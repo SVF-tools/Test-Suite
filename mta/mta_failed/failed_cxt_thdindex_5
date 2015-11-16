@@ -1,0 +1,78 @@
+/*
+ * Simple alias check
+ * Author: pengd 
+ * Date: 07/07/2015
+ */
+#include "aliascheck.h"
+#include "pthread.h"
+
+
+pthread_t t3;
+int Global;
+
+void *foo2(void *x) {
+  return x;
+}
+
+void *foo1(void *x) {
+  pthread_t t;
+
+cs8: pthread_create(&t, NULL, foo2, NULL);
+
+     pthread_join(t, NULL);
+
+     return x;
+}
+
+pthread_t Returnthread(){
+  return t3;
+}
+pthread_t* Returnthdaddr(){
+  return &t3;
+}
+
+void Join (pthread_t t){
+  pthread_join(t, NULL);
+}
+void Create(pthread_t t){
+cs7: pthread_create(&t, NULL, foo1, NULL);
+     pthread_join(t, NULL);
+}
+
+int main(){
+  pthread_t t, t4;
+  pthread_t t2[2];
+
+cs1: pthread_create(&t, NULL, foo1, NULL);
+     pthread_join(t, NULL);
+
+cs2: pthread_create(&t2[0], NULL, foo1, NULL);
+     pthread_join(t2[0], NULL);
+
+cs3: Create(t2[1]);
+
+cs4: pthread_create(Returnthdaddr(), NULL, foo1, NULL);
+cs5: Join (Returnthread());
+
+cs6: Create(t4);
+
+     CXT_THREAD(1,"cs1.foo1");
+     CXT_THREAD(2,"cs2.foo1");
+     CXT_THREAD(3,"cs3.Create,cs7.foo1");
+     CXT_THREAD(4,"cs4.foo1");
+     CXT_THREAD(5,"cs6.Create,cs7.foo1");
+
+     CXT_THREAD(6,"cs1.foo1,cs8.foo2");
+     CXT_THREAD(7,"cs2.foo1,cs8.foo2");
+     CXT_THREAD(8,"cs3.Create,cs7.foo1,cs8.foo2");
+     CXT_THREAD(9,"cs4.foo1,cs8.foo2");
+     CXT_THREAD(10,"cs6.Create,cs7.foo1,cs8.foo2");
+
+//     TCT_ACCESS(0,"1,2,3,4,5");
+ //    TCT_ACCESS(1,"6");
+   //  TCT_ACCESS(2,"7");
+     //TCT_ACCESS(3,"8");
+ //    TCT_ACCESS(4,"9");
+   //  TCT_ACCESS(5,"10");
+     return 1;
+}
