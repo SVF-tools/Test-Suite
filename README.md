@@ -4,8 +4,13 @@ PTABen is a micro-benchmark suite designed for validating various pointer analys
 
 
 1. Download the whole test suite "PTABen" and put it under the root directory of [SVF](https://github.com/unsw-corg/SVF)
-2. "singlerun.sh" provides a simple way to test an analysis (e.g., wpa -ander) given a single program file
-3. "runtest.sh" tests an analysis (e.g., wpa -ander) for a set of micro-benchmarks under a specific folder (e.g., fi_tests)
+2. Set up environment before runing test cases.
+```
+   cd $SVFHome
+   . ./setup
+```
+3. "singlerun.sh" provides a simple way to test an analysis (e.g., wpa -ander) given a single program file
+4. "runtest.sh" tests an analysis (e.g., wpa -ander) for a set of micro-benchmarks under a specific folder (e.g., fi_tests)
    (Note that you can modify variable "TestFolders" and "TestScripts" in "runtest.sh" to specify which folder and what analysis to be tested.)
 
 | Folder       | Description           | 
