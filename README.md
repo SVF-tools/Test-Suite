@@ -1,6 +1,6 @@
 ## How to use PTABen
 
-PTABen is a micro-benchmark suite designed for validating various pointer analysis algorithms for C and C++ programs. It includes around 450 hand-written programs and code snippets from real programs. PTABen provides flexible and extendable interfaces for users to add their own tests for validating the correctness of different pointer/alias analyses.
+PTABen is a micro-benchmark suite designed for validating various pointer analysis algorithms for C and C++ programs. It includes around 400 hand-written programs and code snippets from real programs. PTABen provides flexible and extendable interfaces for users to add their own tests for validating the correctness of different pointer/alias analyses.
 
 
 1. Download the whole test suite "PTABen" and put it under the root directory of [SVF](https://github.com/unsw-corg/SVF)
