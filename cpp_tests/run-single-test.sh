@@ -1,4 +1,4 @@
-FLAGS="-g -S -emit-llvm"
+FLAGS="-g -S -std=c++11 -emit-llvm"
 FLAGS="${FLAGS} -I../"
 #FLAGS="-g ${FLAGS}"
 
