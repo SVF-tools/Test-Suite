@@ -15,8 +15,8 @@ PTABen is a micro-benchmark suite designed for validating various pointer analys
 
 | Folder       | Description           | 
 | ------------- |:-------------:|
-|basic_c_tests | flow-insensitive and field-sensitive tests|
-|basic_cpp_tests | test cases for C++ programs|
+|basic_c_tests | basic test cases for C programs (flow-insensitive and field-sensitive analysis)|
+|basic_cpp_tests | basic test cases for C++ programs (flow-insensitive and field-sensitive analysis) |
 |fs_tests | flow-sensitive tests|
 |cs_tests | context-sensitive tests|
 |path_tests | path-sensitive tests|
