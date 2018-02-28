@@ -2,6 +2,7 @@
  * Quake benchmark
  * Loukas Kallivokas and David O'Hallaron
  * Carnegie Mellon University, November, 1997
+ * http://www.cs.umd.edu/~hollings/cs714/f15/quake.c
  */ 
 #include <stdio.h>
 #include <stdlib.h>

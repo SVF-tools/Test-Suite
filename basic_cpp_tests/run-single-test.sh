@@ -1,8 +1,9 @@
-FLAGS="-g -S -std=c++11 -emit-llvm"
+FLAGS="-S -emit-llvm"
 FLAGS="${FLAGS} -I../"
+FLAGS="${FLAGS} -std=c++11"
 #FLAGS="-g ${FLAGS}"
 
-file=$1
+file="array-1"
 
 #./clean.sh
 

@@ -15,7 +15,7 @@ LLVMOPTFLAG='-mem2reg -mergereturn'
 TESTWITHOPT=$1
 COMPILELOG="compile.log"
 ### Add the fold of c files to be tested
-TestFolders="fi_tests"
+TestFolders="basic_c_tests"
 #      rc
 #            test\
 #	     "
