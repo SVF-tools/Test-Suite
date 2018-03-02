@@ -6,19 +6,23 @@
 
 #include "aliascheck.h"
 
-int x, y; int *p = &x; int *q = &y;
-int **pp = &p; int**qq = &q;
+int **pp, **qq;
+int *p, *q;
+int x;
 
 void foo() {
-     NOALIAS(*pp, *qq);
-}
-void bar() {
-     qq = &q;
-     q = &x;
-}
-int main() {
-    foo();
-    bar();
-    MUSTALIAS(*pp, *qq);
+	pp = &p;
+	p = &x;
 }
 
+void bar() {
+	qq = &q;
+	q = &x;
+}
+
+int main() {
+	foo();
+	bar();
+	MUSTALIAS(*pp, *qq);
+	return 0;
+}
