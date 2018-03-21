@@ -8,7 +8,7 @@
 TNAME=wpa
 ###########SET variables and options when testing using executable file
 EXEFILE=$PTABIN/wpa    ### Add the tools here for testing
-FLAGS="-ander -vgep=true -stat=false" #-print-pts" # -dump-pag'  ### Add the FLAGS here for testing
+FLAGS="-ander -print-pts=false -stat=false" #-print-pts" # -dump-pag'  ### Add the FLAGS here for testing
 #echo testing MSSA with flag $FLAGS
 
 ###########SET variables and options when testing using loadable so file invoked by opt
