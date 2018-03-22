@@ -7,7 +7,7 @@
 ################################################
 
 ##remember to run ./setup script before running testings
-CLANGFLAG='-g -c -emit-llvm -I.'
+CLANGFLAG='-Xclang -disable-O0-optnone -g -c -emit-llvm -I.'
 LLVMOPTFLAG='-mem2reg -mergereturn'
 
 TARGET=$1
@@ -15,7 +15,7 @@ COMPILELOG="compile.log"
 ### Add the fold of c files to be tested
 
 ### Add the test shell files
-TestScripts="testsaber.sh"
+TestScripts="testwpa.sh"
 #      testrc.sh
 #	     testdvf.sh\
 #	     testmssa.sh"
