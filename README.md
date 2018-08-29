@@ -8,6 +8,8 @@ PTABen is a micro-benchmark suite designed for validating various pointer analys
 ```
    cd $SVFHome
    . ./setup
+   cd PTABen
+   ./runtest.sh (or ./singlerun.sh basic_c_tests/global-funptr.c)
 ```
 3. "singlerun.sh" provides a simple way to test an analysis (e.g., wpa -ander) given a single program file
 4. "runtest.sh" tests an analysis (e.g., wpa -ander) for a set of micro-benchmarks under a specific folder (e.g., basic_c_tests)
