@@ -5,8 +5,10 @@
  */
 #include "aliascheck.h"
 
+
 void func1(int **p, int **q) {
 	*p = *q;
+	MUSTALIAS(p, q);
 }
 
 void (*fp)(int**,int**);
@@ -18,9 +20,9 @@ int main() {
 	x = &o1;
 	y = &o2;
 	m = &x;
-	n = &y;
+	n = &x;
 	fp = func1;
 	fp(m,n);
-	MUSTALIAS(x, y);
+	NOALIAS(x, y);
 	return 0;
 }
