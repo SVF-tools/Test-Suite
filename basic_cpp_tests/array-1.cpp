@@ -1,5 +1,4 @@
 #include "aliascheck.h"
-#include <iostream>
 #include <array>
 
 using namespace std;
