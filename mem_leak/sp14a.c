@@ -15,7 +15,7 @@ int * make(int n) {
 		return make(n - 1);
 	} else {
 		free(y);
-		return PLKMALLOC(10);
+		return NFRMALLOC(10);
 	}
 }
 
