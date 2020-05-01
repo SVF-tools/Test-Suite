@@ -15,16 +15,16 @@ PTABen is a micro-benchmark suite designed for validating various pointer analys
 4. "runtest.sh" tests an analysis (e.g., wpa -ander) for a set of micro-benchmarks under a specific folder (e.g., basic_c_tests)
    (Note that you can modify variable "TestFolders" and "TestScripts" in "runtest.sh" to specify which folder and what analysis to be tested.)
 
-| Folder       | Description           | 
-| ------------- |:-------------:|
-|basic_c_tests | basic test cases for C programs (flow-insensitive and field-sensitive analysis)|
-|basic_cpp_tests | basic test cases for C++ programs (flow-insensitive and field-sensitive analysis) |
-|fs_tests | flow-sensitive tests|
-|cs_tests | context-sensitive tests|
-|path_tests | path-sensitive tests|
-|complex_tests | complex test cases simplified from real programs|
-|mta | multithreaded test cases|
-|mem_leak | memory leak test cases|
-|scripts | scripts to run the tests|
+| Folder       | Script | wpa option | Description        |
+|--------------|--------|------------|:------------------:|
+|basic_c_tests | testwpa.sh | -ander | basic test cases for C programs (flow-insensitive and field-sensitive analysis)|
+|basic_cpp_tests | | | basic test cases for C++ programs (flow-insensitive and field-sensitive analysis) |
+|fs_tests | testwpa.sh | -fspta | flow-sensitive tests|
+|cs_tests | testdvf.sh | | context-sensitive tests|
+|path_tests | NA | | path-sensitive tests|
+|complex_tests | | | complex test cases simplified from real programs|
+|mta | | | multithreaded test cases|
+|mem_leak | testsaber.sh | | memory leak test cases|
+|scripts | | | scripts to run the tests|
 
 

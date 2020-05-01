@@ -23,31 +23,3 @@ else
   $RUNSCRIPT $1 $TNAME "$FLAGS" $2
 fi
 
-
-###############Saber instrumentation and runtime#################
-INSTRNAME=instr
-PROG=$(dirname $1)/`basename $1 .opt`
-
-#Saber instrumentation flags
-INSTRFLAGS="-ins"
-INSTRLLVMFLAGS="-pinst"
-
-#perform instrumentation and generate machine object file by llc
-echo Instrument $PROG ...
-if [[ $2 == 'opt' ]]
-then
-  $RUNSCRIPT $PROG.opt.saber $INSTRNAME "$INSTRLLVMFLAGS" $2
-  $LLVMLLC -filetype=obj $PROG.opt.saber.instr -o $PROG.o
-else
-  $RUNSCRIPT $PROG.saber $INSTRNAME "$INSTRFLAGS" $2
-  $LLVMLLC -filetype=obj $PROG.instr -o $PROG.o
-fi
-
-#compile runtime library
-SABERRTLIB=$PTARTLIB/SaberRT.c
-$CLANG -g -c $SABERRTLIB -o $SABERRTLIB.o -I$PTARTLIB
-
-#link the object file with saber runtime lib, and finally generate the executable file
-echo link $PROG with saber runtime library
-$CLANG -o $PROG.exe -O0 $PROG.o $SABERRTLIB.o
-
