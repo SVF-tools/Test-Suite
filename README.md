@@ -15,7 +15,7 @@ PTABen is a micro-benchmark suite designed for validating various pointer analys
 4. "runtest.sh" tests an analysis (e.g., wpa -ander) for a set of micro-benchmarks under a specific folder (e.g., basic_c_tests)
    (Note that you can modify variable "TestFolders" and "TestScripts" in "runtest.sh" to specify which folder and what analysis to be tested.)
 
-| Folder       | Script | wpa option | Description        |
+| Folder       | Script | SVF option | Description        |
 |--------------|--------|------------|:------------------:|
 |basic_c_tests | testwpa.sh | wpa -ander | basic test cases for C programs (flow-insensitive and field-sensitive analysis)|
 |basic_cpp_tests | | | basic test cases for C++ programs (flow-insensitive and field-sensitive analysis) |
