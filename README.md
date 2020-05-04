@@ -17,14 +17,14 @@ PTABen is a micro-benchmark suite designed for validating various pointer analys
 
 | Folder       | Script | wpa option | Description        |
 |--------------|--------|------------|:------------------:|
-|basic_c_tests | testwpa.sh | -ander | basic test cases for C programs (flow-insensitive and field-sensitive analysis)|
+|basic_c_tests | testwpa.sh | wpa -ander | basic test cases for C programs (flow-insensitive and field-sensitive analysis)|
 |basic_cpp_tests | | | basic test cases for C++ programs (flow-insensitive and field-sensitive analysis) |
-|fs_tests | testwpa.sh | -fspta | flow-sensitive tests|
+|fs_tests | testwpa.sh | wpa -fspta | flow-sensitive tests|
 |cs_tests | testdvf.sh | | context-sensitive tests|
 |path_tests | NA | | path-sensitive tests|
 |complex_tests | | | complex test cases simplified from real programs|
 |mta | | | multithreaded test cases|
-|mem_leak | testsaber.sh | | memory leak test cases|
+|mem_leak | testsaber.sh | saber -leak -valid-tests -mempar=inter-disjoint | memory leak test cases|
 |scripts | | | scripts to run the tests|
 
 
