@@ -22,7 +22,7 @@ typedef struct Rectangle
 } Rectangle;
 
 void Rectangle_draw(int* p, float* q) {}
-addrtype Void_ExtendCore(long* p);
+addrtype Void_ExtendCore(long* p){}
 
 void CoreMoreCore(addrtype *Region)
 {

@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include "aliascheck.h"
 
-extern  char *  SyGetmem ( long size );
+char *  SyGetmem ( long size ){}
 
 typedef struct TypHeader {
 	struct TypHeader    * * ptr;
