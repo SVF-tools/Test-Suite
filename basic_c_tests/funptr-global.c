@@ -39,3 +39,5 @@ void PL_NewHashTable(PRUint32 n , void *allocPriv )
 
 }
 
+int main(){return 0;}
+
