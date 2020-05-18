@@ -5,7 +5,7 @@
  * Date: 02/04/2014
  */
 
-#include <aliascheck.h>
+#include "aliascheck.h"
 int main(){
     int* newfile = SAFEMALLOC(190);
     int i = 0;
