@@ -1,5 +1,6 @@
 root=$(cd "$(dirname "$0")";pwd)
-echo $root
+
+#check wether the test case bc folder exist 
 if [ -d 'test_cases_bc' ] ; then
     echo "folder exists!"
 else
@@ -23,13 +24,13 @@ for filename in $files;do
 		generate_bc $filename 
 			
 	else
- 
+	#check wether the file is cpp or c file
 	if [ ${filename##*.} = 'cpp' ] || [ ${filename##*.} = 'c' ]
 	 then
         file_path=$(cd "$(dirname "$filename")";pwd)
-
 	    echo $file_path"/"$filename
         clang -c -iquote $bc_path -emit-llvm $file_path"/"$filename -o $bc_path$filename".bc"
+		opt -mem2reg $bc_path$filename".bc" -o $bc_path$filename".opt"
 	fi
 	
 	fi
