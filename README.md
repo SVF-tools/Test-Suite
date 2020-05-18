@@ -1,6 +1,6 @@
-## How to use PTABen
+## How to use Test-Suite
 
-PTABen is a micro-benchmark suite designed for validating various pointer analysis algorithms for C and C++ programs. It includes around 400 hand-written programs and code snippets from real programs. PTABen provides flexible and extendable interfaces for users to add their own tests for validating the correctness of different pointer/alias analyses.
+Test-Suite is a micro-benchmark suite designed for validating various static analysis algorithms (particularly pointer analyses and static bug checkers) developed in SVF. It includes around 400 hand-written programs and code snippets from real programs. Test-Suite provides flexible and extendable interfaces for users to add their own tests for validating the correctness of different static analyses.
 
 
 1. Download the whole test suite "PTABen" and put it under the root directory of [SVF](https://github.com/unsw-corg/SVF)
