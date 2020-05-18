@@ -30,7 +30,7 @@ for filename in $files;do
         file_path=$(cd "$(dirname "$filename")";pwd)
 	    echo $file_path"/"$filename
         clang -c -iquote $bc_path -emit-llvm $file_path"/"$filename -o $bc_path$filename".bc"
-		opt -mem2reg $bc_path$filename".bc" -o $bc_path$filename".opt"
+		opt -mem2reg $bc_path$filename".bc" -o $bc_path$filename".bc"
 	fi
 	
 	fi
