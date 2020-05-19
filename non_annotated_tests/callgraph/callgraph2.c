@@ -1,3 +1,4 @@
+void a();
 
 void b(){
 

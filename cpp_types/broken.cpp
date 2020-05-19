@@ -17,6 +17,6 @@ class C : public B {
 
 int main(void) {
     A *a = new A();
-    checkType(a,”A”);
+    checkType(a,"A");
 }
 
