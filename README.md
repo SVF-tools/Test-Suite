@@ -9,15 +9,15 @@ Download SVF and execute the following commandline under SVF's root directory
 ```
 
 The following gives the Test-Suite's folders and the corresponding SVF's options for validation.
-| Folder       | Script | SVF option | Description        |
-|--------------|--------|------------|:------------------:|
-|basic_c_tests |  | wpa -ander -stat=false | basic test cases for C programs (flow-insensitive and field-sensitive analysis)|
-|basic_cpp_tests | | | basic test cases for C++ programs (flow-insensitive and field-sensitive analysis) |
-|fs_tests |  | wpa -fspta -stat=false | flow-sensitive tests|
-|cs_tests | | dvf -cxt -print-pts=false -stat=false | context-sensitive tests|
-|path_tests |  | | path-sensitive tests|
-|complex_tests | | | complex test cases simplified from real programs|
-|mta | | | multithreaded test cases|
-|mem_leak |  | saber -leak -valid-tests -mempar=inter-disjoint -stat=false | memory leak test cases|
+| Folder       |  SVF option | Description        |
+|--------------|--------------------|:------------------:|
+|basic_c_tests |   wpa -ander -stat=false | basic test cases for C programs (flow-insensitive and field-sensitive analysis)|
+|basic_cpp_tests | wpa -ander -stat=false | basic test cases for C++ programs (flow-insensitive and field-sensitive analysis) |
+|fs_tests |   wpa -fspta -stat=false | flow-sensitive tests|
+|cs_tests |  dvf -cxt -print-pts=false -stat=false | context-sensitive tests|
+|path_tests |   | path-sensitive tests|
+|complex_tests | wpa -ander -stat=false | complex test cases simplified from real programs|
+|mta |  | multithreaded test cases|
+|mem_leak |   saber -leak -valid-tests -mempar=inter-disjoint -stat=false | memory leak test cases|
 
 
