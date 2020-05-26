@@ -5,7 +5,7 @@ if [ -d 'test_cases_bc' ] ; then
     echo "folder exists!"
 else
     mkdir "test_cases_bc"
-	cp aliascheck.h test_cases_bc/ 
+    cp aliascheck.h test_cases_bc/ 
 fi
 
 bc_path=$root"/test_cases_bc/"
@@ -16,7 +16,7 @@ if [ "X$1" != 'X' ]
          cd "$1"
   fi
   
-  files=`ls`
+files=`ls`
 for filename in $files;do
 	
 	if [ -d $filename ]
@@ -24,14 +24,20 @@ for filename in $files;do
 		generate_bc $filename 
 			
 	else
-	#check wether the file is cpp or c file
-	if [ ${filename##*.} = 'cpp' ] || [ ${filename##*.} = 'c' ]
-	 then
-        file_path=$(cd "$(dirname "$filename")";pwd)
-	    echo $file_path"/"$filename
-        clang -c -iquote $bc_path -emit-llvm $file_path"/"$filename -o $bc_path$filename".bc" -Wno-everything
-		opt -mem2reg $bc_path$filename".bc" -o $bc_path$filename".bc"
-	fi
+		#check wether the file is cpp or c file
+		if [ ${filename##*.} = 'cpp' ] || [ ${filename##*.} = 'c' ]
+	 	then
+        		file_path=$(cd "$(dirname "$filename")";pwd)
+	    		echo $file_path"/"$filename
+			if [ ${filename##*.} = 'cpp' ]
+			then
+        			clang++ -c -stdlib=libc++ -iquote $bc_path -emit-llvm $file_path"/"$filename -o $bc_path$filename".bc" -Wno-everything
+        			echo clang++ -c -iquote $bc_path -emit-llvm $file_path"/"$filename -o $bc_path$filename".bc" -Wno-everything
+			else
+        			clang -c -iquote $bc_path -emit-llvm $file_path"/"$filename -o $bc_path$filename".bc" -Wno-everything
+			fi
+			opt -mem2reg $bc_path$filename".bc" -o $bc_path$filename".bc"
+		fi
 	
 	fi
 done
