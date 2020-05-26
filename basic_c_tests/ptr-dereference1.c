@@ -12,10 +12,10 @@ int main()
 	d = &a;
 	MUSTALIAS(c,d);
 	c = &b;
-	// In LLVM, top level variables
-	// will be converted into SSA, so
-	// different versions should have
-	// different values.
-	NOALIAS(c,d);
+	// In LLVM, every declared variable is address-taken 
+	// accessed via pointers through loads/stores
+	// c here is loaded from the same memory on LLVM's partial SSA form
+	MAYALIAS(c,d);
+	NOALIAS(&b,d);
 	return 0;
 }

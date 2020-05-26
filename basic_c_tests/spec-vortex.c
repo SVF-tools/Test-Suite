@@ -72,6 +72,6 @@ int* PartLib01 = NULL;
 int main()
 {
 	PartLib_Create(&PartLib01);
-	EXPECTEDFAIL_NOALIAS(PartLib01, &Rectangle_draw);
+	NOALIAS(PartLib01, &Rectangle_draw);
 	return 0;
 }

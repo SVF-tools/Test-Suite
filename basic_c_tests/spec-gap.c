@@ -27,7 +27,7 @@ TypHandle NewBag() {
 	s = ((TypHandle*)((HdFree)->ptr)) - 1;
 	e = (FirstBag-1);
 	while ( e <= s )  *d-- = *s--;
-	EXPECTEDFAIL_NOALIAS(*s, &IntComm);
+	NOALIAS(*s, &IntComm);
 
 	for (h=HdFree; h < (TypHandle)(FirstBag-1); ++h)
 		h->ptr += needed / (sizeof(TypHandle));
