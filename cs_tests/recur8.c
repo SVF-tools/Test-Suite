@@ -6,7 +6,7 @@ void bar(int **a){
 	*a = &b;
 	c = *a;
 	MUSTALIAS(c,&b);
-	NOALIAS(c,&z1);
+	MAYALIAS(c,&z1);
 	MAYALIAS(c,&z2);
 	foo(a);
 }
