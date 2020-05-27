@@ -32,7 +32,6 @@ for filename in $files;do
 			if [ ${filename##*.} = 'cpp' ]
 			then
         			clang++ -c -stdlib=libc++ -iquote $bc_path -emit-llvm $file_path"/"$filename -o $bc_path$filename".bc" -Wno-everything
-        			echo clang++ -c -iquote $bc_path -emit-llvm $file_path"/"$filename -o $bc_path$filename".bc" -Wno-everything
 			else
         			clang -c -iquote $bc_path -emit-llvm $file_path"/"$filename -o $bc_path$filename".bc" -Wno-everything
 			fi
