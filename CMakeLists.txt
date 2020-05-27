@@ -120,6 +120,7 @@ add_test(NAME cs_tests/recur9.c COMMAND dvf -cxt -print-pts=false -stat=false ${
 add_test(NAME cs_tests/recur10.c COMMAND dvf -cxt -print-pts=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/recur10.c.bc WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin)
 
 #memory leak test cases
+#[[
 add_test(NAME mem_leak/malloc0.c COMMAND saber -leak -valid-tests -mempar=inter-disjoint -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/malloc0.c.bc WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin)
 add_test(NAME mem_leak/malloc1.c COMMAND saber -leak -valid-tests -mempar=inter-disjoint -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/malloc1.c.bc WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin)
 add_test(NAME mem_leak/malloc2.c COMMAND saber -leak -valid-tests -mempar=inter-disjoint -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/malloc2.c.bc WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin)
@@ -211,3 +212,4 @@ add_test(NAME mem_leak/sp6a.c COMMAND saber -leak -valid-tests -mempar=inter-dis
 add_test(NAME  mem_leak/sp7.c COMMAND saber -leak -valid-tests -mempar=inter-disjoint -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/sp7.c.bc WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin)
 add_test(NAME mem_leak/sp8.c COMMAND saber -leak -valid-tests -mempar=inter-disjoint -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/sp8.c.bc WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin)
 add_test(NAME mem_leak/sp9.c COMMAND saber -leak -valid-tests -mempar=inter-disjoint -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/sp9.c.bc WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin)
+]]
