@@ -6,7 +6,7 @@ void bar(int **a){
 	*a = &b;
 	c = *a;
 	MUSTALIAS(c,&b);
-	MAYALIAS(c,&z1);
+	MAYALIAS(c,&z1);   // it should be no-alias if strong updates are enabled
 	MAYALIAS(c,&z2);
 	foo(a);
 }
