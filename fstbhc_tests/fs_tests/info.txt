@@ -1,0 +1,7 @@
+The fs_tests directory in .. except with the calls appropriately updated
+to TBHC_XALIAS macros.
+
+pcycle2 is removed because it is an illegal program.
+
+To build:
+    for f in *.c; do echo $f; clang -I../.. -ctir -emit-llvm -S $f; done
