@@ -18,6 +18,12 @@ cd $root
 bc_dir_name="test_cases_bc"
 
 for f in "$dir/"*; do
+  # Ignore non-.c/.cpp files.
+  ext=${f##*.}
+  if [ \( "$ext" != "c" -a "$ext" != "cpp" \) -o "$ext" = "$f" ]; then
+    continue;
+  fi
+
   echo "add_test("
   echo "  NAME $f"
   echo "  COMMAND $cmd \${CMAKE_CURRENT_SOURCE_DIR}/$bc_dir_name/$f.bc"

@@ -33,8 +33,8 @@ for td in $test_dirs; do
 
   for c_f in "$full_td/"*; do
     ext=${c_f##*.}
-    # Only care about .c/.cpp files.
-    if [ "$ext" != "cpp" -a "$ext" != "c" ]; then
+    # Only care about .c/.cpp files. Check $ext = $f in case filename is c/cpp.
+    if [ \( "$ext" != "cpp" -a "$ext" != "c" \) -o "$ext" = "$f" ]; then
       continue
     fi
 
@@ -55,6 +55,16 @@ for td in $test_dirs; do
     else
       # Definitely = cpp.
       compiler="clang++"
+    fi
+
+    # If the test directory is an fstbhc directory, use ctir Clang.
+    if expr "$td" : "^fstbhc" > /dev/null; then
+      if [ ! -d "$CTIR_DIR" -o ! -r "$CTIR_DIR/$compiler" ]; then
+        echo "$0: expected \$CTIR_DIR (= '$CTIR_DIR') to point to ctir compilers; skipping $c_f"
+        continue
+      fi
+
+      compiler="$CTIR_DIR/$compiler -ctir"
     fi
 
     $compiler -Wno-everything -S -emit-llvm -I"$root" "$c_f" -o "$bc_f"
