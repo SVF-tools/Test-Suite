@@ -7,7 +7,7 @@ Download SVF and execute the following commandline under SVF's root directory. `
 ```
 git clone https://github.com/SVF-tools/SVF.git
 cd SVF
-./build.sh
+source ./build.sh
 ```
 
 The following gives the Test-Suite's folders and the corresponding SVF's options for validation.
