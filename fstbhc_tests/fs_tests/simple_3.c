@@ -1,9 +1,4 @@
-/*
- * Simple program to test flow-sensitive analysis.
- * Author: Sen Ye
- * Date: 08/11/2013
- */
-
+/* Copied from fs_tests/ and modified to use TBHC macros. */
 #include "tbhc_aliascheck.h"
 
 int main() {

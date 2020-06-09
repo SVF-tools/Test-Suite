@@ -1,8 +1,4 @@
-/*
- * Alias with array
- * Author: Sen Ye
- * Date: 06/09/2013
- */
+/* Copied from fs_tests/ and modified to use TBHC macros. */
 #include "tbhc_aliascheck.h"
 
 struct MyStruct {
