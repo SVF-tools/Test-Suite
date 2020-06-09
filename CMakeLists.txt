@@ -621,6 +621,11 @@ add_test(
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
+  NAME fstbhc_tests/static_first_field.cpp
+  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/static_first_field.cpp.bc
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+add_test(
   NAME fstbhc_tests/virtual1.cpp
   COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/virtual1.cpp.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
