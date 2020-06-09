@@ -11,18 +11,18 @@ cd SVF
 ```
 
 The following gives the Test-Suite's folders and the corresponding SVF's options for validation.
-| Folder       |  SVF option | Description        |
-|--------------|--------------------|:------------------:|
-|basic_c_tests |   wpa -ander -stat=false | basic test cases for C programs (flow-insensitive and field-sensitive analysis)|
-|basic_cpp_tests | wpa -ander -stat=false | basic test cases for C++ programs (flow-insensitive and field-sensitive analysis) |
-|fs_tests |   wpa -fspta -stat=false | flow-sensitive tests|
-|cs_tests |  dvf -cxt -print-pts=false -stat=false | context-sensitive tests|
-|path_tests |   | path-sensitive tests|
-|complex_tests | wpa -ander -stat=false | complex test cases simplified from real programs|
-|mta |  | multithreaded test cases|
-|mem_leak |   saber -leak -valid-tests -mempar=inter-disjoint -stat=false | memory leak test cases|
-| fstbhc_tests | wpa -fstbhc -stat=false | FSTBHC tests |
-| fstbhc_tests/fs_tests | wpa -fstbhc -stat=false | FSTBHC tests sourced from fs_tests |
+| Folder                |  SVF option                                                 | Description                                                                       |
+|-----------------------|-------------------------------------------------------------|:---------------------------------------------------------------------------------:|
+| basic_c_tests         | wpa -ander -stat=false                                      | basic test cases for C programs (flow-insensitive and field-sensitive analysis)   |
+| basic_cpp_tests       | wpa -ander -stat=false                                      | basic test cases for C++ programs (flow-insensitive and field-sensitive analysis) |
+| fs_tests              | wpa -fspta -stat=false                                      | flow-sensitive tests                                                              |
+| cs_tests              | dvf -cxt -print-pts=false -stat=false                       | context-sensitive tests                                                           |
+| path_tests            |                                                             | path-sensitive tests                                                              |
+| complex_tests         | wpa -ander -stat=false                                      | complex test cases simplified from real programs                                  |
+| mta                   |                                                             | multithreaded test cases                                                          |
+| mem_leak              | saber -leak -valid-tests -mempar=inter-disjoint -stat=false | memory leak test cases                                                            |
+| fstbhc_tests          | wpa -fstbhc -stat=false                                     | FSTBHC tests                                                                      |
+| fstbhc_tests/fs_tests | wpa -fstbhc -stat=false                                     | FSTBHC tests sourced from fs_tests                                                |
 
 To compile the tests in `fstbhc_tests` and `fstbhc_tests/fs_tests`, [ctir Clang](https://github.com/mbarbar/ctir) is required, which SVF's `build.sh` will download.
 
