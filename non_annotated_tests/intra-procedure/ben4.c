@@ -11,6 +11,6 @@ int main(){
 
 	int **q,*p;
 
-		*q = &p;
+		q = &p;
 
 }
