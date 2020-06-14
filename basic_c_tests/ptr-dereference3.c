@@ -6,13 +6,13 @@ void foo(int q){
 }
 int main(){
 
-int *s,*r,**x,**y,t,z,k;
+int *s,*r,*x,**y,t,z,k;
 	s = &t;
 	r = &z;
 	y = &r;
 	s = r;
   MUSTALIAS(s,&z);
-	x = y;
+	x = *y;
   MUSTALIAS(x,r);
 	foo(k);
 return 0;

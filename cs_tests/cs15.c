@@ -1,9 +1,12 @@
 #include "aliascheck.h"
 void foo(int **w,int**x,int **y, int *z){
 	int *t;
-	t = *x;
 	*y = z;
+	t = *x;
 	*w = t;
+	MUSTALIAS(a1,&d1);
+	MUSTALIAS(a1,t1);
+	MUSTALIAS(b1,a1);
 
 }
 
