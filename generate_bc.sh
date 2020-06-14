@@ -46,9 +46,6 @@ for td in $test_dirs; do
       continue
     fi
 
-    echo "$0: Compiling: $c_f"
-    echo "$0:        to: $bc_f"
-
     compiler=""
     if [ "$ext" = "c" ]; then
       compiler="clang"
@@ -59,6 +56,11 @@ for td in $test_dirs; do
 
     # If the test directory is an fstbhc directory, use ctir Clang.
     if expr "$td" : "^fstbhc" > /dev/null; then
+      # If the user hasn't set $CTIR, they don't want to build ctir tests.
+      if [ -z "$CTIR" ]; then
+        continue
+      fi
+
       if [ ! -d "$CTIR_DIR" -o ! -r "$CTIR_DIR/$compiler" ]; then
         echo "$0: expected \$CTIR_DIR (= '$CTIR_DIR') to point to ctir compilers; skipping $c_f"
         continue
@@ -66,6 +68,9 @@ for td in $test_dirs; do
 
       compiler="$CTIR_DIR/$compiler -ctir"
     fi
+
+    echo "$0: Compiling '$c_f'"
+    echo "$0:        to '$bc_f'"
 
     $compiler -Wno-everything -S -emit-llvm -I"$root" "$c_f" -o "$bc_f"
     # ^ created a .ll, let's make it .bc, as the filename suggests.

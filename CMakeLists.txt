@@ -579,191 +579,194 @@ add_test(
 )
 
 # Flow-sensitive type-based heap cloning tests
+# Ignore if $CTIR is not defined.
+if (DEFINED ENV{CTIR})
 # (fstbhc_tests/)
-add_test(
-  NAME fstbhc_tests/array1.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/array1.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/basic1.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/basic1.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/constructor1.cpp
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/constructor1.cpp.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/field1.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/field1.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/field2.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/field2.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/field3.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/field3.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/loop.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/loop.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/union.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/union.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/static_first_field.cpp
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/static_first_field.cpp.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/virtual1.cpp
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/virtual1.cpp.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/virtual2.cpp
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/virtual2.cpp.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/virtual3.cpp
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/virtual3.cpp.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/xmalloc1.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/xmalloc1.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/xmalloc2.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/xmalloc2.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/xmalloc3.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/xmalloc3.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
+    add_test(
+      NAME fstbhc_tests/array1.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/array1.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/basic1.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/basic1.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/constructor1.cpp
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/constructor1.cpp.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/field1.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/field1.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/field2.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/field2.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/field3.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/field3.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/loop.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/loop.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/union.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/union.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/static_first_field.cpp
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/static_first_field.cpp.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/virtual1.cpp
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/virtual1.cpp.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/virtual2.cpp
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/virtual2.cpp.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/virtual3.cpp
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/virtual3.cpp.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/xmalloc1.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/xmalloc1.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/xmalloc2.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/xmalloc2.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/xmalloc3.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/xmalloc3.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
 
 # (fstbhc/fs_tests/)
-add_test(
-  NAME fstbhc_tests/fs_tests/array_alias_1.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/array_alias_1.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/array_alias_2.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/array_alias_2.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/array_alias_3.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/array_alias_3.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/array_alias_4.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/array_alias_4.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/array_alias_5.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/array_alias_5.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/branch_1.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/branch_1.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/branch_2.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/branch_2.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/branch_3.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/branch_3.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/function_pointer.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/function_pointer.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/function_pointer_2.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/function_pointer_2.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/global_1.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/global_1.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/global_2.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/global_2.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/global_3.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/global_3.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/global_4.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/global_4.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/global_5.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/global_5.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/pcycle1.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/pcycle1.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/simple_1.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/simple_1.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/simple_2.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/simple_2.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/simple_3.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/simple_3.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/strong_update.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/strong_update.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/struct_1.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/struct_1.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-add_test(
-  NAME fstbhc_tests/fs_tests/struct_2.c
-  COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/struct_2.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
+    add_test(
+      NAME fstbhc_tests/fs_tests/array_alias_1.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/array_alias_1.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/array_alias_2.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/array_alias_2.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/array_alias_3.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/array_alias_3.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/array_alias_4.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/array_alias_4.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/array_alias_5.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/array_alias_5.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/branch_1.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/branch_1.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/branch_2.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/branch_2.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/branch_3.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/branch_3.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/function_pointer.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/function_pointer.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/function_pointer_2.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/function_pointer_2.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/global_1.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/global_1.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/global_2.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/global_2.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/global_3.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/global_3.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/global_4.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/global_4.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/global_5.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/global_5.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/pcycle1.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/pcycle1.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/simple_1.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/simple_1.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/simple_2.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/simple_2.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/simple_3.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/simple_3.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/strong_update.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/strong_update.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/struct_1.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/struct_1.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME fstbhc_tests/fs_tests/struct_2.c
+      COMMAND wpa -fstbhc -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fstbhc_tests/fs_tests/struct_2.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+endif()
