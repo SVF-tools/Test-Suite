@@ -4,9 +4,6 @@ void foo(int **w,int**x,int **y, int *z){
 	*y = z;
 	t = *x;
 	*w = t;
-	MUSTALIAS(a1,&d1);
-	MUSTALIAS(a1,t1);
-	MUSTALIAS(b1,a1);
 
 }
 
@@ -22,6 +19,8 @@ int main(){
 	c = &b1;
 	d = &d1;
 	bar(a,b,c,d);
+	MUSTALIAS(a1,&d1);
+	MUSTALIAS(b1,a1);
 //	foo(a,b,c,d);
 //	foo(b,a,c,d);
 }
