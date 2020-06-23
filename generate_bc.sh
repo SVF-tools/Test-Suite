@@ -56,8 +56,8 @@ for td in $test_dirs; do
 
     # If the test directory is an fstbhc directory, use ctir Clang.
     if expr "$td" : "^fstbhc" > /dev/null; then
-      # If the user hasn't set $CTIR, they don't want to build ctir tests.
-      if [ -z "$CTIR" ]; then
+      # If the user hasn't set $SVF_CTIR, they don't want to build ctir tests.
+      if [ -z "$SVF_CTIR" ]; then
         continue
       fi
 
