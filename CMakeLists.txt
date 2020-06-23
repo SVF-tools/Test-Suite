@@ -579,8 +579,8 @@ add_test(
 )
 
 # Flow-sensitive type-based heap cloning tests
-# Ignore if $CTIR is not defined.
-if (DEFINED ENV{CTIR})
+# Ignore if $SVF_CTIR is not defined.
+if (DEFINED ENV{SVF_CTIR})
 # (fstbhc_tests/)
     add_test(
       NAME fstbhc_tests/array1.c
