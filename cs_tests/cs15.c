@@ -1,11 +1,10 @@
 #include "aliascheck.h"
 
-
 void foo(int **w,int**x,int **y, int *z){
 	int *t;
-	*y = z;
 	t = *x;
-	*w = t;
+	*y = z;
+	*t = w;
 
 }
 
