@@ -6,7 +6,7 @@ void foo(int q){
 }
 int main(){
 
-int *s,*r,***x,**y,t,z,k;
+int *s,*r,*x,**y,t,z,k;
 	s = &t;
 	r = &z;
 	y = &r;

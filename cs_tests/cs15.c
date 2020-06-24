@@ -1,9 +1,10 @@
 #include "aliascheck.h"
+
 void foo(int **w,int**x,int **y, int *z){
 	int *t;
-	t = *x;
 	*y = z;
-	*t = w;
+	t = *x;
+	*w = t;
 
 }
 
@@ -19,6 +20,8 @@ int main(){
 	c = &b1;
 	d = &d1;
 	bar(a,b,c,d);
+	MUSTALIAS(a1,&d1);
+	MUSTALIAS(b1,a1);
 //	foo(a,b,c,d);
 //	foo(b,a,c,d);
 }
