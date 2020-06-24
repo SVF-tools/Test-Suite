@@ -2,9 +2,9 @@
 
 void foo(int **w,int**x,int **y, int *z){
 	int *t;
-	t = *x;
 	*y = z;
-	*t = w;
+	t = *x;
+	*w = t;
 
 }
 
