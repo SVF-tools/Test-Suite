@@ -5,7 +5,7 @@ void MUSTALIAS(void* p, void* q){
   printf("\n");
 }
 
-void PARTAILALIAS(void* p, void* q){
+void PARTIALALIAS(void* p, void* q){
   printf("\n");
 }
 
