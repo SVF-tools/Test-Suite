@@ -273,9 +273,10 @@ add_test(
   COMMAND wpa -ander -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/basic_c_tests/struct-simple.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
+# This test relies on first-fields not being treated as the base.
 add_test(
   NAME basic_c_tests/struct-twoflds.c
-  COMMAND wpa -ander -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/basic_c_tests/struct-twoflds.c.bc
+  COMMAND wpa -ander -stat=false -ff-eq-base=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/basic_c_tests/struct-twoflds.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 
