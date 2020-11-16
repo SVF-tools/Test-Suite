@@ -7,8 +7,8 @@ main(){
 	if(x) { x =&c; y =&e;}
 	else { x= &d; y = &f;}
 	foo(x,y);
-    MUSTALIAS(c,&e);
-    MUSTALIAS(d,&f);
+    MAYALIAS(c,&e);
+    MAYALIAS(d,&f);
     NOALIAS(c,&f);
     NOALIAS(d,&e);
 	
