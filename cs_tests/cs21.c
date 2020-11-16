@@ -8,7 +8,7 @@ int *foo(int *x){
    else
     y = x;
 
-    MUSTALIAS(y,&a);
+    MAYALIAS(y,&a);
     return y;
 
 }
