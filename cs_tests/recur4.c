@@ -12,8 +12,6 @@ void f(int **p){
 	int k;
 	y = &k;
 	if (z){
-		f(p);
-
 		*p = &z;
 		MUSTALIAS(y,&z);
 		NOALIAS(y,&k);
