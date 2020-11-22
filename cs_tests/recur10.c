@@ -3,7 +3,7 @@ int **p,*x, y, z;
 
 void f() {
   p = &x;
-  if (x) {
+  if (1) {
     *p = &y;
 	MUSTALIAS(x,&y);
     f();
