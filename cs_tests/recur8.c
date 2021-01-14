@@ -2,6 +2,8 @@
 int z1,z2;
 void foo(int **p);
 void bar(int **a){
+	if(z1>5) return;
+	z1++;
 	int *c, b;
 	*a = &b;
 	c = *a;
