@@ -21,10 +21,10 @@ int main(){
     b = &b1;
     a = &b;
     foo(a);
-    MUSTALIAS(b,&z);
+    MAYALIAS(b,&z);
     EXPECTEDFAIL_NOALIAS(b,&b1);
     a = &c;
     foo(a);
-    MUSTALIAS(c,&z);
+    MAYALIAS(c,&z);
     NOALIAS(c,&c1);
 }
