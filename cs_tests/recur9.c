@@ -7,6 +7,8 @@ void bar(int **q){
 }
 
 void foo(int **a){
+    if(z>5) return;
+    z++;
     *a = &z;
     bar(a);
 }
