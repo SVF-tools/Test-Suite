@@ -2,10 +2,8 @@
 int **p,*x, y, z;
 
 void f() {
-  if(z>5) return;	
-  z++;
   p = &x;
-  if (1) {
+  if (z) {
     *p = &y;
 	MUSTALIAS(x,&y);
     f();
@@ -15,8 +13,8 @@ void f() {
 	/// reach "*p=&z" since it will flow into f() before
 	/// "*p=&z" and connected with the entry of f(). So the
 	/// store "*p=&z" can not be completed as p's pts is empty.
-	NOALIAS(x,&z);
-	NOALIAS(x,&y);
+	MAYALIAS(x,&z);
+	MAYALIAS(x,&y);
     f();
   }
 }
