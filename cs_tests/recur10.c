@@ -2,6 +2,8 @@
 int **p,*x, y, z;
 
 void f() {
+  if(z>5) return;	
+  z++;
   p = &x;
   if (1) {
     *p = &y;
