@@ -2,6 +2,8 @@
 int *x, y, z;
 
 void f() {
+  if(z > 5) return;
+  z++;
   if (1) {
          x = &y;
 	MUSTALIAS(x,&y);
