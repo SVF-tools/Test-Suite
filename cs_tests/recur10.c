@@ -8,13 +8,8 @@ void f() {
 	MUSTALIAS(x,&y);
     f();
     *p = &z;
-	/// p doesn't point to x at the above line: although p's
-	/// value changed by stmt "p=&x", the value flow can not
-	/// reach "*p=&z" since it will flow into f() before
-	/// "*p=&z" and connected with the entry of f(). So the
-	/// store "*p=&z" can not be completed as p's pts is empty.
 	MAYALIAS(x,&z);
-	MAYALIAS(x,&y);
+	NOALIAS(x,&y);
     f();
   }
 }
