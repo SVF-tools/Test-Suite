@@ -20,7 +20,7 @@ main(){
 	e = &t;
 	foo(x,y);
     MAYALIAS(c,d);
-    MUSTALIAS(d,&obj);
+    MAYALIAS(d,&obj);
     MAYALIAS(a,c);
     NOALIAS(a,d);
     MAYALIAS(c,d);
