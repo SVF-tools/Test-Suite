@@ -7,7 +7,7 @@
 
 void f(int *m, int *n)
 {
-	MUSTALIAS(m, n);
+	MAYALIAS(m, n);
 }
 
 typedef void (*fp)(int*m, int*n);
