@@ -416,132 +416,132 @@ add_test(
 # It should produce the same results as FSPTA, so we can reuse those tests.
 add_test(
   NAME vfs_tests/array_alias_1.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/array_alias_1.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/array_alias_1.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/array_alias_2.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/array_alias_2.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/array_alias_2.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/array_alias_3.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/array_alias_3.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/array_alias_3.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/array_alias_4.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/array_alias_4.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/array_alias_4.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/array_alias_5.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/array_alias_5.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/array_alias_5.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/branch_1.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/branch_1.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/branch_1.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/branch_2.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/branch_2.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/branch_2.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/branch_3.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/branch_3.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/branch_3.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/function_pointer.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/function_pointer.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/function_pointer.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/function_pointer_2.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/function_pointer_2.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/function_pointer_2.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/global_1.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/global_1.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/global_1.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/global_2.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/global_2.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/global_2.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/global_3.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/global_3.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/global_3.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/global_4.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/global_4.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/global_4.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/global_5.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/global_5.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/global_5.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/pcycle1.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/pcycle1.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/pcycle1.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/pcycle2.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/pcycle2.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/pcycle2.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/return.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/return.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/return.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/simple_1.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/simple_1.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/simple_1.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/simple_2.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/simple_2.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/simple_2.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/simple_3.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/simple_3.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/simple_3.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/strong_update.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/strong_update.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/strong_update.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/struct_1.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/struct_1.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/struct_1.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/struct_2.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/struct_2.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/struct_2.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/test-su.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/test-su.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/test-su.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 add_test(
   NAME vfs_tests/tt.c
-  COMMAND wpa -vfspta -optSVFG=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/tt.c.bc
+  COMMAND wpa -vfspta -opt-svfg=false -stat=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/vfs_tests/tt.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 
