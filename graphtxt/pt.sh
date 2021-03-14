@@ -1,1 +1,1 @@
-wpa -ander -dump-pag -print-pts -graphtxt=$1 case.bc
+wpa -ander -dump-pag -print-pts -graph-txt=$1 case.bc

@@ -3,9 +3,9 @@
 	
 		memobj pointed by ptr is a FIObjPN, which represents a struct Data object.
 		(1)
-		wpa -fspta -dump-consG -detect-tc -svfmain -stat=false -print-all-pts ./cast.opt
+		wpa -fspta -dump-consG -detect-tc -svf-main -stat=false -print-all-pts ./cast.opt
 		(2)
-		wpa -nander -dump-consG -detect-tc -svfmain -stat=false -print-all-pts ./cast.opt
+		wpa -nander -dump-consG -detect-tc -svf-main -stat=false -print-all-pts ./cast.opt
  */
 
 struct Point{	
