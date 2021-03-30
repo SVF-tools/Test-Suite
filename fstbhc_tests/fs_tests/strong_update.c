@@ -1,5 +1,5 @@
 /* Copied from fs_tests/ and modified to use TBHC macros. */
-#include "tbhc_aliascheck.h"
+#include "aliascheck.h"
 void bar(int***k, int***s){
 
 	*k = *s; 

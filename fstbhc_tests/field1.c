@@ -1,4 +1,4 @@
-#include "tbhc_aliascheck.h"
+#include "aliascheck.h"
 
 // Same allocation site, same field type
 // but different struct type.

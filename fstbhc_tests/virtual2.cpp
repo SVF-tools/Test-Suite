@@ -1,4 +1,4 @@
-#include "tbhc_aliascheck.h"
+#include "aliascheck.h"
 
 class A {
 public:

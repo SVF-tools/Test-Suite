@@ -1,4 +1,4 @@
-#include "tbhc_aliascheck.h"
+#include "aliascheck.h"
 
 struct obstack {
   unsigned long chunk_size;
