@@ -1,4 +1,4 @@
-#include "tbhc_aliascheck.h"
+#include "aliascheck.h"
 
 void *xmalloc(size_t s) {
     return malloc(s);

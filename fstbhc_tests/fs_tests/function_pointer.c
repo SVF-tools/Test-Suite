@@ -1,5 +1,5 @@
 /* Copied from fs_tests/ and modified to use TBHC macros. */
-#include "tbhc_aliascheck.h"
+#include "aliascheck.h"
 
 void func1(int *p, int *q) {
 	// if function pointer solved correctly,

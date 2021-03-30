@@ -1,5 +1,5 @@
 /* Copied from fs_tests/ and modified to use TBHC macros. */
-#include "tbhc_aliascheck.h"
+#include "aliascheck.h"
 
 int x, y; int *p = &x; int *q = &y;
 int **pp = &p; int**qq = &q;

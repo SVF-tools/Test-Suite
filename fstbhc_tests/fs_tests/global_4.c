@@ -1,5 +1,5 @@
 /* Copied from fs_tests/ and modified to use TBHC macros. */
-#include "tbhc_aliascheck.h"
+#include "aliascheck.h"
 int g;
 int* obj = &g; 
 void Zulu(int**p, int *q);

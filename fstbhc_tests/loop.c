@@ -1,4 +1,4 @@
-#include "tbhc_aliascheck.h"
+#include "aliascheck.h"
 
 // Two objects generated in a loop
 // without an allocation wrapper.

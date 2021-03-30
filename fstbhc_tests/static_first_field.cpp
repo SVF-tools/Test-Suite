@@ -1,4 +1,4 @@
-#include "tbhc_aliascheck.h"
+#include "aliascheck.h"
 
 // First field is actually float, not int (it's static).
 struct S {
