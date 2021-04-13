@@ -904,3 +904,187 @@ if (DEFINED ENV{SVF_CTIR})
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
     )
 endif()
+
+# differential testing for flow-sensitive analysis 
+add_test(
+  NAME differential_test/fs_tests/array_alias_1.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/array_alias_1.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/array_alias_1.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/array_alias_1.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/array_alias_2.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/array_alias_2.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/array_alias_2.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/array_alias_2.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/array_alias_3.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/array_alias_3.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/array_alias_3.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/array_alias_3.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/array_alias_4.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/array_alias_4.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/array_alias_4.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/array_alias_4.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/array_alias_5.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/array_alias_5.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/array_alias_5.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/array_alias_5.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/branch_1.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/branch_1.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/branch_1.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/branch_1.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/branch_2.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/branch_2.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/branch_2.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/branch_2.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/branch_3.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/branch_3.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/branch_3.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/branch_3.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/function_pointer.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/function_pointer.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/function_pointer.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/function_pointer.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/function_pointer_2.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/function_pointer_2.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/function_pointer_2.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/function_pointer_2.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/global_1.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/global_1.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/global_1.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/global_1.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/global_2.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/global_2.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/global_2.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/global_2.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/global_3.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/global_3.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/global_3.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/global_3.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/global_4.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/global_4.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/global_4.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/global_4.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/global_5.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/global_5.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/global_5.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/global_5.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/pcycle1.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/pcycle1.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/pcycle1.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/pcycle1.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/pcycle2.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/pcycle2.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/pcycle2.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/pcycle2.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/return.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/return.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/return.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/return.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/simple_1.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/simple_1.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/simple_1.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/simple_1.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/simple_2.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/simple_2.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/simple_2.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/simple_2.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/simple_3.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/simple_3.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/simple_3.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/simple_3.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/strong_update.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/strong_update.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/strong_update.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/strong_update.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/struct_1.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/struct_1.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/struct_1.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/struct_1.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/struct_2.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/struct_2.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/struct_2.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/struct_2.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/test-su.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/test-su.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/test-su.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/test-su.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
+add_test(
+  NAME differential_test/fs_tests/tt.c
+  COMMAND diff <(wpa -fspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/tt.c.bc) <(wpa -vfspta ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/tt.c.bc)
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(differential_test/fs_tests/tt.c PROPERTIES FAIL_REGULAR_EXPRESSION "AvgTopLvlPtsSize")
+
