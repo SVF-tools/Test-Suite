@@ -30,10 +30,9 @@ To compile the tests in `fstbhc_tests` and `fstbhc_tests/fs_tests`, [ctir Clang]
 
 `./generate_bc.sh` builds all test cases in the aforementioned folders into `test_cases_bc`.
 
-`./generate_cmake_test.sh` will produce the `add_test` calls required by CMake and output them to stdout.
-The output can be appended to `CMakeLists.txt` with `>> CMakeLists.txt`.
-It takes two arguments: the directory containing `.c`/`.cpp` test cases, and the command to run the test.
-For example, `./generate_cmake_test.sh basic_c_tests "wpa -ander -stat=false"` will produce:
+`./generate_cmake_test.sh` will produce the `add_test` calls required by CMake and will create the required CMakeLists.txt file.
+To add more tests to the file, append the command and directory to the `folder` and `command` arrays in `./generate_cmake_test.sh`.
+For example, `./generate_cmake_test.sh` will produce:
 ```
 add_test(
   NAME basic_c_tests/CI-funptr.c
