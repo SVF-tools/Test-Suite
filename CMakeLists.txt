@@ -12,7 +12,6 @@ list(
   vfs_tests
   cs_tests
   complex_tests
-  mem_leak
   fstbhc_tests
   fstbhc_tests/fs_tests
 )
@@ -26,7 +25,6 @@ list(
   "wpa -vfspta -opt-svfg=false -stat=false"
   "dvf -cxt -print-pts=false -stat=false"
   "wpa -ander -stat=false"
-  "saber -leak -valid-tests --mem-par=inter-disjoint -stat=false"
   "wpa -fstbhc -stat=false"
   "wpa -fstbhc -stat=false"
 )
@@ -45,6 +43,9 @@ foreach(i RANGE ${len2})
   set(command ${commandtemp})
   # loops over each file creating a test
   foreach(filename ${files})
+    if (${filename} MATCHES "struct-twoflds.c.bc")
+      continue()
+    endif()
     add_test(
       NAME ${filename}
       COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
@@ -52,6 +53,12 @@ foreach(i RANGE ${len2})
     )
   endforeach()
 endforeach()
+
+add_test(
+  NAME basic_c_tests/struct-twoflds.c
+  COMMAND wpa -ander -stat=false -ff-eq-base=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/basic_c_tests/struct-twoflds.c.bc
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
 
 # differential_tests fspta-vfspta
 file(GLOB files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/*.bc*")
