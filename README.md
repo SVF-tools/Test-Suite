@@ -30,10 +30,8 @@ To compile the tests in `fstbhc_tests` and `fstbhc_tests/fs_tests`, [ctir Clang]
 
 `./generate_bc.sh` builds all test cases in the aforementioned folders into `test_cases_bc`.
 
-`./generate_cmake_test.sh` will produce the `add_test` calls required by CMake and output them to stdout.
-The output can be appended to `CMakeLists.txt` with `>> CMakeLists.txt`.
-It takes two arguments: the directory containing `.c`/`.cpp` test cases, and the command to run the test.
-For example, `./generate_cmake_test.sh basic_c_tests "wpa -ander -stat=false"` will produce:
+All tests are specified in `CMakeLists.txt` file. The `CMakeLists.txt` file uses foreach loops to create tests in bulk. To add new tests append a command and specified folder into the respective lists commands and folders in `CMakeLists.txt`
+An example of a test:
 ```
 add_test(
   NAME basic_c_tests/CI-funptr.c
@@ -49,4 +47,6 @@ add_test(
 ...
 ...
 ```
+
+For differential testing of two options a C++ script `diff_tests.cpp` is used. This script will run each option, compare the results and output. If the output is 0 then the test passed.
 
