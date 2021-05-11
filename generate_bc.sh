@@ -117,3 +117,8 @@ do
     opt -mem2reg "$bc_f" -o "$bc_f"
   done
 done
+
+echo "$0: Compiling diff_tests unit test"
+cd diff_tests
+g++ -o diff_tests diff_tests.cpp
+cd ..
