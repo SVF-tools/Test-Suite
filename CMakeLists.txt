@@ -2,6 +2,7 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
+# folder and commands list act in parallel. e.g. for index 0 command "wpa -ander -stat=false" will be run on basic_c_tests folder.
 list(
   APPEND
   folders
@@ -33,12 +34,16 @@ list(
 list(LENGTH folders len1)
 math(EXPR len2 "${len1} - 1")
 
+# loops over each command in commands list
 foreach(i RANGE ${len2})
+  # gets the command and folder of index i
   list(GET folders ${i} folder)
   list(GET commands ${i} cmd)
+  # creates a list of each file in folder
   file(GLOB files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/${folder}/*.bc*")
   string(REPLACE " " ";" commandtemp ${cmd})
   set(command ${commandtemp})
+  # loops over each file creating a test
   foreach(filename ${files})
     add_test(
       NAME ${filename}
