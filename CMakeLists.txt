@@ -11,7 +11,6 @@ list(
   fs_tests
   vfs_tests
   cs_tests
-  complex_tests
   fstbhc_tests
   fstbhc_tests/fs_tests
 )
@@ -24,7 +23,6 @@ list(
   "wpa -fspta -stat=false"
   "wpa -vfspta -opt-svfg=false -stat=false"
   "dvf -cxt -print-pts=false -stat=false"
-  "wpa -ander -stat=false"
   "wpa -fstbhc -stat=false"
   "wpa -fstbhc -stat=false"
 )
@@ -83,6 +81,9 @@ list(
 foreach(folder ${diff_tests_anderson_folders})
   file(GLOB files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/${folder}/*.bc*")
   foreach(filename ${files})
+    if (${filename} MATCHES "struct-twoflds.c.bc")
+      continue()
+    endif()
     add_test(
       NAME diff_tests/ander-nander/${filename}
       COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests "wpa -ander" "wpa -nander" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
@@ -91,3 +92,10 @@ foreach(folder ${diff_tests_anderson_folders})
     set_tests_properties(diff_tests/ander-nander/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
   endforeach()
 endforeach()
+
+add_test(
+      NAME diff_tests/ander-nander/basic_c_tests/struct-twoflds.c.bc
+      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests "wpa -ander -ff-eq-base=fals" "wpa -nander -ff-eq-base=fals" ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/basic_c_tests/struct-twoflds.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(diff_tests/ander-nander/basic_c_tests/struct-twoflds.c.bc PROPERTIES PASS_REGULAR_EXPRESSION "0")
