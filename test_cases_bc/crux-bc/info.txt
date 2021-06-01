@@ -3,5 +3,5 @@ CXXFLAGS:
 LOC		Bitcode		Aliases
 ---		-------		-------
 10879		htop.bc		
-3582		dc.bc		
 8452		bc.bc		
+3582		dc.bc		
