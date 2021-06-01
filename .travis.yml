@@ -1,4 +1,6 @@
 language: generic
+services:
+  - docker
 node_js:
   - "12.13"
 matrix:
@@ -11,7 +13,7 @@ if: branch = master
 
 before_script:
  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get update; fi
-
+ - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get install unzip; fi
 
 script:
  - git stash --all
@@ -25,6 +27,13 @@ after_script:
   - git checkout remotes/origin/master
   - git status
   - bash ./generate_bc.sh
+  - git clone https://github.com/mbarbar/crux-bitcode
+  - cd crux-bitcode
+  - rm pkgs.txt
+  - echo -e "bc\nhtop" >> pkgs.txt
+  - bash ./build-bitcode.sh
+  - unzip -j -o \*.zip -d $TRAVIS_BUILD_DIR/test_cases_bc/crux-bc/
+  - cd ..
   - git status
   - git add .
   - git commit -m'update bc files'
