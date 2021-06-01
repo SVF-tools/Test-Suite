@@ -32,7 +32,7 @@ after_script:
   - rm pkgs.txt
   - echo -e "bc\nhtop" >> pkgs.txt
   - bash ./build-bitcode.sh
-  - unzip -j \*.zip -d $TRAVIS_BUILD_DIR/test_cases_bc/crux-bitcode/
+  - unzip -j \*.zip -d $TRAVIS_BUILD_DIR/test_cases_bc/crux-bc/
   - cd ..
   - git status
   - git add .
