@@ -29,6 +29,8 @@ after_script:
   - bash ./generate_bc.sh
   - git clone https://github.com/mbarbar/crux-bitcode
   - cd crux-bitcode
+  - rm pkgs.txt
+  - echo -e "bc\nhtop" >> pkgs.txt
   - bash ./build-bitcode.sh
   - unzip -j \*.zip -d $TRAVIS_BUILD_DIR/test_cases_bc/crux-bitcode/
   - cd ..
