@@ -33,8 +33,9 @@ after_script:
   - echo -e "bc\nhtop" >> pkgs.txt
   - bash ./build-bitcode.sh
   - unzip -j -o \*.zip -d $TRAVIS_BUILD_DIR/test_cases_bc/crux-bc/
+  - rm $TRAVIS_BUILD_DIR/test_cases_bc/crux-bc/info.txt
   - cd ..
   - git status
   - git add .
   - git commit -m'update bc files'
-  - git push https://Wren71:${git_key}@github.com/Wren71/Test-Suite.git HEAD:master
+  - git push https://Wren71:${git_key}@github.com/SVF-tools/Test-Suite.git HEAD:master
