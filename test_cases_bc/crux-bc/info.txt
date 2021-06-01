@@ -1,0 +1,7 @@
+CFLAGS: 
+CXXFLAGS: 
+LOC		Bitcode		Aliases
+---		-------		-------
+3582		dc.bc		
+8452		bc.bc		
+10879		htop.bc		
