@@ -17,7 +17,6 @@ test_dirs="
 "
 
 root=$(cd "$(dirname "$0")"; pwd)
-
 ########
 # Check whether the test case bc folder exists.
 ########
@@ -42,7 +41,7 @@ do
   ########
   # Full path to the test dir.
   ########
-  full_td="$root/$td"
+  full_td="$root/src/$td"
 
   ########
   # Loops through each file within the folder.
@@ -119,6 +118,8 @@ do
 done
 
 echo "$0: Compiling diff_tests unit test"
-cd diff_tests
+cd src/diff_tests
 g++ -o diff_tests diff_tests.cpp
-cd ..
+mkdir ../../test_cases_bc/diff_tests
+mv diff_tests ../../test_cases_bc/diff_tests/diff_tests
+cd ../..
