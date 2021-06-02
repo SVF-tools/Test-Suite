@@ -1,11 +1,12 @@
 #!/bin/bash
 
 sysOS=`uname -s`
-echo $sysOS
 if [[ $sysOS == "Darwin" ]]
 then
-    ./diff_tests_osx $@
+    ${BASH_SOURCE%/*}/diff_tests_osx "$@"
 elif [[ $sysOS == "Linux" ]]
 then
-    ./diff_tests_linux $@
+    ${BASH_SOURCE%/*}/diff_tests_linux "$@"
+else
+   echo "Builds outside Ubuntu and macOS are not supported."
 fi
