@@ -1,6 +1,8 @@
 #!/bin/sh
 # Generate bitcode for the .c/.cpp tests in $test_dirs.
 
+sysOS=`uname -s`
+
 test_dirs="
   basic_c_tests
   basic_cpp_tests
@@ -26,6 +28,8 @@ then
     mkdir -p "$bc_path"
 fi
 
+if [[ $sysOS == "Linux" ]]
+then
 ########
 # Loops through each folder in test_dirs.
 ########
@@ -119,7 +123,18 @@ done
 
 echo "$0: Compiling diff_tests unit test"
 cd src/diff_tests
-g++ -o diff_tests diff_tests.cpp
+g++ -o diff_tests_linux diff_tests.cpp
 mkdir ../../test_cases_bc/diff_tests
-mv diff_tests ../../test_cases_bc/diff_tests/diff_tests
+mv diff_tests_linux ../../test_cases_bc/diff_tests/diff_tests
 cd ../..
+fi
+
+# build diff_tests for osx
+if [[ $sysOS == "Darwin" ]]
+then
+    cd src/diff_tests
+    g++ -o diff_tests_osx diff_tests.cpp
+    mkdir ../../test_cases_bc/diff_tests
+    mv diff_tests_osx ../../test_cases_bc/diff_tests/diff_tests
+    cd ../..
+fi

@@ -8,6 +8,9 @@ matrix:
       - os: linux
         dist: bionic
         sudo: required
+      - os: osx
+        osx_image: xcode12.4
+        sudo: required
 
 if: branch = master
 
@@ -20,20 +23,20 @@ script:
  - echo $(pwd)
 
 after_script:
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cd ..; fi
+  - cd ..
   - cd Test-Suite
   - echo $(pwd)
   - git branch -a
   - git checkout remotes/origin/master
   - git status
   - bash ./generate_bc.sh
-  - git clone https://github.com/mbarbar/crux-bitcode
-  - cd crux-bitcode
-  - rm pkgs.txt
-  - echo -e "bc\nhtop" >> pkgs.txt
-  - bash ./build-bitcode.sh
-  - unzip -j -o \*.zip -d $TRAVIS_BUILD_DIR/test_cases_bc/crux-bc/
-  - rm $TRAVIS_BUILD_DIR/test_cases_bc/crux-bc/info.txt
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then git clone https://github.com/mbarbar/crux-bitcode; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cd crux-bitcode; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then rm pkgs.txt; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then echo -e "bc\nhtop" >> pkgs.txt; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then bash ./build-bitcode.sh; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then unzip -j -o \*.zip -d $TRAVIS_BUILD_DIR/test_cases_bc/crux-bc/; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then rm $TRAVIS_BUILD_DIR/test_cases_bc/crux-bc/info.txt; fi
   - cd ..
   - git status
   - git add .
