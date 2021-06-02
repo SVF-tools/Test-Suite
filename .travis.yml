@@ -37,7 +37,7 @@ after_script:
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then bash ./build-bitcode.sh; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then unzip -j -o \*.zip -d $TRAVIS_BUILD_DIR/test_cases_bc/crux-bc/; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then rm $TRAVIS_BUILD_DIR/test_cases_bc/crux-bc/info.txt; fi
-  - cd ..
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cd ..; fi
   - git status
   - git add .
   - git commit -m'update bc files'
