@@ -38,4 +38,4 @@ after_script:
   - git status
   - git add .
   - git commit -m'update bc files'
-  - git push https://Wren71:${git_key}@github.com/SVF-tools/Test-Suite.git HEAD:master
+  - git push https://yuleisui:${git_key}@github.com/SVF-tools/Test-Suite.git HEAD:master
