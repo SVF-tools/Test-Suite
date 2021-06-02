@@ -125,7 +125,7 @@ echo "$0: Compiling diff_tests unit test"
 cd src/diff_tests
 g++ -o diff_tests_linux diff_tests.cpp
 mkdir ../../test_cases_bc/diff_tests
-mv diff_tests_linux ../../test_cases_bc/diff_tests/diff_tests
+mv diff_tests_linux ../../test_cases_bc/diff_tests/diff_tests_linux
 cd ../..
 fi
 
@@ -135,6 +135,6 @@ then
     cd src/diff_tests
     g++ -o diff_tests_osx diff_tests.cpp
     mkdir ../../test_cases_bc/diff_tests
-    mv diff_tests_osx ../../test_cases_bc/diff_tests/diff_tests
+    mv diff_tests_osx ../../test_cases_bc/diff_tests/diff_tests_osx
     cd ../..
 fi
