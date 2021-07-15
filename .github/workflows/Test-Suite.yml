@@ -61,5 +61,5 @@ jobs:
           git config --global user.email 'joe@users.noreply.github.com'
           git status
           git add .
-          git commit -m "update bc files"
+          git commit -am "update bc files"
           git push https://Wren71:${git_key}@github.com/Wren71/Test-Suite.git HEAD:master
