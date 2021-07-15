@@ -1,0 +1,70 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Test-Suite
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ${{ matrix.os }}
+      matrix:
+        os: [linux, osx]
+        include:
+          - os: linux
+            dist: bionic
+            sudo: required
+          - os: osx
+            osx_image: xcode12.4
+            sudo: required
+  
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 12.13
+          
+      - name: env-setup
+        run: | 
+          - if [ "$RUNNER_OS" = "linux" ]; then sudo apt-get update; fi
+          - if [ "$RUNNER_OS" = "linux" ]; then sudo apt-get install unzip; fi
+          
+      - name: stash-changes
+        run: | 
+          - git stash --all
+          - echo $(pwd)
+
+      # Runs a set of commands using the runners shell
+      - name: generate-bcs
+        run: |
+          - cd ..
+          - cd Test-Suite
+          - echo $(pwd)
+          - git branch -a
+          - git checkout remotes/origin/master
+          - git status
+          - bash ./generate_bc.sh
+          - if [ "$RUNNER_OS" = "linux" ]; then git clone https://github.com/mbarbar/crux-bitcode; fi    
+          - if [ "$RUNNER_OS" = "linux" ]; then cd crux-bitcode; fi
+          - if [ "$RUNNER_OS" = "linux" ]; then rm pkgs.txt; fi
+          - if [ "$RUNNER_OS" = "linux" ]; then echo -e "bc\nhtop" >> pkgs.txt; fi
+          - if [ "$RUNNER_OS" = "linux" ]; then bash ./build-bitcode.sh; fi
+          - if [ "$RUNNER_OS" = "linux" ]; then unzip -j -o \*.zip -d $GITHUB_WORKSPACE/test_cases_bc/crux-bc/; fi
+          - if [ "$RUNNER_OS" = "linux" ]; then rm $GITHUB_WORKSPACE/test_cases_bc/crux-bc/info.txt; fi
+          - if [ "$RUNNER_OS" = "linux" ]; then cd ..; fi
+          - git status
+          - git add .
+          - git commit -m'update bc files'
+          - git push https://Wren71:${git_key}@github.com/Wren71/Test-Suite.git HEAD:master
+          
