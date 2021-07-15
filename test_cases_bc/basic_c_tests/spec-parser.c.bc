@@ -1,0 +1,320 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/src/basic_c_tests/spec-parser.c'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/basic_c_tests/spec-parser.c"
+target datalayout = "e-m:e-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
+
+%struct.Word_struct = type { i32*, %struct.X_node_struct* }
+%struct.X_node_struct = type { i32*, %struct.X_node_struct* }
+%struct.clause_struct = type { %struct.clause_struct* }
+
+@.str = private unnamed_addr constant [2 x i8] c"\0A\00", align 1
+@.str.1 = private unnamed_addr constant [4 x i8] c"%s\0A\00", align 1
+@.str.2 = private unnamed_addr constant [25 x i8] c"Press ENTER to continue\0A\00", align 1
+@sentence = common dso_local global [250 x %struct.Word_struct] zeroinitializer, align 16
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @MUSTALIAS(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+declare dso_local i32 @printf(i8*, ...) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @PARTIALALIAS(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @MAYALIAS(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @NOALIAS(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @EXPECTEDFAIL_MAYALIAS(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @EXPECTEDFAIL_NOALIAS(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @SAFEMALLOC(i32) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #3
+  ret i8* %5
+}
+
+; Function Attrs: nounwind
+declare dso_local noalias i8* @malloc(i64) #2
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @PLKMALLOC(i32) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #3
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @NFRMALLOC(i32) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #3
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @CLKMALLOC(i32) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #3
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @NFRLEAKFP(i32) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #3
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @PLKLEAKFP(i32) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #3
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @LEAKFN(i32) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #3
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @RC_ACCESS(i32, i32) #0 {
+  %3 = alloca i32, align 4
+  %4 = alloca i32, align 4
+  store i32 %0, i32* %3, align 4
+  store i32 %1, i32* %4, align 4
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @CXT_THREAD(i32, i8*) #0 {
+  %3 = alloca i32, align 4
+  %4 = alloca i8*, align 8
+  store i32 %0, i32* %3, align 4
+  store i8* %1, i8** %4, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @TCT_ACCESS(i32, i8*) #0 {
+  %3 = alloca i32, align 4
+  %4 = alloca i8*, align 8
+  store i32 %0, i32* %3, align 4
+  store i8* %1, i8** %4, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @INTERLEV_ACCESS(i32, i8*, i8*) #0 {
+  %4 = alloca i32, align 4
+  %5 = alloca i8*, align 8
+  %6 = alloca i8*, align 8
+  store i32 %0, i32* %4, align 4
+  store i8* %1, i8** %5, align 8
+  store i8* %2, i8** %6, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @PAUSE(i8*) #0 {
+  %2 = alloca i8*, align 8
+  store i8* %0, i8** %2, align 8
+  %3 = load i8*, i8** %2, align 8
+  %4 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.1, i64 0, i64 0), i8* %3)
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([25 x i8], [25 x i8]* @.str.2, i64 0, i64 0))
+  %6 = call i32 @getchar()
+  ret void
+}
+
+declare dso_local i32 @getchar() #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @deref() #0 {
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @xalloc(i32) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = call noalias i8* @malloc(i64 1000) #3
+  ret i8* %3
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @build_clause() #0 {
+  %1 = alloca %struct.clause_struct*, align 8
+  %2 = alloca %struct.clause_struct*, align 8
+  %3 = alloca %struct.clause_struct*, align 8
+  store %struct.clause_struct* null, %struct.clause_struct** %1, align 8
+  %4 = call i8* @xalloc(i32 8)
+  %5 = bitcast i8* %4 to %struct.clause_struct*
+  store %struct.clause_struct* %5, %struct.clause_struct** %2, align 8
+  br label %6
+
+6:                                                ; preds = %9, %0
+  %7 = load %struct.clause_struct*, %struct.clause_struct** %2, align 8
+  %8 = icmp ne %struct.clause_struct* %7, null
+  br i1 %8, label %9, label %18
+
+9:                                                ; preds = %6
+  %10 = load %struct.clause_struct*, %struct.clause_struct** %2, align 8
+  %11 = getelementptr inbounds %struct.clause_struct, %struct.clause_struct* %10, i32 0, i32 0
+  %12 = load %struct.clause_struct*, %struct.clause_struct** %11, align 8
+  store %struct.clause_struct* %12, %struct.clause_struct** %3, align 8
+  %13 = load %struct.clause_struct*, %struct.clause_struct** %1, align 8
+  %14 = load %struct.clause_struct*, %struct.clause_struct** %2, align 8
+  %15 = getelementptr inbounds %struct.clause_struct, %struct.clause_struct* %14, i32 0, i32 0
+  store %struct.clause_struct* %13, %struct.clause_struct** %15, align 8
+  %16 = load %struct.clause_struct*, %struct.clause_struct** %2, align 8
+  store %struct.clause_struct* %16, %struct.clause_struct** %1, align 8
+  %17 = load %struct.clause_struct*, %struct.clause_struct** %3, align 8
+  store %struct.clause_struct* %17, %struct.clause_struct** %2, align 8
+  br label %6
+
+18:                                               ; preds = %6
+  %19 = load i32*, i32** getelementptr inbounds ([250 x %struct.Word_struct], [250 x %struct.Word_struct]* @sentence, i64 0, i64 0, i32 0), align 16
+  %20 = bitcast i32* %19 to i8*
+  %21 = load %struct.clause_struct*, %struct.clause_struct** %2, align 8
+  %22 = bitcast %struct.clause_struct* %21 to i8*
+  call void @NOALIAS(i8* %20, i8* %22)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @special_string(i32) #0 {
+  %2 = alloca i32, align 4
+  %3 = alloca %struct.X_node_struct*, align 8
+  store i32 %0, i32* %2, align 4
+  %4 = call i8* @xalloc(i32 16)
+  %5 = bitcast i8* %4 to %struct.X_node_struct*
+  %6 = load i32, i32* %2, align 4
+  %7 = sext i32 %6 to i64
+  %8 = getelementptr inbounds [250 x %struct.Word_struct], [250 x %struct.Word_struct]* @sentence, i64 0, i64 %7
+  %9 = getelementptr inbounds %struct.Word_struct, %struct.Word_struct* %8, i32 0, i32 1
+  store %struct.X_node_struct* %5, %struct.X_node_struct** %9, align 8
+  %10 = load i32, i32* %2, align 4
+  %11 = sext i32 %10 to i64
+  %12 = getelementptr inbounds [250 x %struct.Word_struct], [250 x %struct.Word_struct]* @sentence, i64 0, i64 %11
+  %13 = getelementptr inbounds %struct.Word_struct, %struct.Word_struct* %12, i32 0, i32 1
+  %14 = load %struct.X_node_struct*, %struct.X_node_struct** %13, align 8
+  store %struct.X_node_struct* %14, %struct.X_node_struct** %3, align 8
+  br label %15
+
+15:                                               ; preds = %26, %1
+  %16 = load %struct.X_node_struct*, %struct.X_node_struct** %3, align 8
+  %17 = icmp ne %struct.X_node_struct* %16, null
+  br i1 %17, label %18, label %30
+
+18:                                               ; preds = %15
+  %19 = load i32, i32* %2, align 4
+  %20 = sext i32 %19 to i64
+  %21 = getelementptr inbounds [250 x %struct.Word_struct], [250 x %struct.Word_struct]* @sentence, i64 0, i64 %20
+  %22 = getelementptr inbounds %struct.Word_struct, %struct.Word_struct* %21, i32 0, i32 0
+  %23 = load i32*, i32** %22, align 16
+  %24 = load %struct.X_node_struct*, %struct.X_node_struct** %3, align 8
+  %25 = getelementptr inbounds %struct.X_node_struct, %struct.X_node_struct* %24, i32 0, i32 0
+  store i32* %23, i32** %25, align 8
+  br label %26
+
+26:                                               ; preds = %18
+  %27 = load %struct.X_node_struct*, %struct.X_node_struct** %3, align 8
+  %28 = getelementptr inbounds %struct.X_node_struct, %struct.X_node_struct* %27, i32 0, i32 1
+  %29 = load %struct.X_node_struct*, %struct.X_node_struct** %28, align 8
+  store %struct.X_node_struct* %29, %struct.X_node_struct** %3, align 8
+  br label %15
+
+30:                                               ; preds = %15
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main() #0 {
+  %1 = alloca i32, align 4
+  store i32 0, i32* %1, align 4
+  call void @build_clause()
+  call void @special_string(i32 10)
+  ret i32 0
+}
+
+attributes #0 = { noinline nounwind optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #3 = { nounwind }
+
+!llvm.module.flags = !{!0}
+!llvm.ident = !{!1}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{!"clang version 9.0.0-2~ubuntu18.04.2 (tags/RELEASE_900/final)"}

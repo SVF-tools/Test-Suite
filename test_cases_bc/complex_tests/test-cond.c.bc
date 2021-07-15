@@ -1,0 +1,44 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/src/complex_tests/test-cond.c'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/complex_tests/test-cond.c"
+target datalayout = "e-m:e-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
+
+@g2 = common dso_local global i8 0, align 1
+@g1 = common dso_local global i8 0, align 1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @f1(i8**) #0 {
+  %2 = alloca i8**, align 8
+  store i8** %0, i8*** %2, align 8
+  %3 = call i32 (...) @cond()
+  %4 = icmp ne i32 %3, 0
+  br i1 %4, label %5, label %7
+
+5:                                                ; preds = %1
+  %6 = load i8**, i8*** %2, align 8
+  store i8* @g2, i8** %6, align 8
+  br label %7
+
+7:                                                ; preds = %5, %1
+  ret void
+}
+
+declare dso_local i32 @cond(...) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @f2() #0 {
+  %1 = alloca i8*, align 8
+  store i8* @g1, i8** %1, align 8
+  call void @f1(i8** %1)
+  %2 = load i8*, i8** %1, align 8
+  ret i8* %2
+}
+
+attributes #0 = { noinline nounwind optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+
+!llvm.module.flags = !{!0}
+!llvm.ident = !{!1}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{!"clang version 9.0.0-2~ubuntu18.04.2 (tags/RELEASE_900/final)"}
