@@ -29,7 +29,7 @@ jobs:
       - name: env-setup
         run: | 
             if [ "$RUNNER_OS" = "Linux" ]; then sudo apt-get update; fi
-            if [ "$RUNNER_OS" = "Linux" ]; then sudo apt-get install unzip; fi
+            if [ "$RUNNER_OS" = "Linux" ]; then sudo apt-get install unzip llvm; fi
           
       - name: stash-changes
         run: | 
@@ -40,10 +40,6 @@ jobs:
       - name: generate-bcs
         run: |
            echo $(pwd)
-          #  cd ..
-          #  cd Test-Suite
-          #  git branch -a
-          #  git checkout remotes/origin/master
            git status
            bash ./generate_bc.sh
            if [ "$RUNNER_OS" = "Linux" ]; then git clone https://github.com/mbarbar/crux-bitcode; fi    
