@@ -25,9 +25,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 12.13
           
       - name: env-setup
         run: | 
@@ -57,8 +54,12 @@ jobs:
            if [ "$RUNNER_OS" = "Linux" ]; then unzip -j -o \*.zip -d $GITHUB_WORKSPACE/test_cases_bc/crux-bc/; fi
            if [ "$RUNNER_OS" = "Linux" ]; then rm $GITHUB_WORKSPACE/test_cases_bc/crux-bc/info.txt; fi
            if [ "$RUNNER_OS" = "Linux" ]; then cd ..; fi
-           git status
-           git add .
-           git commit -m'update bc files'
-           git push https://Wren71:${git_key}@github.com/Wren71/Test-Suite.git HEAD:master
-          
+
+      - name: commit-and-push
+        run: |
+          git config --global user.name 'Joe'
+          git config --global user.email 'joe@users.noreply.github.com'
+          git status
+          git add .
+          git commit -am "update bc files"
+          git push https://Wren71:${git_key}@github.com/Wren71/Test-Suite.git HEAD:master
