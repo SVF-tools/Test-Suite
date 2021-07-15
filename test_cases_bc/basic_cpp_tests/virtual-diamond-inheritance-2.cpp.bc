@@ -1,0 +1,628 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/src/basic_cpp_tests/virtual-diamond-inheritance-2.cpp'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/basic_cpp_tests/virtual-diamond-inheritance-2.cpp"
+target datalayout = "e-m:e-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
+
+%class.A = type { i32 (...)** }
+%class.B = type { %class.A }
+%class.C = type { %class.A }
+%class.D = type { %class.B, %class.C }
+
+$_ZN1DC1Ev = comdat any
+
+$_ZN1AC2Ev = comdat any
+
+$_ZN1BC2Ev = comdat any
+
+$_ZN1CC2Ev = comdat any
+
+$_ZN1A2f1EPi = comdat any
+
+$_ZN1A2f2EPi = comdat any
+
+$_ZN1B2g1EPi = comdat any
+
+$_ZN1B2g2EPi = comdat any
+
+$_ZN1C2h1EPi = comdat any
+
+$_ZN1C2h2EPi = comdat any
+
+$_ZN1D2l1EPi = comdat any
+
+$_ZN1D2l2EPi = comdat any
+
+$_ZTV1D = comdat any
+
+$_ZTT1D = comdat any
+
+$_ZTC1D0_1B = comdat any
+
+$_ZTS1B = comdat any
+
+$_ZTS1A = comdat any
+
+$_ZTI1A = comdat any
+
+$_ZTI1B = comdat any
+
+$_ZTC1D8_1C = comdat any
+
+$_ZTS1C = comdat any
+
+$_ZTI1C = comdat any
+
+$_ZTS1D = comdat any
+
+$_ZTI1D = comdat any
+
+$_ZTV1A = comdat any
+
+@.str = private unnamed_addr constant [2 x i8] c"\0A\00", align 1
+@.str.1 = private unnamed_addr constant [4 x i8] c"%s\0A\00", align 1
+@.str.2 = private unnamed_addr constant [25 x i8] c"Press ENTER to continue\0A\00", align 1
+@global_obj_f1 = dso_local global i32 0, align 4
+@global_ptr_f1 = dso_local global i32* @global_obj_f1, align 8
+@global_obj_f2 = dso_local global i32 0, align 4
+@global_ptr_f2 = dso_local global i32* @global_obj_f2, align 8
+@global_obj_g1 = dso_local global i32 0, align 4
+@global_ptr_g1 = dso_local global i32* @global_obj_g1, align 8
+@global_obj_g2 = dso_local global i32 0, align 4
+@global_ptr_g2 = dso_local global i32* @global_obj_g2, align 8
+@global_obj_h1 = dso_local global i32 0, align 4
+@global_ptr_h1 = dso_local global i32* @global_obj_h1, align 8
+@global_obj_h2 = dso_local global i32 0, align 4
+@global_ptr_h2 = dso_local global i32* @global_obj_h2, align 8
+@global_obj_l1 = dso_local global i32 0, align 4
+@global_ptr_l1 = dso_local global i32* @global_obj_l1, align 8
+@global_obj_l2 = dso_local global i32 0, align 4
+@global_ptr_l2 = dso_local global i32* @global_obj_l2, align 8
+@_ZTV1D = linkonce_odr dso_local unnamed_addr constant { [11 x i8*], [9 x i8*] } { [11 x i8*] [i8* null, i8* null, i8* null, i8* null, i8* bitcast ({ i8*, i8*, i32, i32, i8*, i64, i8*, i64 }* @_ZTI1D to i8*), i8* bitcast (void (%class.A*, i32*)* @_ZN1A2f1EPi to i8*), i8* bitcast (void (%class.A*, i32*)* @_ZN1A2f2EPi to i8*), i8* bitcast (void (%class.B*, i32*)* @_ZN1B2g1EPi to i8*), i8* bitcast (void (%class.B*, i32*)* @_ZN1B2g2EPi to i8*), i8* bitcast (void (%class.D*, i32*)* @_ZN1D2l1EPi to i8*), i8* bitcast (void (%class.D*, i32*)* @_ZN1D2l2EPi to i8*)], [9 x i8*] [i8* inttoptr (i64 -8 to i8*), i8* inttoptr (i64 -8 to i8*), i8* inttoptr (i64 -8 to i8*), i8* inttoptr (i64 -8 to i8*), i8* bitcast ({ i8*, i8*, i32, i32, i8*, i64, i8*, i64 }* @_ZTI1D to i8*), i8* null, i8* null, i8* bitcast (void (%class.C*, i32*)* @_ZN1C2h1EPi to i8*), i8* bitcast (void (%class.C*, i32*)* @_ZN1C2h2EPi to i8*)] }, comdat, align 8
+@_ZTT1D = linkonce_odr dso_local unnamed_addr constant [7 x i8*] [i8* bitcast (i8** getelementptr inbounds ({ [11 x i8*], [9 x i8*] }, { [11 x i8*], [9 x i8*] }* @_ZTV1D, i32 0, inrange i32 0, i32 5) to i8*), i8* bitcast (i8** getelementptr inbounds ({ [9 x i8*] }, { [9 x i8*] }* @_ZTC1D0_1B, i32 0, inrange i32 0, i32 5) to i8*), i8* bitcast (i8** getelementptr inbounds ({ [9 x i8*] }, { [9 x i8*] }* @_ZTC1D0_1B, i32 0, inrange i32 0, i32 5) to i8*), i8* bitcast (i8** getelementptr inbounds ({ [9 x i8*], [6 x i8*] }, { [9 x i8*], [6 x i8*] }* @_ZTC1D8_1C, i32 0, inrange i32 0, i32 5) to i8*), i8* bitcast (i8** getelementptr inbounds ({ [9 x i8*], [6 x i8*] }, { [9 x i8*], [6 x i8*] }* @_ZTC1D8_1C, i32 0, inrange i32 1, i32 4) to i8*), i8* bitcast (i8** getelementptr inbounds ({ [11 x i8*], [9 x i8*] }, { [11 x i8*], [9 x i8*] }* @_ZTV1D, i32 0, inrange i32 0, i32 5) to i8*), i8* bitcast (i8** getelementptr inbounds ({ [11 x i8*], [9 x i8*] }, { [11 x i8*], [9 x i8*] }* @_ZTV1D, i32 0, inrange i32 1, i32 5) to i8*)], comdat, align 8
+@_ZTC1D0_1B = linkonce_odr dso_local unnamed_addr constant { [9 x i8*] } { [9 x i8*] [i8* null, i8* null, i8* null, i8* null, i8* bitcast ({ i8*, i8*, i32, i32, i8*, i64 }* @_ZTI1B to i8*), i8* bitcast (void (%class.A*, i32*)* @_ZN1A2f1EPi to i8*), i8* bitcast (void (%class.A*, i32*)* @_ZN1A2f2EPi to i8*), i8* bitcast (void (%class.B*, i32*)* @_ZN1B2g1EPi to i8*), i8* bitcast (void (%class.B*, i32*)* @_ZN1B2g2EPi to i8*)] }, comdat, align 8
+@_ZTVN10__cxxabiv121__vmi_class_type_infoE = external dso_local global i8*
+@_ZTS1B = linkonce_odr dso_local constant [3 x i8] c"1B\00", comdat, align 1
+@_ZTVN10__cxxabiv117__class_type_infoE = external dso_local global i8*
+@_ZTS1A = linkonce_odr dso_local constant [3 x i8] c"1A\00", comdat, align 1
+@_ZTI1A = linkonce_odr dso_local constant { i8*, i8* } { i8* bitcast (i8** getelementptr inbounds (i8*, i8** @_ZTVN10__cxxabiv117__class_type_infoE, i64 2) to i8*), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @_ZTS1A, i32 0, i32 0) }, comdat, align 8
+@_ZTI1B = linkonce_odr dso_local constant { i8*, i8*, i32, i32, i8*, i64 } { i8* bitcast (i8** getelementptr inbounds (i8*, i8** @_ZTVN10__cxxabiv121__vmi_class_type_infoE, i64 2) to i8*), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @_ZTS1B, i32 0, i32 0), i32 0, i32 1, i8* bitcast ({ i8*, i8* }* @_ZTI1A to i8*), i64 -10237 }, comdat, align 8
+@_ZTC1D8_1C = linkonce_odr dso_local unnamed_addr constant { [9 x i8*], [6 x i8*] } { [9 x i8*] [i8* inttoptr (i64 -8 to i8*), i8* inttoptr (i64 -8 to i8*), i8* inttoptr (i64 -8 to i8*), i8* null, i8* bitcast ({ i8*, i8*, i32, i32, i8*, i64 }* @_ZTI1C to i8*), i8* null, i8* null, i8* bitcast (void (%class.C*, i32*)* @_ZN1C2h1EPi to i8*), i8* bitcast (void (%class.C*, i32*)* @_ZN1C2h2EPi to i8*)], [6 x i8*] [i8* null, i8* null, i8* inttoptr (i64 8 to i8*), i8* bitcast ({ i8*, i8*, i32, i32, i8*, i64 }* @_ZTI1C to i8*), i8* bitcast (void (%class.A*, i32*)* @_ZN1A2f1EPi to i8*), i8* bitcast (void (%class.A*, i32*)* @_ZN1A2f2EPi to i8*)] }, comdat, align 8
+@_ZTS1C = linkonce_odr dso_local constant [3 x i8] c"1C\00", comdat, align 1
+@_ZTI1C = linkonce_odr dso_local constant { i8*, i8*, i32, i32, i8*, i64 } { i8* bitcast (i8** getelementptr inbounds (i8*, i8** @_ZTVN10__cxxabiv121__vmi_class_type_infoE, i64 2) to i8*), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @_ZTS1C, i32 0, i32 0), i32 0, i32 1, i8* bitcast ({ i8*, i8* }* @_ZTI1A to i8*), i64 -10237 }, comdat, align 8
+@_ZTS1D = linkonce_odr dso_local constant [3 x i8] c"1D\00", comdat, align 1
+@_ZTI1D = linkonce_odr dso_local constant { i8*, i8*, i32, i32, i8*, i64, i8*, i64 } { i8* bitcast (i8** getelementptr inbounds (i8*, i8** @_ZTVN10__cxxabiv121__vmi_class_type_infoE, i64 2) to i8*), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @_ZTS1D, i32 0, i32 0), i32 2, i32 2, i8* bitcast ({ i8*, i8*, i32, i32, i8*, i64 }* @_ZTI1B to i8*), i64 2, i8* bitcast ({ i8*, i8*, i32, i32, i8*, i64 }* @_ZTI1C to i8*), i64 2050 }, comdat, align 8
+@_ZTV1A = linkonce_odr dso_local unnamed_addr constant { [4 x i8*] } { [4 x i8*] [i8* null, i8* bitcast ({ i8*, i8* }* @_ZTI1A to i8*), i8* bitcast (void (%class.A*, i32*)* @_ZN1A2f1EPi to i8*), i8* bitcast (void (%class.A*, i32*)* @_ZN1A2f2EPi to i8*)] }, comdat, align 8
+
+; Function Attrs: noinline optnone uwtable
+define dso_local void @_Z9MUSTALIASPvS_(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+declare dso_local i32 @printf(i8*, ...) #1
+
+; Function Attrs: noinline optnone uwtable
+define dso_local void @_Z12PARTIALALIASPvS_(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define dso_local void @_Z8MAYALIASPvS_(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define dso_local void @_Z7NOALIASPvS_(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define dso_local void @_Z21EXPECTEDFAIL_MAYALIASPvS_(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define dso_local void @_Z20EXPECTEDFAIL_NOALIASPvS_(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @_Z10SAFEMALLOCi(i32) #2 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #5
+  ret i8* %5
+}
+
+; Function Attrs: nounwind
+declare dso_local noalias i8* @malloc(i64) #3
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @_Z9PLKMALLOCi(i32) #2 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #5
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @_Z9NFRMALLOCi(i32) #2 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #5
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @_Z9CLKMALLOCi(i32) #2 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #5
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @_Z9NFRLEAKFPi(i32) #2 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #5
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @_Z9PLKLEAKFPi(i32) #2 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #5
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @_Z6LEAKFNi(i32) #2 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #5
+  ret i8* %5
+}
+
+; Function Attrs: noinline optnone uwtable
+define dso_local void @_Z9RC_ACCESSii(i32, i32) #0 {
+  %3 = alloca i32, align 4
+  %4 = alloca i32, align 4
+  store i32 %0, i32* %3, align 4
+  store i32 %1, i32* %4, align 4
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @_Z10CXT_THREADiPc(i32, i8*) #2 {
+  %3 = alloca i32, align 4
+  %4 = alloca i8*, align 8
+  store i32 %0, i32* %3, align 4
+  store i8* %1, i8** %4, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @_Z10TCT_ACCESSiPc(i32, i8*) #2 {
+  %3 = alloca i32, align 4
+  %4 = alloca i8*, align 8
+  store i32 %0, i32* %3, align 4
+  store i8* %1, i8** %4, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @_Z15INTERLEV_ACCESSiPcS_(i32, i8*, i8*) #2 {
+  %4 = alloca i32, align 4
+  %5 = alloca i8*, align 8
+  %6 = alloca i8*, align 8
+  store i32 %0, i32* %4, align 4
+  store i8* %1, i8** %5, align 8
+  store i8* %2, i8** %6, align 8
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define dso_local void @_Z5PAUSEPc(i8*) #0 {
+  %2 = alloca i8*, align 8
+  store i8* %0, i8** %2, align 8
+  %3 = load i8*, i8** %2, align 8
+  %4 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.1, i64 0, i64 0), i8* %3)
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([25 x i8], [25 x i8]* @.str.2, i64 0, i64 0))
+  %6 = call i32 @getchar()
+  ret void
+}
+
+declare dso_local i32 @getchar() #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @_Z5derefv() #2 {
+  ret void
+}
+
+; Function Attrs: noinline norecurse optnone uwtable
+define dso_local i32 @main(i32, i8**) #4 {
+  %3 = alloca i32, align 4
+  %4 = alloca i32, align 4
+  %5 = alloca i8**, align 8
+  %6 = alloca i32*, align 8
+  %7 = alloca i32*, align 8
+  %8 = alloca i32*, align 8
+  %9 = alloca i32*, align 8
+  %10 = alloca i32*, align 8
+  %11 = alloca i32*, align 8
+  %12 = alloca i32*, align 8
+  %13 = alloca i32*, align 8
+  %14 = alloca %class.A*, align 8
+  %15 = alloca %class.B*, align 8
+  %16 = alloca %class.C*, align 8
+  %17 = alloca %class.D*, align 8
+  %18 = alloca %class.D, align 8
+  store i32 0, i32* %3, align 4
+  store i32 %0, i32* %4, align 4
+  store i8** %1, i8*** %5, align 8
+  store i32* @global_obj_f1, i32** %6, align 8
+  store i32* @global_obj_f2, i32** %7, align 8
+  store i32* @global_obj_g1, i32** %8, align 8
+  store i32* @global_obj_g2, i32** %9, align 8
+  store i32* @global_obj_h1, i32** %10, align 8
+  store i32* @global_obj_h2, i32** %11, align 8
+  store i32* @global_obj_l1, i32** %12, align 8
+  store i32* @global_obj_l2, i32** %13, align 8
+  call void @_ZN1DC1Ev(%class.D* %18) #5
+  %19 = icmp eq %class.D* %18, null
+  br i1 %19, label %29, label %20
+
+20:                                               ; preds = %2
+  %21 = bitcast %class.D* %18 to i8**
+  %22 = load i8*, i8** %21, align 8
+  %23 = getelementptr i8, i8* %22, i64 -40
+  %24 = bitcast i8* %23 to i64*
+  %25 = load i64, i64* %24, align 8
+  %26 = bitcast %class.D* %18 to i8*
+  %27 = getelementptr inbounds i8, i8* %26, i64 %25
+  %28 = bitcast i8* %27 to %class.A*
+  br label %29
+
+29:                                               ; preds = %20, %2
+  %30 = phi %class.A* [ %28, %20 ], [ null, %2 ]
+  store %class.A* %30, %class.A** %14, align 8
+  %31 = load %class.A*, %class.A** %14, align 8
+  %32 = load i32*, i32** %6, align 8
+  %33 = bitcast %class.A* %31 to void (%class.A*, i32*)***
+  %34 = load void (%class.A*, i32*)**, void (%class.A*, i32*)*** %33, align 8
+  %35 = getelementptr inbounds void (%class.A*, i32*)*, void (%class.A*, i32*)** %34, i64 0
+  %36 = load void (%class.A*, i32*)*, void (%class.A*, i32*)** %35, align 8
+  call void %36(%class.A* %31, i32* %32)
+  %37 = load %class.A*, %class.A** %14, align 8
+  %38 = load i32*, i32** %7, align 8
+  %39 = bitcast %class.A* %37 to void (%class.A*, i32*)***
+  %40 = load void (%class.A*, i32*)**, void (%class.A*, i32*)*** %39, align 8
+  %41 = getelementptr inbounds void (%class.A*, i32*)*, void (%class.A*, i32*)** %40, i64 1
+  %42 = load void (%class.A*, i32*)*, void (%class.A*, i32*)** %41, align 8
+  call void %42(%class.A* %37, i32* %38)
+  %43 = bitcast %class.D* %18 to %class.B*
+  store %class.B* %43, %class.B** %15, align 8
+  %44 = load %class.B*, %class.B** %15, align 8
+  %45 = load i32*, i32** %8, align 8
+  %46 = bitcast %class.B* %44 to void (%class.B*, i32*)***
+  %47 = load void (%class.B*, i32*)**, void (%class.B*, i32*)*** %46, align 8
+  %48 = getelementptr inbounds void (%class.B*, i32*)*, void (%class.B*, i32*)** %47, i64 2
+  %49 = load void (%class.B*, i32*)*, void (%class.B*, i32*)** %48, align 8
+  call void %49(%class.B* %44, i32* %45)
+  %50 = load %class.B*, %class.B** %15, align 8
+  %51 = load i32*, i32** %9, align 8
+  %52 = bitcast %class.B* %50 to void (%class.B*, i32*)***
+  %53 = load void (%class.B*, i32*)**, void (%class.B*, i32*)*** %52, align 8
+  %54 = getelementptr inbounds void (%class.B*, i32*)*, void (%class.B*, i32*)** %53, i64 3
+  %55 = load void (%class.B*, i32*)*, void (%class.B*, i32*)** %54, align 8
+  call void %55(%class.B* %50, i32* %51)
+  %56 = icmp eq %class.D* %18, null
+  br i1 %56, label %61, label %57
+
+57:                                               ; preds = %29
+  %58 = bitcast %class.D* %18 to i8*
+  %59 = getelementptr inbounds i8, i8* %58, i64 8
+  %60 = bitcast i8* %59 to %class.C*
+  br label %61
+
+61:                                               ; preds = %57, %29
+  %62 = phi %class.C* [ %60, %57 ], [ null, %29 ]
+  store %class.C* %62, %class.C** %16, align 8
+  %63 = load %class.C*, %class.C** %16, align 8
+  %64 = load i32*, i32** %10, align 8
+  %65 = bitcast %class.C* %63 to void (%class.C*, i32*)***
+  %66 = load void (%class.C*, i32*)**, void (%class.C*, i32*)*** %65, align 8
+  %67 = getelementptr inbounds void (%class.C*, i32*)*, void (%class.C*, i32*)** %66, i64 2
+  %68 = load void (%class.C*, i32*)*, void (%class.C*, i32*)** %67, align 8
+  call void %68(%class.C* %63, i32* %64)
+  %69 = load %class.C*, %class.C** %16, align 8
+  %70 = load i32*, i32** %11, align 8
+  %71 = bitcast %class.C* %69 to void (%class.C*, i32*)***
+  %72 = load void (%class.C*, i32*)**, void (%class.C*, i32*)*** %71, align 8
+  %73 = getelementptr inbounds void (%class.C*, i32*)*, void (%class.C*, i32*)** %72, i64 3
+  %74 = load void (%class.C*, i32*)*, void (%class.C*, i32*)** %73, align 8
+  call void %74(%class.C* %69, i32* %70)
+  store %class.D* %18, %class.D** %17, align 8
+  %75 = load %class.D*, %class.D** %17, align 8
+  %76 = load i32*, i32** %12, align 8
+  %77 = bitcast %class.D* %75 to void (%class.D*, i32*)***
+  %78 = load void (%class.D*, i32*)**, void (%class.D*, i32*)*** %77, align 8
+  %79 = getelementptr inbounds void (%class.D*, i32*)*, void (%class.D*, i32*)** %78, i64 4
+  %80 = load void (%class.D*, i32*)*, void (%class.D*, i32*)** %79, align 8
+  call void %80(%class.D* %75, i32* %76)
+  %81 = load %class.D*, %class.D** %17, align 8
+  %82 = load i32*, i32** %13, align 8
+  %83 = bitcast %class.D* %81 to void (%class.D*, i32*)***
+  %84 = load void (%class.D*, i32*)**, void (%class.D*, i32*)*** %83, align 8
+  %85 = getelementptr inbounds void (%class.D*, i32*)*, void (%class.D*, i32*)** %84, i64 5
+  %86 = load void (%class.D*, i32*)*, void (%class.D*, i32*)** %85, align 8
+  call void %86(%class.D* %81, i32* %82)
+  ret i32 0
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZN1DC1Ev(%class.D*) unnamed_addr #2 comdat align 2 {
+  %2 = alloca %class.D*, align 8
+  store %class.D* %0, %class.D** %2, align 8
+  %3 = load %class.D*, %class.D** %2, align 8
+  %4 = bitcast %class.D* %3 to %class.A*
+  call void @_ZN1AC2Ev(%class.A* %4) #5
+  %5 = bitcast %class.D* %3 to %class.B*
+  call void @_ZN1BC2Ev(%class.B* %5, i8** getelementptr inbounds ([7 x i8*], [7 x i8*]* @_ZTT1D, i64 0, i64 1)) #5
+  %6 = bitcast %class.D* %3 to i8*
+  %7 = getelementptr inbounds i8, i8* %6, i64 8
+  %8 = bitcast i8* %7 to %class.C*
+  call void @_ZN1CC2Ev(%class.C* %8, i8** getelementptr inbounds ([7 x i8*], [7 x i8*]* @_ZTT1D, i64 0, i64 3)) #5
+  %9 = bitcast %class.D* %3 to i32 (...)***
+  store i32 (...)** bitcast (i8** getelementptr inbounds ({ [11 x i8*], [9 x i8*] }, { [11 x i8*], [9 x i8*] }* @_ZTV1D, i32 0, inrange i32 0, i32 5) to i32 (...)**), i32 (...)*** %9, align 8
+  %10 = bitcast %class.D* %3 to i32 (...)***
+  store i32 (...)** bitcast (i8** getelementptr inbounds ({ [11 x i8*], [9 x i8*] }, { [11 x i8*], [9 x i8*] }* @_ZTV1D, i32 0, inrange i32 0, i32 5) to i32 (...)**), i32 (...)*** %10, align 8
+  %11 = bitcast %class.D* %3 to i8*
+  %12 = getelementptr inbounds i8, i8* %11, i64 8
+  %13 = bitcast i8* %12 to i32 (...)***
+  store i32 (...)** bitcast (i8** getelementptr inbounds ({ [11 x i8*], [9 x i8*] }, { [11 x i8*], [9 x i8*] }* @_ZTV1D, i32 0, inrange i32 1, i32 5) to i32 (...)**), i32 (...)*** %13, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZN1AC2Ev(%class.A*) unnamed_addr #2 comdat align 2 {
+  %2 = alloca %class.A*, align 8
+  store %class.A* %0, %class.A** %2, align 8
+  %3 = load %class.A*, %class.A** %2, align 8
+  %4 = bitcast %class.A* %3 to i32 (...)***
+  store i32 (...)** bitcast (i8** getelementptr inbounds ({ [4 x i8*] }, { [4 x i8*] }* @_ZTV1A, i32 0, inrange i32 0, i32 2) to i32 (...)**), i32 (...)*** %4, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZN1BC2Ev(%class.B*, i8**) unnamed_addr #2 comdat align 2 {
+  %3 = alloca %class.B*, align 8
+  %4 = alloca i8**, align 8
+  store %class.B* %0, %class.B** %3, align 8
+  store i8** %1, i8*** %4, align 8
+  %5 = load %class.B*, %class.B** %3, align 8
+  %6 = load i8**, i8*** %4, align 8
+  %7 = load i8*, i8** %6, align 8
+  %8 = bitcast %class.B* %5 to i32 (...)***
+  %9 = bitcast i8* %7 to i32 (...)**
+  store i32 (...)** %9, i32 (...)*** %8, align 8
+  %10 = getelementptr inbounds i8*, i8** %6, i64 1
+  %11 = load i8*, i8** %10, align 8
+  %12 = bitcast %class.B* %5 to i8**
+  %13 = load i8*, i8** %12, align 8
+  %14 = getelementptr i8, i8* %13, i64 -40
+  %15 = bitcast i8* %14 to i64*
+  %16 = load i64, i64* %15, align 8
+  %17 = bitcast %class.B* %5 to i8*
+  %18 = getelementptr inbounds i8, i8* %17, i64 %16
+  %19 = bitcast i8* %18 to i32 (...)***
+  %20 = bitcast i8* %11 to i32 (...)**
+  store i32 (...)** %20, i32 (...)*** %19, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZN1CC2Ev(%class.C*, i8**) unnamed_addr #2 comdat align 2 {
+  %3 = alloca %class.C*, align 8
+  %4 = alloca i8**, align 8
+  store %class.C* %0, %class.C** %3, align 8
+  store i8** %1, i8*** %4, align 8
+  %5 = load %class.C*, %class.C** %3, align 8
+  %6 = load i8**, i8*** %4, align 8
+  %7 = load i8*, i8** %6, align 8
+  %8 = bitcast %class.C* %5 to i32 (...)***
+  %9 = bitcast i8* %7 to i32 (...)**
+  store i32 (...)** %9, i32 (...)*** %8, align 8
+  %10 = getelementptr inbounds i8*, i8** %6, i64 1
+  %11 = load i8*, i8** %10, align 8
+  %12 = bitcast %class.C* %5 to i8**
+  %13 = load i8*, i8** %12, align 8
+  %14 = getelementptr i8, i8* %13, i64 -40
+  %15 = bitcast i8* %14 to i64*
+  %16 = load i64, i64* %15, align 8
+  %17 = bitcast %class.C* %5 to i8*
+  %18 = getelementptr inbounds i8, i8* %17, i64 %16
+  %19 = bitcast i8* %18 to i32 (...)***
+  %20 = bitcast i8* %11 to i32 (...)**
+  store i32 (...)** %20, i32 (...)*** %19, align 8
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr dso_local void @_ZN1A2f1EPi(%class.A*, i32*) unnamed_addr #0 comdat align 2 {
+  %3 = alloca %class.A*, align 8
+  %4 = alloca i32*, align 8
+  store %class.A* %0, %class.A** %3, align 8
+  store i32* %1, i32** %4, align 8
+  %5 = load %class.A*, %class.A** %3, align 8
+  %6 = load i32*, i32** @global_ptr_f1, align 8
+  %7 = bitcast i32* %6 to i8*
+  %8 = load i32*, i32** %4, align 8
+  %9 = bitcast i32* %8 to i8*
+  call void @_Z9MUSTALIASPvS_(i8* %7, i8* %9)
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr dso_local void @_ZN1A2f2EPi(%class.A*, i32*) unnamed_addr #0 comdat align 2 {
+  %3 = alloca %class.A*, align 8
+  %4 = alloca i32*, align 8
+  store %class.A* %0, %class.A** %3, align 8
+  store i32* %1, i32** %4, align 8
+  %5 = load %class.A*, %class.A** %3, align 8
+  %6 = load i32*, i32** @global_ptr_f2, align 8
+  %7 = bitcast i32* %6 to i8*
+  %8 = load i32*, i32** %4, align 8
+  %9 = bitcast i32* %8 to i8*
+  call void @_Z9MUSTALIASPvS_(i8* %7, i8* %9)
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr dso_local void @_ZN1B2g1EPi(%class.B*, i32*) unnamed_addr #0 comdat align 2 {
+  %3 = alloca %class.B*, align 8
+  %4 = alloca i32*, align 8
+  store %class.B* %0, %class.B** %3, align 8
+  store i32* %1, i32** %4, align 8
+  %5 = load %class.B*, %class.B** %3, align 8
+  %6 = load i32*, i32** @global_ptr_g1, align 8
+  %7 = bitcast i32* %6 to i8*
+  %8 = load i32*, i32** %4, align 8
+  %9 = bitcast i32* %8 to i8*
+  call void @_Z9MUSTALIASPvS_(i8* %7, i8* %9)
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr dso_local void @_ZN1B2g2EPi(%class.B*, i32*) unnamed_addr #0 comdat align 2 {
+  %3 = alloca %class.B*, align 8
+  %4 = alloca i32*, align 8
+  store %class.B* %0, %class.B** %3, align 8
+  store i32* %1, i32** %4, align 8
+  %5 = load %class.B*, %class.B** %3, align 8
+  %6 = load i32*, i32** @global_ptr_g2, align 8
+  %7 = bitcast i32* %6 to i8*
+  %8 = load i32*, i32** %4, align 8
+  %9 = bitcast i32* %8 to i8*
+  call void @_Z9MUSTALIASPvS_(i8* %7, i8* %9)
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr dso_local void @_ZN1C2h1EPi(%class.C*, i32*) unnamed_addr #0 comdat align 2 {
+  %3 = alloca %class.C*, align 8
+  %4 = alloca i32*, align 8
+  store %class.C* %0, %class.C** %3, align 8
+  store i32* %1, i32** %4, align 8
+  %5 = load %class.C*, %class.C** %3, align 8
+  %6 = load i32*, i32** @global_ptr_h1, align 8
+  %7 = bitcast i32* %6 to i8*
+  %8 = load i32*, i32** %4, align 8
+  %9 = bitcast i32* %8 to i8*
+  call void @_Z9MUSTALIASPvS_(i8* %7, i8* %9)
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr dso_local void @_ZN1C2h2EPi(%class.C*, i32*) unnamed_addr #0 comdat align 2 {
+  %3 = alloca %class.C*, align 8
+  %4 = alloca i32*, align 8
+  store %class.C* %0, %class.C** %3, align 8
+  store i32* %1, i32** %4, align 8
+  %5 = load %class.C*, %class.C** %3, align 8
+  %6 = load i32*, i32** @global_ptr_h2, align 8
+  %7 = bitcast i32* %6 to i8*
+  %8 = load i32*, i32** %4, align 8
+  %9 = bitcast i32* %8 to i8*
+  call void @_Z9MUSTALIASPvS_(i8* %7, i8* %9)
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr dso_local void @_ZN1D2l1EPi(%class.D*, i32*) unnamed_addr #0 comdat align 2 {
+  %3 = alloca %class.D*, align 8
+  %4 = alloca i32*, align 8
+  store %class.D* %0, %class.D** %3, align 8
+  store i32* %1, i32** %4, align 8
+  %5 = load %class.D*, %class.D** %3, align 8
+  %6 = load i32*, i32** @global_ptr_l1, align 8
+  %7 = bitcast i32* %6 to i8*
+  %8 = load i32*, i32** %4, align 8
+  %9 = bitcast i32* %8 to i8*
+  call void @_Z9MUSTALIASPvS_(i8* %7, i8* %9)
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr dso_local void @_ZN1D2l2EPi(%class.D*, i32*) unnamed_addr #0 comdat align 2 {
+  %3 = alloca %class.D*, align 8
+  %4 = alloca i32*, align 8
+  store %class.D* %0, %class.D** %3, align 8
+  store i32* %1, i32** %4, align 8
+  %5 = load %class.D*, %class.D** %3, align 8
+  %6 = load i32*, i32** @global_ptr_l2, align 8
+  %7 = bitcast i32* %6 to i8*
+  %8 = load i32*, i32** %4, align 8
+  %9 = bitcast i32* %8 to i8*
+  call void @_Z9MUSTALIASPvS_(i8* %7, i8* %9)
+  ret void
+}
+
+attributes #0 = { noinline optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { noinline nounwind optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #3 = { nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #4 = { noinline norecurse optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #5 = { nounwind }
+
+!llvm.module.flags = !{!0}
+!llvm.ident = !{!1}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{!"clang version 9.0.0-2~ubuntu18.04.2 (tags/RELEASE_900/final)"}

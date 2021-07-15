@@ -1,0 +1,381 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/src/mem_leak/sp9.c'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/mem_leak/sp9.c"
+target datalayout = "e-m:e-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
+
+@.str = private unnamed_addr constant [2 x i8] c"\0A\00", align 1
+@.str.1 = private unnamed_addr constant [4 x i8] c"%s\0A\00", align 1
+@.str.2 = private unnamed_addr constant [25 x i8] c"Press ENTER to continue\0A\00", align 1
+@.str.3 = private unnamed_addr constant [4 x i8] c"%d\0A\00", align 1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @MUSTALIAS(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+declare dso_local i32 @printf(i8*, ...) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @PARTIALALIAS(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @MAYALIAS(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @NOALIAS(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @EXPECTEDFAIL_MAYALIAS(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @EXPECTEDFAIL_NOALIAS(i8*, i8*) #0 {
+  %3 = alloca i8*, align 8
+  %4 = alloca i8*, align 8
+  store i8* %0, i8** %3, align 8
+  store i8* %1, i8** %4, align 8
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @SAFEMALLOC(i32) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #4
+  ret i8* %5
+}
+
+; Function Attrs: nounwind
+declare dso_local noalias i8* @malloc(i64) #2
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @PLKMALLOC(i32) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #4
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @NFRMALLOC(i32) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #4
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @CLKMALLOC(i32) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #4
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @NFRLEAKFP(i32) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #4
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @PLKLEAKFP(i32) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #4
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @LEAKFN(i32) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, i32* %2, align 4
+  %3 = load i32, i32* %2, align 4
+  %4 = sext i32 %3 to i64
+  %5 = call noalias i8* @malloc(i64 %4) #4
+  ret i8* %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @RC_ACCESS(i32, i32) #0 {
+  %3 = alloca i32, align 4
+  %4 = alloca i32, align 4
+  store i32 %0, i32* %3, align 4
+  store i32 %1, i32* %4, align 4
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @CXT_THREAD(i32, i8*) #0 {
+  %3 = alloca i32, align 4
+  %4 = alloca i8*, align 8
+  store i32 %0, i32* %3, align 4
+  store i8* %1, i8** %4, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @TCT_ACCESS(i32, i8*) #0 {
+  %3 = alloca i32, align 4
+  %4 = alloca i8*, align 8
+  store i32 %0, i32* %3, align 4
+  store i8* %1, i8** %4, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @INTERLEV_ACCESS(i32, i8*, i8*) #0 {
+  %4 = alloca i32, align 4
+  %5 = alloca i8*, align 8
+  %6 = alloca i8*, align 8
+  store i32 %0, i32* %4, align 4
+  store i8* %1, i8** %5, align 8
+  store i8* %2, i8** %6, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @PAUSE(i8*) #0 {
+  %2 = alloca i8*, align 8
+  store i8* %0, i8** %2, align 8
+  %3 = load i8*, i8** %2, align 8
+  %4 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.1, i64 0, i64 0), i8* %3)
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([25 x i8], [25 x i8]* @.str.2, i64 0, i64 0))
+  %6 = call i32 @getchar()
+  ret void
+}
+
+declare dso_local i32 @getchar() #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @deref() #0 {
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @sum(i8*) #0 {
+  %2 = alloca i8*, align 8
+  %3 = alloca i8*, align 8
+  %4 = alloca i32, align 4
+  %5 = alloca i32, align 4
+  %6 = alloca i32, align 4
+  %7 = alloca i32, align 4
+  store i8* %0, i8** %2, align 8
+  store i32 0, i32* %4, align 4
+  %8 = load i8*, i8** %2, align 8
+  %9 = icmp eq i8* %8, null
+  br i1 %9, label %10, label %11
+
+10:                                               ; preds = %1
+  br label %14
+
+11:                                               ; preds = %1
+  %12 = load i8*, i8** %2, align 8
+  %13 = call i64 @strlen(i8* %12)
+  br label %14
+
+14:                                               ; preds = %11, %10
+  %15 = phi i64 [ 0, %10 ], [ %13, %11 ]
+  %16 = trunc i64 %15 to i32
+  store i32 %16, i32* %7, align 4
+  %17 = load i32, i32* %7, align 4
+  %18 = icmp sgt i32 %17, 0
+  br i1 %18, label %19, label %22
+
+19:                                               ; preds = %14
+  %20 = load i32, i32* %7, align 4
+  %21 = call i8* @PLKMALLOC(i32 %20)
+  store i8* %21, i8** %3, align 8
+  store i32 0, i32* %6, align 4
+  br label %23
+
+22:                                               ; preds = %14
+  store i32 -1, i32* %6, align 4
+  br label %23
+
+23:                                               ; preds = %22, %19
+  br label %24
+
+24:                                               ; preds = %61, %23
+  %25 = load i32, i32* %4, align 4
+  %26 = load i32, i32* %7, align 4
+  %27 = icmp slt i32 %25, %26
+  br i1 %27, label %28, label %64
+
+28:                                               ; preds = %24
+  store i32 0, i32* %5, align 4
+  br label %29
+
+29:                                               ; preds = %37, %28
+  %30 = load i8*, i8** %2, align 8
+  %31 = load i32, i32* %4, align 4
+  %32 = sext i32 %31 to i64
+  %33 = getelementptr inbounds i8, i8* %30, i64 %32
+  %34 = load i8, i8* %33, align 1
+  %35 = sext i8 %34 to i32
+  %36 = icmp sgt i32 %35, 0
+  br i1 %36, label %37, label %49
+
+37:                                               ; preds = %29
+  %38 = load i8*, i8** %2, align 8
+  %39 = load i32, i32* %4, align 4
+  %40 = add nsw i32 %39, 1
+  store i32 %40, i32* %4, align 4
+  %41 = sext i32 %39 to i64
+  %42 = getelementptr inbounds i8, i8* %38, i64 %41
+  %43 = load i8, i8* %42, align 1
+  %44 = load i8*, i8** %3, align 8
+  %45 = load i32, i32* %5, align 4
+  %46 = add nsw i32 %45, 1
+  store i32 %46, i32* %5, align 4
+  %47 = sext i32 %45 to i64
+  %48 = getelementptr inbounds i8, i8* %44, i64 %47
+  store i8 %43, i8* %48, align 1
+  br label %29
+
+49:                                               ; preds = %29
+  %50 = load i32, i32* %5, align 4
+  %51 = icmp sgt i32 %50, 0
+  br i1 %51, label %52, label %61
+
+52:                                               ; preds = %49
+  %53 = load i8*, i8** %3, align 8
+  %54 = load i32, i32* %5, align 4
+  %55 = sext i32 %54 to i64
+  %56 = getelementptr inbounds i8, i8* %53, i64 %55
+  store i8 0, i8* %56, align 1
+  %57 = load i8*, i8** %3, align 8
+  %58 = call i32 @atoi(i8* %57) #5
+  %59 = load i32, i32* %6, align 4
+  %60 = add nsw i32 %59, %58
+  store i32 %60, i32* %6, align 4
+  br label %61
+
+61:                                               ; preds = %52, %49
+  %62 = load i32, i32* %4, align 4
+  %63 = add nsw i32 %62, 1
+  store i32 %63, i32* %4, align 4
+  br label %24
+
+64:                                               ; preds = %24
+  %65 = load i32, i32* %6, align 4
+  %66 = icmp sge i32 %65, 0
+  br i1 %66, label %67, label %69
+
+67:                                               ; preds = %64
+  %68 = load i8*, i8** %3, align 8
+  call void @free(i8* %68) #4
+  br label %69
+
+69:                                               ; preds = %67, %64
+  %70 = load i32, i32* %6, align 4
+  ret i32 %70
+}
+
+declare dso_local i64 @strlen(i8*) #1
+
+; Function Attrs: nounwind readonly
+declare dso_local i32 @atoi(i8*) #3
+
+; Function Attrs: nounwind
+declare dso_local void @free(i8*) #2
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main(i32, i8**) #0 {
+  %3 = alloca i32, align 4
+  %4 = alloca i32, align 4
+  %5 = alloca i8**, align 8
+  %6 = alloca i32, align 4
+  store i32 0, i32* %3, align 4
+  store i32 %0, i32* %4, align 4
+  store i8** %1, i8*** %5, align 8
+  store i32 1, i32* %6, align 4
+  br label %7
+
+7:                                                ; preds = %19, %2
+  %8 = load i32, i32* %6, align 4
+  %9 = load i32, i32* %4, align 4
+  %10 = icmp slt i32 %8, %9
+  br i1 %10, label %11, label %22
+
+11:                                               ; preds = %7
+  %12 = load i8**, i8*** %5, align 8
+  %13 = load i32, i32* %6, align 4
+  %14 = sext i32 %13 to i64
+  %15 = getelementptr inbounds i8*, i8** %12, i64 %14
+  %16 = load i8*, i8** %15, align 8
+  %17 = call i32 @sum(i8* %16)
+  %18 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.3, i64 0, i64 0), i32 %17)
+  br label %19
+
+19:                                               ; preds = %11
+  %20 = load i32, i32* %6, align 4
+  %21 = add nsw i32 %20, 1
+  store i32 %21, i32* %6, align 4
+  br label %7
+
+22:                                               ; preds = %7
+  %23 = load i32, i32* %3, align 4
+  ret i32 %23
+}
+
+attributes #0 = { noinline nounwind optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #3 = { nounwind readonly "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #4 = { nounwind }
+attributes #5 = { nounwind readonly }
+
+!llvm.module.flags = !{!0}
+!llvm.ident = !{!1}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{!"clang version 9.0.0-2~ubuntu18.04.2 (tags/RELEASE_900/final)"}
