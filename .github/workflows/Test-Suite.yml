@@ -39,11 +39,11 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: generate-bcs
         run: |
-           cd ..
-           cd Test-Suite
            echo $(pwd)
-           git branch -a
-           git checkout remotes/origin/master
+          #  cd ..
+          #  cd Test-Suite
+          #  git branch -a
+          #  git checkout remotes/origin/master
            git status
            bash ./generate_bc.sh
            if [ "$RUNNER_OS" = "Linux" ]; then git clone https://github.com/mbarbar/crux-bitcode; fi    
@@ -61,5 +61,5 @@ jobs:
           git config --global user.email 'joe@users.noreply.github.com'
           git status
           git add .
-          git commit -am "update bc files"
+          git commit -am "update bc files" || true
           git push https://Wren71:${git_key}@github.com/Wren71/Test-Suite.git HEAD:master
