@@ -17,15 +17,16 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
-      matrix:
-        os: [linux, osx]
-        include:
-          - os: linux
-            dist: bionic
-            sudo: required
-          - os: osx
-            osx_image: xcode12.4
-            sudo: required
+      strategy:
+        matrix:
+          os: [linux, osx]
+          include:
+            - os: linux
+              dist: bionic
+              sudo: required
+            - os: osx
+              osx_image: xcode12.4
+              sudo: required
   
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
