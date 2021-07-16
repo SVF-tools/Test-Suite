@@ -1,0 +1,63 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Test-Suite
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+  
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+          
+      - name: env-setup
+        run: | 
+            if [ "$RUNNER_OS" = "Linux" ]; then sudo apt-get update; fi
+            if [ "$RUNNER_OS" = "Linux" ]; then sudo apt-get install unzip llvm clang; fi
+          
+      - name: stash-changes
+        run: | 
+            git stash --all
+            echo $(pwd)
+
+      # Runs a set of commands using the runners shell
+      - name: generate-bcs
+        run: |
+           echo $(pwd)
+           git status
+           bash ./generate_bc.sh
+           if [ "$RUNNER_OS" = "Linux" ]; then git clone https://github.com/mbarbar/crux-bitcode; fi    
+           if [ "$RUNNER_OS" = "Linux" ]; then cd crux-bitcode; fi
+           if [ "$RUNNER_OS" = "Linux" ]; then rm pkgs.txt; fi
+           if [ "$RUNNER_OS" = "Linux" ]; then echo -e "bc\nhtop" >> pkgs.txt; fi
+           if [ "$RUNNER_OS" = "Linux" ]; then bash ./build-bitcode.sh; fi
+           if [ "$RUNNER_OS" = "Linux" ]; then unzip -j -o \*.zip -d $GITHUB_WORKSPACE/test_cases_bc/crux-bc/; fi
+           if [ "$RUNNER_OS" = "Linux" ]; then rm $GITHUB_WORKSPACE/test_cases_bc/crux-bc/info.txt; fi
+           if [ "$RUNNER_OS" = "Linux" ]; then cd ..; fi
+
+      - name: commit-and-push
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@users.noreply.github.com'
+          git status
+          git pull 
+          git add .
+          git commit -am "update bc files" || true
+          git push https://yuleisui:${git_key}@github.com/SVF-tools/Test-Suite.git HEAD:master
+
