@@ -1,0 +1,44 @@
+language: generic
+services:
+  - docker
+node_js:
+  - "12.13"
+matrix:
+    include:
+      - os: linux
+        dist: bionic
+        sudo: required
+      - os: osx
+        osx_image: xcode12.4
+        sudo: required
+
+if: branch = master
+
+before_script:
+ - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get update; fi
+ - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get install unzip; fi
+
+script:
+ - git stash --all
+ - echo $(pwd)
+
+after_script:
+  - cd ..
+  - cd Test-Suite
+  - echo $(pwd)
+  - git branch -a
+  - git checkout remotes/origin/master
+  - git status
+  - bash ./generate_bc.sh
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then git clone https://github.com/mbarbar/crux-bitcode; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cd crux-bitcode; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then rm pkgs.txt; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then echo -e "bc\nhtop" >> pkgs.txt; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then bash ./build-bitcode.sh; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then unzip -j -o \*.zip -d $TRAVIS_BUILD_DIR/test_cases_bc/crux-bc/; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then rm $TRAVIS_BUILD_DIR/test_cases_bc/crux-bc/info.txt; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cd ..; fi
+  - git status
+  - git add .
+  - git commit -m'update bc files'
+  - git push https://yuleisui:${git_key}@github.com/SVF-tools/Test-Suite.git HEAD:master
