@@ -19,6 +19,8 @@ test_dirs="
 "
 
 root=$(cd "$(dirname "$0")"; pwd)
+bc_path="$root/test_cases_bc"
+
 ########
 # Remove previous bc folder and create a new one.
 ########
