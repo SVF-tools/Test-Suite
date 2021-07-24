@@ -26,7 +26,7 @@ list(
   "dvf -cxt -print-pts=false -stat=false"
   "wpa -fstbhc -stat=false"
   "wpa -fstbhc -stat=false"
-  "mta -print-mhp-validation -print-lock-validation"
+  "mta -mhp-validation -lock-validation"
 )
 
 list(LENGTH folders len1)
