@@ -21,15 +21,16 @@ test_dirs="
 root=$(cd "$(dirname "$0")"; pwd)
 bc_path="$root/test_cases_bc"
 
+if [[ $sysOS == "Linux" ]]
+then
+
 ########
 # Remove previous bc folder and create a new one.
 ########
 
 git rm -rf "$bc_path"
 mkdir -p "$bc_path"
-   
-if [[ $sysOS == "Linux" ]]
-then
+
 ########
 # Loops through each folder in test_dirs.
 ########
