@@ -82,6 +82,10 @@ void INTERLEV_ACCESS(int thdid,char* cxt, char* lev){
   //printf("\n");
 }
 
+void LOCK(char* lockname) {
+	
+}
+
 void PAUSE(char* str){
   printf("%s\n", str);
   printf("Press ENTER to continue\n");
