@@ -14,12 +14,9 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  linux_build:
     # The type of runner that the job will run on
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
+    runs-on: ubuntu-latest
   
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -28,8 +25,8 @@ jobs:
           
       - name: env-setup
         run: | 
-            if [ "$RUNNER_OS" = "Linux" ]; then sudo apt-get update; fi
-            if [ "$RUNNER_OS" = "Linux" ]; then sudo apt-get install unzip llvm clang; fi
+            sudo apt-get update
+            sudo apt-get install unzip llvm clang
           
       - name: stash-changes
         run: | 
@@ -42,14 +39,14 @@ jobs:
            echo $(pwd)
            git status
            bash ./generate_bc.sh
-           if [ "$RUNNER_OS" = "Linux" ]; then git clone https://github.com/mbarbar/crux-bitcode; fi    
-           if [ "$RUNNER_OS" = "Linux" ]; then cd crux-bitcode; fi
-           if [ "$RUNNER_OS" = "Linux" ]; then rm pkgs.txt; fi
-           if [ "$RUNNER_OS" = "Linux" ]; then echo -e "bc\nhtop" >> pkgs.txt; fi
-           if [ "$RUNNER_OS" = "Linux" ]; then bash ./build-bitcode.sh; fi
-           if [ "$RUNNER_OS" = "Linux" ]; then unzip -j -o \*.zip -d $GITHUB_WORKSPACE/test_cases_bc/crux-bc/; fi
-           if [ "$RUNNER_OS" = "Linux" ]; then rm $GITHUB_WORKSPACE/test_cases_bc/crux-bc/info.txt; fi
-           if [ "$RUNNER_OS" = "Linux" ]; then cd ..; fi
+           git clone https://github.com/mbarbar/crux-bitcode    
+           cd crux-bitcode
+           rm pkgs.txt
+           echo -e "bc\nhtop" >> pkgs.txt
+           bash ./build-bitcode.sh
+           unzip -j -o \*.zip -d $GITHUB_WORKSPACE/test_cases_bc/crux-bc/
+           rm $GITHUB_WORKSPACE/test_cases_bc/crux-bc/info.txt
+           cd ..
 
       - name: commit-and-push
         run: |
@@ -61,3 +58,30 @@ jobs:
           git commit -am "update bc files" || true
           git push https://yuleisui:${git_key}@github.com/SVF-tools/Test-Suite.git HEAD:master
 
+  mac_build:
+    needs: linux_build
+    runs-on: macos-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: stash-changes
+        run: | 
+          git stash --all
+          echo $(pwd)
+
+      - name: generate-bcs
+        run: |
+          echo $(pwd)
+          git status
+          bash ./generate_bc.sh
+
+      - name: commit-and-push
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@users.noreply.github.com'
+          git status
+          git pull 
+          git add .
+          git commit -am "update bc files" || true
+          git push
