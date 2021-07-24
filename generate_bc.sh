@@ -25,7 +25,7 @@ bc_path="$root/test_cases_bc"
 # Remove previous bc folder and create a new one.
 ########
 
-rm -rf "$bc_path"
+git rm -rf "$bc_path"
 mkdir -p "$bc_path"
    
 if [[ $sysOS == "Linux" ]]
