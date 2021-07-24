@@ -135,7 +135,11 @@ if [[ $sysOS == "Darwin" ]]
 then
     cd src/diff_tests
     g++ -o diff_tests_osx diff_tests.cpp
-    mkdir ../../test_cases_bc/diff_tests
-    mv diff_tests_osx ../../test_cases_bc/diff_tests/diff_tests_osx
+    diff_exe_path=$bc_path/diff_tests
+    if [ ! -d "$diff_exe_path" ]
+    then
+        mkdir -p "$diff_exe_path"
+    fi
+    mv diff_tests_osx $diff_exe_path/diff_tests_osx
     cd ../..
 fi
