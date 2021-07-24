@@ -13,6 +13,7 @@ list(
   cs_tests
   fstbhc_tests
   fstbhc_tests/fs_tests
+  mta
 )
 
 list(
@@ -25,6 +26,7 @@ list(
   "dvf -cxt -print-pts=false -stat=false"
   "wpa -fstbhc -stat=false"
   "wpa -fstbhc -stat=false"
+  "mta -print-mhp-validation -print-lock-validation"
 )
 
 list(LENGTH folders len1)
