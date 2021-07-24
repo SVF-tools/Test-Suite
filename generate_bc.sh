@@ -20,14 +20,12 @@ test_dirs="
 
 root=$(cd "$(dirname "$0")"; pwd)
 ########
-# Check whether the test case bc folder exists.
+# Remove previous bc folder and create a new one.
 ########
-bc_path="$root/test_cases_bc"
-if [ ! -d "$bc_path" ]
-then
-    mkdir -p "$bc_path"
-fi
 
+rm -rf "$bc_path"
+mkdir -p "$bc_path"
+   
 if [[ $sysOS == "Linux" ]]
 then
 ########
