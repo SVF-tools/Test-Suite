@@ -1,12 +1,12 @@
-; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/basic_cpp_tests/forward_list-4.cpp.bc'
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/src/basic_cpp_tests/forward_list-4.cpp'
 source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/basic_cpp_tests/forward_list-4.cpp"
 target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-pc-linux-gnu"
 
 %"class.std::ios_base::Init" = type { i8 }
 %"class.std::forward_list" = type { %"struct.std::_Fwd_list_base" }
-%"struct.std::_Fwd_list_base" = type { %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl" }
-%"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl" = type { %"struct.std::_Fwd_list_node_base" }
+%"struct.std::_Fwd_list_base" = type { %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl" }
+%"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl" = type { %"struct.std::_Fwd_list_node_base" }
 %"struct.std::_Fwd_list_node_base" = type { %"struct.std::_Fwd_list_node_base"* }
 %class.A = type { i32 (...)** }
 %"struct.std::_Fwd_list_iterator" = type { %"struct.std::_Fwd_list_node_base"* }
@@ -370,8 +370,8 @@ entry:
   %ptr = alloca i32*, align 8
   %alist = alloca %"class.std::forward_list", align 8
   %a = alloca %class.A, align 8
-  %exn.slot = alloca i8*
-  %ehselector.slot = alloca i32
+  %exn.slot = alloca i8*, align 8
+  %ehselector.slot = alloca i32, align 4
   %it = alloca %"struct.std::_Fwd_list_iterator", align 8
   %aptr = alloca %class.A*, align 8
   store i32 0, i32* %retval, align 4
@@ -380,14 +380,14 @@ entry:
   store i32* @global_obj, i32** %ptr, align 8
   call void @_ZNSt12forward_listI1ASaIS0_EEC2Ev(%"class.std::forward_list"* %alist) #5
   call void @_ZN1AC2Ev(%class.A* %a) #5
-  invoke void @_ZNSt12forward_listI1ASaIS0_EE10push_frontERKS0_(%"class.std::forward_list"* %alist, %class.A* dereferenceable(8) %a)
+  invoke void @_ZNSt12forward_listI1ASaIS0_EE10push_frontERKS0_(%"class.std::forward_list"* %alist, %class.A* nonnull align 8 dereferenceable(8) %a)
           to label %invoke.cont unwind label %lpad
 
 invoke.cont:                                      ; preds = %entry
   %call = call %"struct.std::_Fwd_list_node_base"* @_ZNSt12forward_listI1ASaIS0_EE5beginEv(%"class.std::forward_list"* %alist) #5
   %coerce.dive = getelementptr inbounds %"struct.std::_Fwd_list_iterator", %"struct.std::_Fwd_list_iterator"* %it, i32 0, i32 0
   store %"struct.std::_Fwd_list_node_base"* %call, %"struct.std::_Fwd_list_node_base"** %coerce.dive, align 8
-  %call1 = call dereferenceable(8) %class.A* @_ZNKSt18_Fwd_list_iteratorI1AEdeEv(%"struct.std::_Fwd_list_iterator"* %it) #5
+  %call1 = call nonnull align 8 dereferenceable(8) %class.A* @_ZNKSt18_Fwd_list_iteratorI1AEdeEv(%"struct.std::_Fwd_list_iterator"* %it) #5
   store %class.A* %call1, %class.A** %aptr, align 8
   %0 = load %class.A*, %class.A** %aptr, align 8
   %1 = load i32*, i32** %ptr, align 8
@@ -445,7 +445,7 @@ entry:
 }
 
 ; Function Attrs: noinline optnone uwtable
-define linkonce_odr dso_local void @_ZNSt12forward_listI1ASaIS0_EE10push_frontERKS0_(%"class.std::forward_list"* %this, %class.A* dereferenceable(8) %__val) #0 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt12forward_listI1ASaIS0_EE10push_frontERKS0_(%"class.std::forward_list"* %this, %class.A* nonnull align 8 dereferenceable(8) %__val) #0 comdat align 2 {
 entry:
   %this.addr = alloca %"class.std::forward_list"*, align 8
   %__val.addr = alloca %class.A*, align 8
@@ -460,7 +460,7 @@ entry:
   %1 = load %class.A*, %class.A** %__val.addr, align 8
   %coerce.dive2 = getelementptr inbounds %"struct.std::_Fwd_list_const_iterator", %"struct.std::_Fwd_list_const_iterator"* %agg.tmp, i32 0, i32 0
   %2 = load %"struct.std::_Fwd_list_node_base"*, %"struct.std::_Fwd_list_node_base"** %coerce.dive2, align 8
-  %call3 = call %"struct.std::_Fwd_list_node_base"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE15_M_insert_afterIJRKS0_EEEPSt19_Fwd_list_node_baseSt24_Fwd_list_const_iteratorIS0_EDpOT_(%"struct.std::_Fwd_list_base"* %0, %"struct.std::_Fwd_list_node_base"* %2, %class.A* dereferenceable(8) %1)
+  %call3 = call %"struct.std::_Fwd_list_node_base"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE15_M_insert_afterIJRKS0_EEEPSt19_Fwd_list_node_baseSt24_Fwd_list_const_iteratorIS0_EDpOT_(%"struct.std::_Fwd_list_base"* %0, %"struct.std::_Fwd_list_node_base"* %2, %class.A* nonnull align 8 dereferenceable(8) %1)
   ret void
 }
 
@@ -475,7 +475,7 @@ entry:
   %this1 = load %"class.std::forward_list"*, %"class.std::forward_list"** %this.addr, align 8
   %0 = bitcast %"class.std::forward_list"* %this1 to %"struct.std::_Fwd_list_base"*
   %_M_impl = getelementptr inbounds %"struct.std::_Fwd_list_base", %"struct.std::_Fwd_list_base"* %0, i32 0, i32 0
-  %_M_head = getelementptr inbounds %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl", %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"* %_M_impl, i32 0, i32 0
+  %_M_head = getelementptr inbounds %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl", %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"* %_M_impl, i32 0, i32 0
   %_M_next = getelementptr inbounds %"struct.std::_Fwd_list_node_base", %"struct.std::_Fwd_list_node_base"* %_M_head, i32 0, i32 0
   %1 = load %"struct.std::_Fwd_list_node_base"*, %"struct.std::_Fwd_list_node_base"** %_M_next, align 8
   call void @_ZNSt18_Fwd_list_iteratorI1AEC2EPSt19_Fwd_list_node_base(%"struct.std::_Fwd_list_iterator"* %retval, %"struct.std::_Fwd_list_node_base"* %1) #5
@@ -485,7 +485,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local dereferenceable(8) %class.A* @_ZNKSt18_Fwd_list_iteratorI1AEdeEv(%"struct.std::_Fwd_list_iterator"* %this) #2 comdat align 2 {
+define linkonce_odr dso_local nonnull align 8 dereferenceable(8) %class.A* @_ZNKSt18_Fwd_list_iteratorI1AEdeEv(%"struct.std::_Fwd_list_iterator"* %this) #2 comdat align 2 {
 entry:
   %this.addr = alloca %"struct.std::_Fwd_list_iterator"*, align 8
   store %"struct.std::_Fwd_list_iterator"* %this, %"struct.std::_Fwd_list_iterator"** %this.addr, align 8
@@ -515,19 +515,19 @@ entry:
   store %"struct.std::_Fwd_list_base"* %this, %"struct.std::_Fwd_list_base"** %this.addr, align 8
   %this1 = load %"struct.std::_Fwd_list_base"*, %"struct.std::_Fwd_list_base"** %this.addr, align 8
   %_M_impl = getelementptr inbounds %"struct.std::_Fwd_list_base", %"struct.std::_Fwd_list_base"* %this1, i32 0, i32 0
-  call void @_ZNSt14_Fwd_list_baseI1ASaIS0_EE14_Fwd_list_implC2Ev(%"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"* %_M_impl) #5
+  call void @_ZNSt14_Fwd_list_baseI1ASaIS0_EE14_Fwd_list_implC2Ev(%"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"* %_M_impl) #5
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt14_Fwd_list_baseI1ASaIS0_EE14_Fwd_list_implC2Ev(%"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"* %this) unnamed_addr #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt14_Fwd_list_baseI1ASaIS0_EE14_Fwd_list_implC2Ev(%"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"* %this) unnamed_addr #2 comdat align 2 {
 entry:
-  %this.addr = alloca %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"*, align 8
-  store %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"* %this, %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"** %this.addr, align 8
-  %this1 = load %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"*, %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"** %this.addr, align 8
-  %0 = bitcast %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"* %this1 to %"class.std::allocator"*
+  %this.addr = alloca %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"*, align 8
+  store %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"* %this, %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"** %this.addr, align 8
+  %this1 = load %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"*, %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"** %this.addr, align 8
+  %0 = bitcast %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"* %this1 to %"class.std::allocator"*
   call void @_ZNSaISt14_Fwd_list_nodeI1AEEC2Ev(%"class.std::allocator"* %0) #5
-  %_M_head = getelementptr inbounds %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl", %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"* %this1, i32 0, i32 0
+  %_M_head = getelementptr inbounds %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl", %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"* %this1, i32 0, i32 0
   %1 = bitcast %"struct.std::_Fwd_list_node_base"* %_M_head to i8*
   call void @llvm.memset.p0i8.i64(i8* align 8 %1, i8 0, i64 8, i1 false)
   call void @_ZNSt19_Fwd_list_node_baseC2Ev(%"struct.std::_Fwd_list_node_base"* %_M_head) #5
@@ -545,7 +545,7 @@ entry:
   ret void
 }
 
-; Function Attrs: argmemonly nounwind willreturn
+; Function Attrs: argmemonly nounwind willreturn writeonly
 declare void @llvm.memset.p0i8.i64(i8* nocapture writeonly, i8, i64, i1 immarg) #7
 
 ; Function Attrs: noinline nounwind optnone uwtable
@@ -588,18 +588,18 @@ entry:
 define linkonce_odr dso_local void @_ZNSt14_Fwd_list_baseI1ASaIS0_EED2Ev(%"struct.std::_Fwd_list_base"* %this) unnamed_addr #2 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
 entry:
   %this.addr = alloca %"struct.std::_Fwd_list_base"*, align 8
-  %exn.slot = alloca i8*
-  %ehselector.slot = alloca i32
+  %exn.slot = alloca i8*, align 8
+  %ehselector.slot = alloca i32, align 4
   store %"struct.std::_Fwd_list_base"* %this, %"struct.std::_Fwd_list_base"** %this.addr, align 8
   %this1 = load %"struct.std::_Fwd_list_base"*, %"struct.std::_Fwd_list_base"** %this.addr, align 8
   %_M_impl = getelementptr inbounds %"struct.std::_Fwd_list_base", %"struct.std::_Fwd_list_base"* %this1, i32 0, i32 0
-  %_M_head = getelementptr inbounds %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl", %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"* %_M_impl, i32 0, i32 0
+  %_M_head = getelementptr inbounds %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl", %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"* %_M_impl, i32 0, i32 0
   %call = invoke %"struct.std::_Fwd_list_node_base"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE14_M_erase_afterEPSt19_Fwd_list_node_baseS4_(%"struct.std::_Fwd_list_base"* %this1, %"struct.std::_Fwd_list_node_base"* %_M_head, %"struct.std::_Fwd_list_node_base"* null)
           to label %invoke.cont unwind label %lpad
 
 invoke.cont:                                      ; preds = %entry
   %_M_impl2 = getelementptr inbounds %"struct.std::_Fwd_list_base", %"struct.std::_Fwd_list_base"* %this1, i32 0, i32 0
-  call void @_ZNSt14_Fwd_list_baseI1ASaIS0_EE14_Fwd_list_implD2Ev(%"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"* %_M_impl2) #5
+  call void @_ZNSt14_Fwd_list_baseI1ASaIS0_EE14_Fwd_list_implD2Ev(%"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"* %_M_impl2) #5
   ret void
 
 lpad:                                             ; preds = %entry
@@ -610,7 +610,7 @@ lpad:                                             ; preds = %entry
   %2 = extractvalue { i8*, i32 } %0, 1
   store i32 %2, i32* %ehselector.slot, align 4
   %_M_impl3 = getelementptr inbounds %"struct.std::_Fwd_list_base", %"struct.std::_Fwd_list_base"* %this1, i32 0, i32 0
-  call void @_ZNSt14_Fwd_list_baseI1ASaIS0_EE14_Fwd_list_implD2Ev(%"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"* %_M_impl3) #5
+  call void @_ZNSt14_Fwd_list_baseI1ASaIS0_EE14_Fwd_list_implD2Ev(%"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"* %_M_impl3) #5
   br label %terminate.handler
 
 terminate.handler:                                ; preds = %lpad
@@ -654,10 +654,10 @@ while.body:                                       ; preds = %while.cond
   %9 = load %"struct.std::_Fwd_list_node_base"*, %"struct.std::_Fwd_list_node_base"** %_M_next2, align 8
   %10 = bitcast %"struct.std::_Fwd_list_node_base"* %9 to %"struct.std::_Fwd_list_node"*
   store %"struct.std::_Fwd_list_node"* %10, %"struct.std::_Fwd_list_node"** %__curr, align 8
-  %call = call dereferenceable(1) %"class.std::allocator"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE21_M_get_Node_allocatorEv(%"struct.std::_Fwd_list_base"* %this1) #5
+  %call = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE21_M_get_Node_allocatorEv(%"struct.std::_Fwd_list_base"* %this1) #5
   %11 = load %"struct.std::_Fwd_list_node"*, %"struct.std::_Fwd_list_node"** %__temp, align 8
   %call3 = call %class.A* @_ZNSt14_Fwd_list_nodeI1AE9_M_valptrEv(%"struct.std::_Fwd_list_node"* %11) #5
-  call void @_ZNSt16allocator_traitsISaISt14_Fwd_list_nodeI1AEEE7destroyIS1_EEvRS3_PT_(%"class.std::allocator"* dereferenceable(1) %call, %class.A* %call3) #5
+  call void @_ZNSt16allocator_traitsISaISt14_Fwd_list_nodeI1AEEE7destroyIS1_EEvRS3_PT_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %call, %class.A* %call3) #5
   %12 = load %"struct.std::_Fwd_list_node"*, %"struct.std::_Fwd_list_node"** %__temp, align 8
   %13 = load %"struct.std::_Fwd_list_node"*, %"struct.std::_Fwd_list_node"** %__temp, align 8
   call void @_ZNSt14_Fwd_list_baseI1ASaIS0_EE11_M_put_nodeEPSt14_Fwd_list_nodeIS0_E(%"struct.std::_Fwd_list_base"* %this1, %"struct.std::_Fwd_list_node"* %13)
@@ -673,12 +673,12 @@ while.end:                                        ; preds = %while.cond
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt14_Fwd_list_baseI1ASaIS0_EE14_Fwd_list_implD2Ev(%"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"* %this) unnamed_addr #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt14_Fwd_list_baseI1ASaIS0_EE14_Fwd_list_implD2Ev(%"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"* %this) unnamed_addr #2 comdat align 2 {
 entry:
-  %this.addr = alloca %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"*, align 8
-  store %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"* %this, %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"** %this.addr, align 8
-  %this1 = load %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"*, %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"** %this.addr, align 8
-  %0 = bitcast %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"* %this1 to %"class.std::allocator"*
+  %this.addr = alloca %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"*, align 8
+  store %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"* %this, %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"** %this.addr, align 8
+  %this1 = load %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"*, %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"** %this.addr, align 8
+  %0 = bitcast %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"* %this1 to %"class.std::allocator"*
   call void @_ZNSaISt14_Fwd_list_nodeI1AEED2Ev(%"class.std::allocator"* %0) #5
   ret void
 }
@@ -695,7 +695,7 @@ declare dso_local i8* @__cxa_begin_catch(i8*)
 declare dso_local void @_ZSt9terminatev()
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt16allocator_traitsISaISt14_Fwd_list_nodeI1AEEE7destroyIS1_EEvRS3_PT_(%"class.std::allocator"* dereferenceable(1) %__a, %class.A* %__p) #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt16allocator_traitsISaISt14_Fwd_list_nodeI1AEEE7destroyIS1_EEvRS3_PT_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %__a, %class.A* %__p) #2 comdat align 2 {
 entry:
   %__a.addr = alloca %"class.std::allocator"*, align 8
   %__p.addr = alloca %class.A*, align 8
@@ -709,13 +709,13 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local dereferenceable(1) %"class.std::allocator"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE21_M_get_Node_allocatorEv(%"struct.std::_Fwd_list_base"* %this) #2 comdat align 2 {
+define linkonce_odr dso_local nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE21_M_get_Node_allocatorEv(%"struct.std::_Fwd_list_base"* %this) #2 comdat align 2 {
 entry:
   %this.addr = alloca %"struct.std::_Fwd_list_base"*, align 8
   store %"struct.std::_Fwd_list_base"* %this, %"struct.std::_Fwd_list_base"** %this.addr, align 8
   %this1 = load %"struct.std::_Fwd_list_base"*, %"struct.std::_Fwd_list_base"** %this.addr, align 8
   %_M_impl = getelementptr inbounds %"struct.std::_Fwd_list_base", %"struct.std::_Fwd_list_base"* %this1, i32 0, i32 0
-  %0 = bitcast %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"* %_M_impl to %"class.std::allocator"*
+  %0 = bitcast %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"* %_M_impl to %"class.std::allocator"*
   ret %"class.std::allocator"* %0
 }
 
@@ -740,11 +740,11 @@ entry:
   store %"struct.std::_Fwd_list_node"* %__p, %"struct.std::_Fwd_list_node"** %__p.addr, align 8
   %this1 = load %"struct.std::_Fwd_list_base"*, %"struct.std::_Fwd_list_base"** %this.addr, align 8
   %0 = load %"struct.std::_Fwd_list_node"*, %"struct.std::_Fwd_list_node"** %__p.addr, align 8
-  %call = call %"struct.std::_Fwd_list_node"* @_ZNSt14pointer_traitsIPSt14_Fwd_list_nodeI1AEE10pointer_toERS2_(%"struct.std::_Fwd_list_node"* dereferenceable(16) %0) #5
+  %call = call %"struct.std::_Fwd_list_node"* @_ZNSt14pointer_traitsIPSt14_Fwd_list_nodeI1AEE10pointer_toERS2_(%"struct.std::_Fwd_list_node"* nonnull align 8 dereferenceable(16) %0) #5
   store %"struct.std::_Fwd_list_node"* %call, %"struct.std::_Fwd_list_node"** %__ptr, align 8
-  %call2 = call dereferenceable(1) %"class.std::allocator"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE21_M_get_Node_allocatorEv(%"struct.std::_Fwd_list_base"* %this1) #5
+  %call2 = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE21_M_get_Node_allocatorEv(%"struct.std::_Fwd_list_base"* %this1) #5
   %1 = load %"struct.std::_Fwd_list_node"*, %"struct.std::_Fwd_list_node"** %__ptr, align 8
-  call void @_ZNSt16allocator_traitsISaISt14_Fwd_list_nodeI1AEEE10deallocateERS3_PS2_m(%"class.std::allocator"* dereferenceable(1) %call2, %"struct.std::_Fwd_list_node"* %1, i64 1)
+  call void @_ZNSt16allocator_traitsISaISt14_Fwd_list_nodeI1AEEE10deallocateERS3_PS2_m(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %call2, %"struct.std::_Fwd_list_node"* %1, i64 1)
   ret void
 }
 
@@ -783,17 +783,17 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local %"struct.std::_Fwd_list_node"* @_ZNSt14pointer_traitsIPSt14_Fwd_list_nodeI1AEE10pointer_toERS2_(%"struct.std::_Fwd_list_node"* dereferenceable(16) %__r) #2 comdat align 2 {
+define linkonce_odr dso_local %"struct.std::_Fwd_list_node"* @_ZNSt14pointer_traitsIPSt14_Fwd_list_nodeI1AEE10pointer_toERS2_(%"struct.std::_Fwd_list_node"* nonnull align 8 dereferenceable(16) %__r) #2 comdat align 2 {
 entry:
   %__r.addr = alloca %"struct.std::_Fwd_list_node"*, align 8
   store %"struct.std::_Fwd_list_node"* %__r, %"struct.std::_Fwd_list_node"** %__r.addr, align 8
   %0 = load %"struct.std::_Fwd_list_node"*, %"struct.std::_Fwd_list_node"** %__r.addr, align 8
-  %call = call %"struct.std::_Fwd_list_node"* @_ZSt9addressofISt14_Fwd_list_nodeI1AEEPT_RS3_(%"struct.std::_Fwd_list_node"* dereferenceable(16) %0) #5
+  %call = call %"struct.std::_Fwd_list_node"* @_ZSt9addressofISt14_Fwd_list_nodeI1AEEPT_RS3_(%"struct.std::_Fwd_list_node"* nonnull align 8 dereferenceable(16) %0) #5
   ret %"struct.std::_Fwd_list_node"* %call
 }
 
 ; Function Attrs: noinline optnone uwtable
-define linkonce_odr dso_local void @_ZNSt16allocator_traitsISaISt14_Fwd_list_nodeI1AEEE10deallocateERS3_PS2_m(%"class.std::allocator"* dereferenceable(1) %__a, %"struct.std::_Fwd_list_node"* %__p, i64 %__n) #0 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt16allocator_traitsISaISt14_Fwd_list_nodeI1AEEE10deallocateERS3_PS2_m(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %__a, %"struct.std::_Fwd_list_node"* %__p, i64 %__n) #0 comdat align 2 {
 entry:
   %__a.addr = alloca %"class.std::allocator"*, align 8
   %__p.addr = alloca %"struct.std::_Fwd_list_node"*, align 8
@@ -810,17 +810,17 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local %"struct.std::_Fwd_list_node"* @_ZSt9addressofISt14_Fwd_list_nodeI1AEEPT_RS3_(%"struct.std::_Fwd_list_node"* dereferenceable(16) %__r) #2 comdat {
+define linkonce_odr dso_local %"struct.std::_Fwd_list_node"* @_ZSt9addressofISt14_Fwd_list_nodeI1AEEPT_RS3_(%"struct.std::_Fwd_list_node"* nonnull align 8 dereferenceable(16) %__r) #2 comdat {
 entry:
   %__r.addr = alloca %"struct.std::_Fwd_list_node"*, align 8
   store %"struct.std::_Fwd_list_node"* %__r, %"struct.std::_Fwd_list_node"** %__r.addr, align 8
   %0 = load %"struct.std::_Fwd_list_node"*, %"struct.std::_Fwd_list_node"** %__r.addr, align 8
-  %call = call %"struct.std::_Fwd_list_node"* @_ZSt11__addressofISt14_Fwd_list_nodeI1AEEPT_RS3_(%"struct.std::_Fwd_list_node"* dereferenceable(16) %0) #5
+  %call = call %"struct.std::_Fwd_list_node"* @_ZSt11__addressofISt14_Fwd_list_nodeI1AEEPT_RS3_(%"struct.std::_Fwd_list_node"* nonnull align 8 dereferenceable(16) %0) #5
   ret %"struct.std::_Fwd_list_node"* %call
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local %"struct.std::_Fwd_list_node"* @_ZSt11__addressofISt14_Fwd_list_nodeI1AEEPT_RS3_(%"struct.std::_Fwd_list_node"* dereferenceable(16) %__r) #2 comdat {
+define linkonce_odr dso_local %"struct.std::_Fwd_list_node"* @_ZSt11__addressofISt14_Fwd_list_nodeI1AEEPT_RS3_(%"struct.std::_Fwd_list_node"* nonnull align 8 dereferenceable(16) %__r) #2 comdat {
 entry:
   %__r.addr = alloca %"struct.std::_Fwd_list_node"*, align 8
   store %"struct.std::_Fwd_list_node"* %__r, %"struct.std::_Fwd_list_node"** %__r.addr, align 8
@@ -868,7 +868,7 @@ entry:
 }
 
 ; Function Attrs: noinline optnone uwtable
-define linkonce_odr dso_local %"struct.std::_Fwd_list_node_base"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE15_M_insert_afterIJRKS0_EEEPSt19_Fwd_list_node_baseSt24_Fwd_list_const_iteratorIS0_EDpOT_(%"struct.std::_Fwd_list_base"* %this, %"struct.std::_Fwd_list_node_base"* %__pos.coerce, %class.A* dereferenceable(8) %__args) #0 comdat align 2 {
+define linkonce_odr dso_local %"struct.std::_Fwd_list_node_base"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE15_M_insert_afterIJRKS0_EEEPSt19_Fwd_list_node_baseSt24_Fwd_list_const_iteratorIS0_EDpOT_(%"struct.std::_Fwd_list_base"* %this, %"struct.std::_Fwd_list_node_base"* %__pos.coerce, %class.A* nonnull align 8 dereferenceable(8) %__args) #0 comdat align 2 {
 entry:
   %__pos = alloca %"struct.std::_Fwd_list_const_iterator", align 8
   %this.addr = alloca %"struct.std::_Fwd_list_base"*, align 8
@@ -884,8 +884,8 @@ entry:
   %0 = load %"struct.std::_Fwd_list_node_base"*, %"struct.std::_Fwd_list_node_base"** %_M_node, align 8
   store %"struct.std::_Fwd_list_node_base"* %0, %"struct.std::_Fwd_list_node_base"** %__to, align 8
   %1 = load %class.A*, %class.A** %__args.addr, align 8
-  %call = call dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* dereferenceable(8) %1) #5
-  %call2 = call %"struct.std::_Fwd_list_node"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE14_M_create_nodeIJRKS0_EEEPSt14_Fwd_list_nodeIS0_EDpOT_(%"struct.std::_Fwd_list_base"* %this1, %class.A* dereferenceable(8) %call)
+  %call = call nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %1) #5
+  %call2 = call %"struct.std::_Fwd_list_node"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE14_M_create_nodeIJRKS0_EEEPSt14_Fwd_list_nodeIS0_EDpOT_(%"struct.std::_Fwd_list_base"* %this1, %class.A* nonnull align 8 dereferenceable(8) %call)
   store %"struct.std::_Fwd_list_node"* %call2, %"struct.std::_Fwd_list_node"** %__thing, align 8
   %2 = load %"struct.std::_Fwd_list_node_base"*, %"struct.std::_Fwd_list_node_base"** %__to, align 8
   %_M_next = getelementptr inbounds %"struct.std::_Fwd_list_node_base", %"struct.std::_Fwd_list_node_base"* %2, i32 0, i32 0
@@ -914,7 +914,7 @@ entry:
   %this1 = load %"class.std::forward_list"*, %"class.std::forward_list"** %this.addr, align 8
   %0 = bitcast %"class.std::forward_list"* %this1 to %"struct.std::_Fwd_list_base"*
   %_M_impl = getelementptr inbounds %"struct.std::_Fwd_list_base", %"struct.std::_Fwd_list_base"* %0, i32 0, i32 0
-  %_M_head = getelementptr inbounds %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl", %"struct.std::_Fwd_list_base<A, std::allocator<A> >::_Fwd_list_impl"* %_M_impl, i32 0, i32 0
+  %_M_head = getelementptr inbounds %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl", %"struct.std::_Fwd_list_base<A, std::allocator<A>>::_Fwd_list_impl"* %_M_impl, i32 0, i32 0
   call void @_ZNSt24_Fwd_list_const_iteratorI1AEC2EPKSt19_Fwd_list_node_base(%"struct.std::_Fwd_list_const_iterator"* %retval, %"struct.std::_Fwd_list_node_base"* %_M_head) #5
   %coerce.dive = getelementptr inbounds %"struct.std::_Fwd_list_const_iterator", %"struct.std::_Fwd_list_const_iterator"* %retval, i32 0, i32 0
   %1 = load %"struct.std::_Fwd_list_node_base"*, %"struct.std::_Fwd_list_node_base"** %coerce.dive, align 8
@@ -922,7 +922,7 @@ entry:
 }
 
 ; Function Attrs: noinline optnone uwtable
-define linkonce_odr dso_local %"struct.std::_Fwd_list_node"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE14_M_create_nodeIJRKS0_EEEPSt14_Fwd_list_nodeIS0_EDpOT_(%"struct.std::_Fwd_list_base"* %this, %class.A* dereferenceable(8) %__args) #0 comdat align 2 {
+define linkonce_odr dso_local %"struct.std::_Fwd_list_node"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE14_M_create_nodeIJRKS0_EEEPSt14_Fwd_list_nodeIS0_EDpOT_(%"struct.std::_Fwd_list_base"* %this, %class.A* nonnull align 8 dereferenceable(8) %__args) #0 comdat align 2 {
 entry:
   %this.addr = alloca %"struct.std::_Fwd_list_base"*, align 8
   %__args.addr = alloca %class.A*, align 8
@@ -936,18 +936,18 @@ entry:
   %1 = bitcast %"struct.std::_Fwd_list_node"* %0 to i8*
   %2 = bitcast i8* %1 to %"struct.std::_Fwd_list_node"*
   call void @_ZNSt14_Fwd_list_nodeI1AEC2Ev(%"struct.std::_Fwd_list_node"* %2) #5
-  %call2 = call dereferenceable(1) %"class.std::allocator"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE21_M_get_Node_allocatorEv(%"struct.std::_Fwd_list_base"* %this1) #5
+  %call2 = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE21_M_get_Node_allocatorEv(%"struct.std::_Fwd_list_base"* %this1) #5
   %3 = load %"struct.std::_Fwd_list_node"*, %"struct.std::_Fwd_list_node"** %__node, align 8
   %call3 = call %class.A* @_ZNSt14_Fwd_list_nodeI1AE9_M_valptrEv(%"struct.std::_Fwd_list_node"* %3) #5
   %4 = load %class.A*, %class.A** %__args.addr, align 8
-  %call4 = call dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* dereferenceable(8) %4) #5
-  call void @_ZNSt16allocator_traitsISaISt14_Fwd_list_nodeI1AEEE9constructIS1_JRKS1_EEEvRS3_PT_DpOT0_(%"class.std::allocator"* dereferenceable(1) %call2, %class.A* %call3, %class.A* dereferenceable(8) %call4) #5
+  %call4 = call nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %4) #5
+  call void @_ZNSt16allocator_traitsISaISt14_Fwd_list_nodeI1AEEE9constructIS1_JRKS1_EEEvRS3_PT_DpOT0_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %call2, %class.A* %call3, %class.A* nonnull align 8 dereferenceable(8) %call4) #5
   %5 = load %"struct.std::_Fwd_list_node"*, %"struct.std::_Fwd_list_node"** %__node, align 8
   ret %"struct.std::_Fwd_list_node"* %5
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* dereferenceable(8) %__t) #2 comdat {
+define linkonce_odr dso_local nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %__t) #2 comdat {
 entry:
   %__t.addr = alloca %class.A*, align 8
   store %class.A* %__t, %class.A** %__t.addr, align 8
@@ -962,8 +962,8 @@ entry:
   %__ptr = alloca %"struct.std::_Fwd_list_node"*, align 8
   store %"struct.std::_Fwd_list_base"* %this, %"struct.std::_Fwd_list_base"** %this.addr, align 8
   %this1 = load %"struct.std::_Fwd_list_base"*, %"struct.std::_Fwd_list_base"** %this.addr, align 8
-  %call = call dereferenceable(1) %"class.std::allocator"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE21_M_get_Node_allocatorEv(%"struct.std::_Fwd_list_base"* %this1) #5
-  %call2 = call %"struct.std::_Fwd_list_node"* @_ZNSt16allocator_traitsISaISt14_Fwd_list_nodeI1AEEE8allocateERS3_m(%"class.std::allocator"* dereferenceable(1) %call, i64 1)
+  %call = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNSt14_Fwd_list_baseI1ASaIS0_EE21_M_get_Node_allocatorEv(%"struct.std::_Fwd_list_base"* %this1) #5
+  %call2 = call %"struct.std::_Fwd_list_node"* @_ZNSt16allocator_traitsISaISt14_Fwd_list_nodeI1AEEE8allocateERS3_m(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %call, i64 1)
   store %"struct.std::_Fwd_list_node"* %call2, %"struct.std::_Fwd_list_node"** %__ptr, align 8
   %0 = load %"struct.std::_Fwd_list_node"*, %"struct.std::_Fwd_list_node"** %__ptr, align 8
   %call3 = call %"struct.std::_Fwd_list_node"* @_ZSt12__to_addressISt14_Fwd_list_nodeI1AEEPT_S4_(%"struct.std::_Fwd_list_node"* %0) #5
@@ -983,7 +983,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt16allocator_traitsISaISt14_Fwd_list_nodeI1AEEE9constructIS1_JRKS1_EEEvRS3_PT_DpOT0_(%"class.std::allocator"* dereferenceable(1) %__a, %class.A* %__p, %class.A* dereferenceable(8) %__args) #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt16allocator_traitsISaISt14_Fwd_list_nodeI1AEEE9constructIS1_JRKS1_EEEvRS3_PT_DpOT0_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %__a, %class.A* %__p, %class.A* nonnull align 8 dereferenceable(8) %__args) #2 comdat align 2 {
 entry:
   %__a.addr = alloca %"class.std::allocator"*, align 8
   %__p.addr = alloca %class.A*, align 8
@@ -995,13 +995,13 @@ entry:
   %1 = bitcast %"class.std::allocator"* %0 to %"class.__gnu_cxx::new_allocator"*
   %2 = load %class.A*, %class.A** %__p.addr, align 8
   %3 = load %class.A*, %class.A** %__args.addr, align 8
-  %call = call dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* dereferenceable(8) %3) #5
-  call void @_ZN9__gnu_cxx13new_allocatorISt14_Fwd_list_nodeI1AEE9constructIS2_JRKS2_EEEvPT_DpOT0_(%"class.__gnu_cxx::new_allocator"* %1, %class.A* %2, %class.A* dereferenceable(8) %call) #5
+  %call = call nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %3) #5
+  call void @_ZN9__gnu_cxx13new_allocatorISt14_Fwd_list_nodeI1AEE9constructIS2_JRKS2_EEEvPT_DpOT0_(%"class.__gnu_cxx::new_allocator"* %1, %class.A* %2, %class.A* nonnull align 8 dereferenceable(8) %call) #5
   ret void
 }
 
 ; Function Attrs: noinline optnone uwtable
-define linkonce_odr dso_local %"struct.std::_Fwd_list_node"* @_ZNSt16allocator_traitsISaISt14_Fwd_list_nodeI1AEEE8allocateERS3_m(%"class.std::allocator"* dereferenceable(1) %__a, i64 %__n) #0 comdat align 2 {
+define linkonce_odr dso_local %"struct.std::_Fwd_list_node"* @_ZNSt16allocator_traitsISaISt14_Fwd_list_nodeI1AEEE8allocateERS3_m(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %__a, i64 %__n) #0 comdat align 2 {
 entry:
   %__a.addr = alloca %"class.std::allocator"*, align 8
   %__n.addr = alloca i64, align 8
@@ -1045,7 +1045,7 @@ if.then:                                          ; preds = %entry
 if.end:                                           ; preds = %entry
   %2 = load i64, i64* %__n.addr, align 8
   %mul = mul i64 %2, 16
-  %call2 = call i8* @_Znwm(i64 %mul)
+  %call2 = call noalias nonnull i8* @_Znwm(i64 %mul) #14
   %3 = bitcast i8* %call2 to %"struct.std::_Fwd_list_node"*
   ret %"struct.std::_Fwd_list_node"* %3
 }
@@ -1062,11 +1062,11 @@ entry:
 ; Function Attrs: noreturn
 declare dso_local void @_ZSt17__throw_bad_allocv() #10
 
-; Function Attrs: nobuiltin
-declare dso_local noalias i8* @_Znwm(i64) #11
+; Function Attrs: nobuiltin allocsize(0)
+declare dso_local nonnull i8* @_Znwm(i64) #11
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorISt14_Fwd_list_nodeI1AEE9constructIS2_JRKS2_EEEvPT_DpOT0_(%"class.__gnu_cxx::new_allocator"* %this, %class.A* %__p, %class.A* dereferenceable(8) %__args) #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorISt14_Fwd_list_nodeI1AEE9constructIS2_JRKS2_EEEvPT_DpOT0_(%"class.__gnu_cxx::new_allocator"* %this, %class.A* %__p, %class.A* nonnull align 8 dereferenceable(8) %__args) #2 comdat align 2 {
 entry:
   %this.addr = alloca %"class.__gnu_cxx::new_allocator"*, align 8
   %__p.addr = alloca %class.A*, align 8
@@ -1079,13 +1079,13 @@ entry:
   %1 = bitcast %class.A* %0 to i8*
   %2 = bitcast i8* %1 to %class.A*
   %3 = load %class.A*, %class.A** %__args.addr, align 8
-  %call = call dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* dereferenceable(8) %3) #5
-  call void @_ZN1AC2ERKS_(%class.A* %2, %class.A* dereferenceable(8) %call) #5
+  %call = call nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %3) #5
+  call void @_ZN1AC2ERKS_(%class.A* %2, %class.A* nonnull align 8 dereferenceable(8) %call) #5
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZN1AC2ERKS_(%class.A* %this, %class.A* dereferenceable(8) %0) unnamed_addr #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZN1AC2ERKS_(%class.A* %this, %class.A* nonnull align 8 dereferenceable(8) %0) unnamed_addr #2 comdat align 2 {
 entry:
   %this.addr = alloca %class.A*, align 8
   %.addr = alloca %class.A*, align 8
@@ -1132,23 +1132,24 @@ entry:
   ret void
 }
 
-attributes #0 = { noinline optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #1 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #2 = { noinline nounwind optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #3 = { nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #4 = { noinline uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #0 = { noinline optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { noinline nounwind optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #3 = { nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #4 = { noinline uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #5 = { nounwind }
-attributes #6 = { noinline norecurse optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #7 = { argmemonly nounwind willreturn }
+attributes #6 = { noinline norecurse optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #7 = { argmemonly nounwind willreturn writeonly }
 attributes #8 = { noinline noreturn nounwind }
-attributes #9 = { nobuiltin nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #10 = { noreturn "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #11 = { nobuiltin "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #9 = { nobuiltin nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #10 = { noreturn "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #11 = { nobuiltin allocsize(0) "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #12 = { noreturn nounwind }
 attributes #13 = { noreturn }
+attributes #14 = { allocsize(0) }
 
 !llvm.module.flags = !{!0}
 !llvm.ident = !{!1}
 
 !0 = !{i32 1, !"wchar_size", i32 4}
-!1 = !{!"clang version 10.0.0-4ubuntu1 "}
+!1 = !{!"Ubuntu clang version 11.0.0-2~ubuntu20.04.1"}

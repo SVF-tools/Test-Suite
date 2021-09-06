@@ -1,4 +1,4 @@
-; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/mta/imprecise_cxt_recur_6.c.bc'
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/src/mta/imprecise_cxt_recur_6.c'
 source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/mta/imprecise_cxt_recur_6.c"
 target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-pc-linux-gnu"
@@ -8,21 +8,21 @@ target triple = "x86_64-pc-linux-gnu"
 @.str = private unnamed_addr constant [2 x i8] c"\0A\00", align 1
 @.str.1 = private unnamed_addr constant [4 x i8] c"%s\0A\00", align 1
 @.str.2 = private unnamed_addr constant [25 x i8] c"Press ENTER to continue\0A\00", align 1
-@Global = common dso_local global i32 0, align 4
+@Global = dso_local global i32 0, align 4
 @.str.3 = private unnamed_addr constant [38 x i8] c"cs1.Call,cs2.Create,cs4.foo1,cs5.foo2\00", align 1
 @.str.4 = private unnamed_addr constant [6 x i8] c"0,1,2\00", align 1
 @.str.5 = private unnamed_addr constant [29 x i8] c"cs1.Call,cs2.Create,cs4.foo1\00", align 1
-@t2 = common dso_local global i64 0, align 8
+@t2 = dso_local global i64 0, align 8
 @.str.6 = private unnamed_addr constant [20 x i8] c"cs1.Call,cs2.Create\00", align 1
-@t = common dso_local global [5 x i64] zeroinitializer, align 16
+@t = dso_local global [5 x i64] zeroinitializer, align 16
 @.str.7 = private unnamed_addr constant [18 x i8] c"cs1.Call,cs3.Join\00", align 1
 @.str.8 = private unnamed_addr constant [9 x i8] c"cs1.Call\00", align 1
 @.str.9 = private unnamed_addr constant [1 x i8] zeroinitializer, align 1
 @.str.10 = private unnamed_addr constant [2 x i8] c"0\00", align 1
 @.str.11 = private unnamed_addr constant [2 x i8] c"1\00", align 1
 @.str.12 = private unnamed_addr constant [2 x i8] c"2\00", align 1
-@t1 = common dso_local global i64 0, align 8
-@tid = common dso_local global i32 0, align 4
+@t1 = dso_local global i64 0, align 8
+@tid = dso_local global i32 0, align 4
 
 ; Function Attrs: noinline nounwind optnone uwtable
 define dso_local void @MUSTALIAS(i8* %p, i8* %q) #0 {
@@ -411,15 +411,15 @@ cs1:                                              ; preds = %entry
   ret i32 1
 }
 
-attributes #0 = { noinline nounwind optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #1 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #2 = { nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #0 = { noinline nounwind optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #3 = { nounwind }
 
 !llvm.module.flags = !{!0}
 !llvm.ident = !{!1}
 
 !0 = !{i32 1, !"wchar_size", i32 4}
-!1 = !{!"clang version 10.0.0-4ubuntu1 "}
+!1 = !{!"Ubuntu clang version 11.0.0-2~ubuntu20.04.1"}
 !2 = !{!3}
 !3 = !{i64 2, i64 3, i1 false}

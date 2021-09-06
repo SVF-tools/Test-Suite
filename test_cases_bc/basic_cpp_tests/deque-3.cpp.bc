@@ -1,12 +1,12 @@
-; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/basic_cpp_tests/deque-3.cpp.bc'
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/src/basic_cpp_tests/deque-3.cpp'
 source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/basic_cpp_tests/deque-3.cpp"
 target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-pc-linux-gnu"
 
 %"class.std::deque" = type { %"class.std::_Deque_base" }
-%"class.std::_Deque_base" = type { %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl" }
-%"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl" = type { %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data" }
-%"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data" = type { %class.A**, i64, %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator" }
+%"class.std::_Deque_base" = type { %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl" }
+%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl" = type { %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data" }
+%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data" = type { %class.A**, i64, %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator" }
 %class.A = type { i32 (...)** }
 %"struct.std::_Deque_iterator" = type { %class.A*, %class.A*, %class.A*, %class.A** }
 %"class.std::allocator" = type { i8 }
@@ -413,8 +413,8 @@ entry:
   %ptr = alloca i32*, align 8
   %adeque = alloca %"class.std::deque", align 8
   %a = alloca %class.A, align 8
-  %exn.slot = alloca i8*
-  %ehselector.slot = alloca i32
+  %exn.slot = alloca i8*, align 8
+  %ehselector.slot = alloca i32, align 4
   %aptr = alloca %class.A*, align 8
   store i32 0, i32* %retval, align 4
   store i32 %argc, i32* %argc.addr, align 4
@@ -422,11 +422,11 @@ entry:
   store i32* @global_obj, i32** %ptr, align 8
   call void @_ZNSt5dequeI1ASaIS0_EEC2Ev(%"class.std::deque"* %adeque)
   call void @_ZN1AC2Ev(%class.A* %a) #10
-  invoke void @_ZNSt5dequeI1ASaIS0_EE9push_backERKS0_(%"class.std::deque"* %adeque, %class.A* dereferenceable(8) %a)
+  invoke void @_ZNSt5dequeI1ASaIS0_EE9push_backERKS0_(%"class.std::deque"* %adeque, %class.A* nonnull align 8 dereferenceable(8) %a)
           to label %invoke.cont unwind label %lpad
 
 invoke.cont:                                      ; preds = %entry
-  %call = call dereferenceable(8) %class.A* @_ZNSt5dequeI1ASaIS0_EE5frontEv(%"class.std::deque"* %adeque) #10
+  %call = call nonnull align 8 dereferenceable(8) %class.A* @_ZNSt5dequeI1ASaIS0_EE5frontEv(%"class.std::deque"* %adeque) #10
   store %class.A* %call, %class.A** %aptr, align 8
   %0 = load %class.A*, %class.A** %aptr, align 8
   %1 = load i32*, i32** %ptr, align 8
@@ -484,7 +484,7 @@ entry:
 }
 
 ; Function Attrs: noinline optnone uwtable
-define linkonce_odr dso_local void @_ZNSt5dequeI1ASaIS0_EE9push_backERKS0_(%"class.std::deque"* %this, %class.A* dereferenceable(8) %__x) #0 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt5dequeI1ASaIS0_EE9push_backERKS0_(%"class.std::deque"* %this, %class.A* nonnull align 8 dereferenceable(8) %__x) #0 comdat align 2 {
 entry:
   %this.addr = alloca %"class.std::deque"*, align 8
   %__x.addr = alloca %class.A*, align 8
@@ -493,14 +493,14 @@ entry:
   %this1 = load %"class.std::deque"*, %"class.std::deque"** %this.addr, align 8
   %0 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %0, i32 0, i32 0
-  %1 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %1, i32 0, i32 3
+  %1 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %1, i32 0, i32 3
   %_M_cur = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish, i32 0, i32 0
   %2 = load %class.A*, %class.A** %_M_cur, align 8
   %3 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl2 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %3, i32 0, i32 0
-  %4 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl2 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish3 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %4, i32 0, i32 3
+  %4 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl2 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish3 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %4, i32 0, i32 3
   %_M_last = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish3, i32 0, i32 2
   %5 = load %class.A*, %class.A** %_M_last, align 8
   %add.ptr = getelementptr inbounds %class.A, %class.A* %5, i64 -1
@@ -510,19 +510,19 @@ entry:
 if.then:                                          ; preds = %entry
   %6 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl4 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %6, i32 0, i32 0
-  %7 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl4 to %"class.std::allocator"*
+  %7 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl4 to %"class.std::allocator"*
   %8 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl5 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %8, i32 0, i32 0
-  %9 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl5 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish6 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %9, i32 0, i32 3
+  %9 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl5 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish6 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %9, i32 0, i32 3
   %_M_cur7 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish6, i32 0, i32 0
   %10 = load %class.A*, %class.A** %_M_cur7, align 8
   %11 = load %class.A*, %class.A** %__x.addr, align 8
-  call void @_ZNSt16allocator_traitsISaI1AEE9constructIS0_JRKS0_EEEvRS1_PT_DpOT0_(%"class.std::allocator"* dereferenceable(1) %7, %class.A* %10, %class.A* dereferenceable(8) %11) #10
+  call void @_ZNSt16allocator_traitsISaI1AEE9constructIS0_JRKS0_EEEvRS1_PT_DpOT0_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %7, %class.A* %10, %class.A* nonnull align 8 dereferenceable(8) %11) #10
   %12 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl8 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %12, i32 0, i32 0
-  %13 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl8 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish9 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %13, i32 0, i32 3
+  %13 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl8 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish9 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %13, i32 0, i32 3
   %_M_cur10 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish9, i32 0, i32 0
   %14 = load %class.A*, %class.A** %_M_cur10, align 8
   %incdec.ptr = getelementptr inbounds %class.A, %class.A* %14, i32 1
@@ -531,7 +531,7 @@ if.then:                                          ; preds = %entry
 
 if.else:                                          ; preds = %entry
   %15 = load %class.A*, %class.A** %__x.addr, align 8
-  call void @_ZNSt5dequeI1ASaIS0_EE16_M_push_back_auxIJRKS0_EEEvDpOT_(%"class.std::deque"* %this1, %class.A* dereferenceable(8) %15)
+  call void @_ZNSt5dequeI1ASaIS0_EE16_M_push_back_auxIJRKS0_EEEvDpOT_(%"class.std::deque"* %this1, %class.A* nonnull align 8 dereferenceable(8) %15)
   br label %if.end
 
 if.end:                                           ; preds = %if.else, %if.then
@@ -541,14 +541,14 @@ if.end:                                           ; preds = %if.else, %if.then
 declare dso_local i32 @__gxx_personality_v0(...)
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local dereferenceable(8) %class.A* @_ZNSt5dequeI1ASaIS0_EE5frontEv(%"class.std::deque"* %this) #2 comdat align 2 {
+define linkonce_odr dso_local nonnull align 8 dereferenceable(8) %class.A* @_ZNSt5dequeI1ASaIS0_EE5frontEv(%"class.std::deque"* %this) #2 comdat align 2 {
 entry:
   %this.addr = alloca %"class.std::deque"*, align 8
   %ref.tmp = alloca %"struct.std::_Deque_iterator", align 8
   store %"class.std::deque"* %this, %"class.std::deque"** %this.addr, align 8
   %this1 = load %"class.std::deque"*, %"class.std::deque"** %this.addr, align 8
-  call void @_ZNSt5dequeI1ASaIS0_EE5beginEv(%"struct.std::_Deque_iterator"* sret %ref.tmp, %"class.std::deque"* %this1) #10
-  %call = call dereferenceable(8) %class.A* @_ZNKSt15_Deque_iteratorI1ARS0_PS0_EdeEv(%"struct.std::_Deque_iterator"* %ref.tmp) #10
+  call void @_ZNSt5dequeI1ASaIS0_EE5beginEv(%"struct.std::_Deque_iterator"* sret align 8 %ref.tmp, %"class.std::deque"* %this1) #10
+  %call = call nonnull align 8 dereferenceable(8) %class.A* @_ZNKSt15_Deque_iteratorI1ARS0_PS0_EdeEv(%"struct.std::_Deque_iterator"* %ref.tmp) #10
   ret %class.A* %call
 }
 
@@ -558,15 +558,15 @@ entry:
   %this.addr = alloca %"class.std::deque"*, align 8
   %agg.tmp = alloca %"struct.std::_Deque_iterator", align 8
   %agg.tmp2 = alloca %"struct.std::_Deque_iterator", align 8
-  %exn.slot = alloca i8*
-  %ehselector.slot = alloca i32
+  %exn.slot = alloca i8*, align 8
+  %ehselector.slot = alloca i32, align 4
   store %"class.std::deque"* %this, %"class.std::deque"** %this.addr, align 8
   %this1 = load %"class.std::deque"*, %"class.std::deque"** %this.addr, align 8
-  call void @_ZNSt5dequeI1ASaIS0_EE5beginEv(%"struct.std::_Deque_iterator"* sret %agg.tmp, %"class.std::deque"* %this1) #10
-  call void @_ZNSt5dequeI1ASaIS0_EE3endEv(%"struct.std::_Deque_iterator"* sret %agg.tmp2, %"class.std::deque"* %this1) #10
+  call void @_ZNSt5dequeI1ASaIS0_EE5beginEv(%"struct.std::_Deque_iterator"* sret align 8 %agg.tmp, %"class.std::deque"* %this1) #10
+  call void @_ZNSt5dequeI1ASaIS0_EE3endEv(%"struct.std::_Deque_iterator"* sret align 8 %agg.tmp2, %"class.std::deque"* %this1) #10
   %0 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
-  %call = call dereferenceable(1) %"class.std::allocator"* @_ZNSt11_Deque_baseI1ASaIS0_EE19_M_get_Tp_allocatorEv(%"class.std::_Deque_base"* %0) #10
-  invoke void @_ZNSt5dequeI1ASaIS0_EE15_M_destroy_dataESt15_Deque_iteratorIS0_RS0_PS0_ES6_RKS1_(%"class.std::deque"* %this1, %"struct.std::_Deque_iterator"* %agg.tmp, %"struct.std::_Deque_iterator"* %agg.tmp2, %"class.std::allocator"* dereferenceable(1) %call)
+  %call = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNSt11_Deque_baseI1ASaIS0_EE19_M_get_Tp_allocatorEv(%"class.std::_Deque_base"* %0) #10
+  invoke void @_ZNSt5dequeI1ASaIS0_EE15_M_destroy_dataESt15_Deque_iteratorIS0_RS0_PS0_ES6_RKS1_(%"class.std::deque"* %this1, %"struct.std::_Deque_iterator"* %agg.tmp, %"struct.std::_Deque_iterator"* %agg.tmp2, %"class.std::allocator"* nonnull align 1 dereferenceable(1) %call)
           to label %invoke.cont unwind label %lpad
 
 invoke.cont:                                      ; preds = %entry
@@ -595,12 +595,12 @@ terminate.handler:                                ; preds = %lpad
 define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EEC2Ev(%"class.std::_Deque_base"* %this) unnamed_addr #0 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
 entry:
   %this.addr = alloca %"class.std::_Deque_base"*, align 8
-  %exn.slot = alloca i8*
-  %ehselector.slot = alloca i32
+  %exn.slot = alloca i8*, align 8
+  %ehselector.slot = alloca i32, align 4
   store %"class.std::_Deque_base"* %this, %"class.std::_Deque_base"** %this.addr, align 8
   %this1 = load %"class.std::_Deque_base"*, %"class.std::_Deque_base"** %this.addr, align 8
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  call void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implC2Ev(%"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl) #10
+  call void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implC2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl) #10
   invoke void @_ZNSt11_Deque_baseI1ASaIS0_EE17_M_initialize_mapEm(%"class.std::_Deque_base"* %this1, i64 0)
           to label %invoke.cont unwind label %lpad
 
@@ -614,7 +614,7 @@ lpad:                                             ; preds = %entry
   store i8* %1, i8** %exn.slot, align 8
   %2 = extractvalue { i8*, i32 } %0, 1
   store i32 %2, i32* %ehselector.slot, align 4
-  call void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implD2Ev(%"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl) #10
+  call void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implD2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl) #10
   br label %eh.resume
 
 eh.resume:                                        ; preds = %lpad
@@ -626,15 +626,15 @@ eh.resume:                                        ; preds = %lpad
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implC2Ev(%"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %this) unnamed_addr #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implC2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %this) unnamed_addr #2 comdat align 2 {
 entry:
-  %this.addr = alloca %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"*, align 8
-  store %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %this, %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"** %this.addr, align 8
-  %this1 = load %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"*, %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"** %this.addr, align 8
-  %0 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %this1 to %"class.std::allocator"*
+  %this.addr = alloca %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"*, align 8
+  store %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %this, %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"** %this.addr, align 8
+  %this1 = load %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"*, %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"** %this.addr, align 8
+  %0 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %this1 to %"class.std::allocator"*
   call void @_ZNSaI1AEC2Ev(%"class.std::allocator"* %0) #10
-  %1 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %this1 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  call void @_ZNSt11_Deque_baseI1ASaIS0_EE16_Deque_impl_dataC2Ev(%"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %1) #10
+  %1 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %this1 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  call void @_ZNSt11_Deque_baseI1ASaIS0_EE16_Deque_impl_dataC2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %1) #10
   ret void
 }
 
@@ -648,8 +648,8 @@ entry:
   %ref.tmp2 = alloca i64, align 8
   %__nstart = alloca %class.A**, align 8
   %__nfinish = alloca %class.A**, align 8
-  %exn.slot = alloca i8*
-  %ehselector.slot = alloca i32
+  %exn.slot = alloca i8*, align 8
+  %ehselector.slot = alloca i32, align 4
   store %"class.std::_Deque_base"* %this, %"class.std::_Deque_base"** %this.addr, align 8
   store i64 %__num_elements, i64* %__num_elements.addr, align 8
   %this1 = load %"class.std::_Deque_base"*, %"class.std::_Deque_base"** %this.addr, align 8
@@ -662,28 +662,28 @@ entry:
   %1 = load i64, i64* %__num_nodes, align 8
   %add3 = add i64 %1, 2
   store i64 %add3, i64* %ref.tmp2, align 8
-  %call4 = call dereferenceable(8) i64* @_ZSt3maxImERKT_S2_S2_(i64* dereferenceable(8) %ref.tmp, i64* dereferenceable(8) %ref.tmp2)
+  %call4 = call nonnull align 8 dereferenceable(8) i64* @_ZSt3maxImERKT_S2_S2_(i64* nonnull align 8 dereferenceable(8) %ref.tmp, i64* nonnull align 8 dereferenceable(8) %ref.tmp2)
   %2 = load i64, i64* %call4, align 8
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %3 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map_size = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %3, i32 0, i32 1
+  %3 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map_size = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %3, i32 0, i32 1
   store i64 %2, i64* %_M_map_size, align 8
   %_M_impl5 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %4 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl5 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map_size6 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %4, i32 0, i32 1
+  %4 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl5 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map_size6 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %4, i32 0, i32 1
   %5 = load i64, i64* %_M_map_size6, align 8
   %call7 = call %class.A** @_ZNSt11_Deque_baseI1ASaIS0_EE15_M_allocate_mapEm(%"class.std::_Deque_base"* %this1, i64 %5)
   %_M_impl8 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %6 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl8 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %6, i32 0, i32 0
+  %6 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl8 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %6, i32 0, i32 0
   store %class.A** %call7, %class.A*** %_M_map, align 8
   %_M_impl9 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %7 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl9 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map10 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %7, i32 0, i32 0
+  %7 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl9 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map10 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %7, i32 0, i32 0
   %8 = load %class.A**, %class.A*** %_M_map10, align 8
   %_M_impl11 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %9 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl11 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map_size12 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %9, i32 0, i32 1
+  %9 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl11 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map_size12 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %9, i32 0, i32 1
   %10 = load i64, i64* %_M_map_size12, align 8
   %11 = load i64, i64* %__num_nodes, align 8
   %sub = sub i64 %10, %11
@@ -715,21 +715,21 @@ catch:                                            ; preds = %lpad
   %exn = load i8*, i8** %exn.slot, align 8
   %19 = call i8* @__cxa_begin_catch(i8* %exn) #10
   %_M_impl15 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %20 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl15 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map16 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %20, i32 0, i32 0
+  %20 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl15 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map16 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %20, i32 0, i32 0
   %21 = load %class.A**, %class.A*** %_M_map16, align 8
   %_M_impl17 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %22 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl17 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map_size18 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %22, i32 0, i32 1
+  %22 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl17 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map_size18 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %22, i32 0, i32 1
   %23 = load i64, i64* %_M_map_size18, align 8
   call void @_ZNSt11_Deque_baseI1ASaIS0_EE17_M_deallocate_mapEPPS0_m(%"class.std::_Deque_base"* %this1, %class.A** %21, i64 %23) #10
   %_M_impl19 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %24 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl19 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map20 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %24, i32 0, i32 0
+  %24 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl19 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map20 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %24, i32 0, i32 0
   store %class.A** null, %class.A*** %_M_map20, align 8
   %_M_impl21 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %25 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl21 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map_size22 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %25, i32 0, i32 1
+  %25 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl21 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map_size22 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %25, i32 0, i32 1
   store i64 0, i64* %_M_map_size22, align 8
   invoke void @__cxa_rethrow() #12
           to label %unreachable unwind label %lpad23
@@ -749,29 +749,29 @@ invoke.cont24:                                    ; preds = %lpad23
 
 try.cont:                                         ; preds = %invoke.cont
   %_M_impl25 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %29 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl25 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_start = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %29, i32 0, i32 2
+  %29 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl25 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_start = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %29, i32 0, i32 2
   %30 = load %class.A**, %class.A*** %__nstart, align 8
   call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_E11_M_set_nodeEPS2_(%"struct.std::_Deque_iterator"* %_M_start, %class.A** %30) #10
   %_M_impl26 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %31 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl26 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %31, i32 0, i32 3
+  %31 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl26 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %31, i32 0, i32 3
   %32 = load %class.A**, %class.A*** %__nfinish, align 8
   %add.ptr27 = getelementptr inbounds %class.A*, %class.A** %32, i64 -1
   call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_E11_M_set_nodeEPS2_(%"struct.std::_Deque_iterator"* %_M_finish, %class.A** %add.ptr27) #10
   %_M_impl28 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %33 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl28 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_start29 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %33, i32 0, i32 2
+  %33 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl28 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_start29 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %33, i32 0, i32 2
   %_M_first = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_start29, i32 0, i32 1
   %34 = load %class.A*, %class.A** %_M_first, align 8
   %_M_impl30 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %35 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl30 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_start31 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %35, i32 0, i32 2
+  %35 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl30 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_start31 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %35, i32 0, i32 2
   %_M_cur = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_start31, i32 0, i32 0
   store %class.A* %34, %class.A** %_M_cur, align 8
   %_M_impl32 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %36 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl32 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish33 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %36, i32 0, i32 3
+  %36 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl32 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish33 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %36, i32 0, i32 3
   %_M_first34 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish33, i32 0, i32 1
   %37 = load %class.A*, %class.A** %_M_first34, align 8
   %38 = load i64, i64* %__num_elements.addr, align 8
@@ -779,8 +779,8 @@ try.cont:                                         ; preds = %invoke.cont
   %rem = urem i64 %38, %call35
   %add.ptr36 = getelementptr inbounds %class.A, %class.A* %37, i64 %rem
   %_M_impl37 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %39 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl37 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish38 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %39, i32 0, i32 3
+  %39 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl37 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish38 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %39, i32 0, i32 3
   %_M_cur39 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish38, i32 0, i32 0
   store %class.A* %add.ptr36, %class.A** %_M_cur39, align 8
   ret void
@@ -804,12 +804,12 @@ unreachable:                                      ; preds = %catch
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implD2Ev(%"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %this) unnamed_addr #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implD2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %this) unnamed_addr #2 comdat align 2 {
 entry:
-  %this.addr = alloca %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"*, align 8
-  store %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %this, %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"** %this.addr, align 8
-  %this1 = load %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"*, %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"** %this.addr, align 8
-  %0 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %this1 to %"class.std::allocator"*
+  %this.addr = alloca %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"*, align 8
+  store %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %this, %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"** %this.addr, align 8
+  %this1 = load %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"*, %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"** %this.addr, align 8
+  %0 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %this1 to %"class.std::allocator"*
   call void @_ZNSaI1AED2Ev(%"class.std::allocator"* %0) #10
   ret void
 }
@@ -826,18 +826,18 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EE16_Deque_impl_dataC2Ev(%"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %this) unnamed_addr #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EE16_Deque_impl_dataC2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %this) unnamed_addr #2 comdat align 2 {
 entry:
-  %this.addr = alloca %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*, align 8
-  store %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %this, %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"** %this.addr, align 8
-  %this1 = load %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*, %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"** %this.addr, align 8
-  %_M_map = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %this1, i32 0, i32 0
+  %this.addr = alloca %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*, align 8
+  store %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %this, %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"** %this.addr, align 8
+  %this1 = load %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*, %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"** %this.addr, align 8
+  %_M_map = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %this1, i32 0, i32 0
   store %class.A** null, %class.A*** %_M_map, align 8
-  %_M_map_size = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %this1, i32 0, i32 1
+  %_M_map_size = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %this1, i32 0, i32 1
   store i64 0, i64* %_M_map_size, align 8
-  %_M_start = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %this1, i32 0, i32 2
+  %_M_start = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %this1, i32 0, i32 2
   call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2Ev(%"struct.std::_Deque_iterator"* %_M_start) #10
-  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %this1, i32 0, i32 3
+  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %this1, i32 0, i32 3
   call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2Ev(%"struct.std::_Deque_iterator"* %_M_finish) #10
   ret void
 }
@@ -891,7 +891,7 @@ cond.end:                                         ; preds = %cond.false, %cond.t
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local dereferenceable(8) i64* @_ZSt3maxImERKT_S2_S2_(i64* dereferenceable(8) %__a, i64* dereferenceable(8) %__b) #2 comdat {
+define linkonce_odr dso_local nonnull align 8 dereferenceable(8) i64* @_ZSt3maxImERKT_S2_S2_(i64* nonnull align 8 dereferenceable(8) %__a, i64* nonnull align 8 dereferenceable(8) %__b) #2 comdat {
 entry:
   %retval = alloca i64*, align 8
   %__a.addr = alloca i64*, align 8
@@ -926,14 +926,14 @@ entry:
   %this.addr = alloca %"class.std::_Deque_base"*, align 8
   %__n.addr = alloca i64, align 8
   %__map_alloc = alloca %"class.std::allocator.0", align 1
-  %exn.slot = alloca i8*
-  %ehselector.slot = alloca i32
+  %exn.slot = alloca i8*, align 8
+  %ehselector.slot = alloca i32, align 4
   store %"class.std::_Deque_base"* %this, %"class.std::_Deque_base"** %this.addr, align 8
   store i64 %__n, i64* %__n.addr, align 8
   %this1 = load %"class.std::_Deque_base"*, %"class.std::_Deque_base"** %this.addr, align 8
-  call void @_ZNKSt11_Deque_baseI1ASaIS0_EE20_M_get_map_allocatorEv(%"class.std::allocator.0"* sret %__map_alloc, %"class.std::_Deque_base"* %this1) #10
+  call void @_ZNKSt11_Deque_baseI1ASaIS0_EE20_M_get_map_allocatorEv(%"class.std::allocator.0"* sret align 1 %__map_alloc, %"class.std::_Deque_base"* %this1) #10
   %0 = load i64, i64* %__n.addr, align 8
-  %call = invoke %class.A** @_ZNSt16allocator_traitsISaIP1AEE8allocateERS2_m(%"class.std::allocator.0"* dereferenceable(1) %__map_alloc, i64 %0)
+  %call = invoke %class.A** @_ZNSt16allocator_traitsISaIP1AEE8allocateERS2_m(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %__map_alloc, i64 %0)
           to label %invoke.cont unwind label %lpad
 
 invoke.cont:                                      ; preds = %entry
@@ -965,8 +965,8 @@ entry:
   %__nstart.addr = alloca %class.A**, align 8
   %__nfinish.addr = alloca %class.A**, align 8
   %__cur = alloca %class.A**, align 8
-  %exn.slot = alloca i8*
-  %ehselector.slot = alloca i32
+  %exn.slot = alloca i8*, align 8
+  %ehselector.slot = alloca i32, align 4
   store %"class.std::_Deque_base"* %this, %"class.std::_Deque_base"** %this.addr, align 8
   store %class.A** %__nstart, %class.A*** %__nstart.addr, align 8
   store %class.A** %__nfinish, %class.A*** %__nfinish.addr, align 8
@@ -1060,16 +1060,16 @@ entry:
   %__p.addr = alloca %class.A**, align 8
   %__n.addr = alloca i64, align 8
   %__map_alloc = alloca %"class.std::allocator.0", align 1
-  %exn.slot = alloca i8*
-  %ehselector.slot = alloca i32
+  %exn.slot = alloca i8*, align 8
+  %ehselector.slot = alloca i32, align 4
   store %"class.std::_Deque_base"* %this, %"class.std::_Deque_base"** %this.addr, align 8
   store %class.A** %__p, %class.A*** %__p.addr, align 8
   store i64 %__n, i64* %__n.addr, align 8
   %this1 = load %"class.std::_Deque_base"*, %"class.std::_Deque_base"** %this.addr, align 8
-  call void @_ZNKSt11_Deque_baseI1ASaIS0_EE20_M_get_map_allocatorEv(%"class.std::allocator.0"* sret %__map_alloc, %"class.std::_Deque_base"* %this1) #10
+  call void @_ZNKSt11_Deque_baseI1ASaIS0_EE20_M_get_map_allocatorEv(%"class.std::allocator.0"* sret align 1 %__map_alloc, %"class.std::_Deque_base"* %this1) #10
   %0 = load %class.A**, %class.A*** %__p.addr, align 8
   %1 = load i64, i64* %__n.addr, align 8
-  invoke void @_ZNSt16allocator_traitsISaIP1AEE10deallocateERS2_PS1_m(%"class.std::allocator.0"* dereferenceable(1) %__map_alloc, %class.A** %0, i64 %1)
+  invoke void @_ZNSt16allocator_traitsISaIP1AEE10deallocateERS2_PS1_m(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %__map_alloc, %class.A** %0, i64 %1)
           to label %invoke.cont unwind label %lpad
 
 invoke.cont:                                      ; preds = %entry
@@ -1130,7 +1130,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNKSt11_Deque_baseI1ASaIS0_EE20_M_get_map_allocatorEv(%"class.std::allocator.0"* noalias sret %agg.result, %"class.std::_Deque_base"* %this) #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZNKSt11_Deque_baseI1ASaIS0_EE20_M_get_map_allocatorEv(%"class.std::allocator.0"* noalias sret align 1 %agg.result, %"class.std::_Deque_base"* %this) #2 comdat align 2 {
 entry:
   %result.ptr = alloca i8*, align 8
   %this.addr = alloca %"class.std::_Deque_base"*, align 8
@@ -1138,13 +1138,13 @@ entry:
   store i8* %0, i8** %result.ptr, align 8
   store %"class.std::_Deque_base"* %this, %"class.std::_Deque_base"** %this.addr, align 8
   %this1 = load %"class.std::_Deque_base"*, %"class.std::_Deque_base"** %this.addr, align 8
-  %call = call dereferenceable(1) %"class.std::allocator"* @_ZNKSt11_Deque_baseI1ASaIS0_EE19_M_get_Tp_allocatorEv(%"class.std::_Deque_base"* %this1) #10
-  call void @_ZNSaIP1AEC2IS_EERKSaIT_E(%"class.std::allocator.0"* %agg.result, %"class.std::allocator"* dereferenceable(1) %call) #10
+  %call = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNKSt11_Deque_baseI1ASaIS0_EE19_M_get_Tp_allocatorEv(%"class.std::_Deque_base"* %this1) #10
+  call void @_ZNSaIP1AEC2IS_EERKSaIT_E(%"class.std::allocator.0"* %agg.result, %"class.std::allocator"* nonnull align 1 dereferenceable(1) %call) #10
   ret void
 }
 
 ; Function Attrs: noinline optnone uwtable
-define linkonce_odr dso_local %class.A** @_ZNSt16allocator_traitsISaIP1AEE8allocateERS2_m(%"class.std::allocator.0"* dereferenceable(1) %__a, i64 %__n) #0 comdat align 2 {
+define linkonce_odr dso_local %class.A** @_ZNSt16allocator_traitsISaIP1AEE8allocateERS2_m(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %__a, i64 %__n) #0 comdat align 2 {
 entry:
   %__a.addr = alloca %"class.std::allocator.0"*, align 8
   %__n.addr = alloca i64, align 8
@@ -1169,18 +1169,18 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local dereferenceable(1) %"class.std::allocator"* @_ZNKSt11_Deque_baseI1ASaIS0_EE19_M_get_Tp_allocatorEv(%"class.std::_Deque_base"* %this) #2 comdat align 2 {
+define linkonce_odr dso_local nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNKSt11_Deque_baseI1ASaIS0_EE19_M_get_Tp_allocatorEv(%"class.std::_Deque_base"* %this) #2 comdat align 2 {
 entry:
   %this.addr = alloca %"class.std::_Deque_base"*, align 8
   store %"class.std::_Deque_base"* %this, %"class.std::_Deque_base"** %this.addr, align 8
   %this1 = load %"class.std::_Deque_base"*, %"class.std::_Deque_base"** %this.addr, align 8
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %0 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl to %"class.std::allocator"*
+  %0 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl to %"class.std::allocator"*
   ret %"class.std::allocator"* %0
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSaIP1AEC2IS_EERKSaIT_E(%"class.std::allocator.0"* %this, %"class.std::allocator"* dereferenceable(1) %0) unnamed_addr #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSaIP1AEC2IS_EERKSaIT_E(%"class.std::allocator.0"* %this, %"class.std::allocator"* nonnull align 1 dereferenceable(1) %0) unnamed_addr #2 comdat align 2 {
 entry:
   %this.addr = alloca %"class.std::allocator.0"*, align 8
   %.addr = alloca %"class.std::allocator"*, align 8
@@ -1223,7 +1223,7 @@ if.then:                                          ; preds = %entry
 if.end:                                           ; preds = %entry
   %2 = load i64, i64* %__n.addr, align 8
   %mul = mul i64 %2, 8
-  %call2 = call i8* @_Znwm(i64 %mul)
+  %call2 = call noalias nonnull i8* @_Znwm(i64 %mul) #13
   %3 = bitcast i8* %call2 to %class.A**
   ret %class.A** %3
 }
@@ -1240,8 +1240,8 @@ entry:
 ; Function Attrs: noreturn
 declare dso_local void @_ZSt17__throw_bad_allocv() #6
 
-; Function Attrs: nobuiltin
-declare dso_local noalias i8* @_Znwm(i64) #7
+; Function Attrs: nobuiltin allocsize(0)
+declare dso_local nonnull i8* @_Znwm(i64) #7
 
 ; Function Attrs: noinline nounwind optnone uwtable
 define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorIP1AED2Ev(%"class.__gnu_cxx::new_allocator.1"* %this) unnamed_addr #2 comdat align 2 {
@@ -1259,9 +1259,9 @@ entry:
   store %"class.std::_Deque_base"* %this, %"class.std::_Deque_base"** %this.addr, align 8
   %this1 = load %"class.std::_Deque_base"*, %"class.std::_Deque_base"** %this.addr, align 8
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %0 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl to %"class.std::allocator"*
+  %0 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl to %"class.std::allocator"*
   %call = call i64 @_ZSt16__deque_buf_sizem(i64 8)
-  %call2 = call %class.A* @_ZNSt16allocator_traitsISaI1AEE8allocateERS1_m(%"class.std::allocator"* dereferenceable(1) %0, i64 %call)
+  %call2 = call %class.A* @_ZNSt16allocator_traitsISaI1AEE8allocateERS1_m(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %0, i64 %call)
   ret %class.A* %call2
 }
 
@@ -1303,7 +1303,7 @@ for.end:                                          ; preds = %for.cond
 }
 
 ; Function Attrs: noinline optnone uwtable
-define linkonce_odr dso_local %class.A* @_ZNSt16allocator_traitsISaI1AEE8allocateERS1_m(%"class.std::allocator"* dereferenceable(1) %__a, i64 %__n) #0 comdat align 2 {
+define linkonce_odr dso_local %class.A* @_ZNSt16allocator_traitsISaI1AEE8allocateERS1_m(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %__a, i64 %__n) #0 comdat align 2 {
 entry:
   %__a.addr = alloca %"class.std::allocator"*, align 8
   %__n.addr = alloca i64, align 8
@@ -1338,7 +1338,7 @@ if.then:                                          ; preds = %entry
 if.end:                                           ; preds = %entry
   %2 = load i64, i64* %__n.addr, align 8
   %mul = mul i64 %2, 8
-  %call2 = call i8* @_Znwm(i64 %mul)
+  %call2 = call noalias nonnull i8* @_Znwm(i64 %mul) #13
   %3 = bitcast i8* %call2 to %class.A*
   ret %class.A* %3
 }
@@ -1361,13 +1361,13 @@ entry:
   store %class.A* %__p, %class.A** %__p.addr, align 8
   %this1 = load %"class.std::_Deque_base"*, %"class.std::_Deque_base"** %this.addr, align 8
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %0 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl to %"class.std::allocator"*
+  %0 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl to %"class.std::allocator"*
   %1 = load %class.A*, %class.A** %__p.addr, align 8
   %call = invoke i64 @_ZSt16__deque_buf_sizem(i64 8)
           to label %invoke.cont unwind label %terminate.lpad
 
 invoke.cont:                                      ; preds = %entry
-  invoke void @_ZNSt16allocator_traitsISaI1AEE10deallocateERS1_PS0_m(%"class.std::allocator"* dereferenceable(1) %0, %class.A* %1, i64 %call)
+  invoke void @_ZNSt16allocator_traitsISaI1AEE10deallocateERS1_PS0_m(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %0, %class.A* %1, i64 %call)
           to label %invoke.cont2 unwind label %terminate.lpad
 
 invoke.cont2:                                     ; preds = %invoke.cont
@@ -1382,7 +1382,7 @@ terminate.lpad:                                   ; preds = %invoke.cont, %entry
 }
 
 ; Function Attrs: noinline optnone uwtable
-define linkonce_odr dso_local void @_ZNSt16allocator_traitsISaI1AEE10deallocateERS1_PS0_m(%"class.std::allocator"* dereferenceable(1) %__a, %class.A* %__p, i64 %__n) #0 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt16allocator_traitsISaI1AEE10deallocateERS1_PS0_m(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %__a, %class.A* %__p, i64 %__n) #0 comdat align 2 {
 entry:
   %__a.addr = alloca %"class.std::allocator"*, align 8
   %__p.addr = alloca %class.A*, align 8
@@ -1418,7 +1418,7 @@ entry:
 declare dso_local void @_ZdlPv(i8*) #8
 
 ; Function Attrs: noinline optnone uwtable
-define linkonce_odr dso_local void @_ZNSt16allocator_traitsISaIP1AEE10deallocateERS2_PS1_m(%"class.std::allocator.0"* dereferenceable(1) %__a, %class.A** %__p, i64 %__n) #0 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt16allocator_traitsISaIP1AEE10deallocateERS2_PS1_m(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %__a, %class.A** %__p, i64 %__n) #0 comdat align 2 {
 entry:
   %__a.addr = alloca %"class.std::allocator.0"*, align 8
   %__p.addr = alloca %class.A**, align 8
@@ -1504,7 +1504,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt5dequeI1ASaIS0_EE15_M_destroy_dataESt15_Deque_iteratorIS0_RS0_PS0_ES6_RKS1_(%"class.std::deque"* %this, %"struct.std::_Deque_iterator"* %__first, %"struct.std::_Deque_iterator"* %__last, %"class.std::allocator"* dereferenceable(1) %0) #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt5dequeI1ASaIS0_EE15_M_destroy_dataESt15_Deque_iteratorIS0_RS0_PS0_ES6_RKS1_(%"class.std::deque"* %this, %"struct.std::_Deque_iterator"* %__first, %"struct.std::_Deque_iterator"* %__last, %"class.std::allocator"* nonnull align 1 dereferenceable(1) %0) #2 comdat align 2 {
 entry:
   %this.addr = alloca %"class.std::deque"*, align 8
   %.addr = alloca %"class.std::allocator"*, align 8
@@ -1515,7 +1515,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt5dequeI1ASaIS0_EE5beginEv(%"struct.std::_Deque_iterator"* noalias sret %agg.result, %"class.std::deque"* %this) #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt5dequeI1ASaIS0_EE5beginEv(%"struct.std::_Deque_iterator"* noalias sret align 8 %agg.result, %"class.std::deque"* %this) #2 comdat align 2 {
 entry:
   %result.ptr = alloca i8*, align 8
   %this.addr = alloca %"class.std::deque"*, align 8
@@ -1525,14 +1525,14 @@ entry:
   %this1 = load %"class.std::deque"*, %"class.std::deque"** %this.addr, align 8
   %1 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %1, i32 0, i32 0
-  %2 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_start = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %2, i32 0, i32 2
-  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2ERKS3_(%"struct.std::_Deque_iterator"* %agg.result, %"struct.std::_Deque_iterator"* dereferenceable(32) %_M_start) #10
+  %2 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_start = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %2, i32 0, i32 2
+  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2ERKS3_(%"struct.std::_Deque_iterator"* %agg.result, %"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_start) #10
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt5dequeI1ASaIS0_EE3endEv(%"struct.std::_Deque_iterator"* noalias sret %agg.result, %"class.std::deque"* %this) #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt5dequeI1ASaIS0_EE3endEv(%"struct.std::_Deque_iterator"* noalias sret align 8 %agg.result, %"class.std::deque"* %this) #2 comdat align 2 {
 entry:
   %result.ptr = alloca i8*, align 8
   %this.addr = alloca %"class.std::deque"*, align 8
@@ -1542,20 +1542,20 @@ entry:
   %this1 = load %"class.std::deque"*, %"class.std::deque"** %this.addr, align 8
   %1 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %1, i32 0, i32 0
-  %2 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %2, i32 0, i32 3
-  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2ERKS3_(%"struct.std::_Deque_iterator"* %agg.result, %"struct.std::_Deque_iterator"* dereferenceable(32) %_M_finish) #10
+  %2 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %2, i32 0, i32 3
+  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2ERKS3_(%"struct.std::_Deque_iterator"* %agg.result, %"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_finish) #10
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local dereferenceable(1) %"class.std::allocator"* @_ZNSt11_Deque_baseI1ASaIS0_EE19_M_get_Tp_allocatorEv(%"class.std::_Deque_base"* %this) #2 comdat align 2 {
+define linkonce_odr dso_local nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNSt11_Deque_baseI1ASaIS0_EE19_M_get_Tp_allocatorEv(%"class.std::_Deque_base"* %this) #2 comdat align 2 {
 entry:
   %this.addr = alloca %"class.std::_Deque_base"*, align 8
   store %"class.std::_Deque_base"* %this, %"class.std::_Deque_base"** %this.addr, align 8
   %this1 = load %"class.std::_Deque_base"*, %"class.std::_Deque_base"** %this.addr, align 8
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %0 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl to %"class.std::allocator"*
+  %0 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl to %"class.std::allocator"*
   ret %"class.std::allocator"* %0
 }
 
@@ -1566,44 +1566,44 @@ entry:
   store %"class.std::_Deque_base"* %this, %"class.std::_Deque_base"** %this.addr, align 8
   %this1 = load %"class.std::_Deque_base"*, %"class.std::_Deque_base"** %this.addr, align 8
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %0 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %0, i32 0, i32 0
+  %0 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %0, i32 0, i32 0
   %1 = load %class.A**, %class.A*** %_M_map, align 8
   %tobool = icmp ne %class.A** %1, null
   br i1 %tobool, label %if.then, label %if.end
 
 if.then:                                          ; preds = %entry
   %_M_impl2 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %2 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl2 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_start = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %2, i32 0, i32 2
+  %2 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl2 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_start = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %2, i32 0, i32 2
   %_M_node = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_start, i32 0, i32 3
   %3 = load %class.A**, %class.A*** %_M_node, align 8
   %_M_impl3 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %4 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl3 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %4, i32 0, i32 3
+  %4 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl3 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %4, i32 0, i32 3
   %_M_node4 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish, i32 0, i32 3
   %5 = load %class.A**, %class.A*** %_M_node4, align 8
   %add.ptr = getelementptr inbounds %class.A*, %class.A** %5, i64 1
   call void @_ZNSt11_Deque_baseI1ASaIS0_EE16_M_destroy_nodesEPPS0_S4_(%"class.std::_Deque_base"* %this1, %class.A** %3, %class.A** %add.ptr) #10
   %_M_impl5 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %6 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl5 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map6 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %6, i32 0, i32 0
+  %6 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl5 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map6 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %6, i32 0, i32 0
   %7 = load %class.A**, %class.A*** %_M_map6, align 8
   %_M_impl7 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  %8 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl7 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map_size = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %8, i32 0, i32 1
+  %8 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl7 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map_size = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %8, i32 0, i32 1
   %9 = load i64, i64* %_M_map_size, align 8
   call void @_ZNSt11_Deque_baseI1ASaIS0_EE17_M_deallocate_mapEPPS0_m(%"class.std::_Deque_base"* %this1, %class.A** %7, i64 %9) #10
   br label %if.end
 
 if.end:                                           ; preds = %if.then, %entry
   %_M_impl8 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  call void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implD2Ev(%"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl8) #10
+  call void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implD2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl8) #10
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2ERKS3_(%"struct.std::_Deque_iterator"* %this, %"struct.std::_Deque_iterator"* dereferenceable(32) %__x) unnamed_addr #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2ERKS3_(%"struct.std::_Deque_iterator"* %this, %"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %__x) unnamed_addr #2 comdat align 2 {
 entry:
   %this.addr = alloca %"struct.std::_Deque_iterator"*, align 8
   %__x.addr = alloca %"struct.std::_Deque_iterator"*, align 8
@@ -1634,7 +1634,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt16allocator_traitsISaI1AEE9constructIS0_JRKS0_EEEvRS1_PT_DpOT0_(%"class.std::allocator"* dereferenceable(1) %__a, %class.A* %__p, %class.A* dereferenceable(8) %__args) #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt16allocator_traitsISaI1AEE9constructIS0_JRKS0_EEEvRS1_PT_DpOT0_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %__a, %class.A* %__p, %class.A* nonnull align 8 dereferenceable(8) %__args) #2 comdat align 2 {
 entry:
   %__a.addr = alloca %"class.std::allocator"*, align 8
   %__p.addr = alloca %class.A*, align 8
@@ -1646,13 +1646,13 @@ entry:
   %1 = bitcast %"class.std::allocator"* %0 to %"class.__gnu_cxx::new_allocator"*
   %2 = load %class.A*, %class.A** %__p.addr, align 8
   %3 = load %class.A*, %class.A** %__args.addr, align 8
-  %call = call dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* dereferenceable(8) %3) #10
-  call void @_ZN9__gnu_cxx13new_allocatorI1AE9constructIS1_JRKS1_EEEvPT_DpOT0_(%"class.__gnu_cxx::new_allocator"* %1, %class.A* %2, %class.A* dereferenceable(8) %call) #10
+  %call = call nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %3) #10
+  call void @_ZN9__gnu_cxx13new_allocatorI1AE9constructIS1_JRKS1_EEEvPT_DpOT0_(%"class.__gnu_cxx::new_allocator"* %1, %class.A* %2, %class.A* nonnull align 8 dereferenceable(8) %call) #10
   ret void
 }
 
 ; Function Attrs: noinline optnone uwtable
-define linkonce_odr dso_local void @_ZNSt5dequeI1ASaIS0_EE16_M_push_back_auxIJRKS0_EEEvDpOT_(%"class.std::deque"* %this, %class.A* dereferenceable(8) %__args) #0 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt5dequeI1ASaIS0_EE16_M_push_back_auxIJRKS0_EEEvDpOT_(%"class.std::deque"* %this, %class.A* nonnull align 8 dereferenceable(8) %__args) #0 comdat align 2 {
 entry:
   %this.addr = alloca %"class.std::deque"*, align 8
   %__args.addr = alloca %class.A*, align 8
@@ -1674,53 +1674,53 @@ if.end:                                           ; preds = %entry
   %call3 = call %class.A* @_ZNSt11_Deque_baseI1ASaIS0_EE16_M_allocate_nodeEv(%"class.std::_Deque_base"* %0)
   %1 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %1, i32 0, i32 0
-  %2 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %2, i32 0, i32 3
+  %2 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %2, i32 0, i32 3
   %_M_node = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish, i32 0, i32 3
   %3 = load %class.A**, %class.A*** %_M_node, align 8
   %add.ptr = getelementptr inbounds %class.A*, %class.A** %3, i64 1
   store %class.A* %call3, %class.A** %add.ptr, align 8
   %4 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl4 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %4, i32 0, i32 0
-  %5 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl4 to %"class.std::allocator"*
+  %5 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl4 to %"class.std::allocator"*
   %6 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl5 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %6, i32 0, i32 0
-  %7 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl5 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish6 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %7, i32 0, i32 3
+  %7 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl5 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish6 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %7, i32 0, i32 3
   %_M_cur = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish6, i32 0, i32 0
   %8 = load %class.A*, %class.A** %_M_cur, align 8
   %9 = load %class.A*, %class.A** %__args.addr, align 8
-  %call7 = call dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* dereferenceable(8) %9) #10
-  call void @_ZNSt16allocator_traitsISaI1AEE9constructIS0_JRKS0_EEEvRS1_PT_DpOT0_(%"class.std::allocator"* dereferenceable(1) %5, %class.A* %8, %class.A* dereferenceable(8) %call7) #10
+  %call7 = call nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %9) #10
+  call void @_ZNSt16allocator_traitsISaI1AEE9constructIS0_JRKS0_EEEvRS1_PT_DpOT0_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %5, %class.A* %8, %class.A* nonnull align 8 dereferenceable(8) %call7) #10
   %10 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl8 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %10, i32 0, i32 0
-  %11 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl8 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish9 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %11, i32 0, i32 3
+  %11 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl8 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish9 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %11, i32 0, i32 3
   %12 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl10 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %12, i32 0, i32 0
-  %13 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl10 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish11 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %13, i32 0, i32 3
+  %13 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl10 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish11 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %13, i32 0, i32 3
   %_M_node12 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish11, i32 0, i32 3
   %14 = load %class.A**, %class.A*** %_M_node12, align 8
   %add.ptr13 = getelementptr inbounds %class.A*, %class.A** %14, i64 1
   call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_E11_M_set_nodeEPS2_(%"struct.std::_Deque_iterator"* %_M_finish9, %class.A** %add.ptr13) #10
   %15 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl14 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %15, i32 0, i32 0
-  %16 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl14 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish15 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %16, i32 0, i32 3
+  %16 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl14 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish15 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %16, i32 0, i32 3
   %_M_first = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish15, i32 0, i32 1
   %17 = load %class.A*, %class.A** %_M_first, align 8
   %18 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl16 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %18, i32 0, i32 0
-  %19 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl16 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish17 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %19, i32 0, i32 3
+  %19 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl16 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish17 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %19, i32 0, i32 3
   %_M_cur18 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish17, i32 0, i32 0
   store %class.A* %17, %class.A** %_M_cur18, align 8
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorI1AE9constructIS1_JRKS1_EEEvPT_DpOT0_(%"class.__gnu_cxx::new_allocator"* %this, %class.A* %__p, %class.A* dereferenceable(8) %__args) #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorI1AE9constructIS1_JRKS1_EEEvPT_DpOT0_(%"class.__gnu_cxx::new_allocator"* %this, %class.A* %__p, %class.A* nonnull align 8 dereferenceable(8) %__args) #2 comdat align 2 {
 entry:
   %this.addr = alloca %"class.__gnu_cxx::new_allocator"*, align 8
   %__p.addr = alloca %class.A*, align 8
@@ -1733,13 +1733,13 @@ entry:
   %1 = bitcast %class.A* %0 to i8*
   %2 = bitcast i8* %1 to %class.A*
   %3 = load %class.A*, %class.A** %__args.addr, align 8
-  %call = call dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* dereferenceable(8) %3) #10
-  call void @_ZN1AC2ERKS_(%class.A* %2, %class.A* dereferenceable(8) %call) #10
+  %call = call nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %3) #10
+  call void @_ZN1AC2ERKS_(%class.A* %2, %class.A* nonnull align 8 dereferenceable(8) %call) #10
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* dereferenceable(8) %__t) #2 comdat {
+define linkonce_odr dso_local nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %__t) #2 comdat {
 entry:
   %__t.addr = alloca %class.A*, align 8
   store %class.A* %__t, %class.A** %__t.addr, align 8
@@ -1748,7 +1748,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZN1AC2ERKS_(%class.A* %this, %class.A* dereferenceable(8) %0) unnamed_addr #2 comdat align 2 {
+define linkonce_odr dso_local void @_ZN1AC2ERKS_(%class.A* %this, %class.A* nonnull align 8 dereferenceable(8) %0) unnamed_addr #2 comdat align 2 {
 entry:
   %this.addr = alloca %class.A*, align 8
   %.addr = alloca %class.A*, align 8
@@ -1768,13 +1768,13 @@ entry:
   %this1 = load %"class.std::deque"*, %"class.std::deque"** %this.addr, align 8
   %0 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %0, i32 0, i32 0
-  %1 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %1, i32 0, i32 3
+  %1 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %1, i32 0, i32 3
   %2 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl2 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %2, i32 0, i32 0
-  %3 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl2 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_start = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %3, i32 0, i32 2
-  %call = call i64 @_ZStmiRKSt15_Deque_iteratorI1ARS0_PS0_ES5_(%"struct.std::_Deque_iterator"* dereferenceable(32) %_M_finish, %"struct.std::_Deque_iterator"* dereferenceable(32) %_M_start) #10
+  %3 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl2 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_start = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %3, i32 0, i32 2
+  %call = call i64 @_ZStmiRKSt15_Deque_iteratorI1ARS0_PS0_ES5_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_finish, %"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_start) #10
   ret i64 %call
 }
 
@@ -1785,8 +1785,8 @@ entry:
   store %"class.std::deque"* %this, %"class.std::deque"** %this.addr, align 8
   %this1 = load %"class.std::deque"*, %"class.std::deque"** %this.addr, align 8
   %0 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
-  %call = call dereferenceable(1) %"class.std::allocator"* @_ZNKSt11_Deque_baseI1ASaIS0_EE19_M_get_Tp_allocatorEv(%"class.std::_Deque_base"* %0) #10
-  %call2 = call i64 @_ZNSt5dequeI1ASaIS0_EE11_S_max_sizeERKS1_(%"class.std::allocator"* dereferenceable(1) %call) #10
+  %call = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNKSt11_Deque_baseI1ASaIS0_EE19_M_get_Tp_allocatorEv(%"class.std::_Deque_base"* %0) #10
+  %call2 = call i64 @_ZNSt5dequeI1ASaIS0_EE11_S_max_sizeERKS1_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %call) #10
   ret i64 %call2
 }
 
@@ -1805,19 +1805,19 @@ entry:
   %add = add i64 %0, 1
   %1 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %1, i32 0, i32 0
-  %2 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map_size = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %2, i32 0, i32 1
+  %2 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map_size = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %2, i32 0, i32 1
   %3 = load i64, i64* %_M_map_size, align 8
   %4 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl2 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %4, i32 0, i32 0
-  %5 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl2 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %5, i32 0, i32 3
+  %5 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl2 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %5, i32 0, i32 3
   %_M_node = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish, i32 0, i32 3
   %6 = load %class.A**, %class.A*** %_M_node, align 8
   %7 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl3 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %7, i32 0, i32 0
-  %8 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl3 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %8, i32 0, i32 0
+  %8 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl3 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %8, i32 0, i32 0
   %9 = load %class.A**, %class.A*** %_M_map, align 8
   %sub.ptr.lhs.cast = ptrtoint %class.A** %6 to i64
   %sub.ptr.rhs.cast = ptrtoint %class.A** %9 to i64
@@ -1837,7 +1837,7 @@ if.end:                                           ; preds = %if.then, %entry
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local i64 @_ZStmiRKSt15_Deque_iteratorI1ARS0_PS0_ES5_(%"struct.std::_Deque_iterator"* dereferenceable(32) %__x, %"struct.std::_Deque_iterator"* dereferenceable(32) %__y) #2 comdat {
+define linkonce_odr dso_local i64 @_ZStmiRKSt15_Deque_iteratorI1ARS0_PS0_ES5_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %__x, %"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %__y) #2 comdat {
 entry:
   %__x.addr = alloca %"struct.std::_Deque_iterator"*, align 8
   %__y.addr = alloca %"struct.std::_Deque_iterator"*, align 8
@@ -1882,7 +1882,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local i64 @_ZNSt5dequeI1ASaIS0_EE11_S_max_sizeERKS1_(%"class.std::allocator"* dereferenceable(1) %__a) #2 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+define linkonce_odr dso_local i64 @_ZNSt5dequeI1ASaIS0_EE11_S_max_sizeERKS1_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %__a) #2 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
 entry:
   %__a.addr = alloca %"class.std::allocator"*, align 8
   %__diffmax = alloca i64, align 8
@@ -1890,9 +1890,9 @@ entry:
   store %"class.std::allocator"* %__a, %"class.std::allocator"** %__a.addr, align 8
   store i64 9223372036854775807, i64* %__diffmax, align 8
   %0 = load %"class.std::allocator"*, %"class.std::allocator"** %__a.addr, align 8
-  %call = call i64 @_ZNSt16allocator_traitsISaI1AEE8max_sizeERKS1_(%"class.std::allocator"* dereferenceable(1) %0) #10
+  %call = call i64 @_ZNSt16allocator_traitsISaI1AEE8max_sizeERKS1_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %0) #10
   store i64 %call, i64* %__allocmax, align 8
-  %call1 = invoke dereferenceable(8) i64* @_ZSt3minImERKT_S2_S2_(i64* dereferenceable(8) %__diffmax, i64* dereferenceable(8) %__allocmax)
+  %call1 = invoke nonnull align 8 dereferenceable(8) i64* @_ZSt3minImERKT_S2_S2_(i64* nonnull align 8 dereferenceable(8) %__diffmax, i64* nonnull align 8 dereferenceable(8) %__allocmax)
           to label %invoke.cont unwind label %terminate.lpad
 
 invoke.cont:                                      ; preds = %entry
@@ -1908,7 +1908,7 @@ terminate.lpad:                                   ; preds = %entry
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local i64 @_ZNSt16allocator_traitsISaI1AEE8max_sizeERKS1_(%"class.std::allocator"* dereferenceable(1) %__a) #2 comdat align 2 {
+define linkonce_odr dso_local i64 @_ZNSt16allocator_traitsISaI1AEE8max_sizeERKS1_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %__a) #2 comdat align 2 {
 entry:
   %__a.addr = alloca %"class.std::allocator"*, align 8
   store %"class.std::allocator"* %__a, %"class.std::allocator"** %__a.addr, align 8
@@ -1919,7 +1919,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local dereferenceable(8) i64* @_ZSt3minImERKT_S2_S2_(i64* dereferenceable(8) %__a, i64* dereferenceable(8) %__b) #2 comdat {
+define linkonce_odr dso_local nonnull align 8 dereferenceable(8) i64* @_ZSt3minImERKT_S2_S2_(i64* nonnull align 8 dereferenceable(8) %__a, i64* nonnull align 8 dereferenceable(8) %__b) #2 comdat {
 entry:
   %retval = alloca i64*, align 8
   %__a.addr = alloca i64*, align 8
@@ -1976,14 +1976,14 @@ entry:
   %this1 = load %"class.std::deque"*, %"class.std::deque"** %this.addr, align 8
   %0 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %0, i32 0, i32 0
-  %1 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %1, i32 0, i32 3
+  %1 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %1, i32 0, i32 3
   %_M_node = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish, i32 0, i32 3
   %2 = load %class.A**, %class.A*** %_M_node, align 8
   %3 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl2 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %3, i32 0, i32 0
-  %4 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl2 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_start = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %4, i32 0, i32 2
+  %4 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl2 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_start = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %4, i32 0, i32 2
   %_M_node3 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_start, i32 0, i32 3
   %5 = load %class.A**, %class.A*** %_M_node3, align 8
   %sub.ptr.lhs.cast = ptrtoint %class.A** %2 to i64
@@ -1998,8 +1998,8 @@ entry:
   store i64 %add4, i64* %__new_num_nodes, align 8
   %8 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl5 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %8, i32 0, i32 0
-  %9 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl5 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map_size = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %9, i32 0, i32 1
+  %9 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl5 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map_size = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %9, i32 0, i32 1
   %10 = load i64, i64* %_M_map_size, align 8
   %11 = load i64, i64* %__new_num_nodes, align 8
   %mul = mul i64 2, %11
@@ -2009,13 +2009,13 @@ entry:
 if.then:                                          ; preds = %entry
   %12 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl6 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %12, i32 0, i32 0
-  %13 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl6 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %13, i32 0, i32 0
+  %13 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl6 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %13, i32 0, i32 0
   %14 = load %class.A**, %class.A*** %_M_map, align 8
   %15 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl7 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %15, i32 0, i32 0
-  %16 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl7 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map_size8 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %16, i32 0, i32 1
+  %16 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl7 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map_size8 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %16, i32 0, i32 1
   %17 = load i64, i64* %_M_map_size8, align 8
   %18 = load i64, i64* %__new_num_nodes, align 8
   %sub = sub i64 %17, %18
@@ -2039,8 +2039,8 @@ cond.end:                                         ; preds = %cond.false, %cond.t
   %21 = load %class.A**, %class.A*** %__new_nstart, align 8
   %22 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl10 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %22, i32 0, i32 0
-  %23 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl10 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_start11 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %23, i32 0, i32 2
+  %23 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl10 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_start11 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %23, i32 0, i32 2
   %_M_node12 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_start11, i32 0, i32 3
   %24 = load %class.A**, %class.A*** %_M_node12, align 8
   %cmp13 = icmp ult %class.A** %21, %24
@@ -2049,14 +2049,14 @@ cond.end:                                         ; preds = %cond.false, %cond.t
 if.then14:                                        ; preds = %cond.end
   %25 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl15 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %25, i32 0, i32 0
-  %26 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl15 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_start16 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %26, i32 0, i32 2
+  %26 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl15 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_start16 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %26, i32 0, i32 2
   %_M_node17 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_start16, i32 0, i32 3
   %27 = load %class.A**, %class.A*** %_M_node17, align 8
   %28 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl18 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %28, i32 0, i32 0
-  %29 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl18 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish19 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %29, i32 0, i32 3
+  %29 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl18 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish19 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %29, i32 0, i32 3
   %_M_node20 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish19, i32 0, i32 3
   %30 = load %class.A**, %class.A*** %_M_node20, align 8
   %add.ptr21 = getelementptr inbounds %class.A*, %class.A** %30, i64 1
@@ -2067,14 +2067,14 @@ if.then14:                                        ; preds = %cond.end
 if.else:                                          ; preds = %cond.end
   %32 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl22 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %32, i32 0, i32 0
-  %33 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl22 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_start23 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %33, i32 0, i32 2
+  %33 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl22 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_start23 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %33, i32 0, i32 2
   %_M_node24 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_start23, i32 0, i32 3
   %34 = load %class.A**, %class.A*** %_M_node24, align 8
   %35 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl25 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %35, i32 0, i32 0
-  %36 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl25 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish26 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %36, i32 0, i32 3
+  %36 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl25 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish26 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %36, i32 0, i32 3
   %_M_node27 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish26, i32 0, i32 3
   %37 = load %class.A**, %class.A*** %_M_node27, align 8
   %add.ptr28 = getelementptr inbounds %class.A*, %class.A** %37, i64 1
@@ -2090,14 +2090,14 @@ if.end:                                           ; preds = %if.else, %if.then14
 if.else31:                                        ; preds = %entry
   %40 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl32 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %40, i32 0, i32 0
-  %41 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl32 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map_size33 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %41, i32 0, i32 1
+  %41 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl32 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map_size33 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %41, i32 0, i32 1
   %42 = load i64, i64* %_M_map_size33, align 8
   %43 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl34 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %43, i32 0, i32 0
-  %44 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl34 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map_size35 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %44, i32 0, i32 1
-  %call36 = call dereferenceable(8) i64* @_ZSt3maxImERKT_S2_S2_(i64* dereferenceable(8) %_M_map_size35, i64* dereferenceable(8) %__nodes_to_add.addr)
+  %44 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl34 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map_size35 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %44, i32 0, i32 1
+  %call36 = call nonnull align 8 dereferenceable(8) i64* @_ZSt3maxImERKT_S2_S2_(i64* nonnull align 8 dereferenceable(8) %_M_map_size35, i64* nonnull align 8 dereferenceable(8) %__nodes_to_add.addr)
   %45 = load i64, i64* %call36, align 8
   %add37 = add i64 %42, %45
   %add38 = add i64 %add37, 2
@@ -2129,14 +2129,14 @@ cond.end46:                                       ; preds = %cond.false45, %cond
   store %class.A** %add.ptr48, %class.A*** %__new_nstart, align 8
   %53 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl49 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %53, i32 0, i32 0
-  %54 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl49 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_start50 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %54, i32 0, i32 2
+  %54 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl49 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_start50 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %54, i32 0, i32 2
   %_M_node51 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_start50, i32 0, i32 3
   %55 = load %class.A**, %class.A*** %_M_node51, align 8
   %56 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl52 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %56, i32 0, i32 0
-  %57 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl52 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish53 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %57, i32 0, i32 3
+  %57 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl52 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish53 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %57, i32 0, i32 3
   %_M_node54 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish53, i32 0, i32 3
   %58 = load %class.A**, %class.A*** %_M_node54, align 8
   %add.ptr55 = getelementptr inbounds %class.A*, %class.A** %58, i64 1
@@ -2145,40 +2145,40 @@ cond.end46:                                       ; preds = %cond.false45, %cond
   %60 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %61 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl57 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %61, i32 0, i32 0
-  %62 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl57 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map58 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %62, i32 0, i32 0
+  %62 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl57 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map58 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %62, i32 0, i32 0
   %63 = load %class.A**, %class.A*** %_M_map58, align 8
   %64 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl59 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %64, i32 0, i32 0
-  %65 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl59 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map_size60 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %65, i32 0, i32 1
+  %65 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl59 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map_size60 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %65, i32 0, i32 1
   %66 = load i64, i64* %_M_map_size60, align 8
   call void @_ZNSt11_Deque_baseI1ASaIS0_EE17_M_deallocate_mapEPPS0_m(%"class.std::_Deque_base"* %60, %class.A** %63, i64 %66) #10
   %67 = load %class.A**, %class.A*** %__new_map, align 8
   %68 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl61 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %68, i32 0, i32 0
-  %69 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl61 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map62 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %69, i32 0, i32 0
+  %69 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl61 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map62 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %69, i32 0, i32 0
   store %class.A** %67, %class.A*** %_M_map62, align 8
   %70 = load i64, i64* %__new_map_size, align 8
   %71 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl63 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %71, i32 0, i32 0
-  %72 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl63 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_map_size64 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %72, i32 0, i32 1
+  %72 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl63 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_map_size64 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %72, i32 0, i32 1
   store i64 %70, i64* %_M_map_size64, align 8
   br label %if.end65
 
 if.end65:                                         ; preds = %cond.end46, %if.end
   %73 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl66 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %73, i32 0, i32 0
-  %74 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl66 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_start67 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %74, i32 0, i32 2
+  %74 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl66 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_start67 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %74, i32 0, i32 2
   %75 = load %class.A**, %class.A*** %__new_nstart, align 8
   call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_E11_M_set_nodeEPS2_(%"struct.std::_Deque_iterator"* %_M_start67, %class.A** %75) #10
   %76 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl68 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %76, i32 0, i32 0
-  %77 = bitcast %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl"* %_M_impl68 to %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"*
-  %_M_finish69 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A> >::_Deque_impl_data"* %77, i32 0, i32 3
+  %77 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl68 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
+  %_M_finish69 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %77, i32 0, i32 3
   %78 = load %class.A**, %class.A*** %__new_nstart, align 8
   %79 = load i64, i64* %__old_num_nodes, align 8
   %add.ptr70 = getelementptr inbounds %class.A*, %class.A** %78, i64 %79
@@ -2239,7 +2239,7 @@ entry:
   %2 = load %class.A**, %class.A*** %__result.addr, align 8
   %call2 = call %class.A** @_ZSt12__niter_baseIPP1AET_S3_(%class.A** %2) #10
   %call3 = call %class.A** @_ZSt14__copy_move_a1ILb0EPP1AS2_ET1_T0_S4_S3_(%class.A** %call, %class.A** %call1, %class.A** %call2)
-  %call4 = call %class.A** @_ZSt12__niter_wrapIPP1AET_RKS3_S3_(%class.A*** dereferenceable(8) %__result.addr, %class.A** %call3)
+  %call4 = call %class.A** @_ZSt12__niter_wrapIPP1AET_RKS3_S3_(%class.A*** nonnull align 8 dereferenceable(8) %__result.addr, %class.A** %call3)
   ret %class.A** %call4
 }
 
@@ -2253,7 +2253,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local %class.A** @_ZSt12__niter_wrapIPP1AET_RKS3_S3_(%class.A*** dereferenceable(8) %0, %class.A** %__res) #2 comdat {
+define linkonce_odr dso_local %class.A** @_ZSt12__niter_wrapIPP1AET_RKS3_S3_(%class.A*** nonnull align 8 dereferenceable(8) %0, %class.A** %__res) #2 comdat {
 entry:
   %.addr = alloca %class.A***, align 8
   %__res.addr = alloca %class.A**, align 8
@@ -2361,7 +2361,7 @@ entry:
   %2 = load %class.A**, %class.A*** %__result.addr, align 8
   %call2 = call %class.A** @_ZSt12__niter_baseIPP1AET_S3_(%class.A** %2) #10
   %call3 = call %class.A** @_ZSt23__copy_move_backward_a1ILb0EPP1AS2_ET1_T0_S4_S3_(%class.A** %call, %class.A** %call1, %class.A** %call2)
-  %call4 = call %class.A** @_ZSt12__niter_wrapIPP1AET_RKS3_S3_(%class.A*** dereferenceable(8) %__result.addr, %class.A** %call3)
+  %call4 = call %class.A** @_ZSt12__niter_wrapIPP1AET_RKS3_S3_(%class.A*** nonnull align 8 dereferenceable(8) %__result.addr, %class.A** %call3)
   ret %class.A** %call4
 }
 
@@ -2440,7 +2440,7 @@ if.end:                                           ; preds = %if.then, %entry
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local dereferenceable(8) %class.A* @_ZNKSt15_Deque_iteratorI1ARS0_PS0_EdeEv(%"struct.std::_Deque_iterator"* %this) #2 comdat align 2 {
+define linkonce_odr dso_local nonnull align 8 dereferenceable(8) %class.A* @_ZNKSt15_Deque_iteratorI1ARS0_PS0_EdeEv(%"struct.std::_Deque_iterator"* %this) #2 comdat align 2 {
 entry:
   %this.addr = alloca %"struct.std::_Deque_iterator"*, align 8
   store %"struct.std::_Deque_iterator"* %this, %"struct.std::_Deque_iterator"** %this.addr, align 8
@@ -2450,22 +2450,23 @@ entry:
   ret %class.A* %0
 }
 
-attributes #0 = { noinline optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #1 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #2 = { noinline nounwind optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #3 = { nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #4 = { noinline norecurse optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #0 = { noinline optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { noinline nounwind optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #3 = { nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #4 = { noinline norecurse optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #5 = { noinline noreturn nounwind }
-attributes #6 = { noreturn "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #7 = { nobuiltin "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #8 = { nobuiltin nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #6 = { noreturn "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #7 = { nobuiltin allocsize(0) "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #8 = { nobuiltin nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #9 = { argmemonly nounwind willreturn }
 attributes #10 = { nounwind }
 attributes #11 = { noreturn nounwind }
 attributes #12 = { noreturn }
+attributes #13 = { allocsize(0) }
 
 !llvm.module.flags = !{!0}
 !llvm.ident = !{!1}
 
 !0 = !{i32 1, !"wchar_size", i32 4}
-!1 = !{!"clang version 10.0.0-4ubuntu1 "}
+!1 = !{!"Ubuntu clang version 11.0.0-2~ubuntu20.04.1"}
