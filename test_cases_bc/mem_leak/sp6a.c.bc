@@ -1,7 +1,7 @@
-; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/src/mem_leak/sp6a.c'
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/mem_leak/sp6a.c.bc'
 source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/mem_leak/sp6a.c"
 target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
-target triple = "x86_64-pc-linux-gnu"
+target triple = "x86_64-unknown-linux-gnu"
 
 %struct._list = type { %struct._list* }
 
@@ -22,7 +22,7 @@ entry:
   ret void, !dbg !24
 }
 
-; Function Attrs: nounwind readnone speculatable willreturn
+; Function Attrs: nofree nosync nounwind readnone speculatable willreturn
 declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
 
 declare dso_local i32 @printf(i8*, ...) #2
@@ -306,51 +306,51 @@ for.inc:                                          ; preds = %for.body
   br label %for.cond, !dbg !191, !llvm.loop !192
 
 for.end:                                          ; preds = %for.cond
-  %9 = load %struct._list*, %struct._list** %p, align 8, !dbg !194
-  %next3 = getelementptr inbounds %struct._list, %struct._list* %9, i32 0, i32 0, !dbg !195
-  store %struct._list* null, %struct._list** %next3, align 8, !dbg !196
-  %10 = load %struct._list*, %struct._list** %hd, align 8, !dbg !197
-  ret %struct._list* %10, !dbg !198
+  %9 = load %struct._list*, %struct._list** %p, align 8, !dbg !195
+  %next3 = getelementptr inbounds %struct._list, %struct._list* %9, i32 0, i32 0, !dbg !196
+  store %struct._list* null, %struct._list** %next3, align 8, !dbg !197
+  %10 = load %struct._list*, %struct._list** %hd, align 8, !dbg !198
+  ret %struct._list* %10, !dbg !199
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @free_list(%struct._list* %hd) #0 !dbg !199 {
+define dso_local void @free_list(%struct._list* %hd) #0 !dbg !200 {
 entry:
   %hd.addr = alloca %struct._list*, align 8
   store %struct._list* %hd, %struct._list** %hd.addr, align 8
-  call void @llvm.dbg.declare(metadata %struct._list** %hd.addr, metadata !202, metadata !DIExpression()), !dbg !203
-  %0 = load %struct._list*, %struct._list** %hd.addr, align 8, !dbg !204
-  %1 = bitcast %struct._list* %0 to i8*, !dbg !204
-  call void @free(i8* %1) #4, !dbg !205
-  ret void, !dbg !206
+  call void @llvm.dbg.declare(metadata %struct._list** %hd.addr, metadata !203, metadata !DIExpression()), !dbg !204
+  %0 = load %struct._list*, %struct._list** %hd.addr, align 8, !dbg !205
+  %1 = bitcast %struct._list* %0 to i8*, !dbg !205
+  call void @free(i8* %1) #4, !dbg !206
+  ret void, !dbg !207
 }
 
 ; Function Attrs: nounwind
 declare dso_local void @free(i8*) #3
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @main() #0 !dbg !207 {
+define dso_local void @main() #0 !dbg !208 {
 entry:
   %l = alloca %struct._list*, align 8
-  call void @llvm.dbg.declare(metadata %struct._list** %l, metadata !208, metadata !DIExpression()), !dbg !209
-  %call = call %struct._list* @make_list(i32 10), !dbg !210
-  store %struct._list* %call, %struct._list** %l, align 8, !dbg !209
-  %0 = load %struct._list*, %struct._list** %l, align 8, !dbg !211
-  call void @free_list(%struct._list* %0), !dbg !212
-  ret void, !dbg !213
+  call void @llvm.dbg.declare(metadata %struct._list** %l, metadata !209, metadata !DIExpression()), !dbg !210
+  %call = call %struct._list* @make_list(i32 10), !dbg !211
+  store %struct._list* %call, %struct._list** %l, align 8, !dbg !210
+  %0 = load %struct._list*, %struct._list** %l, align 8, !dbg !212
+  call void @free_list(%struct._list* %0), !dbg !213
+  ret void, !dbg !214
 }
 
-attributes #0 = { noinline nounwind optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #1 = { nounwind readnone speculatable willreturn }
-attributes #2 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #3 = { nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #0 = { noinline nounwind optnone uwtable "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { nofree nosync nounwind readnone speculatable willreturn }
+attributes #2 = { "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #3 = { nounwind "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #4 = { nounwind }
 
 !llvm.dbg.cu = !{!0}
 !llvm.module.flags = !{!10, !11, !12}
 !llvm.ident = !{!13}
 
-!0 = distinct !DICompileUnit(language: DW_LANG_C99, file: !1, producer: "Ubuntu clang version 11.0.0-2~ubuntu20.04.1", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !2, retainedTypes: !3, splitDebugInlining: false, nameTableKind: None)
+!0 = distinct !DICompileUnit(language: DW_LANG_C99, file: !1, producer: "clang version 12.0.0", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !2, retainedTypes: !3, splitDebugInlining: false, nameTableKind: None)
 !1 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/mem_leak/sp6a.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
 !2 = !{}
 !3 = !{!4}
@@ -363,7 +363,7 @@ attributes #4 = { nounwind }
 !10 = !{i32 7, !"Dwarf Version", i32 4}
 !11 = !{i32 2, !"Debug Info Version", i32 3}
 !12 = !{i32 1, !"wchar_size", i32 4}
-!13 = !{!"Ubuntu clang version 11.0.0-2~ubuntu20.04.1"}
+!13 = !{!"clang version 12.0.0"}
 !14 = distinct !DISubprogram(name: "MUSTALIAS", scope: !15, file: !15, line: 4, type: !16, scopeLine: 4, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
 !15 = !DIFile(filename: "aliascheck.h", directory: "/home/runner/work/Test-Suite/Test-Suite")
 !16 = !DISubroutineType(types: !17)
@@ -542,25 +542,26 @@ attributes #4 = { nounwind }
 !189 = !DILocation(line: 22, column: 9, scope: !181)
 !190 = !DILocation(line: 19, column: 23, scope: !176)
 !191 = !DILocation(line: 19, column: 7, scope: !176)
-!192 = distinct !{!192, !179, !193}
+!192 = distinct !{!192, !179, !193, !194}
 !193 = !DILocation(line: 22, column: 9, scope: !173)
-!194 = !DILocation(line: 23, column: 6, scope: !158)
-!195 = !DILocation(line: 23, column: 9, scope: !158)
-!196 = !DILocation(line: 23, column: 14, scope: !158)
-!197 = !DILocation(line: 24, column: 15, scope: !158)
-!198 = !DILocation(line: 24, column: 8, scope: !158)
-!199 = distinct !DISubprogram(name: "free_list", scope: !5, file: !5, line: 27, type: !200, scopeLine: 27, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!200 = !DISubroutineType(types: !201)
-!201 = !{null, !4}
-!202 = !DILocalVariable(name: "hd", arg: 1, scope: !199, file: !5, line: 27, type: !4)
-!203 = !DILocation(line: 27, column: 21, scope: !199)
-!204 = !DILocation(line: 28, column: 11, scope: !199)
-!205 = !DILocation(line: 28, column: 6, scope: !199)
-!206 = !DILocation(line: 29, column: 1, scope: !199)
-!207 = distinct !DISubprogram(name: "main", scope: !5, file: !5, line: 31, type: !155, scopeLine: 31, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!208 = !DILocalVariable(name: "l", scope: !207, file: !5, line: 32, type: !4)
-!209 = !DILocation(line: 32, column: 11, scope: !207)
-!210 = !DILocation(line: 32, column: 15, scope: !207)
-!211 = !DILocation(line: 33, column: 17, scope: !207)
-!212 = !DILocation(line: 33, column: 7, scope: !207)
-!213 = !DILocation(line: 34, column: 1, scope: !207)
+!194 = !{!"llvm.loop.mustprogress"}
+!195 = !DILocation(line: 23, column: 6, scope: !158)
+!196 = !DILocation(line: 23, column: 9, scope: !158)
+!197 = !DILocation(line: 23, column: 14, scope: !158)
+!198 = !DILocation(line: 24, column: 15, scope: !158)
+!199 = !DILocation(line: 24, column: 8, scope: !158)
+!200 = distinct !DISubprogram(name: "free_list", scope: !5, file: !5, line: 27, type: !201, scopeLine: 27, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!201 = !DISubroutineType(types: !202)
+!202 = !{null, !4}
+!203 = !DILocalVariable(name: "hd", arg: 1, scope: !200, file: !5, line: 27, type: !4)
+!204 = !DILocation(line: 27, column: 21, scope: !200)
+!205 = !DILocation(line: 28, column: 11, scope: !200)
+!206 = !DILocation(line: 28, column: 6, scope: !200)
+!207 = !DILocation(line: 29, column: 1, scope: !200)
+!208 = distinct !DISubprogram(name: "main", scope: !5, file: !5, line: 31, type: !155, scopeLine: 31, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!209 = !DILocalVariable(name: "l", scope: !208, file: !5, line: 32, type: !4)
+!210 = !DILocation(line: 32, column: 11, scope: !208)
+!211 = !DILocation(line: 32, column: 15, scope: !208)
+!212 = !DILocation(line: 33, column: 17, scope: !208)
+!213 = !DILocation(line: 33, column: 7, scope: !208)
+!214 = !DILocation(line: 34, column: 1, scope: !208)

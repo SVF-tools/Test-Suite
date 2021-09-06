@@ -1,7 +1,7 @@
-; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/src/basic_c_tests/spec-parser.c'
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/basic_c_tests/spec-parser.c.bc'
 source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/basic_c_tests/spec-parser.c"
 target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
-target triple = "x86_64-pc-linux-gnu"
+target triple = "x86_64-unknown-linux-gnu"
 
 %struct.Word_struct = type { i32*, %struct.X_node_struct* }
 %struct.X_node_struct = type { i32*, %struct.X_node_struct* }
@@ -270,7 +270,7 @@ while.body:                                       ; preds = %while.cond
   store %struct.clause_struct* %6, %struct.clause_struct** %c, align 8
   %7 = load %struct.clause_struct*, %struct.clause_struct** %c2, align 8
   store %struct.clause_struct* %7, %struct.clause_struct** %c1, align 8
-  br label %while.cond
+  br label %while.cond, !llvm.loop !2
 
 while.end:                                        ; preds = %while.cond
   %8 = load i32*, i32** getelementptr inbounds ([250 x %struct.Word_struct], [250 x %struct.Word_struct]* @sentence, i64 0, i64 0, i32 0), align 16
@@ -323,7 +323,7 @@ for.inc:                                          ; preds = %for.body
   %next = getelementptr inbounds %struct.X_node_struct, %struct.X_node_struct* %8, i32 0, i32 1
   %9 = load %struct.X_node_struct*, %struct.X_node_struct** %next, align 8
   store %struct.X_node_struct* %9, %struct.X_node_struct** %e, align 8
-  br label %for.cond
+  br label %for.cond, !llvm.loop !4
 
 for.end:                                          ; preds = %for.cond
   ret void
@@ -339,13 +339,16 @@ entry:
   ret i32 0
 }
 
-attributes #0 = { noinline nounwind optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #1 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #2 = { nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #0 = { noinline nounwind optnone uwtable "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { nounwind "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #3 = { nounwind }
 
 !llvm.module.flags = !{!0}
 !llvm.ident = !{!1}
 
 !0 = !{i32 1, !"wchar_size", i32 4}
-!1 = !{!"Ubuntu clang version 11.0.0-2~ubuntu20.04.1"}
+!1 = !{!"clang version 12.0.0"}
+!2 = distinct !{!2, !3}
+!3 = !{!"llvm.loop.mustprogress"}
+!4 = distinct !{!4, !3}

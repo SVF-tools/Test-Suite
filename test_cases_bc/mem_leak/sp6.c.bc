@@ -1,7 +1,7 @@
-; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/src/mem_leak/sp6.c'
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/mem_leak/sp6.c.bc'
 source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/mem_leak/sp6.c"
 target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
-target triple = "x86_64-pc-linux-gnu"
+target triple = "x86_64-unknown-linux-gnu"
 
 %struct._list = type { %struct._list* }
 
@@ -22,7 +22,7 @@ entry:
   ret void, !dbg !24
 }
 
-; Function Attrs: nounwind readnone speculatable willreturn
+; Function Attrs: nofree nosync nounwind readnone speculatable willreturn
 declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
 
 declare dso_local i32 @printf(i8*, ...) #2
@@ -310,35 +310,35 @@ while.body:                                       ; preds = %while.cond
   br label %while.cond, !dbg !181, !llvm.loop !192
 
 while.end:                                        ; preds = %while.cond
-  ret void, !dbg !194
+  ret void, !dbg !195
 }
 
 ; Function Attrs: nounwind
 declare dso_local void @free(i8*) #3
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @main() #0 !dbg !195 {
+define dso_local void @main() #0 !dbg !196 {
 entry:
   %l = alloca %struct._list*, align 8
-  call void @llvm.dbg.declare(metadata %struct._list** %l, metadata !196, metadata !DIExpression()), !dbg !197
-  %call = call %struct._list* @make_list(i32 10), !dbg !198
-  store %struct._list* %call, %struct._list** %l, align 8, !dbg !197
-  %0 = load %struct._list*, %struct._list** %l, align 8, !dbg !199
-  call void @free_list(%struct._list* %0), !dbg !200
-  ret void, !dbg !201
+  call void @llvm.dbg.declare(metadata %struct._list** %l, metadata !197, metadata !DIExpression()), !dbg !198
+  %call = call %struct._list* @make_list(i32 10), !dbg !199
+  store %struct._list* %call, %struct._list** %l, align 8, !dbg !198
+  %0 = load %struct._list*, %struct._list** %l, align 8, !dbg !200
+  call void @free_list(%struct._list* %0), !dbg !201
+  ret void, !dbg !202
 }
 
-attributes #0 = { noinline nounwind optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #1 = { nounwind readnone speculatable willreturn }
-attributes #2 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #3 = { nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #0 = { noinline nounwind optnone uwtable "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { nofree nosync nounwind readnone speculatable willreturn }
+attributes #2 = { "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #3 = { nounwind "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #4 = { nounwind }
 
 !llvm.dbg.cu = !{!0}
 !llvm.module.flags = !{!10, !11, !12}
 !llvm.ident = !{!13}
 
-!0 = distinct !DICompileUnit(language: DW_LANG_C99, file: !1, producer: "Ubuntu clang version 11.0.0-2~ubuntu20.04.1", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !2, retainedTypes: !3, splitDebugInlining: false, nameTableKind: None)
+!0 = distinct !DICompileUnit(language: DW_LANG_C99, file: !1, producer: "clang version 12.0.0", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !2, retainedTypes: !3, splitDebugInlining: false, nameTableKind: None)
 !1 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/mem_leak/sp6.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
 !2 = !{}
 !3 = !{!4}
@@ -351,7 +351,7 @@ attributes #4 = { nounwind }
 !10 = !{i32 7, !"Dwarf Version", i32 4}
 !11 = !{i32 2, !"Debug Info Version", i32 3}
 !12 = !{i32 1, !"wchar_size", i32 4}
-!13 = !{!"Ubuntu clang version 11.0.0-2~ubuntu20.04.1"}
+!13 = !{!"clang version 12.0.0"}
 !14 = distinct !DISubprogram(name: "MUSTALIAS", scope: !15, file: !15, line: 4, type: !16, scopeLine: 4, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
 !15 = !DIFile(filename: "aliascheck.h", directory: "/home/runner/work/Test-Suite/Test-Suite")
 !16 = !DISubroutineType(types: !17)
@@ -530,13 +530,14 @@ attributes #4 = { nounwind }
 !189 = !DILocation(line: 33, column: 15, scope: !185)
 !190 = !DILocation(line: 34, column: 20, scope: !185)
 !191 = !DILocation(line: 34, column: 18, scope: !185)
-!192 = distinct !{!192, !181, !193}
+!192 = distinct !{!192, !181, !193, !194}
 !193 = !DILocation(line: 35, column: 13, scope: !174)
-!194 = !DILocation(line: 36, column: 1, scope: !174)
-!195 = distinct !DISubprogram(name: "main", scope: !5, file: !5, line: 38, type: !155, scopeLine: 38, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!196 = !DILocalVariable(name: "l", scope: !195, file: !5, line: 39, type: !4)
-!197 = !DILocation(line: 39, column: 10, scope: !195)
-!198 = !DILocation(line: 39, column: 14, scope: !195)
-!199 = !DILocation(line: 40, column: 15, scope: !195)
-!200 = !DILocation(line: 40, column: 5, scope: !195)
-!201 = !DILocation(line: 41, column: 1, scope: !195)
+!194 = !{!"llvm.loop.mustprogress"}
+!195 = !DILocation(line: 36, column: 1, scope: !174)
+!196 = distinct !DISubprogram(name: "main", scope: !5, file: !5, line: 38, type: !155, scopeLine: 38, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!197 = !DILocalVariable(name: "l", scope: !196, file: !5, line: 39, type: !4)
+!198 = !DILocation(line: 39, column: 10, scope: !196)
+!199 = !DILocation(line: 39, column: 14, scope: !196)
+!200 = !DILocation(line: 40, column: 15, scope: !196)
+!201 = !DILocation(line: 40, column: 5, scope: !196)
+!202 = !DILocation(line: 41, column: 1, scope: !196)
