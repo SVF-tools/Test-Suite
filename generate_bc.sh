@@ -116,7 +116,7 @@ do
     ########
     # created a .ll, let's make it .bc, as the filename suggests.
     ########
-    $compiler -Wno-everything -S -emit-llvm -fno-discard-value-names -I"$root" "$c_f" -o "$bc_f"
+    $compiler -Wno-everything -S -emit-llvm -fno-discard-value-names -g -I"$root" "$c_f" -o "$bc_f"
     llvm-as "$bc_f" -o "$bc_f"
     opt -mem2reg "$bc_f" -o "$bc_f"
   done
