@@ -45,7 +45,7 @@ jobs:
            git clone https://github.com/mbarbar/crux-bitcode    
            cd crux-bitcode
            rm pkgs.txt
-           echo -e "bc\nhtop" >> pkgs.txt
+           echo -e "bc\nhtop\nvim\ncurl\nbash\nbzip2" >> pkgs.txt
            bash ./build-bitcode.sh
            unzip -j -o \*.zip -d $GITHUB_WORKSPACE/test_cases_bc/crux-bc/
            rm $GITHUB_WORKSPACE/test_cases_bc/crux-bc/info.txt
