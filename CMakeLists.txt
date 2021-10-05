@@ -86,12 +86,25 @@ foreach(folder ${diff_tests_anderson_folders})
     if (${filename} MATCHES "struct-twoflds.c.bc")
       continue()
     endif()
+    if (${filename} MATCHES ".pre.bc")
+      continue()
+    endif()
+
     add_test(
       NAME diff_tests/ander-nander/${filename}
       COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander" "wpa -nander" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
     )
     set_tests_properties(diff_tests/ander-nander/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
+    # read and write ander
+    # change file extension to .pre.bc
+    string(REGEX REPLACE "[.]bc$" ".pre.bc" readFile ${CMAKE_CURRENT_SOURCE_DIR}/${filename})
+    add_test(
+      NAME diff_tests/ander-read-write/${filename}
+      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -write-ander=ir_annotator" "wpa -ander -read-ander=ir_annotator" ${CMAKE_CURRENT_SOURCE_DIR}/${filename} ${readFile}
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    set_tests_properties(diff_tests/ander-read-write/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
   endforeach()
 endforeach()
 

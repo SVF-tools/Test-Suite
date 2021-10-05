@@ -35,13 +35,22 @@ string extractData(const string str) {
 
 int main(int argc, char *argv[])
 {
+
     string cmd1 = argv[1];
     string cmd2 = argv[2];
     string folder = argv[3];
+    string result, result2;
+    result = exec_command(("./" + cmd1 + " " +  folder).c_str());
+    if (argc == 5)
+    {
+        string folder2 = argv[4];
+        result2 = exec_command(("./" + cmd2 + " " +  folder2).c_str());
+    }
+    else {
+        result2 = exec_command(("./" + cmd2 + " " +  folder).c_str());
+    }
 
-    auto result = exec_command(("./" + cmd1 + " " +  folder).c_str());
-    auto result2 = exec_command(("./" + cmd2 + " " +  folder).c_str());
-    auto data1 = extractData(result);
-    auto data2 = extractData(result2);
+    string data1 = extractData(result);
+    string data2 = extractData(result2);
     cout << data1.compare(data2) << endl;
 }
