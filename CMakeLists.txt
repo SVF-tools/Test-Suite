@@ -14,7 +14,6 @@ list(
   fstbhc_tests
   fstbhc_tests/fs_tests
   mta
-  mem_leak
 )
 
 list(
@@ -28,7 +27,6 @@ list(
   "wpa -fstbhc -stat=false"
   "wpa -fstbhc -stat=false"
   "mta -mhp-validation -lock-validation -stat=false"
-  "saber -leak -valid-tests=true -stat=false"
 )
 
 list(LENGTH folders len1)
@@ -99,7 +97,7 @@ endforeach()
 
 add_test(
       NAME diff_tests/ander-nander/basic_c_tests/struct-twoflds.c.bc
-      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -ff-eq-base=fals" "wpa -nander -ff-eq-base=fals" ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/basic_c_tests/struct-twoflds.c.bc
+      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -ff-eq-base=false" "wpa -nander -ff-eq-base=false" ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/basic_c_tests/struct-twoflds.c.bc
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 set_tests_properties(diff_tests/ander-nander/basic_c_tests/struct-twoflds.c.bc PROPERTIES PASS_REGULAR_EXPRESSION "0")
