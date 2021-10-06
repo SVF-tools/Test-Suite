@@ -1,0 +1,53 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/basic_cpp_tests/variant-gep.cpp.bc'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/basic_cpp_tests/variant-gep.cpp"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+%struct.Data = type { i32, i32, i32, %struct.Point }
+%struct.Point = type { i32, i32 }
+%struct.D3Point = type { %struct.Point, i32 }
+
+; Function Attrs: noinline norecurse optnone uwtable mustprogress
+define dso_local i32 @main(i32 %argc, i8** %argv) #0 {
+entry:
+  %argc.addr = alloca i32, align 4
+  %argv.addr = alloca i8**, align 8
+  %dt = alloca %struct.Data*, align 8
+  %ptr = alloca %struct.Point*, align 8
+  %c = alloca %struct.D3Point*, align 8
+  store i32 %argc, i32* %argc.addr, align 4
+  store i8** %argv, i8*** %argv.addr, align 8
+  %call = call noalias nonnull i8* @_Znam(i64 320) #2
+  %0 = bitcast i8* %call to %struct.Data*
+  store %struct.Data* %0, %struct.Data** %dt, align 8
+  %1 = load %struct.Data*, %struct.Data** %dt, align 8
+  %2 = load i32, i32* %argc.addr, align 4
+  %idxprom = sext i32 %2 to i64
+  %arrayidx = getelementptr inbounds %struct.Data, %struct.Data* %1, i64 %idxprom
+  %p = getelementptr inbounds %struct.Data, %struct.Data* %arrayidx, i32 0, i32 3
+  store %struct.Point* %p, %struct.Point** %ptr, align 8
+  %3 = load %struct.Point*, %struct.Point** %ptr, align 8
+  %4 = bitcast %struct.Point* %3 to %struct.D3Point*
+  store %struct.D3Point* %4, %struct.D3Point** %c, align 8
+  %5 = load %struct.Data*, %struct.Data** %dt, align 8
+  %arrayidx1 = getelementptr inbounds %struct.Data, %struct.Data* %5, i64 3
+  %p2 = getelementptr inbounds %struct.Data, %struct.Data* %arrayidx1, i32 0, i32 3
+  store %struct.Point* %p2, %struct.Point** %ptr, align 8
+  %6 = load %struct.Point*, %struct.Point** %ptr, align 8
+  %7 = bitcast %struct.Point* %6 to %struct.D3Point*
+  store %struct.D3Point* %7, %struct.D3Point** %c, align 8
+  ret i32 0
+}
+
+; Function Attrs: nobuiltin allocsize(0)
+declare dso_local nonnull i8* @_Znam(i64) #1
+
+attributes #0 = { noinline norecurse optnone uwtable mustprogress "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { nobuiltin allocsize(0) "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { builtin allocsize(0) }
+
+!llvm.module.flags = !{!0}
+!llvm.ident = !{!1}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{!"clang version 12.0.0"}

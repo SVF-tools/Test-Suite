@@ -1,0 +1,354 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/basic_c_tests/spec-parser.c.bc'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/basic_c_tests/spec-parser.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+%struct.Word_struct = type { i32*, %struct.X_node_struct* }
+%struct.X_node_struct = type { i32*, %struct.X_node_struct* }
+%struct.clause_struct = type { %struct.clause_struct* }
+
+@.str = private unnamed_addr constant [2 x i8] c"\0A\00", align 1
+@.str.1 = private unnamed_addr constant [4 x i8] c"%s\0A\00", align 1
+@.str.2 = private unnamed_addr constant [25 x i8] c"Press ENTER to continue\0A\00", align 1
+@sentence = dso_local global [250 x %struct.Word_struct] zeroinitializer, align 16
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @MUSTALIAS(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+declare dso_local i32 @printf(i8*, ...) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @PARTIALALIAS(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @MAYALIAS(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @NOALIAS(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @EXPECTEDFAIL_MAYALIAS(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @EXPECTEDFAIL_NOALIAS(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @SAFEMALLOC(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #3
+  ret i8* %call
+}
+
+; Function Attrs: nounwind
+declare dso_local noalias i8* @malloc(i64) #2
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @PLKMALLOC(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #3
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @NFRMALLOC(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #3
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @CLKMALLOC(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #3
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @NFRLEAKFP(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #3
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @PLKLEAKFP(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #3
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @LEAKFN(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #3
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @RC_ACCESS(i32 %id, i32 %flags) #0 {
+entry:
+  %id.addr = alloca i32, align 4
+  %flags.addr = alloca i32, align 4
+  store i32 %id, i32* %id.addr, align 4
+  store i32 %flags, i32* %flags.addr, align 4
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @CXT_THREAD(i32 %thdid, i8* %cxt) #0 {
+entry:
+  %thdid.addr = alloca i32, align 4
+  %cxt.addr = alloca i8*, align 8
+  store i32 %thdid, i32* %thdid.addr, align 4
+  store i8* %cxt, i8** %cxt.addr, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @TCT_ACCESS(i32 %thdid, i8* %cxt) #0 {
+entry:
+  %thdid.addr = alloca i32, align 4
+  %cxt.addr = alloca i8*, align 8
+  store i32 %thdid, i32* %thdid.addr, align 4
+  store i8* %cxt, i8** %cxt.addr, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @INTERLEV_ACCESS(i32 %thdid, i8* %cxt, i8* %lev) #0 {
+entry:
+  %thdid.addr = alloca i32, align 4
+  %cxt.addr = alloca i8*, align 8
+  %lev.addr = alloca i8*, align 8
+  store i32 %thdid, i32* %thdid.addr, align 4
+  store i8* %cxt, i8** %cxt.addr, align 8
+  store i8* %lev, i8** %lev.addr, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @LOCK(i8* %lockname) #0 {
+entry:
+  %lockname.addr = alloca i8*, align 8
+  store i8* %lockname, i8** %lockname.addr, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @PAUSE(i8* %str) #0 {
+entry:
+  %str.addr = alloca i8*, align 8
+  store i8* %str, i8** %str.addr, align 8
+  %0 = load i8*, i8** %str.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.1, i64 0, i64 0), i8* %0)
+  %call1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([25 x i8], [25 x i8]* @.str.2, i64 0, i64 0))
+  %call2 = call i32 @getchar()
+  ret void
+}
+
+declare dso_local i32 @getchar() #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @deref() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @xalloc(i32 %size) #0 {
+entry:
+  %size.addr = alloca i32, align 4
+  store i32 %size, i32* %size.addr, align 4
+  %call = call noalias i8* @malloc(i64 1000) #3
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @build_clause() #0 {
+entry:
+  %c = alloca %struct.clause_struct*, align 8
+  %c1 = alloca %struct.clause_struct*, align 8
+  %c2 = alloca %struct.clause_struct*, align 8
+  store %struct.clause_struct* null, %struct.clause_struct** %c, align 8
+  %call = call i8* @xalloc(i32 8)
+  %0 = bitcast i8* %call to %struct.clause_struct*
+  store %struct.clause_struct* %0, %struct.clause_struct** %c1, align 8
+  br label %while.cond
+
+while.cond:                                       ; preds = %while.body, %entry
+  %1 = load %struct.clause_struct*, %struct.clause_struct** %c1, align 8
+  %cmp = icmp ne %struct.clause_struct* %1, null
+  br i1 %cmp, label %while.body, label %while.end
+
+while.body:                                       ; preds = %while.cond
+  %2 = load %struct.clause_struct*, %struct.clause_struct** %c1, align 8
+  %next = getelementptr inbounds %struct.clause_struct, %struct.clause_struct* %2, i32 0, i32 0
+  %3 = load %struct.clause_struct*, %struct.clause_struct** %next, align 8
+  store %struct.clause_struct* %3, %struct.clause_struct** %c2, align 8
+  %4 = load %struct.clause_struct*, %struct.clause_struct** %c, align 8
+  %5 = load %struct.clause_struct*, %struct.clause_struct** %c1, align 8
+  %next1 = getelementptr inbounds %struct.clause_struct, %struct.clause_struct* %5, i32 0, i32 0
+  store %struct.clause_struct* %4, %struct.clause_struct** %next1, align 8
+  %6 = load %struct.clause_struct*, %struct.clause_struct** %c1, align 8
+  store %struct.clause_struct* %6, %struct.clause_struct** %c, align 8
+  %7 = load %struct.clause_struct*, %struct.clause_struct** %c2, align 8
+  store %struct.clause_struct* %7, %struct.clause_struct** %c1, align 8
+  br label %while.cond, !llvm.loop !2
+
+while.end:                                        ; preds = %while.cond
+  %8 = load i32*, i32** getelementptr inbounds ([250 x %struct.Word_struct], [250 x %struct.Word_struct]* @sentence, i64 0, i64 0, i32 0), align 16
+  %9 = bitcast i32* %8 to i8*
+  %10 = load %struct.clause_struct*, %struct.clause_struct** %c1, align 8
+  %11 = bitcast %struct.clause_struct* %10 to i8*
+  call void @NOALIAS(i8* %9, i8* %11)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @special_string(i32 %i) #0 {
+entry:
+  %i.addr = alloca i32, align 4
+  %e = alloca %struct.X_node_struct*, align 8
+  store i32 %i, i32* %i.addr, align 4
+  %call = call i8* @xalloc(i32 16)
+  %0 = bitcast i8* %call to %struct.X_node_struct*
+  %1 = load i32, i32* %i.addr, align 4
+  %idxprom = sext i32 %1 to i64
+  %arrayidx = getelementptr inbounds [250 x %struct.Word_struct], [250 x %struct.Word_struct]* @sentence, i64 0, i64 %idxprom
+  %x = getelementptr inbounds %struct.Word_struct, %struct.Word_struct* %arrayidx, i32 0, i32 1
+  store %struct.X_node_struct* %0, %struct.X_node_struct** %x, align 8
+  %2 = load i32, i32* %i.addr, align 4
+  %idxprom1 = sext i32 %2 to i64
+  %arrayidx2 = getelementptr inbounds [250 x %struct.Word_struct], [250 x %struct.Word_struct]* @sentence, i64 0, i64 %idxprom1
+  %x3 = getelementptr inbounds %struct.Word_struct, %struct.Word_struct* %arrayidx2, i32 0, i32 1
+  %3 = load %struct.X_node_struct*, %struct.X_node_struct** %x3, align 8
+  store %struct.X_node_struct* %3, %struct.X_node_struct** %e, align 8
+  br label %for.cond
+
+for.cond:                                         ; preds = %for.inc, %entry
+  %4 = load %struct.X_node_struct*, %struct.X_node_struct** %e, align 8
+  %cmp = icmp ne %struct.X_node_struct* %4, null
+  br i1 %cmp, label %for.body, label %for.end
+
+for.body:                                         ; preds = %for.cond
+  %5 = load i32, i32* %i.addr, align 4
+  %idxprom4 = sext i32 %5 to i64
+  %arrayidx5 = getelementptr inbounds [250 x %struct.Word_struct], [250 x %struct.Word_struct]* @sentence, i64 0, i64 %idxprom4
+  %string = getelementptr inbounds %struct.Word_struct, %struct.Word_struct* %arrayidx5, i32 0, i32 0
+  %6 = load i32*, i32** %string, align 16
+  %7 = load %struct.X_node_struct*, %struct.X_node_struct** %e, align 8
+  %string6 = getelementptr inbounds %struct.X_node_struct, %struct.X_node_struct* %7, i32 0, i32 0
+  store i32* %6, i32** %string6, align 8
+  br label %for.inc
+
+for.inc:                                          ; preds = %for.body
+  %8 = load %struct.X_node_struct*, %struct.X_node_struct** %e, align 8
+  %next = getelementptr inbounds %struct.X_node_struct, %struct.X_node_struct* %8, i32 0, i32 1
+  %9 = load %struct.X_node_struct*, %struct.X_node_struct** %next, align 8
+  store %struct.X_node_struct* %9, %struct.X_node_struct** %e, align 8
+  br label %for.cond, !llvm.loop !4
+
+for.end:                                          ; preds = %for.cond
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main() #0 {
+entry:
+  %retval = alloca i32, align 4
+  store i32 0, i32* %retval, align 4
+  call void @build_clause()
+  call void @special_string(i32 10)
+  ret i32 0
+}
+
+attributes #0 = { noinline nounwind optnone uwtable "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { nounwind "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #3 = { nounwind }
+
+!llvm.module.flags = !{!0}
+!llvm.ident = !{!1}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{!"clang version 12.0.0"}
+!2 = distinct !{!2, !3}
+!3 = !{!"llvm.loop.mustprogress"}
+!4 = distinct !{!4, !3}

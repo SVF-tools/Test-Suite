@@ -1,0 +1,143 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/complex_tests/test-linklist1.c.bc'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/complex_tests/test-linklist1.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+%struct.list = type { i32, %struct.list*, %struct.list* }
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local %struct.list* @construct(i32 %idx) #0 {
+entry:
+  %idx.addr = alloca i32, align 4
+  %head = alloca %struct.list*, align 8
+  %i = alloca i32, align 4
+  %cur = alloca %struct.list*, align 8
+  store i32 %idx, i32* %idx.addr, align 4
+  store i32 0, i32* %i, align 4
+  %call = call i8* @malloc(i32 24)
+  %0 = bitcast i8* %call to %struct.list*
+  store %struct.list* %0, %struct.list** %head, align 8
+  %1 = load %struct.list*, %struct.list** %head, align 8
+  %next = getelementptr inbounds %struct.list, %struct.list* %1, i32 0, i32 1
+  store %struct.list* null, %struct.list** %next, align 8
+  %2 = load %struct.list*, %struct.list** %head, align 8
+  %prev = getelementptr inbounds %struct.list, %struct.list* %2, i32 0, i32 2
+  store %struct.list* null, %struct.list** %prev, align 8
+  %3 = load %struct.list*, %struct.list** %head, align 8
+  %flag = getelementptr inbounds %struct.list, %struct.list* %3, i32 0, i32 0
+  store i32 -1, i32* %flag, align 8
+  store i32 0, i32* %i, align 4
+  br label %for.cond
+
+for.cond:                                         ; preds = %for.inc, %entry
+  %4 = load i32, i32* %i, align 4
+  %5 = load i32, i32* %idx.addr, align 4
+  %cmp = icmp ult i32 %4, %5
+  br i1 %cmp, label %for.body, label %for.end
+
+for.body:                                         ; preds = %for.cond
+  %call1 = call i8* @malloc(i32 24)
+  %6 = bitcast i8* %call1 to %struct.list*
+  store %struct.list* %6, %struct.list** %cur, align 8
+  %7 = load i32, i32* %idx.addr, align 4
+  %8 = load %struct.list*, %struct.list** %cur, align 8
+  %flag2 = getelementptr inbounds %struct.list, %struct.list* %8, i32 0, i32 0
+  store i32 %7, i32* %flag2, align 8
+  %9 = load %struct.list*, %struct.list** %head, align 8
+  %10 = load %struct.list*, %struct.list** %cur, align 8
+  %next3 = getelementptr inbounds %struct.list, %struct.list* %10, i32 0, i32 1
+  store %struct.list* %9, %struct.list** %next3, align 8
+  %11 = load %struct.list*, %struct.list** %cur, align 8
+  %prev4 = getelementptr inbounds %struct.list, %struct.list* %11, i32 0, i32 2
+  store %struct.list* null, %struct.list** %prev4, align 8
+  %12 = load %struct.list*, %struct.list** %cur, align 8
+  %13 = load %struct.list*, %struct.list** %head, align 8
+  %prev5 = getelementptr inbounds %struct.list, %struct.list* %13, i32 0, i32 2
+  store %struct.list* %12, %struct.list** %prev5, align 8
+  %14 = load %struct.list*, %struct.list** %cur, align 8
+  store %struct.list* %14, %struct.list** %head, align 8
+  br label %for.inc
+
+for.inc:                                          ; preds = %for.body
+  %15 = load i32, i32* %i, align 4
+  %inc = add i32 %15, 1
+  store i32 %inc, i32* %i, align 4
+  br label %for.cond, !llvm.loop !2
+
+for.end:                                          ; preds = %for.cond
+  %16 = load %struct.list*, %struct.list** %head, align 8
+  ret %struct.list* %16
+}
+
+declare dso_local i8* @malloc(i32) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local %struct.list* @randomwalk(%struct.list* %head) #0 {
+entry:
+  %head.addr = alloca %struct.list*, align 8
+  %cur = alloca %struct.list*, align 8
+  store %struct.list* %head, %struct.list** %head.addr, align 8
+  %0 = load %struct.list*, %struct.list** %head.addr, align 8
+  store %struct.list* %0, %struct.list** %cur, align 8
+  br label %for.cond
+
+for.cond:                                         ; preds = %for.inc, %entry
+  %1 = load %struct.list*, %struct.list** %cur, align 8
+  %flag = getelementptr inbounds %struct.list, %struct.list* %1, i32 0, i32 0
+  %2 = load i32, i32* %flag, align 8
+  %cmp = icmp ne i32 %2, 0
+  br i1 %cmp, label %for.body, label %for.end
+
+for.body:                                         ; preds = %for.cond
+  %3 = load %struct.list*, %struct.list** %cur, align 8
+  %flag1 = getelementptr inbounds %struct.list, %struct.list* %3, i32 0, i32 0
+  %4 = load i32, i32* %flag1, align 8
+  %cmp2 = icmp sgt i32 %4, 3
+  br i1 %cmp2, label %if.then, label %if.end
+
+if.then:                                          ; preds = %for.body
+  %5 = load %struct.list*, %struct.list** %cur, align 8
+  %prev = getelementptr inbounds %struct.list, %struct.list* %5, i32 0, i32 2
+  %6 = load %struct.list*, %struct.list** %prev, align 8
+  store %struct.list* %6, %struct.list** %cur, align 8
+  br label %if.end
+
+if.end:                                           ; preds = %if.then, %for.body
+  br label %for.inc
+
+for.inc:                                          ; preds = %if.end
+  %7 = load %struct.list*, %struct.list** %cur, align 8
+  %next = getelementptr inbounds %struct.list, %struct.list* %7, i32 0, i32 1
+  %8 = load %struct.list*, %struct.list** %next, align 8
+  store %struct.list* %8, %struct.list** %cur, align 8
+  br label %for.cond, !llvm.loop !4
+
+for.end:                                          ; preds = %for.cond
+  %9 = load %struct.list*, %struct.list** %cur, align 8
+  ret %struct.list* %9
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @main() #0 {
+entry:
+  %head = alloca %struct.list*, align 8
+  %head1 = alloca %struct.list*, align 8
+  %call = call %struct.list* @construct(i32 10)
+  store %struct.list* %call, %struct.list** %head, align 8
+  %0 = load %struct.list*, %struct.list** %head, align 8
+  %call1 = call %struct.list* @randomwalk(%struct.list* %0)
+  store %struct.list* %call1, %struct.list** %head1, align 8
+  ret void
+}
+
+attributes #0 = { noinline nounwind optnone uwtable "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+
+!llvm.module.flags = !{!0}
+!llvm.ident = !{!1}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{!"clang version 12.0.0"}
+!2 = distinct !{!2, !3}
+!3 = !{!"llvm.loop.mustprogress"}
+!4 = distinct !{!4, !3}

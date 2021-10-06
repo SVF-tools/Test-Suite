@@ -1,0 +1,87 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/cpp_types/broken.cpp.bc'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/cpp_types/broken.cpp"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+%class.A = type { i8 }
+
+$_ZN1AC2Ev = comdat any
+
+@.str = private unnamed_addr constant [2 x i8] c"A\00", align 1
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define dso_local void @_Z9checkTypePvPc(i8* %clz, i8* %ty) #0 {
+entry:
+  %clz.addr = alloca i8*, align 8
+  %ty.addr = alloca i8*, align 8
+  store i8* %clz, i8** %clz.addr, align 8
+  store i8* %ty, i8** %ty.addr, align 8
+  ret void
+}
+
+; Function Attrs: noinline norecurse optnone uwtable mustprogress
+define dso_local i32 @main() #1 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+entry:
+  %a = alloca %class.A*, align 8
+  %exn.slot = alloca i8*, align 8
+  %ehselector.slot = alloca i32, align 4
+  %call = call noalias nonnull i8* @_Znwm(i64 1) #5
+  %0 = bitcast i8* %call to %class.A*
+  invoke void @_ZN1AC2Ev(%class.A* nonnull dereferenceable(1) %0)
+          to label %invoke.cont unwind label %lpad
+
+invoke.cont:                                      ; preds = %entry
+  store %class.A* %0, %class.A** %a, align 8
+  %1 = load %class.A*, %class.A** %a, align 8
+  %2 = bitcast %class.A* %1 to i8*
+  call void @_Z9checkTypePvPc(i8* %2, i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret i32 0
+
+lpad:                                             ; preds = %entry
+  %3 = landingpad { i8*, i32 }
+          cleanup
+  %4 = extractvalue { i8*, i32 } %3, 0
+  store i8* %4, i8** %exn.slot, align 8
+  %5 = extractvalue { i8*, i32 } %3, 1
+  store i32 %5, i32* %ehselector.slot, align 4
+  call void @_ZdlPv(i8* %call) #6
+  br label %eh.resume
+
+eh.resume:                                        ; preds = %lpad
+  %exn = load i8*, i8** %exn.slot, align 8
+  %sel = load i32, i32* %ehselector.slot, align 4
+  %lpad.val = insertvalue { i8*, i32 } undef, i8* %exn, 0
+  %lpad.val1 = insertvalue { i8*, i32 } %lpad.val, i32 %sel, 1
+  resume { i8*, i32 } %lpad.val1
+}
+
+; Function Attrs: nobuiltin allocsize(0)
+declare dso_local nonnull i8* @_Znwm(i64) #2
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZN1AC2Ev(%class.A* nonnull dereferenceable(1) %this) unnamed_addr #3 comdat align 2 {
+entry:
+  %this.addr = alloca %class.A*, align 8
+  store %class.A* %this, %class.A** %this.addr, align 8
+  %this1 = load %class.A*, %class.A** %this.addr, align 8
+  ret void
+}
+
+declare dso_local i32 @__gxx_personality_v0(...)
+
+; Function Attrs: nobuiltin nounwind
+declare dso_local void @_ZdlPv(i8*) #4
+
+attributes #0 = { noinline nounwind optnone uwtable mustprogress "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { noinline norecurse optnone uwtable mustprogress "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { nobuiltin allocsize(0) "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #3 = { noinline nounwind optnone uwtable "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #4 = { nobuiltin nounwind "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #5 = { builtin allocsize(0) }
+attributes #6 = { builtin nounwind }
+
+!llvm.module.flags = !{!0}
+!llvm.ident = !{!1}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{!"clang version 12.0.0"}

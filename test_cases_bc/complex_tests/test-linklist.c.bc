@@ -1,0 +1,173 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/complex_tests/test-linklist.c.bc'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/complex_tests/test-linklist.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+%struct.list = type { i32, %struct.list* }
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @destroy(%struct.list* %head) #0 {
+entry:
+  %head.addr = alloca %struct.list*, align 8
+  %cur = alloca %struct.list*, align 8
+  store %struct.list* %head, %struct.list** %head.addr, align 8
+  %0 = load %struct.list*, %struct.list** %head.addr, align 8
+  store %struct.list* %0, %struct.list** %cur, align 8
+  br label %while.cond
+
+while.cond:                                       ; preds = %while.body, %entry
+  %1 = load %struct.list*, %struct.list** %cur, align 8
+  %flag = getelementptr inbounds %struct.list, %struct.list* %1, i32 0, i32 0
+  %2 = load i32, i32* %flag, align 8
+  %cmp = icmp ne i32 %2, -1
+  br i1 %cmp, label %while.body, label %while.end
+
+while.body:                                       ; preds = %while.cond
+  %3 = load %struct.list*, %struct.list** %cur, align 8
+  %next = getelementptr inbounds %struct.list, %struct.list* %3, i32 0, i32 1
+  %4 = load %struct.list*, %struct.list** %next, align 8
+  store %struct.list* %4, %struct.list** %cur, align 8
+  %5 = load %struct.list*, %struct.list** %cur, align 8
+  %6 = bitcast %struct.list* %5 to i8*
+  call void @free(i8* %6)
+  br label %while.cond, !llvm.loop !2
+
+while.end:                                        ; preds = %while.cond
+  ret void
+}
+
+declare dso_local void @free(i8*) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local %struct.list* @construct(i32 %idx) #0 {
+entry:
+  %idx.addr = alloca i32, align 4
+  %head = alloca %struct.list*, align 8
+  %i = alloca i32, align 4
+  %cur = alloca %struct.list*, align 8
+  store i32 %idx, i32* %idx.addr, align 4
+  store i32 0, i32* %i, align 4
+  %call = call i8* @malloc(i32 16)
+  %0 = bitcast i8* %call to %struct.list*
+  store %struct.list* %0, %struct.list** %head, align 8
+  %1 = load %struct.list*, %struct.list** %head, align 8
+  %next = getelementptr inbounds %struct.list, %struct.list* %1, i32 0, i32 1
+  store %struct.list* null, %struct.list** %next, align 8
+  %2 = load %struct.list*, %struct.list** %head, align 8
+  %flag = getelementptr inbounds %struct.list, %struct.list* %2, i32 0, i32 0
+  store i32 -1, i32* %flag, align 8
+  store i32 0, i32* %i, align 4
+  br label %for.cond
+
+for.cond:                                         ; preds = %for.inc, %entry
+  %3 = load i32, i32* %i, align 4
+  %4 = load i32, i32* %idx.addr, align 4
+  %cmp = icmp ult i32 %3, %4
+  br i1 %cmp, label %for.body, label %for.end
+
+for.body:                                         ; preds = %for.cond
+  %call1 = call i8* @malloc(i32 16)
+  %5 = bitcast i8* %call1 to %struct.list*
+  store %struct.list* %5, %struct.list** %cur, align 8
+  %6 = load i32, i32* %idx.addr, align 4
+  %7 = load %struct.list*, %struct.list** %cur, align 8
+  %flag2 = getelementptr inbounds %struct.list, %struct.list* %7, i32 0, i32 0
+  store i32 %6, i32* %flag2, align 8
+  %8 = load %struct.list*, %struct.list** %head, align 8
+  %9 = load %struct.list*, %struct.list** %cur, align 8
+  %next3 = getelementptr inbounds %struct.list, %struct.list* %9, i32 0, i32 1
+  store %struct.list* %8, %struct.list** %next3, align 8
+  %10 = load %struct.list*, %struct.list** %cur, align 8
+  store %struct.list* %10, %struct.list** %head, align 8
+  br label %for.inc
+
+for.inc:                                          ; preds = %for.body
+  %11 = load i32, i32* %i, align 4
+  %inc = add i32 %11, 1
+  store i32 %inc, i32* %i, align 4
+  br label %for.cond, !llvm.loop !4
+
+for.end:                                          ; preds = %for.cond
+  %12 = load %struct.list*, %struct.list** %head, align 8
+  ret %struct.list* %12
+}
+
+declare dso_local i8* @malloc(i32) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local %struct.list* @addlist(%struct.list* %l, %struct.list* %elem) #0 {
+entry:
+  %l.addr = alloca %struct.list*, align 8
+  %elem.addr = alloca %struct.list*, align 8
+  %head = alloca %struct.list*, align 8
+  %t = alloca %struct.list*, align 8
+  store %struct.list* %l, %struct.list** %l.addr, align 8
+  store %struct.list* %elem, %struct.list** %elem.addr, align 8
+  %0 = load %struct.list*, %struct.list** %l.addr, align 8
+  store %struct.list* %0, %struct.list** %head, align 8
+  br label %while.cond
+
+while.cond:                                       ; preds = %while.body, %entry
+  %1 = load %struct.list*, %struct.list** %head, align 8
+  %next = getelementptr inbounds %struct.list, %struct.list* %1, i32 0, i32 1
+  %2 = load %struct.list*, %struct.list** %next, align 8
+  store %struct.list* %2, %struct.list** %t, align 8
+  %tobool = icmp ne %struct.list* %2, null
+  br i1 %tobool, label %while.body, label %while.end
+
+while.body:                                       ; preds = %while.cond
+  %3 = load %struct.list*, %struct.list** %t, align 8
+  store %struct.list* %3, %struct.list** %head, align 8
+  br label %while.cond, !llvm.loop !5
+
+while.end:                                        ; preds = %while.cond
+  %4 = load %struct.list*, %struct.list** %elem.addr, align 8
+  %5 = load %struct.list*, %struct.list** %head, align 8
+  %next1 = getelementptr inbounds %struct.list, %struct.list* %5, i32 0, i32 1
+  store %struct.list* %4, %struct.list** %next1, align 8
+  %6 = load %struct.list*, %struct.list** %l.addr, align 8
+  ret %struct.list* %6
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @main() #0 {
+entry:
+  %head = alloca %struct.list*, align 8
+  %head1 = alloca %struct.list*, align 8
+  %call = call %struct.list* @construct(i32 10)
+  store %struct.list* %call, %struct.list** %head, align 8
+  %call1 = call %struct.list* @construct(i32 2)
+  store %struct.list* %call1, %struct.list** %head1, align 8
+  %0 = load %struct.list*, %struct.list** %head, align 8
+  %flag = getelementptr inbounds %struct.list, %struct.list* %0, i32 0, i32 0
+  %1 = load i32, i32* %flag, align 8
+  %cmp = icmp eq i32 %1, 5
+  br i1 %cmp, label %if.then, label %if.end
+
+if.then:                                          ; preds = %entry
+  %2 = load %struct.list*, %struct.list** %head, align 8
+  store %struct.list* %2, %struct.list** %head1, align 8
+  br label %if.end
+
+if.end:                                           ; preds = %if.then, %entry
+  %3 = load %struct.list*, %struct.list** %head, align 8
+  %4 = load %struct.list*, %struct.list** %head1, align 8
+  %call2 = call %struct.list* @addlist(%struct.list* %3, %struct.list* %4)
+  store %struct.list* %call2, %struct.list** %head, align 8
+  %5 = load %struct.list*, %struct.list** %head, align 8
+  call void @destroy(%struct.list* %5)
+  ret void
+}
+
+attributes #0 = { noinline nounwind optnone uwtable "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+
+!llvm.module.flags = !{!0}
+!llvm.ident = !{!1}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{!"clang version 12.0.0"}
+!2 = distinct !{!2, !3}
+!3 = !{!"llvm.loop.mustprogress"}
+!4 = distinct !{!4, !3}
+!5 = distinct !{!5, !3}

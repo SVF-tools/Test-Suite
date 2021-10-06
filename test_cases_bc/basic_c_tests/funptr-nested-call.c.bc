@@ -1,0 +1,87 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/basic_c_tests/funptr-nested-call.c.bc'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/basic_c_tests/funptr-nested-call.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+@.str = private unnamed_addr constant [3 x i8] c"f\0A\00", align 1
+@.str.1 = private unnamed_addr constant [3 x i8] c"g\0A\00", align 1
+@p = dso_local global void (...)* null, align 8
+@fptr = dso_local global void (void (...)*)* null, align 8
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @f() #0 {
+entry:
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+declare dso_local i32 @printf(i8*, ...) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @g() #0 {
+entry:
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.1, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @fake_fun(void (...)* %a) #0 {
+entry:
+  %a.addr = alloca void (...)*, align 8
+  store void (...)* %a, void (...)** %a.addr, align 8
+  %0 = load void (...)*, void (...)** %a.addr, align 8
+  store void (...)* %0, void (...)** @p, align 8
+  %1 = load void (...)*, void (...)** @p, align 8
+  call void (...) %1()
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @real_fun(void (...)* %a) #0 {
+entry:
+  %a.addr = alloca void (...)*, align 8
+  store void (...)* %a, void (...)** %a.addr, align 8
+  %0 = load void (...)*, void (...)** %a.addr, align 8
+  store void (...)* %0, void (...)** @p, align 8
+  %1 = load void (...)*, void (...)** @p, align 8
+  call void (...) %1()
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @set(void (...)* %src) #0 {
+entry:
+  %src.addr = alloca void (...)*, align 8
+  store void (...)* %src, void (...)** %src.addr, align 8
+  %0 = load void (...)*, void (...)** %src.addr, align 8
+  %1 = bitcast void (...)* %0 to void (void (...)*)*
+  store void (void (...)*)* %1, void (void (...)*)** @fptr, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main(i32 %argc, i8** %argv) #0 {
+entry:
+  %retval = alloca i32, align 4
+  %argc.addr = alloca i32, align 4
+  %argv.addr = alloca i8**, align 8
+  store i32 0, i32* %retval, align 4
+  store i32 %argc, i32* %argc.addr, align 4
+  store i8** %argv, i8*** %argv.addr, align 8
+  call void @set(void (...)* bitcast (void (void (...)*)* @fake_fun to void (...)*))
+  call void @set(void (...)* bitcast (void (void (...)*)* @real_fun to void (...)*))
+  %0 = load void (void (...)*)*, void (void (...)*)** @fptr, align 8
+  call void %0(void (...)* bitcast (void ()* @f to void (...)*))
+  %1 = load void (void (...)*)*, void (void (...)*)** @fptr, align 8
+  call void %1(void (...)* bitcast (void ()* @g to void (...)*))
+  ret i32 0
+}
+
+attributes #0 = { noinline nounwind optnone uwtable "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+
+!llvm.module.flags = !{!0}
+!llvm.ident = !{!1}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{!"clang version 12.0.0"}

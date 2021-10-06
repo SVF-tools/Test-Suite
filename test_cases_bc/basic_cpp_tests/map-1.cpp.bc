@@ -1,0 +1,2004 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/basic_cpp_tests/map-1.cpp.bc'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/basic_cpp_tests/map-1.cpp"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+%"class.std::ios_base::Init" = type { i8 }
+%"class.std::map" = type { %"class.std::_Rb_tree" }
+%"class.std::_Rb_tree" = type { %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl" }
+%"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl" = type { %"struct.std::_Rb_tree_key_compare", %"struct.std::_Rb_tree_header" }
+%"struct.std::_Rb_tree_key_compare" = type { %"struct.std::less" }
+%"struct.std::less" = type { i8 }
+%"struct.std::_Rb_tree_header" = type { %"struct.std::_Rb_tree_node_base", i64 }
+%"struct.std::_Rb_tree_node_base" = type { i32, %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"* }
+%class.A = type { i32 (...)** }
+%"struct.std::pair.0" = type { i32, %class.A }
+%"struct.std::pair" = type <{ %"struct.std::_Rb_tree_iterator", i8, [7 x i8] }>
+%"struct.std::_Rb_tree_iterator" = type { %"struct.std::_Rb_tree_node_base"* }
+%"struct.std::_Rb_tree_const_iterator" = type { %"struct.std::_Rb_tree_node_base"* }
+%"struct.std::pair.3" = type { i32, %class.A }
+%"class.std::__pair_base.1" = type { i8 }
+%"struct.std::_Rb_tree_node" = type { %"struct.std::_Rb_tree_node_base", %"struct.__gnu_cxx::__aligned_membuf" }
+%"struct.__gnu_cxx::__aligned_membuf" = type { [16 x i8] }
+%"class.std::allocator" = type { i8 }
+%"class.__gnu_cxx::new_allocator" = type { i8 }
+%"struct.std::pair.6" = type { %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"* }
+%"struct.std::_Select1st" = type { i8 }
+%"class.std::__pair_base" = type { i8 }
+%"class.std::__pair_base.4" = type { i8 }
+%"class.std::__pair_base.7" = type { i8 }
+
+$_ZNSt3mapIi1ASt4lessIiESaISt4pairIKiS0_EEEC2Ev = comdat any
+
+$_ZN1AC2Ev = comdat any
+
+$_ZNSt3mapIi1ASt4lessIiESaISt4pairIKiS0_EEE6insertIS3_IiS0_EEENSt9enable_ifIXsr16is_constructibleIS5_T_EE5valueES3_ISt17_Rb_tree_iteratorIS5_EbEE4typeEOSB_ = comdat any
+
+$_ZNSt4pairIi1AEC2IiRS0_Lb1EEEOT_OT0_ = comdat any
+
+$_ZNSt3mapIi1ASt4lessIiESaISt4pairIKiS0_EEE5beginEv = comdat any
+
+$_ZNSt23_Rb_tree_const_iteratorISt4pairIKi1AEEC2ERKSt17_Rb_tree_iteratorIS3_E = comdat any
+
+$_ZNKSt23_Rb_tree_const_iteratorISt4pairIKi1AEEptEv = comdat any
+
+$_ZNSt3mapIi1ASt4lessIiESaISt4pairIKiS0_EEED2Ev = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EEC2Ev = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE13_Rb_tree_implIS7_Lb1EEC2Ev = comdat any
+
+$_ZNSaISt13_Rb_tree_nodeISt4pairIKi1AEEEC2Ev = comdat any
+
+$_ZNSt20_Rb_tree_key_compareISt4lessIiEEC2Ev = comdat any
+
+$_ZNSt15_Rb_tree_headerC2Ev = comdat any
+
+$_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEEC2Ev = comdat any
+
+$_ZNSt15_Rb_tree_header8_M_resetEv = comdat any
+
+$__clang_call_terminate = comdat any
+
+$_ZNK1A1fEPi = comdat any
+
+$_ZSt7forwardIiEOT_RNSt16remove_referenceIS0_E4typeE = comdat any
+
+$_ZSt7forwardIR1AEOT_RNSt16remove_referenceIS2_E4typeE = comdat any
+
+$_ZN1AC2ERKS_ = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EED2Ev = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE8_M_eraseEPSt13_Rb_tree_nodeIS3_E = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE8_M_beginEv = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE13_Rb_tree_implIS7_Lb1EED2Ev = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE8_S_rightEPSt18_Rb_tree_node_base = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE7_S_leftEPSt18_Rb_tree_node_base = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE12_M_drop_nodeEPSt13_Rb_tree_nodeIS3_E = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE15_M_destroy_nodeEPSt13_Rb_tree_nodeIS3_E = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE11_M_put_nodeEPSt13_Rb_tree_nodeIS3_E = comdat any
+
+$_ZNSt16allocator_traitsISaISt13_Rb_tree_nodeISt4pairIKi1AEEEE7destroyIS4_EEvRS6_PT_ = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE21_M_get_Node_allocatorEv = comdat any
+
+$_ZNSt13_Rb_tree_nodeISt4pairIKi1AEE9_M_valptrEv = comdat any
+
+$_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEE7destroyIS5_EEvPT_ = comdat any
+
+$_ZN9__gnu_cxx16__aligned_membufISt4pairIKi1AEE6_M_ptrEv = comdat any
+
+$_ZN9__gnu_cxx16__aligned_membufISt4pairIKi1AEE7_M_addrEv = comdat any
+
+$_ZNSt16allocator_traitsISaISt13_Rb_tree_nodeISt4pairIKi1AEEEE10deallocateERS6_PS5_m = comdat any
+
+$_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEE10deallocateEPS6_m = comdat any
+
+$_ZNSaISt13_Rb_tree_nodeISt4pairIKi1AEEED2Ev = comdat any
+
+$_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEED2Ev = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE17_M_emplace_uniqueIJS0_IiS2_EEEES0_ISt17_Rb_tree_iteratorIS3_EbEDpOT_ = comdat any
+
+$_ZSt7forwardISt4pairIi1AEEOT_RNSt16remove_referenceIS3_E4typeE = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE14_M_create_nodeIJS0_IiS2_EEEEPSt13_Rb_tree_nodeIS3_EDpOT_ = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE24_M_get_insert_unique_posERS1_ = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE6_S_keyEPKSt13_Rb_tree_nodeIS3_E = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE14_M_insert_nodeEPSt18_Rb_tree_node_baseSB_PSt13_Rb_tree_nodeIS3_E = comdat any
+
+$_ZNSt4pairISt17_Rb_tree_iteratorIS_IKi1AEEbEC2IS4_bLb1EEEOT_OT0_ = comdat any
+
+$_ZNSt17_Rb_tree_iteratorISt4pairIKi1AEEC2EPSt18_Rb_tree_node_base = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE11_M_get_nodeEv = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE17_M_construct_nodeIJS0_IiS2_EEEEvPSt13_Rb_tree_nodeIS3_EDpOT_ = comdat any
+
+$_ZNSt16allocator_traitsISaISt13_Rb_tree_nodeISt4pairIKi1AEEEE8allocateERS6_m = comdat any
+
+$_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEE8allocateEmPKv = comdat any
+
+$_ZNK9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEE11_M_max_sizeEv = comdat any
+
+$_ZNSt16allocator_traitsISaISt13_Rb_tree_nodeISt4pairIKi1AEEEE9constructIS4_JS1_IiS3_EEEEvRS6_PT_DpOT0_ = comdat any
+
+$_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEE9constructIS5_JS2_IiS4_EEEEvPT_DpOT0_ = comdat any
+
+$_ZNSt4pairIKi1AEC2IiS1_Lb1EEEOS_IT_T0_E = comdat any
+
+$_ZSt7forwardI1AEOT_RNSt16remove_referenceIS1_E4typeE = comdat any
+
+$_ZN1AC2EOS_ = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE6_M_endEv = comdat any
+
+$_ZNKSt4lessIiEclERKiS2_ = comdat any
+
+$_ZSteqRKSt17_Rb_tree_iteratorISt4pairIKi1AEES6_ = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE5beginEv = comdat any
+
+$_ZNSt4pairIPSt18_Rb_tree_node_baseS1_EC2IRPSt13_Rb_tree_nodeIS_IKi1AEERS1_Lb1EEEOT_OT0_ = comdat any
+
+$_ZNSt17_Rb_tree_iteratorISt4pairIKi1AEEmmEv = comdat any
+
+$_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE6_S_keyEPKSt18_Rb_tree_node_base = comdat any
+
+$_ZNSt4pairIPSt18_Rb_tree_node_baseS1_EC2IRS1_Lb1EEEOT_RKS1_ = comdat any
+
+$_ZSt7forwardIRPSt13_Rb_tree_nodeISt4pairIKi1AEEEOT_RNSt16remove_referenceIS8_E4typeE = comdat any
+
+$_ZSt7forwardIRPSt18_Rb_tree_node_baseEOT_RNSt16remove_referenceIS3_E4typeE = comdat any
+
+$_ZNKSt10_Select1stISt4pairIKi1AEEclERKS3_ = comdat any
+
+$_ZNKSt13_Rb_tree_nodeISt4pairIKi1AEE9_M_valptrEv = comdat any
+
+$_ZNK9__gnu_cxx16__aligned_membufISt4pairIKi1AEE6_M_ptrEv = comdat any
+
+$_ZNK9__gnu_cxx16__aligned_membufISt4pairIKi1AEE7_M_addrEv = comdat any
+
+$_ZSt7forwardISt17_Rb_tree_iteratorISt4pairIKi1AEEEOT_RNSt16remove_referenceIS6_E4typeE = comdat any
+
+$_ZSt7forwardIbEOT_RNSt16remove_referenceIS0_E4typeE = comdat any
+
+$_ZTV1A = comdat any
+
+$_ZTS1A = comdat any
+
+$_ZTI1A = comdat any
+
+@.str = private unnamed_addr constant [2 x i8] c"\0A\00", align 1
+@.str.1 = private unnamed_addr constant [4 x i8] c"%s\0A\00", align 1
+@.str.2 = private unnamed_addr constant [25 x i8] c"Press ENTER to continue\0A\00", align 1
+@_ZStL8__ioinit = internal global %"class.std::ios_base::Init" zeroinitializer, align 1
+@__dso_handle = external hidden global i8
+@global_obj = dso_local global i32 0, align 4
+@global_ptr = dso_local global i32* @global_obj, align 8
+@_ZTV1A = linkonce_odr dso_local unnamed_addr constant { [3 x i8*] } { [3 x i8*] [i8* null, i8* bitcast ({ i8*, i8* }* @_ZTI1A to i8*), i8* bitcast (void (%class.A*, i32*)* @_ZNK1A1fEPi to i8*)] }, comdat, align 8
+@_ZTVN10__cxxabiv117__class_type_infoE = external dso_local global i8*
+@_ZTS1A = linkonce_odr dso_local constant [3 x i8] c"1A\00", comdat, align 1
+@_ZTI1A = linkonce_odr dso_local constant { i8*, i8* } { i8* bitcast (i8** getelementptr inbounds (i8*, i8** @_ZTVN10__cxxabiv117__class_type_infoE, i64 2) to i8*), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @_ZTS1A, i32 0, i32 0) }, comdat, align 8
+@llvm.global_ctors = appending global [1 x { i32, void ()*, i8* }] [{ i32, void ()*, i8* } { i32 65535, void ()* @_GLOBAL__sub_I_map_1.cpp, i8* null }]
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define dso_local void @_Z9MUSTALIASPvS_(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+declare dso_local i32 @printf(i8*, ...) #1
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define dso_local void @_Z12PARTIALALIASPvS_(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define dso_local void @_Z8MAYALIASPvS_(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define dso_local void @_Z7NOALIASPvS_(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define dso_local void @_Z21EXPECTEDFAIL_MAYALIASPvS_(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define dso_local void @_Z20EXPECTEDFAIL_NOALIASPvS_(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define dso_local i8* @_Z10SAFEMALLOCi(i32 %n) #2 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #5
+  ret i8* %call
+}
+
+; Function Attrs: nounwind
+declare dso_local noalias i8* @malloc(i64) #3
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define dso_local i8* @_Z9PLKMALLOCi(i32 %n) #2 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #5
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define dso_local i8* @_Z9NFRMALLOCi(i32 %n) #2 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #5
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define dso_local i8* @_Z9CLKMALLOCi(i32 %n) #2 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #5
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define dso_local i8* @_Z9NFRLEAKFPi(i32 %n) #2 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #5
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define dso_local i8* @_Z9PLKLEAKFPi(i32 %n) #2 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #5
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define dso_local i8* @_Z6LEAKFNi(i32 %n) #2 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #5
+  ret i8* %call
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define dso_local void @_Z9RC_ACCESSii(i32 %id, i32 %flags) #0 {
+entry:
+  %id.addr = alloca i32, align 4
+  %flags.addr = alloca i32, align 4
+  store i32 %id, i32* %id.addr, align 4
+  store i32 %flags, i32* %flags.addr, align 4
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define dso_local void @_Z10CXT_THREADiPc(i32 %thdid, i8* %cxt) #2 {
+entry:
+  %thdid.addr = alloca i32, align 4
+  %cxt.addr = alloca i8*, align 8
+  store i32 %thdid, i32* %thdid.addr, align 4
+  store i8* %cxt, i8** %cxt.addr, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define dso_local void @_Z10TCT_ACCESSiPc(i32 %thdid, i8* %cxt) #2 {
+entry:
+  %thdid.addr = alloca i32, align 4
+  %cxt.addr = alloca i8*, align 8
+  store i32 %thdid, i32* %thdid.addr, align 4
+  store i8* %cxt, i8** %cxt.addr, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define dso_local void @_Z15INTERLEV_ACCESSiPcS_(i32 %thdid, i8* %cxt, i8* %lev) #2 {
+entry:
+  %thdid.addr = alloca i32, align 4
+  %cxt.addr = alloca i8*, align 8
+  %lev.addr = alloca i8*, align 8
+  store i32 %thdid, i32* %thdid.addr, align 4
+  store i8* %cxt, i8** %cxt.addr, align 8
+  store i8* %lev, i8** %lev.addr, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define dso_local void @_Z4LOCKPc(i8* %lockname) #2 {
+entry:
+  %lockname.addr = alloca i8*, align 8
+  store i8* %lockname, i8** %lockname.addr, align 8
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define dso_local void @_Z5PAUSEPc(i8* %str) #0 {
+entry:
+  %str.addr = alloca i8*, align 8
+  store i8* %str, i8** %str.addr, align 8
+  %0 = load i8*, i8** %str.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.1, i64 0, i64 0), i8* %0)
+  %call1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([25 x i8], [25 x i8]* @.str.2, i64 0, i64 0))
+  %call2 = call i32 @getchar()
+  ret void
+}
+
+declare dso_local i32 @getchar() #1
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define dso_local void @_Z5derefv() #2 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline uwtable
+define internal void @__cxx_global_var_init() #4 section ".text.startup" {
+entry:
+  call void @_ZNSt8ios_base4InitC1Ev(%"class.std::ios_base::Init"* nonnull dereferenceable(1) @_ZStL8__ioinit)
+  %0 = call i32 @__cxa_atexit(void (i8*)* bitcast (void (%"class.std::ios_base::Init"*)* @_ZNSt8ios_base4InitD1Ev to void (i8*)*), i8* getelementptr inbounds (%"class.std::ios_base::Init", %"class.std::ios_base::Init"* @_ZStL8__ioinit, i32 0, i32 0), i8* @__dso_handle) #5
+  ret void
+}
+
+declare dso_local void @_ZNSt8ios_base4InitC1Ev(%"class.std::ios_base::Init"* nonnull dereferenceable(1)) unnamed_addr #1
+
+; Function Attrs: nounwind
+declare dso_local void @_ZNSt8ios_base4InitD1Ev(%"class.std::ios_base::Init"* nonnull dereferenceable(1)) unnamed_addr #3
+
+; Function Attrs: nounwind
+declare dso_local i32 @__cxa_atexit(void (i8*)*, i8*, i8*) #5
+
+; Function Attrs: noinline norecurse optnone uwtable mustprogress
+define dso_local i32 @main(i32 %argc, i8** %argv) #6 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+entry:
+  %retval = alloca i32, align 4
+  %argc.addr = alloca i32, align 4
+  %argv.addr = alloca i8**, align 8
+  %ptr = alloca i32*, align 8
+  %amap = alloca %"class.std::map", align 8
+  %a = alloca %class.A, align 8
+  %ref.tmp = alloca %"struct.std::pair.0", align 8
+  %ref.tmp1 = alloca i32, align 4
+  %exn.slot = alloca i8*, align 8
+  %ehselector.slot = alloca i32, align 4
+  %coerce = alloca %"struct.std::pair", align 8
+  %it = alloca %"struct.std::_Rb_tree_const_iterator", align 8
+  %ref.tmp3 = alloca %"struct.std::_Rb_tree_iterator", align 8
+  %aptr = alloca %class.A*, align 8
+  store i32 0, i32* %retval, align 4
+  store i32 %argc, i32* %argc.addr, align 4
+  store i8** %argv, i8*** %argv.addr, align 8
+  store i32* @global_obj, i32** %ptr, align 8
+  call void @_ZNSt3mapIi1ASt4lessIiESaISt4pairIKiS0_EEEC2Ev(%"class.std::map"* nonnull dereferenceable(48) %amap) #5
+  call void @_ZN1AC2Ev(%class.A* nonnull dereferenceable(8) %a) #5
+  store i32 0, i32* %ref.tmp1, align 4
+  invoke void @_ZNSt4pairIi1AEC2IiRS0_Lb1EEEOT_OT0_(%"struct.std::pair.0"* nonnull dereferenceable(16) %ref.tmp, i32* nonnull align 4 dereferenceable(4) %ref.tmp1, %class.A* nonnull align 8 dereferenceable(8) %a)
+          to label %invoke.cont unwind label %lpad
+
+invoke.cont:                                      ; preds = %entry
+  %call = invoke { %"struct.std::_Rb_tree_node_base"*, i8 } @_ZNSt3mapIi1ASt4lessIiESaISt4pairIKiS0_EEE6insertIS3_IiS0_EEENSt9enable_ifIXsr16is_constructibleIS5_T_EE5valueES3_ISt17_Rb_tree_iteratorIS5_EbEE4typeEOSB_(%"class.std::map"* nonnull dereferenceable(48) %amap, %"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %ref.tmp)
+          to label %invoke.cont2 unwind label %lpad
+
+invoke.cont2:                                     ; preds = %invoke.cont
+  %0 = bitcast %"struct.std::pair"* %coerce to { %"struct.std::_Rb_tree_node_base"*, i8 }*
+  %1 = getelementptr inbounds { %"struct.std::_Rb_tree_node_base"*, i8 }, { %"struct.std::_Rb_tree_node_base"*, i8 }* %0, i32 0, i32 0
+  %2 = extractvalue { %"struct.std::_Rb_tree_node_base"*, i8 } %call, 0
+  store %"struct.std::_Rb_tree_node_base"* %2, %"struct.std::_Rb_tree_node_base"** %1, align 8
+  %3 = getelementptr inbounds { %"struct.std::_Rb_tree_node_base"*, i8 }, { %"struct.std::_Rb_tree_node_base"*, i8 }* %0, i32 0, i32 1
+  %4 = extractvalue { %"struct.std::_Rb_tree_node_base"*, i8 } %call, 1
+  store i8 %4, i8* %3, align 8
+  %call4 = call %"struct.std::_Rb_tree_node_base"* @_ZNSt3mapIi1ASt4lessIiESaISt4pairIKiS0_EEE5beginEv(%"class.std::map"* nonnull dereferenceable(48) %amap) #5
+  %coerce.dive = getelementptr inbounds %"struct.std::_Rb_tree_iterator", %"struct.std::_Rb_tree_iterator"* %ref.tmp3, i32 0, i32 0
+  store %"struct.std::_Rb_tree_node_base"* %call4, %"struct.std::_Rb_tree_node_base"** %coerce.dive, align 8
+  call void @_ZNSt23_Rb_tree_const_iteratorISt4pairIKi1AEEC2ERKSt17_Rb_tree_iteratorIS3_E(%"struct.std::_Rb_tree_const_iterator"* nonnull dereferenceable(8) %it, %"struct.std::_Rb_tree_iterator"* nonnull align 8 dereferenceable(8) %ref.tmp3) #5
+  %call5 = call %"struct.std::pair.3"* @_ZNKSt23_Rb_tree_const_iteratorISt4pairIKi1AEEptEv(%"struct.std::_Rb_tree_const_iterator"* nonnull dereferenceable(8) %it) #5
+  %second = getelementptr inbounds %"struct.std::pair.3", %"struct.std::pair.3"* %call5, i32 0, i32 1
+  store %class.A* %second, %class.A** %aptr, align 8
+  %5 = load %class.A*, %class.A** %aptr, align 8
+  %6 = load i32*, i32** %ptr, align 8
+  %7 = bitcast %class.A* %5 to void (%class.A*, i32*)***
+  %vtable = load void (%class.A*, i32*)**, void (%class.A*, i32*)*** %7, align 8
+  %vfn = getelementptr inbounds void (%class.A*, i32*)*, void (%class.A*, i32*)** %vtable, i64 0
+  %8 = load void (%class.A*, i32*)*, void (%class.A*, i32*)** %vfn, align 8
+  invoke void %8(%class.A* nonnull dereferenceable(8) %5, i32* %6)
+          to label %invoke.cont6 unwind label %lpad
+
+invoke.cont6:                                     ; preds = %invoke.cont2
+  store i32 0, i32* %retval, align 4
+  call void @_ZNSt3mapIi1ASt4lessIiESaISt4pairIKiS0_EEED2Ev(%"class.std::map"* nonnull dereferenceable(48) %amap) #5
+  %9 = load i32, i32* %retval, align 4
+  ret i32 %9
+
+lpad:                                             ; preds = %invoke.cont2, %invoke.cont, %entry
+  %10 = landingpad { i8*, i32 }
+          cleanup
+  %11 = extractvalue { i8*, i32 } %10, 0
+  store i8* %11, i8** %exn.slot, align 8
+  %12 = extractvalue { i8*, i32 } %10, 1
+  store i32 %12, i32* %ehselector.slot, align 4
+  call void @_ZNSt3mapIi1ASt4lessIiESaISt4pairIKiS0_EEED2Ev(%"class.std::map"* nonnull dereferenceable(48) %amap) #5
+  br label %eh.resume
+
+eh.resume:                                        ; preds = %lpad
+  %exn = load i8*, i8** %exn.slot, align 8
+  %sel = load i32, i32* %ehselector.slot, align 4
+  %lpad.val = insertvalue { i8*, i32 } undef, i8* %exn, 0
+  %lpad.val7 = insertvalue { i8*, i32 } %lpad.val, i32 %sel, 1
+  resume { i8*, i32 } %lpad.val7
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt3mapIi1ASt4lessIiESaISt4pairIKiS0_EEEC2Ev(%"class.std::map"* nonnull dereferenceable(48) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::map"*, align 8
+  store %"class.std::map"* %this, %"class.std::map"** %this.addr, align 8
+  %this1 = load %"class.std::map"*, %"class.std::map"** %this.addr, align 8
+  %_M_t = getelementptr inbounds %"class.std::map", %"class.std::map"* %this1, i32 0, i32 0
+  call void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EEC2Ev(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %_M_t) #5
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZN1AC2Ev(%class.A* nonnull dereferenceable(8) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %class.A*, align 8
+  store %class.A* %this, %class.A** %this.addr, align 8
+  %this1 = load %class.A*, %class.A** %this.addr, align 8
+  %0 = bitcast %class.A* %this1 to i32 (...)***
+  store i32 (...)** bitcast (i8** getelementptr inbounds ({ [3 x i8*] }, { [3 x i8*] }* @_ZTV1A, i32 0, inrange i32 0, i32 2) to i32 (...)**), i32 (...)*** %0, align 8
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define linkonce_odr dso_local { %"struct.std::_Rb_tree_node_base"*, i8 } @_ZNSt3mapIi1ASt4lessIiESaISt4pairIKiS0_EEE6insertIS3_IiS0_EEENSt9enable_ifIXsr16is_constructibleIS5_T_EE5valueES3_ISt17_Rb_tree_iteratorIS5_EbEE4typeEOSB_(%"class.std::map"* nonnull dereferenceable(48) %this, %"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %__x) #0 comdat align 2 {
+entry:
+  %retval = alloca %"struct.std::pair", align 8
+  %this.addr = alloca %"class.std::map"*, align 8
+  %__x.addr = alloca %"struct.std::pair.0"*, align 8
+  store %"class.std::map"* %this, %"class.std::map"** %this.addr, align 8
+  store %"struct.std::pair.0"* %__x, %"struct.std::pair.0"** %__x.addr, align 8
+  %this1 = load %"class.std::map"*, %"class.std::map"** %this.addr, align 8
+  %_M_t = getelementptr inbounds %"class.std::map", %"class.std::map"* %this1, i32 0, i32 0
+  %0 = load %"struct.std::pair.0"*, %"struct.std::pair.0"** %__x.addr, align 8
+  %call = call nonnull align 8 dereferenceable(16) %"struct.std::pair.0"* @_ZSt7forwardISt4pairIi1AEEOT_RNSt16remove_referenceIS3_E4typeE(%"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %0) #5
+  %call2 = call { %"struct.std::_Rb_tree_node_base"*, i8 } @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE17_M_emplace_uniqueIJS0_IiS2_EEEES0_ISt17_Rb_tree_iteratorIS3_EbEDpOT_(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %_M_t, %"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %call)
+  %1 = bitcast %"struct.std::pair"* %retval to { %"struct.std::_Rb_tree_node_base"*, i8 }*
+  %2 = getelementptr inbounds { %"struct.std::_Rb_tree_node_base"*, i8 }, { %"struct.std::_Rb_tree_node_base"*, i8 }* %1, i32 0, i32 0
+  %3 = extractvalue { %"struct.std::_Rb_tree_node_base"*, i8 } %call2, 0
+  store %"struct.std::_Rb_tree_node_base"* %3, %"struct.std::_Rb_tree_node_base"** %2, align 8
+  %4 = getelementptr inbounds { %"struct.std::_Rb_tree_node_base"*, i8 }, { %"struct.std::_Rb_tree_node_base"*, i8 }* %1, i32 0, i32 1
+  %5 = extractvalue { %"struct.std::_Rb_tree_node_base"*, i8 } %call2, 1
+  store i8 %5, i8* %4, align 8
+  %6 = bitcast %"struct.std::pair"* %retval to { %"struct.std::_Rb_tree_node_base"*, i8 }*
+  %7 = load { %"struct.std::_Rb_tree_node_base"*, i8 }, { %"struct.std::_Rb_tree_node_base"*, i8 }* %6, align 8
+  ret { %"struct.std::_Rb_tree_node_base"*, i8 } %7
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt4pairIi1AEC2IiRS0_Lb1EEEOT_OT0_(%"struct.std::pair.0"* nonnull dereferenceable(16) %this, i32* nonnull align 4 dereferenceable(4) %__x, %class.A* nonnull align 8 dereferenceable(8) %__y) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::pair.0"*, align 8
+  %__x.addr = alloca i32*, align 8
+  %__y.addr = alloca %class.A*, align 8
+  store %"struct.std::pair.0"* %this, %"struct.std::pair.0"** %this.addr, align 8
+  store i32* %__x, i32** %__x.addr, align 8
+  store %class.A* %__y, %class.A** %__y.addr, align 8
+  %this1 = load %"struct.std::pair.0"*, %"struct.std::pair.0"** %this.addr, align 8
+  %0 = bitcast %"struct.std::pair.0"* %this1 to %"class.std::__pair_base.1"*
+  %first = getelementptr inbounds %"struct.std::pair.0", %"struct.std::pair.0"* %this1, i32 0, i32 0
+  %1 = load i32*, i32** %__x.addr, align 8
+  %call = call nonnull align 4 dereferenceable(4) i32* @_ZSt7forwardIiEOT_RNSt16remove_referenceIS0_E4typeE(i32* nonnull align 4 dereferenceable(4) %1) #5
+  %2 = load i32, i32* %call, align 4
+  store i32 %2, i32* %first, align 8
+  %second = getelementptr inbounds %"struct.std::pair.0", %"struct.std::pair.0"* %this1, i32 0, i32 1
+  %3 = load %class.A*, %class.A** %__y.addr, align 8
+  %call2 = call nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIR1AEOT_RNSt16remove_referenceIS2_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %3) #5
+  call void @_ZN1AC2ERKS_(%class.A* nonnull dereferenceable(8) %second, %class.A* nonnull align 8 dereferenceable(8) %call2) #5
+  ret void
+}
+
+declare dso_local i32 @__gxx_personality_v0(...)
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local %"struct.std::_Rb_tree_node_base"* @_ZNSt3mapIi1ASt4lessIiESaISt4pairIKiS0_EEE5beginEv(%"class.std::map"* nonnull dereferenceable(48) %this) #2 comdat align 2 {
+entry:
+  %retval = alloca %"struct.std::_Rb_tree_iterator", align 8
+  %this.addr = alloca %"class.std::map"*, align 8
+  store %"class.std::map"* %this, %"class.std::map"** %this.addr, align 8
+  %this1 = load %"class.std::map"*, %"class.std::map"** %this.addr, align 8
+  %_M_t = getelementptr inbounds %"class.std::map", %"class.std::map"* %this1, i32 0, i32 0
+  %call = call %"struct.std::_Rb_tree_node_base"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE5beginEv(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %_M_t) #5
+  %coerce.dive = getelementptr inbounds %"struct.std::_Rb_tree_iterator", %"struct.std::_Rb_tree_iterator"* %retval, i32 0, i32 0
+  store %"struct.std::_Rb_tree_node_base"* %call, %"struct.std::_Rb_tree_node_base"** %coerce.dive, align 8
+  %coerce.dive2 = getelementptr inbounds %"struct.std::_Rb_tree_iterator", %"struct.std::_Rb_tree_iterator"* %retval, i32 0, i32 0
+  %0 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %coerce.dive2, align 8
+  ret %"struct.std::_Rb_tree_node_base"* %0
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt23_Rb_tree_const_iteratorISt4pairIKi1AEEC2ERKSt17_Rb_tree_iteratorIS3_E(%"struct.std::_Rb_tree_const_iterator"* nonnull dereferenceable(8) %this, %"struct.std::_Rb_tree_iterator"* nonnull align 8 dereferenceable(8) %__it) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::_Rb_tree_const_iterator"*, align 8
+  %__it.addr = alloca %"struct.std::_Rb_tree_iterator"*, align 8
+  store %"struct.std::_Rb_tree_const_iterator"* %this, %"struct.std::_Rb_tree_const_iterator"** %this.addr, align 8
+  store %"struct.std::_Rb_tree_iterator"* %__it, %"struct.std::_Rb_tree_iterator"** %__it.addr, align 8
+  %this1 = load %"struct.std::_Rb_tree_const_iterator"*, %"struct.std::_Rb_tree_const_iterator"** %this.addr, align 8
+  %_M_node = getelementptr inbounds %"struct.std::_Rb_tree_const_iterator", %"struct.std::_Rb_tree_const_iterator"* %this1, i32 0, i32 0
+  %0 = load %"struct.std::_Rb_tree_iterator"*, %"struct.std::_Rb_tree_iterator"** %__it.addr, align 8
+  %_M_node2 = getelementptr inbounds %"struct.std::_Rb_tree_iterator", %"struct.std::_Rb_tree_iterator"* %0, i32 0, i32 0
+  %1 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %_M_node2, align 8
+  store %"struct.std::_Rb_tree_node_base"* %1, %"struct.std::_Rb_tree_node_base"** %_M_node, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local %"struct.std::pair.3"* @_ZNKSt23_Rb_tree_const_iteratorISt4pairIKi1AEEptEv(%"struct.std::_Rb_tree_const_iterator"* nonnull dereferenceable(8) %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::_Rb_tree_const_iterator"*, align 8
+  store %"struct.std::_Rb_tree_const_iterator"* %this, %"struct.std::_Rb_tree_const_iterator"** %this.addr, align 8
+  %this1 = load %"struct.std::_Rb_tree_const_iterator"*, %"struct.std::_Rb_tree_const_iterator"** %this.addr, align 8
+  %_M_node = getelementptr inbounds %"struct.std::_Rb_tree_const_iterator", %"struct.std::_Rb_tree_const_iterator"* %this1, i32 0, i32 0
+  %0 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %_M_node, align 8
+  %1 = bitcast %"struct.std::_Rb_tree_node_base"* %0 to %"struct.std::_Rb_tree_node"*
+  %call = call %"struct.std::pair.3"* @_ZNKSt13_Rb_tree_nodeISt4pairIKi1AEE9_M_valptrEv(%"struct.std::_Rb_tree_node"* nonnull dereferenceable(48) %1)
+  ret %"struct.std::pair.3"* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt3mapIi1ASt4lessIiESaISt4pairIKiS0_EEED2Ev(%"class.std::map"* nonnull dereferenceable(48) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::map"*, align 8
+  store %"class.std::map"* %this, %"class.std::map"** %this.addr, align 8
+  %this1 = load %"class.std::map"*, %"class.std::map"** %this.addr, align 8
+  %_M_t = getelementptr inbounds %"class.std::map", %"class.std::map"* %this1, i32 0, i32 0
+  call void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EED2Ev(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %_M_t) #5
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EEC2Ev(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::_Rb_tree"*, align 8
+  store %"class.std::_Rb_tree"* %this, %"class.std::_Rb_tree"** %this.addr, align 8
+  %this1 = load %"class.std::_Rb_tree"*, %"class.std::_Rb_tree"** %this.addr, align 8
+  %_M_impl = getelementptr inbounds %"class.std::_Rb_tree", %"class.std::_Rb_tree"* %this1, i32 0, i32 0
+  call void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE13_Rb_tree_implIS7_Lb1EEC2Ev(%"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* nonnull dereferenceable(48) %_M_impl) #5
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE13_Rb_tree_implIS7_Lb1EEC2Ev(%"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* nonnull dereferenceable(48) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"*, align 8
+  store %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* %this, %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"** %this.addr, align 8
+  %this1 = load %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"*, %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"** %this.addr, align 8
+  %0 = bitcast %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* %this1 to %"class.std::allocator"*
+  call void @_ZNSaISt13_Rb_tree_nodeISt4pairIKi1AEEEC2Ev(%"class.std::allocator"* nonnull dereferenceable(1) %0) #5
+  %1 = bitcast %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* %this1 to %"struct.std::_Rb_tree_key_compare"*
+  call void @_ZNSt20_Rb_tree_key_compareISt4lessIiEEC2Ev(%"struct.std::_Rb_tree_key_compare"* nonnull dereferenceable(1) %1) #5
+  %2 = bitcast %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* %this1 to i8*
+  %3 = getelementptr inbounds i8, i8* %2, i64 8
+  %4 = bitcast i8* %3 to %"struct.std::_Rb_tree_header"*
+  call void @_ZNSt15_Rb_tree_headerC2Ev(%"struct.std::_Rb_tree_header"* nonnull dereferenceable(40) %4) #5
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSaISt13_Rb_tree_nodeISt4pairIKi1AEEEC2Ev(%"class.std::allocator"* nonnull dereferenceable(1) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::allocator"*, align 8
+  store %"class.std::allocator"* %this, %"class.std::allocator"** %this.addr, align 8
+  %this1 = load %"class.std::allocator"*, %"class.std::allocator"** %this.addr, align 8
+  %0 = bitcast %"class.std::allocator"* %this1 to %"class.__gnu_cxx::new_allocator"*
+  call void @_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEEC2Ev(%"class.__gnu_cxx::new_allocator"* nonnull dereferenceable(1) %0) #5
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt20_Rb_tree_key_compareISt4lessIiEEC2Ev(%"struct.std::_Rb_tree_key_compare"* nonnull dereferenceable(1) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::_Rb_tree_key_compare"*, align 8
+  store %"struct.std::_Rb_tree_key_compare"* %this, %"struct.std::_Rb_tree_key_compare"** %this.addr, align 8
+  %this1 = load %"struct.std::_Rb_tree_key_compare"*, %"struct.std::_Rb_tree_key_compare"** %this.addr, align 8
+  %_M_key_compare = getelementptr inbounds %"struct.std::_Rb_tree_key_compare", %"struct.std::_Rb_tree_key_compare"* %this1, i32 0, i32 0
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt15_Rb_tree_headerC2Ev(%"struct.std::_Rb_tree_header"* nonnull dereferenceable(40) %this) unnamed_addr #7 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+entry:
+  %this.addr = alloca %"struct.std::_Rb_tree_header"*, align 8
+  store %"struct.std::_Rb_tree_header"* %this, %"struct.std::_Rb_tree_header"** %this.addr, align 8
+  %this1 = load %"struct.std::_Rb_tree_header"*, %"struct.std::_Rb_tree_header"** %this.addr, align 8
+  %_M_header = getelementptr inbounds %"struct.std::_Rb_tree_header", %"struct.std::_Rb_tree_header"* %this1, i32 0, i32 0
+  %_M_header2 = getelementptr inbounds %"struct.std::_Rb_tree_header", %"struct.std::_Rb_tree_header"* %this1, i32 0, i32 0
+  %_M_color = getelementptr inbounds %"struct.std::_Rb_tree_node_base", %"struct.std::_Rb_tree_node_base"* %_M_header2, i32 0, i32 0
+  store i32 0, i32* %_M_color, align 8
+  invoke void @_ZNSt15_Rb_tree_header8_M_resetEv(%"struct.std::_Rb_tree_header"* nonnull dereferenceable(40) %this1)
+          to label %invoke.cont unwind label %terminate.lpad
+
+invoke.cont:                                      ; preds = %entry
+  ret void
+
+terminate.lpad:                                   ; preds = %entry
+  %0 = landingpad { i8*, i32 }
+          catch i8* null
+  %1 = extractvalue { i8*, i32 } %0, 0
+  call void @__clang_call_terminate(i8* %1) #15
+  unreachable
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEEC2Ev(%"class.__gnu_cxx::new_allocator"* nonnull dereferenceable(1) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.__gnu_cxx::new_allocator"*, align 8
+  store %"class.__gnu_cxx::new_allocator"* %this, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
+  %this1 = load %"class.__gnu_cxx::new_allocator"*, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local void @_ZNSt15_Rb_tree_header8_M_resetEv(%"struct.std::_Rb_tree_header"* nonnull dereferenceable(40) %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::_Rb_tree_header"*, align 8
+  store %"struct.std::_Rb_tree_header"* %this, %"struct.std::_Rb_tree_header"** %this.addr, align 8
+  %this1 = load %"struct.std::_Rb_tree_header"*, %"struct.std::_Rb_tree_header"** %this.addr, align 8
+  %_M_header = getelementptr inbounds %"struct.std::_Rb_tree_header", %"struct.std::_Rb_tree_header"* %this1, i32 0, i32 0
+  %_M_parent = getelementptr inbounds %"struct.std::_Rb_tree_node_base", %"struct.std::_Rb_tree_node_base"* %_M_header, i32 0, i32 1
+  store %"struct.std::_Rb_tree_node_base"* null, %"struct.std::_Rb_tree_node_base"** %_M_parent, align 8
+  %_M_header2 = getelementptr inbounds %"struct.std::_Rb_tree_header", %"struct.std::_Rb_tree_header"* %this1, i32 0, i32 0
+  %_M_header3 = getelementptr inbounds %"struct.std::_Rb_tree_header", %"struct.std::_Rb_tree_header"* %this1, i32 0, i32 0
+  %_M_left = getelementptr inbounds %"struct.std::_Rb_tree_node_base", %"struct.std::_Rb_tree_node_base"* %_M_header3, i32 0, i32 2
+  store %"struct.std::_Rb_tree_node_base"* %_M_header2, %"struct.std::_Rb_tree_node_base"** %_M_left, align 8
+  %_M_header4 = getelementptr inbounds %"struct.std::_Rb_tree_header", %"struct.std::_Rb_tree_header"* %this1, i32 0, i32 0
+  %_M_header5 = getelementptr inbounds %"struct.std::_Rb_tree_header", %"struct.std::_Rb_tree_header"* %this1, i32 0, i32 0
+  %_M_right = getelementptr inbounds %"struct.std::_Rb_tree_node_base", %"struct.std::_Rb_tree_node_base"* %_M_header5, i32 0, i32 3
+  store %"struct.std::_Rb_tree_node_base"* %_M_header4, %"struct.std::_Rb_tree_node_base"** %_M_right, align 8
+  %_M_node_count = getelementptr inbounds %"struct.std::_Rb_tree_header", %"struct.std::_Rb_tree_header"* %this1, i32 0, i32 1
+  store i64 0, i64* %_M_node_count, align 8
+  ret void
+}
+
+; Function Attrs: noinline noreturn nounwind
+define linkonce_odr hidden void @__clang_call_terminate(i8* %0) #8 comdat {
+  %2 = call i8* @__cxa_begin_catch(i8* %0) #5
+  call void @_ZSt9terminatev() #15
+  unreachable
+}
+
+declare dso_local i8* @__cxa_begin_catch(i8*)
+
+declare dso_local void @_ZSt9terminatev()
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define linkonce_odr dso_local void @_ZNK1A1fEPi(%class.A* nonnull dereferenceable(8) %this, i32* %i) unnamed_addr #0 comdat align 2 {
+entry:
+  %this.addr = alloca %class.A*, align 8
+  %i.addr = alloca i32*, align 8
+  store %class.A* %this, %class.A** %this.addr, align 8
+  store i32* %i, i32** %i.addr, align 8
+  %this1 = load %class.A*, %class.A** %this.addr, align 8
+  %0 = load i32*, i32** @global_ptr, align 8
+  %1 = bitcast i32* %0 to i8*
+  %2 = load i32*, i32** %i.addr, align 8
+  %3 = bitcast i32* %2 to i8*
+  call void @_Z9MUSTALIASPvS_(i8* %1, i8* %3)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local nonnull align 4 dereferenceable(4) i32* @_ZSt7forwardIiEOT_RNSt16remove_referenceIS0_E4typeE(i32* nonnull align 4 dereferenceable(4) %__t) #2 comdat {
+entry:
+  %__t.addr = alloca i32*, align 8
+  store i32* %__t, i32** %__t.addr, align 8
+  %0 = load i32*, i32** %__t.addr, align 8
+  ret i32* %0
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIR1AEOT_RNSt16remove_referenceIS2_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %__t) #2 comdat {
+entry:
+  %__t.addr = alloca %class.A*, align 8
+  store %class.A* %__t, %class.A** %__t.addr, align 8
+  %0 = load %class.A*, %class.A** %__t.addr, align 8
+  ret %class.A* %0
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZN1AC2ERKS_(%class.A* nonnull dereferenceable(8) %this, %class.A* nonnull align 8 dereferenceable(8) %0) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %class.A*, align 8
+  %.addr = alloca %class.A*, align 8
+  store %class.A* %this, %class.A** %this.addr, align 8
+  store %class.A* %0, %class.A** %.addr, align 8
+  %this1 = load %class.A*, %class.A** %this.addr, align 8
+  %1 = bitcast %class.A* %this1 to i32 (...)***
+  store i32 (...)** bitcast (i8** getelementptr inbounds ({ [3 x i8*] }, { [3 x i8*] }* @_ZTV1A, i32 0, inrange i32 0, i32 2) to i32 (...)**), i32 (...)*** %1, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EED2Ev(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this) unnamed_addr #7 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+entry:
+  %this.addr = alloca %"class.std::_Rb_tree"*, align 8
+  %exn.slot = alloca i8*, align 8
+  %ehselector.slot = alloca i32, align 4
+  store %"class.std::_Rb_tree"* %this, %"class.std::_Rb_tree"** %this.addr, align 8
+  %this1 = load %"class.std::_Rb_tree"*, %"class.std::_Rb_tree"** %this.addr, align 8
+  %call = call %"struct.std::_Rb_tree_node"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE8_M_beginEv(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1) #5
+  invoke void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE8_M_eraseEPSt13_Rb_tree_nodeIS3_E(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1, %"struct.std::_Rb_tree_node"* %call)
+          to label %invoke.cont unwind label %lpad
+
+invoke.cont:                                      ; preds = %entry
+  %_M_impl = getelementptr inbounds %"class.std::_Rb_tree", %"class.std::_Rb_tree"* %this1, i32 0, i32 0
+  call void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE13_Rb_tree_implIS7_Lb1EED2Ev(%"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* nonnull dereferenceable(48) %_M_impl) #5
+  ret void
+
+lpad:                                             ; preds = %entry
+  %0 = landingpad { i8*, i32 }
+          catch i8* null
+  %1 = extractvalue { i8*, i32 } %0, 0
+  store i8* %1, i8** %exn.slot, align 8
+  %2 = extractvalue { i8*, i32 } %0, 1
+  store i32 %2, i32* %ehselector.slot, align 4
+  %_M_impl2 = getelementptr inbounds %"class.std::_Rb_tree", %"class.std::_Rb_tree"* %this1, i32 0, i32 0
+  call void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE13_Rb_tree_implIS7_Lb1EED2Ev(%"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* nonnull dereferenceable(48) %_M_impl2) #5
+  br label %terminate.handler
+
+terminate.handler:                                ; preds = %lpad
+  %exn = load i8*, i8** %exn.slot, align 8
+  call void @__clang_call_terminate(i8* %exn) #15
+  unreachable
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define linkonce_odr dso_local void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE8_M_eraseEPSt13_Rb_tree_nodeIS3_E(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this, %"struct.std::_Rb_tree_node"* %__x) #0 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::_Rb_tree"*, align 8
+  %__x.addr = alloca %"struct.std::_Rb_tree_node"*, align 8
+  %__y = alloca %"struct.std::_Rb_tree_node"*, align 8
+  store %"class.std::_Rb_tree"* %this, %"class.std::_Rb_tree"** %this.addr, align 8
+  store %"struct.std::_Rb_tree_node"* %__x, %"struct.std::_Rb_tree_node"** %__x.addr, align 8
+  %this1 = load %"class.std::_Rb_tree"*, %"class.std::_Rb_tree"** %this.addr, align 8
+  br label %while.cond
+
+while.cond:                                       ; preds = %while.body, %entry
+  %0 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__x.addr, align 8
+  %cmp = icmp ne %"struct.std::_Rb_tree_node"* %0, null
+  br i1 %cmp, label %while.body, label %while.end
+
+while.body:                                       ; preds = %while.cond
+  %1 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__x.addr, align 8
+  %2 = bitcast %"struct.std::_Rb_tree_node"* %1 to %"struct.std::_Rb_tree_node_base"*
+  %call = call %"struct.std::_Rb_tree_node"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE8_S_rightEPSt18_Rb_tree_node_base(%"struct.std::_Rb_tree_node_base"* %2) #5
+  call void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE8_M_eraseEPSt13_Rb_tree_nodeIS3_E(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1, %"struct.std::_Rb_tree_node"* %call)
+  %3 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__x.addr, align 8
+  %4 = bitcast %"struct.std::_Rb_tree_node"* %3 to %"struct.std::_Rb_tree_node_base"*
+  %call2 = call %"struct.std::_Rb_tree_node"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE7_S_leftEPSt18_Rb_tree_node_base(%"struct.std::_Rb_tree_node_base"* %4) #5
+  store %"struct.std::_Rb_tree_node"* %call2, %"struct.std::_Rb_tree_node"** %__y, align 8
+  %5 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__x.addr, align 8
+  call void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE12_M_drop_nodeEPSt13_Rb_tree_nodeIS3_E(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1, %"struct.std::_Rb_tree_node"* %5) #5
+  %6 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__y, align 8
+  store %"struct.std::_Rb_tree_node"* %6, %"struct.std::_Rb_tree_node"** %__x.addr, align 8
+  br label %while.cond, !llvm.loop !2
+
+while.end:                                        ; preds = %while.cond
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local %"struct.std::_Rb_tree_node"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE8_M_beginEv(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::_Rb_tree"*, align 8
+  store %"class.std::_Rb_tree"* %this, %"class.std::_Rb_tree"** %this.addr, align 8
+  %this1 = load %"class.std::_Rb_tree"*, %"class.std::_Rb_tree"** %this.addr, align 8
+  %_M_impl = getelementptr inbounds %"class.std::_Rb_tree", %"class.std::_Rb_tree"* %this1, i32 0, i32 0
+  %0 = bitcast %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* %_M_impl to i8*
+  %add.ptr = getelementptr inbounds i8, i8* %0, i64 8
+  %1 = bitcast i8* %add.ptr to %"struct.std::_Rb_tree_header"*
+  %_M_header = getelementptr inbounds %"struct.std::_Rb_tree_header", %"struct.std::_Rb_tree_header"* %1, i32 0, i32 0
+  %_M_parent = getelementptr inbounds %"struct.std::_Rb_tree_node_base", %"struct.std::_Rb_tree_node_base"* %_M_header, i32 0, i32 1
+  %2 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %_M_parent, align 8
+  %3 = bitcast %"struct.std::_Rb_tree_node_base"* %2 to %"struct.std::_Rb_tree_node"*
+  ret %"struct.std::_Rb_tree_node"* %3
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE13_Rb_tree_implIS7_Lb1EED2Ev(%"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* nonnull dereferenceable(48) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"*, align 8
+  store %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* %this, %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"** %this.addr, align 8
+  %this1 = load %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"*, %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"** %this.addr, align 8
+  %0 = bitcast %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* %this1 to %"class.std::allocator"*
+  call void @_ZNSaISt13_Rb_tree_nodeISt4pairIKi1AEEED2Ev(%"class.std::allocator"* nonnull dereferenceable(1) %0) #5
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local %"struct.std::_Rb_tree_node"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE8_S_rightEPSt18_Rb_tree_node_base(%"struct.std::_Rb_tree_node_base"* %__x) #2 comdat align 2 {
+entry:
+  %__x.addr = alloca %"struct.std::_Rb_tree_node_base"*, align 8
+  store %"struct.std::_Rb_tree_node_base"* %__x, %"struct.std::_Rb_tree_node_base"** %__x.addr, align 8
+  %0 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %__x.addr, align 8
+  %_M_right = getelementptr inbounds %"struct.std::_Rb_tree_node_base", %"struct.std::_Rb_tree_node_base"* %0, i32 0, i32 3
+  %1 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %_M_right, align 8
+  %2 = bitcast %"struct.std::_Rb_tree_node_base"* %1 to %"struct.std::_Rb_tree_node"*
+  ret %"struct.std::_Rb_tree_node"* %2
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local %"struct.std::_Rb_tree_node"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE7_S_leftEPSt18_Rb_tree_node_base(%"struct.std::_Rb_tree_node_base"* %__x) #2 comdat align 2 {
+entry:
+  %__x.addr = alloca %"struct.std::_Rb_tree_node_base"*, align 8
+  store %"struct.std::_Rb_tree_node_base"* %__x, %"struct.std::_Rb_tree_node_base"** %__x.addr, align 8
+  %0 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %__x.addr, align 8
+  %_M_left = getelementptr inbounds %"struct.std::_Rb_tree_node_base", %"struct.std::_Rb_tree_node_base"* %0, i32 0, i32 2
+  %1 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %_M_left, align 8
+  %2 = bitcast %"struct.std::_Rb_tree_node_base"* %1 to %"struct.std::_Rb_tree_node"*
+  ret %"struct.std::_Rb_tree_node"* %2
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE12_M_drop_nodeEPSt13_Rb_tree_nodeIS3_E(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this, %"struct.std::_Rb_tree_node"* %__p) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::_Rb_tree"*, align 8
+  %__p.addr = alloca %"struct.std::_Rb_tree_node"*, align 8
+  store %"class.std::_Rb_tree"* %this, %"class.std::_Rb_tree"** %this.addr, align 8
+  store %"struct.std::_Rb_tree_node"* %__p, %"struct.std::_Rb_tree_node"** %__p.addr, align 8
+  %this1 = load %"class.std::_Rb_tree"*, %"class.std::_Rb_tree"** %this.addr, align 8
+  %0 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__p.addr, align 8
+  call void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE15_M_destroy_nodeEPSt13_Rb_tree_nodeIS3_E(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1, %"struct.std::_Rb_tree_node"* %0) #5
+  %1 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__p.addr, align 8
+  call void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE11_M_put_nodeEPSt13_Rb_tree_nodeIS3_E(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1, %"struct.std::_Rb_tree_node"* %1) #5
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE15_M_destroy_nodeEPSt13_Rb_tree_nodeIS3_E(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this, %"struct.std::_Rb_tree_node"* %__p) #2 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+entry:
+  %this.addr = alloca %"class.std::_Rb_tree"*, align 8
+  %__p.addr = alloca %"struct.std::_Rb_tree_node"*, align 8
+  store %"class.std::_Rb_tree"* %this, %"class.std::_Rb_tree"** %this.addr, align 8
+  store %"struct.std::_Rb_tree_node"* %__p, %"struct.std::_Rb_tree_node"** %__p.addr, align 8
+  %this1 = load %"class.std::_Rb_tree"*, %"class.std::_Rb_tree"** %this.addr, align 8
+  %call = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE21_M_get_Node_allocatorEv(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1) #5
+  %0 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__p.addr, align 8
+  %call2 = invoke %"struct.std::pair.3"* @_ZNSt13_Rb_tree_nodeISt4pairIKi1AEE9_M_valptrEv(%"struct.std::_Rb_tree_node"* nonnull dereferenceable(48) %0)
+          to label %invoke.cont unwind label %terminate.lpad
+
+invoke.cont:                                      ; preds = %entry
+  call void @_ZNSt16allocator_traitsISaISt13_Rb_tree_nodeISt4pairIKi1AEEEE7destroyIS4_EEvRS6_PT_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %call, %"struct.std::pair.3"* %call2) #5
+  %1 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__p.addr, align 8
+  ret void
+
+terminate.lpad:                                   ; preds = %entry
+  %2 = landingpad { i8*, i32 }
+          catch i8* null
+  %3 = extractvalue { i8*, i32 } %2, 0
+  call void @__clang_call_terminate(i8* %3) #15
+  unreachable
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE11_M_put_nodeEPSt13_Rb_tree_nodeIS3_E(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this, %"struct.std::_Rb_tree_node"* %__p) #2 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+entry:
+  %this.addr = alloca %"class.std::_Rb_tree"*, align 8
+  %__p.addr = alloca %"struct.std::_Rb_tree_node"*, align 8
+  store %"class.std::_Rb_tree"* %this, %"class.std::_Rb_tree"** %this.addr, align 8
+  store %"struct.std::_Rb_tree_node"* %__p, %"struct.std::_Rb_tree_node"** %__p.addr, align 8
+  %this1 = load %"class.std::_Rb_tree"*, %"class.std::_Rb_tree"** %this.addr, align 8
+  %call = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE21_M_get_Node_allocatorEv(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1) #5
+  %0 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__p.addr, align 8
+  invoke void @_ZNSt16allocator_traitsISaISt13_Rb_tree_nodeISt4pairIKi1AEEEE10deallocateERS6_PS5_m(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %call, %"struct.std::_Rb_tree_node"* %0, i64 1)
+          to label %invoke.cont unwind label %terminate.lpad
+
+invoke.cont:                                      ; preds = %entry
+  ret void
+
+terminate.lpad:                                   ; preds = %entry
+  %1 = landingpad { i8*, i32 }
+          catch i8* null
+  %2 = extractvalue { i8*, i32 } %1, 0
+  call void @__clang_call_terminate(i8* %2) #15
+  unreachable
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local void @_ZNSt16allocator_traitsISaISt13_Rb_tree_nodeISt4pairIKi1AEEEE7destroyIS4_EEvRS6_PT_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %__a, %"struct.std::pair.3"* %__p) #2 comdat align 2 {
+entry:
+  %__a.addr = alloca %"class.std::allocator"*, align 8
+  %__p.addr = alloca %"struct.std::pair.3"*, align 8
+  store %"class.std::allocator"* %__a, %"class.std::allocator"** %__a.addr, align 8
+  store %"struct.std::pair.3"* %__p, %"struct.std::pair.3"** %__p.addr, align 8
+  %0 = load %"class.std::allocator"*, %"class.std::allocator"** %__a.addr, align 8
+  %1 = bitcast %"class.std::allocator"* %0 to %"class.__gnu_cxx::new_allocator"*
+  %2 = load %"struct.std::pair.3"*, %"struct.std::pair.3"** %__p.addr, align 8
+  call void @_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEE7destroyIS5_EEvPT_(%"class.__gnu_cxx::new_allocator"* nonnull dereferenceable(1) %1, %"struct.std::pair.3"* %2) #5
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE21_M_get_Node_allocatorEv(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::_Rb_tree"*, align 8
+  store %"class.std::_Rb_tree"* %this, %"class.std::_Rb_tree"** %this.addr, align 8
+  %this1 = load %"class.std::_Rb_tree"*, %"class.std::_Rb_tree"** %this.addr, align 8
+  %_M_impl = getelementptr inbounds %"class.std::_Rb_tree", %"class.std::_Rb_tree"* %this1, i32 0, i32 0
+  %0 = bitcast %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* %_M_impl to %"class.std::allocator"*
+  ret %"class.std::allocator"* %0
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local %"struct.std::pair.3"* @_ZNSt13_Rb_tree_nodeISt4pairIKi1AEE9_M_valptrEv(%"struct.std::_Rb_tree_node"* nonnull dereferenceable(48) %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::_Rb_tree_node"*, align 8
+  store %"struct.std::_Rb_tree_node"* %this, %"struct.std::_Rb_tree_node"** %this.addr, align 8
+  %this1 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %this.addr, align 8
+  %_M_storage = getelementptr inbounds %"struct.std::_Rb_tree_node", %"struct.std::_Rb_tree_node"* %this1, i32 0, i32 1
+  %call = call %"struct.std::pair.3"* @_ZN9__gnu_cxx16__aligned_membufISt4pairIKi1AEE6_M_ptrEv(%"struct.__gnu_cxx::__aligned_membuf"* nonnull dereferenceable(16) %_M_storage) #5
+  ret %"struct.std::pair.3"* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEE7destroyIS5_EEvPT_(%"class.__gnu_cxx::new_allocator"* nonnull dereferenceable(1) %this, %"struct.std::pair.3"* %__p) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.__gnu_cxx::new_allocator"*, align 8
+  %__p.addr = alloca %"struct.std::pair.3"*, align 8
+  store %"class.__gnu_cxx::new_allocator"* %this, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
+  store %"struct.std::pair.3"* %__p, %"struct.std::pair.3"** %__p.addr, align 8
+  %this1 = load %"class.__gnu_cxx::new_allocator"*, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
+  %0 = load %"struct.std::pair.3"*, %"struct.std::pair.3"** %__p.addr, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local %"struct.std::pair.3"* @_ZN9__gnu_cxx16__aligned_membufISt4pairIKi1AEE6_M_ptrEv(%"struct.__gnu_cxx::__aligned_membuf"* nonnull dereferenceable(16) %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.__gnu_cxx::__aligned_membuf"*, align 8
+  store %"struct.__gnu_cxx::__aligned_membuf"* %this, %"struct.__gnu_cxx::__aligned_membuf"** %this.addr, align 8
+  %this1 = load %"struct.__gnu_cxx::__aligned_membuf"*, %"struct.__gnu_cxx::__aligned_membuf"** %this.addr, align 8
+  %call = call i8* @_ZN9__gnu_cxx16__aligned_membufISt4pairIKi1AEE7_M_addrEv(%"struct.__gnu_cxx::__aligned_membuf"* nonnull dereferenceable(16) %this1) #5
+  %0 = bitcast i8* %call to %"struct.std::pair.3"*
+  ret %"struct.std::pair.3"* %0
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local i8* @_ZN9__gnu_cxx16__aligned_membufISt4pairIKi1AEE7_M_addrEv(%"struct.__gnu_cxx::__aligned_membuf"* nonnull dereferenceable(16) %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.__gnu_cxx::__aligned_membuf"*, align 8
+  store %"struct.__gnu_cxx::__aligned_membuf"* %this, %"struct.__gnu_cxx::__aligned_membuf"** %this.addr, align 8
+  %this1 = load %"struct.__gnu_cxx::__aligned_membuf"*, %"struct.__gnu_cxx::__aligned_membuf"** %this.addr, align 8
+  %_M_storage = getelementptr inbounds %"struct.__gnu_cxx::__aligned_membuf", %"struct.__gnu_cxx::__aligned_membuf"* %this1, i32 0, i32 0
+  %0 = bitcast [16 x i8]* %_M_storage to i8*
+  ret i8* %0
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define linkonce_odr dso_local void @_ZNSt16allocator_traitsISaISt13_Rb_tree_nodeISt4pairIKi1AEEEE10deallocateERS6_PS5_m(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %__a, %"struct.std::_Rb_tree_node"* %__p, i64 %__n) #0 comdat align 2 {
+entry:
+  %__a.addr = alloca %"class.std::allocator"*, align 8
+  %__p.addr = alloca %"struct.std::_Rb_tree_node"*, align 8
+  %__n.addr = alloca i64, align 8
+  store %"class.std::allocator"* %__a, %"class.std::allocator"** %__a.addr, align 8
+  store %"struct.std::_Rb_tree_node"* %__p, %"struct.std::_Rb_tree_node"** %__p.addr, align 8
+  store i64 %__n, i64* %__n.addr, align 8
+  %0 = load %"class.std::allocator"*, %"class.std::allocator"** %__a.addr, align 8
+  %1 = bitcast %"class.std::allocator"* %0 to %"class.__gnu_cxx::new_allocator"*
+  %2 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__p.addr, align 8
+  %3 = load i64, i64* %__n.addr, align 8
+  call void @_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEE10deallocateEPS6_m(%"class.__gnu_cxx::new_allocator"* nonnull dereferenceable(1) %1, %"struct.std::_Rb_tree_node"* %2, i64 %3)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEE10deallocateEPS6_m(%"class.__gnu_cxx::new_allocator"* nonnull dereferenceable(1) %this, %"struct.std::_Rb_tree_node"* %__p, i64 %__t) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.__gnu_cxx::new_allocator"*, align 8
+  %__p.addr = alloca %"struct.std::_Rb_tree_node"*, align 8
+  %__t.addr = alloca i64, align 8
+  store %"class.__gnu_cxx::new_allocator"* %this, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
+  store %"struct.std::_Rb_tree_node"* %__p, %"struct.std::_Rb_tree_node"** %__p.addr, align 8
+  store i64 %__t, i64* %__t.addr, align 8
+  %this1 = load %"class.__gnu_cxx::new_allocator"*, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
+  %0 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__p.addr, align 8
+  %1 = bitcast %"struct.std::_Rb_tree_node"* %0 to i8*
+  call void @_ZdlPv(i8* %1) #5
+  ret void
+}
+
+; Function Attrs: nobuiltin nounwind
+declare dso_local void @_ZdlPv(i8*) #9
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSaISt13_Rb_tree_nodeISt4pairIKi1AEEED2Ev(%"class.std::allocator"* nonnull dereferenceable(1) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::allocator"*, align 8
+  store %"class.std::allocator"* %this, %"class.std::allocator"** %this.addr, align 8
+  %this1 = load %"class.std::allocator"*, %"class.std::allocator"** %this.addr, align 8
+  %0 = bitcast %"class.std::allocator"* %this1 to %"class.__gnu_cxx::new_allocator"*
+  call void @_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEED2Ev(%"class.__gnu_cxx::new_allocator"* nonnull dereferenceable(1) %0) #5
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEED2Ev(%"class.__gnu_cxx::new_allocator"* nonnull dereferenceable(1) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.__gnu_cxx::new_allocator"*, align 8
+  store %"class.__gnu_cxx::new_allocator"* %this, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
+  %this1 = load %"class.__gnu_cxx::new_allocator"*, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define linkonce_odr dso_local { %"struct.std::_Rb_tree_node_base"*, i8 } @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE17_M_emplace_uniqueIJS0_IiS2_EEEES0_ISt17_Rb_tree_iteratorIS3_EbEDpOT_(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this, %"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %__args) #0 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+entry:
+  %retval = alloca %"struct.std::pair", align 8
+  %this.addr = alloca %"class.std::_Rb_tree"*, align 8
+  %__args.addr = alloca %"struct.std::pair.0"*, align 8
+  %__z = alloca %"struct.std::_Rb_tree_node"*, align 8
+  %__res = alloca %"struct.std::pair.6", align 8
+  %exn.slot = alloca i8*, align 8
+  %ehselector.slot = alloca i32, align 4
+  %ref.tmp = alloca %"struct.std::_Rb_tree_iterator", align 8
+  %ref.tmp9 = alloca i8, align 1
+  %ref.tmp11 = alloca %"struct.std::_Rb_tree_iterator", align 8
+  %ref.tmp13 = alloca i8, align 1
+  store %"class.std::_Rb_tree"* %this, %"class.std::_Rb_tree"** %this.addr, align 8
+  store %"struct.std::pair.0"* %__args, %"struct.std::pair.0"** %__args.addr, align 8
+  %this1 = load %"class.std::_Rb_tree"*, %"class.std::_Rb_tree"** %this.addr, align 8
+  %0 = load %"struct.std::pair.0"*, %"struct.std::pair.0"** %__args.addr, align 8
+  %call = call nonnull align 8 dereferenceable(16) %"struct.std::pair.0"* @_ZSt7forwardISt4pairIi1AEEOT_RNSt16remove_referenceIS3_E4typeE(%"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %0) #5
+  %call2 = call %"struct.std::_Rb_tree_node"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE14_M_create_nodeIJS0_IiS2_EEEEPSt13_Rb_tree_nodeIS3_EDpOT_(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1, %"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %call)
+  store %"struct.std::_Rb_tree_node"* %call2, %"struct.std::_Rb_tree_node"** %__z, align 8
+  %1 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__z, align 8
+  %call3 = invoke nonnull align 4 dereferenceable(4) i32* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE6_S_keyEPKSt13_Rb_tree_nodeIS3_E(%"struct.std::_Rb_tree_node"* %1)
+          to label %invoke.cont unwind label %lpad
+
+invoke.cont:                                      ; preds = %entry
+  %call5 = invoke { %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"* } @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE24_M_get_insert_unique_posERS1_(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1, i32* nonnull align 4 dereferenceable(4) %call3)
+          to label %invoke.cont4 unwind label %lpad
+
+invoke.cont4:                                     ; preds = %invoke.cont
+  %2 = bitcast %"struct.std::pair.6"* %__res to { %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"* }*
+  %3 = getelementptr inbounds { %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"* }, { %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"* }* %2, i32 0, i32 0
+  %4 = extractvalue { %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"* } %call5, 0
+  store %"struct.std::_Rb_tree_node_base"* %4, %"struct.std::_Rb_tree_node_base"** %3, align 8
+  %5 = getelementptr inbounds { %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"* }, { %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"* }* %2, i32 0, i32 1
+  %6 = extractvalue { %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"* } %call5, 1
+  store %"struct.std::_Rb_tree_node_base"* %6, %"struct.std::_Rb_tree_node_base"** %5, align 8
+  %second = getelementptr inbounds %"struct.std::pair.6", %"struct.std::pair.6"* %__res, i32 0, i32 1
+  %7 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %second, align 8
+  %tobool = icmp ne %"struct.std::_Rb_tree_node_base"* %7, null
+  br i1 %tobool, label %if.then, label %if.end
+
+if.then:                                          ; preds = %invoke.cont4
+  %first = getelementptr inbounds %"struct.std::pair.6", %"struct.std::pair.6"* %__res, i32 0, i32 0
+  %8 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %first, align 8
+  %second6 = getelementptr inbounds %"struct.std::pair.6", %"struct.std::pair.6"* %__res, i32 0, i32 1
+  %9 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %second6, align 8
+  %10 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__z, align 8
+  %call8 = invoke %"struct.std::_Rb_tree_node_base"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE14_M_insert_nodeEPSt18_Rb_tree_node_baseSB_PSt13_Rb_tree_nodeIS3_E(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1, %"struct.std::_Rb_tree_node_base"* %8, %"struct.std::_Rb_tree_node_base"* %9, %"struct.std::_Rb_tree_node"* %10)
+          to label %invoke.cont7 unwind label %lpad
+
+invoke.cont7:                                     ; preds = %if.then
+  %coerce.dive = getelementptr inbounds %"struct.std::_Rb_tree_iterator", %"struct.std::_Rb_tree_iterator"* %ref.tmp, i32 0, i32 0
+  store %"struct.std::_Rb_tree_node_base"* %call8, %"struct.std::_Rb_tree_node_base"** %coerce.dive, align 8
+  store i8 1, i8* %ref.tmp9, align 1
+  invoke void @_ZNSt4pairISt17_Rb_tree_iteratorIS_IKi1AEEbEC2IS4_bLb1EEEOT_OT0_(%"struct.std::pair"* nonnull dereferenceable(9) %retval, %"struct.std::_Rb_tree_iterator"* nonnull align 8 dereferenceable(8) %ref.tmp, i8* nonnull align 1 dereferenceable(1) %ref.tmp9)
+          to label %invoke.cont10 unwind label %lpad
+
+invoke.cont10:                                    ; preds = %invoke.cont7
+  br label %return
+
+lpad:                                             ; preds = %if.end, %invoke.cont7, %if.then, %invoke.cont, %entry
+  %11 = landingpad { i8*, i32 }
+          catch i8* null
+  %12 = extractvalue { i8*, i32 } %11, 0
+  store i8* %12, i8** %exn.slot, align 8
+  %13 = extractvalue { i8*, i32 } %11, 1
+  store i32 %13, i32* %ehselector.slot, align 4
+  br label %catch
+
+catch:                                            ; preds = %lpad
+  %exn = load i8*, i8** %exn.slot, align 8
+  %14 = call i8* @__cxa_begin_catch(i8* %exn) #5
+  %15 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__z, align 8
+  call void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE12_M_drop_nodeEPSt13_Rb_tree_nodeIS3_E(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1, %"struct.std::_Rb_tree_node"* %15) #5
+  invoke void @__cxa_rethrow() #16
+          to label %unreachable unwind label %lpad15
+
+if.end:                                           ; preds = %invoke.cont4
+  %16 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__z, align 8
+  call void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE12_M_drop_nodeEPSt13_Rb_tree_nodeIS3_E(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1, %"struct.std::_Rb_tree_node"* %16) #5
+  %first12 = getelementptr inbounds %"struct.std::pair.6", %"struct.std::pair.6"* %__res, i32 0, i32 0
+  %17 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %first12, align 8
+  call void @_ZNSt17_Rb_tree_iteratorISt4pairIKi1AEEC2EPSt18_Rb_tree_node_base(%"struct.std::_Rb_tree_iterator"* nonnull dereferenceable(8) %ref.tmp11, %"struct.std::_Rb_tree_node_base"* %17) #5
+  store i8 0, i8* %ref.tmp13, align 1
+  invoke void @_ZNSt4pairISt17_Rb_tree_iteratorIS_IKi1AEEbEC2IS4_bLb1EEEOT_OT0_(%"struct.std::pair"* nonnull dereferenceable(9) %retval, %"struct.std::_Rb_tree_iterator"* nonnull align 8 dereferenceable(8) %ref.tmp11, i8* nonnull align 1 dereferenceable(1) %ref.tmp13)
+          to label %invoke.cont14 unwind label %lpad
+
+invoke.cont14:                                    ; preds = %if.end
+  br label %return
+
+lpad15:                                           ; preds = %catch
+  %18 = landingpad { i8*, i32 }
+          cleanup
+  %19 = extractvalue { i8*, i32 } %18, 0
+  store i8* %19, i8** %exn.slot, align 8
+  %20 = extractvalue { i8*, i32 } %18, 1
+  store i32 %20, i32* %ehselector.slot, align 4
+  invoke void @__cxa_end_catch()
+          to label %invoke.cont16 unwind label %terminate.lpad
+
+invoke.cont16:                                    ; preds = %lpad15
+  br label %eh.resume
+
+try.cont:                                         ; No predecessors!
+  call void @llvm.trap()
+  unreachable
+
+return:                                           ; preds = %invoke.cont14, %invoke.cont10
+  %21 = bitcast %"struct.std::pair"* %retval to { %"struct.std::_Rb_tree_node_base"*, i8 }*
+  %22 = load { %"struct.std::_Rb_tree_node_base"*, i8 }, { %"struct.std::_Rb_tree_node_base"*, i8 }* %21, align 8
+  ret { %"struct.std::_Rb_tree_node_base"*, i8 } %22
+
+eh.resume:                                        ; preds = %invoke.cont16
+  %exn17 = load i8*, i8** %exn.slot, align 8
+  %sel = load i32, i32* %ehselector.slot, align 4
+  %lpad.val = insertvalue { i8*, i32 } undef, i8* %exn17, 0
+  %lpad.val18 = insertvalue { i8*, i32 } %lpad.val, i32 %sel, 1
+  resume { i8*, i32 } %lpad.val18
+
+terminate.lpad:                                   ; preds = %lpad15
+  %23 = landingpad { i8*, i32 }
+          catch i8* null
+  %24 = extractvalue { i8*, i32 } %23, 0
+  call void @__clang_call_terminate(i8* %24) #15
+  unreachable
+
+unreachable:                                      ; preds = %catch
+  unreachable
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local nonnull align 8 dereferenceable(16) %"struct.std::pair.0"* @_ZSt7forwardISt4pairIi1AEEOT_RNSt16remove_referenceIS3_E4typeE(%"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %__t) #2 comdat {
+entry:
+  %__t.addr = alloca %"struct.std::pair.0"*, align 8
+  store %"struct.std::pair.0"* %__t, %"struct.std::pair.0"** %__t.addr, align 8
+  %0 = load %"struct.std::pair.0"*, %"struct.std::pair.0"** %__t.addr, align 8
+  ret %"struct.std::pair.0"* %0
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define linkonce_odr dso_local %"struct.std::_Rb_tree_node"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE14_M_create_nodeIJS0_IiS2_EEEEPSt13_Rb_tree_nodeIS3_EDpOT_(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this, %"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %__args) #0 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::_Rb_tree"*, align 8
+  %__args.addr = alloca %"struct.std::pair.0"*, align 8
+  %__tmp = alloca %"struct.std::_Rb_tree_node"*, align 8
+  store %"class.std::_Rb_tree"* %this, %"class.std::_Rb_tree"** %this.addr, align 8
+  store %"struct.std::pair.0"* %__args, %"struct.std::pair.0"** %__args.addr, align 8
+  %this1 = load %"class.std::_Rb_tree"*, %"class.std::_Rb_tree"** %this.addr, align 8
+  %call = call %"struct.std::_Rb_tree_node"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE11_M_get_nodeEv(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1)
+  store %"struct.std::_Rb_tree_node"* %call, %"struct.std::_Rb_tree_node"** %__tmp, align 8
+  %0 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__tmp, align 8
+  %1 = load %"struct.std::pair.0"*, %"struct.std::pair.0"** %__args.addr, align 8
+  %call2 = call nonnull align 8 dereferenceable(16) %"struct.std::pair.0"* @_ZSt7forwardISt4pairIi1AEEOT_RNSt16remove_referenceIS3_E4typeE(%"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %1) #5
+  call void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE17_M_construct_nodeIJS0_IiS2_EEEEvPSt13_Rb_tree_nodeIS3_EDpOT_(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1, %"struct.std::_Rb_tree_node"* %0, %"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %call2)
+  %2 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__tmp, align 8
+  ret %"struct.std::_Rb_tree_node"* %2
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define linkonce_odr dso_local { %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"* } @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE24_M_get_insert_unique_posERS1_(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this, i32* nonnull align 4 dereferenceable(4) %__k) #0 comdat align 2 {
+entry:
+  %retval = alloca %"struct.std::pair.6", align 8
+  %this.addr = alloca %"class.std::_Rb_tree"*, align 8
+  %__k.addr = alloca i32*, align 8
+  %__x = alloca %"struct.std::_Rb_tree_node"*, align 8
+  %__y = alloca %"struct.std::_Rb_tree_node_base"*, align 8
+  %__comp = alloca i8, align 1
+  %__j = alloca %"struct.std::_Rb_tree_iterator", align 8
+  %ref.tmp = alloca %"struct.std::_Rb_tree_iterator", align 8
+  %ref.tmp20 = alloca %"struct.std::_Rb_tree_node_base"*, align 8
+  store %"class.std::_Rb_tree"* %this, %"class.std::_Rb_tree"** %this.addr, align 8
+  store i32* %__k, i32** %__k.addr, align 8
+  %this1 = load %"class.std::_Rb_tree"*, %"class.std::_Rb_tree"** %this.addr, align 8
+  %call = call %"struct.std::_Rb_tree_node"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE8_M_beginEv(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1) #5
+  store %"struct.std::_Rb_tree_node"* %call, %"struct.std::_Rb_tree_node"** %__x, align 8
+  %call2 = call %"struct.std::_Rb_tree_node_base"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE6_M_endEv(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1) #5
+  store %"struct.std::_Rb_tree_node_base"* %call2, %"struct.std::_Rb_tree_node_base"** %__y, align 8
+  store i8 1, i8* %__comp, align 1
+  br label %while.cond
+
+while.cond:                                       ; preds = %cond.end, %entry
+  %0 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__x, align 8
+  %cmp = icmp ne %"struct.std::_Rb_tree_node"* %0, null
+  br i1 %cmp, label %while.body, label %while.end
+
+while.body:                                       ; preds = %while.cond
+  %1 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__x, align 8
+  %2 = bitcast %"struct.std::_Rb_tree_node"* %1 to %"struct.std::_Rb_tree_node_base"*
+  store %"struct.std::_Rb_tree_node_base"* %2, %"struct.std::_Rb_tree_node_base"** %__y, align 8
+  %_M_impl = getelementptr inbounds %"class.std::_Rb_tree", %"class.std::_Rb_tree"* %this1, i32 0, i32 0
+  %3 = bitcast %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* %_M_impl to %"struct.std::_Rb_tree_key_compare"*
+  %_M_key_compare = getelementptr inbounds %"struct.std::_Rb_tree_key_compare", %"struct.std::_Rb_tree_key_compare"* %3, i32 0, i32 0
+  %4 = load i32*, i32** %__k.addr, align 8
+  %5 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__x, align 8
+  %call3 = call nonnull align 4 dereferenceable(4) i32* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE6_S_keyEPKSt13_Rb_tree_nodeIS3_E(%"struct.std::_Rb_tree_node"* %5)
+  %call4 = call zeroext i1 @_ZNKSt4lessIiEclERKiS2_(%"struct.std::less"* nonnull dereferenceable(1) %_M_key_compare, i32* nonnull align 4 dereferenceable(4) %4, i32* nonnull align 4 dereferenceable(4) %call3)
+  %frombool = zext i1 %call4 to i8
+  store i8 %frombool, i8* %__comp, align 1
+  %6 = load i8, i8* %__comp, align 1
+  %tobool = trunc i8 %6 to i1
+  br i1 %tobool, label %cond.true, label %cond.false
+
+cond.true:                                        ; preds = %while.body
+  %7 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__x, align 8
+  %8 = bitcast %"struct.std::_Rb_tree_node"* %7 to %"struct.std::_Rb_tree_node_base"*
+  %call5 = call %"struct.std::_Rb_tree_node"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE7_S_leftEPSt18_Rb_tree_node_base(%"struct.std::_Rb_tree_node_base"* %8) #5
+  br label %cond.end
+
+cond.false:                                       ; preds = %while.body
+  %9 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__x, align 8
+  %10 = bitcast %"struct.std::_Rb_tree_node"* %9 to %"struct.std::_Rb_tree_node_base"*
+  %call6 = call %"struct.std::_Rb_tree_node"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE8_S_rightEPSt18_Rb_tree_node_base(%"struct.std::_Rb_tree_node_base"* %10) #5
+  br label %cond.end
+
+cond.end:                                         ; preds = %cond.false, %cond.true
+  %cond = phi %"struct.std::_Rb_tree_node"* [ %call5, %cond.true ], [ %call6, %cond.false ]
+  store %"struct.std::_Rb_tree_node"* %cond, %"struct.std::_Rb_tree_node"** %__x, align 8
+  br label %while.cond, !llvm.loop !4
+
+while.end:                                        ; preds = %while.cond
+  %11 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %__y, align 8
+  call void @_ZNSt17_Rb_tree_iteratorISt4pairIKi1AEEC2EPSt18_Rb_tree_node_base(%"struct.std::_Rb_tree_iterator"* nonnull dereferenceable(8) %__j, %"struct.std::_Rb_tree_node_base"* %11) #5
+  %12 = load i8, i8* %__comp, align 1
+  %tobool7 = trunc i8 %12 to i1
+  br i1 %tobool7, label %if.then, label %if.end12
+
+if.then:                                          ; preds = %while.end
+  %call8 = call %"struct.std::_Rb_tree_node_base"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE5beginEv(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1) #5
+  %coerce.dive = getelementptr inbounds %"struct.std::_Rb_tree_iterator", %"struct.std::_Rb_tree_iterator"* %ref.tmp, i32 0, i32 0
+  store %"struct.std::_Rb_tree_node_base"* %call8, %"struct.std::_Rb_tree_node_base"** %coerce.dive, align 8
+  %call9 = call zeroext i1 @_ZSteqRKSt17_Rb_tree_iteratorISt4pairIKi1AEES6_(%"struct.std::_Rb_tree_iterator"* nonnull align 8 dereferenceable(8) %__j, %"struct.std::_Rb_tree_iterator"* nonnull align 8 dereferenceable(8) %ref.tmp) #5
+  br i1 %call9, label %if.then10, label %if.else
+
+if.then10:                                        ; preds = %if.then
+  call void @_ZNSt4pairIPSt18_Rb_tree_node_baseS1_EC2IRPSt13_Rb_tree_nodeIS_IKi1AEERS1_Lb1EEEOT_OT0_(%"struct.std::pair.6"* nonnull dereferenceable(16) %retval, %"struct.std::_Rb_tree_node"** nonnull align 8 dereferenceable(8) %__x, %"struct.std::_Rb_tree_node_base"** nonnull align 8 dereferenceable(8) %__y)
+  br label %return
+
+if.else:                                          ; preds = %if.then
+  %call11 = call nonnull align 8 dereferenceable(8) %"struct.std::_Rb_tree_iterator"* @_ZNSt17_Rb_tree_iteratorISt4pairIKi1AEEmmEv(%"struct.std::_Rb_tree_iterator"* nonnull dereferenceable(8) %__j) #5
+  br label %if.end
+
+if.end:                                           ; preds = %if.else
+  br label %if.end12
+
+if.end12:                                         ; preds = %if.end, %while.end
+  %_M_impl13 = getelementptr inbounds %"class.std::_Rb_tree", %"class.std::_Rb_tree"* %this1, i32 0, i32 0
+  %13 = bitcast %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* %_M_impl13 to %"struct.std::_Rb_tree_key_compare"*
+  %_M_key_compare14 = getelementptr inbounds %"struct.std::_Rb_tree_key_compare", %"struct.std::_Rb_tree_key_compare"* %13, i32 0, i32 0
+  %_M_node = getelementptr inbounds %"struct.std::_Rb_tree_iterator", %"struct.std::_Rb_tree_iterator"* %__j, i32 0, i32 0
+  %14 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %_M_node, align 8
+  %call15 = call nonnull align 4 dereferenceable(4) i32* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE6_S_keyEPKSt18_Rb_tree_node_base(%"struct.std::_Rb_tree_node_base"* %14)
+  %15 = load i32*, i32** %__k.addr, align 8
+  %call16 = call zeroext i1 @_ZNKSt4lessIiEclERKiS2_(%"struct.std::less"* nonnull dereferenceable(1) %_M_key_compare14, i32* nonnull align 4 dereferenceable(4) %call15, i32* nonnull align 4 dereferenceable(4) %15)
+  br i1 %call16, label %if.then17, label %if.end18
+
+if.then17:                                        ; preds = %if.end12
+  call void @_ZNSt4pairIPSt18_Rb_tree_node_baseS1_EC2IRPSt13_Rb_tree_nodeIS_IKi1AEERS1_Lb1EEEOT_OT0_(%"struct.std::pair.6"* nonnull dereferenceable(16) %retval, %"struct.std::_Rb_tree_node"** nonnull align 8 dereferenceable(8) %__x, %"struct.std::_Rb_tree_node_base"** nonnull align 8 dereferenceable(8) %__y)
+  br label %return
+
+if.end18:                                         ; preds = %if.end12
+  %_M_node19 = getelementptr inbounds %"struct.std::_Rb_tree_iterator", %"struct.std::_Rb_tree_iterator"* %__j, i32 0, i32 0
+  store %"struct.std::_Rb_tree_node_base"* null, %"struct.std::_Rb_tree_node_base"** %ref.tmp20, align 8
+  call void @_ZNSt4pairIPSt18_Rb_tree_node_baseS1_EC2IRS1_Lb1EEEOT_RKS1_(%"struct.std::pair.6"* nonnull dereferenceable(16) %retval, %"struct.std::_Rb_tree_node_base"** nonnull align 8 dereferenceable(8) %_M_node19, %"struct.std::_Rb_tree_node_base"** nonnull align 8 dereferenceable(8) %ref.tmp20)
+  br label %return
+
+return:                                           ; preds = %if.end18, %if.then17, %if.then10
+  %16 = bitcast %"struct.std::pair.6"* %retval to { %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"* }*
+  %17 = load { %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"* }, { %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"* }* %16, align 8
+  ret { %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"* } %17
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define linkonce_odr dso_local nonnull align 4 dereferenceable(4) i32* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE6_S_keyEPKSt13_Rb_tree_nodeIS3_E(%"struct.std::_Rb_tree_node"* %__x) #0 comdat align 2 {
+entry:
+  %__x.addr = alloca %"struct.std::_Rb_tree_node"*, align 8
+  %ref.tmp = alloca %"struct.std::_Select1st", align 1
+  store %"struct.std::_Rb_tree_node"* %__x, %"struct.std::_Rb_tree_node"** %__x.addr, align 8
+  %0 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__x.addr, align 8
+  %call = call %"struct.std::pair.3"* @_ZNKSt13_Rb_tree_nodeISt4pairIKi1AEE9_M_valptrEv(%"struct.std::_Rb_tree_node"* nonnull dereferenceable(48) %0)
+  %call1 = call nonnull align 4 dereferenceable(4) i32* @_ZNKSt10_Select1stISt4pairIKi1AEEclERKS3_(%"struct.std::_Select1st"* nonnull dereferenceable(1) %ref.tmp, %"struct.std::pair.3"* nonnull align 8 dereferenceable(16) %call)
+  ret i32* %call1
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define linkonce_odr dso_local %"struct.std::_Rb_tree_node_base"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE14_M_insert_nodeEPSt18_Rb_tree_node_baseSB_PSt13_Rb_tree_nodeIS3_E(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this, %"struct.std::_Rb_tree_node_base"* %__x, %"struct.std::_Rb_tree_node_base"* %__p, %"struct.std::_Rb_tree_node"* %__z) #0 comdat align 2 {
+entry:
+  %retval = alloca %"struct.std::_Rb_tree_iterator", align 8
+  %this.addr = alloca %"class.std::_Rb_tree"*, align 8
+  %__x.addr = alloca %"struct.std::_Rb_tree_node_base"*, align 8
+  %__p.addr = alloca %"struct.std::_Rb_tree_node_base"*, align 8
+  %__z.addr = alloca %"struct.std::_Rb_tree_node"*, align 8
+  %__insert_left = alloca i8, align 1
+  store %"class.std::_Rb_tree"* %this, %"class.std::_Rb_tree"** %this.addr, align 8
+  store %"struct.std::_Rb_tree_node_base"* %__x, %"struct.std::_Rb_tree_node_base"** %__x.addr, align 8
+  store %"struct.std::_Rb_tree_node_base"* %__p, %"struct.std::_Rb_tree_node_base"** %__p.addr, align 8
+  store %"struct.std::_Rb_tree_node"* %__z, %"struct.std::_Rb_tree_node"** %__z.addr, align 8
+  %this1 = load %"class.std::_Rb_tree"*, %"class.std::_Rb_tree"** %this.addr, align 8
+  %0 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %__x.addr, align 8
+  %cmp = icmp ne %"struct.std::_Rb_tree_node_base"* %0, null
+  br i1 %cmp, label %lor.end, label %lor.lhs.false
+
+lor.lhs.false:                                    ; preds = %entry
+  %1 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %__p.addr, align 8
+  %call = call %"struct.std::_Rb_tree_node_base"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE6_M_endEv(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1) #5
+  %cmp2 = icmp eq %"struct.std::_Rb_tree_node_base"* %1, %call
+  br i1 %cmp2, label %lor.end, label %lor.rhs
+
+lor.rhs:                                          ; preds = %lor.lhs.false
+  %_M_impl = getelementptr inbounds %"class.std::_Rb_tree", %"class.std::_Rb_tree"* %this1, i32 0, i32 0
+  %2 = bitcast %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* %_M_impl to %"struct.std::_Rb_tree_key_compare"*
+  %_M_key_compare = getelementptr inbounds %"struct.std::_Rb_tree_key_compare", %"struct.std::_Rb_tree_key_compare"* %2, i32 0, i32 0
+  %3 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__z.addr, align 8
+  %call3 = call nonnull align 4 dereferenceable(4) i32* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE6_S_keyEPKSt13_Rb_tree_nodeIS3_E(%"struct.std::_Rb_tree_node"* %3)
+  %4 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %__p.addr, align 8
+  %call4 = call nonnull align 4 dereferenceable(4) i32* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE6_S_keyEPKSt18_Rb_tree_node_base(%"struct.std::_Rb_tree_node_base"* %4)
+  %call5 = call zeroext i1 @_ZNKSt4lessIiEclERKiS2_(%"struct.std::less"* nonnull dereferenceable(1) %_M_key_compare, i32* nonnull align 4 dereferenceable(4) %call3, i32* nonnull align 4 dereferenceable(4) %call4)
+  br label %lor.end
+
+lor.end:                                          ; preds = %lor.rhs, %lor.lhs.false, %entry
+  %5 = phi i1 [ true, %lor.lhs.false ], [ true, %entry ], [ %call5, %lor.rhs ]
+  %frombool = zext i1 %5 to i8
+  store i8 %frombool, i8* %__insert_left, align 1
+  %6 = load i8, i8* %__insert_left, align 1
+  %tobool = trunc i8 %6 to i1
+  %7 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__z.addr, align 8
+  %8 = bitcast %"struct.std::_Rb_tree_node"* %7 to %"struct.std::_Rb_tree_node_base"*
+  %9 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %__p.addr, align 8
+  %_M_impl6 = getelementptr inbounds %"class.std::_Rb_tree", %"class.std::_Rb_tree"* %this1, i32 0, i32 0
+  %10 = bitcast %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* %_M_impl6 to i8*
+  %add.ptr = getelementptr inbounds i8, i8* %10, i64 8
+  %11 = bitcast i8* %add.ptr to %"struct.std::_Rb_tree_header"*
+  %_M_header = getelementptr inbounds %"struct.std::_Rb_tree_header", %"struct.std::_Rb_tree_header"* %11, i32 0, i32 0
+  call void @_ZSt29_Rb_tree_insert_and_rebalancebPSt18_Rb_tree_node_baseS0_RS_(i1 zeroext %tobool, %"struct.std::_Rb_tree_node_base"* %8, %"struct.std::_Rb_tree_node_base"* %9, %"struct.std::_Rb_tree_node_base"* nonnull align 8 dereferenceable(32) %_M_header) #5
+  %_M_impl7 = getelementptr inbounds %"class.std::_Rb_tree", %"class.std::_Rb_tree"* %this1, i32 0, i32 0
+  %12 = bitcast %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* %_M_impl7 to i8*
+  %add.ptr8 = getelementptr inbounds i8, i8* %12, i64 8
+  %13 = bitcast i8* %add.ptr8 to %"struct.std::_Rb_tree_header"*
+  %_M_node_count = getelementptr inbounds %"struct.std::_Rb_tree_header", %"struct.std::_Rb_tree_header"* %13, i32 0, i32 1
+  %14 = load i64, i64* %_M_node_count, align 8
+  %inc = add i64 %14, 1
+  store i64 %inc, i64* %_M_node_count, align 8
+  %15 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__z.addr, align 8
+  %16 = bitcast %"struct.std::_Rb_tree_node"* %15 to %"struct.std::_Rb_tree_node_base"*
+  call void @_ZNSt17_Rb_tree_iteratorISt4pairIKi1AEEC2EPSt18_Rb_tree_node_base(%"struct.std::_Rb_tree_iterator"* nonnull dereferenceable(8) %retval, %"struct.std::_Rb_tree_node_base"* %16) #5
+  %coerce.dive = getelementptr inbounds %"struct.std::_Rb_tree_iterator", %"struct.std::_Rb_tree_iterator"* %retval, i32 0, i32 0
+  %17 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %coerce.dive, align 8
+  ret %"struct.std::_Rb_tree_node_base"* %17
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt4pairISt17_Rb_tree_iteratorIS_IKi1AEEbEC2IS4_bLb1EEEOT_OT0_(%"struct.std::pair"* nonnull dereferenceable(9) %this, %"struct.std::_Rb_tree_iterator"* nonnull align 8 dereferenceable(8) %__x, i8* nonnull align 1 dereferenceable(1) %__y) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::pair"*, align 8
+  %__x.addr = alloca %"struct.std::_Rb_tree_iterator"*, align 8
+  %__y.addr = alloca i8*, align 8
+  store %"struct.std::pair"* %this, %"struct.std::pair"** %this.addr, align 8
+  store %"struct.std::_Rb_tree_iterator"* %__x, %"struct.std::_Rb_tree_iterator"** %__x.addr, align 8
+  store i8* %__y, i8** %__y.addr, align 8
+  %this1 = load %"struct.std::pair"*, %"struct.std::pair"** %this.addr, align 8
+  %0 = bitcast %"struct.std::pair"* %this1 to %"class.std::__pair_base"*
+  %first = getelementptr inbounds %"struct.std::pair", %"struct.std::pair"* %this1, i32 0, i32 0
+  %1 = load %"struct.std::_Rb_tree_iterator"*, %"struct.std::_Rb_tree_iterator"** %__x.addr, align 8
+  %call = call nonnull align 8 dereferenceable(8) %"struct.std::_Rb_tree_iterator"* @_ZSt7forwardISt17_Rb_tree_iteratorISt4pairIKi1AEEEOT_RNSt16remove_referenceIS6_E4typeE(%"struct.std::_Rb_tree_iterator"* nonnull align 8 dereferenceable(8) %1) #5
+  %2 = bitcast %"struct.std::_Rb_tree_iterator"* %first to i8*
+  %3 = bitcast %"struct.std::_Rb_tree_iterator"* %call to i8*
+  call void @llvm.memcpy.p0i8.p0i8.i64(i8* align 8 %2, i8* align 8 %3, i64 8, i1 false)
+  %second = getelementptr inbounds %"struct.std::pair", %"struct.std::pair"* %this1, i32 0, i32 1
+  %4 = load i8*, i8** %__y.addr, align 8
+  %call2 = call nonnull align 1 dereferenceable(1) i8* @_ZSt7forwardIbEOT_RNSt16remove_referenceIS0_E4typeE(i8* nonnull align 1 dereferenceable(1) %4) #5
+  %5 = load i8, i8* %call2, align 1
+  %tobool = trunc i8 %5 to i1
+  %frombool = zext i1 %tobool to i8
+  store i8 %frombool, i8* %second, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt17_Rb_tree_iteratorISt4pairIKi1AEEC2EPSt18_Rb_tree_node_base(%"struct.std::_Rb_tree_iterator"* nonnull dereferenceable(8) %this, %"struct.std::_Rb_tree_node_base"* %__x) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::_Rb_tree_iterator"*, align 8
+  %__x.addr = alloca %"struct.std::_Rb_tree_node_base"*, align 8
+  store %"struct.std::_Rb_tree_iterator"* %this, %"struct.std::_Rb_tree_iterator"** %this.addr, align 8
+  store %"struct.std::_Rb_tree_node_base"* %__x, %"struct.std::_Rb_tree_node_base"** %__x.addr, align 8
+  %this1 = load %"struct.std::_Rb_tree_iterator"*, %"struct.std::_Rb_tree_iterator"** %this.addr, align 8
+  %_M_node = getelementptr inbounds %"struct.std::_Rb_tree_iterator", %"struct.std::_Rb_tree_iterator"* %this1, i32 0, i32 0
+  %0 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %__x.addr, align 8
+  store %"struct.std::_Rb_tree_node_base"* %0, %"struct.std::_Rb_tree_node_base"** %_M_node, align 8
+  ret void
+}
+
+declare dso_local void @__cxa_rethrow()
+
+declare dso_local void @__cxa_end_catch()
+
+; Function Attrs: cold noreturn nounwind
+declare void @llvm.trap() #10
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define linkonce_odr dso_local %"struct.std::_Rb_tree_node"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE11_M_get_nodeEv(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this) #0 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::_Rb_tree"*, align 8
+  store %"class.std::_Rb_tree"* %this, %"class.std::_Rb_tree"** %this.addr, align 8
+  %this1 = load %"class.std::_Rb_tree"*, %"class.std::_Rb_tree"** %this.addr, align 8
+  %call = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE21_M_get_Node_allocatorEv(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1) #5
+  %call2 = call %"struct.std::_Rb_tree_node"* @_ZNSt16allocator_traitsISaISt13_Rb_tree_nodeISt4pairIKi1AEEEE8allocateERS6_m(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %call, i64 1)
+  ret %"struct.std::_Rb_tree_node"* %call2
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define linkonce_odr dso_local void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE17_M_construct_nodeIJS0_IiS2_EEEEvPSt13_Rb_tree_nodeIS3_EDpOT_(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this, %"struct.std::_Rb_tree_node"* %__node, %"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %__args) #0 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+entry:
+  %this.addr = alloca %"class.std::_Rb_tree"*, align 8
+  %__node.addr = alloca %"struct.std::_Rb_tree_node"*, align 8
+  %__args.addr = alloca %"struct.std::pair.0"*, align 8
+  %exn.slot = alloca i8*, align 8
+  %ehselector.slot = alloca i32, align 4
+  store %"class.std::_Rb_tree"* %this, %"class.std::_Rb_tree"** %this.addr, align 8
+  store %"struct.std::_Rb_tree_node"* %__node, %"struct.std::_Rb_tree_node"** %__node.addr, align 8
+  store %"struct.std::pair.0"* %__args, %"struct.std::pair.0"** %__args.addr, align 8
+  %this1 = load %"class.std::_Rb_tree"*, %"class.std::_Rb_tree"** %this.addr, align 8
+  %0 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__node.addr, align 8
+  %1 = bitcast %"struct.std::_Rb_tree_node"* %0 to i8*
+  %2 = bitcast i8* %1 to %"struct.std::_Rb_tree_node"*
+  %call = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE21_M_get_Node_allocatorEv(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1) #5
+  %3 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__node.addr, align 8
+  %call2 = call %"struct.std::pair.3"* @_ZNSt13_Rb_tree_nodeISt4pairIKi1AEE9_M_valptrEv(%"struct.std::_Rb_tree_node"* nonnull dereferenceable(48) %3)
+  %4 = load %"struct.std::pair.0"*, %"struct.std::pair.0"** %__args.addr, align 8
+  %call3 = call nonnull align 8 dereferenceable(16) %"struct.std::pair.0"* @_ZSt7forwardISt4pairIi1AEEOT_RNSt16remove_referenceIS3_E4typeE(%"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %4) #5
+  invoke void @_ZNSt16allocator_traitsISaISt13_Rb_tree_nodeISt4pairIKi1AEEEE9constructIS4_JS1_IiS3_EEEEvRS6_PT_DpOT0_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %call, %"struct.std::pair.3"* %call2, %"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %call3)
+          to label %invoke.cont unwind label %lpad
+
+invoke.cont:                                      ; preds = %entry
+  br label %try.cont
+
+lpad:                                             ; preds = %entry
+  %5 = landingpad { i8*, i32 }
+          catch i8* null
+  %6 = extractvalue { i8*, i32 } %5, 0
+  store i8* %6, i8** %exn.slot, align 8
+  %7 = extractvalue { i8*, i32 } %5, 1
+  store i32 %7, i32* %ehselector.slot, align 4
+  br label %catch
+
+catch:                                            ; preds = %lpad
+  %exn = load i8*, i8** %exn.slot, align 8
+  %8 = call i8* @__cxa_begin_catch(i8* %exn) #5
+  %9 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__node.addr, align 8
+  %10 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %__node.addr, align 8
+  call void @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE11_M_put_nodeEPSt13_Rb_tree_nodeIS3_E(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this1, %"struct.std::_Rb_tree_node"* %10) #5
+  invoke void @__cxa_rethrow() #16
+          to label %unreachable unwind label %lpad4
+
+lpad4:                                            ; preds = %catch
+  %11 = landingpad { i8*, i32 }
+          cleanup
+  %12 = extractvalue { i8*, i32 } %11, 0
+  store i8* %12, i8** %exn.slot, align 8
+  %13 = extractvalue { i8*, i32 } %11, 1
+  store i32 %13, i32* %ehselector.slot, align 4
+  invoke void @__cxa_end_catch()
+          to label %invoke.cont5 unwind label %terminate.lpad
+
+invoke.cont5:                                     ; preds = %lpad4
+  br label %eh.resume
+
+try.cont:                                         ; preds = %invoke.cont
+  ret void
+
+eh.resume:                                        ; preds = %invoke.cont5
+  %exn6 = load i8*, i8** %exn.slot, align 8
+  %sel = load i32, i32* %ehselector.slot, align 4
+  %lpad.val = insertvalue { i8*, i32 } undef, i8* %exn6, 0
+  %lpad.val7 = insertvalue { i8*, i32 } %lpad.val, i32 %sel, 1
+  resume { i8*, i32 } %lpad.val7
+
+terminate.lpad:                                   ; preds = %lpad4
+  %14 = landingpad { i8*, i32 }
+          catch i8* null
+  %15 = extractvalue { i8*, i32 } %14, 0
+  call void @__clang_call_terminate(i8* %15) #15
+  unreachable
+
+unreachable:                                      ; preds = %catch
+  unreachable
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define linkonce_odr dso_local %"struct.std::_Rb_tree_node"* @_ZNSt16allocator_traitsISaISt13_Rb_tree_nodeISt4pairIKi1AEEEE8allocateERS6_m(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %__a, i64 %__n) #0 comdat align 2 {
+entry:
+  %__a.addr = alloca %"class.std::allocator"*, align 8
+  %__n.addr = alloca i64, align 8
+  store %"class.std::allocator"* %__a, %"class.std::allocator"** %__a.addr, align 8
+  store i64 %__n, i64* %__n.addr, align 8
+  %0 = load %"class.std::allocator"*, %"class.std::allocator"** %__a.addr, align 8
+  %1 = bitcast %"class.std::allocator"* %0 to %"class.__gnu_cxx::new_allocator"*
+  %2 = load i64, i64* %__n.addr, align 8
+  %call = call %"struct.std::_Rb_tree_node"* @_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEE8allocateEmPKv(%"class.__gnu_cxx::new_allocator"* nonnull dereferenceable(1) %1, i64 %2, i8* null)
+  ret %"struct.std::_Rb_tree_node"* %call
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define linkonce_odr dso_local %"struct.std::_Rb_tree_node"* @_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEE8allocateEmPKv(%"class.__gnu_cxx::new_allocator"* nonnull dereferenceable(1) %this, i64 %__n, i8* %0) #0 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.__gnu_cxx::new_allocator"*, align 8
+  %__n.addr = alloca i64, align 8
+  %.addr = alloca i8*, align 8
+  store %"class.__gnu_cxx::new_allocator"* %this, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
+  store i64 %__n, i64* %__n.addr, align 8
+  store i8* %0, i8** %.addr, align 8
+  %this1 = load %"class.__gnu_cxx::new_allocator"*, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
+  %1 = load i64, i64* %__n.addr, align 8
+  %call = call i64 @_ZNK9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEE11_M_max_sizeEv(%"class.__gnu_cxx::new_allocator"* nonnull dereferenceable(1) %this1) #5
+  %cmp = icmp ugt i64 %1, %call
+  br i1 %cmp, label %if.then, label %if.end
+
+if.then:                                          ; preds = %entry
+  call void @_ZSt17__throw_bad_allocv() #16
+  unreachable
+
+if.end:                                           ; preds = %entry
+  %2 = load i64, i64* %__n.addr, align 8
+  %mul = mul i64 %2, 48
+  %call2 = call noalias nonnull i8* @_Znwm(i64 %mul) #17
+  %3 = bitcast i8* %call2 to %"struct.std::_Rb_tree_node"*
+  ret %"struct.std::_Rb_tree_node"* %3
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local i64 @_ZNK9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEE11_M_max_sizeEv(%"class.__gnu_cxx::new_allocator"* nonnull dereferenceable(1) %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.__gnu_cxx::new_allocator"*, align 8
+  store %"class.__gnu_cxx::new_allocator"* %this, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
+  %this1 = load %"class.__gnu_cxx::new_allocator"*, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
+  ret i64 192153584101141162
+}
+
+; Function Attrs: noreturn
+declare dso_local void @_ZSt17__throw_bad_allocv() #11
+
+; Function Attrs: nobuiltin allocsize(0)
+declare dso_local nonnull i8* @_Znwm(i64) #12
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define linkonce_odr dso_local void @_ZNSt16allocator_traitsISaISt13_Rb_tree_nodeISt4pairIKi1AEEEE9constructIS4_JS1_IiS3_EEEEvRS6_PT_DpOT0_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %__a, %"struct.std::pair.3"* %__p, %"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %__args) #0 comdat align 2 {
+entry:
+  %__a.addr = alloca %"class.std::allocator"*, align 8
+  %__p.addr = alloca %"struct.std::pair.3"*, align 8
+  %__args.addr = alloca %"struct.std::pair.0"*, align 8
+  store %"class.std::allocator"* %__a, %"class.std::allocator"** %__a.addr, align 8
+  store %"struct.std::pair.3"* %__p, %"struct.std::pair.3"** %__p.addr, align 8
+  store %"struct.std::pair.0"* %__args, %"struct.std::pair.0"** %__args.addr, align 8
+  %0 = load %"class.std::allocator"*, %"class.std::allocator"** %__a.addr, align 8
+  %1 = bitcast %"class.std::allocator"* %0 to %"class.__gnu_cxx::new_allocator"*
+  %2 = load %"struct.std::pair.3"*, %"struct.std::pair.3"** %__p.addr, align 8
+  %3 = load %"struct.std::pair.0"*, %"struct.std::pair.0"** %__args.addr, align 8
+  %call = call nonnull align 8 dereferenceable(16) %"struct.std::pair.0"* @_ZSt7forwardISt4pairIi1AEEOT_RNSt16remove_referenceIS3_E4typeE(%"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %3) #5
+  call void @_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEE9constructIS5_JS2_IiS4_EEEEvPT_DpOT0_(%"class.__gnu_cxx::new_allocator"* nonnull dereferenceable(1) %1, %"struct.std::pair.3"* %2, %"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %call)
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKi1AEEE9constructIS5_JS2_IiS4_EEEEvPT_DpOT0_(%"class.__gnu_cxx::new_allocator"* nonnull dereferenceable(1) %this, %"struct.std::pair.3"* %__p, %"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %__args) #0 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.__gnu_cxx::new_allocator"*, align 8
+  %__p.addr = alloca %"struct.std::pair.3"*, align 8
+  %__args.addr = alloca %"struct.std::pair.0"*, align 8
+  store %"class.__gnu_cxx::new_allocator"* %this, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
+  store %"struct.std::pair.3"* %__p, %"struct.std::pair.3"** %__p.addr, align 8
+  store %"struct.std::pair.0"* %__args, %"struct.std::pair.0"** %__args.addr, align 8
+  %this1 = load %"class.__gnu_cxx::new_allocator"*, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
+  %0 = load %"struct.std::pair.3"*, %"struct.std::pair.3"** %__p.addr, align 8
+  %1 = bitcast %"struct.std::pair.3"* %0 to i8*
+  %2 = bitcast i8* %1 to %"struct.std::pair.3"*
+  %3 = load %"struct.std::pair.0"*, %"struct.std::pair.0"** %__args.addr, align 8
+  %call = call nonnull align 8 dereferenceable(16) %"struct.std::pair.0"* @_ZSt7forwardISt4pairIi1AEEOT_RNSt16remove_referenceIS3_E4typeE(%"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %3) #5
+  call void @_ZNSt4pairIKi1AEC2IiS1_Lb1EEEOS_IT_T0_E(%"struct.std::pair.3"* nonnull dereferenceable(16) %2, %"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %call)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt4pairIKi1AEC2IiS1_Lb1EEEOS_IT_T0_E(%"struct.std::pair.3"* nonnull dereferenceable(16) %this, %"struct.std::pair.0"* nonnull align 8 dereferenceable(16) %__p) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::pair.3"*, align 8
+  %__p.addr = alloca %"struct.std::pair.0"*, align 8
+  store %"struct.std::pair.3"* %this, %"struct.std::pair.3"** %this.addr, align 8
+  store %"struct.std::pair.0"* %__p, %"struct.std::pair.0"** %__p.addr, align 8
+  %this1 = load %"struct.std::pair.3"*, %"struct.std::pair.3"** %this.addr, align 8
+  %0 = bitcast %"struct.std::pair.3"* %this1 to %"class.std::__pair_base.4"*
+  %first = getelementptr inbounds %"struct.std::pair.3", %"struct.std::pair.3"* %this1, i32 0, i32 0
+  %1 = load %"struct.std::pair.0"*, %"struct.std::pair.0"** %__p.addr, align 8
+  %first2 = getelementptr inbounds %"struct.std::pair.0", %"struct.std::pair.0"* %1, i32 0, i32 0
+  %call = call nonnull align 4 dereferenceable(4) i32* @_ZSt7forwardIiEOT_RNSt16remove_referenceIS0_E4typeE(i32* nonnull align 4 dereferenceable(4) %first2) #5
+  %2 = load i32, i32* %call, align 4
+  store i32 %2, i32* %first, align 8
+  %second = getelementptr inbounds %"struct.std::pair.3", %"struct.std::pair.3"* %this1, i32 0, i32 1
+  %3 = load %"struct.std::pair.0"*, %"struct.std::pair.0"** %__p.addr, align 8
+  %second3 = getelementptr inbounds %"struct.std::pair.0", %"struct.std::pair.0"* %3, i32 0, i32 1
+  %call4 = call nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardI1AEOT_RNSt16remove_referenceIS1_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %second3) #5
+  call void @_ZN1AC2EOS_(%class.A* nonnull dereferenceable(8) %second, %class.A* nonnull align 8 dereferenceable(8) %call4) #5
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardI1AEOT_RNSt16remove_referenceIS1_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %__t) #2 comdat {
+entry:
+  %__t.addr = alloca %class.A*, align 8
+  store %class.A* %__t, %class.A** %__t.addr, align 8
+  %0 = load %class.A*, %class.A** %__t.addr, align 8
+  ret %class.A* %0
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZN1AC2EOS_(%class.A* nonnull dereferenceable(8) %this, %class.A* nonnull align 8 dereferenceable(8) %0) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %class.A*, align 8
+  %.addr = alloca %class.A*, align 8
+  store %class.A* %this, %class.A** %this.addr, align 8
+  store %class.A* %0, %class.A** %.addr, align 8
+  %this1 = load %class.A*, %class.A** %this.addr, align 8
+  %1 = bitcast %class.A* %this1 to i32 (...)***
+  store i32 (...)** bitcast (i8** getelementptr inbounds ({ [3 x i8*] }, { [3 x i8*] }* @_ZTV1A, i32 0, inrange i32 0, i32 2) to i32 (...)**), i32 (...)*** %1, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local %"struct.std::_Rb_tree_node_base"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE6_M_endEv(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::_Rb_tree"*, align 8
+  store %"class.std::_Rb_tree"* %this, %"class.std::_Rb_tree"** %this.addr, align 8
+  %this1 = load %"class.std::_Rb_tree"*, %"class.std::_Rb_tree"** %this.addr, align 8
+  %_M_impl = getelementptr inbounds %"class.std::_Rb_tree", %"class.std::_Rb_tree"* %this1, i32 0, i32 0
+  %0 = bitcast %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* %_M_impl to i8*
+  %add.ptr = getelementptr inbounds i8, i8* %0, i64 8
+  %1 = bitcast i8* %add.ptr to %"struct.std::_Rb_tree_header"*
+  %_M_header = getelementptr inbounds %"struct.std::_Rb_tree_header", %"struct.std::_Rb_tree_header"* %1, i32 0, i32 0
+  ret %"struct.std::_Rb_tree_node_base"* %_M_header
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local zeroext i1 @_ZNKSt4lessIiEclERKiS2_(%"struct.std::less"* nonnull dereferenceable(1) %this, i32* nonnull align 4 dereferenceable(4) %__x, i32* nonnull align 4 dereferenceable(4) %__y) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::less"*, align 8
+  %__x.addr = alloca i32*, align 8
+  %__y.addr = alloca i32*, align 8
+  store %"struct.std::less"* %this, %"struct.std::less"** %this.addr, align 8
+  store i32* %__x, i32** %__x.addr, align 8
+  store i32* %__y, i32** %__y.addr, align 8
+  %this1 = load %"struct.std::less"*, %"struct.std::less"** %this.addr, align 8
+  %0 = load i32*, i32** %__x.addr, align 8
+  %1 = load i32, i32* %0, align 4
+  %2 = load i32*, i32** %__y.addr, align 8
+  %3 = load i32, i32* %2, align 4
+  %cmp = icmp slt i32 %1, %3
+  ret i1 %cmp
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local zeroext i1 @_ZSteqRKSt17_Rb_tree_iteratorISt4pairIKi1AEES6_(%"struct.std::_Rb_tree_iterator"* nonnull align 8 dereferenceable(8) %__x, %"struct.std::_Rb_tree_iterator"* nonnull align 8 dereferenceable(8) %__y) #2 comdat {
+entry:
+  %__x.addr = alloca %"struct.std::_Rb_tree_iterator"*, align 8
+  %__y.addr = alloca %"struct.std::_Rb_tree_iterator"*, align 8
+  store %"struct.std::_Rb_tree_iterator"* %__x, %"struct.std::_Rb_tree_iterator"** %__x.addr, align 8
+  store %"struct.std::_Rb_tree_iterator"* %__y, %"struct.std::_Rb_tree_iterator"** %__y.addr, align 8
+  %0 = load %"struct.std::_Rb_tree_iterator"*, %"struct.std::_Rb_tree_iterator"** %__x.addr, align 8
+  %_M_node = getelementptr inbounds %"struct.std::_Rb_tree_iterator", %"struct.std::_Rb_tree_iterator"* %0, i32 0, i32 0
+  %1 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %_M_node, align 8
+  %2 = load %"struct.std::_Rb_tree_iterator"*, %"struct.std::_Rb_tree_iterator"** %__y.addr, align 8
+  %_M_node1 = getelementptr inbounds %"struct.std::_Rb_tree_iterator", %"struct.std::_Rb_tree_iterator"* %2, i32 0, i32 0
+  %3 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %_M_node1, align 8
+  %cmp = icmp eq %"struct.std::_Rb_tree_node_base"* %1, %3
+  ret i1 %cmp
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local %"struct.std::_Rb_tree_node_base"* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE5beginEv(%"class.std::_Rb_tree"* nonnull dereferenceable(48) %this) #2 comdat align 2 {
+entry:
+  %retval = alloca %"struct.std::_Rb_tree_iterator", align 8
+  %this.addr = alloca %"class.std::_Rb_tree"*, align 8
+  store %"class.std::_Rb_tree"* %this, %"class.std::_Rb_tree"** %this.addr, align 8
+  %this1 = load %"class.std::_Rb_tree"*, %"class.std::_Rb_tree"** %this.addr, align 8
+  %_M_impl = getelementptr inbounds %"class.std::_Rb_tree", %"class.std::_Rb_tree"* %this1, i32 0, i32 0
+  %0 = bitcast %"struct.std::_Rb_tree<int, std::pair<const int, A>, std::_Select1st<std::pair<const int, A>>, std::less<int>>::_Rb_tree_impl"* %_M_impl to i8*
+  %add.ptr = getelementptr inbounds i8, i8* %0, i64 8
+  %1 = bitcast i8* %add.ptr to %"struct.std::_Rb_tree_header"*
+  %_M_header = getelementptr inbounds %"struct.std::_Rb_tree_header", %"struct.std::_Rb_tree_header"* %1, i32 0, i32 0
+  %_M_left = getelementptr inbounds %"struct.std::_Rb_tree_node_base", %"struct.std::_Rb_tree_node_base"* %_M_header, i32 0, i32 2
+  %2 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %_M_left, align 8
+  call void @_ZNSt17_Rb_tree_iteratorISt4pairIKi1AEEC2EPSt18_Rb_tree_node_base(%"struct.std::_Rb_tree_iterator"* nonnull dereferenceable(8) %retval, %"struct.std::_Rb_tree_node_base"* %2) #5
+  %coerce.dive = getelementptr inbounds %"struct.std::_Rb_tree_iterator", %"struct.std::_Rb_tree_iterator"* %retval, i32 0, i32 0
+  %3 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %coerce.dive, align 8
+  ret %"struct.std::_Rb_tree_node_base"* %3
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt4pairIPSt18_Rb_tree_node_baseS1_EC2IRPSt13_Rb_tree_nodeIS_IKi1AEERS1_Lb1EEEOT_OT0_(%"struct.std::pair.6"* nonnull dereferenceable(16) %this, %"struct.std::_Rb_tree_node"** nonnull align 8 dereferenceable(8) %__x, %"struct.std::_Rb_tree_node_base"** nonnull align 8 dereferenceable(8) %__y) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::pair.6"*, align 8
+  %__x.addr = alloca %"struct.std::_Rb_tree_node"**, align 8
+  %__y.addr = alloca %"struct.std::_Rb_tree_node_base"**, align 8
+  store %"struct.std::pair.6"* %this, %"struct.std::pair.6"** %this.addr, align 8
+  store %"struct.std::_Rb_tree_node"** %__x, %"struct.std::_Rb_tree_node"*** %__x.addr, align 8
+  store %"struct.std::_Rb_tree_node_base"** %__y, %"struct.std::_Rb_tree_node_base"*** %__y.addr, align 8
+  %this1 = load %"struct.std::pair.6"*, %"struct.std::pair.6"** %this.addr, align 8
+  %0 = bitcast %"struct.std::pair.6"* %this1 to %"class.std::__pair_base.7"*
+  %first = getelementptr inbounds %"struct.std::pair.6", %"struct.std::pair.6"* %this1, i32 0, i32 0
+  %1 = load %"struct.std::_Rb_tree_node"**, %"struct.std::_Rb_tree_node"*** %__x.addr, align 8
+  %call = call nonnull align 8 dereferenceable(8) %"struct.std::_Rb_tree_node"** @_ZSt7forwardIRPSt13_Rb_tree_nodeISt4pairIKi1AEEEOT_RNSt16remove_referenceIS8_E4typeE(%"struct.std::_Rb_tree_node"** nonnull align 8 dereferenceable(8) %1) #5
+  %2 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %call, align 8
+  %3 = bitcast %"struct.std::_Rb_tree_node"* %2 to %"struct.std::_Rb_tree_node_base"*
+  store %"struct.std::_Rb_tree_node_base"* %3, %"struct.std::_Rb_tree_node_base"** %first, align 8
+  %second = getelementptr inbounds %"struct.std::pair.6", %"struct.std::pair.6"* %this1, i32 0, i32 1
+  %4 = load %"struct.std::_Rb_tree_node_base"**, %"struct.std::_Rb_tree_node_base"*** %__y.addr, align 8
+  %call2 = call nonnull align 8 dereferenceable(8) %"struct.std::_Rb_tree_node_base"** @_ZSt7forwardIRPSt18_Rb_tree_node_baseEOT_RNSt16remove_referenceIS3_E4typeE(%"struct.std::_Rb_tree_node_base"** nonnull align 8 dereferenceable(8) %4) #5
+  %5 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %call2, align 8
+  store %"struct.std::_Rb_tree_node_base"* %5, %"struct.std::_Rb_tree_node_base"** %second, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local nonnull align 8 dereferenceable(8) %"struct.std::_Rb_tree_iterator"* @_ZNSt17_Rb_tree_iteratorISt4pairIKi1AEEmmEv(%"struct.std::_Rb_tree_iterator"* nonnull dereferenceable(8) %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::_Rb_tree_iterator"*, align 8
+  store %"struct.std::_Rb_tree_iterator"* %this, %"struct.std::_Rb_tree_iterator"** %this.addr, align 8
+  %this1 = load %"struct.std::_Rb_tree_iterator"*, %"struct.std::_Rb_tree_iterator"** %this.addr, align 8
+  %_M_node = getelementptr inbounds %"struct.std::_Rb_tree_iterator", %"struct.std::_Rb_tree_iterator"* %this1, i32 0, i32 0
+  %0 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %_M_node, align 8
+  %call = call %"struct.std::_Rb_tree_node_base"* @_ZSt18_Rb_tree_decrementPSt18_Rb_tree_node_base(%"struct.std::_Rb_tree_node_base"* %0) #18
+  %_M_node2 = getelementptr inbounds %"struct.std::_Rb_tree_iterator", %"struct.std::_Rb_tree_iterator"* %this1, i32 0, i32 0
+  store %"struct.std::_Rb_tree_node_base"* %call, %"struct.std::_Rb_tree_node_base"** %_M_node2, align 8
+  ret %"struct.std::_Rb_tree_iterator"* %this1
+}
+
+; Function Attrs: noinline optnone uwtable mustprogress
+define linkonce_odr dso_local nonnull align 4 dereferenceable(4) i32* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE6_S_keyEPKSt18_Rb_tree_node_base(%"struct.std::_Rb_tree_node_base"* %__x) #0 comdat align 2 {
+entry:
+  %__x.addr = alloca %"struct.std::_Rb_tree_node_base"*, align 8
+  store %"struct.std::_Rb_tree_node_base"* %__x, %"struct.std::_Rb_tree_node_base"** %__x.addr, align 8
+  %0 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %__x.addr, align 8
+  %1 = bitcast %"struct.std::_Rb_tree_node_base"* %0 to %"struct.std::_Rb_tree_node"*
+  %call = call nonnull align 4 dereferenceable(4) i32* @_ZNSt8_Rb_treeIiSt4pairIKi1AESt10_Select1stIS3_ESt4lessIiESaIS3_EE6_S_keyEPKSt13_Rb_tree_nodeIS3_E(%"struct.std::_Rb_tree_node"* %1)
+  ret i32* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt4pairIPSt18_Rb_tree_node_baseS1_EC2IRS1_Lb1EEEOT_RKS1_(%"struct.std::pair.6"* nonnull dereferenceable(16) %this, %"struct.std::_Rb_tree_node_base"** nonnull align 8 dereferenceable(8) %__x, %"struct.std::_Rb_tree_node_base"** nonnull align 8 dereferenceable(8) %__y) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::pair.6"*, align 8
+  %__x.addr = alloca %"struct.std::_Rb_tree_node_base"**, align 8
+  %__y.addr = alloca %"struct.std::_Rb_tree_node_base"**, align 8
+  store %"struct.std::pair.6"* %this, %"struct.std::pair.6"** %this.addr, align 8
+  store %"struct.std::_Rb_tree_node_base"** %__x, %"struct.std::_Rb_tree_node_base"*** %__x.addr, align 8
+  store %"struct.std::_Rb_tree_node_base"** %__y, %"struct.std::_Rb_tree_node_base"*** %__y.addr, align 8
+  %this1 = load %"struct.std::pair.6"*, %"struct.std::pair.6"** %this.addr, align 8
+  %0 = bitcast %"struct.std::pair.6"* %this1 to %"class.std::__pair_base.7"*
+  %first = getelementptr inbounds %"struct.std::pair.6", %"struct.std::pair.6"* %this1, i32 0, i32 0
+  %1 = load %"struct.std::_Rb_tree_node_base"**, %"struct.std::_Rb_tree_node_base"*** %__x.addr, align 8
+  %call = call nonnull align 8 dereferenceable(8) %"struct.std::_Rb_tree_node_base"** @_ZSt7forwardIRPSt18_Rb_tree_node_baseEOT_RNSt16remove_referenceIS3_E4typeE(%"struct.std::_Rb_tree_node_base"** nonnull align 8 dereferenceable(8) %1) #5
+  %2 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %call, align 8
+  store %"struct.std::_Rb_tree_node_base"* %2, %"struct.std::_Rb_tree_node_base"** %first, align 8
+  %second = getelementptr inbounds %"struct.std::pair.6", %"struct.std::pair.6"* %this1, i32 0, i32 1
+  %3 = load %"struct.std::_Rb_tree_node_base"**, %"struct.std::_Rb_tree_node_base"*** %__y.addr, align 8
+  %4 = load %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"** %3, align 8
+  store %"struct.std::_Rb_tree_node_base"* %4, %"struct.std::_Rb_tree_node_base"** %second, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local nonnull align 8 dereferenceable(8) %"struct.std::_Rb_tree_node"** @_ZSt7forwardIRPSt13_Rb_tree_nodeISt4pairIKi1AEEEOT_RNSt16remove_referenceIS8_E4typeE(%"struct.std::_Rb_tree_node"** nonnull align 8 dereferenceable(8) %__t) #2 comdat {
+entry:
+  %__t.addr = alloca %"struct.std::_Rb_tree_node"**, align 8
+  store %"struct.std::_Rb_tree_node"** %__t, %"struct.std::_Rb_tree_node"*** %__t.addr, align 8
+  %0 = load %"struct.std::_Rb_tree_node"**, %"struct.std::_Rb_tree_node"*** %__t.addr, align 8
+  ret %"struct.std::_Rb_tree_node"** %0
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local nonnull align 8 dereferenceable(8) %"struct.std::_Rb_tree_node_base"** @_ZSt7forwardIRPSt18_Rb_tree_node_baseEOT_RNSt16remove_referenceIS3_E4typeE(%"struct.std::_Rb_tree_node_base"** nonnull align 8 dereferenceable(8) %__t) #2 comdat {
+entry:
+  %__t.addr = alloca %"struct.std::_Rb_tree_node_base"**, align 8
+  store %"struct.std::_Rb_tree_node_base"** %__t, %"struct.std::_Rb_tree_node_base"*** %__t.addr, align 8
+  %0 = load %"struct.std::_Rb_tree_node_base"**, %"struct.std::_Rb_tree_node_base"*** %__t.addr, align 8
+  ret %"struct.std::_Rb_tree_node_base"** %0
+}
+
+; Function Attrs: nounwind readonly willreturn
+declare dso_local %"struct.std::_Rb_tree_node_base"* @_ZSt18_Rb_tree_decrementPSt18_Rb_tree_node_base(%"struct.std::_Rb_tree_node_base"*) #13
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local nonnull align 4 dereferenceable(4) i32* @_ZNKSt10_Select1stISt4pairIKi1AEEclERKS3_(%"struct.std::_Select1st"* nonnull dereferenceable(1) %this, %"struct.std::pair.3"* nonnull align 8 dereferenceable(16) %__x) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::_Select1st"*, align 8
+  %__x.addr = alloca %"struct.std::pair.3"*, align 8
+  store %"struct.std::_Select1st"* %this, %"struct.std::_Select1st"** %this.addr, align 8
+  store %"struct.std::pair.3"* %__x, %"struct.std::pair.3"** %__x.addr, align 8
+  %this1 = load %"struct.std::_Select1st"*, %"struct.std::_Select1st"** %this.addr, align 8
+  %0 = load %"struct.std::pair.3"*, %"struct.std::pair.3"** %__x.addr, align 8
+  %first = getelementptr inbounds %"struct.std::pair.3", %"struct.std::pair.3"* %0, i32 0, i32 0
+  ret i32* %first
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local %"struct.std::pair.3"* @_ZNKSt13_Rb_tree_nodeISt4pairIKi1AEE9_M_valptrEv(%"struct.std::_Rb_tree_node"* nonnull dereferenceable(48) %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::_Rb_tree_node"*, align 8
+  store %"struct.std::_Rb_tree_node"* %this, %"struct.std::_Rb_tree_node"** %this.addr, align 8
+  %this1 = load %"struct.std::_Rb_tree_node"*, %"struct.std::_Rb_tree_node"** %this.addr, align 8
+  %_M_storage = getelementptr inbounds %"struct.std::_Rb_tree_node", %"struct.std::_Rb_tree_node"* %this1, i32 0, i32 1
+  %call = call %"struct.std::pair.3"* @_ZNK9__gnu_cxx16__aligned_membufISt4pairIKi1AEE6_M_ptrEv(%"struct.__gnu_cxx::__aligned_membuf"* nonnull dereferenceable(16) %_M_storage) #5
+  ret %"struct.std::pair.3"* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local %"struct.std::pair.3"* @_ZNK9__gnu_cxx16__aligned_membufISt4pairIKi1AEE6_M_ptrEv(%"struct.__gnu_cxx::__aligned_membuf"* nonnull dereferenceable(16) %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.__gnu_cxx::__aligned_membuf"*, align 8
+  store %"struct.__gnu_cxx::__aligned_membuf"* %this, %"struct.__gnu_cxx::__aligned_membuf"** %this.addr, align 8
+  %this1 = load %"struct.__gnu_cxx::__aligned_membuf"*, %"struct.__gnu_cxx::__aligned_membuf"** %this.addr, align 8
+  %call = call i8* @_ZNK9__gnu_cxx16__aligned_membufISt4pairIKi1AEE7_M_addrEv(%"struct.__gnu_cxx::__aligned_membuf"* nonnull dereferenceable(16) %this1) #5
+  %0 = bitcast i8* %call to %"struct.std::pair.3"*
+  ret %"struct.std::pair.3"* %0
+}
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local i8* @_ZNK9__gnu_cxx16__aligned_membufISt4pairIKi1AEE7_M_addrEv(%"struct.__gnu_cxx::__aligned_membuf"* nonnull dereferenceable(16) %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.__gnu_cxx::__aligned_membuf"*, align 8
+  store %"struct.__gnu_cxx::__aligned_membuf"* %this, %"struct.__gnu_cxx::__aligned_membuf"** %this.addr, align 8
+  %this1 = load %"struct.__gnu_cxx::__aligned_membuf"*, %"struct.__gnu_cxx::__aligned_membuf"** %this.addr, align 8
+  %_M_storage = getelementptr inbounds %"struct.__gnu_cxx::__aligned_membuf", %"struct.__gnu_cxx::__aligned_membuf"* %this1, i32 0, i32 0
+  %0 = bitcast [16 x i8]* %_M_storage to i8*
+  ret i8* %0
+}
+
+; Function Attrs: nounwind
+declare dso_local void @_ZSt29_Rb_tree_insert_and_rebalancebPSt18_Rb_tree_node_baseS0_RS_(i1 zeroext, %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"*, %"struct.std::_Rb_tree_node_base"* nonnull align 8 dereferenceable(32)) #3
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local nonnull align 8 dereferenceable(8) %"struct.std::_Rb_tree_iterator"* @_ZSt7forwardISt17_Rb_tree_iteratorISt4pairIKi1AEEEOT_RNSt16remove_referenceIS6_E4typeE(%"struct.std::_Rb_tree_iterator"* nonnull align 8 dereferenceable(8) %__t) #2 comdat {
+entry:
+  %__t.addr = alloca %"struct.std::_Rb_tree_iterator"*, align 8
+  store %"struct.std::_Rb_tree_iterator"* %__t, %"struct.std::_Rb_tree_iterator"** %__t.addr, align 8
+  %0 = load %"struct.std::_Rb_tree_iterator"*, %"struct.std::_Rb_tree_iterator"** %__t.addr, align 8
+  ret %"struct.std::_Rb_tree_iterator"* %0
+}
+
+; Function Attrs: argmemonly nofree nosync nounwind willreturn
+declare void @llvm.memcpy.p0i8.p0i8.i64(i8* noalias nocapture writeonly, i8* noalias nocapture readonly, i64, i1 immarg) #14
+
+; Function Attrs: noinline nounwind optnone uwtable mustprogress
+define linkonce_odr dso_local nonnull align 1 dereferenceable(1) i8* @_ZSt7forwardIbEOT_RNSt16remove_referenceIS0_E4typeE(i8* nonnull align 1 dereferenceable(1) %__t) #2 comdat {
+entry:
+  %__t.addr = alloca i8*, align 8
+  store i8* %__t, i8** %__t.addr, align 8
+  %0 = load i8*, i8** %__t.addr, align 8
+  ret i8* %0
+}
+
+; Function Attrs: noinline uwtable
+define internal void @_GLOBAL__sub_I_map_1.cpp() #4 section ".text.startup" {
+entry:
+  call void @__cxx_global_var_init()
+  ret void
+}
+
+attributes #0 = { noinline optnone uwtable mustprogress "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { noinline nounwind optnone uwtable mustprogress "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #3 = { nounwind "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #4 = { noinline uwtable "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #5 = { nounwind }
+attributes #6 = { noinline norecurse optnone uwtable mustprogress "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #7 = { noinline nounwind optnone uwtable "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #8 = { noinline noreturn nounwind }
+attributes #9 = { nobuiltin nounwind "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #10 = { cold noreturn nounwind }
+attributes #11 = { noreturn "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #12 = { nobuiltin allocsize(0) "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #13 = { nounwind readonly willreturn "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #14 = { argmemonly nofree nosync nounwind willreturn }
+attributes #15 = { noreturn nounwind }
+attributes #16 = { noreturn }
+attributes #17 = { allocsize(0) }
+attributes #18 = { nounwind readonly willreturn }
+
+!llvm.module.flags = !{!0}
+!llvm.ident = !{!1}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{!"clang version 12.0.0"}
+!2 = distinct !{!2, !3}
+!3 = !{!"llvm.loop.mustprogress"}
+!4 = distinct !{!4, !3}

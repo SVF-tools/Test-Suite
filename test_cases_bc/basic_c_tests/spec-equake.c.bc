@@ -1,0 +1,1241 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/basic_c_tests/spec-equake.c.bc'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/basic_c_tests/spec-equake.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+@.str = private unnamed_addr constant [2 x i8] c"\0A\00", align 1
+@.str.1 = private unnamed_addr constant [4 x i8] c"%s\0A\00", align 1
+@.str.2 = private unnamed_addr constant [25 x i8] c"Press ENTER to continue\0A\00", align 1
+@disp = dso_local global double*** null, align 8
+@.str.3 = private unnamed_addr constant [17 x i8] c"null pointer 2!\0A\00", align 1
+@K = dso_local global double*** null, align 8
+@v = dso_local global double** null, align 8
+@ARCHmatrixindex = dso_local global i32* null, align 8
+@Acol = dso_local global i32* null, align 8
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @MUSTALIAS(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+declare dso_local i32 @printf(i8*, ...) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @PARTIALALIAS(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @MAYALIAS(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @NOALIAS(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @EXPECTEDFAIL_MAYALIAS(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @EXPECTEDFAIL_NOALIAS(i8* %p, i8* %q) #0 {
+entry:
+  %p.addr = alloca i8*, align 8
+  %q.addr = alloca i8*, align 8
+  store i8* %p, i8** %p.addr, align 8
+  store i8* %q, i8** %q.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @SAFEMALLOC(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #3
+  ret i8* %call
+}
+
+; Function Attrs: nounwind
+declare dso_local noalias i8* @malloc(i64) #2
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @PLKMALLOC(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #3
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @NFRMALLOC(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #3
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @CLKMALLOC(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #3
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @NFRLEAKFP(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #3
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @PLKLEAKFP(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #3
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @LEAKFN(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias i8* @malloc(i64 %conv) #3
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @RC_ACCESS(i32 %id, i32 %flags) #0 {
+entry:
+  %id.addr = alloca i32, align 4
+  %flags.addr = alloca i32, align 4
+  store i32 %id, i32* %id.addr, align 4
+  store i32 %flags, i32* %flags.addr, align 4
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @CXT_THREAD(i32 %thdid, i8* %cxt) #0 {
+entry:
+  %thdid.addr = alloca i32, align 4
+  %cxt.addr = alloca i8*, align 8
+  store i32 %thdid, i32* %thdid.addr, align 4
+  store i8* %cxt, i8** %cxt.addr, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @TCT_ACCESS(i32 %thdid, i8* %cxt) #0 {
+entry:
+  %thdid.addr = alloca i32, align 4
+  %cxt.addr = alloca i8*, align 8
+  store i32 %thdid, i32* %thdid.addr, align 4
+  store i8* %cxt, i8** %cxt.addr, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @INTERLEV_ACCESS(i32 %thdid, i8* %cxt, i8* %lev) #0 {
+entry:
+  %thdid.addr = alloca i32, align 4
+  %cxt.addr = alloca i8*, align 8
+  %lev.addr = alloca i8*, align 8
+  store i32 %thdid, i32* %thdid.addr, align 4
+  store i8* %cxt, i8** %cxt.addr, align 8
+  store i8* %lev, i8** %lev.addr, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @LOCK(i8* %lockname) #0 {
+entry:
+  %lockname.addr = alloca i8*, align 8
+  store i8* %lockname, i8** %lockname.addr, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @PAUSE(i8* %str) #0 {
+entry:
+  %str.addr = alloca i8*, align 8
+  store i8* %str, i8** %str.addr, align 8
+  %0 = load i8*, i8** %str.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.1, i64 0, i64 0), i8* %0)
+  %call1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([25 x i8], [25 x i8]* @.str.2, i64 0, i64 0))
+  %call2 = call i32 @getchar()
+  ret void
+}
+
+declare dso_local i32 @getchar() #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @deref() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main(i32 %argc, i8** %argv) #0 {
+entry:
+  %retval = alloca i32, align 4
+  %argc.addr = alloca i32, align 4
+  %argv.addr = alloca i8**, align 8
+  %i = alloca i32, align 4
+  %j = alloca i32, align 4
+  %k = alloca i32, align 4
+  %disptplus = alloca i32, align 4
+  %pp = alloca i32, align 4
+  %Anext = alloca i32, align 4
+  %Alast = alloca i32, align 4
+  %col = alloca i32, align 4
+  %sum0 = alloca double, align 8
+  %sum1 = alloca double, align 8
+  %sum2 = alloca double, align 8
+  %sum3 = alloca double, align 8
+  %rst = alloca double, align 8
+  store i32 0, i32* %retval, align 4
+  store i32 %argc, i32* %argc.addr, align 4
+  store i8** %argv, i8*** %argv.addr, align 8
+  %call = call noalias i8* @malloc(i64 24) #3
+  %0 = bitcast i8* %call to double***
+  store double*** %0, double**** @disp, align 8
+  store i32 0, i32* %disptplus, align 4
+  br label %for.cond
+
+for.cond:                                         ; preds = %for.inc10, %entry
+  %1 = load i32, i32* %disptplus, align 4
+  %cmp = icmp slt i32 %1, 3
+  br i1 %cmp, label %for.body, label %for.end12
+
+for.body:                                         ; preds = %for.cond
+  %call1 = call noalias i8* @malloc(i64 40000) #3
+  %2 = bitcast i8* %call1 to double**
+  %3 = load double***, double**** @disp, align 8
+  %4 = load i32, i32* %disptplus, align 4
+  %idxprom = sext i32 %4 to i64
+  %arrayidx = getelementptr inbounds double**, double*** %3, i64 %idxprom
+  store double** %2, double*** %arrayidx, align 8
+  store i32 0, i32* %i, align 4
+  br label %for.cond2
+
+for.cond2:                                        ; preds = %for.inc, %for.body
+  %5 = load i32, i32* %i, align 4
+  %cmp3 = icmp slt i32 %5, 5000
+  br i1 %cmp3, label %for.body4, label %for.end
+
+for.body4:                                        ; preds = %for.cond2
+  %call5 = call noalias i8* @malloc(i64 32) #3
+  %6 = bitcast i8* %call5 to double*
+  %7 = load double***, double**** @disp, align 8
+  %8 = load i32, i32* %disptplus, align 4
+  %idxprom6 = sext i32 %8 to i64
+  %arrayidx7 = getelementptr inbounds double**, double*** %7, i64 %idxprom6
+  %9 = load double**, double*** %arrayidx7, align 8
+  %10 = load i32, i32* %i, align 4
+  %idxprom8 = sext i32 %10 to i64
+  %arrayidx9 = getelementptr inbounds double*, double** %9, i64 %idxprom8
+  store double* %6, double** %arrayidx9, align 8
+  br label %for.inc
+
+for.inc:                                          ; preds = %for.body4
+  %11 = load i32, i32* %i, align 4
+  %inc = add nsw i32 %11, 1
+  store i32 %inc, i32* %i, align 4
+  br label %for.cond2, !llvm.loop !2
+
+for.end:                                          ; preds = %for.cond2
+  br label %for.inc10
+
+for.inc10:                                        ; preds = %for.end
+  %12 = load i32, i32* %disptplus, align 4
+  %inc11 = add nsw i32 %12, 1
+  store i32 %inc11, i32* %disptplus, align 4
+  br label %for.cond, !llvm.loop !4
+
+for.end12:                                        ; preds = %for.cond
+  %13 = load double***, double**** @disp, align 8
+  %arrayidx13 = getelementptr inbounds double**, double*** %13, i64 2
+  %14 = load double**, double*** %arrayidx13, align 8
+  %arrayidx14 = getelementptr inbounds double*, double** %14, i64 4999
+  %15 = load double*, double** %arrayidx14, align 8
+  %cmp15 = icmp eq double* %15, null
+  br i1 %cmp15, label %if.then, label %if.end
+
+if.then:                                          ; preds = %for.end12
+  %call16 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.3, i64 0, i64 0))
+  store i32 0, i32* %retval, align 4
+  br label %return
+
+if.end:                                           ; preds = %for.end12
+  %call17 = call noalias i8* @malloc(i64 24) #3
+  %16 = bitcast i8* %call17 to double***
+  store double*** %16, double**** @K, align 8
+  store i32 0, i32* %disptplus, align 4
+  br label %for.cond18
+
+for.cond18:                                       ; preds = %for.inc35, %if.end
+  %17 = load i32, i32* %disptplus, align 4
+  %cmp19 = icmp slt i32 %17, 3
+  br i1 %cmp19, label %for.body20, label %for.end37
+
+for.body20:                                       ; preds = %for.cond18
+  %call21 = call noalias i8* @malloc(i64 40000) #3
+  %18 = bitcast i8* %call21 to double**
+  %19 = load double***, double**** @K, align 8
+  %20 = load i32, i32* %disptplus, align 4
+  %idxprom22 = sext i32 %20 to i64
+  %arrayidx23 = getelementptr inbounds double**, double*** %19, i64 %idxprom22
+  store double** %18, double*** %arrayidx23, align 8
+  store i32 0, i32* %i, align 4
+  br label %for.cond24
+
+for.cond24:                                       ; preds = %for.inc32, %for.body20
+  %21 = load i32, i32* %i, align 4
+  %cmp25 = icmp slt i32 %21, 5000
+  br i1 %cmp25, label %for.body26, label %for.end34
+
+for.body26:                                       ; preds = %for.cond24
+  %call27 = call noalias i8* @malloc(i64 32) #3
+  %22 = bitcast i8* %call27 to double*
+  %23 = load double***, double**** @K, align 8
+  %24 = load i32, i32* %disptplus, align 4
+  %idxprom28 = sext i32 %24 to i64
+  %arrayidx29 = getelementptr inbounds double**, double*** %23, i64 %idxprom28
+  %25 = load double**, double*** %arrayidx29, align 8
+  %26 = load i32, i32* %i, align 4
+  %idxprom30 = sext i32 %26 to i64
+  %arrayidx31 = getelementptr inbounds double*, double** %25, i64 %idxprom30
+  store double* %22, double** %arrayidx31, align 8
+  br label %for.inc32
+
+for.inc32:                                        ; preds = %for.body26
+  %27 = load i32, i32* %i, align 4
+  %inc33 = add nsw i32 %27, 1
+  store i32 %inc33, i32* %i, align 4
+  br label %for.cond24, !llvm.loop !5
+
+for.end34:                                        ; preds = %for.cond24
+  br label %for.inc35
+
+for.inc35:                                        ; preds = %for.end34
+  %28 = load i32, i32* %disptplus, align 4
+  %inc36 = add nsw i32 %28, 1
+  store i32 %inc36, i32* %disptplus, align 4
+  br label %for.cond18, !llvm.loop !6
+
+for.end37:                                        ; preds = %for.cond18
+  %29 = load double***, double**** @K, align 8
+  %arrayidx38 = getelementptr inbounds double**, double*** %29, i64 2
+  %30 = load double**, double*** %arrayidx38, align 8
+  %arrayidx39 = getelementptr inbounds double*, double** %30, i64 4999
+  %31 = load double*, double** %arrayidx39, align 8
+  %cmp40 = icmp eq double* %31, null
+  br i1 %cmp40, label %if.then41, label %if.end43
+
+if.then41:                                        ; preds = %for.end37
+  %call42 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.3, i64 0, i64 0))
+  store i32 0, i32* %retval, align 4
+  br label %return
+
+if.end43:                                         ; preds = %for.end37
+  %call44 = call noalias i8* @malloc(i64 40000) #3
+  %32 = bitcast i8* %call44 to double**
+  store double** %32, double*** @v, align 8
+  store i32 0, i32* %i, align 4
+  br label %for.cond45
+
+for.cond45:                                       ; preds = %for.inc51, %if.end43
+  %33 = load i32, i32* %i, align 4
+  %cmp46 = icmp slt i32 %33, 5000
+  br i1 %cmp46, label %for.body47, label %for.end53
+
+for.body47:                                       ; preds = %for.cond45
+  %call48 = call noalias i8* @malloc(i64 32) #3
+  %34 = bitcast i8* %call48 to double*
+  %35 = load double**, double*** @v, align 8
+  %36 = load i32, i32* %i, align 4
+  %idxprom49 = sext i32 %36 to i64
+  %arrayidx50 = getelementptr inbounds double*, double** %35, i64 %idxprom49
+  store double* %34, double** %arrayidx50, align 8
+  br label %for.inc51
+
+for.inc51:                                        ; preds = %for.body47
+  %37 = load i32, i32* %i, align 4
+  %inc52 = add nsw i32 %37, 1
+  store i32 %inc52, i32* %i, align 4
+  br label %for.cond45, !llvm.loop !7
+
+for.end53:                                        ; preds = %for.cond45
+  %38 = load double**, double*** @v, align 8
+  %arrayidx54 = getelementptr inbounds double*, double** %38, i64 4999
+  %39 = load double*, double** %arrayidx54, align 8
+  %cmp55 = icmp eq double* %39, null
+  br i1 %cmp55, label %if.then56, label %if.end58
+
+if.then56:                                        ; preds = %for.end53
+  %call57 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.3, i64 0, i64 0))
+  store i32 0, i32* %retval, align 4
+  br label %return
+
+if.end58:                                         ; preds = %for.end53
+  %call59 = call noalias i8* @malloc(i64 20004) #3
+  %40 = bitcast i8* %call59 to i32*
+  store i32* %40, i32** @ARCHmatrixindex, align 8
+  %41 = load i32*, i32** @ARCHmatrixindex, align 8
+  %cmp60 = icmp eq i32* %41, null
+  br i1 %cmp60, label %if.then61, label %if.end63
+
+if.then61:                                        ; preds = %if.end58
+  %call62 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.3, i64 0, i64 0))
+  store i32 0, i32* %retval, align 4
+  br label %return
+
+if.end63:                                         ; preds = %if.end58
+  %call64 = call noalias i8* @malloc(i64 16) #3
+  %42 = bitcast i8* %call64 to i32*
+  store i32* %42, i32** @Acol, align 8
+  %43 = load i32*, i32** @Acol, align 8
+  %cmp65 = icmp eq i32* %43, null
+  br i1 %cmp65, label %if.then66, label %if.end68
+
+if.then66:                                        ; preds = %if.end63
+  %call67 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.3, i64 0, i64 0))
+  store i32 0, i32* %retval, align 4
+  br label %return
+
+if.end68:                                         ; preds = %if.end63
+  store i32 0, i32* %disptplus, align 4
+  br label %for.cond69
+
+for.cond69:                                       ; preds = %for.inc97, %if.end68
+  %44 = load i32, i32* %disptplus, align 4
+  %cmp70 = icmp slt i32 %44, 3
+  br i1 %cmp70, label %for.body71, label %for.end99
+
+for.body71:                                       ; preds = %for.cond69
+  store i32 0, i32* %i, align 4
+  br label %for.cond72
+
+for.cond72:                                       ; preds = %for.inc94, %for.body71
+  %45 = load i32, i32* %i, align 4
+  %cmp73 = icmp slt i32 %45, 5000
+  br i1 %cmp73, label %for.body74, label %for.end96
+
+for.body74:                                       ; preds = %for.cond72
+  store i32 0, i32* %j, align 4
+  br label %for.cond75
+
+for.cond75:                                       ; preds = %for.inc91, %for.body74
+  %46 = load i32, i32* %j, align 4
+  %cmp76 = icmp slt i32 %46, 4
+  br i1 %cmp76, label %for.body77, label %for.end93
+
+for.body77:                                       ; preds = %for.cond75
+  %47 = load double***, double**** @disp, align 8
+  %48 = load i32, i32* %disptplus, align 4
+  %idxprom78 = sext i32 %48 to i64
+  %arrayidx79 = getelementptr inbounds double**, double*** %47, i64 %idxprom78
+  %49 = load double**, double*** %arrayidx79, align 8
+  %50 = load i32, i32* %i, align 4
+  %idxprom80 = sext i32 %50 to i64
+  %arrayidx81 = getelementptr inbounds double*, double** %49, i64 %idxprom80
+  %51 = load double*, double** %arrayidx81, align 8
+  %52 = load i32, i32* %j, align 4
+  %idxprom82 = sext i32 %52 to i64
+  %arrayidx83 = getelementptr inbounds double, double* %51, i64 %idxprom82
+  store double 0.000000e+00, double* %arrayidx83, align 8
+  %53 = load i32, i32* %i, align 4
+  %conv = sitofp i32 %53 to double
+  %mul = fmul double 1.100000e+00, %conv
+  %54 = load i32, i32* %j, align 4
+  %conv84 = sitofp i32 %54 to double
+  %add = fadd double %mul, %conv84
+  %55 = load double***, double**** @K, align 8
+  %56 = load i32, i32* %disptplus, align 4
+  %idxprom85 = sext i32 %56 to i64
+  %arrayidx86 = getelementptr inbounds double**, double*** %55, i64 %idxprom85
+  %57 = load double**, double*** %arrayidx86, align 8
+  %58 = load i32, i32* %i, align 4
+  %idxprom87 = sext i32 %58 to i64
+  %arrayidx88 = getelementptr inbounds double*, double** %57, i64 %idxprom87
+  %59 = load double*, double** %arrayidx88, align 8
+  %60 = load i32, i32* %j, align 4
+  %idxprom89 = sext i32 %60 to i64
+  %arrayidx90 = getelementptr inbounds double, double* %59, i64 %idxprom89
+  store double %add, double* %arrayidx90, align 8
+  br label %for.inc91
+
+for.inc91:                                        ; preds = %for.body77
+  %61 = load i32, i32* %j, align 4
+  %inc92 = add nsw i32 %61, 1
+  store i32 %inc92, i32* %j, align 4
+  br label %for.cond75, !llvm.loop !8
+
+for.end93:                                        ; preds = %for.cond75
+  br label %for.inc94
+
+for.inc94:                                        ; preds = %for.end93
+  %62 = load i32, i32* %i, align 4
+  %inc95 = add nsw i32 %62, 1
+  store i32 %inc95, i32* %i, align 4
+  br label %for.cond72, !llvm.loop !9
+
+for.end96:                                        ; preds = %for.cond72
+  br label %for.inc97
+
+for.inc97:                                        ; preds = %for.end96
+  %63 = load i32, i32* %disptplus, align 4
+  %inc98 = add nsw i32 %63, 1
+  store i32 %inc98, i32* %disptplus, align 4
+  br label %for.cond69, !llvm.loop !10
+
+for.end99:                                        ; preds = %for.cond69
+  store i32 0, i32* %i, align 4
+  br label %for.cond100
+
+for.cond100:                                      ; preds = %for.inc119, %for.end99
+  %64 = load i32, i32* %i, align 4
+  %cmp101 = icmp slt i32 %64, 5000
+  br i1 %cmp101, label %for.body103, label %for.end121
+
+for.body103:                                      ; preds = %for.cond100
+  store i32 0, i32* %j, align 4
+  br label %for.cond104
+
+for.cond104:                                      ; preds = %for.inc116, %for.body103
+  %65 = load i32, i32* %j, align 4
+  %cmp105 = icmp slt i32 %65, 4
+  br i1 %cmp105, label %for.body107, label %for.end118
+
+for.body107:                                      ; preds = %for.cond104
+  %66 = load i32, i32* %i, align 4
+  %conv108 = sitofp i32 %66 to double
+  %mul109 = fmul double 1.100000e+00, %conv108
+  %67 = load i32, i32* %j, align 4
+  %conv110 = sitofp i32 %67 to double
+  %add111 = fadd double %mul109, %conv110
+  %68 = load double**, double*** @v, align 8
+  %69 = load i32, i32* %i, align 4
+  %idxprom112 = sext i32 %69 to i64
+  %arrayidx113 = getelementptr inbounds double*, double** %68, i64 %idxprom112
+  %70 = load double*, double** %arrayidx113, align 8
+  %71 = load i32, i32* %j, align 4
+  %idxprom114 = sext i32 %71 to i64
+  %arrayidx115 = getelementptr inbounds double, double* %70, i64 %idxprom114
+  store double %add111, double* %arrayidx115, align 8
+  br label %for.inc116
+
+for.inc116:                                       ; preds = %for.body107
+  %72 = load i32, i32* %j, align 4
+  %inc117 = add nsw i32 %72, 1
+  store i32 %inc117, i32* %j, align 4
+  br label %for.cond104, !llvm.loop !11
+
+for.end118:                                       ; preds = %for.cond104
+  br label %for.inc119
+
+for.inc119:                                       ; preds = %for.end118
+  %73 = load i32, i32* %i, align 4
+  %inc120 = add nsw i32 %73, 1
+  store i32 %inc120, i32* %i, align 4
+  br label %for.cond100, !llvm.loop !12
+
+for.end121:                                       ; preds = %for.cond100
+  store i32 0, i32* %i, align 4
+  br label %for.cond122
+
+for.cond122:                                      ; preds = %for.inc134, %for.end121
+  %74 = load i32, i32* %i, align 4
+  %cmp123 = icmp slt i32 %74, 5001
+  br i1 %cmp123, label %for.body125, label %for.end136
+
+for.body125:                                      ; preds = %for.cond122
+  %75 = load i32*, i32** @ARCHmatrixindex, align 8
+  %76 = load i32, i32* %i, align 4
+  %idxprom126 = sext i32 %76 to i64
+  %arrayidx127 = getelementptr inbounds i32, i32* %75, i64 %idxprom126
+  store i32 0, i32* %arrayidx127, align 4
+  %77 = load i32*, i32** @ARCHmatrixindex, align 8
+  %78 = load i32, i32* %i, align 4
+  %add128 = add nsw i32 %78, 1
+  %idxprom129 = sext i32 %add128 to i64
+  %arrayidx130 = getelementptr inbounds i32, i32* %77, i64 %idxprom129
+  store i32 1, i32* %arrayidx130, align 4
+  %79 = load i32*, i32** @ARCHmatrixindex, align 8
+  %80 = load i32, i32* %i, align 4
+  %add131 = add nsw i32 %80, 2
+  %idxprom132 = sext i32 %add131 to i64
+  %arrayidx133 = getelementptr inbounds i32, i32* %79, i64 %idxprom132
+  store i32 2, i32* %arrayidx133, align 4
+  br label %for.inc134
+
+for.inc134:                                       ; preds = %for.body125
+  %81 = load i32, i32* %i, align 4
+  %add135 = add nsw i32 %81, 3
+  store i32 %add135, i32* %i, align 4
+  br label %for.cond122, !llvm.loop !13
+
+for.end136:                                       ; preds = %for.cond122
+  store i32 0, i32* %i, align 4
+  br label %for.cond137
+
+for.cond137:                                      ; preds = %for.inc144, %for.end136
+  %82 = load i32, i32* %i, align 4
+  %cmp138 = icmp slt i32 %82, 4
+  br i1 %cmp138, label %for.body140, label %for.end146
+
+for.body140:                                      ; preds = %for.cond137
+  %83 = load i32, i32* %i, align 4
+  %mul141 = mul nsw i32 300, %83
+  %84 = load i32*, i32** @Acol, align 8
+  %85 = load i32, i32* %i, align 4
+  %idxprom142 = sext i32 %85 to i64
+  %arrayidx143 = getelementptr inbounds i32, i32* %84, i64 %idxprom142
+  store i32 %mul141, i32* %arrayidx143, align 4
+  br label %for.inc144
+
+for.inc144:                                       ; preds = %for.body140
+  %86 = load i32, i32* %i, align 4
+  %inc145 = add nsw i32 %86, 1
+  store i32 %inc145, i32* %i, align 4
+  br label %for.cond137, !llvm.loop !14
+
+for.end146:                                       ; preds = %for.cond137
+  store i32 0, i32* %pp, align 4
+  br label %for.cond147
+
+for.cond147:                                      ; preds = %for.inc303, %for.end146
+  %87 = load i32, i32* %pp, align 4
+  %cmp148 = icmp slt i32 %87, 100000
+  br i1 %cmp148, label %for.body150, label %for.end305
+
+for.body150:                                      ; preds = %for.cond147
+  store i32 0, i32* %i, align 4
+  br label %for.cond151
+
+for.cond151:                                      ; preds = %for.inc300, %for.body150
+  %88 = load i32, i32* %i, align 4
+  %cmp152 = icmp slt i32 %88, 5000
+  br i1 %cmp152, label %for.body154, label %for.end302
+
+for.body154:                                      ; preds = %for.cond151
+  %89 = load i32*, i32** @ARCHmatrixindex, align 8
+  %90 = load i32, i32* %i, align 4
+  %idxprom155 = sext i32 %90 to i64
+  %arrayidx156 = getelementptr inbounds i32, i32* %89, i64 %idxprom155
+  %91 = load i32, i32* %arrayidx156, align 4
+  store i32 %91, i32* %Anext, align 4
+  %92 = load i32*, i32** @ARCHmatrixindex, align 8
+  %93 = load i32, i32* %i, align 4
+  %add157 = add nsw i32 %93, 1
+  %idxprom158 = sext i32 %add157 to i64
+  %arrayidx159 = getelementptr inbounds i32, i32* %92, i64 %idxprom158
+  %94 = load i32, i32* %arrayidx159, align 4
+  store i32 %94, i32* %Alast, align 4
+  br label %while.cond
+
+while.cond:                                       ; preds = %while.body, %for.body154
+  %95 = load i32, i32* %Anext, align 4
+  %96 = load i32, i32* %Alast, align 4
+  %cmp160 = icmp slt i32 %95, %96
+  br i1 %cmp160, label %while.body, label %while.end
+
+while.body:                                       ; preds = %while.cond
+  %97 = load i32*, i32** @Acol, align 8
+  %98 = load i32, i32* %Anext, align 4
+  %idxprom162 = sext i32 %98 to i64
+  %arrayidx163 = getelementptr inbounds i32, i32* %97, i64 %idxprom162
+  %99 = load i32, i32* %arrayidx163, align 4
+  store i32 %99, i32* %col, align 4
+  %100 = load double***, double**** @K, align 8
+  %101 = load i32, i32* %Anext, align 4
+  %idxprom164 = sext i32 %101 to i64
+  %arrayidx165 = getelementptr inbounds double**, double*** %100, i64 %idxprom164
+  %102 = load double**, double*** %arrayidx165, align 8
+  %arrayidx166 = getelementptr inbounds double*, double** %102, i64 0
+  %103 = load double*, double** %arrayidx166, align 8
+  %arrayidx167 = getelementptr inbounds double, double* %103, i64 0
+  %104 = load double, double* %arrayidx167, align 8
+  %105 = load double**, double*** @v, align 8
+  %106 = load i32, i32* %i, align 4
+  %idxprom168 = sext i32 %106 to i64
+  %arrayidx169 = getelementptr inbounds double*, double** %105, i64 %idxprom168
+  %107 = load double*, double** %arrayidx169, align 8
+  %arrayidx170 = getelementptr inbounds double, double* %107, i64 0
+  %108 = load double, double* %arrayidx170, align 8
+  %mul171 = fmul double %104, %108
+  %109 = load double***, double**** @K, align 8
+  %110 = load i32, i32* %Anext, align 4
+  %idxprom172 = sext i32 %110 to i64
+  %arrayidx173 = getelementptr inbounds double**, double*** %109, i64 %idxprom172
+  %111 = load double**, double*** %arrayidx173, align 8
+  %arrayidx174 = getelementptr inbounds double*, double** %111, i64 1
+  %112 = load double*, double** %arrayidx174, align 8
+  %arrayidx175 = getelementptr inbounds double, double* %112, i64 0
+  %113 = load double, double* %arrayidx175, align 8
+  %114 = load double**, double*** @v, align 8
+  %115 = load i32, i32* %i, align 4
+  %idxprom176 = sext i32 %115 to i64
+  %arrayidx177 = getelementptr inbounds double*, double** %114, i64 %idxprom176
+  %116 = load double*, double** %arrayidx177, align 8
+  %arrayidx178 = getelementptr inbounds double, double* %116, i64 1
+  %117 = load double, double* %arrayidx178, align 8
+  %mul179 = fmul double %113, %117
+  %add180 = fadd double %mul171, %mul179
+  %118 = load double***, double**** @K, align 8
+  %119 = load i32, i32* %Anext, align 4
+  %idxprom181 = sext i32 %119 to i64
+  %arrayidx182 = getelementptr inbounds double**, double*** %118, i64 %idxprom181
+  %120 = load double**, double*** %arrayidx182, align 8
+  %arrayidx183 = getelementptr inbounds double*, double** %120, i64 2
+  %121 = load double*, double** %arrayidx183, align 8
+  %arrayidx184 = getelementptr inbounds double, double* %121, i64 0
+  %122 = load double, double* %arrayidx184, align 8
+  %123 = load double**, double*** @v, align 8
+  %124 = load i32, i32* %i, align 4
+  %idxprom185 = sext i32 %124 to i64
+  %arrayidx186 = getelementptr inbounds double*, double** %123, i64 %idxprom185
+  %125 = load double*, double** %arrayidx186, align 8
+  %arrayidx187 = getelementptr inbounds double, double* %125, i64 2
+  %126 = load double, double* %arrayidx187, align 8
+  %mul188 = fmul double %122, %126
+  %add189 = fadd double %add180, %mul188
+  %127 = load double***, double**** @disp, align 8
+  %arrayidx190 = getelementptr inbounds double**, double*** %127, i64 1
+  %128 = load double**, double*** %arrayidx190, align 8
+  %129 = load i32, i32* %col, align 4
+  %idxprom191 = sext i32 %129 to i64
+  %arrayidx192 = getelementptr inbounds double*, double** %128, i64 %idxprom191
+  %130 = load double*, double** %arrayidx192, align 8
+  %arrayidx193 = getelementptr inbounds double, double* %130, i64 0
+  %131 = load double, double* %arrayidx193, align 8
+  %add194 = fadd double %131, %add189
+  store double %add194, double* %arrayidx193, align 8
+  %132 = load double***, double**** @K, align 8
+  %133 = load i32, i32* %Anext, align 4
+  %idxprom195 = sext i32 %133 to i64
+  %arrayidx196 = getelementptr inbounds double**, double*** %132, i64 %idxprom195
+  %134 = load double**, double*** %arrayidx196, align 8
+  %arrayidx197 = getelementptr inbounds double*, double** %134, i64 0
+  %135 = load double*, double** %arrayidx197, align 8
+  %arrayidx198 = getelementptr inbounds double, double* %135, i64 1
+  %136 = load double, double* %arrayidx198, align 8
+  %137 = load double**, double*** @v, align 8
+  %138 = load i32, i32* %i, align 4
+  %idxprom199 = sext i32 %138 to i64
+  %arrayidx200 = getelementptr inbounds double*, double** %137, i64 %idxprom199
+  %139 = load double*, double** %arrayidx200, align 8
+  %arrayidx201 = getelementptr inbounds double, double* %139, i64 0
+  %140 = load double, double* %arrayidx201, align 8
+  %mul202 = fmul double %136, %140
+  %141 = load double***, double**** @K, align 8
+  %142 = load i32, i32* %Anext, align 4
+  %idxprom203 = sext i32 %142 to i64
+  %arrayidx204 = getelementptr inbounds double**, double*** %141, i64 %idxprom203
+  %143 = load double**, double*** %arrayidx204, align 8
+  %arrayidx205 = getelementptr inbounds double*, double** %143, i64 1
+  %144 = load double*, double** %arrayidx205, align 8
+  %arrayidx206 = getelementptr inbounds double, double* %144, i64 1
+  %145 = load double, double* %arrayidx206, align 8
+  %146 = load double**, double*** @v, align 8
+  %147 = load i32, i32* %i, align 4
+  %idxprom207 = sext i32 %147 to i64
+  %arrayidx208 = getelementptr inbounds double*, double** %146, i64 %idxprom207
+  %148 = load double*, double** %arrayidx208, align 8
+  %arrayidx209 = getelementptr inbounds double, double* %148, i64 1
+  %149 = load double, double* %arrayidx209, align 8
+  %mul210 = fmul double %145, %149
+  %add211 = fadd double %mul202, %mul210
+  %150 = load double***, double**** @K, align 8
+  %151 = load i32, i32* %Anext, align 4
+  %idxprom212 = sext i32 %151 to i64
+  %arrayidx213 = getelementptr inbounds double**, double*** %150, i64 %idxprom212
+  %152 = load double**, double*** %arrayidx213, align 8
+  %arrayidx214 = getelementptr inbounds double*, double** %152, i64 2
+  %153 = load double*, double** %arrayidx214, align 8
+  %arrayidx215 = getelementptr inbounds double, double* %153, i64 1
+  %154 = load double, double* %arrayidx215, align 8
+  %155 = load double**, double*** @v, align 8
+  %156 = load i32, i32* %i, align 4
+  %idxprom216 = sext i32 %156 to i64
+  %arrayidx217 = getelementptr inbounds double*, double** %155, i64 %idxprom216
+  %157 = load double*, double** %arrayidx217, align 8
+  %arrayidx218 = getelementptr inbounds double, double* %157, i64 2
+  %158 = load double, double* %arrayidx218, align 8
+  %mul219 = fmul double %154, %158
+  %add220 = fadd double %add211, %mul219
+  %159 = load double***, double**** @disp, align 8
+  %arrayidx221 = getelementptr inbounds double**, double*** %159, i64 1
+  %160 = load double**, double*** %arrayidx221, align 8
+  %161 = load i32, i32* %col, align 4
+  %idxprom222 = sext i32 %161 to i64
+  %arrayidx223 = getelementptr inbounds double*, double** %160, i64 %idxprom222
+  %162 = load double*, double** %arrayidx223, align 8
+  %arrayidx224 = getelementptr inbounds double, double* %162, i64 1
+  %163 = load double, double* %arrayidx224, align 8
+  %add225 = fadd double %163, %add220
+  store double %add225, double* %arrayidx224, align 8
+  %164 = load double***, double**** @K, align 8
+  %165 = load i32, i32* %Anext, align 4
+  %idxprom226 = sext i32 %165 to i64
+  %arrayidx227 = getelementptr inbounds double**, double*** %164, i64 %idxprom226
+  %166 = load double**, double*** %arrayidx227, align 8
+  %arrayidx228 = getelementptr inbounds double*, double** %166, i64 0
+  %167 = load double*, double** %arrayidx228, align 8
+  %arrayidx229 = getelementptr inbounds double, double* %167, i64 2
+  %168 = load double, double* %arrayidx229, align 8
+  %169 = load double**, double*** @v, align 8
+  %170 = load i32, i32* %i, align 4
+  %idxprom230 = sext i32 %170 to i64
+  %arrayidx231 = getelementptr inbounds double*, double** %169, i64 %idxprom230
+  %171 = load double*, double** %arrayidx231, align 8
+  %arrayidx232 = getelementptr inbounds double, double* %171, i64 0
+  %172 = load double, double* %arrayidx232, align 8
+  %mul233 = fmul double %168, %172
+  %173 = load double***, double**** @K, align 8
+  %174 = load i32, i32* %Anext, align 4
+  %idxprom234 = sext i32 %174 to i64
+  %arrayidx235 = getelementptr inbounds double**, double*** %173, i64 %idxprom234
+  %175 = load double**, double*** %arrayidx235, align 8
+  %arrayidx236 = getelementptr inbounds double*, double** %175, i64 1
+  %176 = load double*, double** %arrayidx236, align 8
+  %arrayidx237 = getelementptr inbounds double, double* %176, i64 2
+  %177 = load double, double* %arrayidx237, align 8
+  %178 = load double**, double*** @v, align 8
+  %179 = load i32, i32* %i, align 4
+  %idxprom238 = sext i32 %179 to i64
+  %arrayidx239 = getelementptr inbounds double*, double** %178, i64 %idxprom238
+  %180 = load double*, double** %arrayidx239, align 8
+  %arrayidx240 = getelementptr inbounds double, double* %180, i64 1
+  %181 = load double, double* %arrayidx240, align 8
+  %mul241 = fmul double %177, %181
+  %add242 = fadd double %mul233, %mul241
+  %182 = load double***, double**** @K, align 8
+  %183 = load i32, i32* %Anext, align 4
+  %idxprom243 = sext i32 %183 to i64
+  %arrayidx244 = getelementptr inbounds double**, double*** %182, i64 %idxprom243
+  %184 = load double**, double*** %arrayidx244, align 8
+  %arrayidx245 = getelementptr inbounds double*, double** %184, i64 2
+  %185 = load double*, double** %arrayidx245, align 8
+  %arrayidx246 = getelementptr inbounds double, double* %185, i64 2
+  %186 = load double, double* %arrayidx246, align 8
+  %187 = load double**, double*** @v, align 8
+  %188 = load i32, i32* %i, align 4
+  %idxprom247 = sext i32 %188 to i64
+  %arrayidx248 = getelementptr inbounds double*, double** %187, i64 %idxprom247
+  %189 = load double*, double** %arrayidx248, align 8
+  %arrayidx249 = getelementptr inbounds double, double* %189, i64 2
+  %190 = load double, double* %arrayidx249, align 8
+  %mul250 = fmul double %186, %190
+  %add251 = fadd double %add242, %mul250
+  %191 = load double***, double**** @disp, align 8
+  %arrayidx252 = getelementptr inbounds double**, double*** %191, i64 1
+  %192 = load double**, double*** %arrayidx252, align 8
+  %193 = load i32, i32* %col, align 4
+  %idxprom253 = sext i32 %193 to i64
+  %arrayidx254 = getelementptr inbounds double*, double** %192, i64 %idxprom253
+  %194 = load double*, double** %arrayidx254, align 8
+  %arrayidx255 = getelementptr inbounds double, double* %194, i64 2
+  %195 = load double, double* %arrayidx255, align 8
+  %add256 = fadd double %195, %add251
+  store double %add256, double* %arrayidx255, align 8
+  %196 = load double***, double**** @K, align 8
+  %197 = load i32, i32* %Anext, align 4
+  %idxprom257 = sext i32 %197 to i64
+  %arrayidx258 = getelementptr inbounds double**, double*** %196, i64 %idxprom257
+  %198 = load double**, double*** %arrayidx258, align 8
+  %arrayidx259 = getelementptr inbounds double*, double** %198, i64 0
+  %199 = load double*, double** %arrayidx259, align 8
+  %arrayidx260 = getelementptr inbounds double, double* %199, i64 3
+  %200 = load double, double* %arrayidx260, align 8
+  %201 = load double**, double*** @v, align 8
+  %202 = load i32, i32* %i, align 4
+  %idxprom261 = sext i32 %202 to i64
+  %arrayidx262 = getelementptr inbounds double*, double** %201, i64 %idxprom261
+  %203 = load double*, double** %arrayidx262, align 8
+  %arrayidx263 = getelementptr inbounds double, double* %203, i64 0
+  %204 = load double, double* %arrayidx263, align 8
+  %mul264 = fmul double %200, %204
+  %205 = load double***, double**** @K, align 8
+  %206 = load i32, i32* %Anext, align 4
+  %idxprom265 = sext i32 %206 to i64
+  %arrayidx266 = getelementptr inbounds double**, double*** %205, i64 %idxprom265
+  %207 = load double**, double*** %arrayidx266, align 8
+  %arrayidx267 = getelementptr inbounds double*, double** %207, i64 1
+  %208 = load double*, double** %arrayidx267, align 8
+  %arrayidx268 = getelementptr inbounds double, double* %208, i64 3
+  %209 = load double, double* %arrayidx268, align 8
+  %210 = load double**, double*** @v, align 8
+  %211 = load i32, i32* %i, align 4
+  %idxprom269 = sext i32 %211 to i64
+  %arrayidx270 = getelementptr inbounds double*, double** %210, i64 %idxprom269
+  %212 = load double*, double** %arrayidx270, align 8
+  %arrayidx271 = getelementptr inbounds double, double* %212, i64 1
+  %213 = load double, double* %arrayidx271, align 8
+  %mul272 = fmul double %209, %213
+  %add273 = fadd double %mul264, %mul272
+  %214 = load double***, double**** @K, align 8
+  %215 = load i32, i32* %Anext, align 4
+  %idxprom274 = sext i32 %215 to i64
+  %arrayidx275 = getelementptr inbounds double**, double*** %214, i64 %idxprom274
+  %216 = load double**, double*** %arrayidx275, align 8
+  %arrayidx276 = getelementptr inbounds double*, double** %216, i64 2
+  %217 = load double*, double** %arrayidx276, align 8
+  %arrayidx277 = getelementptr inbounds double, double* %217, i64 3
+  %218 = load double, double* %arrayidx277, align 8
+  %219 = load double**, double*** @v, align 8
+  %220 = load i32, i32* %i, align 4
+  %idxprom278 = sext i32 %220 to i64
+  %arrayidx279 = getelementptr inbounds double*, double** %219, i64 %idxprom278
+  %221 = load double*, double** %arrayidx279, align 8
+  %arrayidx280 = getelementptr inbounds double, double* %221, i64 2
+  %222 = load double, double* %arrayidx280, align 8
+  %mul281 = fmul double %218, %222
+  %add282 = fadd double %add273, %mul281
+  %223 = load double***, double**** @disp, align 8
+  %arrayidx283 = getelementptr inbounds double**, double*** %223, i64 1
+  %224 = load double**, double*** %arrayidx283, align 8
+  %225 = load i32, i32* %col, align 4
+  %idxprom284 = sext i32 %225 to i64
+  %arrayidx285 = getelementptr inbounds double*, double** %224, i64 %idxprom284
+  %226 = load double*, double** %arrayidx285, align 8
+  %arrayidx286 = getelementptr inbounds double, double* %226, i64 3
+  %227 = load double, double* %arrayidx286, align 8
+  %add287 = fadd double %227, %add282
+  store double %add287, double* %arrayidx286, align 8
+  %228 = load double***, double**** @disp, align 8
+  %229 = bitcast double*** %228 to i8*
+  %230 = load double***, double**** @K, align 8
+  %231 = bitcast double*** %230 to i8*
+  call void @NOALIAS(i8* %229, i8* %231)
+  %232 = load double***, double**** @disp, align 8
+  %233 = bitcast double*** %232 to i8*
+  %234 = load double**, double*** @v, align 8
+  %235 = bitcast double** %234 to i8*
+  call void @NOALIAS(i8* %233, i8* %235)
+  %236 = load double***, double**** @disp, align 8
+  %arrayidx288 = getelementptr inbounds double**, double*** %236, i64 1
+  %237 = load double**, double*** %arrayidx288, align 8
+  %238 = bitcast double** %237 to i8*
+  %239 = load double***, double**** @K, align 8
+  %240 = load i32, i32* %Anext, align 4
+  %idxprom289 = sext i32 %240 to i64
+  %arrayidx290 = getelementptr inbounds double**, double*** %239, i64 %idxprom289
+  %241 = load double**, double*** %arrayidx290, align 8
+  %242 = bitcast double** %241 to i8*
+  call void @NOALIAS(i8* %238, i8* %242)
+  %243 = load double***, double**** @disp, align 8
+  %arrayidx291 = getelementptr inbounds double**, double*** %243, i64 1
+  %244 = load double**, double*** %arrayidx291, align 8
+  %245 = bitcast double** %244 to i8*
+  %246 = load double**, double*** @v, align 8
+  %247 = load i32, i32* %i, align 4
+  %idxprom292 = sext i32 %247 to i64
+  %arrayidx293 = getelementptr inbounds double*, double** %246, i64 %idxprom292
+  %248 = load double*, double** %arrayidx293, align 8
+  %249 = bitcast double* %248 to i8*
+  call void @NOALIAS(i8* %245, i8* %249)
+  %250 = load double***, double**** @disp, align 8
+  %arrayidx294 = getelementptr inbounds double**, double*** %250, i64 1
+  %251 = load double**, double*** %arrayidx294, align 8
+  %252 = load i32, i32* %col, align 4
+  %idxprom295 = sext i32 %252 to i64
+  %arrayidx296 = getelementptr inbounds double*, double** %251, i64 %idxprom295
+  %253 = load double*, double** %arrayidx296, align 8
+  %254 = bitcast double* %253 to i8*
+  %255 = load double**, double*** @v, align 8
+  %256 = load i32, i32* %i, align 4
+  %idxprom297 = sext i32 %256 to i64
+  %arrayidx298 = getelementptr inbounds double*, double** %255, i64 %idxprom297
+  %257 = load double*, double** %arrayidx298, align 8
+  %258 = bitcast double* %257 to i8*
+  call void @NOALIAS(i8* %254, i8* %258)
+  %259 = load i32, i32* %Anext, align 4
+  %inc299 = add nsw i32 %259, 1
+  store i32 %inc299, i32* %Anext, align 4
+  br label %while.cond, !llvm.loop !15
+
+while.end:                                        ; preds = %while.cond
+  br label %for.inc300
+
+for.inc300:                                       ; preds = %while.end
+  %260 = load i32, i32* %i, align 4
+  %inc301 = add nsw i32 %260, 1
+  store i32 %inc301, i32* %i, align 4
+  br label %for.cond151, !llvm.loop !16
+
+for.end302:                                       ; preds = %for.cond151
+  br label %for.inc303
+
+for.inc303:                                       ; preds = %for.end302
+  %261 = load i32, i32* %pp, align 4
+  %inc304 = add nsw i32 %261, 1
+  store i32 %inc304, i32* %pp, align 4
+  br label %for.cond147, !llvm.loop !17
+
+for.end305:                                       ; preds = %for.cond147
+  %262 = load double***, double**** @disp, align 8
+  %arrayidx306 = getelementptr inbounds double**, double*** %262, i64 1
+  %263 = load double**, double*** %arrayidx306, align 8
+  %arrayidx307 = getelementptr inbounds double*, double** %263, i64 4999
+  %264 = load double*, double** %arrayidx307, align 8
+  %arrayidx308 = getelementptr inbounds double, double* %264, i64 2
+  %265 = load double, double* %arrayidx308, align 8
+  store double %265, double* %rst, align 8
+  store i32 0, i32* %disptplus, align 4
+  br label %for.cond309
+
+for.cond309:                                      ; preds = %for.inc326, %for.end305
+  %266 = load i32, i32* %disptplus, align 4
+  %cmp310 = icmp slt i32 %266, 3
+  br i1 %cmp310, label %for.body312, label %for.end328
+
+for.body312:                                      ; preds = %for.cond309
+  store i32 0, i32* %i, align 4
+  br label %for.cond313
+
+for.cond313:                                      ; preds = %for.inc321, %for.body312
+  %267 = load i32, i32* %i, align 4
+  %cmp314 = icmp slt i32 %267, 5000
+  br i1 %cmp314, label %for.body316, label %for.end323
+
+for.body316:                                      ; preds = %for.cond313
+  %268 = load double***, double**** @disp, align 8
+  %269 = load i32, i32* %disptplus, align 4
+  %idxprom317 = sext i32 %269 to i64
+  %arrayidx318 = getelementptr inbounds double**, double*** %268, i64 %idxprom317
+  %270 = load double**, double*** %arrayidx318, align 8
+  %271 = load i32, i32* %i, align 4
+  %idxprom319 = sext i32 %271 to i64
+  %arrayidx320 = getelementptr inbounds double*, double** %270, i64 %idxprom319
+  %272 = load double*, double** %arrayidx320, align 8
+  %273 = bitcast double* %272 to i8*
+  call void @free(i8* %273) #3
+  br label %for.inc321
+
+for.inc321:                                       ; preds = %for.body316
+  %274 = load i32, i32* %i, align 4
+  %inc322 = add nsw i32 %274, 1
+  store i32 %inc322, i32* %i, align 4
+  br label %for.cond313, !llvm.loop !18
+
+for.end323:                                       ; preds = %for.cond313
+  %275 = load double***, double**** @disp, align 8
+  %276 = load i32, i32* %disptplus, align 4
+  %idxprom324 = sext i32 %276 to i64
+  %arrayidx325 = getelementptr inbounds double**, double*** %275, i64 %idxprom324
+  %277 = load double**, double*** %arrayidx325, align 8
+  %278 = bitcast double** %277 to i8*
+  call void @free(i8* %278) #3
+  br label %for.inc326
+
+for.inc326:                                       ; preds = %for.end323
+  %279 = load i32, i32* %disptplus, align 4
+  %inc327 = add nsw i32 %279, 1
+  store i32 %inc327, i32* %disptplus, align 4
+  br label %for.cond309, !llvm.loop !19
+
+for.end328:                                       ; preds = %for.cond309
+  %280 = load double***, double**** @disp, align 8
+  %281 = bitcast double*** %280 to i8*
+  call void @free(i8* %281) #3
+  store i32 0, i32* %disptplus, align 4
+  br label %for.cond329
+
+for.cond329:                                      ; preds = %for.inc346, %for.end328
+  %282 = load i32, i32* %disptplus, align 4
+  %cmp330 = icmp slt i32 %282, 3
+  br i1 %cmp330, label %for.body332, label %for.end348
+
+for.body332:                                      ; preds = %for.cond329
+  store i32 0, i32* %i, align 4
+  br label %for.cond333
+
+for.cond333:                                      ; preds = %for.inc341, %for.body332
+  %283 = load i32, i32* %i, align 4
+  %cmp334 = icmp slt i32 %283, 5000
+  br i1 %cmp334, label %for.body336, label %for.end343
+
+for.body336:                                      ; preds = %for.cond333
+  %284 = load double***, double**** @K, align 8
+  %285 = load i32, i32* %disptplus, align 4
+  %idxprom337 = sext i32 %285 to i64
+  %arrayidx338 = getelementptr inbounds double**, double*** %284, i64 %idxprom337
+  %286 = load double**, double*** %arrayidx338, align 8
+  %287 = load i32, i32* %i, align 4
+  %idxprom339 = sext i32 %287 to i64
+  %arrayidx340 = getelementptr inbounds double*, double** %286, i64 %idxprom339
+  %288 = load double*, double** %arrayidx340, align 8
+  %289 = bitcast double* %288 to i8*
+  call void @free(i8* %289) #3
+  br label %for.inc341
+
+for.inc341:                                       ; preds = %for.body336
+  %290 = load i32, i32* %i, align 4
+  %inc342 = add nsw i32 %290, 1
+  store i32 %inc342, i32* %i, align 4
+  br label %for.cond333, !llvm.loop !20
+
+for.end343:                                       ; preds = %for.cond333
+  %291 = load double***, double**** @K, align 8
+  %292 = load i32, i32* %disptplus, align 4
+  %idxprom344 = sext i32 %292 to i64
+  %arrayidx345 = getelementptr inbounds double**, double*** %291, i64 %idxprom344
+  %293 = load double**, double*** %arrayidx345, align 8
+  %294 = bitcast double** %293 to i8*
+  call void @free(i8* %294) #3
+  br label %for.inc346
+
+for.inc346:                                       ; preds = %for.end343
+  %295 = load i32, i32* %disptplus, align 4
+  %inc347 = add nsw i32 %295, 1
+  store i32 %inc347, i32* %disptplus, align 4
+  br label %for.cond329, !llvm.loop !21
+
+for.end348:                                       ; preds = %for.cond329
+  %296 = load double***, double**** @K, align 8
+  %297 = bitcast double*** %296 to i8*
+  call void @free(i8* %297) #3
+  store i32 0, i32* %i, align 4
+  br label %for.cond349
+
+for.cond349:                                      ; preds = %for.inc355, %for.end348
+  %298 = load i32, i32* %i, align 4
+  %cmp350 = icmp slt i32 %298, 5000
+  br i1 %cmp350, label %for.body352, label %for.end357
+
+for.body352:                                      ; preds = %for.cond349
+  %299 = load double**, double*** @v, align 8
+  %300 = load i32, i32* %i, align 4
+  %idxprom353 = sext i32 %300 to i64
+  %arrayidx354 = getelementptr inbounds double*, double** %299, i64 %idxprom353
+  %301 = load double*, double** %arrayidx354, align 8
+  %302 = bitcast double* %301 to i8*
+  call void @free(i8* %302) #3
+  br label %for.inc355
+
+for.inc355:                                       ; preds = %for.body352
+  %303 = load i32, i32* %i, align 4
+  %inc356 = add nsw i32 %303, 1
+  store i32 %inc356, i32* %i, align 4
+  br label %for.cond349, !llvm.loop !22
+
+for.end357:                                       ; preds = %for.cond349
+  %304 = load double**, double*** @v, align 8
+  %305 = bitcast double** %304 to i8*
+  call void @free(i8* %305) #3
+  %306 = load i32*, i32** @ARCHmatrixindex, align 8
+  %307 = bitcast i32* %306 to i8*
+  call void @free(i8* %307) #3
+  %308 = load i32*, i32** @Acol, align 8
+  %309 = bitcast i32* %308 to i8*
+  call void @free(i8* %309) #3
+  %310 = load double, double* %rst, align 8
+  %cmp358 = fcmp ogt double %310, 5.500000e+00
+  br i1 %cmp358, label %if.then360, label %if.else
+
+if.then360:                                       ; preds = %for.end357
+  store i32 0, i32* %retval, align 4
+  br label %return
+
+if.else:                                          ; preds = %for.end357
+  store i32 1, i32* %retval, align 4
+  br label %return
+
+return:                                           ; preds = %if.else, %if.then360, %if.then66, %if.then61, %if.then56, %if.then41, %if.then
+  %311 = load i32, i32* %retval, align 4
+  ret i32 %311
+}
+
+; Function Attrs: nounwind
+declare dso_local void @free(i8*) #2
+
+attributes #0 = { noinline nounwind optnone uwtable "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { nounwind "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #3 = { nounwind }
+
+!llvm.module.flags = !{!0}
+!llvm.ident = !{!1}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{!"clang version 12.0.0"}
+!2 = distinct !{!2, !3}
+!3 = !{!"llvm.loop.mustprogress"}
+!4 = distinct !{!4, !3}
+!5 = distinct !{!5, !3}
+!6 = distinct !{!6, !3}
+!7 = distinct !{!7, !3}
+!8 = distinct !{!8, !3}
+!9 = distinct !{!9, !3}
+!10 = distinct !{!10, !3}
+!11 = distinct !{!11, !3}
+!12 = distinct !{!12, !3}
+!13 = distinct !{!13, !3}
+!14 = distinct !{!14, !3}
+!15 = distinct !{!15, !3}
+!16 = distinct !{!16, !3}
+!17 = distinct !{!17, !3}
+!18 = distinct !{!18, !3}
+!19 = distinct !{!19, !3}
+!20 = distinct !{!20, !3}
+!21 = distinct !{!21, !3}
+!22 = distinct !{!22, !3}
