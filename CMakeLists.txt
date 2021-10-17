@@ -47,7 +47,7 @@ foreach(i RANGE ${len2})
       continue()
     endif()
     add_test(
-      NAME ${filename}
+      NAME points-to/${filename}
       COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
     )
@@ -55,7 +55,7 @@ foreach(i RANGE ${len2})
 endforeach()
 
 add_test(
-  NAME basic_c_tests/struct-twoflds.c
+  NAME points-to/basic_c_tests/struct-twoflds.c
   COMMAND wpa -ander -stat=false -ff-eq-base=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/basic_c_tests/struct-twoflds.c.bc
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
