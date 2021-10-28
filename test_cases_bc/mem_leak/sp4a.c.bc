@@ -293,7 +293,7 @@ if.then:                                          ; preds = %entry
   br label %return, !dbg !180
 
 if.end:                                           ; preds = %entry
-  %call1 = call i8* @PLKLEAKFP(i32 10), !dbg !181
+  %call1 = call i8* @SAFEMALLOC(i32 10), !dbg !181
   %4 = load %struct._S*, %struct._S** %p, align 8, !dbg !182
   %p1 = getelementptr inbounds %struct._S, %struct._S* %4, i32 0, i32 0, !dbg !183
   store i8* %call1, i8** %p1, align 8, !dbg !184

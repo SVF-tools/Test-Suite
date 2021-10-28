@@ -281,7 +281,7 @@ entry:
   call void @llvm.dbg.declare(metadata [10 x i8]* %str2, metadata !171, metadata !DIExpression()), !dbg !172
   %1 = bitcast [10 x i8]* %str2 to i8*, !dbg !172
   call void @llvm.memcpy.p0i8.p0i8.i64(i8* align 1 %1, i8* align 1 getelementptr inbounds ([10 x i8], [10 x i8]* @__const.main.str2, i32 0, i32 0), i64 10, i1 false), !dbg !172
-  %call = call i8* @SAFEMALLOC(i32 16), !dbg !173
+  %call = call noalias i8* @malloc(i64 16) #5, !dbg !173
   %2 = bitcast i8* %call to %struct._S*, !dbg !174
   store %struct._S* %2, %struct._S** %p, align 8, !dbg !175
   %3 = load %struct._S*, %struct._S** %p, align 8, !dbg !176
@@ -293,7 +293,7 @@ if.then:                                          ; preds = %entry
   br label %return, !dbg !180
 
 if.end:                                           ; preds = %entry
-  %call1 = call i8* @PLKLEAKFP(i32 10), !dbg !181
+  %call1 = call noalias i8* @malloc(i64 10) #5, !dbg !181
   %4 = load %struct._S*, %struct._S** %p, align 8, !dbg !182
   %p1 = getelementptr inbounds %struct._S, %struct._S* %4, i32 0, i32 0, !dbg !183
   store i8* %call1, i8** %p1, align 8, !dbg !184
@@ -311,7 +311,7 @@ if.then4:                                         ; preds = %if.end
   br label %return, !dbg !193
 
 if.end5:                                          ; preds = %if.end
-  %call6 = call i8* @PLKLEAKFP(i32 10), !dbg !194
+  %call6 = call i8* @SAFEMALLOC(i32 10), !dbg !194
   %9 = load %struct._S*, %struct._S** %p, align 8, !dbg !195
   %p2 = getelementptr inbounds %struct._S, %struct._S* %9, i32 0, i32 1, !dbg !196
   store i8* %call6, i8** %p2, align 8, !dbg !197

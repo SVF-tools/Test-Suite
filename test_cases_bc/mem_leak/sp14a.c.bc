@@ -286,7 +286,7 @@ if.else:                                          ; preds = %entry
   %3 = load i32*, i32** %y, align 8, !dbg !170
   %4 = bitcast i32* %3 to i8*, !dbg !170
   call void @free(i8* %4) #4, !dbg !172
-  %call2 = call i8* @PLKMALLOC(i32 10), !dbg !173
+  %call2 = call i8* @NFRMALLOC(i32 10), !dbg !173
   %5 = bitcast i8* %call2 to i32*, !dbg !173
   store i32* %5, i32** %retval, align 8, !dbg !174
   br label %return, !dbg !174
