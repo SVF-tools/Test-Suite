@@ -18,17 +18,17 @@ int main(int arg1) {
 	char str1[10] = "STRING 1";
 	char str2[10] = "STRING 2";
 
-	p = (S*) SAFEMALLOC(sizeof(S));
+	p = (S*) malloc(sizeof(S));
 	if (p == NULL)
 		return -1;
 
-	p->p1 = (char *) PLKLEAKFP(sizeof(char) * 10);
+	p->p1 = (char *) malloc(sizeof(char) * 10);
 	if (p->p1 == NULL) {
 		free(p);
 		return -1;
 	}
 
-	p->p2 = (char *) PLKLEAKFP(sizeof(char) * 10);
+	p->p2 = (char *) SAFEMALLOC(sizeof(char) * 10);
 	if (p->p2 == NULL) {
 		if (p->p1 != NULL)
 			free(p->p1);

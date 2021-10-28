@@ -14,6 +14,7 @@ list(
   fstbhc_tests
   fstbhc_tests/fs_tests
   mta
+  mem_leak
 )
 
 list(
@@ -27,6 +28,7 @@ list(
   "wpa -fstbhc -stat=false"
   "wpa -fstbhc -stat=false"
   "mta -mhp-validation -lock-validation -stat=false"
+  "saber -leak -valid-tests -stat=false"
 )
 
 list(LENGTH folders len1)
