@@ -115,7 +115,6 @@ add_test(
 )
 set_tests_properties(diff_tests/ander-nander/basic_c_tests/struct-twoflds.c.bc PROPERTIES PASS_REGULAR_EXPRESSION "0")
 
-
 # saber mem_leak tests
 set(cmd "saber -leak -valid-tests -stat=false")
 file(GLOB mem_leak_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/mem_leak/*.bc*")
