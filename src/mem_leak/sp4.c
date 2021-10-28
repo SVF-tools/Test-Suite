@@ -24,7 +24,7 @@ int main(int arg1)
 	if( p == NULL)
 			return -1;
 
-	p->p1 = (char *)PLKLEAKFP(sizeof(char)*10);
+	p->p1 = (char *)SAFEMALLOC(sizeof(char)*10);
 	if( p->p1 == NULL) {
 			free(p);
 			return -1;
