@@ -86,7 +86,7 @@ foreach(folder ${diff_tests_anderson_folders})
     if (${filename} MATCHES "struct-twoflds.c.bc")
       continue()
     endif()
-    if (${filename} MATCHES ".pre.bc" OR ${filename} MATCHES ".pre.svf.bc")
+    if (${filename} MATCHES ".pre.bc" OR ${filename} MATCHES ".pre.svf.bc" OR ${filename} MATCHES ".svf.bc")
       continue()
     endif()
 
@@ -96,6 +96,15 @@ foreach(folder ${diff_tests_anderson_folders})
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
     )
     set_tests_properties(diff_tests/ander-nander/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
+
+    # read and write svfg
+    add_test(
+      NAME diff_tests/svfg-read-write/${filename}
+      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -write-svfg=read_write_file" "wpa -ander -svfg -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    set_tests_properties(diff_tests/svfg-read-write/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
+
     # read and write ander
     # change file extension to .pre.bc
     string(REGEX REPLACE "[.]bc$" ".pre.svf.bc" readFile ${CMAKE_CURRENT_SOURCE_DIR}/${filename})
@@ -105,6 +114,7 @@ foreach(folder ${diff_tests_anderson_folders})
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
     )
     set_tests_properties(diff_tests/ander-read-write/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
+
   endforeach()
 endforeach()
 
@@ -114,6 +124,31 @@ add_test(
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
 )
 set_tests_properties(diff_tests/ander-nander/basic_c_tests/struct-twoflds.c.bc PROPERTIES PASS_REGULAR_EXPRESSION "0")
+
+# differential_tests read_write_svfg with crux-bc
+file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/bc.bc")
+  add_test(
+    NAME diff_tests/read_write_svfg_crux/${filename}
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -write-svfg=read_write_file" "wpa -ander -svfg -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+  )
+  set_tests_properties(diff_tests/read_write_svfg_crux/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
+
+file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/dc.bc")
+  add_test(
+    NAME diff_tests/read_write_svfg_crux/${filename}
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -write-svfg=read_write_file" "wpa -ander -svfg -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+  )
+  set_tests_properties(diff_tests/read_write_svfg_crux/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
+
+file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/xxd.bc")
+  add_test(
+    NAME diff_tests/read_write_svfg_crux/${filename}
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -write-svfg=read_write_file" "wpa -ander -svfg -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+  )
+  set_tests_properties(diff_tests/read_write_svfg_crux/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
 
 # saber mem_leak tests
 set(cmd "saber -leak -valid-tests -stat=false")
@@ -128,3 +163,4 @@ foreach(filename ${mem_leak_files})
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
   )
 endforeach()
+
