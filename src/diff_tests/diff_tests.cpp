@@ -21,16 +21,25 @@ string exec_command(const char* cmd) {
     return result;
 }
 
-string extractData(const string str) {
+string extractData(const string str, string type) {
+
     stringstream iss(str);
     string line;
+    std::stringstream read_write_svfg_ss;
     while(getline(iss, line)) {
-        if (line.find("AvgTopLvlPtsSize") == 0) {
-            // cout << line << endl;
-            return line;
+        string temp = line; 
+        if(type == "read_write_svfg"){
+            if (temp.find("AvgTopLvlPtsSize") != std::string::npos || temp.find("TotalNode") != std::string::npos || temp.find("TotalEdge") != std::string::npos) {
+            read_write_svfg_ss << temp << ","; 
+            }
+        } else { 
+            if (temp.find("AvgTopLvlPtsSize") == 0) {
+            return temp;
+            }
         }
     }
-    return line;
+
+    return type == "read_write_svfg" ? read_write_svfg_ss.str() : line;
 }
 
 int main(int argc, char *argv[])
@@ -50,7 +59,17 @@ int main(int argc, char *argv[])
         result2 = exec_command(("./" + cmd2 + " " +  folder).c_str());
     }
 
-    string data1 = extractData(result);
-    string data2 = extractData(result2);
-    cout << data1.compare(data2) << endl;
+    string data1;
+    string data2; 
+
+    std::size_t read_write_svfg = cmd1.find("write-svfg");
+    if (read_write_svfg!=std::string::npos){
+        data1 = extractData(result, "read_write_svfg");
+        data2 = extractData(result2, "read_write_svfg");
+    } else { 
+        data1 = extractData(result, "ander_nander,read_write_ander");
+        data2 = extractData(result2, "ander_nander,read_write_ander");
+    }
+
+    std::cout << data1.compare(data2) << endl;
 }
