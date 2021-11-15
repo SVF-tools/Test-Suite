@@ -143,7 +143,7 @@ fi
 if [[ $sysOS == "Darwin" ]]
 then
     cd src/diff_tests
-    clang++ -std=c++11 -stdlib=libc++ diff_tests.cpp -o diff_tests_osx
+    g++ -o diff_tests_osx diff_tests.cpp
     cd ../..
     diff_exe_path=diff_tests
     if [ ! -d "$diff_exe_path" ]
