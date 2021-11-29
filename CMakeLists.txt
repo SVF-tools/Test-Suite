@@ -82,6 +82,7 @@ list(
   basic_c_tests
   basic_cpp_tests
   complex_tests
+  fs_tests
 )
 foreach(folder ${diff_tests_anderson_folders})
   file(GLOB files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/${folder}/*.bc*")
@@ -103,7 +104,7 @@ foreach(folder ${diff_tests_anderson_folders})
     # read and write svfg
     add_test(
       NAME diff_tests/svfg-read-write/${filename}
-      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -write-svfg=read_write_file" "wpa -ander -svfg -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -fspta -write-svfg=read_write_file" "wpa -fspta -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
     )
     set_tests_properties(diff_tests/svfg-read-write/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
@@ -128,6 +129,12 @@ add_test(
 )
 set_tests_properties(diff_tests/ander-nander/basic_c_tests/struct-twoflds.c.bc PROPERTIES PASS_REGULAR_EXPRESSION "0")
 
+add_test(
+      NAME diff_tests/svfg-read-write/basic_c_tests/struct-twoflds.c.bc
+      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -fspta -write-svfg=read_write_file" "wpa -fspta -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/basic_c_tests/struct-twoflds.c.bc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+)
+set_tests_properties(diff_tests/svfg-read-write/basic_c_tests/struct-twoflds.c.bc PROPERTIES PASS_REGULAR_EXPRESSION "0")
 
 # differential_tests read_write_svfg with crux-bc
 list(
@@ -143,7 +150,7 @@ foreach(file ${diff_tests_cruxbc})
   file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/${file}.bc")
   add_test(
     NAME diff_tests/read_write_svfg_crux/${filename}
-    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -write-svfg=read_write_file" "wpa -ander -svfg -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -fspta -write-svfg=read_write_file" "wpa -fspta -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
   )
   set_tests_properties(diff_tests/read_write_svfg_crux/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
@@ -162,4 +169,3 @@ foreach(filename ${mem_leak_files})
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
   )
 endforeach()
-
