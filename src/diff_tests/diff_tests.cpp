@@ -31,7 +31,7 @@ std::string extractData(const std::string str, std::string type)
     std::stringstream output;
     bool found = false;
     std::string searches[] = {"TotalNode","TotalEdge","AvgIndOutDeg", "AvgIndInDeg", "AvgOutDegree", "AvgInDegree", "AvgWeight", "AvgTopLvlPtsSize"};
-    std::vector<std::vector<std::string>> vec;
+    std::vector<std::vector<std::string> > vec;
     std::vector<std::string> temp_vec;
     std::vector<std::string> data;
     std::stringstream iss(str);
