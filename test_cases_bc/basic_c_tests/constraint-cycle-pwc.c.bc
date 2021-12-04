@@ -61,7 +61,7 @@ for.inc:                                          ; preds = %if.end3
   %11 = load %struct.arc*, %struct.arc** %arc, align 8
   %incdec.ptr = getelementptr inbounds %struct.arc, %struct.arc* %11, i32 1
   store %struct.arc* %incdec.ptr, %struct.arc** %arc, align 8
-  br label %for.cond, !llvm.loop !2
+  br label %for.cond, !llvm.loop !4
 
 for.end:                                          ; preds = %for.cond
   ret i32 0
@@ -69,13 +69,15 @@ for.end:                                          ; preds = %for.cond
 
 declare dso_local i32 @printf(i8*, ...) #1
 
-attributes #0 = { noinline nounwind optnone uwtable "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #1 = { "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 
-!llvm.module.flags = !{!0}
-!llvm.ident = !{!1}
+!llvm.module.flags = !{!0, !1, !2}
+!llvm.ident = !{!3}
 
 !0 = !{i32 1, !"wchar_size", i32 4}
-!1 = !{!"clang version 12.0.0"}
-!2 = distinct !{!2, !3}
-!3 = !{!"llvm.loop.mustprogress"}
+!1 = !{i32 7, !"uwtable", i32 1}
+!2 = !{i32 7, !"frame-pointer", i32 2}
+!3 = !{!"clang version 13.0.0"}
+!4 = distinct !{!4, !5}
+!5 = !{!"llvm.loop.mustprogress"}

@@ -61,7 +61,7 @@ for.inc:                                          ; preds = %if.end
   %8 = load i32, i32* %i, align 4
   %inc = add nsw i32 %8, 1
   store i32 %inc, i32* %i, align 4
-  br label %for.cond, !llvm.loop !2
+  br label %for.cond, !llvm.loop !4
 
 for.end:                                          ; preds = %for.cond
   ret void
@@ -86,7 +86,7 @@ entry:
   %retval = alloca i32, align 4
   %table = alloca %struct.gl_api_table*, align 8
   store i32 0, i32* %retval, align 4
-  %call = call noalias i8* @calloc(i64 1, i64 8) #3
+  %call = call noalias align 16 i8* @calloc(i64 1, i64 8) #3
   %0 = bitcast i8* %call to %struct.gl_api_table*
   store %struct.gl_api_table* %0, %struct.gl_api_table** %table, align 8
   %1 = load %struct.gl_api_table*, %struct.gl_api_table** %table, align 8
@@ -97,17 +97,19 @@ entry:
 }
 
 ; Function Attrs: nounwind
-declare dso_local noalias i8* @calloc(i64, i64) #2
+declare dso_local noalias align 16 i8* @calloc(i64, i64) #2
 
-attributes #0 = { noinline nounwind optnone uwtable "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #1 = { "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #2 = { nounwind "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #2 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 attributes #3 = { nounwind }
 
-!llvm.module.flags = !{!0}
-!llvm.ident = !{!1}
+!llvm.module.flags = !{!0, !1, !2}
+!llvm.ident = !{!3}
 
 !0 = !{i32 1, !"wchar_size", i32 4}
-!1 = !{!"clang version 12.0.0"}
-!2 = distinct !{!2, !3}
-!3 = !{!"llvm.loop.mustprogress"}
+!1 = !{i32 7, !"uwtable", i32 1}
+!2 = !{i32 7, !"frame-pointer", i32 2}
+!3 = !{!"clang version 13.0.0"}
+!4 = distinct !{!4, !5}
+!5 = !{!"llvm.loop.mustprogress"}
