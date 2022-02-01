@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include "aliascheck.h"
 
+/// Note that `SyGetmem` is summarized lib function (with side-effect ExtAPI::EFT_ALLOC) in ExtAPI.cpp, we will use SVF's summmary instead of this user defined function
 char *  SyGetmem ( long size ){}
 
 typedef struct TypHeader {
