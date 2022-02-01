@@ -371,7 +371,7 @@ entry:
   call void @PartLib_Create(i32** @PartLib01)
   %0 = load i32*, i32** @PartLib01, align 8
   %1 = bitcast i32* %0 to i8*
-  call void @MAYALIAS(i8* %1, i8* bitcast (void (i32*, float*)* @Rectangle_draw to i8*))
+  call void @NOALIAS(i8* %1, i8* bitcast (void (i32*, float*)* @Rectangle_draw to i8*))
   ret i32 0
 }
 

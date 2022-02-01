@@ -294,7 +294,7 @@ while.end:                                        ; preds = %while.cond
   %11 = load %struct.TypHeader**, %struct.TypHeader*** %s, align 8
   %12 = load %struct.TypHeader*, %struct.TypHeader** %11, align 8
   %13 = bitcast %struct.TypHeader* %12 to i8*
-  call void @MAYALIAS(i8* %13, i8* bitcast (void ()* @IntComm to i8*))
+  call void @NOALIAS(i8* %13, i8* bitcast (void ()* @IntComm to i8*))
   %14 = load %struct.TypHeader*, %struct.TypHeader** @HdFree, align 8
   store %struct.TypHeader* %14, %struct.TypHeader** %h, align 8
   br label %for.cond
