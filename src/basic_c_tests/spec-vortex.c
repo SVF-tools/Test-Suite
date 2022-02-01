@@ -72,6 +72,6 @@ int* PartLib01 = NULL;
 int main()
 {
 	PartLib_Create(&PartLib01);
-	NOALIAS(PartLib01, &Rectangle_draw);
+	MAYALIAS(PartLib01, &Rectangle_draw);
 	return 0;
 }
