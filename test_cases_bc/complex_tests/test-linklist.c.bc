@@ -30,7 +30,7 @@ while.body:                                       ; preds = %while.cond
   %5 = load %struct.list*, %struct.list** %cur, align 8
   %6 = bitcast %struct.list* %5 to i8*
   call void @free(i8* %6)
-  br label %while.cond, !llvm.loop !2
+  br label %while.cond, !llvm.loop !4
 
 while.end:                                        ; preds = %while.cond
   ret void
@@ -85,7 +85,7 @@ for.inc:                                          ; preds = %for.body
   %11 = load i32, i32* %i, align 4
   %inc = add i32 %11, 1
   store i32 %inc, i32* %i, align 4
-  br label %for.cond, !llvm.loop !4
+  br label %for.cond, !llvm.loop !6
 
 for.end:                                          ; preds = %for.cond
   %12 = load %struct.list*, %struct.list** %head, align 8
@@ -118,7 +118,7 @@ while.cond:                                       ; preds = %while.body, %entry
 while.body:                                       ; preds = %while.cond
   %3 = load %struct.list*, %struct.list** %t, align 8
   store %struct.list* %3, %struct.list** %head, align 8
-  br label %while.cond, !llvm.loop !5
+  br label %while.cond, !llvm.loop !7
 
 while.end:                                        ; preds = %while.cond
   %4 = load %struct.list*, %struct.list** %elem.addr, align 8
@@ -159,15 +159,17 @@ if.end:                                           ; preds = %if.then, %entry
   ret void
 }
 
-attributes #0 = { noinline nounwind optnone uwtable "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #1 = { "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 
-!llvm.module.flags = !{!0}
-!llvm.ident = !{!1}
+!llvm.module.flags = !{!0, !1, !2}
+!llvm.ident = !{!3}
 
 !0 = !{i32 1, !"wchar_size", i32 4}
-!1 = !{!"clang version 12.0.0"}
-!2 = distinct !{!2, !3}
-!3 = !{!"llvm.loop.mustprogress"}
-!4 = distinct !{!4, !3}
-!5 = distinct !{!5, !3}
+!1 = !{i32 7, !"uwtable", i32 1}
+!2 = !{i32 7, !"frame-pointer", i32 2}
+!3 = !{!"clang version 13.0.0"}
+!4 = distinct !{!4, !5}
+!5 = !{!"llvm.loop.mustprogress"}
+!6 = distinct !{!6, !5}
+!7 = distinct !{!7, !5}
