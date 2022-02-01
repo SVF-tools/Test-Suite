@@ -21,7 +21,7 @@ void alloc_inin(int ***x){
 	**x = NFRMALLOC(10);
 }
 
-void alloc(int **s){
+void alloc_wrapper(int **s){
 	alloc_indirect(s);
 }
 int main(){
@@ -30,7 +30,7 @@ int main(){
 	int **x = &y;
 //	int ***z = &x;
  //  alloc_indirect(x);
-	alloc(x);
+	alloc_wrapper(x);
    free_indirect(x);
    printf("%d%d",y,a);
    alloc_inin(x);
