@@ -1,0 +1,51 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/basic_c_tests/structcopy1.c.bc'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/basic_c_tests/structcopy1.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+%struct.myStruct = type { float, %struct.innerStruct }
+%struct.innerStruct = type { i32, i32* }
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main() #0 {
+entry:
+  %x = alloca %struct.myStruct, align 8
+  %y = alloca %struct.myStruct, align 8
+  %call = call align 16 i8* @malloc(i64 10)
+  %0 = bitcast i8* %call to i32*
+  %b = getelementptr inbounds %struct.myStruct, %struct.myStruct* %x, i32 0, i32 1
+  %n = getelementptr inbounds %struct.innerStruct, %struct.innerStruct* %b, i32 0, i32 1
+  store i32* %0, i32** %n, align 8
+  %1 = bitcast %struct.myStruct* %y to i8*
+  %2 = bitcast %struct.myStruct* %x to i8*
+  call void @llvm.memcpy.p0i8.p0i8.i64(i8* align 8 %1, i8* align 8 %2, i64 2, i1 false)
+  %b1 = getelementptr inbounds %struct.myStruct, %struct.myStruct* %x, i32 0, i32 1
+  %n2 = getelementptr inbounds %struct.innerStruct, %struct.innerStruct* %b1, i32 0, i32 1
+  %3 = load i32*, i32** %n2, align 8
+  %4 = bitcast i32* %3 to i8*
+  %b3 = getelementptr inbounds %struct.myStruct, %struct.myStruct* %y, i32 0, i32 1
+  %n4 = getelementptr inbounds %struct.innerStruct, %struct.innerStruct* %b3, i32 0, i32 1
+  %5 = load i32*, i32** %n4, align 8
+  %6 = bitcast i32* %5 to i8*
+  %call5 = call i32 @MAYALIAS(i8* %4, i8* %6)
+  ret i32 0
+}
+
+declare dso_local align 16 i8* @malloc(i64) #1
+
+; Function Attrs: argmemonly nofree nounwind willreturn
+declare void @llvm.memcpy.p0i8.p0i8.i64(i8* noalias nocapture writeonly, i8* noalias nocapture readonly, i64, i1 immarg) #2
+
+declare dso_local i32 @MAYALIAS(i8*, i8*) #1
+
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #2 = { argmemonly nofree nounwind willreturn }
+
+!llvm.module.flags = !{!0, !1, !2}
+!llvm.ident = !{!3}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{i32 7, !"uwtable", i32 1}
+!2 = !{i32 7, !"frame-pointer", i32 2}
+!3 = !{!"clang version 13.0.0"}
