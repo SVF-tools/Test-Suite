@@ -12,6 +12,6 @@ int main(){
   struct myStruct x;
   x.b.n = malloc(10);
   struct myStruct y;
-  memcpy(&y,&x,2);
+  memcpy(&y,&x,sizeof(struct myStruct));
   MAYALIAS(x.b.n,y.b.n);
 }
