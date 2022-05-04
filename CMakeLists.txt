@@ -150,7 +150,7 @@ foreach(file ${diff_tests_cruxbc})
   file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/${file}.bc")
   add_test(
     NAME diff_tests/read_write_svfg_crux/${filename}
-    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -fspta -alias-check=false -write-svfg=read_write_file" "wpa -fspta -alias-check=false -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -alias-check=false -write-svfg=read_write_file" "wpa -ander -svfg -alias-check=false -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
   )
   set_tests_properties(diff_tests/read_write_svfg_crux/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
