@@ -9,6 +9,7 @@ git clone https://github.com/SVF-tools/SVF.git
 cd SVF
 git clone https://github.com/SVF-tools/Test-Suite
 source ./build.sh
+ctest
 ```
 
 The following gives the Test-Suite's folders and the corresponding SVF's options for validation.
