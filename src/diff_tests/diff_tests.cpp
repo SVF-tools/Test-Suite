@@ -30,7 +30,7 @@ std::string extractData(const std::string str, std::string type)
 {
     std::stringstream output;
     bool found = false;
-    std::string searches[] = {"TotalNode","TotalEdge","AvgIndOutDeg", "AvgIndInDeg", "AvgOutDegree", "AvgInDegree", "AvgWeight", "AvgTopLvlPtsSize"};
+    std::string searches[] = {"TotalNode","TotalEdge","AvgIndOutDeg", "AvgIndInDeg", "AvgOutDegree", "AvgInDegree", "AvgWeight", "AvgTopLvlPtsSize", "AvgPtsSetSize", "TotalObjects", "TotalPointers"};
     std::vector<std::vector<std::string> > vec;
     std::vector<std::string> temp_vec;
     std::vector<std::string> data;
@@ -40,14 +40,17 @@ std::string extractData(const std::string str, std::string type)
     if(type == "read_write_svfg")
     {
         temp_vec.push_back("****SVFG Statistics****"); 
-        for (int j = 0; j < (sizeof(searches)/sizeof(*searches)) - 1; j++)
+        for (int j = 0; j < (sizeof(searches)/sizeof(*searches)) - 3; j++)
         {
             temp_vec.push_back(searches[j]); 
         }   
         vec.push_back(temp_vec); 
         temp_vec.clear();
-        temp_vec.push_back("****Flow-Sensitive Pointer Analysis Statistics****"); 
-        temp_vec.push_back(searches[7]);
+        temp_vec.push_back("*********Andersen Pointer Analysis Stats***************");
+        for (int k = (sizeof(searches)/sizeof(*searches)) - 4; k < (sizeof(searches)/sizeof(*searches)); k++)
+        {
+            temp_vec.push_back(searches[k]);
+        }
         vec.push_back(temp_vec); 
     } 
     else 
