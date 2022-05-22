@@ -39,18 +39,18 @@ std::string extractData(const std::string str, std::string type)
     int i = 0; 
     if(type == "read_write_svfg")
     {
+        temp_vec.push_back("*********Andersen Pointer Analysis Stats***************");
+        for (int k = 7; k < (sizeof(searches)/sizeof(*searches)); k++)
+        {
+            temp_vec.push_back(searches[k]);
+        }
+        vec.push_back(temp_vec); 
+        temp_vec.clear();
         temp_vec.push_back("****SVFG Statistics****"); 
         for (int j = 0; j < (sizeof(searches)/sizeof(*searches)) - 3; j++)
         {
             temp_vec.push_back(searches[j]); 
         }   
-        vec.push_back(temp_vec); 
-        temp_vec.clear();
-        temp_vec.push_back("****Flow-Sensitive Pointer Analysis Statistics****");
-        for (int k = 7; k < (sizeof(searches)/sizeof(*searches)); k++)
-        {
-            temp_vec.push_back(searches[k]);
-        }
         vec.push_back(temp_vec); 
     } 
     else 
