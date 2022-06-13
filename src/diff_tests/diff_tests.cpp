@@ -8,7 +8,6 @@
 #include <vector>
 #include <algorithm>
 #include <map>
-using namespace std;
 
 std::string exec_command(const char* cmd) 
 {
@@ -28,67 +27,54 @@ std::string exec_command(const char* cmd)
 
 std::string extractData(const std::string str, std::string type) 
 {
-    std::stringstream output;
-    bool found = false;
-    std::string searches[] = {"TotalNode","TotalEdge","AvgIndOutDeg", "AvgIndInDeg", "AvgOutDegree", "AvgInDegree", "AvgWeight", "AvgTopLvlPtsSize", "AvgPtsSetSize", "TotalObjects", "TotalPointers"};
-    std::vector<std::vector<std::string> > vec;
-    std::vector<std::string> temp_vec;
-    std::vector<std::string> data;
     std::stringstream iss(str);
     std::string line;
-    int i = 0; 
+    std::stringstream output;
+    std::string marker;
+    std::vector<std::string> search;
+    std::map<int,std::string> data;
+    bool found = false;
+
     if(type == "read_write_svfg")
     {
-        temp_vec.push_back("*********Andersen Pointer Analysis Stats***************");
-        for (int k = 7; k < (sizeof(searches)/sizeof(*searches)); k++)
-        {
-            temp_vec.push_back(searches[k]);
-        }
-        vec.push_back(temp_vec); 
-        temp_vec.clear();
-        temp_vec.push_back("****SVFG Statistics****"); 
-        for (int j = 0; j < (sizeof(searches)/sizeof(*searches)) - 3; j++)
-        {
-            temp_vec.push_back(searches[j]); 
-        }   
-        vec.push_back(temp_vec); 
+        marker = "****SVFG Statistics****";
+        search.push_back("AvgTopLvlPtsSize");
+        search.push_back("TotalNode");
+        search.push_back("TotalEdge");
+        search.push_back("AvgIndOutDeg");
+        search.push_back("AvgIndInDeg");
+        search.push_back("AvgOutDegree");
+        search.push_back("AvgInDegree");
+        search.push_back("AvgWeight");
     } 
     else 
-    {   
-       temp_vec.push_back("*********Andersen Pointer Analysis Stats***************"); 
-       temp_vec.push_back(searches[7]);
-       vec.push_back(temp_vec);
+    {
+        marker = "*********Andersen Pointer Analysis Stats***************";
+        search.push_back("AvgTopLvlPtsSize");
     }
-
-        std::string marker = vec[0][0];
-        // extract data from command output into a map
-        while(getline(iss, line)) 
-        {
-            if (line.find("#######################################################") != std::string::npos && found){
-                 found = false;
-                 i++;
-                 marker = (i < vec.size()) ? vec[i][0] : "";
-                 if(marker == "") break; 
-            }
-            if (data.size() >= sizeof(searches)/sizeof(*searches))
-                break;
-            if (line.find(marker) != std::string::npos){
-                found = true;
-            }
-            if (found) {
-                for (int j = 1; j < vec[i].size(); j++)
-                {  
-                    if (line.find(vec[i][j]) != std::string::npos) 
-                    {
-                        data.push_back(line);
-                    }
+    // extract data from command output into a map
+    while(getline(iss, line)) 
+    {
+        if (data.size() >= search.size())
+            break;
+        if (line.find(marker) != std::string::npos)
+            found = true;
+        if (found) {
+            for (int i = 0; i < search.size(); i++) 
+            {   
+                if (line.find(search[i]) != std::string::npos) 
+                {
+                    data.insert(std::make_pair(i, line));
                 }
             }
         }
-
-    for(int i = 0; i < data.size(); i++){
-        output << data[i] << "\n";
+    } 
+    std::map<int, std::string>::iterator it;
+    for (it = data.begin(); it != data.end(); it++)
+    {
+        output << it->second << "\n";
     }
+    std::cout << output.str();
     return output.str();
 }
 
@@ -116,7 +102,9 @@ int main(int argc, char *argv[])
     std::size_t read_write_svfg = cmd1.find("write-svfg");
     if (read_write_svfg!=std::string::npos)
     {
+        std::cout << "write\n";
         data1 = extractData(result, "read_write_svfg");
+        std::cout << "read\n";
         data2 = extractData(result2, "read_write_svfg");
     } 
     else 
