@@ -23,10 +23,6 @@ The following gives the Test-Suite's folders and the corresponding SVF's options
 | complex_tests         | wpa -ander -stat=false                                      | complex test cases simplified from real programs                                  |
 | mta                   |                                                             | multithreaded test cases                                                          |
 | mem_leak              | saber -leak -valid-tests -mempar=inter-disjoint -stat=false | memory leak test cases                                                            |
-| fstbhc_tests          | wpa -fstbhc -stat=false                                     | FSTBHC tests                                                                      |
-| fstbhc_tests/fs_tests | wpa -fstbhc -stat=false                                     | FSTBHC tests sourced from fs_tests                                                |
-
-To compile the tests in `fstbhc_tests` and `fstbhc_tests/fs_tests`, [ctir Clang](https://github.com/mbarbar/ctir) is required, which SVF's `build.sh` will download.
 
 ## Scripts
 Travis CI is used to build all the test cases, It uses `./generate_bc.sh` to do so and then pushes the compiled test cases into master branch.

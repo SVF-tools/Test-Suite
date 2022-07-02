@@ -9,8 +9,6 @@ test_dirs="
   complex_tests
   cpp_types
   cs_tests
-  fstbhc_tests
-  fstbhc_tests/fs_tests
   fs_tests
   mem_leak
   mta
@@ -89,25 +87,6 @@ do
         compiler="clang"
     else
         compiler="clang++"
-    fi
-
-    ########
-    # If the test directory is an fstbhc directory, use ctir Clang.
-    ########
-    if expr "$td" : "^fstbhc" > /dev/null
-    then
-        ########
-        # If the user hasn't set $SVF_CTIR, they don't want to build ctir tests.
-        ########
-        if [ -z "$SVF_CTIR" ]
-        then
-            continue
-        elif [ ! -d "$CTIR_DIR" -o ! -r "$CTIR_DIR/$compiler" ]
-        then
-            echo "$0: expected \$CTIR_DIR (= '$CTIR_DIR') to point to ctir compilers; skipping $c_f"
-            continue
-        fi
-        compiler="$CTIR_DIR/$compiler -ctir"
     fi
 
     echo "$0: Compiling '$c_f'"
