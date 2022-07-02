@@ -11,8 +11,6 @@ list(
   fs_tests
   vfs_tests
   cs_tests
-  fstbhc_tests
-  fstbhc_tests/fs_tests
   mta
 )
 
@@ -24,8 +22,6 @@ list(
   "wpa -fspta -stat=false"
   "wpa -vfspta -opt-svfg=false -stat=false"
   "dvf -cxt -print-pts=false -stat=false"
-  "wpa -fstbhc -stat=false"
-  "wpa -fstbhc -stat=false"
   "mta -mhp-validation -lock-validation -stat=false"
 )
 
