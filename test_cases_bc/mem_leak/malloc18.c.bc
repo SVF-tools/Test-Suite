@@ -256,50 +256,44 @@ entry:
 declare dso_local i32 @getchar() #2
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @deref() #0 !dbg !149 {
-entry:
-  ret void, !dbg !152
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
-define dso_local %struct.Img* @read_color_image(i32* %p) #0 !dbg !153 {
+define dso_local %struct.Img* @read_color_image(i32* %p) #0 !dbg !149 {
 entry:
   %p.addr = alloca i32*, align 8
   %image = alloca %struct.Img*, align 8
   store i32* %p, i32** %p.addr, align 8
-  call void @llvm.dbg.declare(metadata i32** %p.addr, metadata !163, metadata !DIExpression()), !dbg !164
-  %0 = load i32*, i32** %p.addr, align 8, !dbg !165
-  store i32 100, i32* %0, align 4, !dbg !166
-  call void @llvm.dbg.declare(metadata %struct.Img** %image, metadata !167, metadata !DIExpression()), !dbg !168
-  %call = call i8* @SAFEMALLOC(i32 10), !dbg !169
-  %1 = bitcast i8* %call to %struct.Img*, !dbg !169
-  store %struct.Img* %1, %struct.Img** %image, align 8, !dbg !168
-  %call1 = call i8* @NFRMALLOC(i32 10), !dbg !170
-  %2 = bitcast i8* %call1 to i32*, !dbg !170
-  %3 = load %struct.Img*, %struct.Img** %image, align 8, !dbg !171
-  %data = getelementptr inbounds %struct.Img, %struct.Img* %3, i32 0, i32 1, !dbg !172
-  store i32* %2, i32** %data, align 8, !dbg !173
-  %4 = load %struct.Img*, %struct.Img** %image, align 8, !dbg !174
-  ret %struct.Img* %4, !dbg !175
+  call void @llvm.dbg.declare(metadata i32** %p.addr, metadata !159, metadata !DIExpression()), !dbg !160
+  %0 = load i32*, i32** %p.addr, align 8, !dbg !161
+  store i32 100, i32* %0, align 4, !dbg !162
+  call void @llvm.dbg.declare(metadata %struct.Img** %image, metadata !163, metadata !DIExpression()), !dbg !164
+  %call = call i8* @SAFEMALLOC(i32 10), !dbg !165
+  %1 = bitcast i8* %call to %struct.Img*, !dbg !165
+  store %struct.Img* %1, %struct.Img** %image, align 8, !dbg !164
+  %call1 = call i8* @NFRMALLOC(i32 10), !dbg !166
+  %2 = bitcast i8* %call1 to i32*, !dbg !166
+  %3 = load %struct.Img*, %struct.Img** %image, align 8, !dbg !167
+  %data = getelementptr inbounds %struct.Img, %struct.Img* %3, i32 0, i32 1, !dbg !168
+  store i32* %2, i32** %data, align 8, !dbg !169
+  %4 = load %struct.Img*, %struct.Img** %image, align 8, !dbg !170
+  ret %struct.Img* %4, !dbg !171
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @free_image(%struct.Img* %image) #0 !dbg !176 {
+define dso_local void @free_image(%struct.Img* %image) #0 !dbg !172 {
 entry:
   %image.addr = alloca %struct.Img*, align 8
   store %struct.Img* %image, %struct.Img** %image.addr, align 8
-  call void @llvm.dbg.declare(metadata %struct.Img** %image.addr, metadata !179, metadata !DIExpression()), !dbg !180
-  %0 = load %struct.Img*, %struct.Img** %image.addr, align 8, !dbg !181
-  %1 = bitcast %struct.Img* %0 to i8*, !dbg !181
-  call void @free(i8* %1) #4, !dbg !182
-  ret void, !dbg !183
+  call void @llvm.dbg.declare(metadata %struct.Img** %image.addr, metadata !175, metadata !DIExpression()), !dbg !176
+  %0 = load %struct.Img*, %struct.Img** %image.addr, align 8, !dbg !177
+  %1 = bitcast %struct.Img* %0 to i8*, !dbg !177
+  call void @free(i8* %1) #4, !dbg !178
+  ret void, !dbg !179
 }
 
 ; Function Attrs: nounwind
 declare dso_local void @free(i8*) #3
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32 @main() #0 !dbg !184 {
+define dso_local i32 @main() #0 !dbg !180 {
 entry:
   %retval = alloca i32, align 4
   %x = alloca i32*, align 8
@@ -307,32 +301,32 @@ entry:
   %c = alloca i32, align 4
   %image = alloca %struct.Img*, align 8
   store i32 0, i32* %retval, align 4
-  call void @llvm.dbg.declare(metadata i32** %x, metadata !187, metadata !DIExpression()), !dbg !188
-  call void @llvm.dbg.declare(metadata i32* %b, metadata !189, metadata !DIExpression()), !dbg !190
-  call void @llvm.dbg.declare(metadata i32* %c, metadata !191, metadata !DIExpression()), !dbg !192
-  store i32 10, i32* %b, align 4, !dbg !193
-  store i32 20, i32* %c, align 4, !dbg !194
-  %0 = load i32*, i32** %x, align 8, !dbg !195
-  %tobool = icmp ne i32* %0, null, !dbg !195
-  br i1 %tobool, label %if.then, label %if.else, !dbg !197
+  call void @llvm.dbg.declare(metadata i32** %x, metadata !183, metadata !DIExpression()), !dbg !184
+  call void @llvm.dbg.declare(metadata i32* %b, metadata !185, metadata !DIExpression()), !dbg !186
+  call void @llvm.dbg.declare(metadata i32* %c, metadata !187, metadata !DIExpression()), !dbg !188
+  store i32 10, i32* %b, align 4, !dbg !189
+  store i32 20, i32* %c, align 4, !dbg !190
+  %0 = load i32*, i32** %x, align 8, !dbg !191
+  %tobool = icmp ne i32* %0, null, !dbg !191
+  br i1 %tobool, label %if.then, label %if.else, !dbg !193
 
 if.then:                                          ; preds = %entry
-  store i32* %b, i32** %x, align 8, !dbg !198
-  br label %if.end, !dbg !199
+  store i32* %b, i32** %x, align 8, !dbg !194
+  br label %if.end, !dbg !195
 
 if.else:                                          ; preds = %entry
-  store i32* %c, i32** %x, align 8, !dbg !200
+  store i32* %c, i32** %x, align 8, !dbg !196
   br label %if.end
 
 if.end:                                           ; preds = %if.else, %if.then
-  call void @llvm.dbg.declare(metadata %struct.Img** %image, metadata !201, metadata !DIExpression()), !dbg !202
-  %1 = load i32*, i32** %x, align 8, !dbg !203
-  %call = call %struct.Img* @read_color_image(i32* %1), !dbg !204
-  store %struct.Img* %call, %struct.Img** %image, align 8, !dbg !202
-  %2 = load %struct.Img*, %struct.Img** %image, align 8, !dbg !205
-  call void @free_image(%struct.Img* %2), !dbg !206
-  %3 = load i32, i32* %retval, align 4, !dbg !207
-  ret i32 %3, !dbg !207
+  call void @llvm.dbg.declare(metadata %struct.Img** %image, metadata !197, metadata !DIExpression()), !dbg !198
+  %1 = load i32*, i32** %x, align 8, !dbg !199
+  %call = call %struct.Img* @read_color_image(i32* %1), !dbg !200
+  store %struct.Img* %call, %struct.Img** %image, align 8, !dbg !198
+  %2 = load %struct.Img*, %struct.Img** %image, align 8, !dbg !201
+  call void @free_image(%struct.Img* %2), !dbg !202
+  %3 = load i32, i32* %retval, align 4, !dbg !203
+  ret i32 %3, !dbg !203
 }
 
 attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
@@ -494,62 +488,58 @@ attributes #4 = { nounwind }
 !146 = !DILocation(line: 91, column: 3, scope: !141)
 !147 = !DILocation(line: 92, column: 3, scope: !141)
 !148 = !DILocation(line: 93, column: 1, scope: !141)
-!149 = distinct !DISubprogram(name: "deref", scope: !10, file: !10, line: 111, type: !150, scopeLine: 111, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!150 = !DISubroutineType(types: !151)
-!151 = !{null}
-!152 = !DILocation(line: 111, column: 20, scope: !149)
-!153 = distinct !DISubprogram(name: "read_color_image", scope: !154, file: !154, line: 17, type: !155, scopeLine: 17, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!154 = !DIFile(filename: "src/mem_leak/malloc18.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
-!155 = !DISubroutineType(types: !156)
-!156 = !{!157, !162}
-!157 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !158, size: 64)
-!158 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "Img", file: !154, line: 11, size: 128, elements: !159)
-!159 = !{!160, !161}
-!160 = !DIDerivedType(tag: DW_TAG_member, name: "id", scope: !158, file: !154, line: 12, baseType: !58, size: 32)
-!161 = !DIDerivedType(tag: DW_TAG_member, name: "data", scope: !158, file: !154, line: 13, baseType: !162, size: 64, offset: 64)
-!162 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !58, size: 64)
-!163 = !DILocalVariable(name: "p", arg: 1, scope: !153, file: !154, line: 17, type: !162)
-!164 = !DILocation(line: 17, column: 35, scope: !153)
-!165 = !DILocation(line: 18, column: 3, scope: !153)
-!166 = !DILocation(line: 18, column: 5, scope: !153)
-!167 = !DILocalVariable(name: "image", scope: !153, file: !154, line: 19, type: !157)
-!168 = !DILocation(line: 19, column: 14, scope: !153)
-!169 = !DILocation(line: 19, column: 22, scope: !153)
-!170 = !DILocation(line: 21, column: 16, scope: !153)
-!171 = !DILocation(line: 21, column: 2, scope: !153)
-!172 = !DILocation(line: 21, column: 9, scope: !153)
-!173 = !DILocation(line: 21, column: 14, scope: !153)
-!174 = !DILocation(line: 22, column: 9, scope: !153)
-!175 = !DILocation(line: 22, column: 2, scope: !153)
-!176 = distinct !DISubprogram(name: "free_image", scope: !154, file: !154, line: 25, type: !177, scopeLine: 25, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!177 = !DISubroutineType(types: !178)
-!178 = !{null, !157}
-!179 = !DILocalVariable(name: "image", arg: 1, scope: !176, file: !154, line: 25, type: !157)
-!180 = !DILocation(line: 25, column: 29, scope: !176)
-!181 = !DILocation(line: 29, column: 7, scope: !176)
-!182 = !DILocation(line: 29, column: 2, scope: !176)
-!183 = !DILocation(line: 30, column: 1, scope: !176)
-!184 = distinct !DISubprogram(name: "main", scope: !154, file: !154, line: 32, type: !185, scopeLine: 32, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!185 = !DISubroutineType(types: !186)
-!186 = !{!58}
-!187 = !DILocalVariable(name: "x", scope: !184, file: !154, line: 33, type: !162)
-!188 = !DILocation(line: 33, column: 7, scope: !184)
-!189 = !DILocalVariable(name: "b", scope: !184, file: !154, line: 34, type: !58)
-!190 = !DILocation(line: 34, column: 6, scope: !184)
-!191 = !DILocalVariable(name: "c", scope: !184, file: !154, line: 34, type: !58)
-!192 = !DILocation(line: 34, column: 8, scope: !184)
-!193 = !DILocation(line: 35, column: 4, scope: !184)
-!194 = !DILocation(line: 36, column: 4, scope: !184)
-!195 = !DILocation(line: 37, column: 5, scope: !196)
-!196 = distinct !DILexicalBlock(scope: !184, file: !154, line: 37, column: 5)
-!197 = !DILocation(line: 37, column: 5, scope: !184)
-!198 = !DILocation(line: 38, column: 4, scope: !196)
-!199 = !DILocation(line: 38, column: 2, scope: !196)
-!200 = !DILocation(line: 40, column: 4, scope: !196)
-!201 = !DILocalVariable(name: "image", scope: !184, file: !154, line: 41, type: !157)
-!202 = !DILocation(line: 41, column: 14, scope: !184)
-!203 = !DILocation(line: 41, column: 39, scope: !184)
-!204 = !DILocation(line: 41, column: 22, scope: !184)
-!205 = !DILocation(line: 43, column: 13, scope: !184)
-!206 = !DILocation(line: 43, column: 2, scope: !184)
-!207 = !DILocation(line: 46, column: 1, scope: !184)
+!149 = distinct !DISubprogram(name: "read_color_image", scope: !150, file: !150, line: 17, type: !151, scopeLine: 17, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!150 = !DIFile(filename: "src/mem_leak/malloc18.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
+!151 = !DISubroutineType(types: !152)
+!152 = !{!153, !158}
+!153 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !154, size: 64)
+!154 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "Img", file: !150, line: 11, size: 128, elements: !155)
+!155 = !{!156, !157}
+!156 = !DIDerivedType(tag: DW_TAG_member, name: "id", scope: !154, file: !150, line: 12, baseType: !58, size: 32)
+!157 = !DIDerivedType(tag: DW_TAG_member, name: "data", scope: !154, file: !150, line: 13, baseType: !158, size: 64, offset: 64)
+!158 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !58, size: 64)
+!159 = !DILocalVariable(name: "p", arg: 1, scope: !149, file: !150, line: 17, type: !158)
+!160 = !DILocation(line: 17, column: 35, scope: !149)
+!161 = !DILocation(line: 18, column: 3, scope: !149)
+!162 = !DILocation(line: 18, column: 5, scope: !149)
+!163 = !DILocalVariable(name: "image", scope: !149, file: !150, line: 19, type: !153)
+!164 = !DILocation(line: 19, column: 14, scope: !149)
+!165 = !DILocation(line: 19, column: 22, scope: !149)
+!166 = !DILocation(line: 21, column: 16, scope: !149)
+!167 = !DILocation(line: 21, column: 2, scope: !149)
+!168 = !DILocation(line: 21, column: 9, scope: !149)
+!169 = !DILocation(line: 21, column: 14, scope: !149)
+!170 = !DILocation(line: 22, column: 9, scope: !149)
+!171 = !DILocation(line: 22, column: 2, scope: !149)
+!172 = distinct !DISubprogram(name: "free_image", scope: !150, file: !150, line: 25, type: !173, scopeLine: 25, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!173 = !DISubroutineType(types: !174)
+!174 = !{null, !153}
+!175 = !DILocalVariable(name: "image", arg: 1, scope: !172, file: !150, line: 25, type: !153)
+!176 = !DILocation(line: 25, column: 29, scope: !172)
+!177 = !DILocation(line: 29, column: 7, scope: !172)
+!178 = !DILocation(line: 29, column: 2, scope: !172)
+!179 = !DILocation(line: 30, column: 1, scope: !172)
+!180 = distinct !DISubprogram(name: "main", scope: !150, file: !150, line: 32, type: !181, scopeLine: 32, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!181 = !DISubroutineType(types: !182)
+!182 = !{!58}
+!183 = !DILocalVariable(name: "x", scope: !180, file: !150, line: 33, type: !158)
+!184 = !DILocation(line: 33, column: 7, scope: !180)
+!185 = !DILocalVariable(name: "b", scope: !180, file: !150, line: 34, type: !58)
+!186 = !DILocation(line: 34, column: 6, scope: !180)
+!187 = !DILocalVariable(name: "c", scope: !180, file: !150, line: 34, type: !58)
+!188 = !DILocation(line: 34, column: 8, scope: !180)
+!189 = !DILocation(line: 35, column: 4, scope: !180)
+!190 = !DILocation(line: 36, column: 4, scope: !180)
+!191 = !DILocation(line: 37, column: 5, scope: !192)
+!192 = distinct !DILexicalBlock(scope: !180, file: !150, line: 37, column: 5)
+!193 = !DILocation(line: 37, column: 5, scope: !180)
+!194 = !DILocation(line: 38, column: 4, scope: !192)
+!195 = !DILocation(line: 38, column: 2, scope: !192)
+!196 = !DILocation(line: 40, column: 4, scope: !192)
+!197 = !DILocalVariable(name: "image", scope: !180, file: !150, line: 41, type: !153)
+!198 = !DILocation(line: 41, column: 14, scope: !180)
+!199 = !DILocation(line: 41, column: 39, scope: !180)
+!200 = !DILocation(line: 41, column: 22, scope: !180)
+!201 = !DILocation(line: 43, column: 13, scope: !180)
+!202 = !DILocation(line: 43, column: 2, scope: !180)
+!203 = !DILocation(line: 46, column: 1, scope: !180)

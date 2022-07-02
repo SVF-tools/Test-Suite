@@ -398,12 +398,6 @@ entry:
 
 declare dso_local i32 @getchar() #1
 
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local void @_Z5derefv() #2 {
-entry:
-  ret void
-}
-
 ; Function Attrs: mustprogress noinline norecurse optnone uwtable
 define dso_local i32 @main(i32 %argc, i8** %argv) #4 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
 entry:

@@ -254,64 +254,58 @@ entry:
 declare dso_local i32 @getchar() #2
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @deref() #0 !dbg !149 {
-entry:
-  ret void, !dbg !152
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32 @func() #0 !dbg !153 {
+define dso_local i32 @func() #0 !dbg !149 {
 entry:
   %retval = alloca i32, align 4
   %p = alloca i32*, align 8
   %q = alloca i32*, align 8
-  call void @llvm.dbg.declare(metadata i32** %p, metadata !157, metadata !DIExpression()), !dbg !159
-  %call = call i8* @PLKMALLOC(i32 1), !dbg !160
-  %0 = bitcast i8* %call to i32*, !dbg !160
-  store i32* %0, i32** %p, align 8, !dbg !159
-  %1 = load i32*, i32** %p, align 8, !dbg !161
-  %tobool = icmp ne i32* %1, null, !dbg !161
-  br i1 %tobool, label %if.end, label %if.then, !dbg !163
+  call void @llvm.dbg.declare(metadata i32** %p, metadata !153, metadata !DIExpression()), !dbg !155
+  %call = call i8* @PLKMALLOC(i32 1), !dbg !156
+  %0 = bitcast i8* %call to i32*, !dbg !156
+  store i32* %0, i32** %p, align 8, !dbg !155
+  %1 = load i32*, i32** %p, align 8, !dbg !157
+  %tobool = icmp ne i32* %1, null, !dbg !157
+  br i1 %tobool, label %if.end, label %if.then, !dbg !159
 
 if.then:                                          ; preds = %entry
-  store i32 -1, i32* %retval, align 4, !dbg !164
-  br label %return, !dbg !164
+  store i32 -1, i32* %retval, align 4, !dbg !160
+  br label %return, !dbg !160
 
 if.end:                                           ; preds = %entry
-  call void @llvm.dbg.declare(metadata i32** %q, metadata !165, metadata !DIExpression()), !dbg !166
-  %call1 = call i8* @SAFEMALLOC(i32 1), !dbg !167
-  %2 = bitcast i8* %call1 to i32*, !dbg !167
-  store i32* %2, i32** %q, align 8, !dbg !166
-  %3 = load i32*, i32** %q, align 8, !dbg !168
-  %tobool2 = icmp ne i32* %3, null, !dbg !168
-  br i1 %tobool2, label %if.end4, label %if.then3, !dbg !170
+  call void @llvm.dbg.declare(metadata i32** %q, metadata !161, metadata !DIExpression()), !dbg !162
+  %call1 = call i8* @SAFEMALLOC(i32 1), !dbg !163
+  %2 = bitcast i8* %call1 to i32*, !dbg !163
+  store i32* %2, i32** %q, align 8, !dbg !162
+  %3 = load i32*, i32** %q, align 8, !dbg !164
+  %tobool2 = icmp ne i32* %3, null, !dbg !164
+  br i1 %tobool2, label %if.end4, label %if.then3, !dbg !166
 
 if.then3:                                         ; preds = %if.end
-  store i32 -1, i32* %retval, align 4, !dbg !171
-  br label %return, !dbg !171
+  store i32 -1, i32* %retval, align 4, !dbg !167
+  br label %return, !dbg !167
 
 if.end4:                                          ; preds = %if.end
-  %4 = load i32*, i32** %p, align 8, !dbg !172
-  %5 = bitcast i32* %4 to i8*, !dbg !172
-  call void @free(i8* %5) #4, !dbg !173
-  %6 = load i32*, i32** %q, align 8, !dbg !174
-  %7 = bitcast i32* %6 to i8*, !dbg !174
-  call void @free(i8* %7) #4, !dbg !175
-  br label %return, !dbg !176
+  %4 = load i32*, i32** %p, align 8, !dbg !168
+  %5 = bitcast i32* %4 to i8*, !dbg !168
+  call void @free(i8* %5) #4, !dbg !169
+  %6 = load i32*, i32** %q, align 8, !dbg !170
+  %7 = bitcast i32* %6 to i8*, !dbg !170
+  call void @free(i8* %7) #4, !dbg !171
+  br label %return, !dbg !172
 
 return:                                           ; preds = %if.end4, %if.then3, %if.then
-  %8 = load i32, i32* %retval, align 4, !dbg !176
-  ret i32 %8, !dbg !176
+  %8 = load i32, i32* %retval, align 4, !dbg !172
+  ret i32 %8, !dbg !172
 }
 
 ; Function Attrs: nounwind
 declare dso_local void @free(i8*) #3
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32 @main() #0 !dbg !177 {
+define dso_local i32 @main() #0 !dbg !173 {
 entry:
-  %call = call i32 @func(), !dbg !178
-  ret i32 0, !dbg !179
+  %call = call i32 @func(), !dbg !174
+  ret i32 0, !dbg !175
 }
 
 attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
@@ -473,34 +467,30 @@ attributes #4 = { nounwind }
 !146 = !DILocation(line: 91, column: 3, scope: !141)
 !147 = !DILocation(line: 92, column: 3, scope: !141)
 !148 = !DILocation(line: 93, column: 1, scope: !141)
-!149 = distinct !DISubprogram(name: "deref", scope: !10, file: !10, line: 111, type: !150, scopeLine: 111, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!150 = !DISubroutineType(types: !151)
-!151 = !{null}
-!152 = !DILocation(line: 111, column: 20, scope: !149)
-!153 = distinct !DISubprogram(name: "func", scope: !154, file: !154, line: 11, type: !155, scopeLine: 11, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!154 = !DIFile(filename: "src/mem_leak/malloc20.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
-!155 = !DISubroutineType(types: !156)
-!156 = !{!58}
-!157 = !DILocalVariable(name: "p", scope: !153, file: !154, line: 13, type: !158)
-!158 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !58, size: 64)
-!159 = !DILocation(line: 13, column: 7, scope: !153)
-!160 = !DILocation(line: 13, column: 11, scope: !153)
-!161 = !DILocation(line: 15, column: 6, scope: !162)
-!162 = distinct !DILexicalBlock(scope: !153, file: !154, line: 15, column: 5)
-!163 = !DILocation(line: 15, column: 5, scope: !153)
-!164 = !DILocation(line: 16, column: 3, scope: !162)
-!165 = !DILocalVariable(name: "q", scope: !153, file: !154, line: 18, type: !158)
-!166 = !DILocation(line: 18, column: 7, scope: !153)
-!167 = !DILocation(line: 18, column: 11, scope: !153)
-!168 = !DILocation(line: 20, column: 6, scope: !169)
-!169 = distinct !DILexicalBlock(scope: !153, file: !154, line: 20, column: 5)
-!170 = !DILocation(line: 20, column: 5, scope: !153)
-!171 = !DILocation(line: 21, column: 3, scope: !169)
-!172 = !DILocation(line: 23, column: 7, scope: !153)
-!173 = !DILocation(line: 23, column: 2, scope: !153)
-!174 = !DILocation(line: 25, column: 7, scope: !153)
-!175 = !DILocation(line: 25, column: 2, scope: !153)
-!176 = !DILocation(line: 27, column: 1, scope: !153)
-!177 = distinct !DISubprogram(name: "main", scope: !154, file: !154, line: 30, type: !155, scopeLine: 30, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!178 = !DILocation(line: 32, column: 2, scope: !177)
-!179 = !DILocation(line: 33, column: 1, scope: !177)
+!149 = distinct !DISubprogram(name: "func", scope: !150, file: !150, line: 11, type: !151, scopeLine: 11, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!150 = !DIFile(filename: "src/mem_leak/malloc20.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
+!151 = !DISubroutineType(types: !152)
+!152 = !{!58}
+!153 = !DILocalVariable(name: "p", scope: !149, file: !150, line: 13, type: !154)
+!154 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !58, size: 64)
+!155 = !DILocation(line: 13, column: 7, scope: !149)
+!156 = !DILocation(line: 13, column: 11, scope: !149)
+!157 = !DILocation(line: 15, column: 6, scope: !158)
+!158 = distinct !DILexicalBlock(scope: !149, file: !150, line: 15, column: 5)
+!159 = !DILocation(line: 15, column: 5, scope: !149)
+!160 = !DILocation(line: 16, column: 3, scope: !158)
+!161 = !DILocalVariable(name: "q", scope: !149, file: !150, line: 18, type: !154)
+!162 = !DILocation(line: 18, column: 7, scope: !149)
+!163 = !DILocation(line: 18, column: 11, scope: !149)
+!164 = !DILocation(line: 20, column: 6, scope: !165)
+!165 = distinct !DILexicalBlock(scope: !149, file: !150, line: 20, column: 5)
+!166 = !DILocation(line: 20, column: 5, scope: !149)
+!167 = !DILocation(line: 21, column: 3, scope: !165)
+!168 = !DILocation(line: 23, column: 7, scope: !149)
+!169 = !DILocation(line: 23, column: 2, scope: !149)
+!170 = !DILocation(line: 25, column: 7, scope: !149)
+!171 = !DILocation(line: 25, column: 2, scope: !149)
+!172 = !DILocation(line: 27, column: 1, scope: !149)
+!173 = distinct !DISubprogram(name: "main", scope: !150, file: !150, line: 30, type: !151, scopeLine: 30, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!174 = !DILocation(line: 32, column: 2, scope: !173)
+!175 = !DILocation(line: 33, column: 1, scope: !173)

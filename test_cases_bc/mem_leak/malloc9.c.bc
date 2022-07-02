@@ -257,32 +257,26 @@ entry:
 declare dso_local i32 @getchar() #2
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @deref() #0 !dbg !170 {
+define dso_local i32* @alloc() #0 !dbg !170 {
 entry:
-  ret void, !dbg !173
+  %call = call i8* @NFRMALLOC(i32 10), !dbg !173
+  %0 = bitcast i8* %call to i32*, !dbg !173
+  ret i32* %0, !dbg !174
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32* @alloc() #0 !dbg !174 {
-entry:
-  %call = call i8* @NFRMALLOC(i32 10), !dbg !177
-  %0 = bitcast i8* %call to i32*, !dbg !177
-  ret i32* %0, !dbg !178
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32 @main() #0 !dbg !179 {
+define dso_local i32 @main() #0 !dbg !175 {
 entry:
   %i = alloca i32, align 4
-  call void @llvm.dbg.declare(metadata i32* %i, metadata !182, metadata !DIExpression()), !dbg !183
-  %call = call i32* @alloc(), !dbg !184
-  %0 = load %struct.s_rr_node*, %struct.s_rr_node** @rr_node, align 8, !dbg !185
-  %1 = load i32, i32* %i, align 4, !dbg !186
-  %idxprom = sext i32 %1 to i64, !dbg !185
-  %arrayidx = getelementptr inbounds %struct.s_rr_node, %struct.s_rr_node* %0, i64 %idxprom, !dbg !185
-  %edges = getelementptr inbounds %struct.s_rr_node, %struct.s_rr_node* %arrayidx, i32 0, i32 6, !dbg !187
-  store i32* %call, i32** %edges, align 8, !dbg !188
-  ret i32 0, !dbg !189
+  call void @llvm.dbg.declare(metadata i32* %i, metadata !178, metadata !DIExpression()), !dbg !179
+  %call = call i32* @alloc(), !dbg !180
+  %0 = load %struct.s_rr_node*, %struct.s_rr_node** @rr_node, align 8, !dbg !181
+  %1 = load i32, i32* %i, align 4, !dbg !182
+  %idxprom = sext i32 %1 to i64, !dbg !181
+  %arrayidx = getelementptr inbounds %struct.s_rr_node, %struct.s_rr_node* %0, i64 %idxprom, !dbg !181
+  %edges = getelementptr inbounds %struct.s_rr_node, %struct.s_rr_node* %arrayidx, i32 0, i32 6, !dbg !183
+  store i32* %call, i32** %edges, align 8, !dbg !184
+  ret i32 0, !dbg !185
 }
 
 attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
@@ -465,23 +459,19 @@ attributes #4 = { nounwind }
 !167 = !DILocation(line: 91, column: 3, scope: !162)
 !168 = !DILocation(line: 92, column: 3, scope: !162)
 !169 = !DILocation(line: 93, column: 1, scope: !162)
-!170 = distinct !DISubprogram(name: "deref", scope: !32, file: !32, line: 111, type: !171, scopeLine: 111, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !4)
+!170 = distinct !DISubprogram(name: "alloc", scope: !6, file: !6, line: 19, type: !171, scopeLine: 19, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !4)
 !171 = !DISubroutineType(types: !172)
-!172 = !{null}
-!173 = !DILocation(line: 111, column: 20, scope: !170)
-!174 = distinct !DISubprogram(name: "alloc", scope: !6, file: !6, line: 19, type: !175, scopeLine: 19, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !4)
-!175 = !DISubroutineType(types: !176)
-!176 = !{!18}
-!177 = !DILocation(line: 21, column: 9, scope: !174)
-!178 = !DILocation(line: 21, column: 2, scope: !174)
-!179 = distinct !DISubprogram(name: "main", scope: !6, file: !6, line: 24, type: !180, scopeLine: 24, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !4)
-!180 = !DISubroutineType(types: !181)
-!181 = !{!19}
-!182 = !DILocalVariable(name: "i", scope: !179, file: !6, line: 26, type: !19)
-!183 = !DILocation(line: 26, column: 6, scope: !179)
-!184 = !DILocation(line: 27, column: 21, scope: !179)
-!185 = !DILocation(line: 27, column: 2, scope: !179)
-!186 = !DILocation(line: 27, column: 10, scope: !179)
-!187 = !DILocation(line: 27, column: 13, scope: !179)
-!188 = !DILocation(line: 27, column: 19, scope: !179)
-!189 = !DILocation(line: 31, column: 1, scope: !179)
+!172 = !{!18}
+!173 = !DILocation(line: 21, column: 9, scope: !170)
+!174 = !DILocation(line: 21, column: 2, scope: !170)
+!175 = distinct !DISubprogram(name: "main", scope: !6, file: !6, line: 24, type: !176, scopeLine: 24, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !4)
+!176 = !DISubroutineType(types: !177)
+!177 = !{!19}
+!178 = !DILocalVariable(name: "i", scope: !175, file: !6, line: 26, type: !19)
+!179 = !DILocation(line: 26, column: 6, scope: !175)
+!180 = !DILocation(line: 27, column: 21, scope: !175)
+!181 = !DILocation(line: 27, column: 2, scope: !175)
+!182 = !DILocation(line: 27, column: 10, scope: !175)
+!183 = !DILocation(line: 27, column: 13, scope: !175)
+!184 = !DILocation(line: 27, column: 19, scope: !175)
+!185 = !DILocation(line: 31, column: 1, scope: !175)

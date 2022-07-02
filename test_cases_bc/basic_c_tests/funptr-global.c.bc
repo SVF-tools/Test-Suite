@@ -224,12 +224,6 @@ entry:
 declare dso_local i32 @getchar() #1
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @deref() #0 {
-entry:
-  ret void
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
 define internal i8* @DefaultAllocTable(i8* %pool, i32 %size) #0 {
 entry:
   %pool.addr = alloca i8*, align 8

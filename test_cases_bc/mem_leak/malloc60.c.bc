@@ -254,50 +254,44 @@ entry:
 declare dso_local i32 @getchar() #2
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @deref() #0 !dbg !149 {
-entry:
-  ret void, !dbg !152
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32 @main() #0 !dbg !153 {
+define dso_local i32 @main() #0 !dbg !149 {
 entry:
   %retval = alloca i32, align 4
   %n = alloca i32, align 4
   %p = alloca i32*, align 8
   store i32 0, i32* %retval, align 4
-  call void @llvm.dbg.declare(metadata i32* %n, metadata !157, metadata !DIExpression()), !dbg !158
-  call void @llvm.dbg.declare(metadata i32** %p, metadata !159, metadata !DIExpression()), !dbg !161
-  %call = call i8* @PLKLEAKFP(i32 10), !dbg !162
-  %0 = bitcast i8* %call to i32*, !dbg !162
-  store i32* %0, i32** %p, align 8, !dbg !161
-  %1 = load i32, i32* %n, align 4, !dbg !163
-  %cmp = icmp sgt i32 %1, 0, !dbg !165
-  br i1 %cmp, label %if.then, label %if.else, !dbg !166
+  call void @llvm.dbg.declare(metadata i32* %n, metadata !153, metadata !DIExpression()), !dbg !154
+  call void @llvm.dbg.declare(metadata i32** %p, metadata !155, metadata !DIExpression()), !dbg !157
+  %call = call i8* @PLKLEAKFP(i32 10), !dbg !158
+  %0 = bitcast i8* %call to i32*, !dbg !158
+  store i32* %0, i32** %p, align 8, !dbg !157
+  %1 = load i32, i32* %n, align 4, !dbg !159
+  %cmp = icmp sgt i32 %1, 0, !dbg !161
+  br i1 %cmp, label %if.then, label %if.else, !dbg !162
 
 if.then:                                          ; preds = %entry
-  %2 = load i32*, i32** %p, align 8, !dbg !167
-  %3 = bitcast i32* %2 to i8*, !dbg !167
-  call void @free(i8* %3) #4, !dbg !168
-  br label %if.end3, !dbg !168
+  %2 = load i32*, i32** %p, align 8, !dbg !163
+  %3 = bitcast i32* %2 to i8*, !dbg !163
+  call void @free(i8* %3) #4, !dbg !164
+  br label %if.end3, !dbg !164
 
 if.else:                                          ; preds = %entry
-  %4 = load i32, i32* %n, align 4, !dbg !169
-  %cmp1 = icmp sle i32 %4, 0, !dbg !171
-  br i1 %cmp1, label %if.then2, label %if.end, !dbg !172
+  %4 = load i32, i32* %n, align 4, !dbg !165
+  %cmp1 = icmp sle i32 %4, 0, !dbg !167
+  br i1 %cmp1, label %if.then2, label %if.end, !dbg !168
 
 if.then2:                                         ; preds = %if.else
-  %5 = load i32*, i32** %p, align 8, !dbg !173
-  %6 = bitcast i32* %5 to i8*, !dbg !173
-  call void @free(i8* %6) #4, !dbg !174
-  br label %if.end, !dbg !174
+  %5 = load i32*, i32** %p, align 8, !dbg !169
+  %6 = bitcast i32* %5 to i8*, !dbg !169
+  call void @free(i8* %6) #4, !dbg !170
+  br label %if.end, !dbg !170
 
 if.end:                                           ; preds = %if.then2, %if.else
   br label %if.end3
 
 if.end3:                                          ; preds = %if.end, %if.then
-  %7 = load i32, i32* %retval, align 4, !dbg !175
-  ret i32 %7, !dbg !175
+  %7 = load i32, i32* %retval, align 4, !dbg !171
+  ret i32 %7, !dbg !171
 }
 
 ; Function Attrs: nounwind
@@ -462,30 +456,26 @@ attributes #4 = { nounwind }
 !146 = !DILocation(line: 91, column: 3, scope: !141)
 !147 = !DILocation(line: 92, column: 3, scope: !141)
 !148 = !DILocation(line: 93, column: 1, scope: !141)
-!149 = distinct !DISubprogram(name: "deref", scope: !10, file: !10, line: 111, type: !150, scopeLine: 111, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!150 = !DISubroutineType(types: !151)
-!151 = !{null}
-!152 = !DILocation(line: 111, column: 20, scope: !149)
-!153 = distinct !DISubprogram(name: "main", scope: !154, file: !154, line: 9, type: !155, scopeLine: 9, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!154 = !DIFile(filename: "src/mem_leak/malloc60.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
-!155 = !DISubroutineType(types: !156)
-!156 = !{!58}
-!157 = !DILocalVariable(name: "n", scope: !153, file: !154, line: 10, type: !58)
-!158 = !DILocation(line: 10, column: 6, scope: !153)
-!159 = !DILocalVariable(name: "p", scope: !153, file: !154, line: 11, type: !160)
-!160 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !58, size: 64)
-!161 = !DILocation(line: 11, column: 10, scope: !153)
-!162 = !DILocation(line: 11, column: 14, scope: !153)
-!163 = !DILocation(line: 12, column: 8, scope: !164)
-!164 = distinct !DILexicalBlock(scope: !153, file: !154, line: 12, column: 8)
-!165 = !DILocation(line: 12, column: 9, scope: !164)
-!166 = !DILocation(line: 12, column: 8, scope: !153)
-!167 = !DILocation(line: 13, column: 14, scope: !164)
-!168 = !DILocation(line: 13, column: 9, scope: !164)
-!169 = !DILocation(line: 14, column: 13, scope: !170)
-!170 = distinct !DILexicalBlock(scope: !164, file: !154, line: 14, column: 13)
-!171 = !DILocation(line: 14, column: 14, scope: !170)
-!172 = !DILocation(line: 14, column: 13, scope: !164)
-!173 = !DILocation(line: 15, column: 14, scope: !170)
-!174 = !DILocation(line: 15, column: 9, scope: !170)
-!175 = !DILocation(line: 16, column: 1, scope: !153)
+!149 = distinct !DISubprogram(name: "main", scope: !150, file: !150, line: 9, type: !151, scopeLine: 9, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!150 = !DIFile(filename: "src/mem_leak/malloc60.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
+!151 = !DISubroutineType(types: !152)
+!152 = !{!58}
+!153 = !DILocalVariable(name: "n", scope: !149, file: !150, line: 10, type: !58)
+!154 = !DILocation(line: 10, column: 6, scope: !149)
+!155 = !DILocalVariable(name: "p", scope: !149, file: !150, line: 11, type: !156)
+!156 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !58, size: 64)
+!157 = !DILocation(line: 11, column: 10, scope: !149)
+!158 = !DILocation(line: 11, column: 14, scope: !149)
+!159 = !DILocation(line: 12, column: 8, scope: !160)
+!160 = distinct !DILexicalBlock(scope: !149, file: !150, line: 12, column: 8)
+!161 = !DILocation(line: 12, column: 9, scope: !160)
+!162 = !DILocation(line: 12, column: 8, scope: !149)
+!163 = !DILocation(line: 13, column: 14, scope: !160)
+!164 = !DILocation(line: 13, column: 9, scope: !160)
+!165 = !DILocation(line: 14, column: 13, scope: !166)
+!166 = distinct !DILexicalBlock(scope: !160, file: !150, line: 14, column: 13)
+!167 = !DILocation(line: 14, column: 14, scope: !166)
+!168 = !DILocation(line: 14, column: 13, scope: !160)
+!169 = !DILocation(line: 15, column: 14, scope: !166)
+!170 = !DILocation(line: 15, column: 9, scope: !166)
+!171 = !DILocation(line: 16, column: 1, scope: !149)

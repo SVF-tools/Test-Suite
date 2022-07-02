@@ -258,87 +258,81 @@ entry:
 declare dso_local i32 @getchar() #2
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @deref() #0 !dbg !156 {
-entry:
-  ret void, !dbg !159
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
-define dso_local %struct.Buf* @readBuf() #0 !dbg !160 {
+define dso_local %struct.Buf* @readBuf() #0 !dbg !156 {
 entry:
   %buf = alloca %struct.Buf*, align 8
-  call void @llvm.dbg.declare(metadata %struct.Buf** %buf, metadata !164, metadata !DIExpression()), !dbg !165
-  %call = call i8* @SAFEMALLOC(i32 10), !dbg !166
-  %0 = bitcast i8* %call to %struct.Buf*, !dbg !166
-  store %struct.Buf* %0, %struct.Buf** %buf, align 8, !dbg !165
-  %call1 = call i8* @SAFEMALLOC(i32 10), !dbg !167
-  %1 = load %struct.Buf*, %struct.Buf** %buf, align 8, !dbg !168
-  %name = getelementptr inbounds %struct.Buf, %struct.Buf* %1, i32 0, i32 0, !dbg !169
-  store i8* %call1, i8** %name, align 8, !dbg !170
-  %2 = load %struct.Buf*, %struct.Buf** %buf, align 8, !dbg !171
-  ret %struct.Buf* %2, !dbg !172
+  call void @llvm.dbg.declare(metadata %struct.Buf** %buf, metadata !160, metadata !DIExpression()), !dbg !161
+  %call = call i8* @SAFEMALLOC(i32 10), !dbg !162
+  %0 = bitcast i8* %call to %struct.Buf*, !dbg !162
+  store %struct.Buf* %0, %struct.Buf** %buf, align 8, !dbg !161
+  %call1 = call i8* @SAFEMALLOC(i32 10), !dbg !163
+  %1 = load %struct.Buf*, %struct.Buf** %buf, align 8, !dbg !164
+  %name = getelementptr inbounds %struct.Buf, %struct.Buf* %1, i32 0, i32 0, !dbg !165
+  store i8* %call1, i8** %name, align 8, !dbg !166
+  %2 = load %struct.Buf*, %struct.Buf** %buf, align 8, !dbg !167
+  ret %struct.Buf* %2, !dbg !168
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @freeBuf(%struct.Buf* %buf) #0 !dbg !173 {
+define dso_local void @freeBuf(%struct.Buf* %buf) #0 !dbg !169 {
 entry:
   %buf.addr = alloca %struct.Buf*, align 8
   store %struct.Buf* %buf, %struct.Buf** %buf.addr, align 8
-  call void @llvm.dbg.declare(metadata %struct.Buf** %buf.addr, metadata !176, metadata !DIExpression()), !dbg !177
-  %0 = load %struct.Buf*, %struct.Buf** %buf.addr, align 8, !dbg !178
-  %name = getelementptr inbounds %struct.Buf, %struct.Buf* %0, i32 0, i32 0, !dbg !179
-  %1 = load i8*, i8** %name, align 8, !dbg !179
-  call void @free(i8* %1) #4, !dbg !180
-  %2 = load %struct.Buf*, %struct.Buf** %buf.addr, align 8, !dbg !181
-  %3 = bitcast %struct.Buf* %2 to i8*, !dbg !181
-  call void @free(i8* %3) #4, !dbg !182
-  ret void, !dbg !183
+  call void @llvm.dbg.declare(metadata %struct.Buf** %buf.addr, metadata !172, metadata !DIExpression()), !dbg !173
+  %0 = load %struct.Buf*, %struct.Buf** %buf.addr, align 8, !dbg !174
+  %name = getelementptr inbounds %struct.Buf, %struct.Buf* %0, i32 0, i32 0, !dbg !175
+  %1 = load i8*, i8** %name, align 8, !dbg !175
+  call void @free(i8* %1) #4, !dbg !176
+  %2 = load %struct.Buf*, %struct.Buf** %buf.addr, align 8, !dbg !177
+  %3 = bitcast %struct.Buf* %2 to i8*, !dbg !177
+  call void @free(i8* %3) #4, !dbg !178
+  ret void, !dbg !179
 }
 
 ; Function Attrs: nounwind
 declare dso_local void @free(i8*) #3
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @SerialReadBuf() #0 !dbg !184 {
+define dso_local void @SerialReadBuf() #0 !dbg !180 {
 entry:
   %n = alloca i32, align 4
   %buf = alloca %struct.Buf*, align 8
-  call void @llvm.dbg.declare(metadata i32* %n, metadata !185, metadata !DIExpression()), !dbg !186
-  br label %while.cond, !dbg !187
+  call void @llvm.dbg.declare(metadata i32* %n, metadata !183, metadata !DIExpression()), !dbg !184
+  br label %while.cond, !dbg !185
 
 while.cond:                                       ; preds = %if.end, %entry
-  %0 = load i32, i32* %n, align 4, !dbg !188
-  %tobool = icmp ne i32 %0, 0, !dbg !187
-  br i1 %tobool, label %while.body, label %while.end, !dbg !187
+  %0 = load i32, i32* %n, align 4, !dbg !186
+  %tobool = icmp ne i32 %0, 0, !dbg !185
+  br i1 %tobool, label %while.body, label %while.end, !dbg !185
 
 while.body:                                       ; preds = %while.cond
-  call void @llvm.dbg.declare(metadata %struct.Buf** %buf, metadata !189, metadata !DIExpression()), !dbg !191
-  %call = call %struct.Buf* @readBuf(), !dbg !192
-  store %struct.Buf* %call, %struct.Buf** %buf, align 8, !dbg !191
-  %1 = load i32, i32* %n, align 4, !dbg !193
-  %2 = load %struct.Buf*, %struct.Buf** %buf, align 8, !dbg !194
-  %call1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.3, i64 0, i64 0), i32 %1, %struct.Buf* %2), !dbg !195
-  %3 = load i32, i32* %n, align 4, !dbg !196
-  %tobool2 = icmp ne i32 %3, 0, !dbg !196
-  br i1 %tobool2, label %if.then, label %if.end, !dbg !198
+  call void @llvm.dbg.declare(metadata %struct.Buf** %buf, metadata !187, metadata !DIExpression()), !dbg !189
+  %call = call %struct.Buf* @readBuf(), !dbg !190
+  store %struct.Buf* %call, %struct.Buf** %buf, align 8, !dbg !189
+  %1 = load i32, i32* %n, align 4, !dbg !191
+  %2 = load %struct.Buf*, %struct.Buf** %buf, align 8, !dbg !192
+  %call1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.3, i64 0, i64 0), i32 %1, %struct.Buf* %2), !dbg !193
+  %3 = load i32, i32* %n, align 4, !dbg !194
+  %tobool2 = icmp ne i32 %3, 0, !dbg !194
+  br i1 %tobool2, label %if.then, label %if.end, !dbg !196
 
 if.then:                                          ; preds = %while.body
-  br label %if.end, !dbg !199
+  br label %if.end, !dbg !197
 
 if.end:                                           ; preds = %if.then, %while.body
-  %4 = load %struct.Buf*, %struct.Buf** %buf, align 8, !dbg !201
-  call void @freeBuf(%struct.Buf* %4), !dbg !202
-  br label %while.cond, !dbg !187, !llvm.loop !203
+  %4 = load %struct.Buf*, %struct.Buf** %buf, align 8, !dbg !199
+  call void @freeBuf(%struct.Buf* %4), !dbg !200
+  br label %while.cond, !dbg !185, !llvm.loop !201
 
 while.end:                                        ; preds = %while.cond
-  ret void, !dbg !206
+  ret void, !dbg !204
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32 @main() #0 !dbg !207 {
+define dso_local i32 @main() #0 !dbg !205 {
 entry:
-  call void @SerialReadBuf(), !dbg !210
-  ret i32 0, !dbg !211
+  call void @SerialReadBuf(), !dbg !208
+  ret i32 0, !dbg !209
 }
 
 attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
@@ -507,59 +501,57 @@ attributes #4 = { nounwind }
 !153 = !DILocation(line: 91, column: 3, scope: !148)
 !154 = !DILocation(line: 92, column: 3, scope: !148)
 !155 = !DILocation(line: 93, column: 1, scope: !148)
-!156 = distinct !DISubprogram(name: "deref", scope: !19, file: !19, line: 111, type: !157, scopeLine: 111, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !4)
+!156 = distinct !DISubprogram(name: "readBuf", scope: !6, file: !6, line: 16, type: !157, scopeLine: 16, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !4)
 !157 = !DISubroutineType(types: !158)
-!158 = !{null}
-!159 = !DILocation(line: 111, column: 20, scope: !156)
-!160 = distinct !DISubprogram(name: "readBuf", scope: !6, file: !6, line: 16, type: !161, scopeLine: 16, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !4)
-!161 = !DISubroutineType(types: !162)
-!162 = !{!163}
-!163 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !7, size: 64)
-!164 = !DILocalVariable(name: "buf", scope: !160, file: !6, line: 18, type: !163)
-!165 = !DILocation(line: 18, column: 14, scope: !160)
-!166 = !DILocation(line: 18, column: 20, scope: !160)
-!167 = !DILocation(line: 19, column: 14, scope: !160)
-!168 = !DILocation(line: 19, column: 2, scope: !160)
-!169 = !DILocation(line: 19, column: 7, scope: !160)
-!170 = !DILocation(line: 19, column: 12, scope: !160)
-!171 = !DILocation(line: 21, column: 9, scope: !160)
-!172 = !DILocation(line: 21, column: 2, scope: !160)
-!173 = distinct !DISubprogram(name: "freeBuf", scope: !6, file: !6, line: 25, type: !174, scopeLine: 25, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !4)
-!174 = !DISubroutineType(types: !175)
-!175 = !{null, !163}
-!176 = !DILocalVariable(name: "buf", arg: 1, scope: !173, file: !6, line: 25, type: !163)
-!177 = !DILocation(line: 25, column: 26, scope: !173)
-!178 = !DILocation(line: 26, column: 7, scope: !173)
-!179 = !DILocation(line: 26, column: 12, scope: !173)
-!180 = !DILocation(line: 26, column: 2, scope: !173)
-!181 = !DILocation(line: 27, column: 7, scope: !173)
-!182 = !DILocation(line: 27, column: 2, scope: !173)
-!183 = !DILocation(line: 29, column: 1, scope: !173)
-!184 = distinct !DISubprogram(name: "SerialReadBuf", scope: !6, file: !6, line: 30, type: !157, scopeLine: 30, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !4)
-!185 = !DILocalVariable(name: "n", scope: !184, file: !6, line: 32, type: !67)
-!186 = !DILocation(line: 32, column: 6, scope: !184)
-!187 = !DILocation(line: 33, column: 2, scope: !184)
-!188 = !DILocation(line: 33, column: 8, scope: !184)
-!189 = !DILocalVariable(name: "buf", scope: !190, file: !6, line: 35, type: !163)
-!190 = distinct !DILexicalBlock(scope: !184, file: !6, line: 33, column: 10)
-!191 = !DILocation(line: 35, column: 15, scope: !190)
-!192 = !DILocation(line: 35, column: 21, scope: !190)
-!193 = !DILocation(line: 36, column: 18, scope: !190)
-!194 = !DILocation(line: 36, column: 20, scope: !190)
-!195 = !DILocation(line: 36, column: 4, scope: !190)
-!196 = !DILocation(line: 38, column: 6, scope: !197)
-!197 = distinct !DILexicalBlock(scope: !190, file: !6, line: 38, column: 6)
-!198 = !DILocation(line: 38, column: 6, scope: !190)
-!199 = !DILocation(line: 40, column: 3, scope: !200)
-!200 = distinct !DILexicalBlock(scope: !197, file: !6, line: 38, column: 8)
-!201 = !DILocation(line: 41, column: 11, scope: !190)
-!202 = !DILocation(line: 41, column: 3, scope: !190)
-!203 = distinct !{!203, !187, !204, !205}
-!204 = !DILocation(line: 44, column: 2, scope: !184)
-!205 = !{!"llvm.loop.mustprogress"}
-!206 = !DILocation(line: 47, column: 1, scope: !184)
-!207 = distinct !DISubprogram(name: "main", scope: !6, file: !6, line: 50, type: !208, scopeLine: 50, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !4)
-!208 = !DISubroutineType(types: !209)
-!209 = !{!67}
-!210 = !DILocation(line: 51, column: 1, scope: !207)
-!211 = !DILocation(line: 53, column: 1, scope: !207)
+!158 = !{!159}
+!159 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !7, size: 64)
+!160 = !DILocalVariable(name: "buf", scope: !156, file: !6, line: 18, type: !159)
+!161 = !DILocation(line: 18, column: 14, scope: !156)
+!162 = !DILocation(line: 18, column: 20, scope: !156)
+!163 = !DILocation(line: 19, column: 14, scope: !156)
+!164 = !DILocation(line: 19, column: 2, scope: !156)
+!165 = !DILocation(line: 19, column: 7, scope: !156)
+!166 = !DILocation(line: 19, column: 12, scope: !156)
+!167 = !DILocation(line: 21, column: 9, scope: !156)
+!168 = !DILocation(line: 21, column: 2, scope: !156)
+!169 = distinct !DISubprogram(name: "freeBuf", scope: !6, file: !6, line: 25, type: !170, scopeLine: 25, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !4)
+!170 = !DISubroutineType(types: !171)
+!171 = !{null, !159}
+!172 = !DILocalVariable(name: "buf", arg: 1, scope: !169, file: !6, line: 25, type: !159)
+!173 = !DILocation(line: 25, column: 26, scope: !169)
+!174 = !DILocation(line: 26, column: 7, scope: !169)
+!175 = !DILocation(line: 26, column: 12, scope: !169)
+!176 = !DILocation(line: 26, column: 2, scope: !169)
+!177 = !DILocation(line: 27, column: 7, scope: !169)
+!178 = !DILocation(line: 27, column: 2, scope: !169)
+!179 = !DILocation(line: 29, column: 1, scope: !169)
+!180 = distinct !DISubprogram(name: "SerialReadBuf", scope: !6, file: !6, line: 30, type: !181, scopeLine: 30, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !4)
+!181 = !DISubroutineType(types: !182)
+!182 = !{null}
+!183 = !DILocalVariable(name: "n", scope: !180, file: !6, line: 32, type: !67)
+!184 = !DILocation(line: 32, column: 6, scope: !180)
+!185 = !DILocation(line: 33, column: 2, scope: !180)
+!186 = !DILocation(line: 33, column: 8, scope: !180)
+!187 = !DILocalVariable(name: "buf", scope: !188, file: !6, line: 35, type: !159)
+!188 = distinct !DILexicalBlock(scope: !180, file: !6, line: 33, column: 10)
+!189 = !DILocation(line: 35, column: 15, scope: !188)
+!190 = !DILocation(line: 35, column: 21, scope: !188)
+!191 = !DILocation(line: 36, column: 18, scope: !188)
+!192 = !DILocation(line: 36, column: 20, scope: !188)
+!193 = !DILocation(line: 36, column: 4, scope: !188)
+!194 = !DILocation(line: 38, column: 6, scope: !195)
+!195 = distinct !DILexicalBlock(scope: !188, file: !6, line: 38, column: 6)
+!196 = !DILocation(line: 38, column: 6, scope: !188)
+!197 = !DILocation(line: 40, column: 3, scope: !198)
+!198 = distinct !DILexicalBlock(scope: !195, file: !6, line: 38, column: 8)
+!199 = !DILocation(line: 41, column: 11, scope: !188)
+!200 = !DILocation(line: 41, column: 3, scope: !188)
+!201 = distinct !{!201, !185, !202, !203}
+!202 = !DILocation(line: 44, column: 2, scope: !180)
+!203 = !{!"llvm.loop.mustprogress"}
+!204 = !DILocation(line: 47, column: 1, scope: !180)
+!205 = distinct !DISubprogram(name: "main", scope: !6, file: !6, line: 50, type: !206, scopeLine: 50, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !4)
+!206 = !DISubroutineType(types: !207)
+!207 = !{!67}
+!208 = !DILocation(line: 51, column: 1, scope: !205)
+!209 = !DILocation(line: 53, column: 1, scope: !205)

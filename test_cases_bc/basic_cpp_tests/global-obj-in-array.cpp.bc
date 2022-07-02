@@ -280,12 +280,6 @@ entry:
 
 declare dso_local i32 @getchar() #1
 
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local void @_Z5derefv() #5 {
-entry:
-  ret void
-}
-
 ; Function Attrs: noinline uwtable
 define internal void @__cxx_global_var_init.3() #0 section ".text.startup" {
 entry:

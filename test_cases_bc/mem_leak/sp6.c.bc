@@ -256,76 +256,70 @@ entry:
 declare dso_local i32 @getchar() #2
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @deref() #0 !dbg !156 {
-entry:
-  ret void, !dbg !159
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
-define dso_local %struct._list* @make_list(i32 %n) #0 !dbg !160 {
+define dso_local %struct._list* @make_list(i32 %n) #0 !dbg !156 {
 entry:
   %n.addr = alloca i32, align 4
   %i = alloca i32, align 4
   %hd = alloca %struct._list*, align 8
   %p = alloca %struct._list*, align 8
   store i32 %n, i32* %n.addr, align 4
-  call void @llvm.dbg.declare(metadata i32* %n.addr, metadata !163, metadata !DIExpression()), !dbg !164
-  call void @llvm.dbg.declare(metadata i32* %i, metadata !165, metadata !DIExpression()), !dbg !166
-  call void @llvm.dbg.declare(metadata %struct._list** %hd, metadata !167, metadata !DIExpression()), !dbg !168
-  %call = call i8* @SAFEMALLOC(i32 8), !dbg !169
-  %0 = bitcast i8* %call to %struct._list*, !dbg !170
-  store %struct._list* %0, %struct._list** %hd, align 8, !dbg !168
-  call void @llvm.dbg.declare(metadata %struct._list** %p, metadata !171, metadata !DIExpression()), !dbg !172
-  %1 = load %struct._list*, %struct._list** %hd, align 8, !dbg !173
-  store %struct._list* %1, %struct._list** %p, align 8, !dbg !172
-  %2 = load %struct._list*, %struct._list** %hd, align 8, !dbg !174
-  ret %struct._list* %2, !dbg !175
+  call void @llvm.dbg.declare(metadata i32* %n.addr, metadata !159, metadata !DIExpression()), !dbg !160
+  call void @llvm.dbg.declare(metadata i32* %i, metadata !161, metadata !DIExpression()), !dbg !162
+  call void @llvm.dbg.declare(metadata %struct._list** %hd, metadata !163, metadata !DIExpression()), !dbg !164
+  %call = call i8* @SAFEMALLOC(i32 8), !dbg !165
+  %0 = bitcast i8* %call to %struct._list*, !dbg !166
+  store %struct._list* %0, %struct._list** %hd, align 8, !dbg !164
+  call void @llvm.dbg.declare(metadata %struct._list** %p, metadata !167, metadata !DIExpression()), !dbg !168
+  %1 = load %struct._list*, %struct._list** %hd, align 8, !dbg !169
+  store %struct._list* %1, %struct._list** %p, align 8, !dbg !168
+  %2 = load %struct._list*, %struct._list** %hd, align 8, !dbg !170
+  ret %struct._list* %2, !dbg !171
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @free_list(%struct._list* %hd) #0 !dbg !176 {
+define dso_local void @free_list(%struct._list* %hd) #0 !dbg !172 {
 entry:
   %hd.addr = alloca %struct._list*, align 8
   %p = alloca %struct._list*, align 8
   store %struct._list* %hd, %struct._list** %hd.addr, align 8
-  call void @llvm.dbg.declare(metadata %struct._list** %hd.addr, metadata !179, metadata !DIExpression()), !dbg !180
-  call void @llvm.dbg.declare(metadata %struct._list** %p, metadata !181, metadata !DIExpression()), !dbg !182
-  br label %while.cond, !dbg !183
+  call void @llvm.dbg.declare(metadata %struct._list** %hd.addr, metadata !175, metadata !DIExpression()), !dbg !176
+  call void @llvm.dbg.declare(metadata %struct._list** %p, metadata !177, metadata !DIExpression()), !dbg !178
+  br label %while.cond, !dbg !179
 
 while.cond:                                       ; preds = %while.body, %entry
-  %0 = load %struct._list*, %struct._list** %hd.addr, align 8, !dbg !184
-  %cmp = icmp ne %struct._list* %0, null, !dbg !185
-  br i1 %cmp, label %while.body, label %while.end, !dbg !183
+  %0 = load %struct._list*, %struct._list** %hd.addr, align 8, !dbg !180
+  %cmp = icmp ne %struct._list* %0, null, !dbg !181
+  br i1 %cmp, label %while.body, label %while.end, !dbg !179
 
 while.body:                                       ; preds = %while.cond
-  %1 = load %struct._list*, %struct._list** %hd.addr, align 8, !dbg !186
-  %next = getelementptr inbounds %struct._list, %struct._list* %1, i32 0, i32 0, !dbg !188
-  %2 = load %struct._list*, %struct._list** %next, align 8, !dbg !188
-  store %struct._list* %2, %struct._list** %p, align 8, !dbg !189
-  %3 = load %struct._list*, %struct._list** %hd.addr, align 8, !dbg !190
-  %4 = bitcast %struct._list* %3 to i8*, !dbg !190
-  call void @free(i8* %4) #4, !dbg !191
-  %5 = load %struct._list*, %struct._list** %p, align 8, !dbg !192
-  store %struct._list* %5, %struct._list** %hd.addr, align 8, !dbg !193
-  br label %while.cond, !dbg !183, !llvm.loop !194
+  %1 = load %struct._list*, %struct._list** %hd.addr, align 8, !dbg !182
+  %next = getelementptr inbounds %struct._list, %struct._list* %1, i32 0, i32 0, !dbg !184
+  %2 = load %struct._list*, %struct._list** %next, align 8, !dbg !184
+  store %struct._list* %2, %struct._list** %p, align 8, !dbg !185
+  %3 = load %struct._list*, %struct._list** %hd.addr, align 8, !dbg !186
+  %4 = bitcast %struct._list* %3 to i8*, !dbg !186
+  call void @free(i8* %4) #4, !dbg !187
+  %5 = load %struct._list*, %struct._list** %p, align 8, !dbg !188
+  store %struct._list* %5, %struct._list** %hd.addr, align 8, !dbg !189
+  br label %while.cond, !dbg !179, !llvm.loop !190
 
 while.end:                                        ; preds = %while.cond
-  ret void, !dbg !197
+  ret void, !dbg !193
 }
 
 ; Function Attrs: nounwind
 declare dso_local void @free(i8*) #3
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @main() #0 !dbg !198 {
+define dso_local void @main() #0 !dbg !194 {
 entry:
   %l = alloca %struct._list*, align 8
-  call void @llvm.dbg.declare(metadata %struct._list** %l, metadata !199, metadata !DIExpression()), !dbg !200
-  %call = call %struct._list* @make_list(i32 10), !dbg !201
-  store %struct._list* %call, %struct._list** %l, align 8, !dbg !200
-  %0 = load %struct._list*, %struct._list** %l, align 8, !dbg !202
-  call void @free_list(%struct._list* %0), !dbg !203
-  ret void, !dbg !204
+  call void @llvm.dbg.declare(metadata %struct._list** %l, metadata !197, metadata !DIExpression()), !dbg !198
+  %call = call %struct._list* @make_list(i32 10), !dbg !199
+  store %struct._list* %call, %struct._list** %l, align 8, !dbg !198
+  %0 = load %struct._list*, %struct._list** %l, align 8, !dbg !200
+  call void @free_list(%struct._list* %0), !dbg !201
+  ret void, !dbg !202
 }
 
 attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
@@ -494,52 +488,50 @@ attributes #4 = { nounwind }
 !153 = !DILocation(line: 91, column: 3, scope: !148)
 !154 = !DILocation(line: 92, column: 3, scope: !148)
 !155 = !DILocation(line: 93, column: 1, scope: !148)
-!156 = distinct !DISubprogram(name: "deref", scope: !17, file: !17, line: 111, type: !157, scopeLine: 111, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!156 = distinct !DISubprogram(name: "make_list", scope: !5, file: !5, line: 15, type: !157, scopeLine: 15, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
 !157 = !DISubroutineType(types: !158)
-!158 = !{null}
-!159 = !DILocation(line: 111, column: 20, scope: !156)
-!160 = distinct !DISubprogram(name: "make_list", scope: !5, file: !5, line: 15, type: !161, scopeLine: 15, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!161 = !DISubroutineType(types: !162)
-!162 = !{!4, !65}
-!163 = !DILocalVariable(name: "n", arg: 1, scope: !160, file: !5, line: 15, type: !65)
-!164 = !DILocation(line: 15, column: 20, scope: !160)
-!165 = !DILocalVariable(name: "i", scope: !160, file: !5, line: 16, type: !65)
-!166 = !DILocation(line: 16, column: 8, scope: !160)
-!167 = !DILocalVariable(name: "hd", scope: !160, file: !5, line: 17, type: !4)
-!168 = !DILocation(line: 17, column: 9, scope: !160)
-!169 = !DILocation(line: 17, column: 20, scope: !160)
-!170 = !DILocation(line: 17, column: 14, scope: !160)
-!171 = !DILocalVariable(name: "p", scope: !160, file: !5, line: 18, type: !4)
-!172 = !DILocation(line: 18, column: 9, scope: !160)
-!173 = !DILocation(line: 18, column: 13, scope: !160)
-!174 = !DILocation(line: 26, column: 15, scope: !160)
-!175 = !DILocation(line: 26, column: 8, scope: !160)
-!176 = distinct !DISubprogram(name: "free_list", scope: !5, file: !5, line: 29, type: !177, scopeLine: 29, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!177 = !DISubroutineType(types: !178)
-!178 = !{null, !4}
-!179 = !DILocalVariable(name: "hd", arg: 1, scope: !176, file: !5, line: 29, type: !4)
-!180 = !DILocation(line: 29, column: 21, scope: !176)
-!181 = !DILocalVariable(name: "p", scope: !176, file: !5, line: 30, type: !4)
-!182 = !DILocation(line: 30, column: 11, scope: !176)
-!183 = !DILocation(line: 31, column: 7, scope: !176)
-!184 = !DILocation(line: 31, column: 14, scope: !176)
-!185 = !DILocation(line: 31, column: 17, scope: !176)
-!186 = !DILocation(line: 32, column: 13, scope: !187)
-!187 = distinct !DILexicalBlock(scope: !176, file: !5, line: 31, column: 23)
-!188 = !DILocation(line: 32, column: 17, scope: !187)
-!189 = !DILocation(line: 32, column: 11, scope: !187)
-!190 = !DILocation(line: 33, column: 20, scope: !187)
-!191 = !DILocation(line: 33, column: 15, scope: !187)
-!192 = !DILocation(line: 34, column: 20, scope: !187)
-!193 = !DILocation(line: 34, column: 18, scope: !187)
-!194 = distinct !{!194, !183, !195, !196}
-!195 = !DILocation(line: 35, column: 13, scope: !176)
-!196 = !{!"llvm.loop.mustprogress"}
-!197 = !DILocation(line: 36, column: 1, scope: !176)
-!198 = distinct !DISubprogram(name: "main", scope: !5, file: !5, line: 38, type: !157, scopeLine: 38, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!199 = !DILocalVariable(name: "l", scope: !198, file: !5, line: 39, type: !4)
-!200 = !DILocation(line: 39, column: 10, scope: !198)
-!201 = !DILocation(line: 39, column: 14, scope: !198)
-!202 = !DILocation(line: 40, column: 15, scope: !198)
-!203 = !DILocation(line: 40, column: 5, scope: !198)
-!204 = !DILocation(line: 41, column: 1, scope: !198)
+!158 = !{!4, !65}
+!159 = !DILocalVariable(name: "n", arg: 1, scope: !156, file: !5, line: 15, type: !65)
+!160 = !DILocation(line: 15, column: 20, scope: !156)
+!161 = !DILocalVariable(name: "i", scope: !156, file: !5, line: 16, type: !65)
+!162 = !DILocation(line: 16, column: 8, scope: !156)
+!163 = !DILocalVariable(name: "hd", scope: !156, file: !5, line: 17, type: !4)
+!164 = !DILocation(line: 17, column: 9, scope: !156)
+!165 = !DILocation(line: 17, column: 20, scope: !156)
+!166 = !DILocation(line: 17, column: 14, scope: !156)
+!167 = !DILocalVariable(name: "p", scope: !156, file: !5, line: 18, type: !4)
+!168 = !DILocation(line: 18, column: 9, scope: !156)
+!169 = !DILocation(line: 18, column: 13, scope: !156)
+!170 = !DILocation(line: 26, column: 15, scope: !156)
+!171 = !DILocation(line: 26, column: 8, scope: !156)
+!172 = distinct !DISubprogram(name: "free_list", scope: !5, file: !5, line: 29, type: !173, scopeLine: 29, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!173 = !DISubroutineType(types: !174)
+!174 = !{null, !4}
+!175 = !DILocalVariable(name: "hd", arg: 1, scope: !172, file: !5, line: 29, type: !4)
+!176 = !DILocation(line: 29, column: 21, scope: !172)
+!177 = !DILocalVariable(name: "p", scope: !172, file: !5, line: 30, type: !4)
+!178 = !DILocation(line: 30, column: 11, scope: !172)
+!179 = !DILocation(line: 31, column: 7, scope: !172)
+!180 = !DILocation(line: 31, column: 14, scope: !172)
+!181 = !DILocation(line: 31, column: 17, scope: !172)
+!182 = !DILocation(line: 32, column: 13, scope: !183)
+!183 = distinct !DILexicalBlock(scope: !172, file: !5, line: 31, column: 23)
+!184 = !DILocation(line: 32, column: 17, scope: !183)
+!185 = !DILocation(line: 32, column: 11, scope: !183)
+!186 = !DILocation(line: 33, column: 20, scope: !183)
+!187 = !DILocation(line: 33, column: 15, scope: !183)
+!188 = !DILocation(line: 34, column: 20, scope: !183)
+!189 = !DILocation(line: 34, column: 18, scope: !183)
+!190 = distinct !{!190, !179, !191, !192}
+!191 = !DILocation(line: 35, column: 13, scope: !172)
+!192 = !{!"llvm.loop.mustprogress"}
+!193 = !DILocation(line: 36, column: 1, scope: !172)
+!194 = distinct !DISubprogram(name: "main", scope: !5, file: !5, line: 38, type: !195, scopeLine: 38, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!195 = !DISubroutineType(types: !196)
+!196 = !{null}
+!197 = !DILocalVariable(name: "l", scope: !194, file: !5, line: 39, type: !4)
+!198 = !DILocation(line: 39, column: 10, scope: !194)
+!199 = !DILocation(line: 39, column: 14, scope: !194)
+!200 = !DILocation(line: 40, column: 15, scope: !194)
+!201 = !DILocation(line: 40, column: 5, scope: !194)
+!202 = !DILocation(line: 41, column: 1, scope: !194)

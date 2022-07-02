@@ -234,12 +234,6 @@ entry:
 declare dso_local i32 @getchar() #1
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @deref() #0 {
-entry:
-  ret void
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
 define dso_local void @aa() #0 {
 entry:
   %0 = load i32, i32* @Global, align 4

@@ -256,116 +256,110 @@ entry:
 declare dso_local i32 @getchar() #2
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @deref() #0 !dbg !158 {
-entry:
-  ret void, !dbg !161
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
-define dso_local %struct.List* @newNode() #0 !dbg !162 {
+define dso_local %struct.List* @newNode() #0 !dbg !158 {
 entry:
   %node = alloca %struct.List*, align 8
-  call void @llvm.dbg.declare(metadata %struct.List** %node, metadata !165, metadata !DIExpression()), !dbg !166
-  %call = call i8* @SAFEMALLOC(i32 24), !dbg !167
-  %0 = bitcast i8* %call to %struct.List*, !dbg !168
-  store %struct.List* %0, %struct.List** %node, align 8, !dbg !169
-  %call1 = call i8* @SAFEMALLOC(i32 4), !dbg !170
-  %1 = bitcast i8* %call1 to i32*, !dbg !171
-  %2 = load %struct.List*, %struct.List** %node, align 8, !dbg !172
-  %a = getelementptr inbounds %struct.List, %struct.List* %2, i32 0, i32 2, !dbg !173
-  store i32* %1, i32** %a, align 8, !dbg !174
-  %3 = load %struct.List*, %struct.List** %node, align 8, !dbg !175
-  ret %struct.List* %3, !dbg !176
+  call void @llvm.dbg.declare(metadata %struct.List** %node, metadata !161, metadata !DIExpression()), !dbg !162
+  %call = call i8* @SAFEMALLOC(i32 24), !dbg !163
+  %0 = bitcast i8* %call to %struct.List*, !dbg !164
+  store %struct.List* %0, %struct.List** %node, align 8, !dbg !165
+  %call1 = call i8* @SAFEMALLOC(i32 4), !dbg !166
+  %1 = bitcast i8* %call1 to i32*, !dbg !167
+  %2 = load %struct.List*, %struct.List** %node, align 8, !dbg !168
+  %a = getelementptr inbounds %struct.List, %struct.List* %2, i32 0, i32 2, !dbg !169
+  store i32* %1, i32** %a, align 8, !dbg !170
+  %3 = load %struct.List*, %struct.List** %node, align 8, !dbg !171
+  ret %struct.List* %3, !dbg !172
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32 @freeNode(%struct.List* %node) #0 !dbg !177 {
+define dso_local i32 @freeNode(%struct.List* %node) #0 !dbg !173 {
 entry:
   %retval = alloca i32, align 4
   %node.addr = alloca %struct.List*, align 8
   store %struct.List* %node, %struct.List** %node.addr, align 8
-  call void @llvm.dbg.declare(metadata %struct.List** %node.addr, metadata !180, metadata !DIExpression()), !dbg !181
-  %0 = load %struct.List*, %struct.List** %node.addr, align 8, !dbg !182
-  %1 = bitcast %struct.List* %0 to i8*, !dbg !182
-  call void @free(i8* %1) #4, !dbg !183
-  %2 = load %struct.List*, %struct.List** %node.addr, align 8, !dbg !184
-  %a = getelementptr inbounds %struct.List, %struct.List* %2, i32 0, i32 2, !dbg !185
-  %3 = load i32*, i32** %a, align 8, !dbg !185
-  %4 = bitcast i32* %3 to i8*, !dbg !184
-  call void @free(i8* %4) #4, !dbg !186
-  %5 = load i32, i32* %retval, align 4, !dbg !187
-  ret i32 %5, !dbg !187
+  call void @llvm.dbg.declare(metadata %struct.List** %node.addr, metadata !176, metadata !DIExpression()), !dbg !177
+  %0 = load %struct.List*, %struct.List** %node.addr, align 8, !dbg !178
+  %1 = bitcast %struct.List* %0 to i8*, !dbg !178
+  call void @free(i8* %1) #4, !dbg !179
+  %2 = load %struct.List*, %struct.List** %node.addr, align 8, !dbg !180
+  %a = getelementptr inbounds %struct.List, %struct.List* %2, i32 0, i32 2, !dbg !181
+  %3 = load i32*, i32** %a, align 8, !dbg !181
+  %4 = bitcast i32* %3 to i8*, !dbg !180
+  call void @free(i8* %4) #4, !dbg !182
+  %5 = load i32, i32* %retval, align 4, !dbg !183
+  ret i32 %5, !dbg !183
 }
 
 ; Function Attrs: nounwind
 declare dso_local void @free(i8*) #3
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @foo() #0 !dbg !188 {
+define dso_local void @foo() #0 !dbg !184 {
 entry:
   %root = alloca %struct.List*, align 8
   %a = alloca i32, align 4
-  call void @llvm.dbg.declare(metadata %struct.List** %root, metadata !189, metadata !DIExpression()), !dbg !190
-  call void @llvm.dbg.declare(metadata i32* %a, metadata !191, metadata !DIExpression()), !dbg !192
-  store i32 10, i32* %a, align 4, !dbg !192
-  %call = call %struct.List* @newNode(), !dbg !193
-  store %struct.List* %call, %struct.List** %root, align 8, !dbg !194
-  %call1 = call %struct.List* @newNode(), !dbg !195
-  %0 = load %struct.List*, %struct.List** %root, align 8, !dbg !196
-  %next = getelementptr inbounds %struct.List, %struct.List* %0, i32 0, i32 0, !dbg !197
-  store %struct.List* %call1, %struct.List** %next, align 8, !dbg !198
-  %1 = load %struct.List*, %struct.List** %root, align 8, !dbg !199
-  %next2 = getelementptr inbounds %struct.List, %struct.List* %1, i32 0, i32 0, !dbg !200
-  %2 = load %struct.List*, %struct.List** %next2, align 8, !dbg !200
-  %call3 = call i32 @freeNode(%struct.List* %2), !dbg !201
-  %3 = load %struct.List*, %struct.List** %root, align 8, !dbg !202
-  %call4 = call i32 @freeNode(%struct.List* %3), !dbg !203
-  ret void, !dbg !204
+  call void @llvm.dbg.declare(metadata %struct.List** %root, metadata !187, metadata !DIExpression()), !dbg !188
+  call void @llvm.dbg.declare(metadata i32* %a, metadata !189, metadata !DIExpression()), !dbg !190
+  store i32 10, i32* %a, align 4, !dbg !190
+  %call = call %struct.List* @newNode(), !dbg !191
+  store %struct.List* %call, %struct.List** %root, align 8, !dbg !192
+  %call1 = call %struct.List* @newNode(), !dbg !193
+  %0 = load %struct.List*, %struct.List** %root, align 8, !dbg !194
+  %next = getelementptr inbounds %struct.List, %struct.List* %0, i32 0, i32 0, !dbg !195
+  store %struct.List* %call1, %struct.List** %next, align 8, !dbg !196
+  %1 = load %struct.List*, %struct.List** %root, align 8, !dbg !197
+  %next2 = getelementptr inbounds %struct.List, %struct.List* %1, i32 0, i32 0, !dbg !198
+  %2 = load %struct.List*, %struct.List** %next2, align 8, !dbg !198
+  %call3 = call i32 @freeNode(%struct.List* %2), !dbg !199
+  %3 = load %struct.List*, %struct.List** %root, align 8, !dbg !200
+  %call4 = call i32 @freeNode(%struct.List* %3), !dbg !201
+  ret void, !dbg !202
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @buffer_free(%struct.List** %m) #0 !dbg !205 {
+define dso_local void @buffer_free(%struct.List** %m) #0 !dbg !203 {
 entry:
   %m.addr = alloca %struct.List**, align 8
   store %struct.List** %m, %struct.List*** %m.addr, align 8
-  call void @llvm.dbg.declare(metadata %struct.List*** %m.addr, metadata !209, metadata !DIExpression()), !dbg !210
-  %0 = load %struct.List**, %struct.List*** %m.addr, align 8, !dbg !211
-  %1 = load %struct.List*, %struct.List** %0, align 8, !dbg !212
-  %buf = getelementptr inbounds %struct.List, %struct.List* %1, i32 0, i32 1, !dbg !213
-  %2 = load i8*, i8** %buf, align 8, !dbg !213
-  call void @free(i8* %2) #4, !dbg !214
-  %3 = load %struct.List**, %struct.List*** %m.addr, align 8, !dbg !215
-  %4 = load %struct.List*, %struct.List** %3, align 8, !dbg !216
-  %5 = bitcast %struct.List* %4 to i8*, !dbg !216
-  call void @free(i8* %5) #4, !dbg !217
-  ret void, !dbg !218
+  call void @llvm.dbg.declare(metadata %struct.List*** %m.addr, metadata !207, metadata !DIExpression()), !dbg !208
+  %0 = load %struct.List**, %struct.List*** %m.addr, align 8, !dbg !209
+  %1 = load %struct.List*, %struct.List** %0, align 8, !dbg !210
+  %buf = getelementptr inbounds %struct.List, %struct.List* %1, i32 0, i32 1, !dbg !211
+  %2 = load i8*, i8** %buf, align 8, !dbg !211
+  call void @free(i8* %2) #4, !dbg !212
+  %3 = load %struct.List**, %struct.List*** %m.addr, align 8, !dbg !213
+  %4 = load %struct.List*, %struct.List** %3, align 8, !dbg !214
+  %5 = bitcast %struct.List* %4 to i8*, !dbg !214
+  call void @free(i8* %5) #4, !dbg !215
+  ret void, !dbg !216
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @buffer_init(%struct.List** %x) #0 !dbg !219 {
+define dso_local void @buffer_init(%struct.List** %x) #0 !dbg !217 {
 entry:
   %x.addr = alloca %struct.List**, align 8
   store %struct.List** %x, %struct.List*** %x.addr, align 8
-  call void @llvm.dbg.declare(metadata %struct.List*** %x.addr, metadata !220, metadata !DIExpression()), !dbg !221
-  %call = call i8* @SAFEMALLOC(i32 10), !dbg !222
-  %0 = load %struct.List**, %struct.List*** %x.addr, align 8, !dbg !223
-  %1 = load %struct.List*, %struct.List** %0, align 8, !dbg !224
-  %buf = getelementptr inbounds %struct.List, %struct.List* %1, i32 0, i32 1, !dbg !225
-  store i8* %call, i8** %buf, align 8, !dbg !226
-  ret void, !dbg !227
+  call void @llvm.dbg.declare(metadata %struct.List*** %x.addr, metadata !218, metadata !DIExpression()), !dbg !219
+  %call = call i8* @SAFEMALLOC(i32 10), !dbg !220
+  %0 = load %struct.List**, %struct.List*** %x.addr, align 8, !dbg !221
+  %1 = load %struct.List*, %struct.List** %0, align 8, !dbg !222
+  %buf = getelementptr inbounds %struct.List, %struct.List* %1, i32 0, i32 1, !dbg !223
+  store i8* %call, i8** %buf, align 8, !dbg !224
+  ret void, !dbg !225
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @main() #0 !dbg !228 {
+define dso_local void @main() #0 !dbg !226 {
 entry:
   %m = alloca %struct.List*, align 8
-  call void @llvm.dbg.declare(metadata %struct.List** %m, metadata !229, metadata !DIExpression()), !dbg !230
-  %call = call i8* @SAFEMALLOC(i32 24), !dbg !231
-  %0 = bitcast i8* %call to %struct.List*, !dbg !232
-  store %struct.List* %0, %struct.List** %m, align 8, !dbg !233
-  call void @buffer_init(%struct.List** %m), !dbg !234
-  call void @buffer_free(%struct.List** %m), !dbg !235
-  ret void, !dbg !236
+  call void @llvm.dbg.declare(metadata %struct.List** %m, metadata !227, metadata !DIExpression()), !dbg !228
+  %call = call i8* @SAFEMALLOC(i32 24), !dbg !229
+  %0 = bitcast i8* %call to %struct.List*, !dbg !230
+  store %struct.List* %0, %struct.List** %m, align 8, !dbg !231
+  call void @buffer_init(%struct.List** %m), !dbg !232
+  call void @buffer_free(%struct.List** %m), !dbg !233
+  ret void, !dbg !234
 }
 
 attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
@@ -536,82 +530,80 @@ attributes #4 = { nounwind }
 !155 = !DILocation(line: 91, column: 3, scope: !150)
 !156 = !DILocation(line: 92, column: 3, scope: !150)
 !157 = !DILocation(line: 93, column: 1, scope: !150)
-!158 = distinct !DISubprogram(name: "deref", scope: !22, file: !22, line: 111, type: !159, scopeLine: 111, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!158 = distinct !DISubprogram(name: "newNode", scope: !6, file: !6, line: 17, type: !159, scopeLine: 17, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
 !159 = !DISubroutineType(types: !160)
-!160 = !{null}
-!161 = !DILocation(line: 111, column: 20, scope: !158)
-!162 = distinct !DISubprogram(name: "newNode", scope: !6, file: !6, line: 17, type: !163, scopeLine: 17, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!163 = !DISubroutineType(types: !164)
-!164 = !{!4}
-!165 = !DILocalVariable(name: "node", scope: !162, file: !6, line: 18, type: !4)
-!166 = !DILocation(line: 18, column: 16, scope: !162)
-!167 = !DILocation(line: 19, column: 25, scope: !162)
-!168 = !DILocation(line: 19, column: 9, scope: !162)
-!169 = !DILocation(line: 19, column: 7, scope: !162)
-!170 = !DILocation(line: 20, column: 20, scope: !162)
-!171 = !DILocation(line: 20, column: 12, scope: !162)
-!172 = !DILocation(line: 20, column: 2, scope: !162)
-!173 = !DILocation(line: 20, column: 8, scope: !162)
-!174 = !DILocation(line: 20, column: 10, scope: !162)
-!175 = !DILocation(line: 21, column: 9, scope: !162)
-!176 = !DILocation(line: 21, column: 2, scope: !162)
-!177 = distinct !DISubprogram(name: "freeNode", scope: !6, file: !6, line: 24, type: !178, scopeLine: 24, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!178 = !DISubroutineType(types: !179)
-!179 = !{!14, !4}
-!180 = !DILocalVariable(name: "node", arg: 1, scope: !177, file: !6, line: 24, type: !4)
-!181 = !DILocation(line: 24, column: 27, scope: !177)
-!182 = !DILocation(line: 25, column: 7, scope: !177)
-!183 = !DILocation(line: 25, column: 2, scope: !177)
-!184 = !DILocation(line: 26, column: 7, scope: !177)
-!185 = !DILocation(line: 26, column: 13, scope: !177)
-!186 = !DILocation(line: 26, column: 2, scope: !177)
-!187 = !DILocation(line: 27, column: 1, scope: !177)
-!188 = distinct !DISubprogram(name: "foo", scope: !6, file: !6, line: 29, type: !159, scopeLine: 29, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!189 = !DILocalVariable(name: "root", scope: !188, file: !6, line: 30, type: !4)
-!190 = !DILocation(line: 30, column: 15, scope: !188)
-!191 = !DILocalVariable(name: "a", scope: !188, file: !6, line: 31, type: !14)
-!192 = !DILocation(line: 31, column: 6, scope: !188)
-!193 = !DILocation(line: 32, column: 9, scope: !188)
-!194 = !DILocation(line: 32, column: 7, scope: !188)
-!195 = !DILocation(line: 33, column: 15, scope: !188)
-!196 = !DILocation(line: 33, column: 2, scope: !188)
-!197 = !DILocation(line: 33, column: 8, scope: !188)
-!198 = !DILocation(line: 33, column: 13, scope: !188)
-!199 = !DILocation(line: 34, column: 11, scope: !188)
-!200 = !DILocation(line: 34, column: 17, scope: !188)
-!201 = !DILocation(line: 34, column: 2, scope: !188)
-!202 = !DILocation(line: 35, column: 11, scope: !188)
-!203 = !DILocation(line: 35, column: 2, scope: !188)
-!204 = !DILocation(line: 36, column: 1, scope: !188)
-!205 = distinct !DISubprogram(name: "buffer_free", scope: !6, file: !6, line: 38, type: !206, scopeLine: 38, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!206 = !DISubroutineType(types: !207)
-!207 = !{null, !208}
-!208 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !4, size: 64)
-!209 = !DILocalVariable(name: "m", arg: 1, scope: !205, file: !6, line: 38, type: !208)
-!210 = !DILocation(line: 38, column: 32, scope: !205)
-!211 = !DILocation(line: 39, column: 9, scope: !205)
-!212 = !DILocation(line: 39, column: 8, scope: !205)
-!213 = !DILocation(line: 39, column: 13, scope: !205)
-!214 = !DILocation(line: 39, column: 2, scope: !205)
-!215 = !DILocation(line: 40, column: 8, scope: !205)
-!216 = !DILocation(line: 40, column: 7, scope: !205)
-!217 = !DILocation(line: 40, column: 2, scope: !205)
-!218 = !DILocation(line: 41, column: 1, scope: !205)
-!219 = distinct !DISubprogram(name: "buffer_init", scope: !6, file: !6, line: 43, type: !206, scopeLine: 43, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!220 = !DILocalVariable(name: "x", arg: 1, scope: !219, file: !6, line: 43, type: !208)
-!221 = !DILocation(line: 43, column: 32, scope: !219)
-!222 = !DILocation(line: 44, column: 23, scope: !219)
-!223 = !DILocation(line: 44, column: 4, scope: !219)
-!224 = !DILocation(line: 44, column: 3, scope: !219)
-!225 = !DILocation(line: 44, column: 8, scope: !219)
-!226 = !DILocation(line: 44, column: 12, scope: !219)
-!227 = !DILocation(line: 45, column: 1, scope: !219)
-!228 = distinct !DISubprogram(name: "main", scope: !6, file: !6, line: 47, type: !159, scopeLine: 47, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!229 = !DILocalVariable(name: "m", scope: !228, file: !6, line: 48, type: !4)
-!230 = !DILocation(line: 48, column: 15, scope: !228)
-!231 = !DILocation(line: 49, column: 22, scope: !228)
-!232 = !DILocation(line: 49, column: 6, scope: !228)
-!233 = !DILocation(line: 49, column: 4, scope: !228)
-!234 = !DILocation(line: 50, column: 2, scope: !228)
-!235 = !DILocation(line: 51, column: 2, scope: !228)
-!236 = !DILocation(line: 52, column: 1, scope: !228)
+!160 = !{!4}
+!161 = !DILocalVariable(name: "node", scope: !158, file: !6, line: 18, type: !4)
+!162 = !DILocation(line: 18, column: 16, scope: !158)
+!163 = !DILocation(line: 19, column: 25, scope: !158)
+!164 = !DILocation(line: 19, column: 9, scope: !158)
+!165 = !DILocation(line: 19, column: 7, scope: !158)
+!166 = !DILocation(line: 20, column: 20, scope: !158)
+!167 = !DILocation(line: 20, column: 12, scope: !158)
+!168 = !DILocation(line: 20, column: 2, scope: !158)
+!169 = !DILocation(line: 20, column: 8, scope: !158)
+!170 = !DILocation(line: 20, column: 10, scope: !158)
+!171 = !DILocation(line: 21, column: 9, scope: !158)
+!172 = !DILocation(line: 21, column: 2, scope: !158)
+!173 = distinct !DISubprogram(name: "freeNode", scope: !6, file: !6, line: 24, type: !174, scopeLine: 24, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!174 = !DISubroutineType(types: !175)
+!175 = !{!14, !4}
+!176 = !DILocalVariable(name: "node", arg: 1, scope: !173, file: !6, line: 24, type: !4)
+!177 = !DILocation(line: 24, column: 27, scope: !173)
+!178 = !DILocation(line: 25, column: 7, scope: !173)
+!179 = !DILocation(line: 25, column: 2, scope: !173)
+!180 = !DILocation(line: 26, column: 7, scope: !173)
+!181 = !DILocation(line: 26, column: 13, scope: !173)
+!182 = !DILocation(line: 26, column: 2, scope: !173)
+!183 = !DILocation(line: 27, column: 1, scope: !173)
+!184 = distinct !DISubprogram(name: "foo", scope: !6, file: !6, line: 29, type: !185, scopeLine: 29, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!185 = !DISubroutineType(types: !186)
+!186 = !{null}
+!187 = !DILocalVariable(name: "root", scope: !184, file: !6, line: 30, type: !4)
+!188 = !DILocation(line: 30, column: 15, scope: !184)
+!189 = !DILocalVariable(name: "a", scope: !184, file: !6, line: 31, type: !14)
+!190 = !DILocation(line: 31, column: 6, scope: !184)
+!191 = !DILocation(line: 32, column: 9, scope: !184)
+!192 = !DILocation(line: 32, column: 7, scope: !184)
+!193 = !DILocation(line: 33, column: 15, scope: !184)
+!194 = !DILocation(line: 33, column: 2, scope: !184)
+!195 = !DILocation(line: 33, column: 8, scope: !184)
+!196 = !DILocation(line: 33, column: 13, scope: !184)
+!197 = !DILocation(line: 34, column: 11, scope: !184)
+!198 = !DILocation(line: 34, column: 17, scope: !184)
+!199 = !DILocation(line: 34, column: 2, scope: !184)
+!200 = !DILocation(line: 35, column: 11, scope: !184)
+!201 = !DILocation(line: 35, column: 2, scope: !184)
+!202 = !DILocation(line: 36, column: 1, scope: !184)
+!203 = distinct !DISubprogram(name: "buffer_free", scope: !6, file: !6, line: 38, type: !204, scopeLine: 38, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!204 = !DISubroutineType(types: !205)
+!205 = !{null, !206}
+!206 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !4, size: 64)
+!207 = !DILocalVariable(name: "m", arg: 1, scope: !203, file: !6, line: 38, type: !206)
+!208 = !DILocation(line: 38, column: 32, scope: !203)
+!209 = !DILocation(line: 39, column: 9, scope: !203)
+!210 = !DILocation(line: 39, column: 8, scope: !203)
+!211 = !DILocation(line: 39, column: 13, scope: !203)
+!212 = !DILocation(line: 39, column: 2, scope: !203)
+!213 = !DILocation(line: 40, column: 8, scope: !203)
+!214 = !DILocation(line: 40, column: 7, scope: !203)
+!215 = !DILocation(line: 40, column: 2, scope: !203)
+!216 = !DILocation(line: 41, column: 1, scope: !203)
+!217 = distinct !DISubprogram(name: "buffer_init", scope: !6, file: !6, line: 43, type: !204, scopeLine: 43, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!218 = !DILocalVariable(name: "x", arg: 1, scope: !217, file: !6, line: 43, type: !206)
+!219 = !DILocation(line: 43, column: 32, scope: !217)
+!220 = !DILocation(line: 44, column: 23, scope: !217)
+!221 = !DILocation(line: 44, column: 4, scope: !217)
+!222 = !DILocation(line: 44, column: 3, scope: !217)
+!223 = !DILocation(line: 44, column: 8, scope: !217)
+!224 = !DILocation(line: 44, column: 12, scope: !217)
+!225 = !DILocation(line: 45, column: 1, scope: !217)
+!226 = distinct !DISubprogram(name: "main", scope: !6, file: !6, line: 47, type: !185, scopeLine: 47, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!227 = !DILocalVariable(name: "m", scope: !226, file: !6, line: 48, type: !4)
+!228 = !DILocation(line: 48, column: 15, scope: !226)
+!229 = !DILocation(line: 49, column: 22, scope: !226)
+!230 = !DILocation(line: 49, column: 6, scope: !226)
+!231 = !DILocation(line: 49, column: 4, scope: !226)
+!232 = !DILocation(line: 50, column: 2, scope: !226)
+!233 = !DILocation(line: 51, column: 2, scope: !226)
+!234 = !DILocation(line: 52, column: 1, scope: !226)

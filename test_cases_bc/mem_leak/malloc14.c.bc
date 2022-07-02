@@ -255,32 +255,26 @@ entry:
 declare dso_local i32 @getchar() #2
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @deref() #0 !dbg !149 {
-entry:
-  ret void, !dbg !152
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32 @main() #0 !dbg !153 {
+define dso_local i32 @main() #0 !dbg !149 {
 entry:
   %p = alloca i32*, align 8
   %i = alloca i32, align 4
   %q = alloca i32*, align 8
-  call void @llvm.dbg.declare(metadata i32** %p, metadata !157, metadata !DIExpression()), !dbg !159
-  %call = call i8* @NFRMALLOC(i32 1), !dbg !160
-  %0 = bitcast i8* %call to i32*, !dbg !160
-  store i32* %0, i32** %p, align 8, !dbg !159
-  call void @llvm.dbg.declare(metadata i32* %i, metadata !161, metadata !DIExpression()), !dbg !162
-  call void @llvm.dbg.declare(metadata i32** %q, metadata !163, metadata !DIExpression()), !dbg !164
-  %1 = load i32*, i32** %p, align 8, !dbg !165
-  %2 = load i32, i32* %i, align 4, !dbg !166
-  %idx.ext = sext i32 %2 to i64, !dbg !167
-  %add.ptr = getelementptr inbounds i32, i32* %1, i64 %idx.ext, !dbg !167
-  store i32* %add.ptr, i32** %q, align 8, !dbg !168
-  %3 = load i32*, i32** %p, align 8, !dbg !169
-  %4 = load i32*, i32** %q, align 8, !dbg !170
-  %call1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.3, i64 0, i64 0), i32* %3, i32* %4), !dbg !171
-  ret i32 0, !dbg !172
+  call void @llvm.dbg.declare(metadata i32** %p, metadata !153, metadata !DIExpression()), !dbg !155
+  %call = call i8* @NFRMALLOC(i32 1), !dbg !156
+  %0 = bitcast i8* %call to i32*, !dbg !156
+  store i32* %0, i32** %p, align 8, !dbg !155
+  call void @llvm.dbg.declare(metadata i32* %i, metadata !157, metadata !DIExpression()), !dbg !158
+  call void @llvm.dbg.declare(metadata i32** %q, metadata !159, metadata !DIExpression()), !dbg !160
+  %1 = load i32*, i32** %p, align 8, !dbg !161
+  %2 = load i32, i32* %i, align 4, !dbg !162
+  %idx.ext = sext i32 %2 to i64, !dbg !163
+  %add.ptr = getelementptr inbounds i32, i32* %1, i64 %idx.ext, !dbg !163
+  store i32* %add.ptr, i32** %q, align 8, !dbg !164
+  %3 = load i32*, i32** %p, align 8, !dbg !165
+  %4 = load i32*, i32** %q, align 8, !dbg !166
+  %call1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.3, i64 0, i64 0), i32* %3, i32* %4), !dbg !167
+  ret i32 0, !dbg !168
 }
 
 attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
@@ -442,27 +436,23 @@ attributes #4 = { nounwind }
 !146 = !DILocation(line: 91, column: 3, scope: !141)
 !147 = !DILocation(line: 92, column: 3, scope: !141)
 !148 = !DILocation(line: 93, column: 1, scope: !141)
-!149 = distinct !DISubprogram(name: "deref", scope: !10, file: !10, line: 111, type: !150, scopeLine: 111, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!150 = !DISubroutineType(types: !151)
-!151 = !{null}
-!152 = !DILocation(line: 111, column: 20, scope: !149)
-!153 = distinct !DISubprogram(name: "main", scope: !154, file: !154, line: 9, type: !155, scopeLine: 9, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!154 = !DIFile(filename: "src/mem_leak/malloc14.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
-!155 = !DISubroutineType(types: !156)
-!156 = !{!58}
-!157 = !DILocalVariable(name: "p", scope: !153, file: !154, line: 12, type: !158)
-!158 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !58, size: 64)
-!159 = !DILocation(line: 12, column: 7, scope: !153)
-!160 = !DILocation(line: 12, column: 11, scope: !153)
-!161 = !DILocalVariable(name: "i", scope: !153, file: !154, line: 13, type: !58)
-!162 = !DILocation(line: 13, column: 6, scope: !153)
-!163 = !DILocalVariable(name: "q", scope: !153, file: !154, line: 13, type: !158)
-!164 = !DILocation(line: 13, column: 9, scope: !153)
-!165 = !DILocation(line: 14, column: 6, scope: !153)
-!166 = !DILocation(line: 14, column: 10, scope: !153)
-!167 = !DILocation(line: 14, column: 8, scope: !153)
-!168 = !DILocation(line: 14, column: 4, scope: !153)
-!169 = !DILocation(line: 15, column: 16, scope: !153)
-!170 = !DILocation(line: 15, column: 18, scope: !153)
-!171 = !DILocation(line: 15, column: 2, scope: !153)
-!172 = !DILocation(line: 16, column: 1, scope: !153)
+!149 = distinct !DISubprogram(name: "main", scope: !150, file: !150, line: 9, type: !151, scopeLine: 9, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!150 = !DIFile(filename: "src/mem_leak/malloc14.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
+!151 = !DISubroutineType(types: !152)
+!152 = !{!58}
+!153 = !DILocalVariable(name: "p", scope: !149, file: !150, line: 12, type: !154)
+!154 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !58, size: 64)
+!155 = !DILocation(line: 12, column: 7, scope: !149)
+!156 = !DILocation(line: 12, column: 11, scope: !149)
+!157 = !DILocalVariable(name: "i", scope: !149, file: !150, line: 13, type: !58)
+!158 = !DILocation(line: 13, column: 6, scope: !149)
+!159 = !DILocalVariable(name: "q", scope: !149, file: !150, line: 13, type: !154)
+!160 = !DILocation(line: 13, column: 9, scope: !149)
+!161 = !DILocation(line: 14, column: 6, scope: !149)
+!162 = !DILocation(line: 14, column: 10, scope: !149)
+!163 = !DILocation(line: 14, column: 8, scope: !149)
+!164 = !DILocation(line: 14, column: 4, scope: !149)
+!165 = !DILocation(line: 15, column: 16, scope: !149)
+!166 = !DILocation(line: 15, column: 18, scope: !149)
+!167 = !DILocation(line: 15, column: 2, scope: !149)
+!168 = !DILocation(line: 16, column: 1, scope: !149)

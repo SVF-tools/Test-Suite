@@ -255,33 +255,27 @@ entry:
 declare dso_local i32 @getchar() #2
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @deref() #0 !dbg !149 {
-entry:
-  ret void, !dbg !152
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32* @readcolor() #0 !dbg !153 {
+define dso_local i32* @readcolor() #0 !dbg !149 {
 entry:
   %image = alloca i32*, align 8
-  call void @llvm.dbg.declare(metadata i32** %image, metadata !158, metadata !DIExpression()), !dbg !159
-  %call = call i8* @NFRMALLOC(i32 100), !dbg !160
-  %0 = bitcast i8* %call to i32*, !dbg !160
-  store i32* %0, i32** %image, align 8, !dbg !159
-  %1 = load i32*, i32** %image, align 8, !dbg !161
-  ret i32* %1, !dbg !162
+  call void @llvm.dbg.declare(metadata i32** %image, metadata !154, metadata !DIExpression()), !dbg !155
+  %call = call i8* @NFRMALLOC(i32 100), !dbg !156
+  %0 = bitcast i8* %call to i32*, !dbg !156
+  store i32* %0, i32** %image, align 8, !dbg !155
+  %1 = load i32*, i32** %image, align 8, !dbg !157
+  ret i32* %1, !dbg !158
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32 @main() #0 !dbg !163 {
+define dso_local i32 @main() #0 !dbg !159 {
 entry:
   %image1 = alloca i32*, align 8
-  call void @llvm.dbg.declare(metadata i32** %image1, metadata !166, metadata !DIExpression()), !dbg !167
-  %call = call i32* @readcolor(), !dbg !168
-  store i32* %call, i32** %image1, align 8, !dbg !167
-  %0 = load i32*, i32** %image1, align 8, !dbg !169
-  %call1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.3, i64 0, i64 0), i32* %0), !dbg !170
-  ret i32 0, !dbg !171
+  call void @llvm.dbg.declare(metadata i32** %image1, metadata !162, metadata !DIExpression()), !dbg !163
+  %call = call i32* @readcolor(), !dbg !164
+  store i32* %call, i32** %image1, align 8, !dbg !163
+  %0 = load i32*, i32** %image1, align 8, !dbg !165
+  %call1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.3, i64 0, i64 0), i32* %0), !dbg !166
+  ret i32 0, !dbg !167
 }
 
 attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
@@ -443,26 +437,22 @@ attributes #4 = { nounwind }
 !146 = !DILocation(line: 91, column: 3, scope: !141)
 !147 = !DILocation(line: 92, column: 3, scope: !141)
 !148 = !DILocation(line: 93, column: 1, scope: !141)
-!149 = distinct !DISubprogram(name: "deref", scope: !10, file: !10, line: 111, type: !150, scopeLine: 111, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!150 = !DISubroutineType(types: !151)
-!151 = !{null}
-!152 = !DILocation(line: 111, column: 20, scope: !149)
-!153 = distinct !DISubprogram(name: "readcolor", scope: !154, file: !154, line: 12, type: !155, scopeLine: 12, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!154 = !DIFile(filename: "src/mem_leak/malloc35.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
-!155 = !DISubroutineType(types: !156)
-!156 = !{!157}
-!157 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !58, size: 64)
-!158 = !DILocalVariable(name: "image", scope: !153, file: !154, line: 14, type: !157)
-!159 = !DILocation(line: 14, column: 6, scope: !153)
-!160 = !DILocation(line: 14, column: 14, scope: !153)
-!161 = !DILocation(line: 16, column: 9, scope: !153)
-!162 = !DILocation(line: 16, column: 2, scope: !153)
-!163 = distinct !DISubprogram(name: "main", scope: !154, file: !154, line: 21, type: !164, scopeLine: 21, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!164 = !DISubroutineType(types: !165)
-!165 = !{!58}
-!166 = !DILocalVariable(name: "image1", scope: !163, file: !154, line: 23, type: !157)
-!167 = !DILocation(line: 23, column: 7, scope: !163)
-!168 = !DILocation(line: 23, column: 16, scope: !163)
-!169 = !DILocation(line: 26, column: 14, scope: !163)
-!170 = !DILocation(line: 26, column: 2, scope: !163)
-!171 = !DILocation(line: 28, column: 1, scope: !163)
+!149 = distinct !DISubprogram(name: "readcolor", scope: !150, file: !150, line: 12, type: !151, scopeLine: 12, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!150 = !DIFile(filename: "src/mem_leak/malloc35.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
+!151 = !DISubroutineType(types: !152)
+!152 = !{!153}
+!153 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !58, size: 64)
+!154 = !DILocalVariable(name: "image", scope: !149, file: !150, line: 14, type: !153)
+!155 = !DILocation(line: 14, column: 6, scope: !149)
+!156 = !DILocation(line: 14, column: 14, scope: !149)
+!157 = !DILocation(line: 16, column: 9, scope: !149)
+!158 = !DILocation(line: 16, column: 2, scope: !149)
+!159 = distinct !DISubprogram(name: "main", scope: !150, file: !150, line: 21, type: !160, scopeLine: 21, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!160 = !DISubroutineType(types: !161)
+!161 = !{!58}
+!162 = !DILocalVariable(name: "image1", scope: !159, file: !150, line: 23, type: !153)
+!163 = !DILocation(line: 23, column: 7, scope: !159)
+!164 = !DILocation(line: 23, column: 16, scope: !159)
+!165 = !DILocation(line: 26, column: 14, scope: !159)
+!166 = !DILocation(line: 26, column: 2, scope: !159)
+!167 = !DILocation(line: 28, column: 1, scope: !159)

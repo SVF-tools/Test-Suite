@@ -255,93 +255,87 @@ entry:
 declare dso_local i32 @getchar() #2
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @deref() #0 !dbg !149 {
-entry:
-  ret void, !dbg !152
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i8** @readBuf() #0 !dbg !153 {
+define dso_local i8** @readBuf() #0 !dbg !149 {
 entry:
   %mBuf = alloca i8**, align 8
-  call void @llvm.dbg.declare(metadata i8*** %mBuf, metadata !158, metadata !DIExpression()), !dbg !159
-  %call = call i8* @SAFEMALLOC(i32 10), !dbg !160
-  %0 = bitcast i8* %call to i8**, !dbg !160
-  store i8** %0, i8*** %mBuf, align 8, !dbg !159
-  %call1 = call i8* @NFRMALLOC(i32 10), !dbg !161
-  %1 = load i8**, i8*** %mBuf, align 8, !dbg !162
-  store i8* %call1, i8** %1, align 8, !dbg !163
-  %2 = load i8**, i8*** %mBuf, align 8, !dbg !164
-  ret i8** %2, !dbg !165
+  call void @llvm.dbg.declare(metadata i8*** %mBuf, metadata !154, metadata !DIExpression()), !dbg !155
+  %call = call i8* @SAFEMALLOC(i32 10), !dbg !156
+  %0 = bitcast i8* %call to i8**, !dbg !156
+  store i8** %0, i8*** %mBuf, align 8, !dbg !155
+  %call1 = call i8* @NFRMALLOC(i32 10), !dbg !157
+  %1 = load i8**, i8*** %mBuf, align 8, !dbg !158
+  store i8* %call1, i8** %1, align 8, !dbg !159
+  %2 = load i8**, i8*** %mBuf, align 8, !dbg !160
+  ret i8** %2, !dbg !161
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @freeBuf(i8** %fBuf) #0 !dbg !166 {
+define dso_local void @freeBuf(i8** %fBuf) #0 !dbg !162 {
 entry:
   %fBuf.addr = alloca i8**, align 8
   store i8** %fBuf, i8*** %fBuf.addr, align 8
-  call void @llvm.dbg.declare(metadata i8*** %fBuf.addr, metadata !169, metadata !DIExpression()), !dbg !170
-  %0 = load i8**, i8*** %fBuf.addr, align 8, !dbg !171
-  %1 = bitcast i8** %0 to i8*, !dbg !171
-  call void @free(i8* %1) #4, !dbg !172
-  ret void, !dbg !173
+  call void @llvm.dbg.declare(metadata i8*** %fBuf.addr, metadata !165, metadata !DIExpression()), !dbg !166
+  %0 = load i8**, i8*** %fBuf.addr, align 8, !dbg !167
+  %1 = bitcast i8** %0 to i8*, !dbg !167
+  call void @free(i8* %1) #4, !dbg !168
+  ret void, !dbg !169
 }
 
 ; Function Attrs: nounwind
 declare dso_local void @free(i8*) #3
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @SerialReadBuf() #0 !dbg !174 {
+define dso_local void @SerialReadBuf() #0 !dbg !170 {
 entry:
   %n = alloca i32, align 4
   %buf = alloca i8**, align 8
-  call void @llvm.dbg.declare(metadata i32* %n, metadata !175, metadata !DIExpression()), !dbg !176
-  store i32 0, i32* %n, align 4, !dbg !177
-  br label %for.cond, !dbg !179
+  call void @llvm.dbg.declare(metadata i32* %n, metadata !173, metadata !DIExpression()), !dbg !174
+  store i32 0, i32* %n, align 4, !dbg !175
+  br label %for.cond, !dbg !177
 
 for.cond:                                         ; preds = %for.inc, %entry
-  %0 = load i32, i32* %n, align 4, !dbg !180
-  %cmp = icmp slt i32 %0, 100, !dbg !182
-  br i1 %cmp, label %for.body, label %for.end, !dbg !183
+  %0 = load i32, i32* %n, align 4, !dbg !178
+  %cmp = icmp slt i32 %0, 100, !dbg !180
+  br i1 %cmp, label %for.body, label %for.end, !dbg !181
 
 for.body:                                         ; preds = %for.cond
-  call void @llvm.dbg.declare(metadata i8*** %buf, metadata !184, metadata !DIExpression()), !dbg !186
-  %call = call i8** @readBuf(), !dbg !187
-  store i8** %call, i8*** %buf, align 8, !dbg !186
-  %1 = load i8**, i8*** %buf, align 8, !dbg !188
-  %2 = load i8*, i8** %1, align 8, !dbg !190
-  %cmp1 = icmp ne i8* %2, inttoptr (i64 10 to i8*), !dbg !191
-  br i1 %cmp1, label %if.then, label %if.else, !dbg !192
+  call void @llvm.dbg.declare(metadata i8*** %buf, metadata !182, metadata !DIExpression()), !dbg !184
+  %call = call i8** @readBuf(), !dbg !185
+  store i8** %call, i8*** %buf, align 8, !dbg !184
+  %1 = load i8**, i8*** %buf, align 8, !dbg !186
+  %2 = load i8*, i8** %1, align 8, !dbg !188
+  %cmp1 = icmp ne i8* %2, inttoptr (i64 10 to i8*), !dbg !189
+  br i1 %cmp1, label %if.then, label %if.else, !dbg !190
 
 if.then:                                          ; preds = %for.body
-  %3 = load i8**, i8*** %buf, align 8, !dbg !193
-  %4 = load i8*, i8** %3, align 8, !dbg !195
-  %call2 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.3, i64 0, i64 0), i8* %4), !dbg !196
-  br label %if.end, !dbg !197
+  %3 = load i8**, i8*** %buf, align 8, !dbg !191
+  %4 = load i8*, i8** %3, align 8, !dbg !193
+  %call2 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.3, i64 0, i64 0), i8* %4), !dbg !194
+  br label %if.end, !dbg !195
 
 if.else:                                          ; preds = %for.body
   br label %if.end
 
 if.end:                                           ; preds = %if.else, %if.then
-  %5 = load i8**, i8*** %buf, align 8, !dbg !198
-  call void @freeBuf(i8** %5), !dbg !199
-  br label %for.inc, !dbg !200
+  %5 = load i8**, i8*** %buf, align 8, !dbg !196
+  call void @freeBuf(i8** %5), !dbg !197
+  br label %for.inc, !dbg !198
 
 for.inc:                                          ; preds = %if.end
-  %6 = load i32, i32* %n, align 4, !dbg !201
-  %inc = add nsw i32 %6, 1, !dbg !201
-  store i32 %inc, i32* %n, align 4, !dbg !201
-  br label %for.cond, !dbg !202, !llvm.loop !203
+  %6 = load i32, i32* %n, align 4, !dbg !199
+  %inc = add nsw i32 %6, 1, !dbg !199
+  store i32 %inc, i32* %n, align 4, !dbg !199
+  br label %for.cond, !dbg !200, !llvm.loop !201
 
 for.end:                                          ; preds = %for.cond
-  ret void, !dbg !206
+  ret void, !dbg !204
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32 @main() #0 !dbg !207 {
+define dso_local i32 @main() #0 !dbg !205 {
 entry:
-  call void @SerialReadBuf(), !dbg !210
-  ret i32 0, !dbg !211
+  call void @SerialReadBuf(), !dbg !208
+  ret i32 0, !dbg !209
 }
 
 attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
@@ -503,66 +497,64 @@ attributes #4 = { nounwind }
 !146 = !DILocation(line: 91, column: 3, scope: !141)
 !147 = !DILocation(line: 92, column: 3, scope: !141)
 !148 = !DILocation(line: 93, column: 1, scope: !141)
-!149 = distinct !DISubprogram(name: "deref", scope: !10, file: !10, line: 111, type: !150, scopeLine: 111, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!150 = !DISubroutineType(types: !151)
-!151 = !{null}
-!152 = !DILocation(line: 111, column: 20, scope: !149)
-!153 = distinct !DISubprogram(name: "readBuf", scope: !154, file: !154, line: 10, type: !155, scopeLine: 10, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!154 = !DIFile(filename: "src/mem_leak/malloc45.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
-!155 = !DISubroutineType(types: !156)
-!156 = !{!157}
-!157 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !112, size: 64)
-!158 = !DILocalVariable(name: "mBuf", scope: !153, file: !154, line: 12, type: !157)
-!159 = !DILocation(line: 12, column: 10, scope: !153)
-!160 = !DILocation(line: 12, column: 17, scope: !153)
-!161 = !DILocation(line: 13, column: 10, scope: !153)
-!162 = !DILocation(line: 13, column: 3, scope: !153)
-!163 = !DILocation(line: 13, column: 8, scope: !153)
-!164 = !DILocation(line: 14, column: 9, scope: !153)
-!165 = !DILocation(line: 14, column: 2, scope: !153)
-!166 = distinct !DISubprogram(name: "freeBuf", scope: !154, file: !154, line: 18, type: !167, scopeLine: 18, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!167 = !DISubroutineType(types: !168)
-!168 = !{null, !157}
-!169 = !DILocalVariable(name: "fBuf", arg: 1, scope: !166, file: !154, line: 18, type: !157)
-!170 = !DILocation(line: 18, column: 21, scope: !166)
-!171 = !DILocation(line: 21, column: 7, scope: !166)
-!172 = !DILocation(line: 21, column: 2, scope: !166)
-!173 = !DILocation(line: 22, column: 1, scope: !166)
-!174 = distinct !DISubprogram(name: "SerialReadBuf", scope: !154, file: !154, line: 24, type: !150, scopeLine: 24, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!175 = !DILocalVariable(name: "n", scope: !174, file: !154, line: 25, type: !58)
-!176 = !DILocation(line: 25, column: 6, scope: !174)
-!177 = !DILocation(line: 26, column: 8, scope: !178)
-!178 = distinct !DILexicalBlock(scope: !174, file: !154, line: 26, column: 2)
-!179 = !DILocation(line: 26, column: 6, scope: !178)
-!180 = !DILocation(line: 26, column: 13, scope: !181)
-!181 = distinct !DILexicalBlock(scope: !178, file: !154, line: 26, column: 2)
-!182 = !DILocation(line: 26, column: 15, scope: !181)
-!183 = !DILocation(line: 26, column: 2, scope: !178)
-!184 = !DILocalVariable(name: "buf", scope: !185, file: !154, line: 28, type: !157)
-!185 = distinct !DILexicalBlock(scope: !181, file: !154, line: 26, column: 26)
-!186 = !DILocation(line: 28, column: 10, scope: !185)
-!187 = !DILocation(line: 28, column: 16, scope: !185)
-!188 = !DILocation(line: 29, column: 7, scope: !189)
-!189 = distinct !DILexicalBlock(scope: !185, file: !154, line: 29, column: 6)
-!190 = !DILocation(line: 29, column: 6, scope: !189)
-!191 = !DILocation(line: 29, column: 10, scope: !189)
-!192 = !DILocation(line: 29, column: 6, scope: !185)
-!193 = !DILocation(line: 30, column: 17, scope: !194)
-!194 = distinct !DILexicalBlock(scope: !189, file: !154, line: 29, column: 17)
-!195 = !DILocation(line: 30, column: 16, scope: !194)
-!196 = !DILocation(line: 30, column: 4, scope: !194)
-!197 = !DILocation(line: 31, column: 3, scope: !194)
-!198 = !DILocation(line: 37, column: 11, scope: !185)
-!199 = !DILocation(line: 37, column: 3, scope: !185)
-!200 = !DILocation(line: 38, column: 2, scope: !185)
-!201 = !DILocation(line: 26, column: 23, scope: !181)
-!202 = !DILocation(line: 26, column: 2, scope: !181)
-!203 = distinct !{!203, !183, !204, !205}
-!204 = !DILocation(line: 38, column: 2, scope: !178)
-!205 = !{!"llvm.loop.mustprogress"}
-!206 = !DILocation(line: 39, column: 1, scope: !174)
-!207 = distinct !DISubprogram(name: "main", scope: !154, file: !154, line: 41, type: !208, scopeLine: 41, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!208 = !DISubroutineType(types: !209)
-!209 = !{!58}
-!210 = !DILocation(line: 43, column: 2, scope: !207)
-!211 = !DILocation(line: 44, column: 1, scope: !207)
+!149 = distinct !DISubprogram(name: "readBuf", scope: !150, file: !150, line: 10, type: !151, scopeLine: 10, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!150 = !DIFile(filename: "src/mem_leak/malloc45.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
+!151 = !DISubroutineType(types: !152)
+!152 = !{!153}
+!153 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !112, size: 64)
+!154 = !DILocalVariable(name: "mBuf", scope: !149, file: !150, line: 12, type: !153)
+!155 = !DILocation(line: 12, column: 10, scope: !149)
+!156 = !DILocation(line: 12, column: 17, scope: !149)
+!157 = !DILocation(line: 13, column: 10, scope: !149)
+!158 = !DILocation(line: 13, column: 3, scope: !149)
+!159 = !DILocation(line: 13, column: 8, scope: !149)
+!160 = !DILocation(line: 14, column: 9, scope: !149)
+!161 = !DILocation(line: 14, column: 2, scope: !149)
+!162 = distinct !DISubprogram(name: "freeBuf", scope: !150, file: !150, line: 18, type: !163, scopeLine: 18, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!163 = !DISubroutineType(types: !164)
+!164 = !{null, !153}
+!165 = !DILocalVariable(name: "fBuf", arg: 1, scope: !162, file: !150, line: 18, type: !153)
+!166 = !DILocation(line: 18, column: 21, scope: !162)
+!167 = !DILocation(line: 21, column: 7, scope: !162)
+!168 = !DILocation(line: 21, column: 2, scope: !162)
+!169 = !DILocation(line: 22, column: 1, scope: !162)
+!170 = distinct !DISubprogram(name: "SerialReadBuf", scope: !150, file: !150, line: 24, type: !171, scopeLine: 24, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!171 = !DISubroutineType(types: !172)
+!172 = !{null}
+!173 = !DILocalVariable(name: "n", scope: !170, file: !150, line: 25, type: !58)
+!174 = !DILocation(line: 25, column: 6, scope: !170)
+!175 = !DILocation(line: 26, column: 8, scope: !176)
+!176 = distinct !DILexicalBlock(scope: !170, file: !150, line: 26, column: 2)
+!177 = !DILocation(line: 26, column: 6, scope: !176)
+!178 = !DILocation(line: 26, column: 13, scope: !179)
+!179 = distinct !DILexicalBlock(scope: !176, file: !150, line: 26, column: 2)
+!180 = !DILocation(line: 26, column: 15, scope: !179)
+!181 = !DILocation(line: 26, column: 2, scope: !176)
+!182 = !DILocalVariable(name: "buf", scope: !183, file: !150, line: 28, type: !153)
+!183 = distinct !DILexicalBlock(scope: !179, file: !150, line: 26, column: 26)
+!184 = !DILocation(line: 28, column: 10, scope: !183)
+!185 = !DILocation(line: 28, column: 16, scope: !183)
+!186 = !DILocation(line: 29, column: 7, scope: !187)
+!187 = distinct !DILexicalBlock(scope: !183, file: !150, line: 29, column: 6)
+!188 = !DILocation(line: 29, column: 6, scope: !187)
+!189 = !DILocation(line: 29, column: 10, scope: !187)
+!190 = !DILocation(line: 29, column: 6, scope: !183)
+!191 = !DILocation(line: 30, column: 17, scope: !192)
+!192 = distinct !DILexicalBlock(scope: !187, file: !150, line: 29, column: 17)
+!193 = !DILocation(line: 30, column: 16, scope: !192)
+!194 = !DILocation(line: 30, column: 4, scope: !192)
+!195 = !DILocation(line: 31, column: 3, scope: !192)
+!196 = !DILocation(line: 37, column: 11, scope: !183)
+!197 = !DILocation(line: 37, column: 3, scope: !183)
+!198 = !DILocation(line: 38, column: 2, scope: !183)
+!199 = !DILocation(line: 26, column: 23, scope: !179)
+!200 = !DILocation(line: 26, column: 2, scope: !179)
+!201 = distinct !{!201, !181, !202, !203}
+!202 = !DILocation(line: 38, column: 2, scope: !176)
+!203 = !{!"llvm.loop.mustprogress"}
+!204 = !DILocation(line: 39, column: 1, scope: !170)
+!205 = distinct !DISubprogram(name: "main", scope: !150, file: !150, line: 41, type: !206, scopeLine: 41, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!206 = !DISubroutineType(types: !207)
+!207 = !{!58}
+!208 = !DILocation(line: 43, column: 2, scope: !205)
+!209 = !DILocation(line: 44, column: 1, scope: !205)

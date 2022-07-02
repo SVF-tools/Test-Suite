@@ -223,12 +223,6 @@ entry:
 declare dso_local i32 @getchar() #1
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @deref() #0 {
-entry:
-  ret void
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
 define dso_local void @malloc_list(%struct.Node* %p, i32 %num) #0 {
 entry:
   %p.addr = alloca %struct.Node*, align 8

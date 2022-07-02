@@ -255,50 +255,44 @@ entry:
 declare dso_local i32 @getchar() #2
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @deref() #0 !dbg !151 {
-entry:
-  ret void, !dbg !154
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i8* @my_malloc(i32 %size) #0 !dbg !155 {
+define dso_local i8* @my_malloc(i32 %size) #0 !dbg !151 {
 entry:
   %size.addr = alloca i32, align 4
   %ret = alloca i8*, align 8
   store i32 %size, i32* %size.addr, align 4
-  call void @llvm.dbg.declare(metadata i32* %size.addr, metadata !157, metadata !DIExpression()), !dbg !158
-  call void @llvm.dbg.declare(metadata i8** %ret, metadata !159, metadata !DIExpression()), !dbg !160
-  %0 = load i32, i32* %size.addr, align 4, !dbg !161
-  %call = call i8* @SAFEMALLOC(i32 %0), !dbg !163
-  store i8* %call, i8** %ret, align 8, !dbg !164
-  %cmp = icmp eq i8* %call, null, !dbg !165
-  br i1 %cmp, label %if.then, label %if.end, !dbg !166
+  call void @llvm.dbg.declare(metadata i32* %size.addr, metadata !153, metadata !DIExpression()), !dbg !154
+  call void @llvm.dbg.declare(metadata i8** %ret, metadata !155, metadata !DIExpression()), !dbg !156
+  %0 = load i32, i32* %size.addr, align 4, !dbg !157
+  %call = call i8* @SAFEMALLOC(i32 %0), !dbg !159
+  store i8* %call, i8** %ret, align 8, !dbg !160
+  %cmp = icmp eq i8* %call, null, !dbg !161
+  br i1 %cmp, label %if.then, label %if.end, !dbg !162
 
 if.then:                                          ; preds = %entry
-  %call1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([45 x i8], [45 x i8]* @.str.3, i64 0, i64 0)), !dbg !167
-  call void @exit(i32 1) #6, !dbg !169
-  unreachable, !dbg !169
+  %call1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([45 x i8], [45 x i8]* @.str.3, i64 0, i64 0)), !dbg !163
+  call void @exit(i32 1) #6, !dbg !165
+  unreachable, !dbg !165
 
 if.end:                                           ; preds = %entry
-  %1 = load i8*, i8** %ret, align 8, !dbg !170
-  ret i8* %1, !dbg !171
+  %1 = load i8*, i8** %ret, align 8, !dbg !166
+  ret i8* %1, !dbg !167
 }
 
 ; Function Attrs: noreturn nounwind
 declare dso_local void @exit(i32) #4
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32 @main() #0 !dbg !172 {
+define dso_local i32 @main() #0 !dbg !168 {
 entry:
   %side_ordering = alloca i32*, align 8
-  call void @llvm.dbg.declare(metadata i32** %side_ordering, metadata !175, metadata !DIExpression()), !dbg !176
-  %call = call i8* @my_malloc(i32 40), !dbg !177
-  %0 = bitcast i8* %call to i32*, !dbg !178
-  store i32* %0, i32** %side_ordering, align 8, !dbg !176
-  %1 = load i32*, i32** %side_ordering, align 8, !dbg !179
-  %2 = bitcast i32* %1 to i8*, !dbg !179
-  call void @free(i8* %2) #5, !dbg !180
-  ret i32 0, !dbg !181
+  call void @llvm.dbg.declare(metadata i32** %side_ordering, metadata !171, metadata !DIExpression()), !dbg !172
+  %call = call i8* @my_malloc(i32 40), !dbg !173
+  %0 = bitcast i8* %call to i32*, !dbg !174
+  store i32* %0, i32** %side_ordering, align 8, !dbg !172
+  %1 = load i32*, i32** %side_ordering, align 8, !dbg !175
+  %2 = bitcast i32* %1 to i8*, !dbg !175
+  call void @free(i8* %2) #5, !dbg !176
+  ret i32 0, !dbg !177
 }
 
 ; Function Attrs: nounwind
@@ -467,34 +461,30 @@ attributes #6 = { noreturn nounwind }
 !148 = !DILocation(line: 91, column: 3, scope: !143)
 !149 = !DILocation(line: 92, column: 3, scope: !143)
 !150 = !DILocation(line: 93, column: 1, scope: !143)
-!151 = distinct !DISubprogram(name: "deref", scope: !13, file: !13, line: 111, type: !152, scopeLine: 111, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!152 = !DISubroutineType(types: !153)
-!153 = !{null}
-!154 = !DILocation(line: 111, column: 20, scope: !151)
-!155 = distinct !DISubprogram(name: "my_malloc", scope: !156, file: !156, line: 11, type: !59, scopeLine: 11, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!156 = !DIFile(filename: "src/mem_leak/malloc8.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
-!157 = !DILocalVariable(name: "size", arg: 1, scope: !155, file: !156, line: 11, type: !5)
-!158 = !DILocation(line: 11, column: 22, scope: !155)
-!159 = !DILocalVariable(name: "ret", scope: !155, file: !156, line: 13, type: !16)
-!160 = !DILocation(line: 13, column: 9, scope: !155)
-!161 = !DILocation(line: 15, column: 27, scope: !162)
-!162 = distinct !DILexicalBlock(scope: !155, file: !156, line: 15, column: 8)
-!163 = !DILocation(line: 15, column: 15, scope: !162)
-!164 = !DILocation(line: 15, column: 13, scope: !162)
-!165 = !DILocation(line: 15, column: 34, scope: !162)
-!166 = !DILocation(line: 15, column: 8, scope: !155)
-!167 = !DILocation(line: 16, column: 9, scope: !168)
-!168 = distinct !DILexicalBlock(scope: !162, file: !156, line: 15, column: 40)
-!169 = !DILocation(line: 17, column: 10, scope: !168)
-!170 = !DILocation(line: 19, column: 13, scope: !155)
-!171 = !DILocation(line: 19, column: 5, scope: !155)
-!172 = distinct !DISubprogram(name: "main", scope: !156, file: !156, line: 22, type: !173, scopeLine: 22, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!173 = !DISubroutineType(types: !174)
-!174 = !{!5}
-!175 = !DILocalVariable(name: "side_ordering", scope: !172, file: !156, line: 25, type: !4)
-!176 = !DILocation(line: 25, column: 8, scope: !172)
-!177 = !DILocation(line: 25, column: 32, scope: !172)
-!178 = !DILocation(line: 25, column: 24, scope: !172)
-!179 = !DILocation(line: 27, column: 7, scope: !172)
-!180 = !DILocation(line: 27, column: 2, scope: !172)
-!181 = !DILocation(line: 28, column: 1, scope: !172)
+!151 = distinct !DISubprogram(name: "my_malloc", scope: !152, file: !152, line: 11, type: !59, scopeLine: 11, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!152 = !DIFile(filename: "src/mem_leak/malloc8.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
+!153 = !DILocalVariable(name: "size", arg: 1, scope: !151, file: !152, line: 11, type: !5)
+!154 = !DILocation(line: 11, column: 22, scope: !151)
+!155 = !DILocalVariable(name: "ret", scope: !151, file: !152, line: 13, type: !16)
+!156 = !DILocation(line: 13, column: 9, scope: !151)
+!157 = !DILocation(line: 15, column: 27, scope: !158)
+!158 = distinct !DILexicalBlock(scope: !151, file: !152, line: 15, column: 8)
+!159 = !DILocation(line: 15, column: 15, scope: !158)
+!160 = !DILocation(line: 15, column: 13, scope: !158)
+!161 = !DILocation(line: 15, column: 34, scope: !158)
+!162 = !DILocation(line: 15, column: 8, scope: !151)
+!163 = !DILocation(line: 16, column: 9, scope: !164)
+!164 = distinct !DILexicalBlock(scope: !158, file: !152, line: 15, column: 40)
+!165 = !DILocation(line: 17, column: 10, scope: !164)
+!166 = !DILocation(line: 19, column: 13, scope: !151)
+!167 = !DILocation(line: 19, column: 5, scope: !151)
+!168 = distinct !DISubprogram(name: "main", scope: !152, file: !152, line: 22, type: !169, scopeLine: 22, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!169 = !DISubroutineType(types: !170)
+!170 = !{!5}
+!171 = !DILocalVariable(name: "side_ordering", scope: !168, file: !152, line: 25, type: !4)
+!172 = !DILocation(line: 25, column: 8, scope: !168)
+!173 = !DILocation(line: 25, column: 32, scope: !168)
+!174 = !DILocation(line: 25, column: 24, scope: !168)
+!175 = !DILocation(line: 27, column: 7, scope: !168)
+!176 = !DILocation(line: 27, column: 2, scope: !168)
+!177 = !DILocation(line: 28, column: 1, scope: !168)

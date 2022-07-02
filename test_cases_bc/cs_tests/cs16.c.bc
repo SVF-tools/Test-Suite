@@ -221,12 +221,6 @@ entry:
 declare dso_local i32 @getchar() #1
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @deref() #0 {
-entry:
-  ret void
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
 define dso_local i32* @alloc(i32 %size) #0 {
 entry:
   %size.addr = alloca i32, align 4

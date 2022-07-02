@@ -254,67 +254,61 @@ entry:
 declare dso_local i32 @getchar() #2
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @deref() #0 !dbg !149 {
-entry:
-  ret void, !dbg !152
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @tmp() #0 !dbg !153 {
+define dso_local void @tmp() #0 !dbg !149 {
 entry:
   %p = alloca i32*, align 8
   %j = alloca i32, align 4
-  call void @llvm.dbg.declare(metadata i32** %p, metadata !155, metadata !DIExpression()), !dbg !157
-  %call = call i8* @PLKMALLOC(i32 1), !dbg !158
-  %0 = bitcast i8* %call to i32*, !dbg !158
-  store i32* %0, i32** %p, align 8, !dbg !157
-  call void @llvm.dbg.declare(metadata i32* %j, metadata !159, metadata !DIExpression()), !dbg !160
-  store i32 0, i32* %j, align 4, !dbg !161
-  br label %for.cond, !dbg !163
+  call void @llvm.dbg.declare(metadata i32** %p, metadata !153, metadata !DIExpression()), !dbg !155
+  %call = call i8* @PLKMALLOC(i32 1), !dbg !156
+  %0 = bitcast i8* %call to i32*, !dbg !156
+  store i32* %0, i32** %p, align 8, !dbg !155
+  call void @llvm.dbg.declare(metadata i32* %j, metadata !157, metadata !DIExpression()), !dbg !158
+  store i32 0, i32* %j, align 4, !dbg !159
+  br label %for.cond, !dbg !161
 
 for.cond:                                         ; preds = %for.inc, %entry
-  %1 = load i32, i32* %j, align 4, !dbg !164
-  %cmp = icmp slt i32 %1, 10, !dbg !166
-  br i1 %cmp, label %for.body, label %for.end, !dbg !167
+  %1 = load i32, i32* %j, align 4, !dbg !162
+  %cmp = icmp slt i32 %1, 10, !dbg !164
+  br i1 %cmp, label %for.body, label %for.end, !dbg !165
 
 for.body:                                         ; preds = %for.cond
-  %2 = load i32, i32* %j, align 4, !dbg !168
-  %cmp1 = icmp sgt i32 %2, 2, !dbg !171
-  br i1 %cmp1, label %if.then, label %if.else, !dbg !172
+  %2 = load i32, i32* %j, align 4, !dbg !166
+  %cmp1 = icmp sgt i32 %2, 2, !dbg !169
+  br i1 %cmp1, label %if.then, label %if.else, !dbg !170
 
 if.then:                                          ; preds = %for.body
-  br label %if.end, !dbg !173
+  br label %if.end, !dbg !171
 
 if.else:                                          ; preds = %for.body
-  br label %return, !dbg !175
+  br label %return, !dbg !173
 
 if.end:                                           ; preds = %if.then
-  br label %for.inc, !dbg !176
+  br label %for.inc, !dbg !174
 
 for.inc:                                          ; preds = %if.end
-  %3 = load i32, i32* %j, align 4, !dbg !177
-  %inc = add nsw i32 %3, 1, !dbg !177
-  store i32 %inc, i32* %j, align 4, !dbg !177
-  br label %for.cond, !dbg !178, !llvm.loop !179
+  %3 = load i32, i32* %j, align 4, !dbg !175
+  %inc = add nsw i32 %3, 1, !dbg !175
+  store i32 %inc, i32* %j, align 4, !dbg !175
+  br label %for.cond, !dbg !176, !llvm.loop !177
 
 for.end:                                          ; preds = %for.cond
-  %4 = load i32*, i32** %p, align 8, !dbg !182
-  %5 = bitcast i32* %4 to i8*, !dbg !182
-  call void @free(i8* %5) #4, !dbg !183
-  br label %return, !dbg !184
+  %4 = load i32*, i32** %p, align 8, !dbg !180
+  %5 = bitcast i32* %4 to i8*, !dbg !180
+  call void @free(i8* %5) #4, !dbg !181
+  br label %return, !dbg !182
 
 return:                                           ; preds = %for.end, %if.else
-  ret void, !dbg !184
+  ret void, !dbg !182
 }
 
 ; Function Attrs: nounwind
 declare dso_local void @free(i8*) #3
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32 @main() #0 !dbg !185 {
+define dso_local i32 @main() #0 !dbg !183 {
 entry:
-  call void @tmp(), !dbg !188
-  ret i32 0, !dbg !189
+  call void @tmp(), !dbg !186
+  ret i32 0, !dbg !187
 }
 
 attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
@@ -476,44 +470,42 @@ attributes #4 = { nounwind }
 !146 = !DILocation(line: 91, column: 3, scope: !141)
 !147 = !DILocation(line: 92, column: 3, scope: !141)
 !148 = !DILocation(line: 93, column: 1, scope: !141)
-!149 = distinct !DISubprogram(name: "deref", scope: !10, file: !10, line: 111, type: !150, scopeLine: 111, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!150 = !DISubroutineType(types: !151)
-!151 = !{null}
-!152 = !DILocation(line: 111, column: 20, scope: !149)
-!153 = distinct !DISubprogram(name: "tmp", scope: !154, file: !154, line: 10, type: !150, scopeLine: 10, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!154 = !DIFile(filename: "src/mem_leak/malloc50.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
-!155 = !DILocalVariable(name: "p", scope: !153, file: !154, line: 12, type: !156)
-!156 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !58, size: 64)
-!157 = !DILocation(line: 12, column: 8, scope: !153)
-!158 = !DILocation(line: 12, column: 12, scope: !153)
-!159 = !DILocalVariable(name: "j", scope: !153, file: !154, line: 13, type: !58)
-!160 = !DILocation(line: 13, column: 7, scope: !153)
-!161 = !DILocation(line: 14, column: 9, scope: !162)
-!162 = distinct !DILexicalBlock(scope: !153, file: !154, line: 14, column: 3)
-!163 = !DILocation(line: 14, column: 7, scope: !162)
-!164 = !DILocation(line: 14, column: 14, scope: !165)
-!165 = distinct !DILexicalBlock(scope: !162, file: !154, line: 14, column: 3)
-!166 = !DILocation(line: 14, column: 16, scope: !165)
-!167 = !DILocation(line: 14, column: 3, scope: !162)
-!168 = !DILocation(line: 15, column: 8, scope: !169)
-!169 = distinct !DILexicalBlock(scope: !170, file: !154, line: 15, column: 8)
-!170 = distinct !DILexicalBlock(scope: !165, file: !154, line: 14, column: 26)
-!171 = !DILocation(line: 15, column: 10, scope: !169)
-!172 = !DILocation(line: 15, column: 8, scope: !170)
-!173 = !DILocation(line: 15, column: 15, scope: !174)
-!174 = distinct !DILexicalBlock(scope: !169, file: !154, line: 15, column: 14)
-!175 = !DILocation(line: 16, column: 10, scope: !169)
-!176 = !DILocation(line: 18, column: 3, scope: !170)
-!177 = !DILocation(line: 14, column: 23, scope: !165)
-!178 = !DILocation(line: 14, column: 3, scope: !165)
-!179 = distinct !{!179, !167, !180, !181}
-!180 = !DILocation(line: 18, column: 3, scope: !162)
-!181 = !{!"llvm.loop.mustprogress"}
-!182 = !DILocation(line: 20, column: 8, scope: !153)
-!183 = !DILocation(line: 20, column: 3, scope: !153)
-!184 = !DILocation(line: 22, column: 1, scope: !153)
-!185 = distinct !DISubprogram(name: "main", scope: !154, file: !154, line: 25, type: !186, scopeLine: 25, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
-!186 = !DISubroutineType(types: !187)
-!187 = !{!58}
-!188 = !DILocation(line: 27, column: 3, scope: !185)
-!189 = !DILocation(line: 29, column: 1, scope: !185)
+!149 = distinct !DISubprogram(name: "tmp", scope: !150, file: !150, line: 10, type: !151, scopeLine: 10, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!150 = !DIFile(filename: "src/mem_leak/malloc50.c", directory: "/home/runner/work/Test-Suite/Test-Suite")
+!151 = !DISubroutineType(types: !152)
+!152 = !{null}
+!153 = !DILocalVariable(name: "p", scope: !149, file: !150, line: 12, type: !154)
+!154 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !58, size: 64)
+!155 = !DILocation(line: 12, column: 8, scope: !149)
+!156 = !DILocation(line: 12, column: 12, scope: !149)
+!157 = !DILocalVariable(name: "j", scope: !149, file: !150, line: 13, type: !58)
+!158 = !DILocation(line: 13, column: 7, scope: !149)
+!159 = !DILocation(line: 14, column: 9, scope: !160)
+!160 = distinct !DILexicalBlock(scope: !149, file: !150, line: 14, column: 3)
+!161 = !DILocation(line: 14, column: 7, scope: !160)
+!162 = !DILocation(line: 14, column: 14, scope: !163)
+!163 = distinct !DILexicalBlock(scope: !160, file: !150, line: 14, column: 3)
+!164 = !DILocation(line: 14, column: 16, scope: !163)
+!165 = !DILocation(line: 14, column: 3, scope: !160)
+!166 = !DILocation(line: 15, column: 8, scope: !167)
+!167 = distinct !DILexicalBlock(scope: !168, file: !150, line: 15, column: 8)
+!168 = distinct !DILexicalBlock(scope: !163, file: !150, line: 14, column: 26)
+!169 = !DILocation(line: 15, column: 10, scope: !167)
+!170 = !DILocation(line: 15, column: 8, scope: !168)
+!171 = !DILocation(line: 15, column: 15, scope: !172)
+!172 = distinct !DILexicalBlock(scope: !167, file: !150, line: 15, column: 14)
+!173 = !DILocation(line: 16, column: 10, scope: !167)
+!174 = !DILocation(line: 18, column: 3, scope: !168)
+!175 = !DILocation(line: 14, column: 23, scope: !163)
+!176 = !DILocation(line: 14, column: 3, scope: !163)
+!177 = distinct !{!177, !165, !178, !179}
+!178 = !DILocation(line: 18, column: 3, scope: !160)
+!179 = !{!"llvm.loop.mustprogress"}
+!180 = !DILocation(line: 20, column: 8, scope: !149)
+!181 = !DILocation(line: 20, column: 3, scope: !149)
+!182 = !DILocation(line: 22, column: 1, scope: !149)
+!183 = distinct !DISubprogram(name: "main", scope: !150, file: !150, line: 25, type: !184, scopeLine: 25, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+!184 = !DISubroutineType(types: !185)
+!185 = !{!58}
+!186 = !DILocation(line: 27, column: 3, scope: !183)
+!187 = !DILocation(line: 29, column: 1, scope: !183)

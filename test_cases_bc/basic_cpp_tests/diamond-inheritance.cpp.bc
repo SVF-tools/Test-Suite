@@ -282,12 +282,6 @@ entry:
 
 declare dso_local i32 @getchar() #1
 
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local void @_Z5derefv() #2 {
-entry:
-  ret void
-}
-
 ; Function Attrs: mustprogress noinline norecurse optnone uwtable
 define dso_local i32 @main() #4 {
 entry:
