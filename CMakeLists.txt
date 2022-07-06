@@ -50,10 +50,12 @@ foreach(i RANGE ${len2})
       continue()
     endif()
     if (${cflindex} EQUAL 0)
-      string(REGEX REPLACE ".bc" ".cfl.bc" filename ${filename})
-    endif()
+      string(REGEX REPLACE ".bc" ".bc-cfl" testname ${filename})
+    else()
+      set(testname ${filename}) 
+    endif()   
     add_test(
-      NAME points-to/${filename}
+      NAME points-to/${testname}
       COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
     )
