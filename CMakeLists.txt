@@ -7,7 +7,6 @@ list(
   APPEND
   folders
   basic_c_tests
-  basic_c_tests
   basic_cpp_tests
   fs_tests
   vfs_tests
@@ -19,7 +18,6 @@ list(
   APPEND
   commands
   "wpa -ander -stat=false"
-  "cfl ${PROJECT_SOURCE_DIR}/include/CFL/CFLGrammar.txt"
   "wpa -ander -stat=false"
   "wpa -fspta -stat=false"
   "wpa -vfspta -opt-svfg=false -stat=false"
@@ -35,8 +33,6 @@ foreach(i RANGE ${len2})
   # gets the command and folder of index i
   list(GET folders ${i} folder)
   list(GET commands ${i} cmd)
-  # change same ctest name for cfl and wpa
-  string(FIND ${cmd} "cfl" cflindex)
   # creates a list of each file in folder
   file(GLOB files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/${folder}/*.bc*")
   string(REPLACE " " ";" commandtemp ${cmd})
@@ -48,9 +44,6 @@ foreach(i RANGE ${len2})
     endif()
     if (${filename} MATCHES ".pre.bc" OR ${filename} MATCHES ".pre.svf.bc" OR ${filename} MATCHES ".svf.bc")
       continue()
-    endif()
-    if (${cflindex} EQUAL 0)
-      string(REGEX REPLACE ".bc" ".cfl.bc" filename ${filename})
     endif()
     add_test(
       NAME points-to/${filename}
@@ -172,3 +165,18 @@ foreach(filename ${mem_leak_files})
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
   )
 endforeach()
+
+# cfl tests
+set(cmd "cfl ${PROJECT_SOURCE_DIR}/include/CFL/CFLGrammar.txt")
+file(GLOB cfl_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/basic_c_tests/*.bc*")
+string(REPLACE " " ";" commandtemp ${cmd})
+set(command ${commandtemp})
+# loops over each file creating a test
+foreach(filename ${cfl_files})
+  add_test(
+      NAME cfl_test/${filename}
+      COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+  )
+endforeach()
+
