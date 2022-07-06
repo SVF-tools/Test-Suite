@@ -50,7 +50,7 @@ foreach(i RANGE ${len2})
       continue()
     endif()
     if (${cflindex} EQUAL 0)
-      set(filename ${filename}_cfl)
+      string(REGEX REPLACE ".bc" ".cfl.bc" filename ${filename})
     endif()
     add_test(
       NAME points-to/${filename}
