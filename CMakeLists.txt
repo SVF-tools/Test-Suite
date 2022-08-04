@@ -180,3 +180,17 @@ foreach(filename ${cfl_files})
   )
 endforeach()
 
+# cfl tests
+set(cmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/CFLGrammar.txt")
+file(GLOB cfl_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/basic_cpp_tests/*.bc*")
+string(REPLACE " " ";" commandtemp ${cmd})
+set(command ${commandtemp})
+# loops over each file creating a test
+foreach(filename ${cfl_files})
+  add_test(
+      NAME cfl_cpp_test/${filename}
+      COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+  )
+endforeach()
+
