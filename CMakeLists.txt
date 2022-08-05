@@ -171,6 +171,7 @@ list(
   APPEND
   cfl_test_bc_folders
   basic_c_tests
+  basic_cpp_tests
 )
 foreach(folder ${cfl_test_bc_folders})
   set(cmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/CFLGrammar.txt")
