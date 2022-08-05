@@ -167,30 +167,24 @@ foreach(filename ${mem_leak_files})
 endforeach()
 
 # cfl tests
-set(cmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/CFLGrammar.txt")
-file(GLOB cfl_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/basic_c_tests/*.bc*")
-string(REPLACE " " ";" commandtemp ${cmd})
-set(command ${commandtemp})
-# loops over each file creating a test
-foreach(filename ${cfl_files})
+list(
+  APPEND
+  cfl_test_bc_folders
+  basic_c_tests
+  basic_cpp_tests
+)
+foreach(folder ${cfl_test_bc_folders})
+  set(cmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/CFLGrammar.txt")
+  file(GLOB cfl_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/${folder}/*.bc*")
+  string(REPLACE " " ";" commandtemp ${cmd})
+  set(command ${commandtemp})
+  # loops over each file creating a test
+  foreach(filename ${cfl_files})
   add_test(
       NAME cfl_test/${filename}
       COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
   )
-endforeach()
-
-# cfl tests
-set(cmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/CFLGrammar.txt")
-file(GLOB cfl_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/basic_cpp_tests/*.bc*")
-string(REPLACE " " ";" commandtemp ${cmd})
-set(command ${commandtemp})
-# loops over each file creating a test
-foreach(filename ${cfl_files})
-  add_test(
-      NAME cfl_cpp_test/${filename}
-      COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-  )
+  endforeach()
 endforeach()
 
