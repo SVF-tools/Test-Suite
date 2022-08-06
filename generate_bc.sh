@@ -108,7 +108,6 @@ done
 
 echo "soft link $bc_path/vfs_tests and $bc_path/dfs_tests to $bc_path/fs_tests"
 cd $bc_path
-echo $pwd
 ln -s "fs_tests" "vfs_tests"
 ln -s "fs_tests" "dfs_tests"
 cd -
