@@ -39,9 +39,6 @@ foreach(i RANGE ${len2})
   set(command ${commandtemp})
   # loops over each file creating a test
   foreach(filename ${files})
-    if (${filename} MATCHES "struct-twoflds.c.bc")
-      continue()
-    endif()
     if (${filename} MATCHES ".pre.bc" OR ${filename} MATCHES ".pre.svf.bc" OR ${filename} MATCHES ".svf.bc")
       continue()
     endif()
@@ -52,12 +49,6 @@ foreach(i RANGE ${len2})
     )
   endforeach()
 endforeach()
-
-add_test(
-  NAME points-to/basic_c_tests/struct-twoflds.c
-  COMMAND wpa -ander -stat=false -ff-eq-base=false ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/basic_c_tests/struct-twoflds.c.bc
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
 
 # differential_tests fspta-vfspta
 file(GLOB files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/*.bc*")
@@ -83,9 +74,6 @@ list(
 foreach(folder ${diff_tests_anderson_folders})
   file(GLOB files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/${folder}/*.bc*")
   foreach(filename ${files})
-    if (${filename} MATCHES "struct-twoflds.c.bc")
-      continue()
-    endif()
     if (${filename} MATCHES ".pre.bc" OR ${filename} MATCHES ".pre.svf.bc" OR ${filename} MATCHES ".svf.bc")
       continue()
     endif()
@@ -117,20 +105,6 @@ foreach(folder ${diff_tests_anderson_folders})
 
   endforeach()
 endforeach()
-
-add_test(
-      NAME diff_tests/ander-nander/basic_c_tests/struct-twoflds.c.bc
-      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -ff-eq-base=false -alias-check=false" "wpa -nander -ff-eq-base=false -alias-check=false" ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/basic_c_tests/struct-twoflds.c.bc
-      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-set_tests_properties(diff_tests/ander-nander/basic_c_tests/struct-twoflds.c.bc PROPERTIES PASS_REGULAR_EXPRESSION "0")
-
-add_test(
-      NAME diff_tests/svfg-read-write/basic_c_tests/struct-twoflds.c.bc
-      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -alias-check=false -write-svfg=read_write_file" "wpa -ander -svfg -alias-check=false -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/basic_c_tests/struct-twoflds.c.bc
-      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-)
-set_tests_properties(diff_tests/svfg-read-write/basic_c_tests/struct-twoflds.c.bc PROPERTIES PASS_REGULAR_EXPRESSION "0")
 
 # differential_tests read_write_svfg with crux-bc
 list(
@@ -171,7 +145,6 @@ list(
   APPEND
   cfl_test_bc_folders
   basic_c_tests
-  basic_cpp_tests
 )
 foreach(folder ${cfl_test_bc_folders})
   set(cmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/CFLGrammar.txt")
