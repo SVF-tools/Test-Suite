@@ -107,8 +107,11 @@ do
 done
 
 echo "soft link $bc_path/vfs_tests and $bc_path/dfs_tests to $bc_path/fs_tests"
-ln -s "./test_cases_bc/fs_tests" "./test_cast_bc/vfs_tests"
-ln -s "./test_cases_bc/fs_tests" "./test_cast_bc/dfs_tests"
+cd $bc_path
+echo $pwd
+ln -s "fs_tests" "vfs_tests"
+ln -s "fs_tests" "dfs_tests"
+cd -
 
 echo "$0: Compiling diff_tests unit test"
 cd src/diff_tests
