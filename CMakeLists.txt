@@ -96,7 +96,7 @@ foreach(folder ${diff_tests_anderson_folders})
     set_tests_properties(diff_tests/ander-read-write/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
 
     # read and write svfg
-    # Some tests failed on mac os when `-ff-eq-base=true`, but successed on ubuntu
+    # Some tests failed on mac os when `-ff-eq-base=false`, but succeeded on ubuntu
     if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
       add_test(
         NAME diff_tests/svfg-read-write/${filename}
