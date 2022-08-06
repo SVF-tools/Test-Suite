@@ -106,6 +106,10 @@ do
   done
 done
 
+echo "soft link $bc_path/vfs_tests and $bc_path/dfs_tests to $bc_path/fs_tests"
+ln -s "$bc_path/fs_tests" "$bc_path/vfs_tests"
+ln -s "$bc_path/fs_tests" "$bc_path/dfs_tests"
+
 echo "$0: Compiling diff_tests unit test"
 cd src/diff_tests
 g++ -o diff_tests_linux diff_tests.cpp

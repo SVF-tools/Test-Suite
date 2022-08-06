@@ -10,6 +10,7 @@ list(
   basic_cpp_tests
   fs_tests
   vfs_tests
+  dfs_tests
   cs_tests
   mta
 )
@@ -21,6 +22,7 @@ list(
   "wpa -ander -stat=false"
   "wpa -fspta -stat=false"
   "wpa -vfspta -opt-svfg=false -stat=false"
+  "dvf -dfs -print-pts=false -stat=false"
   "dvf -cxt -print-pts=false -stat=false"
   "mta -mhp-validation -lock-validation -stat=false"
 )
