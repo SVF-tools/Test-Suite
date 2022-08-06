@@ -85,14 +85,6 @@ foreach(folder ${diff_tests_anderson_folders})
     )
     set_tests_properties(diff_tests/ander-nander/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
 
-    # read and write svfg
-    add_test(
-      NAME diff_tests/svfg-read-write/${filename}
-      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -alias-check=false -write-svfg=read_write_file" "wpa -ander -svfg -alias-check=false -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-    )
-    set_tests_properties(diff_tests/svfg-read-write/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
-
     # read and write ander
     # change file extension to .pre.bc
     string(REGEX REPLACE "[.]bc$" ".pre.svf.bc" readFile ${CMAKE_CURRENT_SOURCE_DIR}/${filename})
@@ -103,6 +95,19 @@ foreach(folder ${diff_tests_anderson_folders})
     )
     set_tests_properties(diff_tests/ander-read-write/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
 
+    # skip "map-1.cpp.bc" and "queue-2.cpp.bc" for svfg write/read
+    if (${filename} MATCHES "map-1.cpp.bc" OR ${filename} MATCHES "queue-2.cpp.bc")
+      continue()
+    endif()
+
+    # read and write svfg
+    add_test(
+      NAME diff_tests/svfg-read-write/${filename}
+      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -alias-check=false -write-svfg=read_write_file" "wpa -ander -svfg -alias-check=false -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    set_tests_properties(diff_tests/svfg-read-write/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
+    
   endforeach()
 endforeach()
 
