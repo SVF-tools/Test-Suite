@@ -100,7 +100,7 @@ foreach(folder ${diff_tests_anderson_folders})
     if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
       add_test(
         NAME diff_tests/svfg-read-write/${filename}
-        COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -ff-eq-base=true -svfg -alias-check=false -write-svfg=read_write_file" "wpa -ander -svfg -alias-check=false -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+        COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -ff-eq-base=true -svfg -alias-check=false -write-svfg=read_write_file" "wpa -ander -ff-eq-base=true -svfg -alias-check=false -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
       )
     else()
