@@ -6,7 +6,7 @@
  */
 // from spec2000 181.mcf
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 typedef struct network
 {

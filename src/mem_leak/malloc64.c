@@ -8,7 +8,7 @@
  */
 
 /// From parsec ferret benchmark tp.c
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 #include <assert.h>
 #include <stdlib.h>

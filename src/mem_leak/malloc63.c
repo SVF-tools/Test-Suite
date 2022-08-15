@@ -6,7 +6,7 @@
  *      Author: Yulei Sui
  */
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 void goo(int* p, int flag, int c);
 
 void foo(int *p, int flag, int c){

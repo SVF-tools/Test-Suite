@@ -6,7 +6,7 @@
  */
 /// extract from 179.art
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 unsigned char** cimage;
 int main(){
     int i,j;

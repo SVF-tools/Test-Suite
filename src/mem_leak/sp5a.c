@@ -6,7 +6,7 @@
  */
 
 //TC05: unclear condition
-#include "aliascheck.h"
+#include "memleak_check.h"
 int f(char *p) {
 	free(p);
 	return 0;

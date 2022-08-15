@@ -6,7 +6,7 @@
  */
 //TC06: Free data structure
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 typedef struct _list {
 	    struct _list *next;

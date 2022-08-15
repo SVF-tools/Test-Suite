@@ -6,7 +6,7 @@
  */
 /// extract from 177.vpr
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 int main(){
  int i;
  int *a = SAFEMALLOC(10);

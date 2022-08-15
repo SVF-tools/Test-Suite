@@ -8,7 +8,7 @@
  */
 // from 177.mesa teximage.c line 1790
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 int** readcolor(){
 

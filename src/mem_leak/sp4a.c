@@ -6,7 +6,7 @@
  */
 
 //TC04: pointers in structure
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 typedef struct _S {
 	char *p1;

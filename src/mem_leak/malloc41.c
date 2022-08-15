@@ -5,7 +5,7 @@
  * Date: 02/04/2014
  */
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 int* bar1(int* b){  
 	  return b;

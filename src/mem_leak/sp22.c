@@ -7,7 +7,7 @@
 
 // TC02: aliasing pointer 
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 int main(int arg1)
 {

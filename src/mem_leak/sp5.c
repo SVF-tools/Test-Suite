@@ -5,7 +5,7 @@
  * Date: 02/04/2014
  */
 //TC05: unclear conditioned 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 int f(char *p)
 {

@@ -6,7 +6,7 @@
  *      Author: Yulei Sui
  */
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 int foo(int **p, int n){
 	if(n == 0)

@@ -5,7 +5,7 @@
  *      Author: Yulei Sui
  */
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 typedef unsigned char  uch;
 typedef unsigned short ush;

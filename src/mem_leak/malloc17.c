@@ -5,7 +5,7 @@
  */
 // this file simplified from 177.mesa image.c
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 int* gl_unpack_image3D(){
 

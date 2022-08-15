@@ -6,7 +6,7 @@
  */
 
 //TC01: inter-procedural argument passing 
-#include "aliascheck.h"
+#include "memleak_check.h"
 int ResourceLeak_TC01(int *p) {
 	char str[10] = "STRING";
 	if (p == NULL)
