@@ -1,0 +1,786 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/double_free/df36.c.bc'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/double_free/df36.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+%struct._twoIntsStruct = type { i32, i32 }
+
+@.str = private unnamed_addr constant [4 x i8] c"%s\0A\00", align 1
+@.str.1 = private unnamed_addr constant [5 x i32] [i32 37, i32 108, i32 115, i32 10, i32 0], align 4
+@.str.2 = private unnamed_addr constant [4 x i8] c"%d\0A\00", align 1
+@.str.3 = private unnamed_addr constant [5 x i8] c"%hd\0A\00", align 1
+@.str.4 = private unnamed_addr constant [4 x i8] c"%f\0A\00", align 1
+@.str.5 = private unnamed_addr constant [5 x i8] c"%ld\0A\00", align 1
+@.str.6 = private unnamed_addr constant [5 x i8] c"%zu\0A\00", align 1
+@.str.7 = private unnamed_addr constant [6 x i8] c"%02x\0A\00", align 1
+@.str.8 = private unnamed_addr constant [5 x i8] c"%ls\0A\00", align 1
+@.str.9 = private unnamed_addr constant [4 x i8] c"%u\0A\00", align 1
+@.str.10 = private unnamed_addr constant [4 x i8] c"%g\0A\00", align 1
+@.str.11 = private unnamed_addr constant [10 x i8] c"%d -- %d\0A\00", align 1
+@.str.12 = private unnamed_addr constant [5 x i8] c"%02x\00", align 1
+@.str.13 = private unnamed_addr constant [1 x i8] zeroinitializer, align 1
+@.str.14 = private unnamed_addr constant [5 x i32] [i32 37, i32 48, i32 50, i32 120, i32 0], align 4
+@GLOBAL_CONST_TRUE = dso_local constant i32 1, align 4
+@GLOBAL_CONST_FALSE = dso_local constant i32 0, align 4
+@GLOBAL_CONST_FIVE = dso_local constant i32 5, align 4
+@globalTrue = dso_local global i32 1, align 4
+@globalFalse = dso_local global i32 0, align 4
+@globalFive = dso_local global i32 5, align 4
+@globalArgc = dso_local global i32 0, align 4
+@globalArgv = dso_local global i8** null, align 8
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @SAFEMALLOC(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias align 16 i8* @malloc(i64 %conv) #5
+  ret i8* %call
+}
+
+; Function Attrs: nounwind
+declare dso_local noalias align 16 i8* @malloc(i64) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @DOUBLEFREEMALLOC(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias align 16 i8* @malloc(i64 %conv) #5
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @DOUBLEFREEMALLOCFN(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias align 16 i8* @malloc(i64 %conv) #5
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @SAFEMALLOCFP(i32 %n) #0 {
+entry:
+  %n.addr = alloca i32, align 4
+  store i32 %n, i32* %n.addr, align 4
+  %0 = load i32, i32* %n.addr, align 4
+  %conv = sext i32 %0 to i64
+  %call = call noalias align 16 i8* @malloc(i64 %conv) #5
+  ret i8* %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @SAFEFREE(i32* %p) #0 {
+entry:
+  %retval = alloca i8*, align 8
+  %p.addr = alloca i32*, align 8
+  store i32* %p, i32** %p.addr, align 8
+  %0 = load i32*, i32** %p.addr, align 8
+  %1 = bitcast i32* %0 to i8*
+  call void @free(i8* %1) #5
+  %2 = load i8*, i8** %retval, align 8
+  ret i8* %2
+}
+
+; Function Attrs: nounwind
+declare dso_local void @free(i8*) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i8* @DOUBLEFREE(i32* %p) #0 {
+entry:
+  %retval = alloca i8*, align 8
+  %p.addr = alloca i32*, align 8
+  store i32* %p, i32** %p.addr, align 8
+  %0 = load i32*, i32** %p.addr, align 8
+  %1 = bitcast i32* %0 to i8*
+  call void @free(i8* %1) #5
+  %2 = load i8*, i8** %retval, align 8
+  ret i8* %2
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @printLine(i8* %line) #0 {
+entry:
+  %line.addr = alloca i8*, align 8
+  store i8* %line, i8** %line.addr, align 8
+  %0 = load i8*, i8** %line.addr, align 8
+  %cmp = icmp ne i8* %0, null
+  br i1 %cmp, label %if.then, label %if.end
+
+if.then:                                          ; preds = %entry
+  %1 = load i8*, i8** %line.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str, i64 0, i64 0), i8* %1)
+  br label %if.end
+
+if.end:                                           ; preds = %if.then, %entry
+  ret void
+}
+
+declare dso_local i32 @printf(i8*, ...) #2
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @printWLine(i32* %line) #0 {
+entry:
+  %line.addr = alloca i32*, align 8
+  store i32* %line, i32** %line.addr, align 8
+  %0 = load i32*, i32** %line.addr, align 8
+  %cmp = icmp ne i32* %0, null
+  br i1 %cmp, label %if.then, label %if.end
+
+if.then:                                          ; preds = %entry
+  %1 = load i32*, i32** %line.addr, align 8
+  %call = call i32 (i32*, ...) @wprintf(i32* getelementptr inbounds ([5 x i32], [5 x i32]* @.str.1, i64 0, i64 0), i32* %1)
+  br label %if.end
+
+if.end:                                           ; preds = %if.then, %entry
+  ret void
+}
+
+declare dso_local i32 @wprintf(i32*, ...) #2
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @printIntLine(i32 %intNumber) #0 {
+entry:
+  %intNumber.addr = alloca i32, align 4
+  store i32 %intNumber, i32* %intNumber.addr, align 4
+  %0 = load i32, i32* %intNumber.addr, align 4
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.2, i64 0, i64 0), i32 %0)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @printShortLine(i16 signext %shortNumber) #0 {
+entry:
+  %shortNumber.addr = alloca i16, align 2
+  store i16 %shortNumber, i16* %shortNumber.addr, align 2
+  %0 = load i16, i16* %shortNumber.addr, align 2
+  %conv = sext i16 %0 to i32
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.3, i64 0, i64 0), i32 %conv)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @printFloatLine(float %floatNumber) #0 {
+entry:
+  %floatNumber.addr = alloca float, align 4
+  store float %floatNumber, float* %floatNumber.addr, align 4
+  %0 = load float, float* %floatNumber.addr, align 4
+  %conv = fpext float %0 to double
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.4, i64 0, i64 0), double %conv)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @printLongLine(i64 %longNumber) #0 {
+entry:
+  %longNumber.addr = alloca i64, align 8
+  store i64 %longNumber, i64* %longNumber.addr, align 8
+  %0 = load i64, i64* %longNumber.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.5, i64 0, i64 0), i64 %0)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @printLongLongLine(i64 %longLongIntNumber) #0 {
+entry:
+  %longLongIntNumber.addr = alloca i64, align 8
+  store i64 %longLongIntNumber, i64* %longLongIntNumber.addr, align 8
+  %0 = load i64, i64* %longLongIntNumber.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.5, i64 0, i64 0), i64 %0)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @printSizeTLine(i64 %sizeTNumber) #0 {
+entry:
+  %sizeTNumber.addr = alloca i64, align 8
+  store i64 %sizeTNumber, i64* %sizeTNumber.addr, align 8
+  %0 = load i64, i64* %sizeTNumber.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.6, i64 0, i64 0), i64 %0)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @printHexCharLine(i8 signext %charHex) #0 {
+entry:
+  %charHex.addr = alloca i8, align 1
+  store i8 %charHex, i8* %charHex.addr, align 1
+  %0 = load i8, i8* %charHex.addr, align 1
+  %conv = sext i8 %0 to i32
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @.str.7, i64 0, i64 0), i32 %conv)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @printWcharLine(i32 %wideChar) #0 {
+entry:
+  %wideChar.addr = alloca i32, align 4
+  %s = alloca [2 x i32], align 4
+  store i32 %wideChar, i32* %wideChar.addr, align 4
+  %0 = load i32, i32* %wideChar.addr, align 4
+  %arrayidx = getelementptr inbounds [2 x i32], [2 x i32]* %s, i64 0, i64 0
+  store i32 %0, i32* %arrayidx, align 4
+  %arrayidx1 = getelementptr inbounds [2 x i32], [2 x i32]* %s, i64 0, i64 1
+  store i32 0, i32* %arrayidx1, align 4
+  %arraydecay = getelementptr inbounds [2 x i32], [2 x i32]* %s, i64 0, i64 0
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.8, i64 0, i64 0), i32* %arraydecay)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @printUnsignedLine(i32 %unsignedNumber) #0 {
+entry:
+  %unsignedNumber.addr = alloca i32, align 4
+  store i32 %unsignedNumber, i32* %unsignedNumber.addr, align 4
+  %0 = load i32, i32* %unsignedNumber.addr, align 4
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.9, i64 0, i64 0), i32 %0)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @printHexUnsignedCharLine(i8 zeroext %unsignedCharacter) #0 {
+entry:
+  %unsignedCharacter.addr = alloca i8, align 1
+  store i8 %unsignedCharacter, i8* %unsignedCharacter.addr, align 1
+  %0 = load i8, i8* %unsignedCharacter.addr, align 1
+  %conv = zext i8 %0 to i32
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @.str.7, i64 0, i64 0), i32 %conv)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @printDoubleLine(double %doubleNumber) #0 {
+entry:
+  %doubleNumber.addr = alloca double, align 8
+  store double %doubleNumber, double* %doubleNumber.addr, align 8
+  %0 = load double, double* %doubleNumber.addr, align 8
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.10, i64 0, i64 0), double %0)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @printStructLine(%struct._twoIntsStruct* %structTwoIntsStruct) #0 {
+entry:
+  %structTwoIntsStruct.addr = alloca %struct._twoIntsStruct*, align 8
+  store %struct._twoIntsStruct* %structTwoIntsStruct, %struct._twoIntsStruct** %structTwoIntsStruct.addr, align 8
+  %0 = load %struct._twoIntsStruct*, %struct._twoIntsStruct** %structTwoIntsStruct.addr, align 8
+  %intOne = getelementptr inbounds %struct._twoIntsStruct, %struct._twoIntsStruct* %0, i32 0, i32 0
+  %1 = load i32, i32* %intOne, align 4
+  %2 = load %struct._twoIntsStruct*, %struct._twoIntsStruct** %structTwoIntsStruct.addr, align 8
+  %intTwo = getelementptr inbounds %struct._twoIntsStruct, %struct._twoIntsStruct* %2, i32 0, i32 1
+  %3 = load i32, i32* %intTwo, align 4
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([10 x i8], [10 x i8]* @.str.11, i64 0, i64 0), i32 %1, i32 %3)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @printBytesLine(i8* %bytes, i64 %numBytes) #0 {
+entry:
+  %bytes.addr = alloca i8*, align 8
+  %numBytes.addr = alloca i64, align 8
+  %i = alloca i64, align 8
+  store i8* %bytes, i8** %bytes.addr, align 8
+  store i64 %numBytes, i64* %numBytes.addr, align 8
+  store i64 0, i64* %i, align 8
+  br label %for.cond
+
+for.cond:                                         ; preds = %for.inc, %entry
+  %0 = load i64, i64* %i, align 8
+  %1 = load i64, i64* %numBytes.addr, align 8
+  %cmp = icmp ult i64 %0, %1
+  br i1 %cmp, label %for.body, label %for.end
+
+for.body:                                         ; preds = %for.cond
+  %2 = load i8*, i8** %bytes.addr, align 8
+  %3 = load i64, i64* %i, align 8
+  %arrayidx = getelementptr inbounds i8, i8* %2, i64 %3
+  %4 = load i8, i8* %arrayidx, align 1
+  %conv = zext i8 %4 to i32
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.12, i64 0, i64 0), i32 %conv)
+  br label %for.inc
+
+for.inc:                                          ; preds = %for.body
+  %5 = load i64, i64* %i, align 8
+  %inc = add i64 %5, 1
+  store i64 %inc, i64* %i, align 8
+  br label %for.cond, !llvm.loop !4
+
+for.end:                                          ; preds = %for.cond
+  %call1 = call i32 @puts(i8* getelementptr inbounds ([1 x i8], [1 x i8]* @.str.13, i64 0, i64 0))
+  ret void
+}
+
+declare dso_local i32 @puts(i8*) #2
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i64 @decodeHexChars(i8* %bytes, i64 %numBytes, i8* %hex) #0 {
+entry:
+  %bytes.addr = alloca i8*, align 8
+  %numBytes.addr = alloca i64, align 8
+  %hex.addr = alloca i8*, align 8
+  %numWritten = alloca i64, align 8
+  %byte = alloca i32, align 4
+  store i8* %bytes, i8** %bytes.addr, align 8
+  store i64 %numBytes, i64* %numBytes.addr, align 8
+  store i8* %hex, i8** %hex.addr, align 8
+  store i64 0, i64* %numWritten, align 8
+  br label %while.cond
+
+while.cond:                                       ; preds = %while.body, %entry
+  %0 = load i64, i64* %numWritten, align 8
+  %1 = load i64, i64* %numBytes.addr, align 8
+  %cmp = icmp ult i64 %0, %1
+  br i1 %cmp, label %land.lhs.true, label %land.end
+
+land.lhs.true:                                    ; preds = %while.cond
+  %call = call i16** @__ctype_b_loc() #6
+  %2 = load i16*, i16** %call, align 8
+  %3 = load i8*, i8** %hex.addr, align 8
+  %4 = load i64, i64* %numWritten, align 8
+  %mul = mul i64 2, %4
+  %arrayidx = getelementptr inbounds i8, i8* %3, i64 %mul
+  %5 = load i8, i8* %arrayidx, align 1
+  %conv = sext i8 %5 to i32
+  %idxprom = sext i32 %conv to i64
+  %arrayidx1 = getelementptr inbounds i16, i16* %2, i64 %idxprom
+  %6 = load i16, i16* %arrayidx1, align 2
+  %conv2 = zext i16 %6 to i32
+  %and = and i32 %conv2, 4096
+  %tobool = icmp ne i32 %and, 0
+  br i1 %tobool, label %land.rhs, label %land.end
+
+land.rhs:                                         ; preds = %land.lhs.true
+  %call3 = call i16** @__ctype_b_loc() #6
+  %7 = load i16*, i16** %call3, align 8
+  %8 = load i8*, i8** %hex.addr, align 8
+  %9 = load i64, i64* %numWritten, align 8
+  %mul4 = mul i64 2, %9
+  %add = add i64 %mul4, 1
+  %arrayidx5 = getelementptr inbounds i8, i8* %8, i64 %add
+  %10 = load i8, i8* %arrayidx5, align 1
+  %conv6 = sext i8 %10 to i32
+  %idxprom7 = sext i32 %conv6 to i64
+  %arrayidx8 = getelementptr inbounds i16, i16* %7, i64 %idxprom7
+  %11 = load i16, i16* %arrayidx8, align 2
+  %conv9 = zext i16 %11 to i32
+  %and10 = and i32 %conv9, 4096
+  %tobool11 = icmp ne i32 %and10, 0
+  br label %land.end
+
+land.end:                                         ; preds = %land.rhs, %land.lhs.true, %while.cond
+  %12 = phi i1 [ false, %land.lhs.true ], [ false, %while.cond ], [ %tobool11, %land.rhs ]
+  br i1 %12, label %while.body, label %while.end
+
+while.body:                                       ; preds = %land.end
+  %13 = load i8*, i8** %hex.addr, align 8
+  %14 = load i64, i64* %numWritten, align 8
+  %mul12 = mul i64 2, %14
+  %arrayidx13 = getelementptr inbounds i8, i8* %13, i64 %mul12
+  %call14 = call i32 (i8*, i8*, ...) @__isoc99_sscanf(i8* %arrayidx13, i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.12, i64 0, i64 0), i32* %byte) #5
+  %15 = load i32, i32* %byte, align 4
+  %conv15 = trunc i32 %15 to i8
+  %16 = load i8*, i8** %bytes.addr, align 8
+  %17 = load i64, i64* %numWritten, align 8
+  %arrayidx16 = getelementptr inbounds i8, i8* %16, i64 %17
+  store i8 %conv15, i8* %arrayidx16, align 1
+  %18 = load i64, i64* %numWritten, align 8
+  %inc = add i64 %18, 1
+  store i64 %inc, i64* %numWritten, align 8
+  br label %while.cond, !llvm.loop !6
+
+while.end:                                        ; preds = %land.end
+  %19 = load i64, i64* %numWritten, align 8
+  ret i64 %19
+}
+
+; Function Attrs: nounwind readnone willreturn
+declare dso_local i16** @__ctype_b_loc() #3
+
+; Function Attrs: nounwind
+declare dso_local i32 @__isoc99_sscanf(i8*, i8*, ...) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i64 @decodeHexWChars(i8* %bytes, i64 %numBytes, i32* %hex) #0 {
+entry:
+  %bytes.addr = alloca i8*, align 8
+  %numBytes.addr = alloca i64, align 8
+  %hex.addr = alloca i32*, align 8
+  %numWritten = alloca i64, align 8
+  %byte = alloca i32, align 4
+  store i8* %bytes, i8** %bytes.addr, align 8
+  store i64 %numBytes, i64* %numBytes.addr, align 8
+  store i32* %hex, i32** %hex.addr, align 8
+  store i64 0, i64* %numWritten, align 8
+  br label %while.cond
+
+while.cond:                                       ; preds = %while.body, %entry
+  %0 = load i64, i64* %numWritten, align 8
+  %1 = load i64, i64* %numBytes.addr, align 8
+  %cmp = icmp ult i64 %0, %1
+  br i1 %cmp, label %land.lhs.true, label %land.end
+
+land.lhs.true:                                    ; preds = %while.cond
+  %2 = load i32*, i32** %hex.addr, align 8
+  %3 = load i64, i64* %numWritten, align 8
+  %mul = mul i64 2, %3
+  %arrayidx = getelementptr inbounds i32, i32* %2, i64 %mul
+  %4 = load i32, i32* %arrayidx, align 4
+  %call = call i32 @iswxdigit(i32 %4) #5
+  %tobool = icmp ne i32 %call, 0
+  br i1 %tobool, label %land.rhs, label %land.end
+
+land.rhs:                                         ; preds = %land.lhs.true
+  %5 = load i32*, i32** %hex.addr, align 8
+  %6 = load i64, i64* %numWritten, align 8
+  %mul1 = mul i64 2, %6
+  %add = add i64 %mul1, 1
+  %arrayidx2 = getelementptr inbounds i32, i32* %5, i64 %add
+  %7 = load i32, i32* %arrayidx2, align 4
+  %call3 = call i32 @iswxdigit(i32 %7) #5
+  %tobool4 = icmp ne i32 %call3, 0
+  br label %land.end
+
+land.end:                                         ; preds = %land.rhs, %land.lhs.true, %while.cond
+  %8 = phi i1 [ false, %land.lhs.true ], [ false, %while.cond ], [ %tobool4, %land.rhs ]
+  br i1 %8, label %while.body, label %while.end
+
+while.body:                                       ; preds = %land.end
+  %9 = load i32*, i32** %hex.addr, align 8
+  %10 = load i64, i64* %numWritten, align 8
+  %mul5 = mul i64 2, %10
+  %arrayidx6 = getelementptr inbounds i32, i32* %9, i64 %mul5
+  %call7 = call i32 (i32*, i32*, ...) @__isoc99_swscanf(i32* %arrayidx6, i32* getelementptr inbounds ([5 x i32], [5 x i32]* @.str.14, i64 0, i64 0), i32* %byte) #5
+  %11 = load i32, i32* %byte, align 4
+  %conv = trunc i32 %11 to i8
+  %12 = load i8*, i8** %bytes.addr, align 8
+  %13 = load i64, i64* %numWritten, align 8
+  %arrayidx8 = getelementptr inbounds i8, i8* %12, i64 %13
+  store i8 %conv, i8* %arrayidx8, align 1
+  %14 = load i64, i64* %numWritten, align 8
+  %inc = add i64 %14, 1
+  store i64 %inc, i64* %numWritten, align 8
+  br label %while.cond, !llvm.loop !7
+
+while.end:                                        ; preds = %land.end
+  %15 = load i64, i64* %numWritten, align 8
+  ret i64 %15
+}
+
+; Function Attrs: nounwind
+declare dso_local i32 @iswxdigit(i32) #1
+
+; Function Attrs: nounwind
+declare dso_local i32 @__isoc99_swscanf(i32*, i32*, ...) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @globalReturnsTrue() #0 {
+entry:
+  ret i32 1
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @globalReturnsFalse() #0 {
+entry:
+  ret i32 0
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @globalReturnsTrueOrFalse() #0 {
+entry:
+  %call = call i32 @rand() #5
+  %rem = srem i32 %call, 2
+  ret i32 %rem
+}
+
+; Function Attrs: nounwind
+declare dso_local i32 @rand() #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @good1() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @good2() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @good3() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @good4() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @good5() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @good6() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @good7() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @good8() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @good9() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @bad1() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @bad2() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @bad3() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @bad4() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @bad5() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @bad6() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @bad7() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @bad8() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @bad9() #0 {
+entry:
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @CWE415_Double_Free__malloc_free_long_13_bad() #0 {
+entry:
+  %data = alloca i64*, align 8
+  store i64* null, i64** %data, align 8
+  %call = call i8* @DOUBLEFREEMALLOC(i32 800)
+  %0 = bitcast i8* %call to i64*
+  store i64* %0, i64** %data, align 8
+  %1 = load i64*, i64** %data, align 8
+  %cmp = icmp eq i64* %1, null
+  br i1 %cmp, label %if.then, label %if.end
+
+if.then:                                          ; preds = %entry
+  call void @exit(i32 -1) #7
+  unreachable
+
+if.end:                                           ; preds = %entry
+  %2 = load i64*, i64** %data, align 8
+  %3 = bitcast i64* %2 to i32*
+  %call1 = call i8* @SAFEFREE(i32* %3)
+  %4 = load i64*, i64** %data, align 8
+  %5 = bitcast i64* %4 to i32*
+  %call2 = call i8* @DOUBLEFREE(i32* %5)
+  ret void
+}
+
+; Function Attrs: noreturn nounwind
+declare dso_local void @exit(i32) #4
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @CWE415_Double_Free__malloc_free_long_13_good() #0 {
+entry:
+  call void @goodB2G1()
+  call void @goodB2G2()
+  call void @goodG2B1()
+  call void @goodG2B2()
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main(i32 %argc, i8** %argv) #0 {
+entry:
+  %retval = alloca i32, align 4
+  %argc.addr = alloca i32, align 4
+  %argv.addr = alloca i8**, align 8
+  store i32 0, i32* %retval, align 4
+  store i32 %argc, i32* %argc.addr, align 4
+  store i8** %argv, i8*** %argv.addr, align 8
+  %call = call i64 @time(i64* null) #5
+  %conv = trunc i64 %call to i32
+  call void @srand(i32 %conv) #5
+  call void @CWE415_Double_Free__malloc_free_long_13_good()
+  call void @CWE415_Double_Free__malloc_free_long_13_bad()
+  ret i32 0
+}
+
+; Function Attrs: nounwind
+declare dso_local void @srand(i32) #1
+
+; Function Attrs: nounwind
+declare dso_local i64 @time(i64*) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define internal void @goodB2G1() #0 {
+entry:
+  %data = alloca i64*, align 8
+  store i64* null, i64** %data, align 8
+  %call = call i8* @SAFEMALLOC(i32 800)
+  %0 = bitcast i8* %call to i64*
+  store i64* %0, i64** %data, align 8
+  %1 = load i64*, i64** %data, align 8
+  %cmp = icmp eq i64* %1, null
+  br i1 %cmp, label %if.then, label %if.end
+
+if.then:                                          ; preds = %entry
+  call void @exit(i32 -1) #7
+  unreachable
+
+if.end:                                           ; preds = %entry
+  %2 = load i64*, i64** %data, align 8
+  %3 = bitcast i64* %2 to i32*
+  %call1 = call i8* @SAFEFREE(i32* %3)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define internal void @goodB2G2() #0 {
+entry:
+  %data = alloca i64*, align 8
+  store i64* null, i64** %data, align 8
+  %call = call i8* @SAFEMALLOC(i32 800)
+  %0 = bitcast i8* %call to i64*
+  store i64* %0, i64** %data, align 8
+  %1 = load i64*, i64** %data, align 8
+  %cmp = icmp eq i64* %1, null
+  br i1 %cmp, label %if.then, label %if.end
+
+if.then:                                          ; preds = %entry
+  call void @exit(i32 -1) #7
+  unreachable
+
+if.end:                                           ; preds = %entry
+  %2 = load i64*, i64** %data, align 8
+  %3 = bitcast i64* %2 to i32*
+  %call1 = call i8* @SAFEFREE(i32* %3)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define internal void @goodG2B1() #0 {
+entry:
+  %data = alloca i64*, align 8
+  store i64* null, i64** %data, align 8
+  %call = call i8* @SAFEMALLOC(i32 800)
+  %0 = bitcast i8* %call to i64*
+  store i64* %0, i64** %data, align 8
+  %1 = load i64*, i64** %data, align 8
+  %cmp = icmp eq i64* %1, null
+  br i1 %cmp, label %if.then, label %if.end
+
+if.then:                                          ; preds = %entry
+  call void @exit(i32 -1) #7
+  unreachable
+
+if.end:                                           ; preds = %entry
+  %2 = load i64*, i64** %data, align 8
+  %3 = bitcast i64* %2 to i32*
+  %call1 = call i8* @SAFEFREE(i32* %3)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define internal void @goodG2B2() #0 {
+entry:
+  %data = alloca i64*, align 8
+  store i64* null, i64** %data, align 8
+  %call = call i8* @SAFEMALLOC(i32 800)
+  %0 = bitcast i8* %call to i64*
+  store i64* %0, i64** %data, align 8
+  %1 = load i64*, i64** %data, align 8
+  %cmp = icmp eq i64* %1, null
+  br i1 %cmp, label %if.then, label %if.end
+
+if.then:                                          ; preds = %entry
+  call void @exit(i32 -1) #7
+  unreachable
+
+if.end:                                           ; preds = %entry
+  %2 = load i64*, i64** %data, align 8
+  %3 = bitcast i64* %2 to i32*
+  %call1 = call i8* @SAFEFREE(i32* %3)
+  ret void
+}
+
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #3 = { nounwind readnone willreturn "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #4 = { noreturn nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #5 = { nounwind }
+attributes #6 = { nounwind readnone willreturn }
+attributes #7 = { noreturn nounwind }
+
+!llvm.module.flags = !{!0, !1, !2}
+!llvm.ident = !{!3}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{i32 7, !"uwtable", i32 1}
+!2 = !{i32 7, !"frame-pointer", i32 2}
+!3 = !{!"clang version 13.0.0"}
+!4 = distinct !{!4, !5}
+!5 = !{!"llvm.loop.mustprogress"}
+!6 = distinct !{!6, !5}
+!7 = distinct !{!7, !5}

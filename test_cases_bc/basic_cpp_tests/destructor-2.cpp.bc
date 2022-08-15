@@ -118,86 +118,6 @@ entry:
   ret void
 }
 
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z10SAFEMALLOCi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #10
-  ret i8* %call
-}
-
-; Function Attrs: nounwind
-declare dso_local noalias align 16 i8* @malloc(i64) #3
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z9PLKMALLOCi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #10
-  ret i8* %call
-}
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z9NFRMALLOCi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #10
-  ret i8* %call
-}
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z9CLKMALLOCi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #10
-  ret i8* %call
-}
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z9NFRLEAKFPi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #10
-  ret i8* %call
-}
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z9PLKLEAKFPi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #10
-  ret i8* %call
-}
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z6LEAKFNi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #10
-  ret i8* %call
-}
-
 ; Function Attrs: mustprogress noinline optnone uwtable
 define dso_local void @_Z9RC_ACCESSii(i32 %id, i32 %flags) #0 {
 entry:
@@ -278,7 +198,7 @@ entry:
 }
 
 ; Function Attrs: mustprogress noinline norecurse optnone uwtable
-define dso_local i32 @main() #4 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+define dso_local i32 @main() #3 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
 entry:
   %retval = alloca i32, align 4
   %i = alloca i32*, align 8
@@ -287,7 +207,7 @@ entry:
   %ehselector.slot = alloca i32, align 4
   store i32 0, i32* %retval, align 4
   store i32* @global_obj, i32** %i, align 8
-  %call = call noalias nonnull i8* @_Znwm(i64 24) #11
+  %call = call noalias nonnull i8* @_Znwm(i64 24) #9
   %0 = bitcast i8* %call to %class.B*
   %1 = load i32*, i32** %i, align 8
   invoke void @_ZN1BC2EPi(%class.B* nonnull align 8 dereferenceable(24) %0, i32* %1)
@@ -317,7 +237,7 @@ lpad:                                             ; preds = %entry
   store i8* %6, i8** %exn.slot, align 8
   %7 = extractvalue { i8*, i32 } %5, 1
   store i32 %7, i32* %ehselector.slot, align 4
-  call void @_ZdlPv(i8* %call) #12
+  call void @_ZdlPv(i8* %call) #11
   br label %eh.resume
 
 eh.resume:                                        ; preds = %lpad
@@ -329,10 +249,10 @@ eh.resume:                                        ; preds = %lpad
 }
 
 ; Function Attrs: nobuiltin allocsize(0)
-declare dso_local nonnull i8* @_Znwm(i64) #5
+declare dso_local nonnull i8* @_Znwm(i64) #4
 
 ; Function Attrs: noinline optnone uwtable
-define linkonce_odr dso_local void @_ZN1BC2EPi(%class.B* nonnull align 8 dereferenceable(24) %this, i32* %i) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZN1BC2EPi(%class.B* nonnull align 8 dereferenceable(24) %this, i32* %i) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %class.B*, align 8
   %i.addr = alloca i32*, align 8
@@ -353,10 +273,10 @@ entry:
 declare dso_local i32 @__gxx_personality_v0(...)
 
 ; Function Attrs: nobuiltin nounwind
-declare dso_local void @_ZdlPv(i8*) #7
+declare dso_local void @_ZdlPv(i8*) #6
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZN1AC2EPi(%class.A* nonnull align 8 dereferenceable(16) %this, i32* %i) unnamed_addr #8 comdat align 2 {
+define linkonce_odr dso_local void @_ZN1AC2EPi(%class.A* nonnull align 8 dereferenceable(16) %this, i32* %i) unnamed_addr #7 comdat align 2 {
 entry:
   %this.addr = alloca %class.A*, align 8
   %i.addr = alloca i32*, align 8
@@ -372,7 +292,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZN1BD2Ev(%class.B* nonnull align 8 dereferenceable(24) %this) unnamed_addr #8 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+define linkonce_odr dso_local void @_ZN1BD2Ev(%class.B* nonnull align 8 dereferenceable(24) %this) unnamed_addr #7 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
 entry:
   %this.addr = alloca %class.B*, align 8
   %exn.slot = alloca i8*, align 8
@@ -403,19 +323,19 @@ lpad:                                             ; preds = %entry
 
 terminate.handler:                                ; preds = %lpad
   %exn = load i8*, i8** %exn.slot, align 8
-  call void @__clang_call_terminate(i8* %exn) #13
+  call void @__clang_call_terminate(i8* %exn) #12
   unreachable
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZN1BD0Ev(%class.B* nonnull align 8 dereferenceable(24) %this) unnamed_addr #8 comdat align 2 {
+define linkonce_odr dso_local void @_ZN1BD0Ev(%class.B* nonnull align 8 dereferenceable(24) %this) unnamed_addr #7 comdat align 2 {
 entry:
   %this.addr = alloca %class.B*, align 8
   store %class.B* %this, %class.B** %this.addr, align 8
   %this1 = load %class.B*, %class.B** %this.addr, align 8
   call void @_ZN1BD2Ev(%class.B* nonnull align 8 dereferenceable(24) %this1) #10
   %0 = bitcast %class.B* %this1 to i8*
-  call void @_ZdlPv(i8* %0) #12
+  call void @_ZdlPv(i8* %0) #11
   ret void
 }
 
@@ -435,7 +355,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZN1AD2Ev(%class.A* nonnull align 8 dereferenceable(16) %this) unnamed_addr #8 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+define linkonce_odr dso_local void @_ZN1AD2Ev(%class.A* nonnull align 8 dereferenceable(16) %this) unnamed_addr #7 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
 entry:
   %this.addr = alloca %class.A*, align 8
   store %class.A* %this, %class.A** %this.addr, align 8
@@ -452,19 +372,19 @@ terminate.lpad:                                   ; preds = %entry
   %1 = landingpad { i8*, i32 }
           catch i8* null
   %2 = extractvalue { i8*, i32 } %1, 0
-  call void @__clang_call_terminate(i8* %2) #13
+  call void @__clang_call_terminate(i8* %2) #12
   unreachable
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZN1AD0Ev(%class.A* nonnull align 8 dereferenceable(16) %this) unnamed_addr #8 comdat align 2 {
+define linkonce_odr dso_local void @_ZN1AD0Ev(%class.A* nonnull align 8 dereferenceable(16) %this) unnamed_addr #7 comdat align 2 {
 entry:
   %this.addr = alloca %class.A*, align 8
   store %class.A* %this, %class.A** %this.addr, align 8
   %this1 = load %class.A*, %class.A** %this.addr, align 8
   call void @_ZN1AD2Ev(%class.A* nonnull align 8 dereferenceable(16) %this1) #10
   %0 = bitcast %class.A* %this1 to i8*
-  call void @_ZdlPv(i8* %0) #12
+  call void @_ZdlPv(i8* %0) #11
   ret void
 }
 
@@ -484,9 +404,9 @@ entry:
 }
 
 ; Function Attrs: noinline noreturn nounwind
-define linkonce_odr hidden void @__clang_call_terminate(i8* %0) #9 comdat {
+define linkonce_odr hidden void @__clang_call_terminate(i8* %0) #8 comdat {
   %2 = call i8* @__cxa_begin_catch(i8* %0) #10
-  call void @_ZSt9terminatev() #13
+  call void @_ZSt9terminatev() #12
   unreachable
 }
 
@@ -497,17 +417,16 @@ declare dso_local void @_ZSt9terminatev()
 attributes #0 = { mustprogress noinline optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 attributes #2 = { mustprogress noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #3 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #4 = { mustprogress noinline norecurse optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #5 = { nobuiltin allocsize(0) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #6 = { noinline optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #7 = { nobuiltin nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #8 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #9 = { noinline noreturn nounwind }
+attributes #3 = { mustprogress noinline norecurse optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #4 = { nobuiltin allocsize(0) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #5 = { noinline optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #6 = { nobuiltin nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #7 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #8 = { noinline noreturn nounwind }
+attributes #9 = { builtin allocsize(0) }
 attributes #10 = { nounwind }
-attributes #11 = { builtin allocsize(0) }
-attributes #12 = { builtin nounwind }
-attributes #13 = { noreturn nounwind }
+attributes #11 = { builtin nounwind }
+attributes #12 = { noreturn nounwind }
 
 !llvm.module.flags = !{!0, !1, !2}
 !llvm.ident = !{!3}

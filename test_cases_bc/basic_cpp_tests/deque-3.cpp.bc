@@ -253,86 +253,6 @@ entry:
   ret void
 }
 
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z10SAFEMALLOCi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #12
-  ret i8* %call
-}
-
-; Function Attrs: nounwind
-declare dso_local noalias align 16 i8* @malloc(i64) #3
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z9PLKMALLOCi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #12
-  ret i8* %call
-}
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z9NFRMALLOCi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #12
-  ret i8* %call
-}
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z9CLKMALLOCi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #12
-  ret i8* %call
-}
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z9NFRLEAKFPi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #12
-  ret i8* %call
-}
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z9PLKLEAKFPi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #12
-  ret i8* %call
-}
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z6LEAKFNi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #12
-  ret i8* %call
-}
-
 ; Function Attrs: mustprogress noinline optnone uwtable
 define dso_local void @_Z9RC_ACCESSii(i32 %id, i32 %flags) #0 {
 entry:
@@ -399,7 +319,7 @@ entry:
 declare dso_local i32 @getchar() #1
 
 ; Function Attrs: mustprogress noinline norecurse optnone uwtable
-define dso_local i32 @main(i32 %argc, i8** %argv) #4 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+define dso_local i32 @main(i32 %argc, i8** %argv) #3 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
 entry:
   %retval = alloca i32, align 4
   %argc.addr = alloca i32, align 4
@@ -415,12 +335,12 @@ entry:
   store i8** %argv, i8*** %argv.addr, align 8
   store i32* @global_obj, i32** %ptr, align 8
   call void @_ZNSt5dequeI1ASaIS0_EEC2Ev(%"class.std::deque"* nonnull align 8 dereferenceable(80) %adeque)
-  call void @_ZN1AC2Ev(%class.A* nonnull align 8 dereferenceable(8) %a) #12
+  call void @_ZN1AC2Ev(%class.A* nonnull align 8 dereferenceable(8) %a) #11
   invoke void @_ZNSt5dequeI1ASaIS0_EE9push_backERKS0_(%"class.std::deque"* nonnull align 8 dereferenceable(80) %adeque, %class.A* nonnull align 8 dereferenceable(8) %a)
           to label %invoke.cont unwind label %lpad
 
 invoke.cont:                                      ; preds = %entry
-  %call = call nonnull align 8 dereferenceable(8) %class.A* @_ZNSt5dequeI1ASaIS0_EE5frontEv(%"class.std::deque"* nonnull align 8 dereferenceable(80) %adeque) #12
+  %call = call nonnull align 8 dereferenceable(8) %class.A* @_ZNSt5dequeI1ASaIS0_EE5frontEv(%"class.std::deque"* nonnull align 8 dereferenceable(80) %adeque) #11
   store %class.A* %call, %class.A** %aptr, align 8
   %0 = load %class.A*, %class.A** %aptr, align 8
   %1 = load i32*, i32** %ptr, align 8
@@ -433,7 +353,7 @@ invoke.cont:                                      ; preds = %entry
 
 invoke.cont1:                                     ; preds = %invoke.cont
   store i32 0, i32* %retval, align 4
-  call void @_ZNSt5dequeI1ASaIS0_EED2Ev(%"class.std::deque"* nonnull align 8 dereferenceable(80) %adeque) #12
+  call void @_ZNSt5dequeI1ASaIS0_EED2Ev(%"class.std::deque"* nonnull align 8 dereferenceable(80) %adeque) #11
   %4 = load i32, i32* %retval, align 4
   ret i32 %4
 
@@ -444,7 +364,7 @@ lpad:                                             ; preds = %invoke.cont, %entry
   store i8* %6, i8** %exn.slot, align 8
   %7 = extractvalue { i8*, i32 } %5, 1
   store i32 %7, i32* %ehselector.slot, align 4
-  call void @_ZNSt5dequeI1ASaIS0_EED2Ev(%"class.std::deque"* nonnull align 8 dereferenceable(80) %adeque) #12
+  call void @_ZNSt5dequeI1ASaIS0_EED2Ev(%"class.std::deque"* nonnull align 8 dereferenceable(80) %adeque) #11
   br label %eh.resume
 
 eh.resume:                                        ; preds = %lpad
@@ -456,7 +376,7 @@ eh.resume:                                        ; preds = %lpad
 }
 
 ; Function Attrs: noinline optnone uwtable
-define linkonce_odr dso_local void @_ZNSt5dequeI1ASaIS0_EEC2Ev(%"class.std::deque"* nonnull align 8 dereferenceable(80) %this) unnamed_addr #5 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt5dequeI1ASaIS0_EEC2Ev(%"class.std::deque"* nonnull align 8 dereferenceable(80) %this) unnamed_addr #4 comdat align 2 {
 entry:
   %this.addr = alloca %"class.std::deque"*, align 8
   store %"class.std::deque"* %this, %"class.std::deque"** %this.addr, align 8
@@ -467,7 +387,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZN1AC2Ev(%class.A* nonnull align 8 dereferenceable(8) %this) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZN1AC2Ev(%class.A* nonnull align 8 dereferenceable(8) %this) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %class.A*, align 8
   store %class.A* %this, %class.A** %this.addr, align 8
@@ -512,7 +432,7 @@ if.then:                                          ; preds = %entry
   %_M_cur7 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish6, i32 0, i32 0
   %10 = load %class.A*, %class.A** %_M_cur7, align 8
   %11 = load %class.A*, %class.A** %__x.addr, align 8
-  call void @_ZNSt16allocator_traitsISaI1AEE9constructIS0_JRKS0_EEEvRS1_PT_DpOT0_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %7, %class.A* %10, %class.A* nonnull align 8 dereferenceable(8) %11) #12
+  call void @_ZNSt16allocator_traitsISaI1AEE9constructIS0_JRKS0_EEEvRS1_PT_DpOT0_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %7, %class.A* %10, %class.A* nonnull align 8 dereferenceable(8) %11) #11
   %12 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl8 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %12, i32 0, i32 0
   %13 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl8 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
@@ -541,13 +461,13 @@ entry:
   %ref.tmp = alloca %"struct.std::_Deque_iterator", align 8
   store %"class.std::deque"* %this, %"class.std::deque"** %this.addr, align 8
   %this1 = load %"class.std::deque"*, %"class.std::deque"** %this.addr, align 8
-  call void @_ZNSt5dequeI1ASaIS0_EE5beginEv(%"struct.std::_Deque_iterator"* sret(%"struct.std::_Deque_iterator") align 8 %ref.tmp, %"class.std::deque"* nonnull align 8 dereferenceable(80) %this1) #12
-  %call = call nonnull align 8 dereferenceable(8) %class.A* @_ZNKSt15_Deque_iteratorI1ARS0_PS0_EdeEv(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %ref.tmp) #12
+  call void @_ZNSt5dequeI1ASaIS0_EE5beginEv(%"struct.std::_Deque_iterator"* sret(%"struct.std::_Deque_iterator") align 8 %ref.tmp, %"class.std::deque"* nonnull align 8 dereferenceable(80) %this1) #11
+  %call = call nonnull align 8 dereferenceable(8) %class.A* @_ZNKSt15_Deque_iteratorI1ARS0_PS0_EdeEv(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %ref.tmp) #11
   ret %class.A* %call
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt5dequeI1ASaIS0_EED2Ev(%"class.std::deque"* nonnull align 8 dereferenceable(80) %this) unnamed_addr #6 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+define linkonce_odr dso_local void @_ZNSt5dequeI1ASaIS0_EED2Ev(%"class.std::deque"* nonnull align 8 dereferenceable(80) %this) unnamed_addr #5 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
 entry:
   %this.addr = alloca %"class.std::deque"*, align 8
   %agg.tmp = alloca %"struct.std::_Deque_iterator", align 8
@@ -556,16 +476,16 @@ entry:
   %ehselector.slot = alloca i32, align 4
   store %"class.std::deque"* %this, %"class.std::deque"** %this.addr, align 8
   %this1 = load %"class.std::deque"*, %"class.std::deque"** %this.addr, align 8
-  call void @_ZNSt5dequeI1ASaIS0_EE5beginEv(%"struct.std::_Deque_iterator"* sret(%"struct.std::_Deque_iterator") align 8 %agg.tmp, %"class.std::deque"* nonnull align 8 dereferenceable(80) %this1) #12
-  call void @_ZNSt5dequeI1ASaIS0_EE3endEv(%"struct.std::_Deque_iterator"* sret(%"struct.std::_Deque_iterator") align 8 %agg.tmp2, %"class.std::deque"* nonnull align 8 dereferenceable(80) %this1) #12
+  call void @_ZNSt5dequeI1ASaIS0_EE5beginEv(%"struct.std::_Deque_iterator"* sret(%"struct.std::_Deque_iterator") align 8 %agg.tmp, %"class.std::deque"* nonnull align 8 dereferenceable(80) %this1) #11
+  call void @_ZNSt5dequeI1ASaIS0_EE3endEv(%"struct.std::_Deque_iterator"* sret(%"struct.std::_Deque_iterator") align 8 %agg.tmp2, %"class.std::deque"* nonnull align 8 dereferenceable(80) %this1) #11
   %0 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
-  %call = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNSt11_Deque_baseI1ASaIS0_EE19_M_get_Tp_allocatorEv(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %0) #12
+  %call = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNSt11_Deque_baseI1ASaIS0_EE19_M_get_Tp_allocatorEv(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %0) #11
   invoke void @_ZNSt5dequeI1ASaIS0_EE15_M_destroy_dataESt15_Deque_iteratorIS0_RS0_PS0_ES6_RKS1_(%"class.std::deque"* nonnull align 8 dereferenceable(80) %this1, %"struct.std::_Deque_iterator"* %agg.tmp, %"struct.std::_Deque_iterator"* %agg.tmp2, %"class.std::allocator"* nonnull align 1 dereferenceable(1) %call)
           to label %invoke.cont unwind label %lpad
 
 invoke.cont:                                      ; preds = %entry
   %1 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
-  call void @_ZNSt11_Deque_baseI1ASaIS0_EED2Ev(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %1) #12
+  call void @_ZNSt11_Deque_baseI1ASaIS0_EED2Ev(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %1) #11
   ret void
 
 lpad:                                             ; preds = %entry
@@ -576,17 +496,17 @@ lpad:                                             ; preds = %entry
   %4 = extractvalue { i8*, i32 } %2, 1
   store i32 %4, i32* %ehselector.slot, align 4
   %5 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
-  call void @_ZNSt11_Deque_baseI1ASaIS0_EED2Ev(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %5) #12
+  call void @_ZNSt11_Deque_baseI1ASaIS0_EED2Ev(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %5) #11
   br label %terminate.handler
 
 terminate.handler:                                ; preds = %lpad
   %exn = load i8*, i8** %exn.slot, align 8
-  call void @__clang_call_terminate(i8* %exn) #13
+  call void @__clang_call_terminate(i8* %exn) #12
   unreachable
 }
 
 ; Function Attrs: noinline optnone uwtable
-define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EEC2Ev(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this) unnamed_addr #5 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EEC2Ev(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this) unnamed_addr #4 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
 entry:
   %this.addr = alloca %"class.std::_Deque_base"*, align 8
   %exn.slot = alloca i8*, align 8
@@ -594,7 +514,7 @@ entry:
   store %"class.std::_Deque_base"* %this, %"class.std::_Deque_base"** %this.addr, align 8
   %this1 = load %"class.std::_Deque_base"*, %"class.std::_Deque_base"** %this.addr, align 8
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  call void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implC2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* nonnull align 8 dereferenceable(80) %_M_impl) #12
+  call void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implC2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* nonnull align 8 dereferenceable(80) %_M_impl) #11
   invoke void @_ZNSt11_Deque_baseI1ASaIS0_EE17_M_initialize_mapEm(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1, i64 0)
           to label %invoke.cont unwind label %lpad
 
@@ -608,7 +528,7 @@ lpad:                                             ; preds = %entry
   store i8* %1, i8** %exn.slot, align 8
   %2 = extractvalue { i8*, i32 } %0, 1
   store i32 %2, i32* %ehselector.slot, align 4
-  call void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implD2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* nonnull align 8 dereferenceable(80) %_M_impl) #12
+  call void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implD2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* nonnull align 8 dereferenceable(80) %_M_impl) #11
   br label %eh.resume
 
 eh.resume:                                        ; preds = %lpad
@@ -620,15 +540,15 @@ eh.resume:                                        ; preds = %lpad
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implC2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* nonnull align 8 dereferenceable(80) %this) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implC2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* nonnull align 8 dereferenceable(80) %this) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"*, align 8
   store %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %this, %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"** %this.addr, align 8
   %this1 = load %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"*, %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"** %this.addr, align 8
   %0 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %this1 to %"class.std::allocator"*
-  call void @_ZNSaI1AEC2Ev(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %0) #12
+  call void @_ZNSaI1AEC2Ev(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %0) #11
   %1 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %this1 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
-  call void @_ZNSt11_Deque_baseI1ASaIS0_EE16_Deque_impl_dataC2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* nonnull align 8 dereferenceable(80) %1) #12
+  call void @_ZNSt11_Deque_baseI1ASaIS0_EE16_Deque_impl_dataC2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* nonnull align 8 dereferenceable(80) %1) #11
   ret void
 }
 
@@ -707,7 +627,7 @@ lpad:                                             ; preds = %entry
 
 catch:                                            ; preds = %lpad
   %exn = load i8*, i8** %exn.slot, align 8
-  %19 = call i8* @__cxa_begin_catch(i8* %exn) #12
+  %19 = call i8* @__cxa_begin_catch(i8* %exn) #11
   %_M_impl15 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
   %20 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl15 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
   %_M_map16 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %20, i32 0, i32 0
@@ -716,7 +636,7 @@ catch:                                            ; preds = %lpad
   %22 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl17 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
   %_M_map_size18 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %22, i32 0, i32 1
   %23 = load i64, i64* %_M_map_size18, align 8
-  call void @_ZNSt11_Deque_baseI1ASaIS0_EE17_M_deallocate_mapEPPS0_m(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1, %class.A** %21, i64 %23) #12
+  call void @_ZNSt11_Deque_baseI1ASaIS0_EE17_M_deallocate_mapEPPS0_m(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1, %class.A** %21, i64 %23) #11
   %_M_impl19 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
   %24 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl19 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
   %_M_map20 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %24, i32 0, i32 0
@@ -725,7 +645,7 @@ catch:                                            ; preds = %lpad
   %25 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl21 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
   %_M_map_size22 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %25, i32 0, i32 1
   store i64 0, i64* %_M_map_size22, align 8
-  invoke void @__cxa_rethrow() #14
+  invoke void @__cxa_rethrow() #13
           to label %unreachable unwind label %lpad23
 
 lpad23:                                           ; preds = %catch
@@ -746,13 +666,13 @@ try.cont:                                         ; preds = %invoke.cont
   %29 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl25 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
   %_M_start = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %29, i32 0, i32 2
   %30 = load %class.A**, %class.A*** %__nstart, align 8
-  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_E11_M_set_nodeEPS2_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_start, %class.A** %30) #12
+  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_E11_M_set_nodeEPS2_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_start, %class.A** %30) #11
   %_M_impl26 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
   %31 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl26 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
   %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %31, i32 0, i32 3
   %32 = load %class.A**, %class.A*** %__nfinish, align 8
   %add.ptr27 = getelementptr inbounds %class.A*, %class.A** %32, i64 -1
-  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_E11_M_set_nodeEPS2_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_finish, %class.A** %add.ptr27) #12
+  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_E11_M_set_nodeEPS2_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_finish, %class.A** %add.ptr27) #11
   %_M_impl28 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
   %33 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl28 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
   %_M_start29 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %33, i32 0, i32 2
@@ -790,7 +710,7 @@ terminate.lpad:                                   ; preds = %lpad23
   %40 = landingpad { i8*, i32 }
           catch i8* null
   %41 = extractvalue { i8*, i32 } %40, 0
-  call void @__clang_call_terminate(i8* %41) #13
+  call void @__clang_call_terminate(i8* %41) #12
   unreachable
 
 unreachable:                                      ; preds = %catch
@@ -798,29 +718,29 @@ unreachable:                                      ; preds = %catch
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implD2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* nonnull align 8 dereferenceable(80) %this) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implD2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* nonnull align 8 dereferenceable(80) %this) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"*, align 8
   store %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %this, %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"** %this.addr, align 8
   %this1 = load %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"*, %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"** %this.addr, align 8
   %0 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %this1 to %"class.std::allocator"*
-  call void @_ZNSaI1AED2Ev(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %0) #12
+  call void @_ZNSaI1AED2Ev(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %0) #11
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSaI1AEC2Ev(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSaI1AEC2Ev(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %"class.std::allocator"*, align 8
   store %"class.std::allocator"* %this, %"class.std::allocator"** %this.addr, align 8
   %this1 = load %"class.std::allocator"*, %"class.std::allocator"** %this.addr, align 8
   %0 = bitcast %"class.std::allocator"* %this1 to %"class.__gnu_cxx::new_allocator"*
-  call void @_ZN9__gnu_cxx13new_allocatorI1AEC2Ev(%"class.__gnu_cxx::new_allocator"* nonnull align 1 dereferenceable(1) %0) #12
+  call void @_ZN9__gnu_cxx13new_allocatorI1AEC2Ev(%"class.__gnu_cxx::new_allocator"* nonnull align 1 dereferenceable(1) %0) #11
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EE16_Deque_impl_dataC2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* nonnull align 8 dereferenceable(80) %this) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EE16_Deque_impl_dataC2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* nonnull align 8 dereferenceable(80) %this) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*, align 8
   store %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %this, %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"** %this.addr, align 8
@@ -830,14 +750,14 @@ entry:
   %_M_map_size = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %this1, i32 0, i32 1
   store i64 0, i64* %_M_map_size, align 8
   %_M_start = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %this1, i32 0, i32 2
-  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2Ev(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_start) #12
+  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2Ev(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_start) #11
   %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %this1, i32 0, i32 3
-  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2Ev(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_finish) #12
+  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2Ev(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_finish) #11
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorI1AEC2Ev(%"class.__gnu_cxx::new_allocator"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorI1AEC2Ev(%"class.__gnu_cxx::new_allocator"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %"class.__gnu_cxx::new_allocator"*, align 8
   store %"class.__gnu_cxx::new_allocator"* %this, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
@@ -846,7 +766,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2Ev(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %this) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2Ev(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %this) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %"struct.std::_Deque_iterator"*, align 8
   store %"struct.std::_Deque_iterator"* %this, %"struct.std::_Deque_iterator"** %this.addr, align 8
@@ -925,13 +845,13 @@ entry:
   store %"class.std::_Deque_base"* %this, %"class.std::_Deque_base"** %this.addr, align 8
   store i64 %__n, i64* %__n.addr, align 8
   %this1 = load %"class.std::_Deque_base"*, %"class.std::_Deque_base"** %this.addr, align 8
-  call void @_ZNKSt11_Deque_baseI1ASaIS0_EE20_M_get_map_allocatorEv(%"class.std::allocator.0"* sret(%"class.std::allocator.0") align 1 %__map_alloc, %"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1) #12
+  call void @_ZNKSt11_Deque_baseI1ASaIS0_EE20_M_get_map_allocatorEv(%"class.std::allocator.0"* sret(%"class.std::allocator.0") align 1 %__map_alloc, %"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1) #11
   %0 = load i64, i64* %__n.addr, align 8
   %call = invoke %class.A** @_ZNSt16allocator_traitsISaIP1AEE8allocateERS2_m(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %__map_alloc, i64 %0)
           to label %invoke.cont unwind label %lpad
 
 invoke.cont:                                      ; preds = %entry
-  call void @_ZNSaIP1AED2Ev(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %__map_alloc) #12
+  call void @_ZNSaIP1AED2Ev(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %__map_alloc) #11
   ret %class.A** %call
 
 lpad:                                             ; preds = %entry
@@ -941,7 +861,7 @@ lpad:                                             ; preds = %entry
   store i8* %2, i8** %exn.slot, align 8
   %3 = extractvalue { i8*, i32 } %1, 1
   store i32 %3, i32* %ehselector.slot, align 4
-  call void @_ZNSaIP1AED2Ev(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %__map_alloc) #12
+  call void @_ZNSaIP1AED2Ev(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %__map_alloc) #11
   br label %eh.resume
 
 eh.resume:                                        ; preds = %lpad
@@ -1001,11 +921,11 @@ lpad:                                             ; preds = %for.body
 
 catch:                                            ; preds = %lpad
   %exn = load i8*, i8** %exn.slot, align 8
-  %8 = call i8* @__cxa_begin_catch(i8* %exn) #12
+  %8 = call i8* @__cxa_begin_catch(i8* %exn) #11
   %9 = load %class.A**, %class.A*** %__nstart.addr, align 8
   %10 = load %class.A**, %class.A*** %__cur, align 8
-  call void @_ZNSt11_Deque_baseI1ASaIS0_EE16_M_destroy_nodesEPPS0_S4_(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1, %class.A** %9, %class.A** %10) #12
-  invoke void @__cxa_rethrow() #14
+  call void @_ZNSt11_Deque_baseI1ASaIS0_EE16_M_destroy_nodesEPPS0_S4_(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1, %class.A** %9, %class.A** %10) #11
+  invoke void @__cxa_rethrow() #13
           to label %unreachable unwind label %lpad2
 
 for.end:                                          ; preds = %for.cond
@@ -1038,7 +958,7 @@ terminate.lpad:                                   ; preds = %lpad2
   %14 = landingpad { i8*, i32 }
           catch i8* null
   %15 = extractvalue { i8*, i32 } %14, 0
-  call void @__clang_call_terminate(i8* %15) #13
+  call void @__clang_call_terminate(i8* %15) #12
   unreachable
 
 unreachable:                                      ; preds = %catch
@@ -1060,14 +980,14 @@ entry:
   store %class.A** %__p, %class.A*** %__p.addr, align 8
   store i64 %__n, i64* %__n.addr, align 8
   %this1 = load %"class.std::_Deque_base"*, %"class.std::_Deque_base"** %this.addr, align 8
-  call void @_ZNKSt11_Deque_baseI1ASaIS0_EE20_M_get_map_allocatorEv(%"class.std::allocator.0"* sret(%"class.std::allocator.0") align 1 %__map_alloc, %"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1) #12
+  call void @_ZNKSt11_Deque_baseI1ASaIS0_EE20_M_get_map_allocatorEv(%"class.std::allocator.0"* sret(%"class.std::allocator.0") align 1 %__map_alloc, %"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1) #11
   %0 = load %class.A**, %class.A*** %__p.addr, align 8
   %1 = load i64, i64* %__n.addr, align 8
   invoke void @_ZNSt16allocator_traitsISaIP1AEE10deallocateERS2_PS1_m(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %__map_alloc, %class.A** %0, i64 %1)
           to label %invoke.cont unwind label %lpad
 
 invoke.cont:                                      ; preds = %entry
-  call void @_ZNSaIP1AED2Ev(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %__map_alloc) #12
+  call void @_ZNSaIP1AED2Ev(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %__map_alloc) #11
   ret void
 
 lpad:                                             ; preds = %entry
@@ -1077,12 +997,12 @@ lpad:                                             ; preds = %entry
   store i8* %3, i8** %exn.slot, align 8
   %4 = extractvalue { i8*, i32 } %2, 1
   store i32 %4, i32* %ehselector.slot, align 4
-  call void @_ZNSaIP1AED2Ev(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %__map_alloc) #12
+  call void @_ZNSaIP1AED2Ev(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %__map_alloc) #11
   br label %terminate.handler
 
 terminate.handler:                                ; preds = %lpad
   %exn = load i8*, i8** %exn.slot, align 8
-  call void @__clang_call_terminate(i8* %exn) #13
+  call void @__clang_call_terminate(i8* %exn) #12
   unreachable
 }
 
@@ -1091,9 +1011,9 @@ declare dso_local void @__cxa_rethrow()
 declare dso_local void @__cxa_end_catch()
 
 ; Function Attrs: noinline noreturn nounwind
-define linkonce_odr hidden void @__clang_call_terminate(i8* %0) #7 comdat {
-  %2 = call i8* @__cxa_begin_catch(i8* %0) #12
-  call void @_ZSt9terminatev() #13
+define linkonce_odr hidden void @__clang_call_terminate(i8* %0) #6 comdat {
+  %2 = call i8* @__cxa_begin_catch(i8* %0) #11
+  call void @_ZSt9terminatev() #12
   unreachable
 }
 
@@ -1116,7 +1036,7 @@ entry:
   store %class.A* %2, %class.A** %_M_first, align 8
   %_M_first2 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %this1, i32 0, i32 1
   %3 = load %class.A*, %class.A** %_M_first2, align 8
-  %call = call i64 @_ZNSt15_Deque_iteratorI1ARS0_PS0_E14_S_buffer_sizeEv() #12
+  %call = call i64 @_ZNSt15_Deque_iteratorI1ARS0_PS0_E14_S_buffer_sizeEv() #11
   %add.ptr = getelementptr inbounds %class.A, %class.A* %3, i64 %call
   %_M_last = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %this1, i32 0, i32 2
   store %class.A* %add.ptr, %class.A** %_M_last, align 8
@@ -1132,8 +1052,8 @@ entry:
   store i8* %0, i8** %result.ptr, align 8
   store %"class.std::_Deque_base"* %this, %"class.std::_Deque_base"** %this.addr, align 8
   %this1 = load %"class.std::_Deque_base"*, %"class.std::_Deque_base"** %this.addr, align 8
-  %call = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNKSt11_Deque_baseI1ASaIS0_EE19_M_get_Tp_allocatorEv(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1) #12
-  call void @_ZNSaIP1AEC2IS_EERKSaIT_E(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %agg.result, %"class.std::allocator"* nonnull align 1 dereferenceable(1) %call) #12
+  %call = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNKSt11_Deque_baseI1ASaIS0_EE19_M_get_Tp_allocatorEv(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1) #11
+  call void @_ZNSaIP1AEC2IS_EERKSaIT_E(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %agg.result, %"class.std::allocator"* nonnull align 1 dereferenceable(1) %call) #11
   ret void
 }
 
@@ -1152,13 +1072,13 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSaIP1AED2Ev(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSaIP1AED2Ev(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %"class.std::allocator.0"*, align 8
   store %"class.std::allocator.0"* %this, %"class.std::allocator.0"** %this.addr, align 8
   %this1 = load %"class.std::allocator.0"*, %"class.std::allocator.0"** %this.addr, align 8
   %0 = bitcast %"class.std::allocator.0"* %this1 to %"class.__gnu_cxx::new_allocator.1"*
-  call void @_ZN9__gnu_cxx13new_allocatorIP1AED2Ev(%"class.__gnu_cxx::new_allocator.1"* nonnull align 1 dereferenceable(1) %0) #12
+  call void @_ZN9__gnu_cxx13new_allocatorIP1AED2Ev(%"class.__gnu_cxx::new_allocator.1"* nonnull align 1 dereferenceable(1) %0) #11
   ret void
 }
 
@@ -1174,7 +1094,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSaIP1AEC2IS_EERKSaIT_E(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %this, %"class.std::allocator"* nonnull align 1 dereferenceable(1) %0) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSaIP1AEC2IS_EERKSaIT_E(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %this, %"class.std::allocator"* nonnull align 1 dereferenceable(1) %0) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %"class.std::allocator.0"*, align 8
   %.addr = alloca %"class.std::allocator"*, align 8
@@ -1182,12 +1102,12 @@ entry:
   store %"class.std::allocator"* %0, %"class.std::allocator"** %.addr, align 8
   %this1 = load %"class.std::allocator.0"*, %"class.std::allocator.0"** %this.addr, align 8
   %1 = bitcast %"class.std::allocator.0"* %this1 to %"class.__gnu_cxx::new_allocator.1"*
-  call void @_ZN9__gnu_cxx13new_allocatorIP1AEC2Ev(%"class.__gnu_cxx::new_allocator.1"* nonnull align 1 dereferenceable(1) %1) #12
+  call void @_ZN9__gnu_cxx13new_allocatorIP1AEC2Ev(%"class.__gnu_cxx::new_allocator.1"* nonnull align 1 dereferenceable(1) %1) #11
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorIP1AEC2Ev(%"class.__gnu_cxx::new_allocator.1"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorIP1AEC2Ev(%"class.__gnu_cxx::new_allocator.1"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %"class.__gnu_cxx::new_allocator.1"*, align 8
   store %"class.__gnu_cxx::new_allocator.1"* %this, %"class.__gnu_cxx::new_allocator.1"** %this.addr, align 8
@@ -1206,18 +1126,18 @@ entry:
   store i8* %0, i8** %.addr, align 8
   %this1 = load %"class.__gnu_cxx::new_allocator.1"*, %"class.__gnu_cxx::new_allocator.1"** %this.addr, align 8
   %1 = load i64, i64* %__n.addr, align 8
-  %call = call i64 @_ZNK9__gnu_cxx13new_allocatorIP1AE11_M_max_sizeEv(%"class.__gnu_cxx::new_allocator.1"* nonnull align 1 dereferenceable(1) %this1) #12
+  %call = call i64 @_ZNK9__gnu_cxx13new_allocatorIP1AE11_M_max_sizeEv(%"class.__gnu_cxx::new_allocator.1"* nonnull align 1 dereferenceable(1) %this1) #11
   %cmp = icmp ugt i64 %1, %call
   br i1 %cmp, label %if.then, label %if.end
 
 if.then:                                          ; preds = %entry
-  call void @_ZSt17__throw_bad_allocv() #14
+  call void @_ZSt17__throw_bad_allocv() #13
   unreachable
 
 if.end:                                           ; preds = %entry
   %2 = load i64, i64* %__n.addr, align 8
   %mul = mul i64 %2, 8
-  %call2 = call noalias nonnull i8* @_Znwm(i64 %mul) #15
+  %call2 = call noalias nonnull i8* @_Znwm(i64 %mul) #14
   %3 = bitcast i8* %call2 to %class.A**
   ret %class.A** %3
 }
@@ -1232,13 +1152,13 @@ entry:
 }
 
 ; Function Attrs: noreturn
-declare dso_local void @_ZSt17__throw_bad_allocv() #8
+declare dso_local void @_ZSt17__throw_bad_allocv() #7
 
 ; Function Attrs: nobuiltin allocsize(0)
-declare dso_local nonnull i8* @_Znwm(i64) #9
+declare dso_local nonnull i8* @_Znwm(i64) #8
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorIP1AED2Ev(%"class.__gnu_cxx::new_allocator.1"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorIP1AED2Ev(%"class.__gnu_cxx::new_allocator.1"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %"class.__gnu_cxx::new_allocator.1"*, align 8
   store %"class.__gnu_cxx::new_allocator.1"* %this, %"class.__gnu_cxx::new_allocator.1"** %this.addr, align 8
@@ -1283,7 +1203,7 @@ for.cond:                                         ; preds = %for.inc, %entry
 for.body:                                         ; preds = %for.cond
   %3 = load %class.A**, %class.A*** %__n, align 8
   %4 = load %class.A*, %class.A** %3, align 8
-  call void @_ZNSt11_Deque_baseI1ASaIS0_EE18_M_deallocate_nodeEPS0_(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1, %class.A* %4) #12
+  call void @_ZNSt11_Deque_baseI1ASaIS0_EE18_M_deallocate_nodeEPS0_(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1, %class.A* %4) #11
   br label %for.inc
 
 for.inc:                                          ; preds = %for.body
@@ -1321,18 +1241,18 @@ entry:
   store i8* %0, i8** %.addr, align 8
   %this1 = load %"class.__gnu_cxx::new_allocator"*, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
   %1 = load i64, i64* %__n.addr, align 8
-  %call = call i64 @_ZNK9__gnu_cxx13new_allocatorI1AE11_M_max_sizeEv(%"class.__gnu_cxx::new_allocator"* nonnull align 1 dereferenceable(1) %this1) #12
+  %call = call i64 @_ZNK9__gnu_cxx13new_allocatorI1AE11_M_max_sizeEv(%"class.__gnu_cxx::new_allocator"* nonnull align 1 dereferenceable(1) %this1) #11
   %cmp = icmp ugt i64 %1, %call
   br i1 %cmp, label %if.then, label %if.end
 
 if.then:                                          ; preds = %entry
-  call void @_ZSt17__throw_bad_allocv() #14
+  call void @_ZSt17__throw_bad_allocv() #13
   unreachable
 
 if.end:                                           ; preds = %entry
   %2 = load i64, i64* %__n.addr, align 8
   %mul = mul i64 %2, 8
-  %call2 = call noalias nonnull i8* @_Znwm(i64 %mul) #15
+  %call2 = call noalias nonnull i8* @_Znwm(i64 %mul) #14
   %3 = bitcast i8* %call2 to %class.A*
   ret %class.A* %3
 }
@@ -1368,7 +1288,7 @@ terminate.lpad:                                   ; preds = %entry
   %2 = landingpad { i8*, i32 }
           catch i8* null
   %3 = extractvalue { i8*, i32 } %2, 0
-  call void @__clang_call_terminate(i8* %3) #13
+  call void @__clang_call_terminate(i8* %3) #12
   unreachable
 }
 
@@ -1401,12 +1321,12 @@ entry:
   %this1 = load %"class.__gnu_cxx::new_allocator"*, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
   %0 = load %class.A*, %class.A** %__p.addr, align 8
   %1 = bitcast %class.A* %0 to i8*
-  call void @_ZdlPv(i8* %1) #12
+  call void @_ZdlPv(i8* %1) #11
   ret void
 }
 
 ; Function Attrs: nobuiltin nounwind
-declare dso_local void @_ZdlPv(i8*) #10
+declare dso_local void @_ZdlPv(i8*) #9
 
 ; Function Attrs: mustprogress noinline optnone uwtable
 define linkonce_odr dso_local void @_ZNSt16allocator_traitsISaIP1AEE10deallocateERS2_PS1_m(%"class.std::allocator.0"* nonnull align 1 dereferenceable(1) %__a, %class.A** %__p, i64 %__n) #0 comdat align 2 {
@@ -1437,7 +1357,7 @@ entry:
   %this1 = load %"class.__gnu_cxx::new_allocator.1"*, %"class.__gnu_cxx::new_allocator.1"** %this.addr, align 8
   %0 = load %class.A**, %class.A*** %__p.addr, align 8
   %1 = bitcast %class.A** %0 to i8*
-  call void @_ZdlPv(i8* %1) #12
+  call void @_ZdlPv(i8* %1) #11
   ret void
 }
 
@@ -1449,18 +1369,18 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSaI1AED2Ev(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSaI1AED2Ev(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %"class.std::allocator"*, align 8
   store %"class.std::allocator"* %this, %"class.std::allocator"** %this.addr, align 8
   %this1 = load %"class.std::allocator"*, %"class.std::allocator"** %this.addr, align 8
   %0 = bitcast %"class.std::allocator"* %this1 to %"class.__gnu_cxx::new_allocator"*
-  call void @_ZN9__gnu_cxx13new_allocatorI1AED2Ev(%"class.__gnu_cxx::new_allocator"* nonnull align 1 dereferenceable(1) %0) #12
+  call void @_ZN9__gnu_cxx13new_allocatorI1AED2Ev(%"class.__gnu_cxx::new_allocator"* nonnull align 1 dereferenceable(1) %0) #11
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorI1AED2Ev(%"class.__gnu_cxx::new_allocator"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZN9__gnu_cxx13new_allocatorI1AED2Ev(%"class.__gnu_cxx::new_allocator"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %"class.__gnu_cxx::new_allocator"*, align 8
   store %"class.__gnu_cxx::new_allocator"* %this, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
@@ -1508,7 +1428,7 @@ entry:
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %1, i32 0, i32 0
   %2 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
   %_M_start = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %2, i32 0, i32 2
-  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2ERKS3_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %agg.result, %"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_start) #12
+  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2ERKS3_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %agg.result, %"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_start) #11
   ret void
 }
 
@@ -1525,7 +1445,7 @@ entry:
   %_M_impl = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %1, i32 0, i32 0
   %2 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
   %_M_finish = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %2, i32 0, i32 3
-  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2ERKS3_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %agg.result, %"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_finish) #12
+  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2ERKS3_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %agg.result, %"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_finish) #11
   ret void
 }
 
@@ -1541,7 +1461,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EED2Ev(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt11_Deque_baseI1ASaIS0_EED2Ev(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %"class.std::_Deque_base"*, align 8
   store %"class.std::_Deque_base"* %this, %"class.std::_Deque_base"** %this.addr, align 8
@@ -1565,7 +1485,7 @@ if.then:                                          ; preds = %entry
   %_M_node4 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish, i32 0, i32 3
   %5 = load %class.A**, %class.A*** %_M_node4, align 8
   %add.ptr = getelementptr inbounds %class.A*, %class.A** %5, i64 1
-  call void @_ZNSt11_Deque_baseI1ASaIS0_EE16_M_destroy_nodesEPPS0_S4_(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1, %class.A** %3, %class.A** %add.ptr) #12
+  call void @_ZNSt11_Deque_baseI1ASaIS0_EE16_M_destroy_nodesEPPS0_S4_(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1, %class.A** %3, %class.A** %add.ptr) #11
   %_M_impl5 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
   %6 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl5 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
   %_M_map6 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %6, i32 0, i32 0
@@ -1574,17 +1494,17 @@ if.then:                                          ; preds = %entry
   %8 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl7 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
   %_M_map_size = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %8, i32 0, i32 1
   %9 = load i64, i64* %_M_map_size, align 8
-  call void @_ZNSt11_Deque_baseI1ASaIS0_EE17_M_deallocate_mapEPPS0_m(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1, %class.A** %7, i64 %9) #12
+  call void @_ZNSt11_Deque_baseI1ASaIS0_EE17_M_deallocate_mapEPPS0_m(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %this1, %class.A** %7, i64 %9) #11
   br label %if.end
 
 if.end:                                           ; preds = %if.then, %entry
   %_M_impl8 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this1, i32 0, i32 0
-  call void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implD2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* nonnull align 8 dereferenceable(80) %_M_impl8) #12
+  call void @_ZNSt11_Deque_baseI1ASaIS0_EE11_Deque_implD2Ev(%"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* nonnull align 8 dereferenceable(80) %_M_impl8) #11
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2ERKS3_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %this, %"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %__x) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZNSt15_Deque_iteratorI1ARS0_PS0_EC2ERKS3_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %this, %"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %__x) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %"struct.std::_Deque_iterator"*, align 8
   %__x.addr = alloca %"struct.std::_Deque_iterator"*, align 8
@@ -1627,8 +1547,8 @@ entry:
   %1 = bitcast %"class.std::allocator"* %0 to %"class.__gnu_cxx::new_allocator"*
   %2 = load %class.A*, %class.A** %__p.addr, align 8
   %3 = load %class.A*, %class.A** %__args.addr, align 8
-  %call = call nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %3) #12
-  call void @_ZN9__gnu_cxx13new_allocatorI1AE9constructIS1_JRKS1_EEEvPT_DpOT0_(%"class.__gnu_cxx::new_allocator"* nonnull align 1 dereferenceable(1) %1, %class.A* %2, %class.A* nonnull align 8 dereferenceable(8) %call) #12
+  %call = call nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %3) #11
+  call void @_ZN9__gnu_cxx13new_allocatorI1AE9constructIS1_JRKS1_EEEvPT_DpOT0_(%"class.__gnu_cxx::new_allocator"* nonnull align 1 dereferenceable(1) %1, %class.A* %2, %class.A* nonnull align 8 dereferenceable(8) %call) #11
   ret void
 }
 
@@ -1640,13 +1560,13 @@ entry:
   store %"class.std::deque"* %this, %"class.std::deque"** %this.addr, align 8
   store %class.A* %__args, %class.A** %__args.addr, align 8
   %this1 = load %"class.std::deque"*, %"class.std::deque"** %this.addr, align 8
-  %call = call i64 @_ZNKSt5dequeI1ASaIS0_EE4sizeEv(%"class.std::deque"* nonnull align 8 dereferenceable(80) %this1) #12
-  %call2 = call i64 @_ZNKSt5dequeI1ASaIS0_EE8max_sizeEv(%"class.std::deque"* nonnull align 8 dereferenceable(80) %this1) #12
+  %call = call i64 @_ZNKSt5dequeI1ASaIS0_EE4sizeEv(%"class.std::deque"* nonnull align 8 dereferenceable(80) %this1) #11
+  %call2 = call i64 @_ZNKSt5dequeI1ASaIS0_EE8max_sizeEv(%"class.std::deque"* nonnull align 8 dereferenceable(80) %this1) #11
   %cmp = icmp eq i64 %call, %call2
   br i1 %cmp, label %if.then, label %if.end
 
 if.then:                                          ; preds = %entry
-  call void @_ZSt20__throw_length_errorPKc(i8* getelementptr inbounds ([48 x i8], [48 x i8]* @.str.3, i64 0, i64 0)) #14
+  call void @_ZSt20__throw_length_errorPKc(i8* getelementptr inbounds ([48 x i8], [48 x i8]* @.str.3, i64 0, i64 0)) #13
   unreachable
 
 if.end:                                           ; preds = %entry
@@ -1671,8 +1591,8 @@ if.end:                                           ; preds = %entry
   %_M_cur = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish6, i32 0, i32 0
   %8 = load %class.A*, %class.A** %_M_cur, align 8
   %9 = load %class.A*, %class.A** %__args.addr, align 8
-  %call7 = call nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %9) #12
-  call void @_ZNSt16allocator_traitsISaI1AEE9constructIS0_JRKS0_EEEvRS1_PT_DpOT0_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %5, %class.A* %8, %class.A* nonnull align 8 dereferenceable(8) %call7) #12
+  %call7 = call nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %9) #11
+  call void @_ZNSt16allocator_traitsISaI1AEE9constructIS0_JRKS0_EEEvRS1_PT_DpOT0_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %5, %class.A* %8, %class.A* nonnull align 8 dereferenceable(8) %call7) #11
   %10 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl8 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %10, i32 0, i32 0
   %11 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl8 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
@@ -1684,7 +1604,7 @@ if.end:                                           ; preds = %entry
   %_M_node12 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish11, i32 0, i32 3
   %14 = load %class.A**, %class.A*** %_M_node12, align 8
   %add.ptr13 = getelementptr inbounds %class.A*, %class.A** %14, i64 1
-  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_E11_M_set_nodeEPS2_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_finish9, %class.A** %add.ptr13) #12
+  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_E11_M_set_nodeEPS2_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_finish9, %class.A** %add.ptr13) #11
   %15 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl14 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %15, i32 0, i32 0
   %16 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl14 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
@@ -1714,8 +1634,8 @@ entry:
   %1 = bitcast %class.A* %0 to i8*
   %2 = bitcast i8* %1 to %class.A*
   %3 = load %class.A*, %class.A** %__args.addr, align 8
-  %call = call nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %3) #12
-  call void @_ZN1AC2ERKS_(%class.A* nonnull align 8 dereferenceable(8) %2, %class.A* nonnull align 8 dereferenceable(8) %call) #12
+  %call = call nonnull align 8 dereferenceable(8) %class.A* @_ZSt7forwardIRK1AEOT_RNSt16remove_referenceIS3_E4typeE(%class.A* nonnull align 8 dereferenceable(8) %3) #11
+  call void @_ZN1AC2ERKS_(%class.A* nonnull align 8 dereferenceable(8) %2, %class.A* nonnull align 8 dereferenceable(8) %call) #11
   ret void
 }
 
@@ -1729,7 +1649,7 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define linkonce_odr dso_local void @_ZN1AC2ERKS_(%class.A* nonnull align 8 dereferenceable(8) %this, %class.A* nonnull align 8 dereferenceable(8) %0) unnamed_addr #6 comdat align 2 {
+define linkonce_odr dso_local void @_ZN1AC2ERKS_(%class.A* nonnull align 8 dereferenceable(8) %this, %class.A* nonnull align 8 dereferenceable(8) %0) unnamed_addr #5 comdat align 2 {
 entry:
   %this.addr = alloca %class.A*, align 8
   %.addr = alloca %class.A*, align 8
@@ -1755,7 +1675,7 @@ entry:
   %_M_impl2 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %2, i32 0, i32 0
   %3 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl2 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
   %_M_start = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %3, i32 0, i32 2
-  %call = call i64 @_ZStmiRKSt15_Deque_iteratorI1ARS0_PS0_ES5_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_finish, %"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_start) #12
+  %call = call i64 @_ZStmiRKSt15_Deque_iteratorI1ARS0_PS0_ES5_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_finish, %"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_start) #11
   ret i64 %call
 }
 
@@ -1766,13 +1686,13 @@ entry:
   store %"class.std::deque"* %this, %"class.std::deque"** %this.addr, align 8
   %this1 = load %"class.std::deque"*, %"class.std::deque"** %this.addr, align 8
   %0 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
-  %call = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNKSt11_Deque_baseI1ASaIS0_EE19_M_get_Tp_allocatorEv(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %0) #12
-  %call2 = call i64 @_ZNSt5dequeI1ASaIS0_EE11_S_max_sizeERKS1_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %call) #12
+  %call = call nonnull align 1 dereferenceable(1) %"class.std::allocator"* @_ZNKSt11_Deque_baseI1ASaIS0_EE19_M_get_Tp_allocatorEv(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %0) #11
+  %call2 = call i64 @_ZNSt5dequeI1ASaIS0_EE11_S_max_sizeERKS1_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %call) #11
   ret i64 %call2
 }
 
 ; Function Attrs: noreturn
-declare dso_local void @_ZSt20__throw_length_errorPKc(i8*) #8
+declare dso_local void @_ZSt20__throw_length_errorPKc(i8*) #7
 
 ; Function Attrs: mustprogress noinline optnone uwtable
 define linkonce_odr dso_local void @_ZNSt5dequeI1ASaIS0_EE22_M_reserve_map_at_backEm(%"class.std::deque"* nonnull align 8 dereferenceable(80) %this, i64 %__nodes_to_add) #0 comdat align 2 {
@@ -1824,7 +1744,7 @@ entry:
   %__y.addr = alloca %"struct.std::_Deque_iterator"*, align 8
   store %"struct.std::_Deque_iterator"* %__x, %"struct.std::_Deque_iterator"** %__x.addr, align 8
   store %"struct.std::_Deque_iterator"* %__y, %"struct.std::_Deque_iterator"** %__y.addr, align 8
-  %call = call i64 @_ZNSt15_Deque_iteratorI1ARS0_PS0_E14_S_buffer_sizeEv() #12
+  %call = call i64 @_ZNSt15_Deque_iteratorI1ARS0_PS0_E14_S_buffer_sizeEv() #11
   %0 = load %"struct.std::_Deque_iterator"*, %"struct.std::_Deque_iterator"** %__x.addr, align 8
   %_M_node = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %0, i32 0, i32 3
   %1 = load %class.A**, %class.A*** %_M_node, align 8
@@ -1871,7 +1791,7 @@ entry:
   store %"class.std::allocator"* %__a, %"class.std::allocator"** %__a.addr, align 8
   store i64 9223372036854775807, i64* %__diffmax, align 8
   %0 = load %"class.std::allocator"*, %"class.std::allocator"** %__a.addr, align 8
-  %call = call i64 @_ZNSt16allocator_traitsISaI1AEE8max_sizeERKS1_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %0) #12
+  %call = call i64 @_ZNSt16allocator_traitsISaI1AEE8max_sizeERKS1_(%"class.std::allocator"* nonnull align 1 dereferenceable(1) %0) #11
   store i64 %call, i64* %__allocmax, align 8
   %call1 = invoke nonnull align 8 dereferenceable(8) i64* @_ZSt3minImERKT_S2_S2_(i64* nonnull align 8 dereferenceable(8) %__diffmax, i64* nonnull align 8 dereferenceable(8) %__allocmax)
           to label %invoke.cont unwind label %terminate.lpad
@@ -1884,7 +1804,7 @@ terminate.lpad:                                   ; preds = %entry
   %2 = landingpad { i8*, i32 }
           catch i8* null
   %3 = extractvalue { i8*, i32 } %2, 0
-  call void @__clang_call_terminate(i8* %3) #13
+  call void @__clang_call_terminate(i8* %3) #12
   unreachable
 }
 
@@ -1895,7 +1815,7 @@ entry:
   store %"class.std::allocator"* %__a, %"class.std::allocator"** %__a.addr, align 8
   %0 = load %"class.std::allocator"*, %"class.std::allocator"** %__a.addr, align 8
   %1 = bitcast %"class.std::allocator"* %0 to %"class.__gnu_cxx::new_allocator"*
-  %call = call i64 @_ZNK9__gnu_cxx13new_allocatorI1AE8max_sizeEv(%"class.__gnu_cxx::new_allocator"* nonnull align 1 dereferenceable(1) %1) #12
+  %call = call i64 @_ZNK9__gnu_cxx13new_allocatorI1AE8max_sizeEv(%"class.__gnu_cxx::new_allocator"* nonnull align 1 dereferenceable(1) %1) #11
   ret i64 %call
 }
 
@@ -1935,7 +1855,7 @@ entry:
   %this.addr = alloca %"class.__gnu_cxx::new_allocator"*, align 8
   store %"class.__gnu_cxx::new_allocator"* %this, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
   %this1 = load %"class.__gnu_cxx::new_allocator"*, %"class.__gnu_cxx::new_allocator"** %this.addr, align 8
-  %call = call i64 @_ZNK9__gnu_cxx13new_allocatorI1AE11_M_max_sizeEv(%"class.__gnu_cxx::new_allocator"* nonnull align 1 dereferenceable(1) %this1) #12
+  %call = call i64 @_ZNK9__gnu_cxx13new_allocatorI1AE11_M_max_sizeEv(%"class.__gnu_cxx::new_allocator"* nonnull align 1 dereferenceable(1) %this1) #11
   ret i64 %call
 }
 
@@ -2134,7 +2054,7 @@ cond.end46:                                       ; preds = %cond.false45, %cond
   %65 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl59 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
   %_M_map_size60 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %65, i32 0, i32 1
   %66 = load i64, i64* %_M_map_size60, align 8
-  call void @_ZNSt11_Deque_baseI1ASaIS0_EE17_M_deallocate_mapEPPS0_m(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %60, %class.A** %63, i64 %66) #12
+  call void @_ZNSt11_Deque_baseI1ASaIS0_EE17_M_deallocate_mapEPPS0_m(%"class.std::_Deque_base"* nonnull align 8 dereferenceable(80) %60, %class.A** %63, i64 %66) #11
   %67 = load %class.A**, %class.A*** %__new_map, align 8
   %68 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl61 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %68, i32 0, i32 0
@@ -2155,7 +2075,7 @@ if.end65:                                         ; preds = %cond.end46, %if.end
   %74 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl66 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
   %_M_start67 = getelementptr inbounds %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data", %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"* %74, i32 0, i32 2
   %75 = load %class.A**, %class.A*** %__new_nstart, align 8
-  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_E11_M_set_nodeEPS2_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_start67, %class.A** %75) #12
+  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_E11_M_set_nodeEPS2_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_start67, %class.A** %75) #11
   %76 = bitcast %"class.std::deque"* %this1 to %"class.std::_Deque_base"*
   %_M_impl68 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %76, i32 0, i32 0
   %77 = bitcast %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl"* %_M_impl68 to %"struct.std::_Deque_base<A, std::allocator<A>>::_Deque_impl_data"*
@@ -2164,7 +2084,7 @@ if.end65:                                         ; preds = %cond.end46, %if.end
   %79 = load i64, i64* %__old_num_nodes, align 8
   %add.ptr70 = getelementptr inbounds %class.A*, %class.A** %78, i64 %79
   %add.ptr71 = getelementptr inbounds %class.A*, %class.A** %add.ptr70, i64 -1
-  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_E11_M_set_nodeEPS2_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_finish69, %class.A** %add.ptr71) #12
+  call void @_ZNSt15_Deque_iteratorI1ARS0_PS0_E11_M_set_nodeEPS2_(%"struct.std::_Deque_iterator"* nonnull align 8 dereferenceable(32) %_M_finish69, %class.A** %add.ptr71) #11
   ret void
 }
 
@@ -2214,11 +2134,11 @@ entry:
   store %class.A** %__last, %class.A*** %__last.addr, align 8
   store %class.A** %__result, %class.A*** %__result.addr, align 8
   %0 = load %class.A**, %class.A*** %__first.addr, align 8
-  %call = call %class.A** @_ZSt12__niter_baseIPP1AET_S3_(%class.A** %0) #12
+  %call = call %class.A** @_ZSt12__niter_baseIPP1AET_S3_(%class.A** %0) #11
   %1 = load %class.A**, %class.A*** %__last.addr, align 8
-  %call1 = call %class.A** @_ZSt12__niter_baseIPP1AET_S3_(%class.A** %1) #12
+  %call1 = call %class.A** @_ZSt12__niter_baseIPP1AET_S3_(%class.A** %1) #11
   %2 = load %class.A**, %class.A*** %__result.addr, align 8
-  %call2 = call %class.A** @_ZSt12__niter_baseIPP1AET_S3_(%class.A** %2) #12
+  %call2 = call %class.A** @_ZSt12__niter_baseIPP1AET_S3_(%class.A** %2) #11
   %call3 = call %class.A** @_ZSt14__copy_move_a1ILb0EPP1AS2_ET1_T0_S4_S3_(%class.A** %call, %class.A** %call1, %class.A** %call2)
   %call4 = call %class.A** @_ZSt12__niter_wrapIPP1AET_RKS3_S3_(%class.A*** nonnull align 8 dereferenceable(8) %__result.addr, %class.A** %call3)
   ret %class.A** %call4
@@ -2324,7 +2244,7 @@ if.end:                                           ; preds = %if.then, %entry
 }
 
 ; Function Attrs: argmemonly nofree nounwind willreturn
-declare void @llvm.memmove.p0i8.p0i8.i64(i8* nocapture writeonly, i8* nocapture readonly, i64, i1 immarg) #11
+declare void @llvm.memmove.p0i8.p0i8.i64(i8* nocapture writeonly, i8* nocapture readonly, i64, i1 immarg) #10
 
 ; Function Attrs: mustprogress noinline optnone uwtable
 define linkonce_odr dso_local %class.A** @_ZSt22__copy_move_backward_aILb0EPP1AS2_ET1_T0_S4_S3_(%class.A** %__first, %class.A** %__last, %class.A** %__result) #0 comdat {
@@ -2336,11 +2256,11 @@ entry:
   store %class.A** %__last, %class.A*** %__last.addr, align 8
   store %class.A** %__result, %class.A*** %__result.addr, align 8
   %0 = load %class.A**, %class.A*** %__first.addr, align 8
-  %call = call %class.A** @_ZSt12__niter_baseIPP1AET_S3_(%class.A** %0) #12
+  %call = call %class.A** @_ZSt12__niter_baseIPP1AET_S3_(%class.A** %0) #11
   %1 = load %class.A**, %class.A*** %__last.addr, align 8
-  %call1 = call %class.A** @_ZSt12__niter_baseIPP1AET_S3_(%class.A** %1) #12
+  %call1 = call %class.A** @_ZSt12__niter_baseIPP1AET_S3_(%class.A** %1) #11
   %2 = load %class.A**, %class.A*** %__result.addr, align 8
-  %call2 = call %class.A** @_ZSt12__niter_baseIPP1AET_S3_(%class.A** %2) #12
+  %call2 = call %class.A** @_ZSt12__niter_baseIPP1AET_S3_(%class.A** %2) #11
   %call3 = call %class.A** @_ZSt23__copy_move_backward_a1ILb0EPP1AS2_ET1_T0_S4_S3_(%class.A** %call, %class.A** %call1, %class.A** %call2)
   %call4 = call %class.A** @_ZSt12__niter_wrapIPP1AET_RKS3_S3_(%class.A*** nonnull align 8 dereferenceable(8) %__result.addr, %class.A** %call3)
   ret %class.A** %call4
@@ -2434,19 +2354,18 @@ entry:
 attributes #0 = { mustprogress noinline optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 attributes #2 = { mustprogress noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #3 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #4 = { mustprogress noinline norecurse optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #5 = { noinline optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #6 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #7 = { noinline noreturn nounwind }
-attributes #8 = { noreturn "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #9 = { nobuiltin allocsize(0) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #10 = { nobuiltin nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #11 = { argmemonly nofree nounwind willreturn }
-attributes #12 = { nounwind }
-attributes #13 = { noreturn nounwind }
-attributes #14 = { noreturn }
-attributes #15 = { allocsize(0) }
+attributes #3 = { mustprogress noinline norecurse optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #4 = { noinline optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #5 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #6 = { noinline noreturn nounwind }
+attributes #7 = { noreturn "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #8 = { nobuiltin allocsize(0) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #9 = { nobuiltin nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #10 = { argmemonly nofree nounwind willreturn }
+attributes #11 = { nounwind }
+attributes #12 = { noreturn nounwind }
+attributes #13 = { noreturn }
+attributes #14 = { allocsize(0) }
 
 !llvm.module.flags = !{!0, !1, !2}
 !llvm.ident = !{!3}

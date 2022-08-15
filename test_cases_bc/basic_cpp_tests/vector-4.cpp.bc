@@ -209,86 +209,6 @@ entry:
   ret void
 }
 
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z10SAFEMALLOCi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #5
-  ret i8* %call
-}
-
-; Function Attrs: nounwind
-declare dso_local noalias align 16 i8* @malloc(i64) #3
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z9PLKMALLOCi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #5
-  ret i8* %call
-}
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z9NFRMALLOCi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #5
-  ret i8* %call
-}
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z9CLKMALLOCi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #5
-  ret i8* %call
-}
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z9NFRLEAKFPi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #5
-  ret i8* %call
-}
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z9PLKLEAKFPi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #5
-  ret i8* %call
-}
-
-; Function Attrs: mustprogress noinline nounwind optnone uwtable
-define dso_local i8* @_Z6LEAKFNi(i32 %n) #2 {
-entry:
-  %n.addr = alloca i32, align 4
-  store i32 %n, i32* %n.addr, align 4
-  %0 = load i32, i32* %n.addr, align 4
-  %conv = sext i32 %0 to i64
-  %call = call noalias align 16 i8* @malloc(i64 %conv) #5
-  ret i8* %call
-}
-
 ; Function Attrs: mustprogress noinline optnone uwtable
 define dso_local void @_Z9RC_ACCESSii(i32 %id, i32 %flags) #0 {
 entry:
@@ -355,7 +275,7 @@ entry:
 declare dso_local i32 @getchar() #1
 
 ; Function Attrs: noinline uwtable
-define internal void @__cxx_global_var_init() #4 section ".text.startup" {
+define internal void @__cxx_global_var_init() #3 section ".text.startup" {
 entry:
   call void @_ZNSt8ios_base4InitC1Ev(%"class.std::ios_base::Init"* nonnull align 1 dereferenceable(1) @_ZStL8__ioinit)
   %0 = call i32 @__cxa_atexit(void (i8*)* bitcast (void (%"class.std::ios_base::Init"*)* @_ZNSt8ios_base4InitD1Ev to void (i8*)*), i8* getelementptr inbounds (%"class.std::ios_base::Init", %"class.std::ios_base::Init"* @_ZStL8__ioinit, i32 0, i32 0), i8* @__dso_handle) #5
@@ -365,7 +285,7 @@ entry:
 declare dso_local void @_ZNSt8ios_base4InitC1Ev(%"class.std::ios_base::Init"* nonnull align 1 dereferenceable(1)) unnamed_addr #1
 
 ; Function Attrs: nounwind
-declare dso_local void @_ZNSt8ios_base4InitD1Ev(%"class.std::ios_base::Init"* nonnull align 1 dereferenceable(1)) unnamed_addr #3
+declare dso_local void @_ZNSt8ios_base4InitD1Ev(%"class.std::ios_base::Init"* nonnull align 1 dereferenceable(1)) unnamed_addr #4
 
 ; Function Attrs: nounwind
 declare dso_local i32 @__cxa_atexit(void (i8*)*, i8*, i8*) #5
@@ -1534,7 +1454,7 @@ entry:
 }
 
 ; Function Attrs: noinline uwtable
-define internal void @_GLOBAL__sub_I_vector_4.cpp() #4 section ".text.startup" {
+define internal void @_GLOBAL__sub_I_vector_4.cpp() #3 section ".text.startup" {
 entry:
   call void @__cxx_global_var_init()
   ret void
@@ -1543,8 +1463,8 @@ entry:
 attributes #0 = { mustprogress noinline optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 attributes #2 = { mustprogress noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #3 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #4 = { noinline uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #3 = { noinline uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #4 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 attributes #5 = { nounwind }
 attributes #6 = { mustprogress noinline norecurse optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 attributes #7 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
