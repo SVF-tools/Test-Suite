@@ -6,7 +6,7 @@
 
 // file from spec2000 188.ammp
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 int func(){
 

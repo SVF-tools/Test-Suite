@@ -8,7 +8,7 @@
  * Date: 02/04/2014
  */
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 void bar1(int** b){
 	*b = LEAKFN(10); // FN

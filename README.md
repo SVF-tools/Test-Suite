@@ -22,7 +22,8 @@ The following gives the Test-Suite's folders and the corresponding SVF's options
 | path_tests            |                                                             | path-sensitive tests                                                              |
 | complex_tests         | wpa -ander -stat=false                                      | complex test cases simplified from real programs                                  |
 | mta                   |                                                             | multithreaded test cases                                                          |
-| mem_leak              | saber -leak -valid-tests -mempar=inter-disjoint -stat=false | memory leak test cases                                                            |
+| mem_leak              | saber -leak -valid-tests -mempar=inter-disjoint -stat=false | memory leak test cases   
+| double_free           | saber -dfree -valid-tests -stat=false                       | double free test cases                                                            |
 
 ## Scripts
 Travis CI is used to build all the test cases, It uses `./generate_bc.sh` to do so and then pushes the compiled test cases into master branch.

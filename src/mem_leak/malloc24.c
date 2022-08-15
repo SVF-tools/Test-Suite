@@ -6,7 +6,7 @@
 
 // from spec 188.ammp unonbon.c line 110
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 int func(){
 	int i;

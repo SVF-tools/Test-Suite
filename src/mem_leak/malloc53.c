@@ -5,7 +5,7 @@
  *      Author: Yulei Sui
  */
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 typedef enum {SOURCE, SINK, IPIN, OPIN, CHANX, CHANY} t_rr_type;
 int nx, ny, io_rat, pins_per_clb;

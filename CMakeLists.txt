@@ -191,6 +191,20 @@ foreach(filename ${mem_leak_files})
   )
 endforeach()
 
+# saber double_free tests (ctest -R double_free -VV)
+set(cmd "saber -dfree -valid-tests -stat=false")
+file(GLOB doublefree_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/double_free/*.bc*")
+string(REPLACE " " ";" commandtemp ${cmd})
+set(command ${commandtemp})
+# loops over each file creating a test
+foreach(filename ${doublefree_files})
+  add_test(
+          NAME double_free/${filename}
+          COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+  )
+endforeach()
+
 # cfl tests (ctest -R cfl_tests -VV)
 list(
   APPEND

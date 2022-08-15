@@ -6,7 +6,7 @@
  */
 
 //TC08: if dependent 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 int G;
 void clear_conditioned() {

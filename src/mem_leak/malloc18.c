@@ -6,7 +6,7 @@
 
 // simplified from 177.mesa teximage.c read_color_image method
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 struct Img{
 	int id;

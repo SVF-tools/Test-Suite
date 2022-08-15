@@ -6,7 +6,7 @@
  *      Author: Yulei Sui
  */
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 int * main(int size){
 	int flag = 0;

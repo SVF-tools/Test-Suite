@@ -6,7 +6,7 @@
  */
 // TC11:relation of pointers 
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 int *aliasing(int **p) {
 	*p = SAFEMALLOC(10);

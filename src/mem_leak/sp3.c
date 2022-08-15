@@ -6,7 +6,7 @@
  */
 // TC03: interprocedural pointer aliasing 
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 void pointer(char **p, char* s)
 {

@@ -6,7 +6,7 @@
  */
 
 //TC07: global escape 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 int *G = NULL;
 

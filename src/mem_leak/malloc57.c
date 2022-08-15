@@ -5,7 +5,7 @@
  * Date: 02/04/2014
  */
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 int main(){
     int* newfile = SAFEMALLOC(190);
     int i = 0;

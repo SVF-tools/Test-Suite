@@ -11,6 +11,7 @@ test_dirs="
   cs_tests
   fs_tests
   mem_leak
+  double_free
   mta
   non_annotated_tests
   path_tests
@@ -105,7 +106,6 @@ do
     opt -S -mem2reg "$bc_f" -o "$bc_f"
   done
 done
-
 
 echo "$0: Compiling diff_tests unit test"
 cd src/diff_tests

@@ -7,7 +7,7 @@
 
 //TC09: unclear condition
 
-#include "aliascheck.h"
+#include "memleak_check.h"
 
 int sum(char *s) {
 	char *p;
