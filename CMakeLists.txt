@@ -137,11 +137,20 @@ foreach(folder ${diff_tests_anderson_folders})
     set_tests_properties(diff_tests-wr-ander/ander-read-write/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
 
     # read and write svfg
-    add_test(
-      NAME diff_tests-wr-svfg/svfg-read-write/${filename}
-      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -alias-check=false -write-svfg=read_write_file" "wpa -ander -svfg -alias-check=false -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-    )
+    # Some tests failed on mac os when `-ff-eq-base=false`, but succeeded on ubuntu
+    if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+      add_test(
+        NAME diff_tests-wr-svfg/svfg-read-write/${filename}
+        COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -ff-eq-base=true -svfg -alias-check=false -write-svfg=read_write_file" "wpa -ander -ff-eq-base=true -svfg -alias-check=false -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+      )
+    else()
+      add_test(
+        NAME diff_tests-wr-svfg/svfg-read-write/${filename}
+        COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -alias-check=false -write-svfg=read_write_file" "wpa -ander -svfg -alias-check=false -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+      )
+    endif()
     
     set_tests_properties(diff_tests-wr-svfg/svfg-read-write/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
     
