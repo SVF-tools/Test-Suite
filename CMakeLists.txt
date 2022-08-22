@@ -213,7 +213,7 @@ list(
 )
 foreach(folder ${cfl_test_bc_folders})
   set(cmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/CFLGrammar.txt")
-  set(PEGcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/PEGGrammar.txt -peg-transfer -null-dummy=false")
+  set(PEGcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/PEGGrammar.txt -peg-transfer")
   file(GLOB cfl_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/${folder}/*.bc*")
   string(REPLACE " " ";" commandtemp ${cmd})
   string(REPLACE " " ";" PEGcommandtemp ${PEGcmd})
