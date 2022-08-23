@@ -196,3 +196,23 @@ foreach(folder ${cfl_test_bc_folders})
   endforeach()
 endforeach()
 
+# Performance regression testing (ctest -R diff-perf-cruxbc -VV)
+list(
+  APPEND
+  diff_tests_cruxbc
+  libcurl.so.bc
+  evim.bc
+  bash
+)
+set(cmd "wpa -vfspta")
+string(REPLACE " " ";" commandtemp ${cmd})
+set(command ${commandtemp})
+foreach(file ${diff_tests_cruxbc})
+  file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/${file}.bc")
+  add_test(
+    NAME diff-perf-cruxbc/${filename}
+    COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+  )
+  set_tests_properties(diff-perf-cruxbc/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
+endforeach()
