@@ -201,7 +201,6 @@ list(
   APPEND
   diff_tests_cruxbc
   libcurl.so
-  evim
   bash
 )
 set(cmd "wpa -vfspta -dump-vfg")
