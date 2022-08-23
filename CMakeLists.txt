@@ -204,7 +204,7 @@ list(
   evim
   bash
 )
-set(cmd "wpa -vfspta")
+set(cmd "wpa -vfspta -dump-vfg")
 string(REPLACE " " ";" commandtemp ${cmd})
 set(command ${commandtemp})
 foreach(file ${diff_tests_cruxbc})
