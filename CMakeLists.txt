@@ -135,46 +135,8 @@ foreach(folder ${diff_tests_anderson_folders})
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
     )
     set_tests_properties(diff_tests-wr-ander/ander-read-write/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
-
-    # read and write svfg
-    # Some tests failed on mac os when `-ff-eq-base=false`, but succeeded on ubuntu
-    if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-      add_test(
-        NAME diff_tests-wr-svfg/svfg-read-write/${filename}
-        COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -ff-eq-base=true -svfg -alias-check=false -write-svfg=read_write_file" "wpa -ander -ff-eq-base=true -svfg -alias-check=false -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-      )
-    else()
-      add_test(
-        NAME diff_tests-wr-svfg/svfg-read-write/${filename}
-        COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -alias-check=false -write-svfg=read_write_file" "wpa -ander -svfg -alias-check=false -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-      )
-    endif()
-    
-    set_tests_properties(diff_tests-wr-svfg/svfg-read-write/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
-    
+   
   endforeach()
-endforeach()
-
-# differential_tests read_write_svfg with crux-bc (ctest -R diff_tests-wr-svfg-cruxbc -VV)
-list(
-  APPEND
-  diff_tests_cruxbc
-  bc
-  dc
-  xxd
-  libbz2.so
-  bzip2recover
-)
-foreach(file ${diff_tests_cruxbc})
-  file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/${file}.bc")
-  add_test(
-    NAME diff_tests-wr-svfg-cruxbc/read_write_svfg_crux/${filename}
-    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -alias-check=false -write-svfg=read_write_file" "wpa -ander -svfg -alias-check=false -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-  )
-  set_tests_properties(diff_tests-wr-svfg-cruxbc/read_write_svfg_crux/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
 endforeach()
 
 # saber mem_leak tests  (ctest -R mem_leak -VV)
