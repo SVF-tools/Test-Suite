@@ -200,8 +200,8 @@ endforeach()
 list(
   APPEND
   diff_tests_cruxbc
-  libcurl.so.bc
-  evim.bc
+  libcurl.so
+  evim
   bash
 )
 set(cmd "wpa -vfspta")
