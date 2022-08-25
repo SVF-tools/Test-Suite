@@ -1,10 +1,10 @@
-Start testing: Aug 24 08:44 UTC
+Start testing: Aug 25 09:22 UTC
 ----------------------------------------------------------
 905/906 Testing: diff-perf-cruxbc/test_cases_bc/crux-bc/libcurl.so.bc
 905/906 Test: diff-perf-cruxbc/test_cases_bc/crux-bc/libcurl.so.bc
 Command: "/home/runner/work/SVF/SVF/Release-build/bin/wpa" "-vfspta" "-dump-vfg" "/home/runner/work/SVF/SVF/Test-Suite/test_cases_bc/crux-bc/libcurl.so.bc"
 Directory: /home/runner/work/SVF/SVF/Release-build/bin
-"diff-perf-cruxbc/test_cases_bc/crux-bc/libcurl.so.bc" start time: Aug 24 08:44 UTC
+"diff-perf-cruxbc/test_cases_bc/crux-bc/libcurl.so.bc" start time: Aug 25 09:22 UTC
 Output:
 ----------------------------------------------------------
 
@@ -23,13 +23,13 @@ TotalNode           1550
 ################ (program : libcurl.so.bc)###############
 AddrsNum            11863
 TotalFieldObjects   757
-StoresNum           20479
+StoresNum           20487
 FSObjNum            8621
 FIObjNum            568
 GepsNum             26324
 MaxStructSize       458
 IndCallSites        1068
-TotalSVFStmts       158311
+TotalSVFStmts       158319
 TotalPointers       157656
 BBWith3Succ         217
 ReturnsNum          2860
@@ -37,7 +37,7 @@ VarArrayObj         220
 CopysNum            7121
 ConstArrayObj       17
 CallsNum            11343
-TotalPTASVFStmts    84963
+TotalPTASVFStmts    84971
 TotalObjects        9190
 FunctionObjs        1550
 GlobalObjs          76
@@ -57,8 +57,8 @@ BBWith2Succ         8503
 *********Constraint Graph Stats***************
 ################ (program : libcurl.so.bc)###############
 -------------------------------------------------------
-AvgIn/OutEdge       1.50665
-AvgIn/OutAddrEdge   0.135647
+AvgIn/OutEdge       1.50674
+AvgIn/OutAddrEdge   0.135634
 AvgIn/OutLoadEdge   0.355118
 AvgIn/OutCopyEdge   0.911986
 MaxInAddrEdge       1
@@ -66,13 +66,13 @@ MaxOutStoreEdge     1024
 NumOfCGNode         167427
 TotalValidNode      76124
 AvgIn/OutStoreEdge  0
-TotalValidObjNode   8465
+TotalValidObjNode   8464
 NumOfGeps           25377
-NumOfCGEdge         104366
-NumOfAddrs          10326
+NumOfCGEdge         104374
+NumOfAddrs          10325
 MaxOutAddrEdge      2060
 NumOfLoads          27033
-NumOfStores         7909
+NumOfStores         7917
 MaxOutLoadEdge      613
 NumOfCopys          44047
 MaxOutCopyEdge      7756
@@ -92,7 +92,7 @@ CopyGepTime         0
 SCCMergeTime        0
 SCCDetectTime       0
 CollapseTime        0
-TotalTime           24.197
+TotalTime           20.957
 MaxNodesInSCC       515
 TotalPWCCycleNum    32
 TotalCycleNum       185
@@ -108,49 +108,49 @@ Pointers            157311
 NumOfFieldExpand    0
 DYFieldPtrs         345
 NumOfSFRs           0
-GepProcessed        119287
+GepProcessed        119289
 PointsToBlkPtr      0
 LoadProcessed       5945476
-CopyProcessed       214484
+CopyProcessed       214495
 StoreProcessed      1638149
 AddrProcessed       10961
 TotalObjects        9947
-NullPointer         976
+NullPointer         977
 Iterations          16
 TotalPointers       157656
 #######################################################
 
 ****Persistent Points-To Cache Statistics: Andersen's analysis bitvector****
 ################ (program : libcurl.so.bc)###############
-UniquePointsToSets       18567
-TotalUnions              379922
-PropertyUnions           94249
+UniquePointsToSets       18576
+TotalUnions              380041
+PropertyUnions           94384
 UniqueUnions             6910
-LookupUnions             266758
-PreemptiveUnions         12005
-TotalComplements         2724831
-PropertyComplements      2470968
-UniqueComplements        5643
-LookupComplements        242582
-PreemptiveComplements    5638
-TotalIntersections       604131
-PropertyIntersections    591330
-UniqueIntersections      99
-LookupIntersections      1372
-PreemptiveIntersections  11330
+LookupUnions             266744
+PreemptiveUnions         12003
+TotalComplements         2724930
+PropertyComplements      2471034
+UniqueComplements        5647
+LookupComplements        242607
+PreemptiveComplements    5642
+TotalIntersections       604152
+PropertyIntersections    591335
+UniqueIntersections      98
+LookupIntersections      1381
+PreemptiveIntersections  11338
 #######################################################
 
 *********Memory SSA Statistics***************
 ################ (program : libcurl.so.bc)###############
 -------------------------------------------------------
 AverageRegSize      13.0633
-SSARenameTime       0.092
-InsertPHITime       0.123
-GenMUCHITime        0.536
-GenRegionTime       8.406
-TotalMSSATime       9.216
+SSARenameTime       0.085
+InsertPHITime       0.101
+GenMUCHITime        0.465
+GenRegionTime       6.957
+TotalMSSATime       7.65
 BBHasMSSAPhi        3695
-StoreHasChi         7369
+StoreHasChi         7377
 MaxRegSize          506
 MemRegions          4678
 FunHasRetMu         1234
@@ -174,11 +174,11 @@ CSHasMu             3560
 -------------------------------------------------------
 AvgWeight           72.8184
 OptTime             0
-ATNodeTime          0.16
+ATNodeTime          0.141
 TLNodeTime          0
-ConnIndEdgeTime     0.525
+ConnIndEdgeTime     0.442
 ConnDirEdgeTime     0
-TotalTime           0.685
+TotalTime           0.583
 MaxIndOutDeg        896
 MaxIndInDeg         896
 Copy                2581
@@ -187,11 +187,11 @@ ActualRet           837
 FormalRet           130
 IndRetEdge          7953
 Gep                 26324
-TotalEdge           206420
+TotalEdge           206436
 DirectRetEdge       438
 ActualOut           7311
-TotalNode           137748
-MaxOutDegree        1294
+TotalNode           137756
+MaxOutDegree        1302
 FormalParam         2039
 IndCallEdge         14603
 PHI                 687
@@ -199,11 +199,11 @@ Addr                10961
 FormalIn            7844
 IndirectEdgeLabels  8177656
 FormalOut           7844
-Store               8284
+Store               8292
 MaxInDegree         896
 ActualIn            13458
 Load                27665
-DirectEdge          94118
+DirectEdge          94134
 ActualParam         11145
 AvgIndInDeg         1
 MSSAPhi             10637
@@ -232,13 +232,13 @@ FIObjNum            568
 ################ (program : libcurl.so.bc)###############
 AddrsNum            11863
 TotalFieldObjects   763
-StoresNum           20479
+StoresNum           20487
 FSObjNum            8621
 FIObjNum            568
 GepsNum             26324
 MaxStructSize       458
 IndCallSites        1068
-TotalSVFStmts       158311
+TotalSVFStmts       158319
 TotalPointers       157656
 BBWith3Succ         217
 ReturnsNum          2860
@@ -246,7 +246,7 @@ VarArrayObj         220
 CopysNum            7121
 ConstArrayObj       17
 CallsNum            11343
-TotalPTASVFStmts    84963
+TotalPTASVFStmts    84971
 TotalObjects        9190
 FunctionObjs        1550
 GlobalObjs          76
@@ -271,8 +271,8 @@ BBWith2Succ         8503
 AvgVersionPtsSize   1.77632
 AvgTopLvlPtsSize    0.4057
 VersionPropTime     0
-TotalTime           29.634
-PrelabelingTime     0.052
+TotalTime           25.529
+PrelabelingTime     0.042
 PhiTime             0
 SCCTime             0
 IndirectPropaTime   0
@@ -282,18 +282,18 @@ AvgPtsSize          0.682957
 LoadTime            0
 PropagationTime     0
 CopyTime            0
-meldLabelingTime    22.828
+meldLabelingTime    19.891
 Strong/WeakUpdTime  0
 AddrTime            0
 UpdateCGTime        0
-SolveTime           0.552
+SolveTime           0.495
 StoreTime           0
 DirectPropaTime     0
 GepTime             0
 NumOfNodesInSCC     0
 IndEdgeSolved       669
 TotalEmptyVPts      0
-ProcessedStore      17713
+ProcessedStore      17729
 TotalNonEmptyVPts   6800
 TotalSingleVObjs    0
 DYFieldObjs         763
@@ -313,7 +313,7 @@ TotalObjects        9953
 ProcessedLoad       59299
 Iterations          2
 MaxTopLvlPtsSize    76
-StoresNum           8284
+StoresNum           8292
 StrongUpdates       5157
 ProcessedAParam     0
 ProcessedPhi        1391
@@ -326,12 +326,12 @@ ProcessedGep        54733
 
 ****Persistent Points-To Cache Statistics: flow-sensitive analysis bitvector****
 ################ (program : libcurl.so.bc)###############
-UniquePointsToSets       10139
-TotalUnions              203257
-PropertyUnions           198312
-UniqueUnions             1104
-LookupUnions             2178
-PreemptiveUnions         1663
+UniquePointsToSets       10140
+TotalUnions              203271
+PropertyUnions           198265
+UniqueUnions             1116
+LookupUnions             2213
+PreemptiveUnions         1677
 TotalComplements         0
 PropertyComplements      0
 UniqueComplements        0
@@ -344,19 +344,19 @@ LookupIntersections      0
 PreemptiveIntersections  0
 #######################################################
 <end of output>
-Test time =  75.59 sec
+Test time =  64.57 sec
 ----------------------------------------------------------
 Test Pass Reason:
 Required regular expression found. Regex=[0]
-"diff-perf-cruxbc/test_cases_bc/crux-bc/libcurl.so.bc" end time: Aug 24 08:45 UTC
-"diff-perf-cruxbc/test_cases_bc/crux-bc/libcurl.so.bc" time elapsed: 00:01:15
+"diff-perf-cruxbc/test_cases_bc/crux-bc/libcurl.so.bc" end time: Aug 25 09:23 UTC
+"diff-perf-cruxbc/test_cases_bc/crux-bc/libcurl.so.bc" time elapsed: 00:01:04
 ----------------------------------------------------------
 
 906/906 Testing: diff-perf-cruxbc/test_cases_bc/crux-bc/bash.bc
 906/906 Test: diff-perf-cruxbc/test_cases_bc/crux-bc/bash.bc
 Command: "/home/runner/work/SVF/SVF/Release-build/bin/wpa" "-vfspta" "-dump-vfg" "/home/runner/work/SVF/SVF/Test-Suite/test_cases_bc/crux-bc/bash.bc"
 Directory: /home/runner/work/SVF/SVF/Release-build/bin
-"diff-perf-cruxbc/test_cases_bc/crux-bc/bash.bc" start time: Aug 24 08:45 UTC
+"diff-perf-cruxbc/test_cases_bc/crux-bc/bash.bc" start time: Aug 25 09:23 UTC
 Output:
 ----------------------------------------------------------
 
@@ -375,13 +375,13 @@ TotalNode           2288
 ################ (program : bash.bc)###############
 AddrsNum            16699
 TotalFieldObjects   1261
-StoresNum           27092
+StoresNum           27093
 FSObjNum            12339
 FIObjNum            351
 GepsNum             22423
 MaxStructSize       24
 IndCallSites        68
-TotalSVFStmts       222022
+TotalSVFStmts       222023
 TotalPointers       223354
 BBWith3Succ         158
 ReturnsNum          5089
@@ -389,7 +389,7 @@ VarArrayObj         152
 CopysNum            12324
 ConstArrayObj       95
 CallsNum            17062
-TotalPTASVFStmts    97506
+TotalPTASVFStmts    97507
 TotalObjects        12691
 FunctionObjs        2288
 GlobalObjs          863
@@ -409,7 +409,7 @@ BBWith2Succ         16676
 *********Constraint Graph Stats***************
 ################ (program : bash.bc)###############
 -------------------------------------------------------
-AvgIn/OutEdge       1.45156
+AvgIn/OutEdge       1.45157
 AvgIn/OutAddrEdge   0.166034
 AvgIn/OutLoadEdge   0.367488
 AvgIn/OutCopyEdge   0.789718
@@ -420,11 +420,11 @@ TotalValidNode      75665
 AvgIn/OutStoreEdge  0
 TotalValidObjNode   10541
 NumOfGeps           21602
-NumOfCGEdge         97269
+NumOfCGEdge         97270
 NumOfAddrs          12563
 MaxOutAddrEdge      2163
 NumOfLoads          27806
-NumOfStores         9709
+NumOfStores         9710
 MaxOutLoadEdge      298
 NumOfCopys          38152
 MaxOutCopyEdge      12209
@@ -444,7 +444,7 @@ CopyGepTime         0
 SCCMergeTime        0
 SCCDetectTime       0
 CollapseTime        0
-TotalTime           14.073
+TotalTime           12.212
 MaxNodesInSCC       263
 TotalPWCCycleNum    25
 TotalCycleNum       218
@@ -475,11 +475,11 @@ TotalPointers       223354
 ****Persistent Points-To Cache Statistics: Andersen's analysis bitvector****
 ################ (program : bash.bc)###############
 UniquePointsToSets       16121
-TotalUnions              194097
-PropertyUnions           133259
-UniqueUnions             1939
-LookupUnions             55339
-PreemptiveUnions         3560
+TotalUnions              194099
+PropertyUnions           133262
+UniqueUnions             1941
+LookupUnions             55334
+PreemptiveUnions         3562
 TotalComplements         2082014
 PropertyComplements      2030174
 UniqueComplements        874
@@ -496,13 +496,13 @@ PreemptiveIntersections  1752
 ################ (program : bash.bc)###############
 -------------------------------------------------------
 AverageRegSize      18.6398
-SSARenameTime       0.15
-InsertPHITime       0.368
-GenMUCHITime        1.234
-GenRegionTime       19.255
-TotalMSSATime       21.094
+SSARenameTime       0.13
+InsertPHITime       0.286
+GenMUCHITime        1.078
+GenRegionTime       15.677
+TotalMSSATime       17.248
 BBHasMSSAPhi        6030
-StoreHasChi         10596
+StoreHasChi         10597
 MaxRegSize          413
 MemRegions          6141
 FunHasRetMu         1968
@@ -526,11 +526,11 @@ CSHasMu             8166
 -------------------------------------------------------
 AvgWeight           54.3265
 OptTime             0
-ATNodeTime          0.517
+ATNodeTime          0.447
 TLNodeTime          0
-ConnIndEdgeTime     2.031
+ConnIndEdgeTime     1.678
 ConnDirEdgeTime     0
-TotalTime           2.548
+TotalTime           2.125
 MaxIndOutDeg        1654
 MaxIndInDeg         1654
 Copy                2762
@@ -539,11 +539,11 @@ ActualRet           3308
 FormalRet           605
 IndRetEdge          50209
 Gep                 22423
-TotalEdge           444476
+TotalEdge           444478
 DirectRetEdge       3210
 ActualOut           42929
-TotalNode           276046
-MaxOutDegree        2252
+TotalNode           276047
+MaxOutDegree        2253
 FormalParam         1912
 IndCallEdge         73411
 PHI                 1147
@@ -551,11 +551,11 @@ Addr                14852
 FormalIn            14774
 IndirectEdgeLabels  18085498
 FormalOut           14671
-Store               12279
+Store               12280
 MaxInDegree         1654
 ActualIn            62788
 Load                30415
-DirectEdge          111572
+DirectEdge          111574
 ActualParam         15492
 AvgIndInDeg         1
 MSSAPhi             35688
@@ -584,13 +584,13 @@ FIObjNum            351
 ################ (program : bash.bc)###############
 AddrsNum            16699
 TotalFieldObjects   1261
-StoresNum           27092
+StoresNum           27093
 FSObjNum            12339
 FIObjNum            351
 GepsNum             22423
 MaxStructSize       24
 IndCallSites        68
-TotalSVFStmts       222022
+TotalSVFStmts       222023
 TotalPointers       223354
 BBWith3Succ         158
 ReturnsNum          5089
@@ -598,7 +598,7 @@ VarArrayObj         152
 CopysNum            12324
 ConstArrayObj       95
 CallsNum            17062
-TotalPTASVFStmts    97506
+TotalPTASVFStmts    97507
 TotalObjects        12691
 FunctionObjs        2288
 GlobalObjs          863
@@ -623,8 +623,8 @@ BBWith2Succ         16676
 AvgVersionPtsSize   300.571
 AvgTopLvlPtsSize    184.008
 VersionPropTime     0
-TotalTime           98.072
-PrelabelingTime     0.067
+TotalTime           87.483
+PrelabelingTime     0.058
 PhiTime             0
 SCCTime             0
 IndirectPropaTime   0
@@ -634,18 +634,18 @@ AvgPtsSize          580.826
 LoadTime            0
 PropagationTime     0
 CopyTime            0
-meldLabelingTime    59.635
+meldLabelingTime    54.645
 Strong/WeakUpdTime  0
 AddrTime            0
 UpdateCGTime        0
-SolveTime           28.555
+SolveTime           24.393
 StoreTime           0
 DirectPropaTime     0
 GepTime             0
 NumOfNodesInSCC     0
 IndEdgeSolved       1331
 TotalEmptyVPts      0
-ProcessedStore      204656
+ProcessedStore      204837
 TotalNonEmptyVPts   1475746
 TotalSingleVObjs    0
 DYFieldObjs         1261
@@ -662,10 +662,10 @@ ProcessedFRet       0
 MaxSCCSize          1
 TotalVersions       1861677
 TotalObjects        13952
-ProcessedLoad       566559
+ProcessedLoad       566552
 Iterations          3
 MaxTopLvlPtsSize    352
-StoresNum           12279
+StoresNum           12280
 StrongUpdates       3163
 ProcessedAParam     0
 ProcessedPhi        16799
@@ -679,11 +679,11 @@ ProcessedGep        196265
 ****Persistent Points-To Cache Statistics: flow-sensitive analysis bitvector****
 ################ (program : bash.bc)###############
 UniquePointsToSets       16532
-TotalUnions              48138836
-PropertyUnions           41922921
-UniqueUnions             7264
-LookupUnions             6198969
-PreemptiveUnions         9682
+TotalUnions              48140631
+PropertyUnions           41924385
+UniqueUnions             7269
+LookupUnions             6199290
+PreemptiveUnions         9687
 TotalComplements         0
 PropertyComplements      0
 UniqueComplements        0
@@ -696,12 +696,12 @@ LookupIntersections      0
 PreemptiveIntersections  0
 #######################################################
 <end of output>
-Test time = 168.23 sec
+Test time = 145.85 sec
 ----------------------------------------------------------
 Test Pass Reason:
 Required regular expression found. Regex=[0]
-"diff-perf-cruxbc/test_cases_bc/crux-bc/bash.bc" end time: Aug 24 08:48 UTC
-"diff-perf-cruxbc/test_cases_bc/crux-bc/bash.bc" time elapsed: 00:02:48
+"diff-perf-cruxbc/test_cases_bc/crux-bc/bash.bc" end time: Aug 25 09:25 UTC
+"diff-perf-cruxbc/test_cases_bc/crux-bc/bash.bc" time elapsed: 00:02:25
 ----------------------------------------------------------
 
-End testing: Aug 24 08:48 UTC
+End testing: Aug 25 09:25 UTC
