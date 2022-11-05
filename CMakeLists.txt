@@ -172,18 +172,21 @@ list(
   APPEND
   cfl_test_bc_folders
   basic_c_tests
+  basic_cpp_tests
 )
 foreach(folder ${cfl_test_bc_folders})
   set(cmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/CFLGrammar.txt -stat=false")
-  set(PEGcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/PEGGrammar.txt -peg-transfer -stat=false")
-  set(VFGcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/VFG.txt -cflsvfg -stat=false")
+  if(${folder} STREQUAL basic_c_tests )
+    set(PEGcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/PEGGrammar.txt -peg-transfer -stat=false")
+    set(VFGcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/VFG.txt -cflsvfg -stat=false")
+    string(REPLACE " " ";" PEGcommandtemp ${PEGcmd})
+    string(REPLACE " " ";" VFGcommandtemp ${VFGcmd})
+    set(PEGcommand ${PEGcommandtemp})
+    set(VFGcommand ${VFGcommandtemp})
+  endif()
   file(GLOB cfl_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/${folder}/*.bc*")
   string(REPLACE " " ";" commandtemp ${cmd})
-  string(REPLACE " " ";" PEGcommandtemp ${PEGcmd})
-  string(REPLACE " " ";" VFGcommandtemp ${VFGcmd})
   set(command ${commandtemp})
-  set(PEGcommand ${PEGcommandtemp})
-  set(VFGcommand ${VFGcommandtemp})
   # loops over each file creating a test
   foreach(filename ${cfl_files})
   add_test(
@@ -191,16 +194,18 @@ foreach(folder ${cfl_test_bc_folders})
       COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
   )
-  add_test(
-    NAME cfl_tests/${filename}PEG
-    COMMAND ${PEGcommand} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-  )
-  add_test(
-    NAME cfl_tests/${filename}VFG
-    COMMAND ${VFGcommand} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-  )
+  if(${folder} STREQUAL basic_c_tests )
+    add_test(
+      NAME cfl_tests/${filename}PEG
+      COMMAND ${PEGcommand} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+    add_test(
+      NAME cfl_tests/${filename}VFG
+      COMMAND ${VFGcommand} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+  endif()
   endforeach()
 endforeach()
 
