@@ -1,7 +1,3 @@
-if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Release)
-endif()
-
 # wpa tests (ctest -R wpa_tests -VV)
 # folder and commands list act in parallel. e.g. for index 0 command "wpa -ander -stat=false" will be run on basic_c_tests folder.
 list(
@@ -42,7 +38,7 @@ foreach(i RANGE ${wpa_len2})
     add_test(
       NAME wpa_tests/${filename}
       COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     )
   endforeach()
 endforeach()
@@ -85,7 +81,7 @@ foreach(i RANGE ${dvf_len2})
     add_test(
       NAME dvf_tests/${filename}
       COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     )
   endforeach()
 endforeach()
@@ -97,7 +93,7 @@ foreach(filename ${files})
   add_test(
     NAME diff_tests-fs/fspta-vfspta/${filename}
     COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -fspta -opt-svfg=false" "wpa -vfspta -opt-svfg=false" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   set_tests_properties(diff_tests-fs/fspta-vfspta/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
 endforeach()
@@ -122,7 +118,7 @@ foreach(folder ${diff_tests_anderson_folders})
     add_test(
       NAME diff_tests-ander/ander-nander/${filename}
       COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -alias-check=false" "wpa -nander -alias-check=false" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     )
     set_tests_properties(diff_tests-ander/ander-nander/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
 
@@ -132,7 +128,7 @@ foreach(folder ${diff_tests_anderson_folders})
     add_test(
       NAME diff_tests-wr-ander/ander-read-write/${filename}
       COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "svf-ex -ander -alias-check=false -write-ander=ir_annotator" "svf-ex -ander -alias-check=false -read-ander=ir_annotator" ${CMAKE_CURRENT_SOURCE_DIR}/${filename} ${readFile}
-      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     )
     set_tests_properties(diff_tests-wr-ander/ander-read-write/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
    
@@ -149,7 +145,7 @@ foreach(filename ${mem_leak_files})
   add_test(
       NAME mem_leak/${filename}
       COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
 
@@ -163,7 +159,7 @@ foreach(filename ${doublefree_files})
   add_test(
           NAME double_free/${filename}
           COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-          WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
 
@@ -192,18 +188,18 @@ foreach(folder ${cfl_test_bc_folders})
   add_test(
       NAME cfl_tests/${filename}
       COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   if(${folder} STREQUAL basic_c_tests )
     add_test(
       NAME cfl_tests/${filename}PEG
       COMMAND ${PEGcommand} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     )
     add_test(
       NAME cfl_tests/${filename}VFG
       COMMAND ${VFGcommand} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     )
   endif()
   endforeach()
@@ -224,7 +220,7 @@ foreach(file ${diff_tests_cruxbc})
   add_test(
     NAME diff-perf-cruxbc/${filename}
     COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   set_tests_properties(diff-perf-cruxbc/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
 endforeach()
