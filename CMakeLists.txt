@@ -95,7 +95,6 @@ foreach(filename ${files})
     COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -fspta -opt-svfg=false" "wpa -vfspta -opt-svfg=false" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
-  set_tests_properties(diff_tests-fs/fspta-vfspta/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
 endforeach()
 
 
@@ -120,7 +119,6 @@ foreach(folder ${diff_tests_anderson_folders})
       COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -alias-check=false" "wpa -nander -alias-check=false" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     )
-    set_tests_properties(diff_tests-ander/ander-nander/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
 
     # read and write ander
     # change file extension to .pre.bc
@@ -222,5 +220,4 @@ foreach(file ${diff_tests_cruxbc})
     COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
-  set_tests_properties(diff-perf-cruxbc/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
 endforeach()
