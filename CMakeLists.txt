@@ -221,3 +221,23 @@ foreach(file ${diff_tests_cruxbc})
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
+
+# Performance regression testing small (ctest -R diff-perf-cruxbc-small -VV)
+list(
+  APPEND
+  diff_tests_cruxbc_small
+  libbz2.so.bc
+  htop
+)
+set(cmd "wpa -vfspta -dump-vfg")
+string(REPLACE " " ";" commandtemp ${cmd})
+set(command ${commandtemp})
+foreach(file ${diff_tests_cruxbc_small})
+  file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/${file}.bc")
+  add_test(
+    NAME diff-perf-cruxbc-small/${filename}
+    COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+  #  set_tests_properties(diff-perf-cruxbc/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
+endforeach()
