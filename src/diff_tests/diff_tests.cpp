@@ -13,14 +13,19 @@ std::string exec_command(const char* cmd)
 {
     std::array<char, 128> buffer;
     std::string result;
-    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
+    FILE * pipe = popen(cmd, "r");
     if (!pipe) 
     {
         throw std::runtime_error("popen() failed!");
     }
-    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) 
+    while (fgets(buffer.data(), buffer.size(), pipe) != nullptr)
     {
         result += buffer.data();
+    }
+    auto res = pclose(pipe);
+    if (res != 0) {
+      std::cout << "Error execution of " << cmd << " failed\n";
+      abort();
     }
     return result;
 }
