@@ -63,7 +63,7 @@ jobs:
 
   mac_build:
     needs: linux_build
-    runs-on: macos-latest
+    runs-on: macos-11
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
