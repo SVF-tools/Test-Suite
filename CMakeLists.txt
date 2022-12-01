@@ -128,8 +128,6 @@ foreach(folder ${diff_tests_anderson_folders})
       COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "svf-ex -ander -alias-check=false -write-ander=ir_annotator" "svf-ex -ander -alias-check=false -read-ander=ir_annotator" ${CMAKE_CURRENT_SOURCE_DIR}/${filename} ${readFile}
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     )
-    set_tests_properties(diff_tests-wr-ander/ander-read-write/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
-   
   endforeach()
 endforeach()
 
@@ -239,5 +237,4 @@ foreach(file ${diff_tests_cruxbc_small})
     COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
-  #  set_tests_properties(diff-perf-cruxbc/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
 endforeach()
