@@ -224,7 +224,7 @@ endforeach()
 list(
   APPEND
   diff_tests_cruxbc_small
-  libbz2.so.bc
+  libbz2.so
   htop
 )
 set(cmd "wpa -vfspta -dump-vfg")
