@@ -139,26 +139,6 @@ foreach(folder ${diff_tests_anderson_folders})
   endforeach()
 endforeach()
 
-# differential_tests read_write_svfg with crux-bc (ctest -R diff_tests-wr-svfg-cruxbc -VV)
-list(
-  APPEND
-  diff_tests_cruxbc
-  bc
-  dc
-  xxd
-  libbz2.so
-  bzip2recover
-)
-foreach(file ${diff_tests_cruxbc})
-  file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/${file}.bc")
-  add_test(
-    NAME diff_tests-wr-svfg-cruxbc/read_write_svfg_crux/${filename}
-    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -alias-check=false -write-svfg=read_write_file" "wpa -ander -svfg -alias-check=false -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-  )
-
-endforeach()
-
 # saber mem_leak tests  (ctest -R mem_leak -VV)
 set(cmd "saber -leak -valid-tests -stat=false")
 file(GLOB mem_leak_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/mem_leak/*.bc*")
