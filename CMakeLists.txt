@@ -171,10 +171,13 @@ foreach(folder ${cfl_test_bc_folders})
   if(${folder} STREQUAL basic_c_tests )
     set(PEGcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/PEGGrammar.txt -peg-transfer -stat=false")
     set(VFGcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/VFG.txt -cflsvfg -stat=false")
+    set(POCRcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/CFLGrammar.txt -stat=false -cfldata")
     string(REPLACE " " ";" PEGcommandtemp ${PEGcmd})
     string(REPLACE " " ";" VFGcommandtemp ${VFGcmd})
+    string(REPLACE " " ";" POCRcommandtemp ${POCRcmd})
     set(PEGcommand ${PEGcommandtemp})
     set(VFGcommand ${VFGcommandtemp})
+    set(POCRcommand ${POCRcommandtemp})
   endif()
   file(GLOB cfl_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/${folder}/*.bc*")
   string(REPLACE " " ";" commandtemp ${cmd})
@@ -196,6 +199,11 @@ foreach(folder ${cfl_test_bc_folders})
       NAME cfl_tests/${filename}VFG
       COMMAND ${VFGcommand} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+    )
+      add_test(
+      NAME cfl_tests/${filename}POCR
+      COMMAND ${POCRcommand} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
     )
   endif()
   endforeach()
