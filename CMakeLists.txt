@@ -156,7 +156,7 @@ foreach(file ${diff_tests_cruxbc})
     COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -alias-check=false -write-svfg=read_write_file" "wpa -ander -svfg -alias-check=false -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
   )
-  set_tests_properties(diff_tests-wr-svfg-cruxbc/read_write_svfg_crux/${filename} PROPERTIES PASS_REGULAR_EXPRESSION "0")
+
 endforeach()
 
 # saber mem_leak tests  (ctest -R mem_leak -VV)
