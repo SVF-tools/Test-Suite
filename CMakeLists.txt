@@ -187,27 +187,27 @@ list(
   basic_cpp_tests
 )
 foreach(folder ${cfl_test_bc_folders})
-  set(cmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/CFLGrammar.txt -stat=false")
+  set(POCRcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/CFLGrammar.txt -stat=false -pocr-alias")
   if(${folder} STREQUAL basic_c_tests )
     set(PEGcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/PEGGrammar.txt -peg-transfer -stat=false")
     set(VFGcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/VFG.txt -cflsvfg -stat=false")
-    set(POCRcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/CFLGrammar.txt -stat=false -pocr-alias")
+    set(cmd "cfl -grammar=${PROJECT_SOURCE_DIR}/include/CFL/CFLGrammar.txt -stat=false")
     string(REPLACE " " ";" PEGcommandtemp ${PEGcmd})
     string(REPLACE " " ";" VFGcommandtemp ${VFGcmd})
-    string(REPLACE " " ";" POCRcommandtemp ${POCRcmd})
+    string(REPLACE " " ";" commandtemp ${cmd})
     set(PEGcommand ${PEGcommandtemp})
     set(VFGcommand ${VFGcommandtemp})
-    set(POCRcommand ${POCRcommandtemp})
+    set(command ${commandtemp})
   endif()
   file(GLOB cfl_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/${folder}/*.bc*")
-  string(REPLACE " " ";" commandtemp ${cmd})
-  set(command ${commandtemp})
+  string(REPLACE " " ";" POCRcommandtemp ${POCRcmd})  
+  set(POCRcommand ${POCRcommandtemp})
   # loops over each file creating a test
   foreach(filename ${cfl_files})
   add_test(
-      NAME cfl_tests/${filename}
-      COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+    NAME cfl_tests/${filename}POCR
+    COMMAND ${POCRcommand} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
   )
   if(${folder} STREQUAL basic_c_tests )
     add_test(
@@ -220,11 +220,11 @@ foreach(folder ${cfl_test_bc_folders})
       COMMAND ${VFGcommand} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     )
-      add_test(
-      NAME cfl_tests/${filename}POCR
-      COMMAND ${POCRcommand} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-    )
+    add_test(
+      NAME cfl_tests/${filename}
+      COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
   endif()
   endforeach()
 endforeach()
