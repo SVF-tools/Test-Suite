@@ -189,11 +189,11 @@ list(
 foreach(folder ${cfl_test_bc_folders})
   set(POCRcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/svf/include/CFL/CFLGrammar.txt -stat=false -pocr-alias")
   if(${folder} STREQUAL basic_c_tests )
-    set(HYBIRDcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/svf/include/CFL/CFLGrammar.txt -stat=false -pocr-hybird")
+    set(HYBRIDcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/svf/include/CFL/CFLGrammar.txt -stat=false -pocr-hybrid")
     set(PEGcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/svf/include/CFL/PEGGrammar.txt -peg-transfer -stat=false")
     set(VFGcmd "cfl -grammar=${PROJECT_SOURCE_DIR}/svf/include/CFL/VFG.txt -cflsvfg -stat=false")
     set(cmd "cfl -grammar=${PROJECT_SOURCE_DIR}/svf/include/CFL/CFLGrammar.txt -stat=false")
-    string(REPLACE " " ";" HYBIRDcommandtemp ${PEGcmd})
+    string(REPLACE " " ";" HYBRIDcommandtemp ${PEGcmd})
     string(REPLACE " " ";" PEGcommandtemp ${PEGcmd})
     string(REPLACE " " ";" VFGcommandtemp ${VFGcmd})
     string(REPLACE " " ";" commandtemp ${cmd})
@@ -214,7 +214,7 @@ foreach(folder ${cfl_test_bc_folders})
   )
   if(${folder} STREQUAL basic_c_tests )
     add_test(
-      NAME cfl_tests/${filename}HYBIRD
+      NAME cfl_tests/${filename}HYBRID
       COMMAND ${HYBIRDcommand} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     )  
