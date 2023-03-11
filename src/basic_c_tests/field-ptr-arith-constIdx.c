@@ -19,6 +19,6 @@ int main()
 	s1.f2 = &b;
 	q = &(s1.f1);
 	p = q+1;
-	EXPECTEDFAIL_MAYALIAS(*p,&b);
+	MAYALIAS(*p,&b);
 	return 0;
 }
