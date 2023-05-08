@@ -20,6 +20,8 @@ test_dirs="
 root=$(cd "$(dirname "$0")"; pwd)
 bc_path="$root/test_cases_bc"
 
+if [[ $sysOS == "Linux" ]];then
+
 ########
 # Remove previous bc folder and create a new one.
 ########
@@ -99,3 +101,5 @@ for td in $test_dirs; do
     opt -S -mem2reg "$bc_f" -o "$bc_f"
   done
 done
+
+fi
