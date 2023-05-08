@@ -57,7 +57,7 @@ do
     # Obtains the text after the '.'.
     ########
     ext=${c_f##*.}
-    
+
     ########
     # We only look for .c/.cpp files. Check $ext = $f in case the filename is c/cpp.
     ########
@@ -106,29 +106,3 @@ do
     opt -S -mem2reg "$bc_f" -o "$bc_f"
   done
 done
-
-echo "$0: Compiling diff_tests unit test"
-cd src/diff_tests
-g++ -o diff_tests_linux diff_tests.cpp
-cd ../..
-diff_exe_path=diff_tests
-if [ ! -d "$diff_exe_path" ]
-then
-    mkdir -p "$diff_exe_path"
-fi
-mv src/diff_tests/diff_tests_linux $diff_exe_path/diff_tests_linux
-fi
-
-# build diff_tests for osx
-if [[ $sysOS == "Darwin" ]]
-then
-    cd src/diff_tests
-    g++ -o diff_tests_osx diff_tests.cpp
-    cd ../..
-    diff_exe_path=diff_tests
-    if [ ! -d "$diff_exe_path" ]
-    then
-        mkdir -p "$diff_exe_path"
-    fi
-    mv src/diff_tests/diff_tests_osx $diff_exe_path/diff_tests_osx
-fi
