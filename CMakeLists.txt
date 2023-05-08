@@ -92,7 +92,10 @@ file(GLOB files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR
 foreach(filename ${files})
   add_test(
     NAME diff_tests-fs/fspta-vfspta/${filename}
-    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -fspta -opt-svfg=false" "wpa -vfspta -opt-svfg=false" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/difftest.py
+      "wpa -fspta -opt-svfg=false"
+      "wpa -vfspta -opt-svfg=false"
+      ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
@@ -116,7 +119,10 @@ foreach(folder ${diff_tests_anderson_folders})
 
     add_test(
       NAME diff_tests-ander/ander-nander/${filename}
-      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -alias-check=false" "wpa -nander -alias-check=false" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/difftest.py
+        "wpa -ander -alias-check=false"
+        "wpa -nander -alias-check=false"
+        ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     )
 
@@ -125,10 +131,13 @@ foreach(folder ${diff_tests_anderson_folders})
     string(REGEX REPLACE "[.]bc$" ".pre.svf.bc" readFile ${CMAKE_CURRENT_SOURCE_DIR}/${filename})
     add_test(
       NAME diff_tests-wr-ander/ander-read-write/${filename}
-      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "svf-ex -ander -alias-check=false -write-ander=ir_annotator" "svf-ex -ander -alias-check=false -read-ander=ir_annotator" ${CMAKE_CURRENT_SOURCE_DIR}/${filename} ${readFile}
+      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/difftest.py
+        "svf-ex -ander -alias-check=false -write-ander=ir_annotator"
+        "svf-ex -ander -alias-check=false -read-ander=ir_annotator"
+        ${CMAKE_CURRENT_SOURCE_DIR}/${filename} ${readFile}
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     )
-    
+
   endforeach()
 endforeach()
 
@@ -146,7 +155,24 @@ foreach(file ${diff_tests_cruxbc})
   file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/${file}.bc")
   add_test(
     NAME diff_tests-wr-svfg-cruxbc/read_write_svfg_crux/${filename}
-    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/diff_tests.sh "wpa -ander -svfg -alias-check=false -write-svfg=read_write_file" "wpa -ander -svfg -alias-check=false -read-svfg=read_write_file" ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/difftest.py
+      "wpa -ander -svfg -alias-check=false -write-svfg=read_write_file"
+      "wpa -ander -svfg -alias-check=false -read-svfg=read_write_file"
+      ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+  )
+endforeach()
+
+set(filesys_test_bcs bc dc xxd libbz2.so bzip2recover ctags curl libcurl.so htop)
+foreach(file ${filesys_test_bcs})
+  file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/${file}.bc")
+  add_test(
+    NAME diff_tests-filesys-cruxbc/filesystem_crux/${filename}
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/difftest.py
+      "wpa -ander -dump-json=ir.json"
+      "wpa -ander -read-json"
+      ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+      "ir.json"
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
   )
 endforeach()
@@ -203,7 +229,7 @@ foreach(folder ${cfl_test_bc_folders})
     set(command ${commandtemp})
   endif()
   file(GLOB cfl_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/${folder}/*.bc*")
-  string(REPLACE " " ";" POCRcommandtemp ${POCRcmd})  
+  string(REPLACE " " ";" POCRcommandtemp ${POCRcmd})
   set(POCRcommand ${POCRcommandtemp})
   # loops over each file creating a test
   foreach(filename ${cfl_files})
@@ -217,7 +243,7 @@ foreach(folder ${cfl_test_bc_folders})
       NAME cfl_tests/${filename}HYBRID
       COMMAND ${HYBRIDcommand} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-    )  
+    )
     add_test(
       NAME cfl_tests/${filename}PEG
       COMMAND ${PEGcommand} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
