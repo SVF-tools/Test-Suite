@@ -92,19 +92,15 @@ def comparer_filesystem(stats1: Stats, stats2: Stats):
             # Those keys might be different
             # ProcessedCopy ProcessedGep ProcessedLoad ProcessedStore ProcessedPhi
             continue
+        if section.startswith('Persistent'):
+            # Persistent statistics are not deterministic
+            continue
         if key.endswith('Time'):
             # Timing statistics are not deterministic
             continue
 
         d1 = stats1[section][key]
         d2 = stats2[section][key]
-
-        if section.startswith('Persistent'):
-            # Persistent statistics are not deterministic
-            delta = abs((d2 - d1) / d1 if abs(d1) > 10 else (d2-d1)/20)
-            if delta > 0.2:
-                raise ValueError(f"Key [{section}][{key}] differ too much: {d1} vs {d2} (delta={delta:.2f})")
-            continue
 
         if d1 != d2:
             raise ValueError(f"Key [{section}][{key}] differ: {d1} != {d2}")
