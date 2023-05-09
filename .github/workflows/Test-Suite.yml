@@ -17,22 +17,22 @@ jobs:
   linux_build:
     # The type of runner that the job will run on
     runs-on: ubuntu-20.04
-  
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-          
+
       - name: env-setup
-        run: | 
+        run: |
             sudo apt-get update
             sudo apt-get install unzip tar
             wget https://github.com/llvm/llvm-project/releases/download/llvmorg-13.0.0/clang+llvm-13.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
             mkdir -p "/opt/llvm" && tar -xf clang+llvm-13.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz -C "/opt/llvm" --strip-components 1
             echo "/opt/llvm/bin" >> $GITHUB_PATH
-            
+
       - name: stash-changes
-        run: | 
+        run: |
             git stash --all
             echo $(pwd)
 
@@ -42,10 +42,10 @@ jobs:
            echo $(pwd)
            git status
            bash ./generate_bc.sh
-           git clone https://github.com/mbarbar/crux-bitcode    
+           git clone https://github.com/mbarbar/crux-bitcode
            cd crux-bitcode
            rm pkgs.txt
-           echo -e "bc\nhtop\nvim\ncurl\nbash\nbzip2" >> pkgs.txt
+           echo -e "bc\nhtop\nvim\ncurl\nbash\nbzip2\nunrar\ntmux\n" >> pkgs.txt
            bash ./build-bitcode.sh
            unzip -j -o \*.zip -d $GITHUB_WORKSPACE/test_cases_bc/crux-bc/
            rm $GITHUB_WORKSPACE/test_cases_bc/crux-bc/info.txt
@@ -56,7 +56,7 @@ jobs:
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@users.noreply.github.com'
           git status
-          git pull 
+          git pull
           git add .
           git commit -am "update bc files" || true
           git push
@@ -69,7 +69,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: stash-changes
-        run: | 
+        run: |
           git stash --all
           echo $(pwd)
 
@@ -84,7 +84,7 @@ jobs:
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@users.noreply.github.com'
           git status
-          git pull 
+          git pull
           git add .
           git commit -am "update bc files" || true
           git push

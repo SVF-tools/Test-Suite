@@ -163,7 +163,7 @@ foreach(file ${diff_tests_cruxbc})
   )
 endforeach()
 
-set(filesys_test_bcs bc dc xxd libbz2.so bzip2recover ctags curl libcurl.so htop)
+set(filesys_test_bcs bc dc xxd libbz2.so bzip2recover curl libcurl.so htop unrar tmux)
 foreach(file ${filesys_test_bcs})
   file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/${file}.bc")
   add_test(
