@@ -251,30 +251,14 @@ endforeach()
 
 # Filesystem & Performance regression testing(ctest -R diff-perf-cruxbc -VV)
 set(diff_tests_cruxbc
-  libcurl.so tmux bash)
+  dc bunzip2 htop libcurl.so bash)
 foreach(file ${diff_tests_cruxbc})
   file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/${file}.bc")
   add_test(
     NAME diff-perf-cruxbc/${filename}
     COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/difftest.py
       "wpa -vfspta -dump-vfg -dump-json=ir.json"
-      "wpa -vfspta -dump-vfg -read-json"
-      ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-      "ir.json"
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-  )
-endforeach()
-
-# Filesystem & Performance regression testing small (ctest -R diff-perf-cruxbc-small -VV)
-set(diff_tests_cruxbc_small
-  dc bc libbz2.so bunzip2 htop curl)
-foreach(file ${diff_tests_cruxbc_small})
-  file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/${file}.bc")
-  add_test(
-    NAME diff-perf-cruxbc-small/${filename}
-    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/difftest.py
-      "wpa -vfspta -dump-vfg -dump-json=ir.json"
-      "wpa -vfspta -dump-vfg -read-json"
+      "wpa -vfspta -read-json"
       ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       "ir.json"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
