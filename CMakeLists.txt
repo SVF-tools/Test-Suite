@@ -250,15 +250,30 @@ foreach(folder ${cfl_test_bc_folders})
 endforeach()
 
 # Filesystem & Performance regression testing(ctest -R diff-perf-cruxbc -VV)
-set(diff_tests_cruxbc
-  dc bunzip2 htop libcurl.so bash)
-foreach(file ${diff_tests_cruxbc})
+set(diff_tests_cruxbc_small
+  dc bc libbz2.so bunzip2 htop)
+foreach(file ${diff_tests_cruxbc_small})
   file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/${file}.bc")
   add_test(
-    NAME diff-perf-cruxbc/${filename}
+    NAME diff-perf-cruxbc-small/${filename}
     COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/difftest.py
       "wpa -vfspta -dump-vfg -dump-json=ir.json"
       "wpa -vfspta -read-json"
+      ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+      "ir.json"
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+
+# Filesystem & Performance regression testing(ctest -R diff-perf-cruxbc -VV)
+set(diff_tests_cruxbc_big libcurl.so bash)
+foreach(file ${diff_tests_cruxbc_big})
+  file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/${file}.bc")
+  add_test(
+    NAME diff-perf-cruxbc-big/${filename}
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/difftest.py
+      "wpa -ander -dump-json=ir.json"
+      "wpa -ander -read-json"
       ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       "ir.json"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
