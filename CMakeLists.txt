@@ -249,7 +249,8 @@ foreach(folder ${cfl_test_bc_folders})
   endforeach()
 endforeach()
 
-# Filesystem & Performance regression testing(ctest -R diff-perf-cruxbc -VV)
+# Crux bc Small: Filesystem & Performance regression testing
+# Run with: (ctest -R diff-perf-cruxbc-small -VV)
 set(diff_tests_cruxbc_small
   dc bc libbz2.so bunzip2 htop)
 foreach(file ${diff_tests_cruxbc_small})
@@ -265,7 +266,8 @@ foreach(file ${diff_tests_cruxbc_small})
   )
 endforeach()
 
-# Filesystem & Performance regression testing(ctest -R diff-perf-cruxbc -VV)
+# Crux bc Big: Filesystem & Performance regression testing
+# Run with (ctest -R diff-perf-cruxbc-big -VV)
 set(diff_tests_cruxbc_big libcurl.so bash)
 foreach(file ${diff_tests_cruxbc_big})
   file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/${file}.bc")
