@@ -1,18 +1,17 @@
-#include <wchar.h>
-#include <wctype.h>
-#include <stdio.h>
+extern void swapExtCallStmt(char **a, char **b);
 
-int main() {
-    wchar_t wc = L'a';
+void swap(char **a, char **b) {}
 
-    if (iswlower(wc)) {
-        wprintf(L"The character is a lowercase letter.\n");
-    } else {
-        wprintf(L"The character is not a lowercase letter.\n");
-    }
-    
-    wchar_t uc = towupper(wc);
-    wprintf(L"The uppercase version of the character is %lc.\n", uc);
+int main (){
+    char * p1, *p2;
+    char * pa, * pb;
+    char b[20];
+    char a[20];
+ 
+    p1 = a;
+    p2 = b;
 
-    return 0;
+    swapExtCallStmt(&p1, &p2);
+    pa = p2;
+    pb = p1;
 }
