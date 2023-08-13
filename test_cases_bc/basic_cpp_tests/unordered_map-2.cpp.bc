@@ -24,7 +24,17 @@ target triple = "x86_64-unknown-linux-gnu"
 %"struct.std::__detail::_Rehash_base" = type { i8 }
 %"struct.std::__detail::_Equality" = type { i8 }
 %"struct.std::__detail::_Hashtable_alloc" = type { i8 }
+%"struct.std::_Enable_default_constructor" = type { i8 }
+%"struct.std::__detail::_Hash_code_base" = type { i8 }
+%"struct.std::__detail::_Hashtable_ebo_helper.2" = type { i8 }
 %"struct.std::__detail::_Hashtable_ebo_helper.3" = type { i8 }
+%"struct.std::__detail::_Hashtable_ebo_helper" = type { i8 }
+%"struct.std::__detail::_Hashtable_ebo_helper.0" = type { i8 }
+%"struct.std::__detail::_Hashtable_ebo_helper.1" = type { i8 }
+%"struct.std::equal_to" = type { i8 }
+%"struct.std::__detail::_Select1st" = type { i8 }
+%"struct.std::hash" = type { i8 }
+%"struct.std::__detail::_Mod_range_hashing" = type { i8 }
 %"class.std::allocator" = type { i8 }
 %"class.__gnu_cxx::new_allocator" = type { i8 }
 %"class.std::allocator.4" = type { i8 }
@@ -34,16 +44,7 @@ target triple = "x86_64-unknown-linux-gnu"
 %"struct.std::_Tuple_impl" = type { %"struct.std::_Head_base" }
 %"struct.std::_Head_base" = type { i32* }
 %"class.std::tuple.7" = type { i8 }
-%"struct.std::__detail::_Hash_code_base" = type { i8 }
-%"struct.std::hash" = type { i8 }
 %"struct.std::pair.9" = type { i8, i64 }
-%"struct.std::__detail::_Hashtable_ebo_helper.0" = type { i8 }
-%"struct.std::__detail::_Mod_range_hashing" = type { i8 }
-%"struct.std::__detail::_Hashtable_ebo_helper.1" = type { i8 }
-%"struct.std::equal_to" = type { i8 }
-%"struct.std::__detail::_Select1st" = type { i8 }
-%"struct.std::__detail::_Hashtable_ebo_helper.2" = type { i8 }
-%"struct.std::__detail::_Hashtable_ebo_helper" = type { i8 }
 %"struct.std::_Index_tuple" = type { i8 }
 %"struct.std::_Index_tuple.8" = type { i8 }
 %"class.std::__pair_base" = type { i8 }
@@ -65,11 +66,23 @@ $_ZNSt13unordered_mapIiPK1ASt4hashIiESt8equal_toIiESaISt4pairIKiS2_EEED2Ev = com
 
 $_ZNSt10_HashtableIiSt4pairIKiPK1AESaIS5_ENSt8__detail10_Select1stESt8equal_toIiESt4hashIiENS7_18_Mod_range_hashingENS7_20_Default_ranged_hashENS7_20_Prime_rehash_policyENS7_17_Hashtable_traitsILb0ELb0ELb1EEEEC2Ev = comdat any
 
+$_ZNSt8__detail15_Hashtable_baseIiSt4pairIKiPK1AENS_10_Select1stESt8equal_toIiESt4hashIiENS_18_Mod_range_hashingENS_20_Default_ranged_hashENS_17_Hashtable_traitsILb0ELb0ELb1EEEEC2Ev = comdat any
+
 $_ZNSt8__detail16_Hashtable_allocISaINS_10_Hash_nodeISt4pairIKiPK1AELb0EEEEEC2Ev = comdat any
 
 $_ZNSt8__detail15_Hash_node_baseC2Ev = comdat any
 
 $_ZNSt8__detail20_Prime_rehash_policyC2Ef = comdat any
+
+$_ZNSt8__detail15_Hash_code_baseIiSt4pairIKiPK1AENS_10_Select1stESt4hashIiENS_18_Mod_range_hashingENS_20_Default_ranged_hashELb0EEC2Ev = comdat any
+
+$_ZNSt8__detail21_Hashtable_ebo_helperILi0ESt8equal_toIiELb1EEC2Ev = comdat any
+
+$_ZNSt8__detail21_Hashtable_ebo_helperILi0ENS_10_Select1stELb1EEC2Ev = comdat any
+
+$_ZNSt8__detail21_Hashtable_ebo_helperILi1ESt4hashIiELb1EEC2Ev = comdat any
+
+$_ZNSt8__detail21_Hashtable_ebo_helperILi2ENS_18_Mod_range_hashingELb1EEC2Ev = comdat any
 
 $_ZNSt8__detail21_Hashtable_ebo_helperILi0ESaINS_10_Hash_nodeISt4pairIKiPK1AELb0EEEELb1EEC2Ev = comdat any
 
@@ -658,12 +671,14 @@ entry:
   store %"class.std::_Hashtable"* %this, %"class.std::_Hashtable"** %this.addr, align 8
   %this1 = load %"class.std::_Hashtable"*, %"class.std::_Hashtable"** %this.addr, align 8
   %0 = bitcast %"class.std::_Hashtable"* %this1 to %"struct.std::__detail::_Hashtable_base"*
+  call void @_ZNSt8__detail15_Hashtable_baseIiSt4pairIKiPK1AENS_10_Select1stESt8equal_toIiESt4hashIiENS_18_Mod_range_hashingENS_20_Default_ranged_hashENS_17_Hashtable_traitsILb0ELb0ELb1EEEEC2Ev(%"struct.std::__detail::_Hashtable_base"* nonnull align 1 dereferenceable(1) %0) #5
   %1 = bitcast %"class.std::_Hashtable"* %this1 to %"struct.std::__detail::_Map_base"*
   %2 = bitcast %"class.std::_Hashtable"* %this1 to %"struct.std::__detail::_Insert"*
   %3 = bitcast %"class.std::_Hashtable"* %this1 to %"struct.std::__detail::_Rehash_base"*
   %4 = bitcast %"class.std::_Hashtable"* %this1 to %"struct.std::__detail::_Equality"*
   %5 = bitcast %"class.std::_Hashtable"* %this1 to %"struct.std::__detail::_Hashtable_alloc"*
   call void @_ZNSt8__detail16_Hashtable_allocISaINS_10_Hash_nodeISt4pairIKiPK1AELb0EEEEEC2Ev(%"struct.std::__detail::_Hashtable_alloc"* nonnull align 1 dereferenceable(1) %5) #5
+  %6 = bitcast %"class.std::_Hashtable"* %this1 to %"struct.std::_Enable_default_constructor"*
   %_M_buckets = getelementptr inbounds %"class.std::_Hashtable", %"class.std::_Hashtable"* %this1, i32 0, i32 0
   %_M_single_bucket = getelementptr inbounds %"class.std::_Hashtable", %"class.std::_Hashtable"* %this1, i32 0, i32 5
   store %"struct.std::__detail::_Hash_node_base"** %_M_single_bucket, %"struct.std::__detail::_Hash_node_base"*** %_M_buckets, align 8
@@ -677,6 +692,19 @@ entry:
   call void @_ZNSt8__detail20_Prime_rehash_policyC2Ef(%"struct.std::__detail::_Prime_rehash_policy"* nonnull align 8 dereferenceable(16) %_M_rehash_policy, float 1.000000e+00) #5
   %_M_single_bucket2 = getelementptr inbounds %"class.std::_Hashtable", %"class.std::_Hashtable"* %this1, i32 0, i32 5
   store %"struct.std::__detail::_Hash_node_base"* null, %"struct.std::__detail::_Hash_node_base"** %_M_single_bucket2, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt8__detail15_Hashtable_baseIiSt4pairIKiPK1AENS_10_Select1stESt8equal_toIiESt4hashIiENS_18_Mod_range_hashingENS_20_Default_ranged_hashENS_17_Hashtable_traitsILb0ELb0ELb1EEEEC2Ev(%"struct.std::__detail::_Hashtable_base"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::__detail::_Hashtable_base"*, align 8
+  store %"struct.std::__detail::_Hashtable_base"* %this, %"struct.std::__detail::_Hashtable_base"** %this.addr, align 8
+  %this1 = load %"struct.std::__detail::_Hashtable_base"*, %"struct.std::__detail::_Hashtable_base"** %this.addr, align 8
+  %0 = bitcast %"struct.std::__detail::_Hashtable_base"* %this1 to %"struct.std::__detail::_Hash_code_base"*
+  call void @_ZNSt8__detail15_Hash_code_baseIiSt4pairIKiPK1AENS_10_Select1stESt4hashIiENS_18_Mod_range_hashingENS_20_Default_ranged_hashELb0EEC2Ev(%"struct.std::__detail::_Hash_code_base"* nonnull align 1 dereferenceable(1) %0) #5
+  %1 = bitcast %"struct.std::__detail::_Hashtable_base"* %this1 to %"struct.std::__detail::_Hashtable_ebo_helper.2"*
+  call void @_ZNSt8__detail21_Hashtable_ebo_helperILi0ESt8equal_toIiELb1EEC2Ev(%"struct.std::__detail::_Hashtable_ebo_helper.2"* nonnull align 1 dereferenceable(1) %1) #5
   ret void
 }
 
@@ -715,6 +743,61 @@ entry:
   store float %0, float* %_M_max_load_factor, align 8
   %_M_next_resize = getelementptr inbounds %"struct.std::__detail::_Prime_rehash_policy", %"struct.std::__detail::_Prime_rehash_policy"* %this1, i32 0, i32 1
   store i64 0, i64* %_M_next_resize, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt8__detail15_Hash_code_baseIiSt4pairIKiPK1AENS_10_Select1stESt4hashIiENS_18_Mod_range_hashingENS_20_Default_ranged_hashELb0EEC2Ev(%"struct.std::__detail::_Hash_code_base"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::__detail::_Hash_code_base"*, align 8
+  store %"struct.std::__detail::_Hash_code_base"* %this, %"struct.std::__detail::_Hash_code_base"** %this.addr, align 8
+  %this1 = load %"struct.std::__detail::_Hash_code_base"*, %"struct.std::__detail::_Hash_code_base"** %this.addr, align 8
+  %0 = bitcast %"struct.std::__detail::_Hash_code_base"* %this1 to %"struct.std::__detail::_Hashtable_ebo_helper"*
+  call void @_ZNSt8__detail21_Hashtable_ebo_helperILi0ENS_10_Select1stELb1EEC2Ev(%"struct.std::__detail::_Hashtable_ebo_helper"* nonnull align 1 dereferenceable(1) %0) #5
+  %1 = bitcast %"struct.std::__detail::_Hash_code_base"* %this1 to %"struct.std::__detail::_Hashtable_ebo_helper.0"*
+  call void @_ZNSt8__detail21_Hashtable_ebo_helperILi1ESt4hashIiELb1EEC2Ev(%"struct.std::__detail::_Hashtable_ebo_helper.0"* nonnull align 1 dereferenceable(1) %1) #5
+  %2 = bitcast %"struct.std::__detail::_Hash_code_base"* %this1 to %"struct.std::__detail::_Hashtable_ebo_helper.1"*
+  call void @_ZNSt8__detail21_Hashtable_ebo_helperILi2ENS_18_Mod_range_hashingELb1EEC2Ev(%"struct.std::__detail::_Hashtable_ebo_helper.1"* nonnull align 1 dereferenceable(1) %2) #5
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt8__detail21_Hashtable_ebo_helperILi0ESt8equal_toIiELb1EEC2Ev(%"struct.std::__detail::_Hashtable_ebo_helper.2"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::__detail::_Hashtable_ebo_helper.2"*, align 8
+  store %"struct.std::__detail::_Hashtable_ebo_helper.2"* %this, %"struct.std::__detail::_Hashtable_ebo_helper.2"** %this.addr, align 8
+  %this1 = load %"struct.std::__detail::_Hashtable_ebo_helper.2"*, %"struct.std::__detail::_Hashtable_ebo_helper.2"** %this.addr, align 8
+  %0 = bitcast %"struct.std::__detail::_Hashtable_ebo_helper.2"* %this1 to %"struct.std::equal_to"*
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt8__detail21_Hashtable_ebo_helperILi0ENS_10_Select1stELb1EEC2Ev(%"struct.std::__detail::_Hashtable_ebo_helper"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::__detail::_Hashtable_ebo_helper"*, align 8
+  store %"struct.std::__detail::_Hashtable_ebo_helper"* %this, %"struct.std::__detail::_Hashtable_ebo_helper"** %this.addr, align 8
+  %this1 = load %"struct.std::__detail::_Hashtable_ebo_helper"*, %"struct.std::__detail::_Hashtable_ebo_helper"** %this.addr, align 8
+  %0 = bitcast %"struct.std::__detail::_Hashtable_ebo_helper"* %this1 to %"struct.std::__detail::_Select1st"*
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt8__detail21_Hashtable_ebo_helperILi1ESt4hashIiELb1EEC2Ev(%"struct.std::__detail::_Hashtable_ebo_helper.0"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::__detail::_Hashtable_ebo_helper.0"*, align 8
+  store %"struct.std::__detail::_Hashtable_ebo_helper.0"* %this, %"struct.std::__detail::_Hashtable_ebo_helper.0"** %this.addr, align 8
+  %this1 = load %"struct.std::__detail::_Hashtable_ebo_helper.0"*, %"struct.std::__detail::_Hashtable_ebo_helper.0"** %this.addr, align 8
+  %0 = bitcast %"struct.std::__detail::_Hashtable_ebo_helper.0"* %this1 to %"struct.std::hash"*
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dso_local void @_ZNSt8__detail21_Hashtable_ebo_helperILi2ENS_18_Mod_range_hashingELb1EEC2Ev(%"struct.std::__detail::_Hashtable_ebo_helper.1"* nonnull align 1 dereferenceable(1) %this) unnamed_addr #7 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::__detail::_Hashtable_ebo_helper.1"*, align 8
+  store %"struct.std::__detail::_Hashtable_ebo_helper.1"* %this, %"struct.std::__detail::_Hashtable_ebo_helper.1"** %this.addr, align 8
+  %this1 = load %"struct.std::__detail::_Hashtable_ebo_helper.1"*, %"struct.std::__detail::_Hashtable_ebo_helper.1"** %this.addr, align 8
+  %0 = bitcast %"struct.std::__detail::_Hashtable_ebo_helper.1"* %this1 to %"struct.std::__detail::_Mod_range_hashing"*
   ret void
 }
 
