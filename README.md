@@ -9,6 +9,7 @@ git clone https://github.com/SVF-tools/SVF.git
 cd SVF
 git clone https://github.com/SVF-tools/Test-Suite
 source ./build.sh
+cd Release-build
 ctest
 ```
 
