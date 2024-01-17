@@ -283,7 +283,9 @@ foreach(file ${diff_tests_cruxbc_big})
 endforeach()
 
 ## symbolic abstraction tests  (ctest -R symabs -VV)
-set(command "symabs")
+set(cmd "ae  -symabs")
+string(REPLACE " " ";" commandtemp ${cmd})
+set(command ${commandtemp})
 add_test(
         NAME symabs
         COMMAND ${command}
