@@ -281,3 +281,11 @@ foreach(file ${diff_tests_cruxbc_big})
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
+
+## symbolic abstraction tests  (ctest -R symabs -VV)
+set(command "symabs")
+add_test(
+        NAME symabs
+        COMMAND ${command}
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+)
