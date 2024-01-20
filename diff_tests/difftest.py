@@ -150,7 +150,7 @@ def try_get_keynum_pair(line: str) -> Optional[Tuple[str, Number]]:
     - 'AvgTopLvlPtsSize 123' into a tuple ('AvgTopLvlPtsSize', 123)
     - 'AvgTopLvlPtsSize 123.456' into a tuple ('AvgTopLvlPtsSize', 123.456).
     '''
-    pattern = r'^([A-Za-z0-9]+)\s+([-+]?\d*\.?\d+)\s*$'
+    pattern = r'^([A-Za-z0-9]+)\s+([-+]?\d*\.?\d+([eE][-+]?\d+)?)\s*$'
     match = re.match(pattern, line)
     if match:
         return match.group(1), str_to_number(match.group(2))
