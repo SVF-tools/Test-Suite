@@ -99,6 +99,10 @@ def comparer_filesystem(stats1: Stats, stats2: Stats):
             # Timing statistics are not deterministic
             continue
 
+        if key.startswith('MemoryUsage'):
+            # Memory statistics are not deterministic
+            continue
+
         d1 = stats1[section][key]
         d2 = stats2[section][key]
 
