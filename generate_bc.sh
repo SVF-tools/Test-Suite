@@ -15,6 +15,7 @@ test_dirs="
   mta
   non_annotated_tests
   path_tests
+  objtype_tests
 "
 
 root=$(cd "$(dirname "$0")"; pwd)

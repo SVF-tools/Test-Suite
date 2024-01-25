@@ -1,3 +1,17 @@
+# object type inference tests  (ctest -R objtype -VV)
+set(cmd "wpa -ander -stat=false")
+file(GLOB type_infer_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/objtype_tests/*.bc*")
+string(REPLACE " " ";" commandtemp ${cmd})
+set(command ${commandtemp})
+# loops over each file creating a test
+foreach(filename ${type_infer_files})
+  add_test(
+          NAME objtype/${filename}
+          COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+
 # wpa tests (ctest -R wpa_tests -VV)
 # folder and commands list act in parallel. e.g. for index 0 command "wpa -ander -stat=false" will be run on basic_c_tests folder.
 list(
