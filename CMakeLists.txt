@@ -1,5 +1,5 @@
 # object type inference tests  (ctest -R objtype -VV)
-set(cmd "wpa -ander -stat=false")
+set(cmd "wpa -type -stat=false")
 file(GLOB type_infer_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/objtype_tests/*.bc*")
 string(REPLACE " " ";" commandtemp ${cmd})
 set(command ${commandtemp})
