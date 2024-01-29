@@ -11,7 +11,7 @@ class A {
     virtual void f(int *i) = 0;
     virtual void g(int *i) {
       NOALIAS(global_ptr_f, i);
-      MUSTALIAS(global_ptr_g, i);
+      NOALIAS(global_ptr_g, i);
     }
 };
 
