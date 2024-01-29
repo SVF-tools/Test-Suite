@@ -297,7 +297,7 @@ entry:
   %5 = bitcast i32* %4 to i8*
   %6 = load i32*, i32** %i.addr, align 8
   %7 = bitcast i32* %6 to i8*
-  call void @_Z9MUSTALIASPvS_(i8* %5, i8* %7)
+  call void @_Z7NOALIASPvS_(i8* %5, i8* %7)
   ret void
 }
 
