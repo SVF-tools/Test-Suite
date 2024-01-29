@@ -6,7 +6,7 @@ int *global_ptr = &global_obj;
 class A {
   public:
     virtual void f(int *i) {
-      MAYALIAS(global_ptr, i);
+      NOALIAS(global_ptr, i);
     }
 };
 

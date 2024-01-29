@@ -11,12 +11,12 @@ float *global_float_ptr = &global_float_obj;
 class A {
   public:
   virtual void f(int *i) {
-    MUSTALIAS(global_int_ptr, i);
+    NOALIAS(global_int_ptr, i);
     NOALIAS(global_float_ptr, i);
   }
   virtual void g(float *j) {
     NOALIAS(global_int_ptr, j);
-    MUSTALIAS(global_float_ptr, j);
+    NOALIAS(global_float_ptr, j);
   }
 };
 
