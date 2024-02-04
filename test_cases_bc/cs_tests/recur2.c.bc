@@ -7,158 +7,157 @@ target triple = "x86_64-unknown-linux-gnu"
 @.str.1 = private unnamed_addr constant [4 x i8] c"%s\0A\00", align 1
 @.str.2 = private unnamed_addr constant [25 x i8] c"Press ENTER to continue\0A\00", align 1
 @y = dso_local global i32 0, align 4
-@x = dso_local global i32* null, align 8
+@x = dso_local global ptr null, align 8
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @MUSTALIAS(i8* %p, i8* %q) #0 {
+define dso_local void @MUSTALIAS(ptr noundef %p, ptr noundef %q) #0 {
 entry:
-  %p.addr = alloca i8*, align 8
-  %q.addr = alloca i8*, align 8
-  store i8* %p, i8** %p.addr, align 8
-  store i8* %q, i8** %q.addr, align 8
-  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  %p.addr = alloca ptr, align 8
+  %q.addr = alloca ptr, align 8
+  store ptr %p, ptr %p.addr, align 8
+  store ptr %q, ptr %q.addr, align 8
+  %call = call i32 (ptr, ...) @printf(ptr noundef @.str)
   ret void
 }
 
-declare dso_local i32 @printf(i8*, ...) #1
+declare i32 @printf(ptr noundef, ...) #1
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @PARTIALALIAS(i8* %p, i8* %q) #0 {
+define dso_local void @PARTIALALIAS(ptr noundef %p, ptr noundef %q) #0 {
 entry:
-  %p.addr = alloca i8*, align 8
-  %q.addr = alloca i8*, align 8
-  store i8* %p, i8** %p.addr, align 8
-  store i8* %q, i8** %q.addr, align 8
-  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
-  ret void
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @MAYALIAS(i8* %p, i8* %q) #0 {
-entry:
-  %p.addr = alloca i8*, align 8
-  %q.addr = alloca i8*, align 8
-  store i8* %p, i8** %p.addr, align 8
-  store i8* %q, i8** %q.addr, align 8
-  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  %p.addr = alloca ptr, align 8
+  %q.addr = alloca ptr, align 8
+  store ptr %p, ptr %p.addr, align 8
+  store ptr %q, ptr %q.addr, align 8
+  %call = call i32 (ptr, ...) @printf(ptr noundef @.str)
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @NOALIAS(i8* %p, i8* %q) #0 {
+define dso_local void @MAYALIAS(ptr noundef %p, ptr noundef %q) #0 {
 entry:
-  %p.addr = alloca i8*, align 8
-  %q.addr = alloca i8*, align 8
-  store i8* %p, i8** %p.addr, align 8
-  store i8* %q, i8** %q.addr, align 8
-  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  %p.addr = alloca ptr, align 8
+  %q.addr = alloca ptr, align 8
+  store ptr %p, ptr %p.addr, align 8
+  store ptr %q, ptr %q.addr, align 8
+  %call = call i32 (ptr, ...) @printf(ptr noundef @.str)
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @EXPECTEDFAIL_MAYALIAS(i8* %p, i8* %q) #0 {
+define dso_local void @NOALIAS(ptr noundef %p, ptr noundef %q) #0 {
 entry:
-  %p.addr = alloca i8*, align 8
-  %q.addr = alloca i8*, align 8
-  store i8* %p, i8** %p.addr, align 8
-  store i8* %q, i8** %q.addr, align 8
-  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  %p.addr = alloca ptr, align 8
+  %q.addr = alloca ptr, align 8
+  store ptr %p, ptr %p.addr, align 8
+  store ptr %q, ptr %q.addr, align 8
+  %call = call i32 (ptr, ...) @printf(ptr noundef @.str)
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @EXPECTEDFAIL_NOALIAS(i8* %p, i8* %q) #0 {
+define dso_local void @EXPECTEDFAIL_MAYALIAS(ptr noundef %p, ptr noundef %q) #0 {
 entry:
-  %p.addr = alloca i8*, align 8
-  %q.addr = alloca i8*, align 8
-  store i8* %p, i8** %p.addr, align 8
-  store i8* %q, i8** %q.addr, align 8
-  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  %p.addr = alloca ptr, align 8
+  %q.addr = alloca ptr, align 8
+  store ptr %p, ptr %p.addr, align 8
+  store ptr %q, ptr %q.addr, align 8
+  %call = call i32 (ptr, ...) @printf(ptr noundef @.str)
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @RC_ACCESS(i32 %id, i32 %flags) #0 {
+define dso_local void @EXPECTEDFAIL_NOALIAS(ptr noundef %p, ptr noundef %q) #0 {
+entry:
+  %p.addr = alloca ptr, align 8
+  %q.addr = alloca ptr, align 8
+  store ptr %p, ptr %p.addr, align 8
+  store ptr %q, ptr %q.addr, align 8
+  %call = call i32 (ptr, ...) @printf(ptr noundef @.str)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @RC_ACCESS(i32 noundef %id, i32 noundef %flags) #0 {
 entry:
   %id.addr = alloca i32, align 4
   %flags.addr = alloca i32, align 4
-  store i32 %id, i32* %id.addr, align 4
-  store i32 %flags, i32* %flags.addr, align 4
-  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str, i64 0, i64 0))
+  store i32 %id, ptr %id.addr, align 4
+  store i32 %flags, ptr %flags.addr, align 4
+  %call = call i32 (ptr, ...) @printf(ptr noundef @.str)
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @CXT_THREAD(i32 %thdid, i8* %cxt) #0 {
+define dso_local void @CXT_THREAD(i32 noundef %thdid, ptr noundef %cxt) #0 {
 entry:
   %thdid.addr = alloca i32, align 4
-  %cxt.addr = alloca i8*, align 8
-  store i32 %thdid, i32* %thdid.addr, align 4
-  store i8* %cxt, i8** %cxt.addr, align 8
+  %cxt.addr = alloca ptr, align 8
+  store i32 %thdid, ptr %thdid.addr, align 4
+  store ptr %cxt, ptr %cxt.addr, align 8
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @TCT_ACCESS(i32 %thdid, i8* %cxt) #0 {
+define dso_local void @TCT_ACCESS(i32 noundef %thdid, ptr noundef %cxt) #0 {
 entry:
   %thdid.addr = alloca i32, align 4
-  %cxt.addr = alloca i8*, align 8
-  store i32 %thdid, i32* %thdid.addr, align 4
-  store i8* %cxt, i8** %cxt.addr, align 8
+  %cxt.addr = alloca ptr, align 8
+  store i32 %thdid, ptr %thdid.addr, align 4
+  store ptr %cxt, ptr %cxt.addr, align 8
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @INTERLEV_ACCESS(i32 %thdid, i8* %cxt, i8* %lev) #0 {
+define dso_local void @INTERLEV_ACCESS(i32 noundef %thdid, ptr noundef %cxt, ptr noundef %lev) #0 {
 entry:
   %thdid.addr = alloca i32, align 4
-  %cxt.addr = alloca i8*, align 8
-  %lev.addr = alloca i8*, align 8
-  store i32 %thdid, i32* %thdid.addr, align 4
-  store i8* %cxt, i8** %cxt.addr, align 8
-  store i8* %lev, i8** %lev.addr, align 8
+  %cxt.addr = alloca ptr, align 8
+  %lev.addr = alloca ptr, align 8
+  store i32 %thdid, ptr %thdid.addr, align 4
+  store ptr %cxt, ptr %cxt.addr, align 8
+  store ptr %lev, ptr %lev.addr, align 8
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @LOCK(i8* %lockname) #0 {
+define dso_local void @LOCK(ptr noundef %lockname) #0 {
 entry:
-  %lockname.addr = alloca i8*, align 8
-  store i8* %lockname, i8** %lockname.addr, align 8
+  %lockname.addr = alloca ptr, align 8
+  store ptr %lockname, ptr %lockname.addr, align 8
   ret void
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @PAUSE(i8* %str) #0 {
+define dso_local void @PAUSE(ptr noundef %str) #0 {
 entry:
-  %str.addr = alloca i8*, align 8
-  store i8* %str, i8** %str.addr, align 8
-  %0 = load i8*, i8** %str.addr, align 8
-  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.1, i64 0, i64 0), i8* %0)
-  %call1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([25 x i8], [25 x i8]* @.str.2, i64 0, i64 0))
+  %str.addr = alloca ptr, align 8
+  store ptr %str, ptr %str.addr, align 8
+  %0 = load ptr, ptr %str.addr, align 8
+  %call = call i32 (ptr, ...) @printf(ptr noundef @.str.1, ptr noundef %0)
+  %call1 = call i32 (ptr, ...) @printf(ptr noundef @.str.2)
   %call2 = call i32 @getchar()
   ret void
 }
 
-declare dso_local i32 @getchar() #1
+declare i32 @getchar() #1
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @f(i32* %m) #0 {
+define dso_local void @f(ptr noundef %m) #0 {
 entry:
-  %m.addr = alloca i32*, align 8
-  %n = alloca i32*, align 8
-  store i32* %m, i32** %m.addr, align 8
-  %0 = load i32*, i32** %m.addr, align 8
-  %1 = bitcast i32* %0 to i8*
-  call void @MUSTALIAS(i8* %1, i8* bitcast (i32* @y to i8*))
-  %2 = load i32, i32* @y, align 4
-  %cmp = icmp eq i32 %2, 1
+  %m.addr = alloca ptr, align 8
+  %n = alloca ptr, align 8
+  store ptr %m, ptr %m.addr, align 8
+  %0 = load ptr, ptr %m.addr, align 8
+  call void @MUSTALIAS(ptr noundef %0, ptr noundef @y)
+  %1 = load i32, ptr @y, align 4
+  %cmp = icmp eq i32 %1, 1
   br i1 %cmp, label %if.then, label %if.end
 
 if.then:                                          ; preds = %entry
-  store i32* @y, i32** %n, align 8
-  %3 = load i32*, i32** %n, align 8
-  call void @f(i32* %3)
+  store ptr @y, ptr %n, align 8
+  %2 = load ptr, ptr %n, align 8
+  call void @f(ptr noundef %2)
   br label %if.end
 
 if.end:                                           ; preds = %if.then, %entry
@@ -168,19 +167,21 @@ if.end:                                           ; preds = %if.then, %entry
 ; Function Attrs: noinline nounwind optnone uwtable
 define dso_local i32 @main() #0 {
 entry:
-  store i32* @y, i32** @x, align 8
-  %0 = load i32*, i32** @x, align 8
-  call void @f(i32* %0)
+  store ptr @y, ptr @x, align 8
+  %0 = load ptr, ptr @x, align 8
+  call void @f(ptr noundef %0)
   ret i32 0
 }
 
 attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 
-!llvm.module.flags = !{!0, !1, !2}
-!llvm.ident = !{!3}
+!llvm.module.flags = !{!0, !1, !2, !3, !4}
+!llvm.ident = !{!5}
 
 !0 = !{i32 1, !"wchar_size", i32 4}
-!1 = !{i32 7, !"uwtable", i32 1}
-!2 = !{i32 7, !"frame-pointer", i32 2}
-!3 = !{!"clang version 13.0.0"}
+!1 = !{i32 8, !"PIC Level", i32 2}
+!2 = !{i32 7, !"PIE Level", i32 2}
+!3 = !{i32 7, !"uwtable", i32 2}
+!4 = !{i32 7, !"frame-pointer", i32 2}
+!5 = !{!"clang version 16.0.0"}
