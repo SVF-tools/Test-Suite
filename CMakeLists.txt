@@ -308,12 +308,12 @@ foreach(filename ${ae_assert_files})
   )
 endforeach()
 
-# loops over ae_bufoverflow_files and run "ae -overflow $bc_file"
-file(GLOB ae_bufoverflow_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_bufoverflow_tests/*.bc")
+# loops over ae_overflow_files and run "ae -overflow $bc_file"
+file(GLOB ae_overflow_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_overflow_tests/*.bc")
 
-foreach(filename ${ae_bufoverflow_files})
+foreach(filename ${ae_overflow_files})
   add_test(
-          NAME ae_bufoverflow_tests/${filename}
+          NAME ae_overflow_tests/${filename}
           COMMAND ae -overflow ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
