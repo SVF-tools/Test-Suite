@@ -17,7 +17,7 @@ test_dirs="
   path_tests
   objtype_tests
   ae_bufoverflow_tests
-  ae_solver_tests
+  ae_assert_tests
 "
 
 
