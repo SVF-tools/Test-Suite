@@ -100,29 +100,6 @@ foreach(i RANGE ${dvf_len2})
   endforeach()
 endforeach()
 
-# loops over ae_assert_files and run "ae $bc_file"
-file(GLOB ae_assert_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_assert_tests/*.bc")
-
-foreach(filename ${ae_assert_files})
-  add_test(
-          NAME ae_assert_tests/${filename}
-          COMMAND ae ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-  )
-endforeach()
-
-# loops over ae_bufoverflow_files and run "ae -overflow $bc_file"
-file(GLOB ae_bufoverflow_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_bufoverflow_tests/*.bc")
-
-foreach(filename ${ae_bufoverflow_files})
-  add_test(
-          NAME ae_bufoverflow_tests/${filename}
-          COMMAND ae -overflow ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-  )
-endforeach()
-
-
 # differential_tests fspta-vfspta  (ctest -R diff_tests-fs -VV)
 file(GLOB files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/*.bc*")
 foreach(filename ${files})
@@ -316,6 +293,29 @@ foreach(file ${diff_tests_cruxbc_big})
       ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       "ir.json"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+
+
+# loops over ae_assert_files and run "ae $bc_file"
+file(GLOB ae_assert_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_assert_tests/*.bc")
+
+foreach(filename ${ae_assert_files})
+  add_test(
+          NAME ae_assert_tests/${filename}
+          COMMAND ae ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+
+# loops over ae_bufoverflow_files and run "ae -overflow $bc_file"
+file(GLOB ae_bufoverflow_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_bufoverflow_tests/*.bc")
+
+foreach(filename ${ae_bufoverflow_files})
+  add_test(
+          NAME ae_bufoverflow_tests/${filename}
+          COMMAND ae -overflow ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
 
