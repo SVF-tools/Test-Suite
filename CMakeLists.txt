@@ -308,7 +308,7 @@ foreach(filename ${ae_assert_files})
   )
 endforeach()
 
-# loops over ae_bufoverflow_files and run "ae -overflow $bc_file"
+# loops over ae_overflow_files and run "ae -overflow $bc_file"
 file(GLOB ae_overflow_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_overflow_tests/*.bc")
 
 foreach(filename ${ae_overflow_files})
