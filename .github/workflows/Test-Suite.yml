@@ -27,8 +27,8 @@ jobs:
         run: |
             sudo apt-get update
             sudo apt-get install unzip tar
-            wget https://github.com/llvm/llvm-project/releases/download/llvmorg-13.0.0/clang+llvm-13.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
-            mkdir -p "/opt/llvm" && tar -xf clang+llvm-13.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz -C "/opt/llvm" --strip-components 1
+            wget https://github.com/llvm/llvm-project/releases/download/llvmorg-16.0.0/clang+llvm-16.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
+            mkdir -p "/opt/llvm" && tar -xf clang+llvm-16.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz -C "/opt/llvm" --strip-components 1
             echo "/opt/llvm/bin" >> $GITHUB_PATH
 
       - name: stash-changes
@@ -43,10 +43,10 @@ jobs:
            git status
            git pull
            bash ./generate_bc.sh
-           git clone https://github.com/mbarbar/crux-bitcode
+           git clone https://github.com/bjjwwang/crux-bitcode -b 16.0.6
            cd crux-bitcode
            rm pkgs.txt
-           echo -e "bc\nhtop\nvim\ncurl\nbash\nbzip2\nunrar\ntmux" >> pkgs.txt
+           echo -e "bc\nhtop\ncurl\nbzip2\nunrar\ntmux\nbash" >> pkgs.txt
            bash ./build-bitcode.sh
            unzip -j -o \*.zip -d $GITHUB_WORKSPACE/test_cases_bc/crux-bc/
            rm $GITHUB_WORKSPACE/test_cases_bc/crux-bc/info.txt
