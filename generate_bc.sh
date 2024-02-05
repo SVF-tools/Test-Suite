@@ -16,7 +16,10 @@ test_dirs="
   non_annotated_tests
   path_tests
   objtype_tests
+  ae_bufoverflow_tests
+  ae_solver_tests
 "
+
 
 root=$(cd "$(dirname "$0")"; pwd)
 bc_path="$root/test_cases_bc"
@@ -34,7 +37,6 @@ mkdir -p "$bc_path"
 # Loops through each folder in test_dirs.
 ########
 for td in $test_dirs; do
-
   ########
   # Creates a directory for each listed folder.
   ########
@@ -50,7 +52,6 @@ for td in $test_dirs; do
   # Loops through each file within the folder.
   ########
   for c_f in "$full_td/"*; do
-
     ########
     # Obtains the text after the '.'.
     ########
