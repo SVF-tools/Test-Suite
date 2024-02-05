@@ -99,10 +99,10 @@ for td in $test_dirs; do
     # td = "ae_assert_tests" or "ae_overflow_tests"
     elif test $td == "ae_assert_tests"
     then
-        $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -disable-O0-optnone -Wno-implicit-function-declaration -fno-discard-value-names -g -mllvm -opaque-pointers -emit-llvm -I"$root" "$c_f" -o "$bc_f"
+        $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
     elif test $td == "ae_overflow_tests"
     then
-        $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -disable-O0-optnone -Wno-implicit-function-declaration -fno-discard-value-names -g -mllvm -opaque-pointers -emit-llvm -I"$root" "$c_f" -o "$bc_f"
+        $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
     else
         $compiler -Wno-everything -S -emit-llvm -fno-discard-value-names -I"$root" "$c_f" -o "$bc_f"
     fi
