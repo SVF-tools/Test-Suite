@@ -16,7 +16,7 @@ test_dirs="
   non_annotated_tests
   path_tests
   objtype_tests
-  ae_bufoverflow_tests
+  ae_overflow_tests
   ae_assert_tests
 "
 
