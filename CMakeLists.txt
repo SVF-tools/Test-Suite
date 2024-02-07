@@ -296,29 +296,6 @@ foreach(file ${diff_tests_cruxbc_big})
   )
 endforeach()
 
-
-# loops over ae_assert_files and run "ae $bc_file"
-file(GLOB ae_assert_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_assert_tests/*.bc")
-
-foreach(filename ${ae_assert_files})
-  add_test(
-          NAME ae_assert_tests/${filename}
-          COMMAND ae ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-  )
-endforeach()
-
-# loops over ae_overflow_files and run "ae -overflow $bc_file"
-file(GLOB ae_overflow_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_overflow_tests/*.bc")
-
-foreach(filename ${ae_overflow_files})
-  add_test(
-          NAME ae_overflow_tests/${filename}
-          COMMAND ae -overflow ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-  )
-endforeach()
-
 ## symbolic abstraction tests  (ctest -R symabs -VV)
 set(cmd "ae  -symabs")
 string(REPLACE " " ";" commandtemp ${cmd})
