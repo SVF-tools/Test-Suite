@@ -303,7 +303,7 @@ file(GLOB ae_assert_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_
 foreach(filename ${ae_assert_files})
   add_test(
           NAME ae_assert_tests/${filename}
-          COMMAND ae ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ae ${CMAKE_CURRENT_SOURCE_DIR}/${filename} -stat=false
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
@@ -314,7 +314,7 @@ file(GLOB ae_overflow_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURREN
 foreach(filename ${ae_overflow_files})
   add_test(
           NAME ae_overflow_tests/${filename}
-          COMMAND ae -overflow ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ae -overflow ${CMAKE_CURRENT_SOURCE_DIR}/${filename} -stat=false
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
