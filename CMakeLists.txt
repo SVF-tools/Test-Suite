@@ -314,7 +314,7 @@ file(GLOB ae_overflow_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURREN
 foreach(filename ${ae_overflow_files})
   add_test(
           NAME ae_overflow_tests/${filename}
-          COMMAND ae -overflow ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ae -overflow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
