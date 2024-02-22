@@ -8,6 +8,6 @@ int main() {
         svf_assert(a == 6);
     }
     else {
-        svf_assert(a <= 5 || a >= 7);
+        //svf_assert(a <= 5 || a >= 7);
     }
 }

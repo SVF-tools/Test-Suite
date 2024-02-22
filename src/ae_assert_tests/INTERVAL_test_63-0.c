@@ -18,6 +18,7 @@ int foo(int input) {
 }
 
 int main() {
+    a = rand();
     int b = a;
 	if(a > 0) {
 		for(int i = 0; i < b; i++) {

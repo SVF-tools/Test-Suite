@@ -8,7 +8,7 @@ extern void svf_assert(bool);
 int main() {
     int* i = malloc(4 * sizeof(int));
     int ar[4] = {1, 2, 3, 5};
-    int a;
+    int a = rand();
     ar[3] = a;
     memcpy(i, ar, 4 * sizeof(int));
     if (i[3] > 5) {
