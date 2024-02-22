@@ -27,23 +27,11 @@ if.then:                                          ; preds = %land.lhs.true
   br label %if.end, !dbg !29
 
 if.else:                                          ; preds = %land.lhs.true, %entry
-  %3 = load i32, ptr %a, align 4, !dbg !30
-  %cmp3 = icmp sle i32 %3, 5, !dbg !32
-  br i1 %cmp3, label %lor.end, label %lor.rhs, !dbg !33
-
-lor.rhs:                                          ; preds = %if.else
-  %4 = load i32, ptr %a, align 4, !dbg !34
-  %cmp4 = icmp sge i32 %4, 7, !dbg !35
-  br label %lor.end, !dbg !33
-
-lor.end:                                          ; preds = %lor.rhs, %if.else
-  %5 = phi i1 [ true, %if.else ], [ %cmp4, %lor.rhs ]
-  call void @svf_assert(i1 noundef zeroext %5), !dbg !36
   br label %if.end
 
-if.end:                                           ; preds = %lor.end, %if.then
-  %6 = load i32, ptr %retval, align 4, !dbg !37
-  ret i32 %6, !dbg !37
+if.end:                                           ; preds = %if.else, %if.then
+  %3 = load i32, ptr %retval, align 4, !dbg !30
+  ret i32 %3, !dbg !30
 }
 
 ; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
@@ -60,7 +48,7 @@ attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protect
 !llvm.ident = !{!9}
 
 !0 = distinct !DICompileUnit(language: DW_LANG_C11, file: !1, producer: "clang version 16.0.0", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, splitDebugInlining: false, nameTableKind: None)
-!1 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/INTERVAL_test_11-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "432ed8d796b94d1eb08650930407841b")
+!1 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/INTERVAL_test_11-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "7004ccd5efa2dbc064acd48763f1ede2")
 !2 = !{i32 7, !"Dwarf Version", i32 5}
 !3 = !{i32 2, !"Debug Info Version", i32 3}
 !4 = !{i32 1, !"wchar_size", i32 4}
@@ -70,7 +58,7 @@ attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protect
 !8 = !{i32 7, !"frame-pointer", i32 2}
 !9 = !{!"clang version 16.0.0"}
 !10 = distinct !DISubprogram(name: "main", scope: !11, file: !11, line: 5, type: !12, scopeLine: 5, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !15)
-!11 = !DIFile(filename: "src/ae_assert_tests/INTERVAL_test_11-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "432ed8d796b94d1eb08650930407841b")
+!11 = !DIFile(filename: "src/ae_assert_tests/INTERVAL_test_11-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "7004ccd5efa2dbc064acd48763f1ede2")
 !12 = !DISubroutineType(types: !13)
 !13 = !{!14}
 !14 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
@@ -89,11 +77,4 @@ attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protect
 !27 = !DILocation(line: 8, column: 22, scope: !26)
 !28 = !DILocation(line: 8, column: 9, scope: !26)
 !29 = !DILocation(line: 9, column: 5, scope: !26)
-!30 = !DILocation(line: 11, column: 20, scope: !31)
-!31 = distinct !DILexicalBlock(scope: !19, file: !11, line: 10, column: 10)
-!32 = !DILocation(line: 11, column: 22, scope: !31)
-!33 = !DILocation(line: 11, column: 27, scope: !31)
-!34 = !DILocation(line: 11, column: 30, scope: !31)
-!35 = !DILocation(line: 11, column: 32, scope: !31)
-!36 = !DILocation(line: 11, column: 9, scope: !31)
-!37 = !DILocation(line: 13, column: 1, scope: !10)
+!30 = !DILocation(line: 13, column: 1, scope: !10)

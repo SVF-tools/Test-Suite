@@ -52,83 +52,88 @@ entry:
   %b = alloca i32, align 4
   %i = alloca i32, align 4
   store i32 0, ptr %retval, align 4
-  call void @llvm.dbg.declare(metadata ptr %b, metadata !45, metadata !DIExpression()), !dbg !46
-  %0 = load i32, ptr @a, align 4, !dbg !47
-  store i32 %0, ptr %b, align 4, !dbg !46
-  %1 = load i32, ptr @a, align 4, !dbg !48
-  %cmp = icmp sgt i32 %1, 0, !dbg !50
-  br i1 %cmp, label %if.then, label %if.end, !dbg !51
+  %call = call i32 @rand() #5, !dbg !45
+  store i32 %call, ptr @a, align 4, !dbg !46
+  call void @llvm.dbg.declare(metadata ptr %b, metadata !47, metadata !DIExpression()), !dbg !48
+  %0 = load i32, ptr @a, align 4, !dbg !49
+  store i32 %0, ptr %b, align 4, !dbg !48
+  %1 = load i32, ptr @a, align 4, !dbg !50
+  %cmp = icmp sgt i32 %1, 0, !dbg !52
+  br i1 %cmp, label %if.then, label %if.end, !dbg !53
 
 if.then:                                          ; preds = %entry
-  call void @llvm.dbg.declare(metadata ptr %i, metadata !52, metadata !DIExpression()), !dbg !55
-  store i32 0, ptr %i, align 4, !dbg !55
-  br label %for.cond, !dbg !56
+  call void @llvm.dbg.declare(metadata ptr %i, metadata !54, metadata !DIExpression()), !dbg !57
+  store i32 0, ptr %i, align 4, !dbg !57
+  br label %for.cond, !dbg !58
 
 for.cond:                                         ; preds = %for.inc, %if.then
-  %2 = load i32, ptr %i, align 4, !dbg !57
-  %3 = load i32, ptr %b, align 4, !dbg !59
-  %cmp1 = icmp slt i32 %2, %3, !dbg !60
-  br i1 %cmp1, label %for.body, label %for.end, !dbg !61
+  %2 = load i32, ptr %i, align 4, !dbg !59
+  %3 = load i32, ptr %b, align 4, !dbg !61
+  %cmp1 = icmp slt i32 %2, %3, !dbg !62
+  br i1 %cmp1, label %for.body, label %for.end, !dbg !63
 
 for.body:                                         ; preds = %for.cond
-  %4 = load i32, ptr @a, align 4, !dbg !62
-  %5 = load i32, ptr @a, align 4, !dbg !64
-  %call = call i32 @foo(i32 noundef %5), !dbg !65
-  %add = add nsw i32 %4, %call, !dbg !66
-  store i32 %add, ptr @a, align 4, !dbg !67
-  br label %for.inc, !dbg !68
+  %4 = load i32, ptr @a, align 4, !dbg !64
+  %5 = load i32, ptr @a, align 4, !dbg !66
+  %call2 = call i32 @foo(i32 noundef %5), !dbg !67
+  %add = add nsw i32 %4, %call2, !dbg !68
+  store i32 %add, ptr @a, align 4, !dbg !69
+  br label %for.inc, !dbg !70
 
 for.inc:                                          ; preds = %for.body
-  %6 = load i32, ptr %i, align 4, !dbg !69
-  %inc = add nsw i32 %6, 1, !dbg !69
-  store i32 %inc, ptr %i, align 4, !dbg !69
-  br label %for.cond, !dbg !70, !llvm.loop !71
+  %6 = load i32, ptr %i, align 4, !dbg !71
+  %inc = add nsw i32 %6, 1, !dbg !71
+  store i32 %inc, ptr %i, align 4, !dbg !71
+  br label %for.cond, !dbg !72, !llvm.loop !73
 
 for.end:                                          ; preds = %for.cond
-  %7 = load i32, ptr @a, align 4, !dbg !73
-  %conv = sitofp i32 %7 to double, !dbg !73
-  %8 = load i32, ptr %b, align 4, !dbg !74
-  %conv2 = sitofp i32 %8 to double, !dbg !74
-  %9 = load i32, ptr %b, align 4, !dbg !75
-  %conv3 = sitofp i32 %9 to double, !dbg !75
-  %call4 = call double @pow(double noundef 2.000000e+00, double noundef %conv3) #5, !dbg !76
-  %mul = fmul double %conv2, %call4, !dbg !77
-  %cmp5 = fcmp oeq double %conv, %mul, !dbg !78
-  call void @svf_assert(i1 noundef zeroext %cmp5), !dbg !79
-  br label %if.end, !dbg !80
+  %7 = load i32, ptr @a, align 4, !dbg !75
+  %conv = sitofp i32 %7 to double, !dbg !75
+  %8 = load i32, ptr %b, align 4, !dbg !76
+  %conv3 = sitofp i32 %8 to double, !dbg !76
+  %9 = load i32, ptr %b, align 4, !dbg !77
+  %conv4 = sitofp i32 %9 to double, !dbg !77
+  %call5 = call double @pow(double noundef 2.000000e+00, double noundef %conv4) #5, !dbg !78
+  %mul = fmul double %conv3, %call5, !dbg !79
+  %cmp6 = fcmp oeq double %conv, %mul, !dbg !80
+  call void @svf_assert(i1 noundef zeroext %cmp6), !dbg !81
+  br label %if.end, !dbg !82
 
 if.end:                                           ; preds = %for.end, %entry
-  br label %while.body, !dbg !81
+  br label %while.body, !dbg !83
 
 while.body:                                       ; preds = %if.end
-  br label %LOOP, !dbg !82
+  br label %LOOP, !dbg !84
 
-LOOP:                                             ; preds = %if.then11, %while.body
-  call void @llvm.dbg.label(metadata !83), !dbg !85
-  %10 = load i32, ptr %b, align 4, !dbg !86
-  %conv7 = sitofp i32 %10 to double, !dbg !86
-  %call8 = call double @pow(double noundef 2.000000e+00, double noundef %conv7) #5, !dbg !87
-  %11 = load i32, ptr @a, align 4, !dbg !88
-  %conv9 = sitofp i32 %11 to double, !dbg !88
-  %sub = fsub double %conv9, %call8, !dbg !88
-  %conv10 = fptosi double %sub to i32, !dbg !88
-  store i32 %conv10, ptr @a, align 4, !dbg !88
-  %12 = load i32, ptr @a, align 4, !dbg !89
-  %tobool = icmp ne i32 %12, 0, !dbg !89
-  br i1 %tobool, label %if.then11, label %if.end12, !dbg !91
+LOOP:                                             ; preds = %if.then12, %while.body
+  call void @llvm.dbg.label(metadata !85), !dbg !87
+  %10 = load i32, ptr %b, align 4, !dbg !88
+  %conv8 = sitofp i32 %10 to double, !dbg !88
+  %call9 = call double @pow(double noundef 2.000000e+00, double noundef %conv8) #5, !dbg !89
+  %11 = load i32, ptr @a, align 4, !dbg !90
+  %conv10 = sitofp i32 %11 to double, !dbg !90
+  %sub = fsub double %conv10, %call9, !dbg !90
+  %conv11 = fptosi double %sub to i32, !dbg !90
+  store i32 %conv11, ptr @a, align 4, !dbg !90
+  %12 = load i32, ptr @a, align 4, !dbg !91
+  %tobool = icmp ne i32 %12, 0, !dbg !91
+  br i1 %tobool, label %if.then12, label %if.end13, !dbg !93
 
-if.then11:                                        ; preds = %LOOP
-  br label %LOOP, !dbg !92
+if.then12:                                        ; preds = %LOOP
+  br label %LOOP, !dbg !94
 
-if.end12:                                         ; preds = %LOOP
-  call void @exit(i32 noundef 0) #6, !dbg !94
-  unreachable, !dbg !94
+if.end13:                                         ; preds = %LOOP
+  call void @exit(i32 noundef 0) #6, !dbg !96
+  unreachable, !dbg !96
 }
 
-declare void @svf_assert(i1 noundef zeroext) #2
+; Function Attrs: nounwind
+declare i32 @rand() #2
+
+declare void @svf_assert(i1 noundef zeroext) #3
 
 ; Function Attrs: nounwind
-declare double @pow(double noundef, double noundef) #3
+declare double @pow(double noundef, double noundef) #2
 
 ; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
 declare void @llvm.dbg.label(metadata) #1
@@ -138,8 +143,8 @@ declare void @exit(i32 noundef) #4
 
 attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #3 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #2 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #3 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 attributes #4 = { noreturn nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 attributes #5 = { nounwind }
 attributes #6 = { noreturn nounwind }
@@ -151,9 +156,9 @@ attributes #6 = { noreturn nounwind }
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
 !1 = distinct !DIGlobalVariable(name: "a", scope: !2, file: !5, line: 10, type: !6, isLocal: false, isDefinition: true)
 !2 = distinct !DICompileUnit(language: DW_LANG_C11, file: !3, producer: "clang version 16.0.0", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !4, splitDebugInlining: false, nameTableKind: None)
-!3 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/INTERVAL_test_63-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "b812ace2a4e05c7de455ead564ea19af")
+!3 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/INTERVAL_test_63-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "42ee7e86ace56ca1a351e60c7cc47f5c")
 !4 = !{!0}
-!5 = !DIFile(filename: "src/ae_assert_tests/INTERVAL_test_63-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "b812ace2a4e05c7de455ead564ea19af")
+!5 = !DIFile(filename: "src/ae_assert_tests/INTERVAL_test_63-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "42ee7e86ace56ca1a351e60c7cc47f5c")
 !6 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
 !7 = !{i32 7, !"Dwarf Version", i32 5}
 !8 = !{i32 2, !"Debug Info Version", i32 3}
@@ -193,53 +198,55 @@ attributes #6 = { noreturn nounwind }
 !42 = distinct !DISubprogram(name: "main", scope: !5, file: !5, line: 20, type: !43, scopeLine: 20, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !18)
 !43 = !DISubroutineType(types: !44)
 !44 = !{!6}
-!45 = !DILocalVariable(name: "b", scope: !42, file: !5, line: 21, type: !6)
-!46 = !DILocation(line: 21, column: 9, scope: !42)
-!47 = !DILocation(line: 21, column: 13, scope: !42)
-!48 = !DILocation(line: 22, column: 5, scope: !49)
-!49 = distinct !DILexicalBlock(scope: !42, file: !5, line: 22, column: 5)
-!50 = !DILocation(line: 22, column: 7, scope: !49)
-!51 = !DILocation(line: 22, column: 5, scope: !42)
-!52 = !DILocalVariable(name: "i", scope: !53, file: !5, line: 23, type: !6)
-!53 = distinct !DILexicalBlock(scope: !54, file: !5, line: 23, column: 3)
-!54 = distinct !DILexicalBlock(scope: !49, file: !5, line: 22, column: 12)
-!55 = !DILocation(line: 23, column: 11, scope: !53)
-!56 = !DILocation(line: 23, column: 7, scope: !53)
-!57 = !DILocation(line: 23, column: 18, scope: !58)
-!58 = distinct !DILexicalBlock(scope: !53, file: !5, line: 23, column: 3)
-!59 = !DILocation(line: 23, column: 22, scope: !58)
-!60 = !DILocation(line: 23, column: 20, scope: !58)
-!61 = !DILocation(line: 23, column: 3, scope: !53)
-!62 = !DILocation(line: 24, column: 8, scope: !63)
-!63 = distinct !DILexicalBlock(scope: !58, file: !5, line: 23, column: 30)
-!64 = !DILocation(line: 24, column: 16, scope: !63)
-!65 = !DILocation(line: 24, column: 12, scope: !63)
-!66 = !DILocation(line: 24, column: 10, scope: !63)
-!67 = !DILocation(line: 24, column: 6, scope: !63)
-!68 = !DILocation(line: 25, column: 3, scope: !63)
-!69 = !DILocation(line: 23, column: 26, scope: !58)
-!70 = !DILocation(line: 23, column: 3, scope: !58)
-!71 = distinct !{!71, !61, !72, !39}
-!72 = !DILocation(line: 25, column: 3, scope: !53)
-!73 = !DILocation(line: 26, column: 17, scope: !54)
-!74 = !DILocation(line: 26, column: 22, scope: !54)
-!75 = !DILocation(line: 26, column: 33, scope: !54)
-!76 = !DILocation(line: 26, column: 26, scope: !54)
-!77 = !DILocation(line: 26, column: 24, scope: !54)
-!78 = !DILocation(line: 26, column: 19, scope: !54)
-!79 = !DILocation(line: 26, column: 6, scope: !54)
-!80 = !DILocation(line: 27, column: 2, scope: !54)
-!81 = !DILocation(line: 28, column: 2, scope: !42)
-!82 = !DILocation(line: 28, column: 14, scope: !42)
-!83 = !DILabel(scope: !84, name: "LOOP", file: !5, line: 29)
-!84 = distinct !DILexicalBlock(scope: !42, file: !5, line: 28, column: 14)
-!85 = !DILocation(line: 29, column: 3, scope: !84)
-!86 = !DILocation(line: 30, column: 15, scope: !84)
-!87 = !DILocation(line: 30, column: 8, scope: !84)
-!88 = !DILocation(line: 30, column: 5, scope: !84)
-!89 = !DILocation(line: 31, column: 6, scope: !90)
-!90 = distinct !DILexicalBlock(scope: !84, file: !5, line: 31, column: 6)
-!91 = !DILocation(line: 31, column: 6, scope: !84)
-!92 = !DILocation(line: 32, column: 4, scope: !93)
-!93 = distinct !DILexicalBlock(scope: !90, file: !5, line: 31, column: 9)
-!94 = !DILocation(line: 34, column: 3, scope: !84)
+!45 = !DILocation(line: 21, column: 9, scope: !42)
+!46 = !DILocation(line: 21, column: 7, scope: !42)
+!47 = !DILocalVariable(name: "b", scope: !42, file: !5, line: 22, type: !6)
+!48 = !DILocation(line: 22, column: 9, scope: !42)
+!49 = !DILocation(line: 22, column: 13, scope: !42)
+!50 = !DILocation(line: 23, column: 5, scope: !51)
+!51 = distinct !DILexicalBlock(scope: !42, file: !5, line: 23, column: 5)
+!52 = !DILocation(line: 23, column: 7, scope: !51)
+!53 = !DILocation(line: 23, column: 5, scope: !42)
+!54 = !DILocalVariable(name: "i", scope: !55, file: !5, line: 24, type: !6)
+!55 = distinct !DILexicalBlock(scope: !56, file: !5, line: 24, column: 3)
+!56 = distinct !DILexicalBlock(scope: !51, file: !5, line: 23, column: 12)
+!57 = !DILocation(line: 24, column: 11, scope: !55)
+!58 = !DILocation(line: 24, column: 7, scope: !55)
+!59 = !DILocation(line: 24, column: 18, scope: !60)
+!60 = distinct !DILexicalBlock(scope: !55, file: !5, line: 24, column: 3)
+!61 = !DILocation(line: 24, column: 22, scope: !60)
+!62 = !DILocation(line: 24, column: 20, scope: !60)
+!63 = !DILocation(line: 24, column: 3, scope: !55)
+!64 = !DILocation(line: 25, column: 8, scope: !65)
+!65 = distinct !DILexicalBlock(scope: !60, file: !5, line: 24, column: 30)
+!66 = !DILocation(line: 25, column: 16, scope: !65)
+!67 = !DILocation(line: 25, column: 12, scope: !65)
+!68 = !DILocation(line: 25, column: 10, scope: !65)
+!69 = !DILocation(line: 25, column: 6, scope: !65)
+!70 = !DILocation(line: 26, column: 3, scope: !65)
+!71 = !DILocation(line: 24, column: 26, scope: !60)
+!72 = !DILocation(line: 24, column: 3, scope: !60)
+!73 = distinct !{!73, !63, !74, !39}
+!74 = !DILocation(line: 26, column: 3, scope: !55)
+!75 = !DILocation(line: 27, column: 17, scope: !56)
+!76 = !DILocation(line: 27, column: 22, scope: !56)
+!77 = !DILocation(line: 27, column: 33, scope: !56)
+!78 = !DILocation(line: 27, column: 26, scope: !56)
+!79 = !DILocation(line: 27, column: 24, scope: !56)
+!80 = !DILocation(line: 27, column: 19, scope: !56)
+!81 = !DILocation(line: 27, column: 6, scope: !56)
+!82 = !DILocation(line: 28, column: 2, scope: !56)
+!83 = !DILocation(line: 29, column: 2, scope: !42)
+!84 = !DILocation(line: 29, column: 14, scope: !42)
+!85 = !DILabel(scope: !86, name: "LOOP", file: !5, line: 30)
+!86 = distinct !DILexicalBlock(scope: !42, file: !5, line: 29, column: 14)
+!87 = !DILocation(line: 30, column: 3, scope: !86)
+!88 = !DILocation(line: 31, column: 15, scope: !86)
+!89 = !DILocation(line: 31, column: 8, scope: !86)
+!90 = !DILocation(line: 31, column: 5, scope: !86)
+!91 = !DILocation(line: 32, column: 6, scope: !92)
+!92 = distinct !DILexicalBlock(scope: !86, file: !5, line: 32, column: 6)
+!93 = !DILocation(line: 32, column: 6, scope: !86)
+!94 = !DILocation(line: 33, column: 4, scope: !95)
+!95 = distinct !DILexicalBlock(scope: !92, file: !5, line: 32, column: 9)
+!96 = !DILocation(line: 35, column: 3, scope: !86)
