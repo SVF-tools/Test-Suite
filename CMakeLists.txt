@@ -167,14 +167,16 @@ list(
 )
 foreach(file ${diff_tests_cruxbc})
   file(GLOB filename RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/crux-bc/${file}.bc")
-  add_test(
-    NAME diff_tests-wr-svfg-cruxbc/read_write_svfg_crux/${filename}
-    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/difftest.py
-      "wpa -ander -svfg -alias-check=false -write-svfg=read_write_file"
-      "wpa -ander -svfg -alias-check=false -read-svfg=read_write_file"
-      ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
-  )
+  if(${filename})
+    add_test(
+      NAME diff_tests-wr-svfg-cruxbc/read_write_svfg_crux/${filename}
+      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/difftest.py
+        "wpa -ander -svfg -alias-check=false -write-svfg=read_write_file"
+        "wpa -ander -svfg -alias-check=false -read-svfg=read_write_file"
+        ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
+    )
+  endif()
 endforeach()
 
 # saber mem_leak tests  (ctest -R mem_leak -VV)
