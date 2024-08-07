@@ -346,3 +346,14 @@ add_test(
         COMMAND ${command}
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
 )
+
+## symbolic abstraction tests  (ctest -R aetest -VV)
+set(cmd "ae  -aetest")
+string(REPLACE " " ";" commandtemp ${cmd})
+set(command ${commandtemp})
+add_test(
+        NAME aetest
+        COMMAND ${command}
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+)
+
