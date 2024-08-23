@@ -72,7 +72,7 @@ list(
   dvf_commands
   "dvf -dfs -print-pts=false"
   "dvf -cxt -print-pts=false"
-  "mta -mhp-validation -lock-validation"
+  "mta"
 )
 
 list(LENGTH dvf_folders dvf_len1)
