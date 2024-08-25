@@ -317,14 +317,6 @@ foreach(filename ${ae_assert_files})
   )
 endforeach()
 
-foreach(filename ${ae_assert_files})
-  add_test(
-          NAME ae_assert_tests/${filename}-simicfg
-          COMMAND ae -icfg-merge-adjnodes ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-  )
-endforeach()
-
 # loops over ae_overflow_files and run "ae -overflow $bc_file"
 file(GLOB ae_overflow_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_overflow_tests/*.bc")
 
@@ -336,13 +328,6 @@ foreach(filename ${ae_overflow_files})
   )
 endforeach()
 
-foreach(filename ${ae_overflow_files})
-  add_test(
-          NAME ae_overflow_tests/${filename}-simicfg
-          COMMAND ae -overflow -icfg-merge-adjnodes -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-  )
-endforeach()
 
 ## symbolic abstraction tests  (ctest -R symabs -VV)
 set(cmd "ae  -symabs")

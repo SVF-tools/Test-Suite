@@ -13,7 +13,7 @@ Template File: point-flaw-01.tmpl.c
  *
  * */
 
-#include "std_testcase.h"
+#include "../ae_overflow_tests/std_testcase.h"
 
 #ifndef _WIN32
 #include <wchar.h>
