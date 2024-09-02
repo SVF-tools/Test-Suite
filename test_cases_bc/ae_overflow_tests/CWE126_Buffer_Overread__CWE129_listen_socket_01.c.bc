@@ -1,0 +1,824 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/ae_overflow_tests/CWE126_Buffer_Overread__CWE129_listen_socket_01.c.bc'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/ae_overflow_tests/CWE126_Buffer_Overread__CWE129_listen_socket_01.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+%struct.sockaddr_in = type { i16, i16, %struct.in_addr, [8 x i8] }
+%struct.in_addr = type { i32 }
+
+@.str = private unnamed_addr constant [31 x i8] c"ERROR: Array index is negative\00", align 1, !dbg !0
+@.str.1 = private unnamed_addr constant [18 x i8] c"Calling good()...\00", align 1, !dbg !7
+@.str.2 = private unnamed_addr constant [16 x i8] c"Finished good()\00", align 1, !dbg !12
+@.str.3 = private unnamed_addr constant [17 x i8] c"Calling bad()...\00", align 1, !dbg !17
+@.str.4 = private unnamed_addr constant [15 x i8] c"Finished bad()\00", align 1, !dbg !22
+@.str.5 = private unnamed_addr constant [36 x i8] c"ERROR: Array index is out-of-bounds\00", align 1, !dbg !27
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @CWE126_Buffer_Overread__CWE129_listen_socket_01_bad() #0 !dbg !104 {
+entry:
+  %data = alloca i32, align 4
+  %recvResult = alloca i32, align 4
+  %service = alloca %struct.sockaddr_in, align 4
+  %listenSocket = alloca i32, align 4
+  %acceptSocket = alloca i32, align 4
+  %inputBuffer = alloca [14 x i8], align 1
+  %buffer = alloca [10 x i32], align 16
+  call void @llvm.dbg.declare(metadata ptr %data, metadata !108, metadata !DIExpression()), !dbg !110
+  store i32 -1, ptr %data, align 4, !dbg !111
+  call void @llvm.dbg.declare(metadata ptr %recvResult, metadata !112, metadata !DIExpression()), !dbg !114
+  call void @llvm.dbg.declare(metadata ptr %service, metadata !115, metadata !DIExpression()), !dbg !132
+  call void @llvm.dbg.declare(metadata ptr %listenSocket, metadata !133, metadata !DIExpression()), !dbg !134
+  store i32 -1, ptr %listenSocket, align 4, !dbg !134
+  call void @llvm.dbg.declare(metadata ptr %acceptSocket, metadata !135, metadata !DIExpression()), !dbg !136
+  store i32 -1, ptr %acceptSocket, align 4, !dbg !136
+  call void @llvm.dbg.declare(metadata ptr %inputBuffer, metadata !137, metadata !DIExpression()), !dbg !138
+  br label %do.body, !dbg !139
+
+do.body:                                          ; preds = %entry
+  %call = call i32 @socket(i32 noundef 2, i32 noundef 1, i32 noundef 6) #7, !dbg !140
+  store i32 %call, ptr %listenSocket, align 4, !dbg !142
+  %0 = load i32, ptr %listenSocket, align 4, !dbg !143
+  %cmp = icmp eq i32 %0, -1, !dbg !145
+  br i1 %cmp, label %if.then, label %if.end, !dbg !146
+
+if.then:                                          ; preds = %do.body
+  br label %do.end, !dbg !147
+
+if.end:                                           ; preds = %do.body
+  call void @llvm.memset.p0.i64(ptr align 4 %service, i8 0, i64 16, i1 false), !dbg !149
+  %sin_family = getelementptr inbounds %struct.sockaddr_in, ptr %service, i32 0, i32 0, !dbg !150
+  store i16 2, ptr %sin_family, align 4, !dbg !151
+  %sin_addr = getelementptr inbounds %struct.sockaddr_in, ptr %service, i32 0, i32 2, !dbg !152
+  %s_addr = getelementptr inbounds %struct.in_addr, ptr %sin_addr, i32 0, i32 0, !dbg !153
+  store i32 0, ptr %s_addr, align 4, !dbg !154
+  %call1 = call zeroext i16 @htons(i16 noundef zeroext 27015) #8, !dbg !155
+  %sin_port = getelementptr inbounds %struct.sockaddr_in, ptr %service, i32 0, i32 1, !dbg !156
+  store i16 %call1, ptr %sin_port, align 2, !dbg !157
+  %1 = load i32, ptr %listenSocket, align 4, !dbg !158
+  %call2 = call i32 @bind(i32 noundef %1, ptr noundef %service, i32 noundef 16) #7, !dbg !160
+  %cmp3 = icmp eq i32 %call2, -1, !dbg !161
+  br i1 %cmp3, label %if.then4, label %if.end5, !dbg !162
+
+if.then4:                                         ; preds = %if.end
+  br label %do.end, !dbg !163
+
+if.end5:                                          ; preds = %if.end
+  %2 = load i32, ptr %listenSocket, align 4, !dbg !165
+  %call6 = call i32 @listen(i32 noundef %2, i32 noundef 5) #7, !dbg !167
+  %cmp7 = icmp eq i32 %call6, -1, !dbg !168
+  br i1 %cmp7, label %if.then8, label %if.end9, !dbg !169
+
+if.then8:                                         ; preds = %if.end5
+  br label %do.end, !dbg !170
+
+if.end9:                                          ; preds = %if.end5
+  %3 = load i32, ptr %listenSocket, align 4, !dbg !172
+  %call10 = call i32 @accept(i32 noundef %3, ptr noundef null, ptr noundef null), !dbg !173
+  store i32 %call10, ptr %acceptSocket, align 4, !dbg !174
+  %4 = load i32, ptr %acceptSocket, align 4, !dbg !175
+  %cmp11 = icmp eq i32 %4, -1, !dbg !177
+  br i1 %cmp11, label %if.then12, label %if.end13, !dbg !178
+
+if.then12:                                        ; preds = %if.end9
+  br label %do.end, !dbg !179
+
+if.end13:                                         ; preds = %if.end9
+  %5 = load i32, ptr %acceptSocket, align 4, !dbg !181
+  %arraydecay = getelementptr inbounds [14 x i8], ptr %inputBuffer, i64 0, i64 0, !dbg !182
+  %call14 = call i64 @recv(i32 noundef %5, ptr noundef %arraydecay, i64 noundef 13, i32 noundef 0), !dbg !183
+  %conv = trunc i64 %call14 to i32, !dbg !183
+  store i32 %conv, ptr %recvResult, align 4, !dbg !184
+  %6 = load i32, ptr %recvResult, align 4, !dbg !185
+  %cmp15 = icmp eq i32 %6, -1, !dbg !187
+  br i1 %cmp15, label %if.then19, label %lor.lhs.false, !dbg !188
+
+lor.lhs.false:                                    ; preds = %if.end13
+  %7 = load i32, ptr %recvResult, align 4, !dbg !189
+  %cmp17 = icmp eq i32 %7, 0, !dbg !190
+  br i1 %cmp17, label %if.then19, label %if.end20, !dbg !191
+
+if.then19:                                        ; preds = %lor.lhs.false, %if.end13
+  br label %do.end, !dbg !192
+
+if.end20:                                         ; preds = %lor.lhs.false
+  %8 = load i32, ptr %recvResult, align 4, !dbg !194
+  %idxprom = sext i32 %8 to i64, !dbg !195
+  %arrayidx = getelementptr inbounds [14 x i8], ptr %inputBuffer, i64 0, i64 %idxprom, !dbg !195
+  store i8 0, ptr %arrayidx, align 1, !dbg !196
+  %arraydecay21 = getelementptr inbounds [14 x i8], ptr %inputBuffer, i64 0, i64 0, !dbg !197
+  %call22 = call i32 @atoi(ptr noundef %arraydecay21) #9, !dbg !198
+  store i32 %call22, ptr %data, align 4, !dbg !199
+  br label %do.end, !dbg !200
+
+do.end:                                           ; preds = %if.end20, %if.then19, %if.then12, %if.then8, %if.then4, %if.then
+  %9 = load i32, ptr %listenSocket, align 4, !dbg !201
+  %cmp23 = icmp ne i32 %9, -1, !dbg !203
+  br i1 %cmp23, label %if.then25, label %if.end27, !dbg !204
+
+if.then25:                                        ; preds = %do.end
+  %10 = load i32, ptr %listenSocket, align 4, !dbg !205
+  %call26 = call i32 @close(i32 noundef %10), !dbg !207
+  br label %if.end27, !dbg !208
+
+if.end27:                                         ; preds = %if.then25, %do.end
+  %11 = load i32, ptr %acceptSocket, align 4, !dbg !209
+  %cmp28 = icmp ne i32 %11, -1, !dbg !211
+  br i1 %cmp28, label %if.then30, label %if.end32, !dbg !212
+
+if.then30:                                        ; preds = %if.end27
+  %12 = load i32, ptr %acceptSocket, align 4, !dbg !213
+  %call31 = call i32 @close(i32 noundef %12), !dbg !215
+  br label %if.end32, !dbg !216
+
+if.end32:                                         ; preds = %if.then30, %if.end27
+  call void @llvm.dbg.declare(metadata ptr %buffer, metadata !217, metadata !DIExpression()), !dbg !222
+  call void @llvm.memset.p0.i64(ptr align 16 %buffer, i8 0, i64 40, i1 false), !dbg !222
+  %13 = load i32, ptr %data, align 4, !dbg !223
+  %cmp33 = icmp sge i32 %13, 0, !dbg !225
+  br i1 %cmp33, label %if.then35, label %if.else, !dbg !226
+
+if.then35:                                        ; preds = %if.end32
+  %14 = load i32, ptr %data, align 4, !dbg !227
+  %idxprom36 = sext i32 %14 to i64, !dbg !229
+  %arrayidx37 = getelementptr inbounds [10 x i32], ptr %buffer, i64 0, i64 %idxprom36, !dbg !229
+  %15 = load i32, ptr %arrayidx37, align 4, !dbg !229
+  call void @printIntLine(i32 noundef %15), !dbg !230
+  %arraydecay38 = getelementptr inbounds [10 x i32], ptr %buffer, i64 0, i64 0, !dbg !231
+  %16 = load i32, ptr %data, align 4, !dbg !232
+  %conv39 = sext i32 %16 to i64, !dbg !232
+  %mul = mul i64 %conv39, 4, !dbg !233
+  %call40 = call i32 (ptr, i64, ...) @UNSAFE_BUFACCESS(ptr noundef %arraydecay38, i64 noundef %mul), !dbg !234
+  br label %if.end41, !dbg !235
+
+if.else:                                          ; preds = %if.end32
+  call void @printLine(ptr noundef @.str), !dbg !236
+  br label %if.end41
+
+if.end41:                                         ; preds = %if.else, %if.then35
+  ret void, !dbg !238
+}
+
+; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
+
+; Function Attrs: nounwind
+declare i32 @socket(i32 noundef, i32 noundef, i32 noundef) #2
+
+; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: write)
+declare void @llvm.memset.p0.i64(ptr nocapture writeonly, i8, i64, i1 immarg) #3
+
+; Function Attrs: nounwind willreturn memory(none)
+declare zeroext i16 @htons(i16 noundef zeroext) #4
+
+; Function Attrs: nounwind
+declare i32 @bind(i32 noundef, ptr noundef, i32 noundef) #2
+
+; Function Attrs: nounwind
+declare i32 @listen(i32 noundef, i32 noundef) #2
+
+declare i32 @accept(i32 noundef, ptr noundef, ptr noundef) #5
+
+declare i64 @recv(i32 noundef, ptr noundef, i64 noundef, i32 noundef) #5
+
+; Function Attrs: nounwind willreturn memory(read)
+declare i32 @atoi(ptr noundef) #6
+
+declare i32 @close(i32 noundef) #5
+
+declare void @printIntLine(i32 noundef) #5
+
+declare i32 @UNSAFE_BUFACCESS(...) #5
+
+declare void @printLine(ptr noundef) #5
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @CWE126_Buffer_Overread__CWE129_listen_socket_01_good() #0 !dbg !239 {
+entry:
+  call void @goodG2B(), !dbg !240
+  call void @goodB2G(), !dbg !241
+  ret void, !dbg !242
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main(i32 noundef %argc, ptr noundef %argv) #0 !dbg !243 {
+entry:
+  %retval = alloca i32, align 4
+  %argc.addr = alloca i32, align 4
+  %argv.addr = alloca ptr, align 8
+  store i32 0, ptr %retval, align 4
+  store i32 %argc, ptr %argc.addr, align 4
+  call void @llvm.dbg.declare(metadata ptr %argc.addr, metadata !248, metadata !DIExpression()), !dbg !249
+  store ptr %argv, ptr %argv.addr, align 8
+  call void @llvm.dbg.declare(metadata ptr %argv.addr, metadata !250, metadata !DIExpression()), !dbg !251
+  %call = call i64 @time(ptr noundef null) #7, !dbg !252
+  %conv = trunc i64 %call to i32, !dbg !253
+  call void @srand(i32 noundef %conv) #7, !dbg !254
+  call void @printLine(ptr noundef @.str.1), !dbg !255
+  call void @CWE126_Buffer_Overread__CWE129_listen_socket_01_good(), !dbg !256
+  call void @printLine(ptr noundef @.str.2), !dbg !257
+  call void @printLine(ptr noundef @.str.3), !dbg !258
+  call void @CWE126_Buffer_Overread__CWE129_listen_socket_01_bad(), !dbg !259
+  call void @printLine(ptr noundef @.str.4), !dbg !260
+  ret i32 0, !dbg !261
+}
+
+; Function Attrs: nounwind
+declare void @srand(i32 noundef) #2
+
+; Function Attrs: nounwind
+declare i64 @time(ptr noundef) #2
+
+; Function Attrs: noinline nounwind optnone uwtable
+define internal void @goodG2B() #0 !dbg !262 {
+entry:
+  %data = alloca i32, align 4
+  %buffer = alloca [10 x i32], align 16
+  call void @llvm.dbg.declare(metadata ptr %data, metadata !263, metadata !DIExpression()), !dbg !264
+  store i32 -1, ptr %data, align 4, !dbg !265
+  store i32 7, ptr %data, align 4, !dbg !266
+  call void @llvm.dbg.declare(metadata ptr %buffer, metadata !267, metadata !DIExpression()), !dbg !269
+  call void @llvm.memset.p0.i64(ptr align 16 %buffer, i8 0, i64 40, i1 false), !dbg !269
+  %0 = load i32, ptr %data, align 4, !dbg !270
+  %cmp = icmp sge i32 %0, 0, !dbg !272
+  br i1 %cmp, label %if.then, label %if.else, !dbg !273
+
+if.then:                                          ; preds = %entry
+  %1 = load i32, ptr %data, align 4, !dbg !274
+  %idxprom = sext i32 %1 to i64, !dbg !276
+  %arrayidx = getelementptr inbounds [10 x i32], ptr %buffer, i64 0, i64 %idxprom, !dbg !276
+  %2 = load i32, ptr %arrayidx, align 4, !dbg !276
+  call void @printIntLine(i32 noundef %2), !dbg !277
+  %arraydecay = getelementptr inbounds [10 x i32], ptr %buffer, i64 0, i64 0, !dbg !278
+  %3 = load i32, ptr %data, align 4, !dbg !279
+  %conv = sext i32 %3 to i64, !dbg !279
+  %mul = mul i64 %conv, 4, !dbg !280
+  %call = call i32 (ptr, i64, ...) @SAFE_BUFACCESS(ptr noundef %arraydecay, i64 noundef %mul), !dbg !281
+  br label %if.end, !dbg !282
+
+if.else:                                          ; preds = %entry
+  call void @printLine(ptr noundef @.str), !dbg !283
+  br label %if.end
+
+if.end:                                           ; preds = %if.else, %if.then
+  ret void, !dbg !285
+}
+
+declare i32 @SAFE_BUFACCESS(...) #5
+
+; Function Attrs: noinline nounwind optnone uwtable
+define internal void @goodB2G() #0 !dbg !286 {
+entry:
+  %data = alloca i32, align 4
+  %recvResult = alloca i32, align 4
+  %service = alloca %struct.sockaddr_in, align 4
+  %listenSocket = alloca i32, align 4
+  %acceptSocket = alloca i32, align 4
+  %inputBuffer = alloca [14 x i8], align 1
+  %buffer = alloca [10 x i32], align 16
+  call void @llvm.dbg.declare(metadata ptr %data, metadata !287, metadata !DIExpression()), !dbg !288
+  store i32 -1, ptr %data, align 4, !dbg !289
+  call void @llvm.dbg.declare(metadata ptr %recvResult, metadata !290, metadata !DIExpression()), !dbg !292
+  call void @llvm.dbg.declare(metadata ptr %service, metadata !293, metadata !DIExpression()), !dbg !294
+  call void @llvm.dbg.declare(metadata ptr %listenSocket, metadata !295, metadata !DIExpression()), !dbg !296
+  store i32 -1, ptr %listenSocket, align 4, !dbg !296
+  call void @llvm.dbg.declare(metadata ptr %acceptSocket, metadata !297, metadata !DIExpression()), !dbg !298
+  store i32 -1, ptr %acceptSocket, align 4, !dbg !298
+  call void @llvm.dbg.declare(metadata ptr %inputBuffer, metadata !299, metadata !DIExpression()), !dbg !300
+  br label %do.body, !dbg !301
+
+do.body:                                          ; preds = %entry
+  %call = call i32 @socket(i32 noundef 2, i32 noundef 1, i32 noundef 6) #7, !dbg !302
+  store i32 %call, ptr %listenSocket, align 4, !dbg !304
+  %0 = load i32, ptr %listenSocket, align 4, !dbg !305
+  %cmp = icmp eq i32 %0, -1, !dbg !307
+  br i1 %cmp, label %if.then, label %if.end, !dbg !308
+
+if.then:                                          ; preds = %do.body
+  br label %do.end, !dbg !309
+
+if.end:                                           ; preds = %do.body
+  call void @llvm.memset.p0.i64(ptr align 4 %service, i8 0, i64 16, i1 false), !dbg !311
+  %sin_family = getelementptr inbounds %struct.sockaddr_in, ptr %service, i32 0, i32 0, !dbg !312
+  store i16 2, ptr %sin_family, align 4, !dbg !313
+  %sin_addr = getelementptr inbounds %struct.sockaddr_in, ptr %service, i32 0, i32 2, !dbg !314
+  %s_addr = getelementptr inbounds %struct.in_addr, ptr %sin_addr, i32 0, i32 0, !dbg !315
+  store i32 0, ptr %s_addr, align 4, !dbg !316
+  %call1 = call zeroext i16 @htons(i16 noundef zeroext 27015) #8, !dbg !317
+  %sin_port = getelementptr inbounds %struct.sockaddr_in, ptr %service, i32 0, i32 1, !dbg !318
+  store i16 %call1, ptr %sin_port, align 2, !dbg !319
+  %1 = load i32, ptr %listenSocket, align 4, !dbg !320
+  %call2 = call i32 @bind(i32 noundef %1, ptr noundef %service, i32 noundef 16) #7, !dbg !322
+  %cmp3 = icmp eq i32 %call2, -1, !dbg !323
+  br i1 %cmp3, label %if.then4, label %if.end5, !dbg !324
+
+if.then4:                                         ; preds = %if.end
+  br label %do.end, !dbg !325
+
+if.end5:                                          ; preds = %if.end
+  %2 = load i32, ptr %listenSocket, align 4, !dbg !327
+  %call6 = call i32 @listen(i32 noundef %2, i32 noundef 5) #7, !dbg !329
+  %cmp7 = icmp eq i32 %call6, -1, !dbg !330
+  br i1 %cmp7, label %if.then8, label %if.end9, !dbg !331
+
+if.then8:                                         ; preds = %if.end5
+  br label %do.end, !dbg !332
+
+if.end9:                                          ; preds = %if.end5
+  %3 = load i32, ptr %listenSocket, align 4, !dbg !334
+  %call10 = call i32 @accept(i32 noundef %3, ptr noundef null, ptr noundef null), !dbg !335
+  store i32 %call10, ptr %acceptSocket, align 4, !dbg !336
+  %4 = load i32, ptr %acceptSocket, align 4, !dbg !337
+  %cmp11 = icmp eq i32 %4, -1, !dbg !339
+  br i1 %cmp11, label %if.then12, label %if.end13, !dbg !340
+
+if.then12:                                        ; preds = %if.end9
+  br label %do.end, !dbg !341
+
+if.end13:                                         ; preds = %if.end9
+  %5 = load i32, ptr %acceptSocket, align 4, !dbg !343
+  %arraydecay = getelementptr inbounds [14 x i8], ptr %inputBuffer, i64 0, i64 0, !dbg !344
+  %call14 = call i64 @recv(i32 noundef %5, ptr noundef %arraydecay, i64 noundef 13, i32 noundef 0), !dbg !345
+  %conv = trunc i64 %call14 to i32, !dbg !345
+  store i32 %conv, ptr %recvResult, align 4, !dbg !346
+  %6 = load i32, ptr %recvResult, align 4, !dbg !347
+  %cmp15 = icmp eq i32 %6, -1, !dbg !349
+  br i1 %cmp15, label %if.then19, label %lor.lhs.false, !dbg !350
+
+lor.lhs.false:                                    ; preds = %if.end13
+  %7 = load i32, ptr %recvResult, align 4, !dbg !351
+  %cmp17 = icmp eq i32 %7, 0, !dbg !352
+  br i1 %cmp17, label %if.then19, label %if.end20, !dbg !353
+
+if.then19:                                        ; preds = %lor.lhs.false, %if.end13
+  br label %do.end, !dbg !354
+
+if.end20:                                         ; preds = %lor.lhs.false
+  %8 = load i32, ptr %recvResult, align 4, !dbg !356
+  %idxprom = sext i32 %8 to i64, !dbg !357
+  %arrayidx = getelementptr inbounds [14 x i8], ptr %inputBuffer, i64 0, i64 %idxprom, !dbg !357
+  store i8 0, ptr %arrayidx, align 1, !dbg !358
+  %arraydecay21 = getelementptr inbounds [14 x i8], ptr %inputBuffer, i64 0, i64 0, !dbg !359
+  %call22 = call i32 @atoi(ptr noundef %arraydecay21) #9, !dbg !360
+  store i32 %call22, ptr %data, align 4, !dbg !361
+  br label %do.end, !dbg !362
+
+do.end:                                           ; preds = %if.end20, %if.then19, %if.then12, %if.then8, %if.then4, %if.then
+  %9 = load i32, ptr %listenSocket, align 4, !dbg !363
+  %cmp23 = icmp ne i32 %9, -1, !dbg !365
+  br i1 %cmp23, label %if.then25, label %if.end27, !dbg !366
+
+if.then25:                                        ; preds = %do.end
+  %10 = load i32, ptr %listenSocket, align 4, !dbg !367
+  %call26 = call i32 @close(i32 noundef %10), !dbg !369
+  br label %if.end27, !dbg !370
+
+if.end27:                                         ; preds = %if.then25, %do.end
+  %11 = load i32, ptr %acceptSocket, align 4, !dbg !371
+  %cmp28 = icmp ne i32 %11, -1, !dbg !373
+  br i1 %cmp28, label %if.then30, label %if.end32, !dbg !374
+
+if.then30:                                        ; preds = %if.end27
+  %12 = load i32, ptr %acceptSocket, align 4, !dbg !375
+  %call31 = call i32 @close(i32 noundef %12), !dbg !377
+  br label %if.end32, !dbg !378
+
+if.end32:                                         ; preds = %if.then30, %if.end27
+  call void @llvm.dbg.declare(metadata ptr %buffer, metadata !379, metadata !DIExpression()), !dbg !381
+  call void @llvm.memset.p0.i64(ptr align 16 %buffer, i8 0, i64 40, i1 false), !dbg !381
+  %13 = load i32, ptr %data, align 4, !dbg !382
+  %cmp33 = icmp sge i32 %13, 0, !dbg !384
+  br i1 %cmp33, label %land.lhs.true, label %if.else, !dbg !385
+
+land.lhs.true:                                    ; preds = %if.end32
+  %14 = load i32, ptr %data, align 4, !dbg !386
+  %cmp35 = icmp slt i32 %14, 10, !dbg !387
+  br i1 %cmp35, label %if.then37, label %if.else, !dbg !388
+
+if.then37:                                        ; preds = %land.lhs.true
+  %15 = load i32, ptr %data, align 4, !dbg !389
+  %idxprom38 = sext i32 %15 to i64, !dbg !391
+  %arrayidx39 = getelementptr inbounds [10 x i32], ptr %buffer, i64 0, i64 %idxprom38, !dbg !391
+  %16 = load i32, ptr %arrayidx39, align 4, !dbg !391
+  call void @printIntLine(i32 noundef %16), !dbg !392
+  br label %if.end40, !dbg !393
+
+if.else:                                          ; preds = %land.lhs.true, %if.end32
+  call void @printLine(ptr noundef @.str.5), !dbg !394
+  br label %if.end40
+
+if.end40:                                         ; preds = %if.else, %if.then37
+  ret void, !dbg !396
+}
+
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
+attributes #2 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #3 = { nocallback nofree nounwind willreturn memory(argmem: write) }
+attributes #4 = { nounwind willreturn memory(none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #5 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #6 = { nounwind willreturn memory(read) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #7 = { nounwind }
+attributes #8 = { nounwind willreturn memory(none) }
+attributes #9 = { nounwind willreturn memory(read) }
+
+!llvm.dbg.cu = !{!32}
+!llvm.module.flags = !{!96, !97, !98, !99, !100, !101, !102}
+!llvm.ident = !{!103}
+
+!0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
+!1 = distinct !DIGlobalVariable(scope: null, file: !2, line: 129, type: !3, isLocal: true, isDefinition: true)
+!2 = !DIFile(filename: "src/ae_overflow_tests/CWE126_Buffer_Overread__CWE129_listen_socket_01.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "c6557841ee5df6a945b50d3bcc7c237c")
+!3 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 248, elements: !5)
+!4 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
+!5 = !{!6}
+!6 = !DISubrange(count: 31)
+!7 = !DIGlobalVariableExpression(var: !8, expr: !DIExpression())
+!8 = distinct !DIGlobalVariable(scope: null, file: !2, line: 272, type: !9, isLocal: true, isDefinition: true)
+!9 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 144, elements: !10)
+!10 = !{!11}
+!11 = !DISubrange(count: 18)
+!12 = !DIGlobalVariableExpression(var: !13, expr: !DIExpression())
+!13 = distinct !DIGlobalVariable(scope: null, file: !2, line: 274, type: !14, isLocal: true, isDefinition: true)
+!14 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 128, elements: !15)
+!15 = !{!16}
+!16 = !DISubrange(count: 16)
+!17 = !DIGlobalVariableExpression(var: !18, expr: !DIExpression())
+!18 = distinct !DIGlobalVariable(scope: null, file: !2, line: 277, type: !19, isLocal: true, isDefinition: true)
+!19 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 136, elements: !20)
+!20 = !{!21}
+!21 = !DISubrange(count: 17)
+!22 = !DIGlobalVariableExpression(var: !23, expr: !DIExpression())
+!23 = distinct !DIGlobalVariable(scope: null, file: !2, line: 279, type: !24, isLocal: true, isDefinition: true)
+!24 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 120, elements: !25)
+!25 = !{!26}
+!26 = !DISubrange(count: 15)
+!27 = !DIGlobalVariableExpression(var: !28, expr: !DIExpression())
+!28 = distinct !DIGlobalVariable(scope: null, file: !2, line: 247, type: !29, isLocal: true, isDefinition: true)
+!29 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 288, elements: !30)
+!30 = !{!31}
+!31 = !DISubrange(count: 36)
+!32 = distinct !DICompileUnit(language: DW_LANG_C11, file: !33, producer: "clang version 16.0.0", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !34, retainedTypes: !77, globals: !95, splitDebugInlining: false, nameTableKind: None)
+!33 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_overflow_tests/CWE126_Buffer_Overread__CWE129_listen_socket_01.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "c6557841ee5df6a945b50d3bcc7c237c")
+!34 = !{!35, !48}
+!35 = !DICompositeType(tag: DW_TAG_enumeration_type, name: "__socket_type", file: !36, line: 24, baseType: !37, size: 32, elements: !38)
+!36 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/socket_type.h", directory: "", checksumkind: CSK_MD5, checksum: "630d972ab4324a8e936ce28b39a40b01")
+!37 = !DIBasicType(name: "unsigned int", size: 32, encoding: DW_ATE_unsigned)
+!38 = !{!39, !40, !41, !42, !43, !44, !45, !46, !47}
+!39 = !DIEnumerator(name: "SOCK_STREAM", value: 1)
+!40 = !DIEnumerator(name: "SOCK_DGRAM", value: 2)
+!41 = !DIEnumerator(name: "SOCK_RAW", value: 3)
+!42 = !DIEnumerator(name: "SOCK_RDM", value: 4)
+!43 = !DIEnumerator(name: "SOCK_SEQPACKET", value: 5)
+!44 = !DIEnumerator(name: "SOCK_DCCP", value: 6)
+!45 = !DIEnumerator(name: "SOCK_PACKET", value: 10)
+!46 = !DIEnumerator(name: "SOCK_CLOEXEC", value: 524288)
+!47 = !DIEnumerator(name: "SOCK_NONBLOCK", value: 2048)
+!48 = !DICompositeType(tag: DW_TAG_enumeration_type, file: !49, line: 40, baseType: !37, size: 32, elements: !50)
+!49 = !DIFile(filename: "/usr/include/netinet/in.h", directory: "", checksumkind: CSK_MD5, checksum: "6a5254a491bcdb8c3253de75bf3571c1")
+!50 = !{!51, !52, !53, !54, !55, !56, !57, !58, !59, !60, !61, !62, !63, !64, !65, !66, !67, !68, !69, !70, !71, !72, !73, !74, !75, !76}
+!51 = !DIEnumerator(name: "IPPROTO_IP", value: 0)
+!52 = !DIEnumerator(name: "IPPROTO_ICMP", value: 1)
+!53 = !DIEnumerator(name: "IPPROTO_IGMP", value: 2)
+!54 = !DIEnumerator(name: "IPPROTO_IPIP", value: 4)
+!55 = !DIEnumerator(name: "IPPROTO_TCP", value: 6)
+!56 = !DIEnumerator(name: "IPPROTO_EGP", value: 8)
+!57 = !DIEnumerator(name: "IPPROTO_PUP", value: 12)
+!58 = !DIEnumerator(name: "IPPROTO_UDP", value: 17)
+!59 = !DIEnumerator(name: "IPPROTO_IDP", value: 22)
+!60 = !DIEnumerator(name: "IPPROTO_TP", value: 29)
+!61 = !DIEnumerator(name: "IPPROTO_DCCP", value: 33)
+!62 = !DIEnumerator(name: "IPPROTO_IPV6", value: 41)
+!63 = !DIEnumerator(name: "IPPROTO_RSVP", value: 46)
+!64 = !DIEnumerator(name: "IPPROTO_GRE", value: 47)
+!65 = !DIEnumerator(name: "IPPROTO_ESP", value: 50)
+!66 = !DIEnumerator(name: "IPPROTO_AH", value: 51)
+!67 = !DIEnumerator(name: "IPPROTO_MTP", value: 92)
+!68 = !DIEnumerator(name: "IPPROTO_BEETPH", value: 94)
+!69 = !DIEnumerator(name: "IPPROTO_ENCAP", value: 98)
+!70 = !DIEnumerator(name: "IPPROTO_PIM", value: 103)
+!71 = !DIEnumerator(name: "IPPROTO_COMP", value: 108)
+!72 = !DIEnumerator(name: "IPPROTO_SCTP", value: 132)
+!73 = !DIEnumerator(name: "IPPROTO_UDPLITE", value: 136)
+!74 = !DIEnumerator(name: "IPPROTO_MPLS", value: 137)
+!75 = !DIEnumerator(name: "IPPROTO_RAW", value: 255)
+!76 = !DIEnumerator(name: "IPPROTO_MAX", value: 256)
+!77 = !{!78, !83, !37}
+!78 = !DIDerivedType(tag: DW_TAG_typedef, name: "in_addr_t", file: !49, line: 30, baseType: !79)
+!79 = !DIDerivedType(tag: DW_TAG_typedef, name: "uint32_t", file: !80, line: 26, baseType: !81)
+!80 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h", directory: "", checksumkind: CSK_MD5, checksum: "d3ea318a915682aaf6645ec16ac9f991")
+!81 = !DIDerivedType(tag: DW_TAG_typedef, name: "__uint32_t", file: !82, line: 42, baseType: !37)
+!82 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/types.h", directory: "", checksumkind: CSK_MD5, checksum: "f6304b1a6dcfc6bee76e9a51043b5090")
+!83 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !84, size: 64)
+!84 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "sockaddr", file: !85, line: 178, size: 128, elements: !86)
+!85 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/socket.h", directory: "", checksumkind: CSK_MD5, checksum: "b1d3343a573cbf39b225111209e02966")
+!86 = !{!87, !91}
+!87 = !DIDerivedType(tag: DW_TAG_member, name: "sa_family", scope: !84, file: !85, line: 180, baseType: !88, size: 16)
+!88 = !DIDerivedType(tag: DW_TAG_typedef, name: "sa_family_t", file: !89, line: 28, baseType: !90)
+!89 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/sockaddr.h", directory: "", checksumkind: CSK_MD5, checksum: "b70cbaf07ffb7e8bf11ee98d9a21e2fc")
+!90 = !DIBasicType(name: "unsigned short", size: 16, encoding: DW_ATE_unsigned)
+!91 = !DIDerivedType(tag: DW_TAG_member, name: "sa_data", scope: !84, file: !85, line: 181, baseType: !92, size: 112, offset: 16)
+!92 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 112, elements: !93)
+!93 = !{!94}
+!94 = !DISubrange(count: 14)
+!95 = !{!0, !7, !12, !17, !22, !27}
+!96 = !{i32 7, !"Dwarf Version", i32 5}
+!97 = !{i32 2, !"Debug Info Version", i32 3}
+!98 = !{i32 1, !"wchar_size", i32 4}
+!99 = !{i32 8, !"PIC Level", i32 2}
+!100 = !{i32 7, !"PIE Level", i32 2}
+!101 = !{i32 7, !"uwtable", i32 2}
+!102 = !{i32 7, !"frame-pointer", i32 2}
+!103 = !{!"clang version 16.0.0"}
+!104 = distinct !DISubprogram(name: "CWE126_Buffer_Overread__CWE129_listen_socket_01_bad", scope: !2, file: !2, line: 44, type: !105, scopeLine: 45, spFlags: DISPFlagDefinition, unit: !32, retainedNodes: !107)
+!105 = !DISubroutineType(types: !106)
+!106 = !{null}
+!107 = !{}
+!108 = !DILocalVariable(name: "data", scope: !104, file: !2, line: 46, type: !109)
+!109 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+!110 = !DILocation(line: 46, column: 9, scope: !104)
+!111 = !DILocation(line: 48, column: 10, scope: !104)
+!112 = !DILocalVariable(name: "recvResult", scope: !113, file: !2, line: 54, type: !109)
+!113 = distinct !DILexicalBlock(scope: !104, file: !2, line: 49, column: 5)
+!114 = !DILocation(line: 54, column: 13, scope: !113)
+!115 = !DILocalVariable(name: "service", scope: !113, file: !2, line: 55, type: !116)
+!116 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "sockaddr_in", file: !49, line: 238, size: 128, elements: !117)
+!117 = !{!118, !119, !123, !127}
+!118 = !DIDerivedType(tag: DW_TAG_member, name: "sin_family", scope: !116, file: !49, line: 240, baseType: !88, size: 16)
+!119 = !DIDerivedType(tag: DW_TAG_member, name: "sin_port", scope: !116, file: !49, line: 241, baseType: !120, size: 16, offset: 16)
+!120 = !DIDerivedType(tag: DW_TAG_typedef, name: "in_port_t", file: !49, line: 119, baseType: !121)
+!121 = !DIDerivedType(tag: DW_TAG_typedef, name: "uint16_t", file: !80, line: 25, baseType: !122)
+!122 = !DIDerivedType(tag: DW_TAG_typedef, name: "__uint16_t", file: !82, line: 40, baseType: !90)
+!123 = !DIDerivedType(tag: DW_TAG_member, name: "sin_addr", scope: !116, file: !49, line: 242, baseType: !124, size: 32, offset: 32)
+!124 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "in_addr", file: !49, line: 31, size: 32, elements: !125)
+!125 = !{!126}
+!126 = !DIDerivedType(tag: DW_TAG_member, name: "s_addr", scope: !124, file: !49, line: 33, baseType: !78, size: 32)
+!127 = !DIDerivedType(tag: DW_TAG_member, name: "sin_zero", scope: !116, file: !49, line: 245, baseType: !128, size: 64, offset: 64)
+!128 = !DICompositeType(tag: DW_TAG_array_type, baseType: !129, size: 64, elements: !130)
+!129 = !DIBasicType(name: "unsigned char", size: 8, encoding: DW_ATE_unsigned_char)
+!130 = !{!131}
+!131 = !DISubrange(count: 8)
+!132 = !DILocation(line: 55, column: 28, scope: !113)
+!133 = !DILocalVariable(name: "listenSocket", scope: !113, file: !2, line: 56, type: !109)
+!134 = !DILocation(line: 56, column: 16, scope: !113)
+!135 = !DILocalVariable(name: "acceptSocket", scope: !113, file: !2, line: 57, type: !109)
+!136 = !DILocation(line: 57, column: 16, scope: !113)
+!137 = !DILocalVariable(name: "inputBuffer", scope: !113, file: !2, line: 58, type: !92)
+!138 = !DILocation(line: 58, column: 14, scope: !113)
+!139 = !DILocation(line: 59, column: 9, scope: !113)
+!140 = !DILocation(line: 69, column: 28, scope: !141)
+!141 = distinct !DILexicalBlock(scope: !113, file: !2, line: 60, column: 9)
+!142 = !DILocation(line: 69, column: 26, scope: !141)
+!143 = !DILocation(line: 70, column: 17, scope: !144)
+!144 = distinct !DILexicalBlock(scope: !141, file: !2, line: 70, column: 17)
+!145 = !DILocation(line: 70, column: 30, scope: !144)
+!146 = !DILocation(line: 70, column: 17, scope: !141)
+!147 = !DILocation(line: 72, column: 17, scope: !148)
+!148 = distinct !DILexicalBlock(scope: !144, file: !2, line: 71, column: 13)
+!149 = !DILocation(line: 74, column: 13, scope: !141)
+!150 = !DILocation(line: 75, column: 21, scope: !141)
+!151 = !DILocation(line: 75, column: 32, scope: !141)
+!152 = !DILocation(line: 76, column: 21, scope: !141)
+!153 = !DILocation(line: 76, column: 30, scope: !141)
+!154 = !DILocation(line: 76, column: 37, scope: !141)
+!155 = !DILocation(line: 77, column: 32, scope: !141)
+!156 = !DILocation(line: 77, column: 21, scope: !141)
+!157 = !DILocation(line: 77, column: 30, scope: !141)
+!158 = !DILocation(line: 78, column: 22, scope: !159)
+!159 = distinct !DILexicalBlock(scope: !141, file: !2, line: 78, column: 17)
+!160 = !DILocation(line: 78, column: 17, scope: !159)
+!161 = !DILocation(line: 78, column: 81, scope: !159)
+!162 = !DILocation(line: 78, column: 17, scope: !141)
+!163 = !DILocation(line: 80, column: 17, scope: !164)
+!164 = distinct !DILexicalBlock(scope: !159, file: !2, line: 79, column: 13)
+!165 = !DILocation(line: 82, column: 24, scope: !166)
+!166 = distinct !DILexicalBlock(scope: !141, file: !2, line: 82, column: 17)
+!167 = !DILocation(line: 82, column: 17, scope: !166)
+!168 = !DILocation(line: 82, column: 54, scope: !166)
+!169 = !DILocation(line: 82, column: 17, scope: !141)
+!170 = !DILocation(line: 84, column: 17, scope: !171)
+!171 = distinct !DILexicalBlock(scope: !166, file: !2, line: 83, column: 13)
+!172 = !DILocation(line: 86, column: 35, scope: !141)
+!173 = !DILocation(line: 86, column: 28, scope: !141)
+!174 = !DILocation(line: 86, column: 26, scope: !141)
+!175 = !DILocation(line: 87, column: 17, scope: !176)
+!176 = distinct !DILexicalBlock(scope: !141, file: !2, line: 87, column: 17)
+!177 = !DILocation(line: 87, column: 30, scope: !176)
+!178 = !DILocation(line: 87, column: 17, scope: !141)
+!179 = !DILocation(line: 89, column: 17, scope: !180)
+!180 = distinct !DILexicalBlock(scope: !176, file: !2, line: 88, column: 13)
+!181 = !DILocation(line: 92, column: 31, scope: !141)
+!182 = !DILocation(line: 92, column: 45, scope: !141)
+!183 = !DILocation(line: 92, column: 26, scope: !141)
+!184 = !DILocation(line: 92, column: 24, scope: !141)
+!185 = !DILocation(line: 93, column: 17, scope: !186)
+!186 = distinct !DILexicalBlock(scope: !141, file: !2, line: 93, column: 17)
+!187 = !DILocation(line: 93, column: 28, scope: !186)
+!188 = !DILocation(line: 93, column: 44, scope: !186)
+!189 = !DILocation(line: 93, column: 47, scope: !186)
+!190 = !DILocation(line: 93, column: 58, scope: !186)
+!191 = !DILocation(line: 93, column: 17, scope: !141)
+!192 = !DILocation(line: 95, column: 17, scope: !193)
+!193 = distinct !DILexicalBlock(scope: !186, file: !2, line: 94, column: 13)
+!194 = !DILocation(line: 98, column: 25, scope: !141)
+!195 = !DILocation(line: 98, column: 13, scope: !141)
+!196 = !DILocation(line: 98, column: 37, scope: !141)
+!197 = !DILocation(line: 100, column: 25, scope: !141)
+!198 = !DILocation(line: 100, column: 20, scope: !141)
+!199 = !DILocation(line: 100, column: 18, scope: !141)
+!200 = !DILocation(line: 101, column: 9, scope: !141)
+!201 = !DILocation(line: 103, column: 13, scope: !202)
+!202 = distinct !DILexicalBlock(scope: !113, file: !2, line: 103, column: 13)
+!203 = !DILocation(line: 103, column: 26, scope: !202)
+!204 = !DILocation(line: 103, column: 13, scope: !113)
+!205 = !DILocation(line: 105, column: 26, scope: !206)
+!206 = distinct !DILexicalBlock(scope: !202, file: !2, line: 104, column: 9)
+!207 = !DILocation(line: 105, column: 13, scope: !206)
+!208 = !DILocation(line: 106, column: 9, scope: !206)
+!209 = !DILocation(line: 107, column: 13, scope: !210)
+!210 = distinct !DILexicalBlock(scope: !113, file: !2, line: 107, column: 13)
+!211 = !DILocation(line: 107, column: 26, scope: !210)
+!212 = !DILocation(line: 107, column: 13, scope: !113)
+!213 = !DILocation(line: 109, column: 26, scope: !214)
+!214 = distinct !DILexicalBlock(scope: !210, file: !2, line: 108, column: 9)
+!215 = !DILocation(line: 109, column: 13, scope: !214)
+!216 = !DILocation(line: 110, column: 9, scope: !214)
+!217 = !DILocalVariable(name: "buffer", scope: !218, file: !2, line: 119, type: !219)
+!218 = distinct !DILexicalBlock(scope: !104, file: !2, line: 118, column: 5)
+!219 = !DICompositeType(tag: DW_TAG_array_type, baseType: !109, size: 320, elements: !220)
+!220 = !{!221}
+!221 = !DISubrange(count: 10)
+!222 = !DILocation(line: 119, column: 13, scope: !218)
+!223 = !DILocation(line: 122, column: 13, scope: !224)
+!224 = distinct !DILexicalBlock(scope: !218, file: !2, line: 122, column: 13)
+!225 = !DILocation(line: 122, column: 18, scope: !224)
+!226 = !DILocation(line: 122, column: 13, scope: !218)
+!227 = !DILocation(line: 124, column: 33, scope: !228)
+!228 = distinct !DILexicalBlock(scope: !224, file: !2, line: 123, column: 9)
+!229 = !DILocation(line: 124, column: 26, scope: !228)
+!230 = !DILocation(line: 124, column: 13, scope: !228)
+!231 = !DILocation(line: 125, column: 30, scope: !228)
+!232 = !DILocation(line: 125, column: 38, scope: !228)
+!233 = !DILocation(line: 125, column: 42, scope: !228)
+!234 = !DILocation(line: 125, column: 13, scope: !228)
+!235 = !DILocation(line: 126, column: 9, scope: !228)
+!236 = !DILocation(line: 129, column: 13, scope: !237)
+!237 = distinct !DILexicalBlock(scope: !224, file: !2, line: 128, column: 9)
+!238 = !DILocation(line: 132, column: 1, scope: !104)
+!239 = distinct !DISubprogram(name: "CWE126_Buffer_Overread__CWE129_listen_socket_01_good", scope: !2, file: !2, line: 252, type: !105, scopeLine: 253, spFlags: DISPFlagDefinition, unit: !32, retainedNodes: !107)
+!240 = !DILocation(line: 254, column: 5, scope: !239)
+!241 = !DILocation(line: 255, column: 5, scope: !239)
+!242 = !DILocation(line: 256, column: 1, scope: !239)
+!243 = distinct !DISubprogram(name: "main", scope: !2, file: !2, line: 267, type: !244, scopeLine: 268, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !32, retainedNodes: !107)
+!244 = !DISubroutineType(types: !245)
+!245 = !{!109, !109, !246}
+!246 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !247, size: 64)
+!247 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !4, size: 64)
+!248 = !DILocalVariable(name: "argc", arg: 1, scope: !243, file: !2, line: 267, type: !109)
+!249 = !DILocation(line: 267, column: 14, scope: !243)
+!250 = !DILocalVariable(name: "argv", arg: 2, scope: !243, file: !2, line: 267, type: !246)
+!251 = !DILocation(line: 267, column: 27, scope: !243)
+!252 = !DILocation(line: 270, column: 22, scope: !243)
+!253 = !DILocation(line: 270, column: 12, scope: !243)
+!254 = !DILocation(line: 270, column: 5, scope: !243)
+!255 = !DILocation(line: 272, column: 5, scope: !243)
+!256 = !DILocation(line: 273, column: 5, scope: !243)
+!257 = !DILocation(line: 274, column: 5, scope: !243)
+!258 = !DILocation(line: 277, column: 5, scope: !243)
+!259 = !DILocation(line: 278, column: 5, scope: !243)
+!260 = !DILocation(line: 279, column: 5, scope: !243)
+!261 = !DILocation(line: 281, column: 5, scope: !243)
+!262 = distinct !DISubprogram(name: "goodG2B", scope: !2, file: !2, line: 139, type: !105, scopeLine: 140, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !32, retainedNodes: !107)
+!263 = !DILocalVariable(name: "data", scope: !262, file: !2, line: 141, type: !109)
+!264 = !DILocation(line: 141, column: 9, scope: !262)
+!265 = !DILocation(line: 143, column: 10, scope: !262)
+!266 = !DILocation(line: 146, column: 10, scope: !262)
+!267 = !DILocalVariable(name: "buffer", scope: !268, file: !2, line: 148, type: !219)
+!268 = distinct !DILexicalBlock(scope: !262, file: !2, line: 147, column: 5)
+!269 = !DILocation(line: 148, column: 13, scope: !268)
+!270 = !DILocation(line: 151, column: 13, scope: !271)
+!271 = distinct !DILexicalBlock(scope: !268, file: !2, line: 151, column: 13)
+!272 = !DILocation(line: 151, column: 18, scope: !271)
+!273 = !DILocation(line: 151, column: 13, scope: !268)
+!274 = !DILocation(line: 153, column: 33, scope: !275)
+!275 = distinct !DILexicalBlock(scope: !271, file: !2, line: 152, column: 9)
+!276 = !DILocation(line: 153, column: 26, scope: !275)
+!277 = !DILocation(line: 153, column: 13, scope: !275)
+!278 = !DILocation(line: 154, column: 28, scope: !275)
+!279 = !DILocation(line: 154, column: 36, scope: !275)
+!280 = !DILocation(line: 154, column: 40, scope: !275)
+!281 = !DILocation(line: 154, column: 13, scope: !275)
+!282 = !DILocation(line: 155, column: 9, scope: !275)
+!283 = !DILocation(line: 158, column: 13, scope: !284)
+!284 = distinct !DILexicalBlock(scope: !271, file: !2, line: 157, column: 9)
+!285 = !DILocation(line: 161, column: 1, scope: !262)
+!286 = distinct !DISubprogram(name: "goodB2G", scope: !2, file: !2, line: 164, type: !105, scopeLine: 165, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !32, retainedNodes: !107)
+!287 = !DILocalVariable(name: "data", scope: !286, file: !2, line: 166, type: !109)
+!288 = !DILocation(line: 166, column: 9, scope: !286)
+!289 = !DILocation(line: 168, column: 10, scope: !286)
+!290 = !DILocalVariable(name: "recvResult", scope: !291, file: !2, line: 174, type: !109)
+!291 = distinct !DILexicalBlock(scope: !286, file: !2, line: 169, column: 5)
+!292 = !DILocation(line: 174, column: 13, scope: !291)
+!293 = !DILocalVariable(name: "service", scope: !291, file: !2, line: 175, type: !116)
+!294 = !DILocation(line: 175, column: 28, scope: !291)
+!295 = !DILocalVariable(name: "listenSocket", scope: !291, file: !2, line: 176, type: !109)
+!296 = !DILocation(line: 176, column: 16, scope: !291)
+!297 = !DILocalVariable(name: "acceptSocket", scope: !291, file: !2, line: 177, type: !109)
+!298 = !DILocation(line: 177, column: 16, scope: !291)
+!299 = !DILocalVariable(name: "inputBuffer", scope: !291, file: !2, line: 178, type: !92)
+!300 = !DILocation(line: 178, column: 14, scope: !291)
+!301 = !DILocation(line: 179, column: 9, scope: !291)
+!302 = !DILocation(line: 189, column: 28, scope: !303)
+!303 = distinct !DILexicalBlock(scope: !291, file: !2, line: 180, column: 9)
+!304 = !DILocation(line: 189, column: 26, scope: !303)
+!305 = !DILocation(line: 190, column: 17, scope: !306)
+!306 = distinct !DILexicalBlock(scope: !303, file: !2, line: 190, column: 17)
+!307 = !DILocation(line: 190, column: 30, scope: !306)
+!308 = !DILocation(line: 190, column: 17, scope: !303)
+!309 = !DILocation(line: 192, column: 17, scope: !310)
+!310 = distinct !DILexicalBlock(scope: !306, file: !2, line: 191, column: 13)
+!311 = !DILocation(line: 194, column: 13, scope: !303)
+!312 = !DILocation(line: 195, column: 21, scope: !303)
+!313 = !DILocation(line: 195, column: 32, scope: !303)
+!314 = !DILocation(line: 196, column: 21, scope: !303)
+!315 = !DILocation(line: 196, column: 30, scope: !303)
+!316 = !DILocation(line: 196, column: 37, scope: !303)
+!317 = !DILocation(line: 197, column: 32, scope: !303)
+!318 = !DILocation(line: 197, column: 21, scope: !303)
+!319 = !DILocation(line: 197, column: 30, scope: !303)
+!320 = !DILocation(line: 198, column: 22, scope: !321)
+!321 = distinct !DILexicalBlock(scope: !303, file: !2, line: 198, column: 17)
+!322 = !DILocation(line: 198, column: 17, scope: !321)
+!323 = !DILocation(line: 198, column: 81, scope: !321)
+!324 = !DILocation(line: 198, column: 17, scope: !303)
+!325 = !DILocation(line: 200, column: 17, scope: !326)
+!326 = distinct !DILexicalBlock(scope: !321, file: !2, line: 199, column: 13)
+!327 = !DILocation(line: 202, column: 24, scope: !328)
+!328 = distinct !DILexicalBlock(scope: !303, file: !2, line: 202, column: 17)
+!329 = !DILocation(line: 202, column: 17, scope: !328)
+!330 = !DILocation(line: 202, column: 54, scope: !328)
+!331 = !DILocation(line: 202, column: 17, scope: !303)
+!332 = !DILocation(line: 204, column: 17, scope: !333)
+!333 = distinct !DILexicalBlock(scope: !328, file: !2, line: 203, column: 13)
+!334 = !DILocation(line: 206, column: 35, scope: !303)
+!335 = !DILocation(line: 206, column: 28, scope: !303)
+!336 = !DILocation(line: 206, column: 26, scope: !303)
+!337 = !DILocation(line: 207, column: 17, scope: !338)
+!338 = distinct !DILexicalBlock(scope: !303, file: !2, line: 207, column: 17)
+!339 = !DILocation(line: 207, column: 30, scope: !338)
+!340 = !DILocation(line: 207, column: 17, scope: !303)
+!341 = !DILocation(line: 209, column: 17, scope: !342)
+!342 = distinct !DILexicalBlock(scope: !338, file: !2, line: 208, column: 13)
+!343 = !DILocation(line: 212, column: 31, scope: !303)
+!344 = !DILocation(line: 212, column: 45, scope: !303)
+!345 = !DILocation(line: 212, column: 26, scope: !303)
+!346 = !DILocation(line: 212, column: 24, scope: !303)
+!347 = !DILocation(line: 213, column: 17, scope: !348)
+!348 = distinct !DILexicalBlock(scope: !303, file: !2, line: 213, column: 17)
+!349 = !DILocation(line: 213, column: 28, scope: !348)
+!350 = !DILocation(line: 213, column: 44, scope: !348)
+!351 = !DILocation(line: 213, column: 47, scope: !348)
+!352 = !DILocation(line: 213, column: 58, scope: !348)
+!353 = !DILocation(line: 213, column: 17, scope: !303)
+!354 = !DILocation(line: 215, column: 17, scope: !355)
+!355 = distinct !DILexicalBlock(scope: !348, file: !2, line: 214, column: 13)
+!356 = !DILocation(line: 218, column: 25, scope: !303)
+!357 = !DILocation(line: 218, column: 13, scope: !303)
+!358 = !DILocation(line: 218, column: 37, scope: !303)
+!359 = !DILocation(line: 220, column: 25, scope: !303)
+!360 = !DILocation(line: 220, column: 20, scope: !303)
+!361 = !DILocation(line: 220, column: 18, scope: !303)
+!362 = !DILocation(line: 221, column: 9, scope: !303)
+!363 = !DILocation(line: 223, column: 13, scope: !364)
+!364 = distinct !DILexicalBlock(scope: !291, file: !2, line: 223, column: 13)
+!365 = !DILocation(line: 223, column: 26, scope: !364)
+!366 = !DILocation(line: 223, column: 13, scope: !291)
+!367 = !DILocation(line: 225, column: 26, scope: !368)
+!368 = distinct !DILexicalBlock(scope: !364, file: !2, line: 224, column: 9)
+!369 = !DILocation(line: 225, column: 13, scope: !368)
+!370 = !DILocation(line: 226, column: 9, scope: !368)
+!371 = !DILocation(line: 227, column: 13, scope: !372)
+!372 = distinct !DILexicalBlock(scope: !291, file: !2, line: 227, column: 13)
+!373 = !DILocation(line: 227, column: 26, scope: !372)
+!374 = !DILocation(line: 227, column: 13, scope: !291)
+!375 = !DILocation(line: 229, column: 26, scope: !376)
+!376 = distinct !DILexicalBlock(scope: !372, file: !2, line: 228, column: 9)
+!377 = !DILocation(line: 229, column: 13, scope: !376)
+!378 = !DILocation(line: 230, column: 9, scope: !376)
+!379 = !DILocalVariable(name: "buffer", scope: !380, file: !2, line: 239, type: !219)
+!380 = distinct !DILexicalBlock(scope: !286, file: !2, line: 238, column: 5)
+!381 = !DILocation(line: 239, column: 13, scope: !380)
+!382 = !DILocation(line: 241, column: 13, scope: !383)
+!383 = distinct !DILexicalBlock(scope: !380, file: !2, line: 241, column: 13)
+!384 = !DILocation(line: 241, column: 18, scope: !383)
+!385 = !DILocation(line: 241, column: 23, scope: !383)
+!386 = !DILocation(line: 241, column: 26, scope: !383)
+!387 = !DILocation(line: 241, column: 31, scope: !383)
+!388 = !DILocation(line: 241, column: 13, scope: !380)
+!389 = !DILocation(line: 243, column: 33, scope: !390)
+!390 = distinct !DILexicalBlock(scope: !383, file: !2, line: 242, column: 9)
+!391 = !DILocation(line: 243, column: 26, scope: !390)
+!392 = !DILocation(line: 243, column: 13, scope: !390)
+!393 = !DILocation(line: 244, column: 9, scope: !390)
+!394 = !DILocation(line: 247, column: 13, scope: !395)
+!395 = distinct !DILexicalBlock(scope: !383, file: !2, line: 246, column: 9)
+!396 = !DILocation(line: 250, column: 1, scope: !286)
