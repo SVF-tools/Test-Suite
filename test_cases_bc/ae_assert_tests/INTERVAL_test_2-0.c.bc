@@ -4,41 +4,51 @@ target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16
 target triple = "x86_64-unknown-linux-gnu"
 
 @.str = private unnamed_addr constant [3 x i8] c"%d\00", align 1, !dbg !0
+@.str.1 = private unnamed_addr constant [3 x i8] c"b1\00", align 1, !dbg !7
+@.str.2 = private unnamed_addr constant [3 x i8] c"b2\00", align 1, !dbg !9
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32 @main() #0 !dbg !18 {
+define dso_local i32 @main() #0 !dbg !22 {
 entry:
   %retval = alloca i32, align 4
   %a = alloca i32, align 4
   %b = alloca i32, align 4
   store i32 0, ptr %retval, align 4
-  call void @llvm.dbg.declare(metadata ptr %a, metadata !23, metadata !DIExpression()), !dbg !24
-  call void @llvm.dbg.declare(metadata ptr %b, metadata !25, metadata !DIExpression()), !dbg !26
-  store i32 1, ptr %b, align 4, !dbg !26
-  %call = call i32 (ptr, ...) @scanf(ptr noundef @.str, ptr noundef %a), !dbg !27
-  %0 = load i32, ptr %a, align 4, !dbg !28
-  %1 = load i32, ptr %b, align 4, !dbg !29
-  %add = add nsw i32 %0, %1, !dbg !30
-  store i32 %add, ptr %b, align 4, !dbg !31
-  %2 = load i32, ptr %a, align 4, !dbg !32
-  %cmp = icmp sgt i32 %2, 5, !dbg !34
+  call void @llvm.dbg.declare(metadata ptr %a, metadata !27, metadata !DIExpression()), !dbg !28
+  call void @llvm.dbg.declare(metadata ptr %b, metadata !29, metadata !DIExpression()), !dbg !30
+  store i32 1, ptr %b, align 4, !dbg !30
+  %call = call i32 (ptr, ...) @scanf(ptr noundef @.str, ptr noundef %a), !dbg !31
+  %0 = load i32, ptr %a, align 4, !dbg !32
+  %cmp = icmp sgt i32 %0, 5, !dbg !34
   br i1 %cmp, label %if.then, label %if.else, !dbg !35
 
 if.then:                                          ; preds = %entry
-  %3 = load i32, ptr %b, align 4, !dbg !36
-  %cmp1 = icmp sgt i32 %3, 6, !dbg !38
-  call void @svf_assert(i1 noundef zeroext %cmp1), !dbg !39
-  br label %if.end, !dbg !40
+  %1 = load i32, ptr %a, align 4, !dbg !36
+  %2 = load i32, ptr %b, align 4, !dbg !38
+  %add = add nsw i32 %1, %2, !dbg !39
+  store i32 %add, ptr %b, align 4, !dbg !40
+  %3 = load i32, ptr %b, align 4, !dbg !41
+  call void @svf_print(i32 noundef %3, ptr noundef @.str.1), !dbg !42
+  %4 = load i32, ptr %b, align 4, !dbg !43
+  %cmp1 = icmp sgt i32 %4, 6, !dbg !44
+  call void @svf_assert(i1 noundef zeroext %cmp1), !dbg !45
+  br label %if.end, !dbg !46
 
 if.else:                                          ; preds = %entry
-  %4 = load i32, ptr %b, align 4, !dbg !41
-  %cmp2 = icmp sle i32 %4, 5, !dbg !43
-  call void @svf_assert(i1 noundef zeroext %cmp2), !dbg !44
+  %5 = load i32, ptr %a, align 4, !dbg !47
+  %6 = load i32, ptr %b, align 4, !dbg !49
+  %add2 = add nsw i32 %5, %6, !dbg !50
+  store i32 %add2, ptr %b, align 4, !dbg !51
+  %7 = load i32, ptr %b, align 4, !dbg !52
+  call void @svf_print(i32 noundef %7, ptr noundef @.str.2), !dbg !53
+  %8 = load i32, ptr %b, align 4, !dbg !54
+  %cmp3 = icmp sle i32 %8, 6, !dbg !55
+  call void @svf_assert(i1 noundef zeroext %cmp3), !dbg !56
   br label %if.end
 
 if.end:                                           ; preds = %if.else, %if.then
-  %5 = load i32, ptr %retval, align 4, !dbg !45
-  ret i32 %5, !dbg !45
+  %9 = load i32, ptr %retval, align 4, !dbg !57
+  ret i32 %9, !dbg !57
 }
 
 ; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
@@ -46,59 +56,73 @@ declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
 
 declare i32 @scanf(ptr noundef, ...) #2
 
+declare void @svf_print(i32 noundef, ptr noundef) #2
+
 declare void @svf_assert(i1 noundef zeroext) #2
 
 attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
 attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 
-!llvm.dbg.cu = !{!7}
-!llvm.module.flags = !{!10, !11, !12, !13, !14, !15, !16}
-!llvm.ident = !{!17}
+!llvm.dbg.cu = !{!11}
+!llvm.module.flags = !{!14, !15, !16, !17, !18, !19, !20}
+!llvm.ident = !{!21}
 
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
-!1 = distinct !DIGlobalVariable(scope: null, file: !2, line: 8, type: !3, isLocal: true, isDefinition: true)
-!2 = !DIFile(filename: "src/ae_assert_tests/INTERVAL_test_2-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "3666d51fed64fda896b8ff2b993919c8")
+!1 = distinct !DIGlobalVariable(scope: null, file: !2, line: 9, type: !3, isLocal: true, isDefinition: true)
+!2 = !DIFile(filename: "src/ae_assert_tests/INTERVAL_test_2-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "fb4ded21f5bf3cb3e533415eaf559a1b")
 !3 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 24, elements: !5)
 !4 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
 !5 = !{!6}
 !6 = !DISubrange(count: 3)
-!7 = distinct !DICompileUnit(language: DW_LANG_C11, file: !8, producer: "clang version 16.0.0", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !9, splitDebugInlining: false, nameTableKind: None)
-!8 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/INTERVAL_test_2-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "3666d51fed64fda896b8ff2b993919c8")
-!9 = !{!0}
-!10 = !{i32 7, !"Dwarf Version", i32 5}
-!11 = !{i32 2, !"Debug Info Version", i32 3}
-!12 = !{i32 1, !"wchar_size", i32 4}
-!13 = !{i32 8, !"PIC Level", i32 2}
-!14 = !{i32 7, !"PIE Level", i32 2}
-!15 = !{i32 7, !"uwtable", i32 2}
-!16 = !{i32 7, !"frame-pointer", i32 2}
-!17 = !{!"clang version 16.0.0"}
-!18 = distinct !DISubprogram(name: "main", scope: !2, file: !2, line: 4, type: !19, scopeLine: 4, spFlags: DISPFlagDefinition, unit: !7, retainedNodes: !22)
-!19 = !DISubroutineType(types: !20)
-!20 = !{!21}
-!21 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
-!22 = !{}
-!23 = !DILocalVariable(name: "a", scope: !18, file: !2, line: 6, type: !21)
-!24 = !DILocation(line: 6, column: 9, scope: !18)
-!25 = !DILocalVariable(name: "b", scope: !18, file: !2, line: 7, type: !21)
-!26 = !DILocation(line: 7, column: 9, scope: !18)
-!27 = !DILocation(line: 8, column: 5, scope: !18)
-!28 = !DILocation(line: 9, column: 9, scope: !18)
-!29 = !DILocation(line: 9, column: 13, scope: !18)
-!30 = !DILocation(line: 9, column: 11, scope: !18)
-!31 = !DILocation(line: 9, column: 7, scope: !18)
+!7 = !DIGlobalVariableExpression(var: !8, expr: !DIExpression())
+!8 = distinct !DIGlobalVariable(scope: null, file: !2, line: 12, type: !3, isLocal: true, isDefinition: true)
+!9 = !DIGlobalVariableExpression(var: !10, expr: !DIExpression())
+!10 = distinct !DIGlobalVariable(scope: null, file: !2, line: 17, type: !3, isLocal: true, isDefinition: true)
+!11 = distinct !DICompileUnit(language: DW_LANG_C11, file: !12, producer: "clang version 16.0.0", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !13, splitDebugInlining: false, nameTableKind: None)
+!12 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/INTERVAL_test_2-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "fb4ded21f5bf3cb3e533415eaf559a1b")
+!13 = !{!0, !7, !9}
+!14 = !{i32 7, !"Dwarf Version", i32 5}
+!15 = !{i32 2, !"Debug Info Version", i32 3}
+!16 = !{i32 1, !"wchar_size", i32 4}
+!17 = !{i32 8, !"PIC Level", i32 2}
+!18 = !{i32 7, !"PIE Level", i32 2}
+!19 = !{i32 7, !"uwtable", i32 2}
+!20 = !{i32 7, !"frame-pointer", i32 2}
+!21 = !{!"clang version 16.0.0"}
+!22 = distinct !DISubprogram(name: "main", scope: !2, file: !2, line: 5, type: !23, scopeLine: 5, spFlags: DISPFlagDefinition, unit: !11, retainedNodes: !26)
+!23 = !DISubroutineType(types: !24)
+!24 = !{!25}
+!25 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+!26 = !{}
+!27 = !DILocalVariable(name: "a", scope: !22, file: !2, line: 7, type: !25)
+!28 = !DILocation(line: 7, column: 9, scope: !22)
+!29 = !DILocalVariable(name: "b", scope: !22, file: !2, line: 8, type: !25)
+!30 = !DILocation(line: 8, column: 9, scope: !22)
+!31 = !DILocation(line: 9, column: 5, scope: !22)
 !32 = !DILocation(line: 10, column: 9, scope: !33)
-!33 = distinct !DILexicalBlock(scope: !18, file: !2, line: 10, column: 9)
+!33 = distinct !DILexicalBlock(scope: !22, file: !2, line: 10, column: 9)
 !34 = !DILocation(line: 10, column: 11, scope: !33)
-!35 = !DILocation(line: 10, column: 9, scope: !18)
-!36 = !DILocation(line: 11, column: 20, scope: !37)
+!35 = !DILocation(line: 10, column: 9, scope: !22)
+!36 = !DILocation(line: 11, column: 13, scope: !37)
 !37 = distinct !DILexicalBlock(scope: !33, file: !2, line: 10, column: 16)
-!38 = !DILocation(line: 11, column: 22, scope: !37)
-!39 = !DILocation(line: 11, column: 9, scope: !37)
-!40 = !DILocation(line: 12, column: 5, scope: !37)
-!41 = !DILocation(line: 14, column: 20, scope: !42)
-!42 = distinct !DILexicalBlock(scope: !33, file: !2, line: 13, column: 10)
-!43 = !DILocation(line: 14, column: 22, scope: !42)
-!44 = !DILocation(line: 14, column: 9, scope: !42)
-!45 = !DILocation(line: 16, column: 1, scope: !18)
+!38 = !DILocation(line: 11, column: 17, scope: !37)
+!39 = !DILocation(line: 11, column: 15, scope: !37)
+!40 = !DILocation(line: 11, column: 11, scope: !37)
+!41 = !DILocation(line: 12, column: 19, scope: !37)
+!42 = !DILocation(line: 12, column: 9, scope: !37)
+!43 = !DILocation(line: 13, column: 20, scope: !37)
+!44 = !DILocation(line: 13, column: 22, scope: !37)
+!45 = !DILocation(line: 13, column: 9, scope: !37)
+!46 = !DILocation(line: 14, column: 5, scope: !37)
+!47 = !DILocation(line: 16, column: 13, scope: !48)
+!48 = distinct !DILexicalBlock(scope: !33, file: !2, line: 15, column: 10)
+!49 = !DILocation(line: 16, column: 17, scope: !48)
+!50 = !DILocation(line: 16, column: 15, scope: !48)
+!51 = !DILocation(line: 16, column: 11, scope: !48)
+!52 = !DILocation(line: 17, column: 19, scope: !48)
+!53 = !DILocation(line: 17, column: 9, scope: !48)
+!54 = !DILocation(line: 18, column: 20, scope: !48)
+!55 = !DILocation(line: 18, column: 22, scope: !48)
+!56 = !DILocation(line: 18, column: 9, scope: !48)
+!57 = !DILocation(line: 20, column: 1, scope: !22)
