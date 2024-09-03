@@ -1,5 +1,6 @@
 #include "stdbool.h"
 extern void svf_assert(bool);
+extern void svf_print(int, char*);
 #include <stdlib.h>
 #include <stdbool.h>
 #include <assert.h>

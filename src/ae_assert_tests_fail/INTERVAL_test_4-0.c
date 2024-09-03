@@ -8,6 +8,7 @@ int main() {
     int b = rand() % 5; //[0, 4]
     int c = a * b;
     if (c == 16) { //a = [6, INF]
+        svf_print();
         svf_assert(a == 4 && b == 4);
     }
     else {

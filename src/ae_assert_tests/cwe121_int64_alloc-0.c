@@ -5,8 +5,8 @@
 extern void svf_assert(bool);
 
 int main() {
-    int64_t * data;
-    int64_t * dataBadBuffer = (int64_t *)ALLOCA((4)*sizeof(int64_t));
+    int * data;
+    int * dataBadBuffer = (int *)ALLOCA((4)*sizeof(int));
     /* FLAW: Set a pointer to a buffer that does not leave room for a NULL terminator when performing
      * string copies in the sinks  */
     data = dataBadBuffer;
