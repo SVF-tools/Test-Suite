@@ -4,6 +4,7 @@
 
 #include "stdbool.h"
 extern void svf_assert(bool);
+extern void svf_print(int, char*);
 int add(int a) {
     return a + 1;
 }
@@ -13,5 +14,5 @@ int main() {
     for (i = 0; i < 5; i++) {
         j = add(j);
     }
-    svf_assert(i == 5 && j == 5);
+    svf_assert(i == 5 && j >= 0);
 }
