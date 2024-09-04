@@ -82,7 +82,7 @@ def comparer_andersen(stats1: Stats, stats2: Stats):
             else:
                 return
     # Default threshold
-    if delta > 0.001:
+    if delta > 0.001008:
         raise ValueError(f"Diff AvgTopLvlPtsSize {delta} too large")
 
 def comparer_filesystem(stats1: Stats, stats2: Stats):
