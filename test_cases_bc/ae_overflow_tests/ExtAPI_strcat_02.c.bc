@@ -1,0 +1,167 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/ae_overflow_tests/ExtAPI_strcat_02.c.bc'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/ae_overflow_tests/ExtAPI_strcat_02.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+@.str = private unnamed_addr constant [6 x i8] c"Hello\00", align 1, !dbg !0
+@.str.1 = private unnamed_addr constant [6 x i8] c"World\00", align 1, !dbg !7
+@.str.2 = private unnamed_addr constant [5 x i8] c"This\00", align 1, !dbg !9
+@.str.3 = private unnamed_addr constant [3 x i8] c"Is\00", align 1, !dbg !14
+@.str.4 = private unnamed_addr constant [4 x i8] c"Too\00", align 1, !dbg !19
+@.str.5 = private unnamed_addr constant [5 x i8] c"Long\00", align 1, !dbg !24
+@__const.main.strings = private unnamed_addr constant [6 x ptr] [ptr @.str, ptr @.str.1, ptr @.str.2, ptr @.str.3, ptr @.str.4, ptr @.str.5], align 16
+@.str.6 = private unnamed_addr constant [12 x i8] c"Buffer: %s\0A\00", align 1, !dbg !26
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main() #0 !dbg !42 {
+entry:
+  %retval = alloca i32, align 4
+  %buffer = alloca [20 x i8], align 16
+  %strings = alloca [6 x ptr], align 16
+  %i = alloca i32, align 4
+  store i32 0, ptr %retval, align 4
+  call void @llvm.dbg.declare(metadata ptr %buffer, metadata !47, metadata !DIExpression()), !dbg !51
+  call void @llvm.memset.p0.i64(ptr align 16 %buffer, i8 0, i64 20, i1 false), !dbg !51
+  call void @llvm.dbg.declare(metadata ptr %strings, metadata !52, metadata !DIExpression()), !dbg !55
+  call void @llvm.memcpy.p0.p0.i64(ptr align 16 %strings, ptr align 16 @__const.main.strings, i64 48, i1 false), !dbg !55
+  call void @llvm.dbg.declare(metadata ptr %i, metadata !56, metadata !DIExpression()), !dbg !57
+  store i32 0, ptr %i, align 4, !dbg !58
+  br label %for.cond, !dbg !60
+
+for.cond:                                         ; preds = %for.inc, %entry
+  %0 = load i32, ptr %i, align 4, !dbg !61
+  %cmp = icmp slt i32 %0, 6, !dbg !63
+  br i1 %cmp, label %for.body, label %for.end, !dbg !64
+
+for.body:                                         ; preds = %for.cond
+  %arraydecay = getelementptr inbounds [20 x i8], ptr %buffer, i64 0, i64 0, !dbg !65
+  %1 = load i32, ptr %i, align 4, !dbg !67
+  %idxprom = sext i32 %1 to i64, !dbg !68
+  %arrayidx = getelementptr inbounds [6 x ptr], ptr %strings, i64 0, i64 %idxprom, !dbg !68
+  %2 = load ptr, ptr %arrayidx, align 8, !dbg !68
+  %call = call ptr @strcat(ptr noundef %arraydecay, ptr noundef %2) #6, !dbg !69
+  br label %for.inc, !dbg !70
+
+for.inc:                                          ; preds = %for.body
+  %3 = load i32, ptr %i, align 4, !dbg !71
+  %inc = add nsw i32 %3, 1, !dbg !71
+  store i32 %inc, ptr %i, align 4, !dbg !71
+  br label %for.cond, !dbg !72, !llvm.loop !73
+
+for.end:                                          ; preds = %for.cond
+  %arraydecay1 = getelementptr inbounds [20 x i8], ptr %buffer, i64 0, i64 0, !dbg !76
+  call void @UNSAFE_BUFACCESS(ptr noundef %arraydecay1, i32 noundef 23), !dbg !77
+  %arraydecay2 = getelementptr inbounds [20 x i8], ptr %buffer, i64 0, i64 0, !dbg !78
+  %call3 = call i32 (ptr, ...) @printf(ptr noundef @.str.6, ptr noundef %arraydecay2), !dbg !79
+  ret i32 0, !dbg !80
+}
+
+; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
+
+; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: write)
+declare void @llvm.memset.p0.i64(ptr nocapture writeonly, i8, i64, i1 immarg) #2
+
+; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: readwrite)
+declare void @llvm.memcpy.p0.p0.i64(ptr noalias nocapture writeonly, ptr noalias nocapture readonly, i64, i1 immarg) #3
+
+; Function Attrs: nounwind
+declare ptr @strcat(ptr noundef, ptr noundef) #4
+
+declare void @UNSAFE_BUFACCESS(ptr noundef, i32 noundef) #5
+
+declare i32 @printf(ptr noundef, ...) #5
+
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
+attributes #2 = { nocallback nofree nounwind willreturn memory(argmem: write) }
+attributes #3 = { nocallback nofree nounwind willreturn memory(argmem: readwrite) }
+attributes #4 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #5 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #6 = { nounwind }
+
+!llvm.dbg.cu = !{!31}
+!llvm.module.flags = !{!34, !35, !36, !37, !38, !39, !40}
+!llvm.ident = !{!41}
+
+!0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
+!1 = distinct !DIGlobalVariable(scope: null, file: !2, line: 6, type: !3, isLocal: true, isDefinition: true)
+!2 = !DIFile(filename: "src/ae_overflow_tests/ExtAPI_strcat_02.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "129a4513e6200aec4a4fee5116412a13")
+!3 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 48, elements: !5)
+!4 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
+!5 = !{!6}
+!6 = !DISubrange(count: 6)
+!7 = !DIGlobalVariableExpression(var: !8, expr: !DIExpression())
+!8 = distinct !DIGlobalVariable(scope: null, file: !2, line: 6, type: !3, isLocal: true, isDefinition: true)
+!9 = !DIGlobalVariableExpression(var: !10, expr: !DIExpression())
+!10 = distinct !DIGlobalVariable(scope: null, file: !2, line: 6, type: !11, isLocal: true, isDefinition: true)
+!11 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 40, elements: !12)
+!12 = !{!13}
+!13 = !DISubrange(count: 5)
+!14 = !DIGlobalVariableExpression(var: !15, expr: !DIExpression())
+!15 = distinct !DIGlobalVariable(scope: null, file: !2, line: 6, type: !16, isLocal: true, isDefinition: true)
+!16 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 24, elements: !17)
+!17 = !{!18}
+!18 = !DISubrange(count: 3)
+!19 = !DIGlobalVariableExpression(var: !20, expr: !DIExpression())
+!20 = distinct !DIGlobalVariable(scope: null, file: !2, line: 6, type: !21, isLocal: true, isDefinition: true)
+!21 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 32, elements: !22)
+!22 = !{!23}
+!23 = !DISubrange(count: 4)
+!24 = !DIGlobalVariableExpression(var: !25, expr: !DIExpression())
+!25 = distinct !DIGlobalVariable(scope: null, file: !2, line: 6, type: !11, isLocal: true, isDefinition: true)
+!26 = !DIGlobalVariableExpression(var: !27, expr: !DIExpression())
+!27 = distinct !DIGlobalVariable(scope: null, file: !2, line: 12, type: !28, isLocal: true, isDefinition: true)
+!28 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 96, elements: !29)
+!29 = !{!30}
+!30 = !DISubrange(count: 12)
+!31 = distinct !DICompileUnit(language: DW_LANG_C11, file: !32, producer: "clang version 16.0.0", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !33, splitDebugInlining: false, nameTableKind: None)
+!32 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_overflow_tests/ExtAPI_strcat_02.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "129a4513e6200aec4a4fee5116412a13")
+!33 = !{!0, !7, !9, !14, !19, !24, !26}
+!34 = !{i32 7, !"Dwarf Version", i32 5}
+!35 = !{i32 2, !"Debug Info Version", i32 3}
+!36 = !{i32 1, !"wchar_size", i32 4}
+!37 = !{i32 8, !"PIC Level", i32 2}
+!38 = !{i32 7, !"PIE Level", i32 2}
+!39 = !{i32 7, !"uwtable", i32 2}
+!40 = !{i32 7, !"frame-pointer", i32 2}
+!41 = !{!"clang version 16.0.0"}
+!42 = distinct !DISubprogram(name: "main", scope: !2, file: !2, line: 4, type: !43, scopeLine: 4, spFlags: DISPFlagDefinition, unit: !31, retainedNodes: !46)
+!43 = !DISubroutineType(types: !44)
+!44 = !{!45}
+!45 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+!46 = !{}
+!47 = !DILocalVariable(name: "buffer", scope: !42, file: !2, line: 5, type: !48)
+!48 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 160, elements: !49)
+!49 = !{!50}
+!50 = !DISubrange(count: 20)
+!51 = !DILocation(line: 5, column: 10, scope: !42)
+!52 = !DILocalVariable(name: "strings", scope: !42, file: !2, line: 6, type: !53)
+!53 = !DICompositeType(tag: DW_TAG_array_type, baseType: !54, size: 384, elements: !5)
+!54 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !4, size: 64)
+!55 = !DILocation(line: 6, column: 11, scope: !42)
+!56 = !DILocalVariable(name: "i", scope: !42, file: !2, line: 7, type: !45)
+!57 = !DILocation(line: 7, column: 9, scope: !42)
+!58 = !DILocation(line: 8, column: 12, scope: !59)
+!59 = distinct !DILexicalBlock(scope: !42, file: !2, line: 8, column: 5)
+!60 = !DILocation(line: 8, column: 10, scope: !59)
+!61 = !DILocation(line: 8, column: 17, scope: !62)
+!62 = distinct !DILexicalBlock(scope: !59, file: !2, line: 8, column: 5)
+!63 = !DILocation(line: 8, column: 19, scope: !62)
+!64 = !DILocation(line: 8, column: 5, scope: !59)
+!65 = !DILocation(line: 9, column: 16, scope: !66)
+!66 = distinct !DILexicalBlock(scope: !62, file: !2, line: 8, column: 29)
+!67 = !DILocation(line: 9, column: 32, scope: !66)
+!68 = !DILocation(line: 9, column: 24, scope: !66)
+!69 = !DILocation(line: 9, column: 9, scope: !66)
+!70 = !DILocation(line: 10, column: 5, scope: !66)
+!71 = !DILocation(line: 8, column: 25, scope: !62)
+!72 = !DILocation(line: 8, column: 5, scope: !62)
+!73 = distinct !{!73, !64, !74, !75}
+!74 = !DILocation(line: 10, column: 5, scope: !59)
+!75 = !{!"llvm.loop.mustprogress"}
+!76 = !DILocation(line: 11, column: 22, scope: !42)
+!77 = !DILocation(line: 11, column: 5, scope: !42)
+!78 = !DILocation(line: 12, column: 28, scope: !42)
+!79 = !DILocation(line: 12, column: 5, scope: !42)
+!80 = !DILocation(line: 14, column: 5, scope: !42)
