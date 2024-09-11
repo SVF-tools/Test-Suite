@@ -6,12 +6,12 @@ int main() {
     int i = 0;
     while (i < 100) {
         if (i == 50) {
-            p = NULL; // <⊥, ⊥>
+            p = NULL;
         }
         else {
-            p = malloc(sizeof(int)); // <⊥, [0x7f...]>
+            p = malloc(sizeof(int));
         }
-        *p = 42; // <⊥, ⊥> join with <⊥, [0x7f...]> => <⊥, [0x7f...]> NOT NUll
+        *p = 42;
         i++;
     }
 
