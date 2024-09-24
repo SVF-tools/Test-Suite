@@ -8,7 +8,7 @@ struct Data {
 };
 
 int main() {
-    struct Data *dataPtr = NULL;
+    struct Data *dataPtr;
 
     UNSAFE_LOAD(&dataPtr->number);  // Accessing a member of the structure via NULL pointer
     UNSAFE_LOAD(&dataPtr->character);
