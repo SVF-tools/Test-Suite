@@ -334,7 +334,7 @@ file(GLOB ae_nullptr_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT
 foreach(filename ${ae_nullptr_files})
   add_test(
           NAME ae_nullptr/${filename}
-          COMMAND ae -nullptr_dereference ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ae -nullptr ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
