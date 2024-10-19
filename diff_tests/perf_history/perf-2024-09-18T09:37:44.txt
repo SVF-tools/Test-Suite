@@ -1,0 +1,1885 @@
+Start testing: Sep 18 09:36 UTC
+----------------------------------------------------------
+1153/1328 Testing: diff-perf-cruxbc-small/test_cases_bc/crux-bc/dc.bc
+1153/1328 Test: diff-perf-cruxbc-small/test_cases_bc/crux-bc/dc.bc
+Command: "/home/runner/work/SVF/SVF/Release-build/bin/wpa" "-vfspta" "-dump-vfg" "-dump-json=ir.json" "/home/runner/work/SVF/SVF/Test-Suite/test_cases_bc/crux-bc/dc.bc"
+Directory: /home/runner/work/SVF/SVF/Release-build/bin
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/dc.bc" start time: Sep 18 09:36 UTC
+Output:
+----------------------------------------------------------
+
+*********General Stats***************
+################ (program : dc.bc)###############
+AddrsNum            896
+BBWith2Succ         521
+BBWith3Succ         7
+CallsNum            863
+ConstArrayObj       1
+ConstStructObj      0
+ConstantObj         0
+CopysNum            329
+FIObjNum            8
+FSObjNum            743
+FunctionObjs        154
+GepsNum             977
+GlobalObjs          30
+HeapObjs            22
+IndCallSites        23
+LoadsNum            2667
+MaxStructSize       18
+NonPtrObj           470
+ReturnsNum          227
+StackObjs           544
+StoresNum           1209
+TotalCallSite       702
+TotalFieldObjects   112
+TotalObjects        752
+TotalPTASVFStmts    4523
+TotalPointers       9712
+TotalSVFStmts       9459
+VarArrayObj         6
+VarStructObj        57
+----------------Time and memory stats--------------------
+LLVMIRTime          0.031
+SVFIRTime           0.206
+SymbolTableTime     0.006
+#######################################################
+
+*********CallGraph Stats (Andersen analysis)***************
+################ (program : dc.bc)###############
+----------------Numbers stats----------------------------
+CalRetPairInCycle   5
+MaxNodeInCycle      2
+NodeInCycle         3
+TotalCycle          2
+TotalEdge           718
+TotalNode           154
+#######################################################
+
+*********Andersen Pointer Analysis Stats***************
+################ (program : dc.bc)###############
+----------------Time and memory stats--------------------
+AvgIn/OutAddrEdge   0.191
+AvgIn/OutCopyEdge   0.800818
+AvgIn/OutEdge       1.46689
+AvgIn/OutLoadEdge   0.359243
+AvgIn/OutStoreEdge  0.115827
+AvgPtsSetSize       0.945698
+AvgTopLvlPtsSize    2.57062
+CollapseTime        0
+CopyGepTime         0
+LoadStoreTime       0
+MemoryUsageVmrss    256
+MemoryUsageVmsize   0
+SCCDetectTime       0
+SCCMergeTime        0
+TotalTime           0.032
+UpdateCGTime        0
+----------------Numbers stats----------------------------
+AddrProcessed       828
+CopyProcessed       3860
+DummyFieldPtrs      28
+FieldObjs           112
+GepProcessed        1685
+IndCallSites        23
+IndEdgeSolved       35
+LoadProcessed       3427
+LocalVarInRecur     42
+MaxInAddrEdge       1
+MaxInCopyEdge       46
+MaxInLoadEdge       80
+MaxInStoreEdge      4
+MaxNodesInSCC       68
+MaxOutAddrEdge      78
+MaxOutCopyEdge      361
+MaxOutLoadEdge      55
+MaxOutStoreEdge     91
+MaxPtsSetSize       59
+MemObjects          752
+NodesInCycles       267
+NullPointer         13
+NumOfAddrs          747
+NumOfCGEdge         4990
+NumOfCGNode         4012
+NumOfCopys          2251
+NumOfFieldExpand    0
+NumOfGeps           881
+NumOfLoads          1405
+NumOfSCCDetect      5
+NumOfSFRs           0
+NumOfStores         453
+NumOfValidNode      3911
+NumOfValidObjNode   734
+Pointers            9684
+PointsToBlkPtr      0
+PointsToConstPtr    0
+SolveIterations     5
+StoreProcessed      1008
+TotalCycleNum       36
+TotalObjects        864
+TotalPWCCycleNum    1
+TotalPointers       9712
+#######################################################
+
+****Persistent Points-To Cache Statistics: Andersen's analysis bitvector****
+################ (program : dc.bc)###############
+UniquePointsToSets       1087
+TotalUnions              7700
+PropertyUnions           4211
+UniqueUnions             213
+LookupUnions             2865
+PreemptiveUnions         411
+TotalComplements         21184
+PropertyComplements      18573
+UniqueComplements        70
+LookupComplements        2471
+PreemptiveComplements    70
+TotalIntersections       3465
+PropertyIntersections    3325
+UniqueIntersections      0
+LookupIntersections      0
+PreemptiveIntersections  140
+#######################################################
+
+*********Memory SSA Statistics***************
+################ (program : dc.bc)###############
+----------------Time and memory stats--------------------
+AverageRegSize      1.62708
+GenMUCHITime        0.003
+GenRegionTime       0.017
+InsertPHITime       0
+SSARenameTime       0.003
+TotalMSSATime       0.023
+----------------Numbers stats----------------------------
+BBHasMSSAPhi        249
+CSChiNode           1010
+CSHasChi            390
+CSHasMu             489
+CSMuNode            1738
+FunEntryChi         749
+FunHasEntryChi      114
+FunHasRetMu         117
+FunRetMu            744
+LoadHasMu           1489
+LoadMuNode          1533
+MSSAPhi             962
+MaxRegSize          55
+MemRegions          421
+StoreChiNode        538
+StoreHasChi         519
+#######################################################
+
+*********SVFG Statistics***************
+################ (program : dc.bc)###############
+----------------Time and memory stats--------------------
+ATNodeTime          0.002
+AvgWeight           1.58216
+ConnDirEdgeTime     0
+ConnIndEdgeTime     0.007
+OptTime             0
+TLNodeTime          0
+TotalTime           0.009
+----------------Numbers stats----------------------------
+ActualIn            1738
+ActualOut           1010
+ActualParam         870
+ActualRet           84
+Addr                828
+AvgInDegree         1
+AvgIndInDeg         1
+AvgIndOutDeg        1
+AvgOutDegree        1
+Copy                26
+DirectCallEdge      567
+DirectEdge          5116
+DirectRetEdge       84
+FormalIn            749
+FormalOut           744
+FormalParam         146
+FormalRet           18
+Gep                 977
+IndCallEdge         1823
+IndRetEdge          1068
+IndirectEdge        9652
+IndirectEdgeLabels  15271
+Load                1489
+MSSAPhi             962
+MaxInDegree         64
+MaxIndInDeg         64
+MaxIndOutDeg        83
+MaxOutDegree        83
+PHI                 19
+Store               533
+TotalEdge           14768
+TotalNode           10194
+#######################################################
+Writing 'svfg_final.dot'...Writing 'fs_solved.dot'...
+*********CallGraph Stats (Flow-sensitive analysis)***************
+################ (program : dc.bc)###############
+----------------Numbers stats----------------------------
+CalRetPairInCycle   5
+FIObjNum            8
+FSObjNum            744
+MaxNodeInCycle      2
+NodeInCycle         3
+TotalCycle          2
+TotalEdge           718
+TotalNode           154
+#######################################################
+
+*********Versioned Flow-Sensitive Pointer Analysis Statistics***************
+################ (program : dc.bc)###############
+----------------Time and memory stats--------------------
+AddrTime            0
+AverageSCCSize      0
+AvgPtsSize          5.05956
+AvgTopLvlPtsSize    2.33343
+AvgVersionPtsSize   3.84196
+CopyTime            0
+DirectPropaTime     0
+GepTime             0
+IndirectPropaTime   0
+LoadTime            0
+MemoryUsageVmrss    1360
+MemoryUsageVmsize   81924
+PhiTime             0
+PrelabelingTime     0.001
+ProcessTime         0
+PropagationTime     0
+SCCTime             0
+SolveTime           0.021
+StoreTime           0
+Strong/WeakUpdTime  0
+TotalTime           0.079
+UpdateCGTime        0
+VersionPropTime     0
+meldLabelingTime    0.012
+----------------Numbers stats----------------------------
+CopysNum            26
+DummyFieldPtrs      28
+FieldObjs           115
+IndEdgeSolved       35
+LocalVarInRecur     42
+MaxPtsSize          59
+MaxSCCSize          1
+MaxTopLvlPtsSize    59
+MaxVersionPtsSize   59
+MaxVersionsForObj   0
+MemObjects          752
+NumOfNodesInSCC     0
+NumOfSCC            0
+Pointers            9684
+ProcessedAParam     0
+ProcessedAddr       1656
+ProcessedCopy       53
+ProcessedFRet       0
+ProcessedGep        3624
+ProcessedLoad       6551
+ProcessedMSSANode   10406
+ProcessedPhi        61
+ProcessedStore      2311
+SolveIterations     2
+StoresNum           533
+StrongUpdates       432
+TotalEmptyVPts      0
+TotalExistingVPts   3670
+TotalNonEmptyVPts   3670
+TotalObjects        867
+TotalPointers       9712
+TotalSingleVObjs    0
+TotalVersions       4882
+#######################################################
+
+****Persistent Points-To Cache Statistics: flow-sensitive analysis bitvector****
+################ (program : dc.bc)###############
+UniquePointsToSets       1044
+TotalUnions              33654
+PropertyUnions           24521
+UniqueUnions             332
+LookupUnions             8295
+PreemptiveUnions         506
+TotalComplements         0
+PropertyComplements      0
+UniqueComplements        0
+LookupComplements        0
+PreemptiveComplements    0
+TotalIntersections       0
+PropertyIntersections    0
+UniqueIntersections      0
+LookupIntersections      0
+PreemptiveIntersections  0
+#######################################################
+<end of output>
+Test time =   0.53 sec
+----------------------------------------------------------
+Test Passed.
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/dc.bc" end time: Sep 18 09:36 UTC
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/dc.bc" time elapsed: 00:00:00
+----------------------------------------------------------
+
+1154/1328 Testing: diff-perf-cruxbc-small/test_cases_bc/crux-bc/bc.bc
+1154/1328 Test: diff-perf-cruxbc-small/test_cases_bc/crux-bc/bc.bc
+Command: "/home/runner/work/SVF/SVF/Release-build/bin/wpa" "-vfspta" "-dump-vfg" "-dump-json=ir.json" "/home/runner/work/SVF/SVF/Test-Suite/test_cases_bc/crux-bc/bc.bc"
+Directory: /home/runner/work/SVF/SVF/Release-build/bin
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/bc.bc" start time: Sep 18 09:36 UTC
+Output:
+----------------------------------------------------------
+
+*********General Stats***************
+################ (program : bc.bc)###############
+AddrsNum            1354
+BBWith2Succ         827
+BBWith3Succ         23
+CallsNum            1180
+ConstArrayObj       2
+ConstStructObj      0
+ConstantObj         0
+CopysNum            754
+FIObjNum            23
+FSObjNum            852
+FunctionObjs        189
+GepsNum             1522
+GlobalObjs          90
+HeapObjs            30
+IndCallSites        21
+LoadsNum            4518
+MaxStructSize       12
+NonPtrObj           558
+ReturnsNum          325
+StackObjs           565
+StoresNum           1951
+TotalCallSite       1147
+TotalFieldObjects   27
+TotalObjects        876
+TotalPTASVFStmts    7046
+TotalPointers       15929
+TotalSVFStmts       15421
+VarArrayObj         12
+VarStructObj        16
+----------------Time and memory stats--------------------
+LLVMIRTime          0.048
+SVFIRTime           0.373
+SymbolTableTime     0.011
+#######################################################
+
+*********CallGraph Stats (Andersen analysis)***************
+################ (program : bc.bc)###############
+----------------Numbers stats----------------------------
+CalRetPairInCycle   11
+MaxNodeInCycle      1
+NodeInCycle         7
+TotalCycle          7
+TotalEdge           1163
+TotalNode           189
+#######################################################
+
+*********Andersen Pointer Analysis Stats***************
+################ (program : bc.bc)###############
+----------------Time and memory stats--------------------
+AvgIn/OutAddrEdge   0.19065
+AvgIn/OutCopyEdge   0.822732
+AvgIn/OutEdge       1.5398
+AvgIn/OutLoadEdge   0.408585
+AvgIn/OutStoreEdge  0.117831
+AvgPtsSetSize       2.92681
+AvgTopLvlPtsSize    8.35814
+CollapseTime        0
+CopyGepTime         0
+LoadStoreTime       0
+MemoryUsageVmrss    0
+MemoryUsageVmsize   0
+SCCDetectTime       0
+SCCMergeTime        0
+TotalTime           0.073
+UpdateCGTime        0
+----------------Numbers stats----------------------------
+AddrProcessed       1193
+CopyProcessed       8801
+DummyFieldPtrs      30
+FieldObjs           27
+GepProcessed        3314
+IndCallSites        21
+IndEdgeSolved       29
+LoadProcessed       14284
+LocalVarInRecur     44
+MaxInAddrEdge       1
+MaxInCopyEdge       63
+MaxInLoadEdge       119
+MaxInStoreEdge      47
+MaxNodesInSCC       45
+MaxOutAddrEdge      319
+MaxOutCopyEdge      716
+MaxOutLoadEdge      179
+MaxOutStoreEdge     138
+MaxPtsSetSize       50
+MemObjects          876
+NodesInCycles       335
+NullPointer         36
+NumOfAddrs          1097
+NumOfCGEdge         7763
+NumOfCGNode         5838
+NumOfCopys          3368
+NumOfFieldExpand    0
+NumOfGeps           1366
+NumOfLoads          2351
+NumOfSCCDetect      7
+NumOfSFRs           0
+NumOfStores         678
+NumOfValidNode      5754
+NumOfValidObjNode   788
+Pointers            15899
+PointsToBlkPtr      0
+PointsToConstPtr    76
+SolveIterations     7
+StoreProcessed      3816
+TotalCycleNum       48
+TotalObjects        903
+TotalPWCCycleNum    2
+TotalPointers       15929
+#######################################################
+
+****Persistent Points-To Cache Statistics: Andersen's analysis bitvector****
+################ (program : bc.bc)###############
+UniquePointsToSets       1378
+TotalUnions              17458
+PropertyUnions           7262
+UniqueUnions             331
+LookupUnions             9229
+PreemptiveUnions         636
+TotalComplements         45000
+PropertyComplements      36662
+UniqueComplements        246
+LookupComplements        7846
+PreemptiveComplements    246
+TotalIntersections       7625
+PropertyIntersections    6913
+UniqueIntersections      5
+LookupIntersections      214
+PreemptiveIntersections  493
+#######################################################
+
+*********Memory SSA Statistics***************
+################ (program : bc.bc)###############
+----------------Time and memory stats--------------------
+AverageRegSize      2.25882
+GenMUCHITime        0.004
+GenRegionTime       0.035
+InsertPHITime       0.002
+SSARenameTime       0.004
+TotalMSSATime       0.046
+----------------Numbers stats----------------------------
+BBHasMSSAPhi        388
+CSChiNode           1641
+CSHasChi            586
+CSHasMu             857
+CSMuNode            3270
+FunEntryChi         896
+FunHasEntryChi      134
+FunHasRetMu         145
+FunRetMu            894
+LoadHasMu           2516
+LoadMuNode          2809
+MSSAPhi             1410
+MaxRegSize          34
+MemRegions          425
+StoreChiNode        793
+StoreHasChi         738
+#######################################################
+
+*********SVFG Statistics***************
+################ (program : bc.bc)###############
+----------------Time and memory stats--------------------
+ATNodeTime          0.005
+AvgWeight           3.46879
+ConnDirEdgeTime     0
+ConnIndEdgeTime     0.012
+OptTime             0
+TLNodeTime          0
+TotalTime           0.017
+----------------Numbers stats----------------------------
+ActualIn            3270
+ActualOut           1641
+ActualParam         1109
+ActualRet           147
+Addr                1193
+AvgInDegree         1
+AvgIndInDeg         1
+AvgIndOutDeg        2
+AvgOutDegree        1
+Copy                5
+DirectCallEdge      796
+DirectEdge          7827
+DirectRetEdge       146
+FormalIn            896
+FormalOut           894
+FormalParam         120
+FormalRet           28
+Gep                 1522
+IndCallEdge         3490
+IndRetEdge          1831
+IndirectEdge        16483
+IndirectEdgeLabels  57176
+Load                2519
+MSSAPhi             1410
+MaxInDegree         330
+MaxIndInDeg         330
+MaxIndOutDeg        264
+MaxOutDegree        264
+PHI                 37
+Store               828
+TotalEdge           24310
+TotalNode           15620
+#######################################################
+Writing 'svfg_final.dot'...Writing 'fs_solved.dot'...
+*********CallGraph Stats (Flow-sensitive analysis)***************
+################ (program : bc.bc)###############
+----------------Numbers stats----------------------------
+CalRetPairInCycle   11
+FIObjNum            23
+FSObjNum            853
+MaxNodeInCycle      1
+NodeInCycle         7
+TotalCycle          7
+TotalEdge           1163
+TotalNode           189
+#######################################################
+
+*********Versioned Flow-Sensitive Pointer Analysis Statistics***************
+################ (program : bc.bc)###############
+----------------Time and memory stats--------------------
+AddrTime            0
+AverageSCCSize      0
+AvgPtsSize          17.0547
+AvgTopLvlPtsSize    6.2249
+AvgVersionPtsSize   11.3741
+CopyTime            0
+DirectPropaTime     0
+GepTime             0
+IndirectPropaTime   0
+LoadTime            0
+MemoryUsageVmrss    2676
+MemoryUsageVmsize   81924
+PhiTime             0
+PrelabelingTime     0
+ProcessTime         0
+PropagationTime     0
+SCCTime             0
+SolveTime           0.041
+StoreTime           0
+Strong/WeakUpdTime  0
+TotalTime           0.182
+UpdateCGTime        0
+VersionPropTime     0
+meldLabelingTime    0.037
+----------------Numbers stats----------------------------
+CopysNum            5
+DummyFieldPtrs      30
+FieldObjs           29
+IndEdgeSolved       29
+LocalVarInRecur     44
+MaxPtsSize          46
+MaxSCCSize          1
+MaxTopLvlPtsSize    46
+MaxVersionPtsSize   46
+MaxVersionsForObj   0
+MemObjects          876
+NumOfNodesInSCC     0
+NumOfSCC            0
+Pointers            15899
+ProcessedAParam     0
+ProcessedAddr       2386
+ProcessedCopy       17
+ProcessedFRet       0
+ProcessedGep        6411
+ProcessedLoad       12952
+ProcessedMSSANode   16222
+ProcessedPhi        130
+ProcessedStore      4233
+SolveIterations     2
+StoresNum           828
+StrongUpdates       579
+TotalEmptyVPts      0
+TotalExistingVPts   10479
+TotalNonEmptyVPts   10479
+TotalObjects        905
+TotalPointers       15929
+TotalSingleVObjs    0
+TotalVersions       13521
+#######################################################
+
+****Persistent Points-To Cache Statistics: flow-sensitive analysis bitvector****
+################ (program : bc.bc)###############
+UniquePointsToSets       1081
+TotalUnions              98341
+PropertyUnions           77285
+UniqueUnions             373
+LookupUnions             20123
+PreemptiveUnions         560
+TotalComplements         0
+PropertyComplements      0
+UniqueComplements        0
+LookupComplements        0
+PreemptiveComplements    0
+TotalIntersections       0
+PropertyIntersections    0
+UniqueIntersections      0
+LookupIntersections      0
+PreemptiveIntersections  0
+#######################################################
+<end of output>
+Test time =   1.04 sec
+----------------------------------------------------------
+Test Passed.
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/bc.bc" end time: Sep 18 09:36 UTC
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/bc.bc" time elapsed: 00:00:01
+----------------------------------------------------------
+
+1155/1328 Testing: diff-perf-cruxbc-small/test_cases_bc/crux-bc/libbz2.so.bc
+1155/1328 Test: diff-perf-cruxbc-small/test_cases_bc/crux-bc/libbz2.so.bc
+Command: "/home/runner/work/SVF/SVF/Release-build/bin/wpa" "-vfspta" "-dump-vfg" "-dump-json=ir.json" "/home/runner/work/SVF/SVF/Test-Suite/test_cases_bc/crux-bc/libbz2.so.bc"
+Directory: /home/runner/work/SVF/SVF/Release-build/bin
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/libbz2.so.bc" start time: Sep 18 09:36 UTC
+Output:
+----------------------------------------------------------
+
+*********General Stats***************
+################ (program : libbz2.so.bc)###############
+AddrsNum            869
+BBWith2Succ         990
+BBWith3Succ         4
+CallsNum            476
+ConstArrayObj       1
+ConstStructObj      0
+ConstantObj         0
+CopysNum            1812
+FIObjNum            9
+FSObjNum            648
+FunctionObjs        83
+GepsNum             4058
+GlobalObjs          7
+HeapObjs            6
+IndCallSites        20
+LoadsNum            8613
+MaxStructSize       64
+NonPtrObj           504
+ReturnsNum          57
+StackObjs           560
+StoresNum           2858
+TotalCallSite       277
+TotalFieldObjects   29
+TotalObjects        658
+TotalPTASVFStmts    9038
+TotalPointers       25045
+TotalSVFStmts       24212
+VarArrayObj         28
+VarStructObj        4
+----------------Time and memory stats--------------------
+LLVMIRTime          0.06
+SVFIRTime           0.577
+SymbolTableTime     0.013
+#######################################################
+
+*********CallGraph Stats (Andersen analysis)***************
+################ (program : libbz2.so.bc)###############
+----------------Numbers stats----------------------------
+CalRetPairInCycle   0
+MaxNodeInCycle      0
+NodeInCycle         0
+TotalCycle          0
+TotalEdge           277
+TotalNode           83
+#######################################################
+
+*********Andersen Pointer Analysis Stats***************
+################ (program : libbz2.so.bc)###############
+----------------Time and memory stats--------------------
+AvgIn/OutAddrEdge   0.0749836
+AvgIn/OutCopyEdge   0.88599
+AvgIn/OutEdge       1.40079
+AvgIn/OutLoadEdge   0.408902
+AvgIn/OutStoreEdge  0.0309143
+AvgPtsSetSize       2.43223
+AvgTopLvlPtsSize    7.20135
+CollapseTime        0
+CopyGepTime         0
+LoadStoreTime       0
+MemoryUsageVmrss    128
+MemoryUsageVmsize   0
+SCCDetectTime       0
+SCCMergeTime        0
+TotalTime           0.102
+UpdateCGTime        0
+----------------Numbers stats----------------------------
+AddrProcessed       699
+CopyProcessed       8724
+DummyFieldPtrs      4
+FieldObjs           29
+GepProcessed        7363
+IndCallSites        20
+IndEdgeSolved       20
+LoadProcessed       9129
+LocalVarInRecur     0
+MaxInAddrEdge       1
+MaxInCopyEdge       70
+MaxInLoadEdge       64
+MaxInStoreEdge      11
+MaxNodesInSCC       3
+MaxOutAddrEdge      43
+MaxOutCopyEdge      1533
+MaxOutLoadEdge      935
+MaxOutStoreEdge     63
+MaxPtsSetSize       9
+MemObjects          658
+NodesInCycles       9
+NullPointer         87
+NumOfAddrs          684
+NumOfCGEdge         12094
+NumOfCGNode         9175
+NumOfCopys          4104
+NumOfFieldExpand    0
+NumOfGeps           3978
+NumOfLoads          3730
+NumOfSCCDetect      7
+NumOfSFRs           0
+NumOfStores         282
+NumOfValidNode      9122
+NumOfValidObjNode   644
+Pointers            25041
+PointsToBlkPtr      0
+PointsToConstPtr    2
+SolveIterations     7
+StoreProcessed      1049
+TotalCycleNum       3
+TotalObjects        687
+TotalPWCCycleNum    0
+TotalPointers       25045
+#######################################################
+
+****Persistent Points-To Cache Statistics: Andersen's analysis bitvector****
+################ (program : libbz2.so.bc)###############
+UniquePointsToSets       828
+TotalUnions              17475
+PropertyUnions           10415
+UniqueUnions             48
+LookupUnions             6925
+PreemptiveUnions         87
+TotalComplements         65657
+PropertyComplements      58570
+UniqueComplements        124
+LookupComplements        6839
+PreemptiveComplements    124
+TotalIntersections       7164
+PropertyIntersections    6916
+UniqueIntersections      0
+LookupIntersections      0
+PreemptiveIntersections  248
+#######################################################
+
+*********Memory SSA Statistics***************
+################ (program : libbz2.so.bc)###############
+----------------Time and memory stats--------------------
+AverageRegSize      1.32022
+GenMUCHITime        0.003
+GenRegionTime       0.014
+InsertPHITime       0
+SSARenameTime       0.005
+TotalMSSATime       0.022
+----------------Numbers stats----------------------------
+BBHasMSSAPhi        157
+CSChiNode           65
+CSHasChi            42
+CSHasMu             170
+CSMuNode            224
+FunEntryChi         238
+FunHasEntryChi      62
+FunHasRetMu         64
+FunRetMu            237
+LoadHasMu           3740
+LoadMuNode          4180
+MSSAPhi             358
+MaxRegSize          9
+MemRegions          178
+StoreChiNode        337
+StoreHasChi         290
+#######################################################
+
+*********SVFG Statistics***************
+################ (program : libbz2.so.bc)###############
+----------------Time and memory stats--------------------
+ATNodeTime          0.001
+AvgWeight           2.37546
+ConnDirEdgeTime     0
+ConnIndEdgeTime     0.002
+OptTime             0
+TLNodeTime          0
+TotalTime           0.003
+----------------Numbers stats----------------------------
+ActualIn            224
+ActualOut           65
+ActualParam         345
+ActualRet           14
+Addr                699
+AvgInDegree         1
+AvgIndInDeg         1
+AvgIndOutDeg        5
+AvgOutDegree        1
+Copy                3
+DirectCallEdge      220
+DirectEdge          8996
+DirectRetEdge       6
+FormalIn            238
+FormalOut           237
+FormalParam         110
+FormalRet           9
+Gep                 4058
+IndCallEdge         225
+IndRetEdge          64
+IndirectEdge        5974
+IndirectEdgeLabels  14191
+Load                3740
+MSSAPhi             358
+MaxInDegree         70
+MaxIndInDeg         70
+MaxIndOutDeg        944
+MaxOutDegree        944
+PHI                 11
+Store               301
+TotalEdge           14970
+TotalNode           10413
+#######################################################
+Writing 'svfg_final.dot'...Writing 'fs_solved.dot'...
+*********CallGraph Stats (Flow-sensitive analysis)***************
+################ (program : libbz2.so.bc)###############
+----------------Numbers stats----------------------------
+CalRetPairInCycle   0
+FIObjNum            9
+FSObjNum            649
+MaxNodeInCycle      0
+NodeInCycle         0
+TotalCycle          0
+TotalEdge           277
+TotalNode           83
+#######################################################
+
+*********Versioned Flow-Sensitive Pointer Analysis Statistics***************
+################ (program : libbz2.so.bc)###############
+----------------Time and memory stats--------------------
+AddrTime            0
+AverageSCCSize      0
+AvgPtsSize          5.5279
+AvgTopLvlPtsSize    2.7565
+AvgVersionPtsSize   4.59595
+CopyTime            0
+DirectPropaTime     0
+GepTime             0
+IndirectPropaTime   0
+LoadTime            0
+MemoryUsageVmrss    1632
+MemoryUsageVmsize   81924
+PhiTime             0
+PrelabelingTime     0.001
+ProcessTime         0
+PropagationTime     0
+SCCTime             0
+SolveTime           0.033
+StoreTime           0
+Strong/WeakUpdTime  0
+TotalTime           0.386
+UpdateCGTime        0
+VersionPropTime     0
+meldLabelingTime    0.007
+----------------Numbers stats----------------------------
+CopysNum            3
+DummyFieldPtrs      4
+FieldObjs           29
+IndEdgeSolved       20
+LocalVarInRecur     0
+MaxPtsSize          9
+MaxSCCSize          1
+MaxTopLvlPtsSize    7
+MaxVersionPtsSize   9
+MaxVersionsForObj   0
+MemObjects          658
+NumOfNodesInSCC     0
+NumOfSCC            0
+Pointers            25041
+ProcessedAParam     0
+ProcessedAddr       2097
+ProcessedCopy       9
+ProcessedFRet       0
+ProcessedGep        19078
+ProcessedLoad       21433
+ProcessedMSSANode   3366
+ProcessedPhi        36
+ProcessedStore      1847
+SolveIterations     3
+StoresNum           301
+StrongUpdates       181
+TotalEmptyVPts      0
+TotalExistingVPts   6514
+TotalNonEmptyVPts   6514
+TotalObjects        687
+TotalPointers       25045
+TotalSingleVObjs    0
+TotalVersions       8563
+#######################################################
+
+****Persistent Points-To Cache Statistics: flow-sensitive analysis bitvector****
+################ (program : libbz2.so.bc)###############
+UniquePointsToSets       708
+TotalUnions              72582
+PropertyUnions           59285
+UniqueUnions             39
+LookupUnions             13192
+PreemptiveUnions         66
+TotalComplements         0
+PropertyComplements      0
+UniqueComplements        0
+LookupComplements        0
+PreemptiveComplements    0
+TotalIntersections       0
+PropertyIntersections    0
+UniqueIntersections      0
+LookupIntersections      0
+PreemptiveIntersections  0
+#######################################################
+<end of output>
+Test time =   1.64 sec
+----------------------------------------------------------
+Test Passed.
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/libbz2.so.bc" end time: Sep 18 09:36 UTC
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/libbz2.so.bc" time elapsed: 00:00:01
+----------------------------------------------------------
+
+1156/1328 Testing: diff-perf-cruxbc-small/test_cases_bc/crux-bc/bunzip2.bc
+1156/1328 Test: diff-perf-cruxbc-small/test_cases_bc/crux-bc/bunzip2.bc
+Command: "/home/runner/work/SVF/SVF/Release-build/bin/wpa" "-vfspta" "-dump-vfg" "-dump-json=ir.json" "/home/runner/work/SVF/SVF/Test-Suite/test_cases_bc/crux-bc/bunzip2.bc"
+Directory: /home/runner/work/SVF/SVF/Release-build/bin
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/bunzip2.bc" start time: Sep 18 09:36 UTC
+Output:
+----------------------------------------------------------
+
+*********General Stats***************
+################ (program : bunzip2.bc)###############
+AddrsNum            1273
+BBWith2Succ         1275
+BBWith3Succ         14
+CallsNum            718
+ConstArrayObj       3
+ConstStructObj      0
+ConstantObj         0
+CopysNum            1913
+FIObjNum            22
+FSObjNum            918
+FunctionObjs        150
+GepsNum             4218
+GlobalObjs          32
+HeapObjs            31
+IndCallSites        20
+LoadsNum            9449
+MaxStructSize       64
+NonPtrObj           718
+ReturnsNum          115
+StackObjs           726
+StoresNum           3219
+TotalCallSite       703
+TotalFieldObjects   51
+TotalObjects        941
+TotalPTASVFStmts    10430
+TotalPointers       28663
+TotalSVFStmts       27443
+VarArrayObj         40
+VarStructObj        16
+----------------Time and memory stats--------------------
+LLVMIRTime          0.071
+SVFIRTime           0.647
+SymbolTableTime     0.016
+#######################################################
+
+*********CallGraph Stats (Andersen analysis)***************
+################ (program : bunzip2.bc)###############
+----------------Numbers stats----------------------------
+CalRetPairInCycle   1
+MaxNodeInCycle      1
+NodeInCycle         1
+TotalCycle          1
+TotalEdge           703
+TotalNode           150
+#######################################################
+
+*********Andersen Pointer Analysis Stats***************
+################ (program : bunzip2.bc)###############
+----------------Time and memory stats--------------------
+AvgIn/OutAddrEdge   0.100951
+AvgIn/OutCopyEdge   0.858801
+AvgIn/OutEdge       1.39962
+AvgIn/OutLoadEdge   0.401713
+AvgIn/OutStoreEdge  0.0381541
+AvgPtsSetSize       3.78461
+AvgTopLvlPtsSize    11.4205
+CollapseTime        0
+CopyGepTime         0
+LoadStoreTime       0
+MemoryUsageVmrss    128
+MemoryUsageVmsize   0
+SCCDetectTime       0
+SCCMergeTime        0
+TotalTime           0.143
+UpdateCGTime        0
+----------------Numbers stats----------------------------
+AddrProcessed       1087
+CopyProcessed       11237
+DummyFieldPtrs      12
+FieldObjs           51
+GepProcessed        9174
+IndCallSites        20
+IndEdgeSolved       20
+LoadProcessed       23749
+LocalVarInRecur     5
+MaxInAddrEdge       1
+MaxInCopyEdge       70
+MaxInLoadEdge       64
+MaxInStoreEdge      14
+MaxNodesInSCC       5
+MaxOutAddrEdge      148
+MaxOutCopyEdge      1548
+MaxOutLoadEdge      935
+MaxOutStoreEdge     63
+MaxPtsSetSize       16
+MemObjects          941
+NodesInCycles       20
+NullPointer         9
+NumOfAddrs          1061
+NumOfCGEdge         13649
+NumOfCGNode         10611
+NumOfCopys          4891
+NumOfFieldExpand    0
+NumOfGeps           4135
+NumOfLoads          4222
+NumOfSCCDetect      7
+NumOfSFRs           0
+NumOfStores         401
+NumOfValidNode      10510
+NumOfValidObjNode   923
+Pointers            28651
+PointsToBlkPtr      0
+PointsToConstPtr    6
+SolveIterations     7
+StoreProcessed      2286
+TotalCycleNum       6
+TotalObjects        992
+TotalPWCCycleNum    1
+TotalPointers       28663
+#######################################################
+
+****Persistent Points-To Cache Statistics: Andersen's analysis bitvector****
+################ (program : bunzip2.bc)###############
+UniquePointsToSets       1199
+TotalUnions              22686
+PropertyUnions           12276
+UniqueUnions             101
+LookupUnions             10124
+PreemptiveUnions         185
+TotalComplements         76089
+PropertyComplements      65548
+UniqueComplements        167
+LookupComplements        10207
+PreemptiveComplements    167
+TotalIntersections       11888
+PropertyIntersections    11554
+UniqueIntersections      0
+LookupIntersections      0
+PreemptiveIntersections  334
+#######################################################
+
+*********Memory SSA Statistics***************
+################ (program : bunzip2.bc)###############
+----------------Time and memory stats--------------------
+AverageRegSize      1.66779
+GenMUCHITime        0.005
+GenRegionTime       0.023
+InsertPHITime       0
+SSARenameTime       0.006
+TotalMSSATime       0.034
+----------------Numbers stats----------------------------
+BBHasMSSAPhi        235
+CSChiNode           246
+CSHasChi            143
+CSHasMu             331
+CSMuNode            662
+FunEntryChi         474
+FunHasEntryChi      107
+FunHasRetMu         101
+FunRetMu            447
+LoadHasMu           4233
+LoadMuNode          4686
+MSSAPhi             663
+MaxRegSize          16
+MemRegions          298
+StoreChiNode        463
+StoreHasChi         410
+#######################################################
+
+*********SVFG Statistics***************
+################ (program : bunzip2.bc)###############
+----------------Time and memory stats--------------------
+ATNodeTime          0.001
+AvgWeight           3.18455
+ConnDirEdgeTime     0
+ConnIndEdgeTime     0.005
+OptTime             0
+TLNodeTime          0
+TotalTime           0.006
+----------------Numbers stats----------------------------
+ActualIn            662
+ActualOut           246
+ActualParam         965
+ActualRet           45
+Addr                1087
+AvgInDegree         1
+AvgIndInDeg         1
+AvgIndOutDeg        3
+AvgOutDegree        1
+Copy                8
+DirectCallEdge      399
+DirectEdge          10756
+DirectRetEdge       37
+FormalIn            474
+FormalOut           447
+FormalParam         151
+FormalRet           15
+Gep                 4218
+IndCallEdge         681
+IndRetEdge          250
+IndirectEdge        8621
+IndirectEdgeLabels  27454
+Load                4233
+MSSAPhi             663
+MaxInDegree         70
+MaxIndInDeg         70
+MaxIndOutDeg        944
+MaxOutDegree        944
+PHI                 19
+Store               429
+TotalEdge           19377
+TotalNode           13663
+#######################################################
+Writing 'svfg_final.dot'...Writing 'fs_solved.dot'...
+*********CallGraph Stats (Flow-sensitive analysis)***************
+################ (program : bunzip2.bc)###############
+----------------Numbers stats----------------------------
+CalRetPairInCycle   1
+FIObjNum            22
+FSObjNum            919
+MaxNodeInCycle      1
+NodeInCycle         1
+TotalCycle          1
+TotalEdge           703
+TotalNode           150
+#######################################################
+
+*********Versioned Flow-Sensitive Pointer Analysis Statistics***************
+################ (program : bunzip2.bc)###############
+----------------Time and memory stats--------------------
+AddrTime            0
+AverageSCCSize      0
+AvgPtsSize          14.0751
+AvgTopLvlPtsSize    7.45619
+AvgVersionPtsSize   9.85726
+CopyTime            0
+DirectPropaTime     0
+GepTime             0
+IndirectPropaTime   0
+LoadTime            0
+MemoryUsageVmrss    2440
+MemoryUsageVmsize   81924
+PhiTime             0
+PrelabelingTime     0.001
+ProcessTime         0
+PropagationTime     0
+SCCTime             0
+SolveTime           0.057
+StoreTime           0
+Strong/WeakUpdTime  0
+TotalTime           0.456
+UpdateCGTime        0
+VersionPropTime     0
+meldLabelingTime    0.016
+----------------Numbers stats----------------------------
+CopysNum            8
+DummyFieldPtrs      12
+FieldObjs           51
+IndEdgeSolved       20
+LocalVarInRecur     5
+MaxPtsSize          16
+MaxSCCSize          1
+MaxTopLvlPtsSize    15
+MaxVersionPtsSize   16
+MaxVersionsForObj   0
+MemObjects          941
+NumOfNodesInSCC     0
+NumOfSCC            0
+Pointers            28651
+ProcessedAParam     0
+ProcessedAddr       2174
+ProcessedCopy       19
+ProcessedFRet       0
+ProcessedGep        20324
+ProcessedLoad       25529
+ProcessedMSSANode   4984
+ProcessedPhi        43
+ProcessedStore      2225
+SolveIterations     2
+StoresNum           429
+StrongUpdates       287
+TotalEmptyVPts      0
+TotalExistingVPts   11426
+TotalNonEmptyVPts   11426
+TotalObjects        992
+TotalPointers       28663
+TotalSingleVObjs    0
+TotalVersions       14394
+#######################################################
+
+****Persistent Points-To Cache Statistics: flow-sensitive analysis bitvector****
+################ (program : bunzip2.bc)###############
+UniquePointsToSets       1066
+TotalUnions              174307
+PropertyUnions           145584
+UniqueUnions             154
+LookupUnions             28331
+PreemptiveUnions         238
+TotalComplements         0
+PropertyComplements      0
+UniqueComplements        0
+LookupComplements        0
+PreemptiveComplements    0
+TotalIntersections       0
+PropertyIntersections    0
+UniqueIntersections      0
+LookupIntersections      0
+PreemptiveIntersections  0
+#######################################################
+<end of output>
+Test time =   1.93 sec
+----------------------------------------------------------
+Test Passed.
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/bunzip2.bc" end time: Sep 18 09:36 UTC
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/bunzip2.bc" time elapsed: 00:00:01
+----------------------------------------------------------
+
+1157/1328 Testing: diff-perf-cruxbc-small/test_cases_bc/crux-bc/htop.bc
+1157/1328 Test: diff-perf-cruxbc-small/test_cases_bc/crux-bc/htop.bc
+Command: "/home/runner/work/SVF/SVF/Release-build/bin/wpa" "-vfspta" "-dump-vfg" "-dump-json=ir.json" "/home/runner/work/SVF/SVF/Test-Suite/test_cases_bc/crux-bc/htop.bc"
+Directory: /home/runner/work/SVF/SVF/Release-build/bin
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/htop.bc" start time: Sep 18 09:36 UTC
+Output:
+----------------------------------------------------------
+vcall gep idx not constantint
+
+*********General Stats***************
+################ (program : htop.bc)###############
+AddrsNum            4614
+BBWith2Succ         1519
+BBWith3Succ         26
+CallsNum            2676
+ConstArrayObj       40
+ConstStructObj      51
+ConstantObj         0
+CopysNum            1452
+FIObjNum            251
+FSObjNum            2791
+FunctionObjs        550
+GepsNum             5199
+GlobalObjs          151
+HeapObjs            62
+IndCallSites        46
+LoadsNum            10440
+MaxStructSize       65
+NonPtrObj           1971
+ReturnsNum          609
+StackObjs           2278
+StoresNum           5154
+TotalCallSite       2502
+TotalFieldObjects   157
+TotalObjects        3043
+TotalPTASVFStmts    20164
+TotalPointers       37161
+TotalSVFStmts       37169
+VarArrayObj         92
+VarStructObj        54
+----------------Time and memory stats--------------------
+LLVMIRTime          0.098
+SVFIRTime           0.875
+SymbolTableTime     0.028
+#######################################################
+
+*********CallGraph Stats (Andersen analysis)***************
+################ (program : htop.bc)###############
+----------------Numbers stats----------------------------
+CalRetPairInCycle   979
+MaxNodeInCycle      125
+NodeInCycle         126
+TotalCycle          2
+TotalEdge           3881
+TotalNode           550
+#######################################################
+
+*********Andersen Pointer Analysis Stats***************
+################ (program : htop.bc)###############
+----------------Time and memory stats--------------------
+AvgIn/OutAddrEdge   0.199086
+AvgIn/OutCopyEdge   0.820665
+AvgIn/OutEdge       1.47375
+AvgIn/OutLoadEdge   0.320366
+AvgIn/OutStoreEdge  0.133631
+AvgPtsSetSize       39.0117
+AvgTopLvlPtsSize    87.9575
+CollapseTime        0
+CopyGepTime         0
+LoadStoreTime       0
+MemoryUsageVmrss    256
+MemoryUsageVmsize   0
+SCCDetectTime       0
+SCCMergeTime        0
+TotalTime           1.059
+UpdateCGTime        0
+----------------Numbers stats----------------------------
+AddrProcessed       4049
+CopyProcessed       29287
+DummyFieldPtrs      123
+FieldObjs           157
+GepProcessed        9613
+IndCallSites        46
+IndEdgeSolved       1423
+LoadProcessed       387409
+LocalVarInRecur     100
+MaxInAddrEdge       1
+MaxInCopyEdge       462
+MaxInLoadEdge       287
+MaxInStoreEdge      69
+MaxNodesInSCC       173
+MaxOutAddrEdge      1008
+MaxOutCopyEdge      1457
+MaxOutLoadEdge      352
+MaxOutStoreEdge     235
+MaxPtsSetSize       222
+MemObjects          3043
+NodesInCycles       244
+NullPointer         152
+NumOfAddrs          3659
+NumOfCGEdge         23427
+NumOfCGNode         18622
+NumOfCopys          9985
+NumOfFieldExpand    0
+NumOfGeps           5098
+NumOfLoads          5888
+NumOfSCCDetect      14
+NumOfSFRs           0
+NumOfStores         2456
+NumOfValidNode      18379
+NumOfValidObjNode   2716
+Pointers            37038
+PointsToBlkPtr      0
+PointsToConstPtr    2402
+SolveIterations     14
+StoreProcessed      57447
+TotalCycleNum       22
+TotalObjects        3200
+TotalPWCCycleNum    8
+TotalPointers       37161
+#######################################################
+
+****Persistent Points-To Cache Statistics: Andersen's analysis bitvector****
+################ (program : htop.bc)###############
+UniquePointsToSets       6125
+TotalUnions              55511
+PropertyUnions           31689
+UniqueUnions             1630
+LookupUnions             19137
+PreemptiveUnions         3055
+TotalComplements         276266
+PropertyComplements      257020
+UniqueComplements        1635
+LookupComplements        15976
+PreemptiveComplements    1635
+TotalIntersections       87434
+PropertyIntersections    81085
+UniqueIntersections      31
+LookupIntersections      3023
+PreemptiveIntersections  3295
+#######################################################
+
+*********Memory SSA Statistics***************
+################ (program : htop.bc)###############
+----------------Time and memory stats--------------------
+AverageRegSize      5.47678
+GenMUCHITime        0.03
+GenRegionTime       0.465
+InsertPHITime       0.01
+SSARenameTime       0.007
+TotalMSSATime       0.513
+----------------Numbers stats----------------------------
+BBHasMSSAPhi        477
+CSChiNode           1924
+CSHasChi            936
+CSHasMu             1134
+CSMuNode            2970
+FunEntryChi         2347
+FunHasEntryChi      418
+FunHasRetMu         419
+FunRetMu            2339
+LoadHasMu           6145
+LoadMuNode          7288
+MSSAPhi             1445
+MaxRegSize          206
+MemRegions          1292
+StoreChiNode        1627
+StoreHasChi         1506
+#######################################################
+
+*********SVFG Statistics***************
+################ (program : htop.bc)###############
+----------------Time and memory stats--------------------
+ATNodeTime          0.015
+AvgWeight           24.3227
+ConnDirEdgeTime     0
+ConnIndEdgeTime     0.045
+OptTime             0
+TLNodeTime          0
+TotalTime           0.06
+----------------Numbers stats----------------------------
+ActualIn            2970
+ActualOut           1924
+ActualParam         3222
+ActualRet           388
+Addr                4049
+AvgInDegree         1
+AvgIndInDeg         1
+AvgIndOutDeg        2
+AvgOutDegree        1
+Copy                6
+DirectCallEdge      1752
+DirectEdge          21964
+DirectRetEdge       385
+FormalIn            2347
+FormalOut           2339
+FormalParam         601
+FormalRet           84
+Gep                 5199
+IndCallEdge         3000
+IndRetEdge          1943
+IndirectEdge        23183
+IndirectEdgeLabels  563873
+Load                6145
+MSSAPhi             1445
+MaxInDegree         499
+MaxIndInDeg         499
+MaxIndOutDeg        183
+MaxOutDegree        411
+PHI                 113
+Store               2515
+TotalEdge           45147
+TotalNode           33348
+#######################################################
+Writing 'svfg_final.dot'...Writing 'fs_solved.dot'...
+*********CallGraph Stats (Flow-sensitive analysis)***************
+################ (program : htop.bc)###############
+----------------Numbers stats----------------------------
+CalRetPairInCycle   796
+FIObjNum            251
+FSObjNum            2792
+MaxNodeInCycle      118
+NodeInCycle         119
+TotalCycle          2
+TotalEdge           3437
+TotalNode           550
+#######################################################
+
+*********Versioned Flow-Sensitive Pointer Analysis Statistics***************
+################ (program : htop.bc)###############
+----------------Time and memory stats--------------------
+AddrTime            0
+AverageSCCSize      0
+AvgPtsSize          112.435
+AvgTopLvlPtsSize    44.7293
+AvgVersionPtsSize   61.0659
+CopyTime            0
+DirectPropaTime     0
+GepTime             0
+IndirectPropaTime   0
+LoadTime            0
+MemoryUsageVmrss    44032
+MemoryUsageVmsize   101996
+PhiTime             0
+PrelabelingTime     0.003
+ProcessTime         0
+PropagationTime     0
+SCCTime             0
+SolveTime           0.918
+StoreTime           0
+Strong/WeakUpdTime  0
+TotalTime           1.895
+UpdateCGTime        0
+VersionPropTime     0
+meldLabelingTime    0.477
+----------------Numbers stats----------------------------
+CopysNum            6
+DummyFieldPtrs      123
+FieldObjs           157
+IndEdgeSolved       979
+LocalVarInRecur     711
+MaxPtsSize          190
+MaxSCCSize          1
+MaxTopLvlPtsSize    190
+MaxVersionPtsSize   190
+MaxVersionsForObj   0
+MemObjects          3043
+NumOfNodesInSCC     0
+NumOfSCC            0
+Pointers            37038
+ProcessedAParam     0
+ProcessedAddr       16196
+ProcessedCopy       26
+ProcessedFRet       0
+ProcessedGep        30646
+ProcessedLoad       50652
+ProcessedMSSANode   44100
+ProcessedPhi        643
+ProcessedStore      17161
+SolveIterations     4
+StoresNum           2515
+StrongUpdates       855
+TotalEmptyVPts      0
+TotalExistingVPts   114951
+TotalNonEmptyVPts   114951
+TotalObjects        3200
+TotalPointers       37161
+TotalSingleVObjs    0
+TotalVersions       140087
+#######################################################
+
+****Persistent Points-To Cache Statistics: flow-sensitive analysis bitvector****
+################ (program : htop.bc)###############
+UniquePointsToSets       5974
+TotalUnions              1960126
+PropertyUnions           1746036
+UniqueUnions             6439
+LookupUnions             198275
+PreemptiveUnions         9376
+TotalComplements         0
+PropertyComplements      0
+UniqueComplements        0
+LookupComplements        0
+PreemptiveComplements    0
+TotalIntersections       0
+PropertyIntersections    0
+UniqueIntersections      0
+LookupIntersections      0
+PreemptiveIntersections  0
+#######################################################
+<end of output>
+Test time =   5.57 sec
+----------------------------------------------------------
+Test Passed.
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/htop.bc" end time: Sep 18 09:37 UTC
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/htop.bc" time elapsed: 00:00:05
+----------------------------------------------------------
+
+1158/1328 Testing: diff-perf-cruxbc-big/test_cases_bc/crux-bc/libcurl.so.bc
+1158/1328 Test: diff-perf-cruxbc-big/test_cases_bc/crux-bc/libcurl.so.bc
+Command: "/home/runner/work/SVF/SVF/Release-build/bin/wpa" "-ander" "-dump-json=ir.json" "/home/runner/work/SVF/SVF/Test-Suite/test_cases_bc/crux-bc/libcurl.so.bc"
+Directory: /home/runner/work/SVF/SVF/Release-build/bin
+"diff-perf-cruxbc-big/test_cases_bc/crux-bc/libcurl.so.bc" start time: Sep 18 09:37 UTC
+Output:
+----------------------------------------------------------
+
+*********General Stats***************
+################ (program : libcurl.so.bc)###############
+AddrsNum            12175
+BBWith2Succ         8503
+BBWith3Succ         217
+CallsNum            11660
+ConstArrayObj       17
+ConstStructObj      31
+ConstantObj         0
+CopysNum            4389
+FIObjNum            390
+FSObjNum            8736
+FunctionObjs        1550
+GepsNum             27922
+GlobalObjs          76
+HeapObjs            301
+IndCallSites        1068
+LoadsNum            43084
+MaxStructSize       458
+NonPtrObj           4986
+ReturnsNum          3092
+StackObjs           7198
+StoresNum           22562
+TotalCallSite       7147
+TotalFieldObjects   1162
+TotalObjects        9127
+TotalPTASVFStmts    87170
+TotalPointers       151806
+TotalSVFStmts       161651
+VarArrayObj         220
+VarStructObj        199
+----------------Time and memory stats--------------------
+LLVMIRTime          0.441
+SVFIRTime           4.362
+SymbolTableTime     0.144
+#######################################################
+
+*********CallGraph Stats (Andersen analysis)***************
+################ (program : libcurl.so.bc)###############
+----------------Numbers stats----------------------------
+CalRetPairInCycle   182
+MaxNodeInCycle      58
+NodeInCycle         96
+TotalCycle          10
+TotalEdge           7757
+TotalNode           1550
+#######################################################
+
+*********Andersen Pointer Analysis Stats***************
+################ (program : libcurl.so.bc)###############
+----------------Time and memory stats--------------------
+AvgIn/OutAddrEdge   0.134748
+AvgIn/OutCopyEdge   0.882193
+AvgIn/OutEdge       1.50944
+AvgIn/OutLoadEdge   0.371571
+AvgIn/OutStoreEdge  0.120927
+AvgPtsSetSize       56.3202
+AvgTopLvlPtsSize    124.013
+CollapseTime        0
+CopyGepTime         0
+LoadStoreTime       0
+MemoryUsageVmrss    61092
+MemoryUsageVmsize   60364
+SCCDetectTime       0
+SCCMergeTime        0
+TotalTime           10.714
+UpdateCGTime        0
+----------------Numbers stats----------------------------
+AddrProcessed       10898
+CopyProcessed       136749
+DummyFieldPtrs      345
+FieldObjs           1162
+GepProcessed        91731
+IndCallSites        1068
+IndEdgeSolved       1641
+LoadProcessed       5341298
+LocalVarInRecur     221
+MaxInAddrEdge       1
+MaxInCopyEdge       1122
+MaxInLoadEdge       1902
+MaxInStoreEdge      299
+MaxNodesInSCC       515
+MaxOutAddrEdge      2060
+MaxOutCopyEdge      5482
+MaxOutLoadEdge      613
+MaxOutStoreEdge     1865
+MaxPtsSetSize       352
+MemObjects          9127
+NodesInCycles       1765
+NullPointer         4709
+NumOfAddrs          10364
+NumOfCGEdge         105733
+NumOfCGNode         78170
+NumOfCopys          40699
+NumOfFieldExpand    0
+NumOfGeps           27154
+NumOfLoads          28579
+NumOfSCCDetect      15
+NumOfSFRs           0
+NumOfStores         9301
+NumOfValidNode      76914
+NumOfValidObjNode   8968
+Pointers            151461
+PointsToBlkPtr      0
+PointsToConstPtr    9191
+SolveIterations     15
+StoreProcessed      2516327
+TotalCycleNum       175
+TotalObjects        10289
+TotalPWCCycleNum    29
+TotalPointers       151806
+#######################################################
+
+****Persistent Points-To Cache Statistics: Andersen's analysis bitvector****
+################ (program : libcurl.so.bc)###############
+UniquePointsToSets       17812
+TotalUnions              271901
+PropertyUnions           82377
+UniqueUnions             5907
+LookupUnions             173336
+PreemptiveUnions         10281
+TotalComplements         1215633
+PropertyComplements      1042950
+UniqueComplements        5131
+LookupComplements        162426
+PreemptiveComplements    5126
+TotalIntersections       507647
+PropertyIntersections    494749
+UniqueIntersections      59
+LookupIntersections      2548
+PreemptiveIntersections  10291
+#######################################################
+<end of output>
+Test time =  18.33 sec
+----------------------------------------------------------
+Test Passed.
+"diff-perf-cruxbc-big/test_cases_bc/crux-bc/libcurl.so.bc" end time: Sep 18 09:37 UTC
+"diff-perf-cruxbc-big/test_cases_bc/crux-bc/libcurl.so.bc" time elapsed: 00:00:18
+----------------------------------------------------------
+
+1159/1328 Testing: diff-perf-cruxbc-big/test_cases_bc/crux-bc/bash.bc
+1159/1328 Test: diff-perf-cruxbc-big/test_cases_bc/crux-bc/bash.bc
+Command: "/home/runner/work/SVF/SVF/Release-build/bin/wpa" "-ander" "-dump-json=ir.json" "/home/runner/work/SVF/SVF/Test-Suite/test_cases_bc/crux-bc/bash.bc"
+Directory: /home/runner/work/SVF/SVF/Release-build/bin
+"diff-perf-cruxbc-big/test_cases_bc/crux-bc/bash.bc" start time: Sep 18 09:37 UTC
+Output:
+----------------------------------------------------------
+
+*********General Stats***************
+################ (program : bash.bc)###############
+AddrsNum            17597
+BBWith2Succ         17391
+BBWith3Succ         158
+CallsNum            18052
+ConstArrayObj       95
+ConstStructObj      36
+ConstantObj         0
+CopysNum            10183
+FIObjNum            327
+FSObjNum            12587
+FunctionObjs        2369
+GepsNum             17899
+GlobalObjs          875
+HeapObjs            70
+IndCallSites        72
+LoadsNum            59146
+MaxStructSize       24
+NonPtrObj           8137
+ReturnsNum          5697
+StackObjs           9599
+StoresNum           27669
+TotalCallSite       13534
+TotalFieldObjects   1278
+TotalObjects        12915
+TotalPTASVFStmts    93563
+TotalPointers       223871
+TotalSVFStmts       223603
+VarArrayObj         157
+VarStructObj        462
+----------------Time and memory stats--------------------
+LLVMIRTime          0.772
+SVFIRTime           6.649
+SymbolTableTime     0.233
+#######################################################
+
+*********CallGraph Stats (Andersen analysis)***************
+################ (program : bash.bc)###############
+----------------Numbers stats----------------------------
+CalRetPairInCycle   6395
+MaxNodeInCycle      1158
+NodeInCycle         1184
+TotalCycle          12
+TotalEdge           14865
+TotalNode           2369
+#######################################################
+
+*********Andersen Pointer Analysis Stats***************
+################ (program : bash.bc)###############
+----------------Time and memory stats--------------------
+AvgIn/OutAddrEdge   0.177235
+AvgIn/OutCopyEdge   0.752778
+AvgIn/OutEdge       1.4764
+AvgIn/OutLoadEdge   0.408356
+AvgIn/OutStoreEdge  0.138032
+AvgPtsSetSize       63.1382
+AvgTopLvlPtsSize    195.826
+CollapseTime        0
+CopyGepTime         0
+LoadStoreTime       0
+MemoryUsageVmrss    512
+MemoryUsageVmsize   0
+SCCDetectTime       0
+SCCMergeTime        0
+TotalTime           11.604
+UpdateCGTime        0
+----------------Numbers stats----------------------------
+AddrProcessed       15089
+CopyProcessed       115354
+DummyFieldPtrs      977
+FieldObjs           1278
+GepProcessed        25732
+IndCallSites        72
+IndEdgeSolved       1375
+LoadProcessed       1652362
+LocalVarInRecur     3420
+MaxInAddrEdge       1
+MaxInCopyEdge       1067
+MaxInLoadEdge       3724
+MaxInStoreEdge      95
+MaxNodesInSCC       281
+MaxOutAddrEdge      2176
+MaxOutCopyEdge      13327
+MaxOutLoadEdge      300
+MaxOutStoreEdge     3280
+MaxPtsSetSize       327
+MemObjects          12915
+NodesInCycles       3050
+NullPointer         511
+NumOfAddrs          12505
+NumOfCGEdge         91664
+NumOfCGNode         71405
+NumOfCopys          36081
+NumOfFieldExpand    0
+NumOfGeps           17032
+NumOfLoads          28812
+NumOfSCCDetect      9
+NumOfSFRs           0
+NumOfStores         9739
+NumOfValidNode      70556
+NumOfValidObjNode   10666
+Pointers            222894
+PointsToBlkPtr      0
+PointsToConstPtr    13127
+SolveIterations     9
+StoreProcessed      479542
+TotalCycleNum       346
+TotalObjects        14193
+TotalPWCCycleNum    26
+TotalPointers       223871
+#######################################################
+
+****Persistent Points-To Cache Statistics: Andersen's analysis bitvector****
+################ (program : bash.bc)###############
+UniquePointsToSets       15695
+TotalUnions              175726
+PropertyUnions           144034
+UniqueUnions             1403
+LookupUnions             27651
+PreemptiveUnions         2638
+TotalComplements         668784
+PropertyComplements      643801
+UniqueComplements        515
+LookupComplements        23953
+PreemptiveComplements    515
+TotalIntersections       1097533
+PropertyIntersections    1088298
+UniqueIntersections      5
+LookupIntersections      8196
+PreemptiveIntersections  1034
+#######################################################
+<end of output>
+Test time =  23.06 sec
+----------------------------------------------------------
+Test Passed.
+"diff-perf-cruxbc-big/test_cases_bc/crux-bc/bash.bc" end time: Sep 18 09:37 UTC
+"diff-perf-cruxbc-big/test_cases_bc/crux-bc/bash.bc" time elapsed: 00:00:23
+----------------------------------------------------------
+
+End testing: Sep 18 09:37 UTC

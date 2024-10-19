@@ -1,5 +1,6 @@
 #include "stdbool.h"
 extern void svf_assert(bool);
+extern void set_value(int, int, int);
 int main() {
     int a, b;
     a = 1;

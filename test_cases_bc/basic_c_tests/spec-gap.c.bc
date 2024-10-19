@@ -146,16 +146,6 @@ entry:
 declare i32 @getchar() #1
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local ptr @SyGetmem(i64 noundef %size) #0 {
-entry:
-  %retval = alloca ptr, align 8
-  %size.addr = alloca i64, align 8
-  store i64 %size, ptr %size.addr, align 8
-  %0 = load ptr, ptr %retval, align 8
-  ret ptr %0
-}
-
-; Function Attrs: noinline nounwind optnone uwtable
 define dso_local void @IntComm() #0 {
 entry:
   ret void
@@ -275,6 +265,8 @@ entry:
   store ptr %2, ptr @FreeHandle, align 8
   ret void
 }
+
+declare ptr @SyGetmem(i64 noundef) #1
 
 ; Function Attrs: noinline nounwind optnone uwtable
 define dso_local i32 @main() #0 {
