@@ -5,14 +5,15 @@
 
 extern void SAFE_LOAD(void *p);
 extern void UNSAFE_LOAD(void *p);
+//extern void svf_assert(bool);
 
 int main() {
     int *myPtr = (int*)malloc(sizeof(int));
-    // SAFE_LOAD(myPtr);
-    *myPtr = 200;
     free(myPtr);
     UNSAFE_LOAD(myPtr);
-    *myPtr = 404;
+    myPtr = (int*)malloc(sizeof(int));
+    *myPtr = 200;
+    SAFE_LOAD(myPtr);
     return 0;
 }
 
