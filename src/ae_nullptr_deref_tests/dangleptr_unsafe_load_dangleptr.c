@@ -12,7 +12,7 @@ int main() {
     *myPtr = 200;
     free(myPtr);
     UNSAFE_LOAD(myPtr);
-    *myPtr = 404;
+    *myPtr = 404;   // Trigger dangling pointer dereference
     return 0;
 }
 

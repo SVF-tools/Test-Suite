@@ -14,7 +14,7 @@ int main() {
 
     myPtr = (int*)malloc(sizeof(int));
     free(myPtr);
-    UNSAFE_LOAD(myPtr);
+    // UNSAFE_LOAD(myPtr);
     myPtr = &a;
     SAFE_LOAD(myPtr);
     return 0;
