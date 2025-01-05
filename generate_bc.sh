@@ -18,6 +18,7 @@ test_dirs="
   objtype_tests
   ae_overflow_tests
   ae_assert_tests
+  ae_nullptr_deref_tests
 "
 
 

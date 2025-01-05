@@ -328,6 +328,16 @@ foreach(filename ${ae_overflow_files})
   )
 endforeach()
 
+# loops over ae_nullptr_files and run "ae $bc_file"
+file(GLOB ae_nullptr_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_nullptr_deref_tests/*.bc")
+
+foreach(filename ${ae_nullptr_files})
+  add_test(
+          NAME ae_nullptr/${filename}
+          COMMAND ae -nullptr ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
 
 ## symbolic abstraction tests  (ctest -R symabs -VV)
 set(cmd "ae  -symabs")
