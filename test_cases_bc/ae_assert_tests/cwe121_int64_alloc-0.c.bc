@@ -1,15 +1,15 @@
-; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/ae_assert_tests/cwe121_int64_alloc-0.c.bc'
-source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/cwe121_int64_alloc-0.c"
-target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
-target triple = "x86_64-unknown-linux-gnu"
+; ModuleID = '/root/testsss/Test-Suite/test_cases_bc/ae_assert_tests/cwe121_int64_alloc-0.c.bc'
+source_filename = "/root/testsss/Test-Suite/src/ae_assert_tests/cwe121_int64_alloc-0.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
 
 ; Function Attrs: noinline nounwind optnone uwtable
 define dso_local i32 @main() #0 !dbg !13 {
 entry:
   %data = alloca ptr, align 8
   %dataBadBuffer = alloca ptr, align 8
-  call void @llvm.dbg.declare(metadata ptr %data, metadata !18, metadata !DIExpression()), !dbg !19
-  call void @llvm.dbg.declare(metadata ptr %dataBadBuffer, metadata !20, metadata !DIExpression()), !dbg !21
+    #dbg_declare(ptr %data, !18, !DIExpression(), !19)
+    #dbg_declare(ptr %dataBadBuffer, !20, !DIExpression(), !21)
   %0 = alloca i8, i64 16, align 16, !dbg !22
   store ptr %0, ptr %dataBadBuffer, align 8, !dbg !21
   %1 = load ptr, ptr %dataBadBuffer, align 8, !dbg !23
@@ -31,21 +31,17 @@ entry:
   ret i32 0, !dbg !34
 }
 
-; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
-declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
+declare void @svf_assert(i1 noundef zeroext) #1
 
-declare void @svf_assert(i1 noundef zeroext) #2
-
-attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 
 !llvm.dbg.cu = !{!0}
 !llvm.module.flags = !{!5, !6, !7, !8, !9, !10, !11}
 !llvm.ident = !{!12}
 
-!0 = distinct !DICompileUnit(language: DW_LANG_C11, file: !1, producer: "clang version 16.0.0", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, retainedTypes: !2, splitDebugInlining: false, nameTableKind: None)
-!1 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/cwe121_int64_alloc-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "1385aefee79cf43f62058450546d8aef")
+!0 = distinct !DICompileUnit(language: DW_LANG_C11, file: !1, producer: "Ubuntu clang version 20.1.2 (++20250402124932+58df0ef89dd6-1~exp1~20250402004952.98)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, retainedTypes: !2, splitDebugInlining: false, nameTableKind: None)
+!1 = !DIFile(filename: "/root/testsss/Test-Suite/src/ae_assert_tests/cwe121_int64_alloc-0.c", directory: "/root/testsss/Test-Suite", checksumkind: CSK_MD5, checksum: "1385aefee79cf43f62058450546d8aef")
 !2 = !{!3}
 !3 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !4, size: 64)
 !4 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
@@ -56,9 +52,9 @@ attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protect
 !9 = !{i32 7, !"PIE Level", i32 2}
 !10 = !{i32 7, !"uwtable", i32 2}
 !11 = !{i32 7, !"frame-pointer", i32 2}
-!12 = !{!"clang version 16.0.0"}
+!12 = !{!"Ubuntu clang version 20.1.2 (++20250402124932+58df0ef89dd6-1~exp1~20250402004952.98)"}
 !13 = distinct !DISubprogram(name: "main", scope: !14, file: !14, line: 7, type: !15, scopeLine: 7, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !17)
-!14 = !DIFile(filename: "src/ae_assert_tests/cwe121_int64_alloc-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "1385aefee79cf43f62058450546d8aef")
+!14 = !DIFile(filename: "src/ae_assert_tests/cwe121_int64_alloc-0.c", directory: "/root/testsss/Test-Suite", checksumkind: CSK_MD5, checksum: "1385aefee79cf43f62058450546d8aef")
 !15 = !DISubroutineType(types: !16)
 !16 = !{!4}
 !17 = !{}

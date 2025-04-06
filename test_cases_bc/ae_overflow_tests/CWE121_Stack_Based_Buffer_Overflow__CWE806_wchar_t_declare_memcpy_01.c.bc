@@ -1,7 +1,7 @@
-; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memcpy_01.c.bc'
-source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memcpy_01.c"
-target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
-target triple = "x86_64-unknown-linux-gnu"
+; ModuleID = '/root/testsss/Test-Suite/test_cases_bc/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memcpy_01.c.bc'
+source_filename = "/root/testsss/Test-Suite/src/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memcpy_01.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
 
 @.str = private unnamed_addr constant [18 x i8] c"Calling good()...\00", align 1, !dbg !0
 @.str.1 = private unnamed_addr constant [16 x i8] c"Finished good()\00", align 1, !dbg !7
@@ -14,32 +14,32 @@ entry:
   %data = alloca ptr, align 8
   %dataBuffer = alloca [100 x i32], align 16
   %dest = alloca [50 x i32], align 16
-  call void @llvm.dbg.declare(metadata ptr %data, metadata !39, metadata !DIExpression()), !dbg !44
-  call void @llvm.dbg.declare(metadata ptr %dataBuffer, metadata !45, metadata !DIExpression()), !dbg !49
+    #dbg_declare(ptr %data, !39, !DIExpression(), !44)
+    #dbg_declare(ptr %dataBuffer, !45, !DIExpression(), !49)
   %arraydecay = getelementptr inbounds [100 x i32], ptr %dataBuffer, i64 0, i64 0, !dbg !50
   store ptr %arraydecay, ptr %data, align 8, !dbg !51
   %0 = load ptr, ptr %data, align 8, !dbg !52
-  %call = call ptr @wmemset(ptr noundef %0, i32 noundef 65, i64 noundef 99) #7, !dbg !53
+  %call = call ptr @wmemset(ptr noundef %0, i32 noundef 65, i64 noundef 99) #6, !dbg !53
   %1 = load ptr, ptr %data, align 8, !dbg !54
   %arrayidx = getelementptr inbounds i32, ptr %1, i64 99, !dbg !54
   store i32 0, ptr %arrayidx, align 4, !dbg !55
-  call void @llvm.dbg.declare(metadata ptr %dest, metadata !56, metadata !DIExpression()), !dbg !61
+    #dbg_declare(ptr %dest, !56, !DIExpression(), !61)
   call void @llvm.memset.p0.i64(ptr align 16 %dest, i8 0, i64 200, i1 false), !dbg !61
   %arraydecay1 = getelementptr inbounds [50 x i32], ptr %dest, i64 0, i64 0, !dbg !62
   %2 = load ptr, ptr %data, align 8, !dbg !63
   %3 = load ptr, ptr %data, align 8, !dbg !64
-  %call2 = call i64 @wcslen(ptr noundef %3) #8, !dbg !65
+  %call2 = call i64 @wcslen(ptr noundef %3) #7, !dbg !65
   %mul = mul i64 %call2, 4, !dbg !66
   call void @llvm.memcpy.p0.p0.i64(ptr align 16 %arraydecay1, ptr align 4 %2, i64 %mul, i1 false), !dbg !62
   %arraydecay3 = getelementptr inbounds [50 x i32], ptr %dest, i64 0, i64 0, !dbg !67
   %4 = load ptr, ptr %data, align 8, !dbg !68
-  %call4 = call i64 @wcslen(ptr noundef %4) #8, !dbg !69
+  %call4 = call i64 @wcslen(ptr noundef %4) #7, !dbg !69
   %mul5 = mul i64 %call4, 4, !dbg !70
   %sub = sub i64 %mul5, 1, !dbg !71
   %call6 = call i32 (ptr, i64, ...) @UNSAFE_BUFACCESS(ptr noundef %arraydecay3, i64 noundef %sub), !dbg !72
   %5 = load ptr, ptr %data, align 8, !dbg !73
   %6 = load ptr, ptr %data, align 8, !dbg !74
-  %call7 = call i64 @wcslen(ptr noundef %6) #8, !dbg !75
+  %call7 = call i64 @wcslen(ptr noundef %6) #7, !dbg !75
   %mul8 = mul i64 %call7, 4, !dbg !76
   %sub9 = sub i64 %mul8, 1, !dbg !77
   %call10 = call i32 (ptr, i64, ...) @SAFE_BUFACCESS(ptr noundef %5, i64 noundef %sub9), !dbg !78
@@ -50,26 +50,23 @@ entry:
   ret void, !dbg !83
 }
 
-; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
-declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
-
 ; Function Attrs: nounwind
-declare ptr @wmemset(ptr noundef, i32 noundef, i64 noundef) #2
+declare ptr @wmemset(ptr noundef, i32 noundef, i64 noundef) #1
 
 ; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: write)
-declare void @llvm.memset.p0.i64(ptr nocapture writeonly, i8, i64, i1 immarg) #3
+declare void @llvm.memset.p0.i64(ptr nocapture writeonly, i8, i64, i1 immarg) #2
 
 ; Function Attrs: nounwind willreturn memory(read)
-declare i64 @wcslen(ptr noundef) #4
+declare i64 @wcslen(ptr noundef) #3
 
 ; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: readwrite)
-declare void @llvm.memcpy.p0.p0.i64(ptr noalias nocapture writeonly, ptr noalias nocapture readonly, i64, i1 immarg) #5
+declare void @llvm.memcpy.p0.p0.i64(ptr noalias nocapture writeonly, ptr noalias nocapture readonly, i64, i1 immarg) #4
 
-declare i32 @UNSAFE_BUFACCESS(...) #6
+declare i32 @UNSAFE_BUFACCESS(...) #5
 
-declare i32 @SAFE_BUFACCESS(...) #6
+declare i32 @SAFE_BUFACCESS(...) #5
 
-declare void @printWLine(ptr noundef) #6
+declare void @printWLine(ptr noundef) #5
 
 ; Function Attrs: noinline nounwind optnone uwtable
 define dso_local void @CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memcpy_01_good() #0 !dbg !84 {
@@ -86,12 +83,12 @@ entry:
   %argv.addr = alloca ptr, align 8
   store i32 0, ptr %retval, align 4
   store i32 %argc, ptr %argc.addr, align 4
-  call void @llvm.dbg.declare(metadata ptr %argc.addr, metadata !92, metadata !DIExpression()), !dbg !93
+    #dbg_declare(ptr %argc.addr, !92, !DIExpression(), !93)
   store ptr %argv, ptr %argv.addr, align 8
-  call void @llvm.dbg.declare(metadata ptr %argv.addr, metadata !94, metadata !DIExpression()), !dbg !95
-  %call = call i64 @time(ptr noundef null) #7, !dbg !96
+    #dbg_declare(ptr %argv.addr, !94, !DIExpression(), !95)
+  %call = call i64 @time(ptr noundef null) #6, !dbg !96
   %conv = trunc i64 %call to i32, !dbg !97
-  call void @srand(i32 noundef %conv) #7, !dbg !98
+  call void @srand(i32 noundef %conv) #6, !dbg !98
   call void @printLine(ptr noundef @.str), !dbg !99
   call void @CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memcpy_01_good(), !dbg !100
   call void @printLine(ptr noundef @.str.1), !dbg !101
@@ -102,12 +99,12 @@ entry:
 }
 
 ; Function Attrs: nounwind
-declare void @srand(i32 noundef) #2
+declare void @srand(i32 noundef) #1
 
 ; Function Attrs: nounwind
-declare i64 @time(ptr noundef) #2
+declare i64 @time(ptr noundef) #1
 
-declare void @printLine(ptr noundef) #6
+declare void @printLine(ptr noundef) #5
 
 ; Function Attrs: noinline nounwind optnone uwtable
 define internal void @goodG2B() #0 !dbg !106 {
@@ -115,32 +112,32 @@ entry:
   %data = alloca ptr, align 8
   %dataBuffer = alloca [100 x i32], align 16
   %dest = alloca [50 x i32], align 16
-  call void @llvm.dbg.declare(metadata ptr %data, metadata !107, metadata !DIExpression()), !dbg !108
-  call void @llvm.dbg.declare(metadata ptr %dataBuffer, metadata !109, metadata !DIExpression()), !dbg !110
+    #dbg_declare(ptr %data, !107, !DIExpression(), !108)
+    #dbg_declare(ptr %dataBuffer, !109, !DIExpression(), !110)
   %arraydecay = getelementptr inbounds [100 x i32], ptr %dataBuffer, i64 0, i64 0, !dbg !111
   store ptr %arraydecay, ptr %data, align 8, !dbg !112
   %0 = load ptr, ptr %data, align 8, !dbg !113
-  %call = call ptr @wmemset(ptr noundef %0, i32 noundef 65, i64 noundef 49) #7, !dbg !114
+  %call = call ptr @wmemset(ptr noundef %0, i32 noundef 65, i64 noundef 49) #6, !dbg !114
   %1 = load ptr, ptr %data, align 8, !dbg !115
   %arrayidx = getelementptr inbounds i32, ptr %1, i64 49, !dbg !115
   store i32 0, ptr %arrayidx, align 4, !dbg !116
-  call void @llvm.dbg.declare(metadata ptr %dest, metadata !117, metadata !DIExpression()), !dbg !119
+    #dbg_declare(ptr %dest, !117, !DIExpression(), !119)
   call void @llvm.memset.p0.i64(ptr align 16 %dest, i8 0, i64 200, i1 false), !dbg !119
   %arraydecay1 = getelementptr inbounds [50 x i32], ptr %dest, i64 0, i64 0, !dbg !120
   %2 = load ptr, ptr %data, align 8, !dbg !121
   %3 = load ptr, ptr %data, align 8, !dbg !122
-  %call2 = call i64 @wcslen(ptr noundef %3) #8, !dbg !123
+  %call2 = call i64 @wcslen(ptr noundef %3) #7, !dbg !123
   %mul = mul i64 %call2, 4, !dbg !124
   call void @llvm.memcpy.p0.p0.i64(ptr align 16 %arraydecay1, ptr align 4 %2, i64 %mul, i1 false), !dbg !120
   %arraydecay3 = getelementptr inbounds [50 x i32], ptr %dest, i64 0, i64 0, !dbg !125
   %4 = load ptr, ptr %data, align 8, !dbg !126
-  %call4 = call i64 @wcslen(ptr noundef %4) #8, !dbg !127
+  %call4 = call i64 @wcslen(ptr noundef %4) #7, !dbg !127
   %mul5 = mul i64 %call4, 4, !dbg !128
   %sub = sub i64 %mul5, 1, !dbg !129
   %call6 = call i32 (ptr, i64, ...) @SAFE_BUFACCESS(ptr noundef %arraydecay3, i64 noundef %sub), !dbg !130
   %5 = load ptr, ptr %data, align 8, !dbg !131
   %6 = load ptr, ptr %data, align 8, !dbg !132
-  %call7 = call i64 @wcslen(ptr noundef %6) #8, !dbg !133
+  %call7 = call i64 @wcslen(ptr noundef %6) #7, !dbg !133
   %mul8 = mul i64 %call7, 4, !dbg !134
   %sub9 = sub i64 %mul8, 1, !dbg !135
   %call10 = call i32 (ptr, i64, ...) @SAFE_BUFACCESS(ptr noundef %5, i64 noundef %sub9), !dbg !136
@@ -151,15 +148,14 @@ entry:
   ret void, !dbg !141
 }
 
-attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #2 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #3 = { nocallback nofree nounwind willreturn memory(argmem: write) }
-attributes #4 = { nounwind willreturn memory(read) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #5 = { nocallback nofree nounwind willreturn memory(argmem: readwrite) }
-attributes #6 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #7 = { nounwind }
-attributes #8 = { nounwind willreturn memory(read) }
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #2 = { nocallback nofree nounwind willreturn memory(argmem: write) }
+attributes #3 = { nounwind willreturn memory(read) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #4 = { nocallback nofree nounwind willreturn memory(argmem: readwrite) }
+attributes #5 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #6 = { nounwind }
+attributes #7 = { nounwind willreturn memory(read) }
 
 !llvm.dbg.cu = !{!22}
 !llvm.module.flags = !{!27, !28, !29, !30, !31, !32, !33}
@@ -167,7 +163,7 @@ attributes #8 = { nounwind willreturn memory(read) }
 
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
 !1 = distinct !DIGlobalVariable(scope: null, file: !2, line: 86, type: !3, isLocal: true, isDefinition: true)
-!2 = !DIFile(filename: "src/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memcpy_01.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "7e4f0985e3b580f69782124bb4153e3f")
+!2 = !DIFile(filename: "src/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memcpy_01.c", directory: "/root/testsss/Test-Suite", checksumkind: CSK_MD5, checksum: "7e4f0985e3b580f69782124bb4153e3f")
 !3 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 144, elements: !5)
 !4 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
 !5 = !{!6}
@@ -187,8 +183,8 @@ attributes #8 = { nounwind willreturn memory(read) }
 !19 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 120, elements: !20)
 !20 = !{!21}
 !21 = !DISubrange(count: 15)
-!22 = distinct !DICompileUnit(language: DW_LANG_C11, file: !23, producer: "clang version 16.0.0", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, retainedTypes: !24, globals: !26, splitDebugInlining: false, nameTableKind: None)
-!23 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memcpy_01.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "7e4f0985e3b580f69782124bb4153e3f")
+!22 = distinct !DICompileUnit(language: DW_LANG_C11, file: !23, producer: "Ubuntu clang version 20.1.2 (++20250402124932+58df0ef89dd6-1~exp1~20250402004952.98)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, retainedTypes: !24, globals: !26, splitDebugInlining: false, nameTableKind: None)
+!23 = !DIFile(filename: "/root/testsss/Test-Suite/src/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memcpy_01.c", directory: "/root/testsss/Test-Suite", checksumkind: CSK_MD5, checksum: "7e4f0985e3b580f69782124bb4153e3f")
 !24 = !{!25}
 !25 = !DIBasicType(name: "unsigned int", size: 32, encoding: DW_ATE_unsigned)
 !26 = !{!0, !7, !12, !17}
@@ -199,15 +195,15 @@ attributes #8 = { nounwind willreturn memory(read) }
 !31 = !{i32 7, !"PIE Level", i32 2}
 !32 = !{i32 7, !"uwtable", i32 2}
 !33 = !{i32 7, !"frame-pointer", i32 2}
-!34 = !{!"clang version 16.0.0"}
+!34 = !{!"Ubuntu clang version 20.1.2 (++20250402124932+58df0ef89dd6-1~exp1~20250402004952.98)"}
 !35 = distinct !DISubprogram(name: "CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memcpy_01_bad", scope: !2, file: !2, line: 23, type: !36, scopeLine: 24, spFlags: DISPFlagDefinition, unit: !22, retainedNodes: !38)
 !36 = !DISubroutineType(types: !37)
 !37 = !{null}
 !38 = !{}
 !39 = !DILocalVariable(name: "data", scope: !35, file: !2, line: 25, type: !40)
 !40 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !41, size: 64)
-!41 = !DIDerivedType(tag: DW_TAG_typedef, name: "wchar_t", file: !42, line: 74, baseType: !43)
-!42 = !DIFile(filename: "/opt/llvm/lib/clang/16/include/stddef.h", directory: "", checksumkind: CSK_MD5, checksum: "f95079da609b0e8f201cb8136304bf3b")
+!41 = !DIDerivedType(tag: DW_TAG_typedef, name: "wchar_t", file: !42, line: 24, baseType: !43)
+!42 = !DIFile(filename: "/usr/lib/llvm-20/lib/clang/20/include/__stddef_wchar_t.h", directory: "", checksumkind: CSK_MD5, checksum: "1bf0c51e90dd5eb05cdcc01afdea587a")
 !43 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
 !44 = !DILocation(line: 25, column: 15, scope: !35)
 !45 = !DILocalVariable(name: "dataBuffer", scope: !35, file: !2, line: 26, type: !46)
@@ -249,7 +245,7 @@ attributes #8 = { nounwind willreturn memory(read) }
 !81 = !DILocation(line: 38, column: 20, scope: !57)
 !82 = !DILocation(line: 38, column: 9, scope: !57)
 !83 = !DILocation(line: 40, column: 1, scope: !35)
-!84 = distinct !DISubprogram(name: "CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memcpy_01_good", scope: !2, file: !2, line: 66, type: !36, scopeLine: 67, spFlags: DISPFlagDefinition, unit: !22, retainedNodes: !38)
+!84 = distinct !DISubprogram(name: "CWE121_Stack_Based_Buffer_Overflow__CWE806_wchar_t_declare_memcpy_01_good", scope: !2, file: !2, line: 66, type: !36, scopeLine: 67, spFlags: DISPFlagDefinition, unit: !22)
 !85 = !DILocation(line: 68, column: 5, scope: !84)
 !86 = !DILocation(line: 69, column: 1, scope: !84)
 !87 = distinct !DISubprogram(name: "main", scope: !2, file: !2, line: 81, type: !88, scopeLine: 82, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !22, retainedNodes: !38)
