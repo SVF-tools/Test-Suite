@@ -269,7 +269,7 @@ endforeach()
 # Run with: (ctest -R diff-perf-cruxbc-small -VV)
 set(diff_tests_cruxbc_small
   dc bc libbz2.so bunzip2 htop)
-set(cmdw "wpa -vfspta -dump-vfg -dump-json=ir.json")
+set(cmdw "wpa -vfspta -dump-vfg")
 string(REPLACE " " ";" commandtempw ${cmdw})
 set(commandw ${commandtempw})
 foreach(file ${diff_tests_cruxbc_small})
@@ -289,7 +289,7 @@ endforeach()
 # Crux bc Big: Filesystem & Performance regression testing
 # Run with (ctest -R diff-perf-cruxbc-big -VV)
 set(diff_tests_cruxbc_big libcurl.so bash)
-set(cmdw "wpa -ander -dump-json=ir.json")
+set(cmdw "wpa -ander")
 string(REPLACE " " ";" commandtempw ${cmdw})
 set(commandw ${commandtempw})
 foreach(file ${diff_tests_cruxbc_big})
@@ -327,6 +327,18 @@ foreach(filename ${ae_overflow_files})
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
+
+# loops over ae_nullptr_deref_files and run "ae -null-ptr-deref $bc_file"
+file(GLOB ae_nullptr_deref_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_nullptr_deref_tests/*.bc")
+
+foreach(filename ${ae_nullptr_deref_files})
+  add_test(
+          NAME ae_nullptr_deref_tests/${filename}
+          COMMAND ae -null-ptr-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+
 
 
 ## symbolic abstraction tests  (ctest -R symabs -VV)
