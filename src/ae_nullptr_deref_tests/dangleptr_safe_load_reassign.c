@@ -2,6 +2,7 @@
 // Created by Ethan Lin on 21/10/2024.
 //
 #include <stdlib.h>
+#include <stdbool.h>
 
 extern void SAFE_LOAD(void *p);
 extern void UNSAFE_LOAD(void *p);
@@ -14,7 +15,7 @@ int main() {
 
     free(safePtr);
 
-    safePtr = (int *)malloc(sizeof(int)); 
+    safePtr = (int *)malloc(sizeof(int));
     *safePtr = 888;
     SAFE_LOAD(safePtr);
     svf_assert(*safePtr == 888);

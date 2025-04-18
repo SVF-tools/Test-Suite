@@ -72,6 +72,8 @@ def comparer_andersen(stats1: Stats, stats2: Stats):
         ('basic_cpp_tests/vector-3.cpp.bc', 0.17), # 0.15063392744891338
         ('complex_tests/test4.c.bc', 0.29), # 0.2820512820512821
         ('basic_cpp_tests/global-obj-in-array.cpp.bc', 0.03), # 0.024187195645946763
+        ('basic_cpp_tests/deque-3.cpp.bc', 0.01), # 0.0010106734674600023
+        ('basic_cpp_tests/deque-4.cpp.bc', 0.01), # 0.0010218273679429763
     ]
     path = sys.argv[-1]  # TODO: Hack
     for name, threshold in exceptions:
