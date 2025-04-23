@@ -1,7 +1,7 @@
-; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE805_int_alloca_loop_01.c.bc'
-source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE805_int_alloca_loop_01.c"
-target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
-target triple = "x86_64-unknown-linux-gnu"
+; ModuleID = '/root/test/once_more/SVF/Test-Suite/test_cases_bc/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE805_int_alloca_loop_01.c.bc'
+source_filename = "/root/test/once_more/SVF/Test-Suite/src/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE805_int_alloca_loop_01.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
 
 @.str = private unnamed_addr constant [18 x i8] c"Calling good()...\00", align 1, !dbg !0
 @.str.1 = private unnamed_addr constant [16 x i8] c"Finished good()\00", align 1, !dbg !7
@@ -16,18 +16,18 @@ entry:
   %dataGoodBuffer = alloca ptr, align 8
   %source = alloca [100 x i32], align 16
   %i = alloca i64, align 8
-  call void @llvm.dbg.declare(metadata ptr %data, metadata !41, metadata !DIExpression()), !dbg !42
-  call void @llvm.dbg.declare(metadata ptr %dataBadBuffer, metadata !43, metadata !DIExpression()), !dbg !44
+    #dbg_declare(ptr %data, !41, !DIExpression(), !42)
+    #dbg_declare(ptr %dataBadBuffer, !43, !DIExpression(), !44)
   %0 = alloca i8, i64 200, align 16, !dbg !45
   store ptr %0, ptr %dataBadBuffer, align 8, !dbg !44
-  call void @llvm.dbg.declare(metadata ptr %dataGoodBuffer, metadata !46, metadata !DIExpression()), !dbg !47
+    #dbg_declare(ptr %dataGoodBuffer, !46, !DIExpression(), !47)
   %1 = alloca i8, i64 400, align 16, !dbg !48
   store ptr %1, ptr %dataGoodBuffer, align 8, !dbg !47
   %2 = load ptr, ptr %dataBadBuffer, align 8, !dbg !49
   store ptr %2, ptr %data, align 8, !dbg !50
-  call void @llvm.dbg.declare(metadata ptr %source, metadata !51, metadata !DIExpression()), !dbg !56
+    #dbg_declare(ptr %source, !51, !DIExpression(), !56)
   call void @llvm.memset.p0.i64(ptr align 16 %source, i8 0, i64 400, i1 false), !dbg !56
-  call void @llvm.dbg.declare(metadata ptr %i, metadata !57, metadata !DIExpression()), !dbg !62
+    #dbg_declare(ptr %i, !57, !DIExpression(), !62)
   store i64 0, ptr %i, align 8, !dbg !63
   br label %for.cond, !dbg !65
 
@@ -38,11 +38,11 @@ for.cond:                                         ; preds = %for.inc, %entry
 
 for.body:                                         ; preds = %for.cond
   %4 = load i64, ptr %i, align 8, !dbg !70
-  %arrayidx = getelementptr inbounds [100 x i32], ptr %source, i64 0, i64 %4, !dbg !72
+  %arrayidx = getelementptr inbounds nuw [100 x i32], ptr %source, i64 0, i64 %4, !dbg !72
   %5 = load i32, ptr %arrayidx, align 4, !dbg !72
   %6 = load ptr, ptr %data, align 8, !dbg !73
   %7 = load i64, ptr %i, align 8, !dbg !74
-  %arrayidx1 = getelementptr inbounds i32, ptr %6, i64 %7, !dbg !73
+  %arrayidx1 = getelementptr inbounds nuw i32, ptr %6, i64 %7, !dbg !73
   store i32 %5, ptr %arrayidx1, align 4, !dbg !75
   br label %for.inc, !dbg !76
 
@@ -64,17 +64,14 @@ for.end:                                          ; preds = %for.cond
   ret void, !dbg !88
 }
 
-; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
-declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
-
 ; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: write)
-declare void @llvm.memset.p0.i64(ptr nocapture writeonly, i8, i64, i1 immarg) #2
+declare void @llvm.memset.p0.i64(ptr nocapture writeonly, i8, i64, i1 immarg) #1
 
-declare i32 @UNSAFE_BUFACCESS(...) #3
+declare i32 @UNSAFE_BUFACCESS(...) #2
 
-declare i32 @SAFE_BUFACCESS(...) #3
+declare i32 @SAFE_BUFACCESS(...) #2
 
-declare void @printIntLine(i32 noundef) #3
+declare void @printIntLine(i32 noundef) #2
 
 ; Function Attrs: noinline nounwind optnone uwtable
 define dso_local void @CWE121_Stack_Based_Buffer_Overflow__CWE805_int_alloca_loop_01_good() #0 !dbg !89 {
@@ -91,12 +88,12 @@ entry:
   %argv.addr = alloca ptr, align 8
   store i32 0, ptr %retval, align 4
   store i32 %argc, ptr %argc.addr, align 4
-  call void @llvm.dbg.declare(metadata ptr %argc.addr, metadata !97, metadata !DIExpression()), !dbg !98
+    #dbg_declare(ptr %argc.addr, !97, !DIExpression(), !98)
   store ptr %argv, ptr %argv.addr, align 8
-  call void @llvm.dbg.declare(metadata ptr %argv.addr, metadata !99, metadata !DIExpression()), !dbg !100
-  %call = call i64 @time(ptr noundef null) #5, !dbg !101
+    #dbg_declare(ptr %argv.addr, !99, !DIExpression(), !100)
+  %call = call i64 @time(ptr noundef null) #4, !dbg !101
   %conv = trunc i64 %call to i32, !dbg !102
-  call void @srand(i32 noundef %conv) #5, !dbg !103
+  call void @srand(i32 noundef %conv) #4, !dbg !103
   call void @printLine(ptr noundef @.str), !dbg !104
   call void @CWE121_Stack_Based_Buffer_Overflow__CWE805_int_alloca_loop_01_good(), !dbg !105
   call void @printLine(ptr noundef @.str.1), !dbg !106
@@ -107,12 +104,12 @@ entry:
 }
 
 ; Function Attrs: nounwind
-declare void @srand(i32 noundef) #4
+declare void @srand(i32 noundef) #3
 
 ; Function Attrs: nounwind
-declare i64 @time(ptr noundef) #4
+declare i64 @time(ptr noundef) #3
 
-declare void @printLine(ptr noundef) #3
+declare void @printLine(ptr noundef) #2
 
 ; Function Attrs: noinline nounwind optnone uwtable
 define internal void @goodG2B() #0 !dbg !111 {
@@ -122,18 +119,18 @@ entry:
   %dataGoodBuffer = alloca ptr, align 8
   %source = alloca [100 x i32], align 16
   %i = alloca i64, align 8
-  call void @llvm.dbg.declare(metadata ptr %data, metadata !112, metadata !DIExpression()), !dbg !113
-  call void @llvm.dbg.declare(metadata ptr %dataBadBuffer, metadata !114, metadata !DIExpression()), !dbg !115
+    #dbg_declare(ptr %data, !112, !DIExpression(), !113)
+    #dbg_declare(ptr %dataBadBuffer, !114, !DIExpression(), !115)
   %0 = alloca i8, i64 200, align 16, !dbg !116
   store ptr %0, ptr %dataBadBuffer, align 8, !dbg !115
-  call void @llvm.dbg.declare(metadata ptr %dataGoodBuffer, metadata !117, metadata !DIExpression()), !dbg !118
+    #dbg_declare(ptr %dataGoodBuffer, !117, !DIExpression(), !118)
   %1 = alloca i8, i64 400, align 16, !dbg !119
   store ptr %1, ptr %dataGoodBuffer, align 8, !dbg !118
   %2 = load ptr, ptr %dataGoodBuffer, align 8, !dbg !120
   store ptr %2, ptr %data, align 8, !dbg !121
-  call void @llvm.dbg.declare(metadata ptr %source, metadata !122, metadata !DIExpression()), !dbg !124
+    #dbg_declare(ptr %source, !122, !DIExpression(), !124)
   call void @llvm.memset.p0.i64(ptr align 16 %source, i8 0, i64 400, i1 false), !dbg !124
-  call void @llvm.dbg.declare(metadata ptr %i, metadata !125, metadata !DIExpression()), !dbg !127
+    #dbg_declare(ptr %i, !125, !DIExpression(), !127)
   store i64 0, ptr %i, align 8, !dbg !128
   br label %for.cond, !dbg !130
 
@@ -144,11 +141,11 @@ for.cond:                                         ; preds = %for.inc, %entry
 
 for.body:                                         ; preds = %for.cond
   %4 = load i64, ptr %i, align 8, !dbg !135
-  %arrayidx = getelementptr inbounds [100 x i32], ptr %source, i64 0, i64 %4, !dbg !137
+  %arrayidx = getelementptr inbounds nuw [100 x i32], ptr %source, i64 0, i64 %4, !dbg !137
   %5 = load i32, ptr %arrayidx, align 4, !dbg !137
   %6 = load ptr, ptr %data, align 8, !dbg !138
   %7 = load i64, ptr %i, align 8, !dbg !139
-  %arrayidx1 = getelementptr inbounds i32, ptr %6, i64 %7, !dbg !138
+  %arrayidx1 = getelementptr inbounds nuw i32, ptr %6, i64 %7, !dbg !138
   store i32 %5, ptr %arrayidx1, align 4, !dbg !140
   %8 = load ptr, ptr %data, align 8, !dbg !141
   %9 = load i64, ptr %i, align 8, !dbg !142
@@ -182,12 +179,11 @@ for.end:                                          ; preds = %for.cond
   ret void, !dbg !164
 }
 
-attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #2 = { nocallback nofree nounwind willreturn memory(argmem: write) }
-attributes #3 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #4 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #5 = { nounwind }
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { nocallback nofree nounwind willreturn memory(argmem: write) }
+attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #3 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #4 = { nounwind }
 
 !llvm.dbg.cu = !{!22}
 !llvm.module.flags = !{!29, !30, !31, !32, !33, !34, !35}
@@ -195,7 +191,7 @@ attributes #5 = { nounwind }
 
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
 !1 = distinct !DIGlobalVariable(scope: null, file: !2, line: 95, type: !3, isLocal: true, isDefinition: true)
-!2 = !DIFile(filename: "src/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE805_int_alloca_loop_01.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "ac59ee9a98ce00cfcf4141366754d53d")
+!2 = !DIFile(filename: "src/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE805_int_alloca_loop_01.c", directory: "/root/test/once_more/SVF/Test-Suite", checksumkind: CSK_MD5, checksum: "ac59ee9a98ce00cfcf4141366754d53d")
 !3 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 144, elements: !5)
 !4 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
 !5 = !{!6}
@@ -215,8 +211,8 @@ attributes #5 = { nounwind }
 !19 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 120, elements: !20)
 !20 = !{!21}
 !21 = !DISubrange(count: 15)
-!22 = distinct !DICompileUnit(language: DW_LANG_C11, file: !23, producer: "clang version 16.0.0", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, retainedTypes: !24, globals: !28, splitDebugInlining: false, nameTableKind: None)
-!23 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE805_int_alloca_loop_01.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "ac59ee9a98ce00cfcf4141366754d53d")
+!22 = distinct !DICompileUnit(language: DW_LANG_C11, file: !23, producer: "Ubuntu clang version 20.1.3 (++20250415115034+9420327ad768-1~exp1~20250415235124.105)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, retainedTypes: !24, globals: !28, splitDebugInlining: false, nameTableKind: None)
+!23 = !DIFile(filename: "/root/test/once_more/SVF/Test-Suite/src/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE805_int_alloca_loop_01.c", directory: "/root/test/once_more/SVF/Test-Suite", checksumkind: CSK_MD5, checksum: "ac59ee9a98ce00cfcf4141366754d53d")
 !24 = !{!25, !27}
 !25 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !26, size: 64)
 !26 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
@@ -229,7 +225,7 @@ attributes #5 = { nounwind }
 !33 = !{i32 7, !"PIE Level", i32 2}
 !34 = !{i32 7, !"uwtable", i32 2}
 !35 = !{i32 7, !"frame-pointer", i32 2}
-!36 = !{!"clang version 16.0.0"}
+!36 = !{!"Ubuntu clang version 20.1.3 (++20250415115034+9420327ad768-1~exp1~20250415235124.105)"}
 !37 = distinct !DISubprogram(name: "CWE121_Stack_Based_Buffer_Overflow__CWE805_int_alloca_loop_01_bad", scope: !2, file: !2, line: 21, type: !38, scopeLine: 22, spFlags: DISPFlagDefinition, unit: !22, retainedNodes: !40)
 !38 = !DISubroutineType(types: !39)
 !39 = !{null}
@@ -252,8 +248,8 @@ attributes #5 = { nounwind }
 !56 = !DILocation(line: 30, column: 13, scope: !52)
 !57 = !DILocalVariable(name: "i", scope: !58, file: !2, line: 32, type: !59)
 !58 = distinct !DILexicalBlock(scope: !52, file: !2, line: 31, column: 9)
-!59 = !DIDerivedType(tag: DW_TAG_typedef, name: "size_t", file: !60, line: 46, baseType: !61)
-!60 = !DIFile(filename: "/opt/llvm/lib/clang/16/include/stddef.h", directory: "", checksumkind: CSK_MD5, checksum: "f95079da609b0e8f201cb8136304bf3b")
+!59 = !DIDerivedType(tag: DW_TAG_typedef, name: "size_t", file: !60, line: 18, baseType: !61)
+!60 = !DIFile(filename: "/usr/lib/llvm-20/lib/clang/20/include/__stddef_size_t.h", directory: "", checksumkind: CSK_MD5, checksum: "2c44e821a2b1951cde2eb0fb2e656867")
 !61 = !DIBasicType(name: "unsigned long", size: 64, encoding: DW_ATE_unsigned)
 !62 = !DILocation(line: 32, column: 20, scope: !58)
 !63 = !DILocation(line: 34, column: 20, scope: !64)
@@ -282,7 +278,7 @@ attributes #5 = { nounwind }
 !86 = !DILocation(line: 40, column: 26, scope: !58)
 !87 = !DILocation(line: 40, column: 13, scope: !58)
 !88 = !DILocation(line: 43, column: 1, scope: !37)
-!89 = distinct !DISubprogram(name: "CWE121_Stack_Based_Buffer_Overflow__CWE805_int_alloca_loop_01_good", scope: !2, file: !2, line: 75, type: !38, scopeLine: 76, spFlags: DISPFlagDefinition, unit: !22, retainedNodes: !40)
+!89 = distinct !DISubprogram(name: "CWE121_Stack_Based_Buffer_Overflow__CWE805_int_alloca_loop_01_good", scope: !2, file: !2, line: 75, type: !38, scopeLine: 76, spFlags: DISPFlagDefinition, unit: !22)
 !90 = !DILocation(line: 77, column: 5, scope: !89)
 !91 = !DILocation(line: 78, column: 1, scope: !89)
 !92 = distinct !DISubprogram(name: "main", scope: !2, file: !2, line: 90, type: !93, scopeLine: 91, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !22, retainedNodes: !40)

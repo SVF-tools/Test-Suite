@@ -1,7 +1,7 @@
-; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/ae_assert_tests/BASIC_ptr_call2-0.c.bc'
-source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/BASIC_ptr_call2-0.c"
-target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
-target triple = "x86_64-unknown-linux-gnu"
+; ModuleID = '/root/test/once_more/SVF/Test-Suite/test_cases_bc/ae_assert_tests/BASIC_ptr_call2-0.c.bc'
+source_filename = "/root/test/once_more/SVF/Test-Suite/src/ae_assert_tests/BASIC_ptr_call2-0.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
 
 @.str = private unnamed_addr constant [2 x i8] c"X\00", align 1, !dbg !0
 
@@ -13,13 +13,13 @@ entry:
   %x = alloca i32, align 4
   %res = alloca i32, align 4
   store i32 0, ptr %retval, align 4
-  call void @llvm.dbg.declare(metadata ptr %y, metadata !23, metadata !DIExpression()), !dbg !24
+    #dbg_declare(ptr %y, !23, !DIExpression(), !24)
   %call = call i32 @c(i32 noundef 2), !dbg !25
   store i32 %call, ptr %y, align 4, !dbg !24
-  call void @llvm.dbg.declare(metadata ptr %x, metadata !26, metadata !DIExpression()), !dbg !27
+    #dbg_declare(ptr %x, !26, !DIExpression(), !27)
   %call1 = call i32 @c(i32 noundef 3), !dbg !28
   store i32 %call1, ptr %x, align 4, !dbg !27
-  call void @llvm.dbg.declare(metadata ptr %res, metadata !29, metadata !DIExpression()), !dbg !30
+    #dbg_declare(ptr %res, !29, !DIExpression(), !30)
   %0 = load i32, ptr %res, align 4, !dbg !31
   call void @set_value(i32 noundef %0, i32 noundef 2, i32 noundef 3), !dbg !32
   %1 = load i32, ptr %x, align 4, !dbg !33
@@ -30,28 +30,24 @@ entry:
   ret i32 0, !dbg !38
 }
 
-; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
-declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
-
 ; Function Attrs: noinline nounwind optnone uwtable
 define dso_local i32 @c(i32 noundef %z) #0 !dbg !39 {
 entry:
   %z.addr = alloca i32, align 4
   store i32 %z, ptr %z.addr, align 4
-  call void @llvm.dbg.declare(metadata ptr %z.addr, metadata !42, metadata !DIExpression()), !dbg !43
+    #dbg_declare(ptr %z.addr, !42, !DIExpression(), !43)
   %0 = load i32, ptr %z.addr, align 4, !dbg !44
   ret i32 %0, !dbg !45
 }
 
-declare void @set_value(i32 noundef, i32 noundef, i32 noundef) #2
+declare void @set_value(i32 noundef, i32 noundef, i32 noundef) #1
 
-declare void @svf_print(i32 noundef, ptr noundef) #2
+declare void @svf_print(i32 noundef, ptr noundef) #1
 
-declare void @svf_assert_eq(i32 noundef, i32 noundef) #2
+declare void @svf_assert_eq(i32 noundef, i32 noundef) #1
 
-attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 
 !llvm.dbg.cu = !{!7}
 !llvm.module.flags = !{!10, !11, !12, !13, !14, !15, !16}
@@ -59,13 +55,13 @@ attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protect
 
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
 !1 = distinct !DIGlobalVariable(scope: null, file: !2, line: 16, type: !3, isLocal: true, isDefinition: true)
-!2 = !DIFile(filename: "src/ae_assert_tests/BASIC_ptr_call2-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "d062e32c50bd991f94a65334c8d20b07")
+!2 = !DIFile(filename: "src/ae_assert_tests/BASIC_ptr_call2-0.c", directory: "/root/test/once_more/SVF/Test-Suite", checksumkind: CSK_MD5, checksum: "d062e32c50bd991f94a65334c8d20b07")
 !3 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 16, elements: !5)
 !4 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
 !5 = !{!6}
 !6 = !DISubrange(count: 2)
-!7 = distinct !DICompileUnit(language: DW_LANG_C11, file: !8, producer: "clang version 16.0.0", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !9, splitDebugInlining: false, nameTableKind: None)
-!8 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/BASIC_ptr_call2-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "d062e32c50bd991f94a65334c8d20b07")
+!7 = distinct !DICompileUnit(language: DW_LANG_C11, file: !8, producer: "Ubuntu clang version 20.1.3 (++20250415115034+9420327ad768-1~exp1~20250415235124.105)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !9, splitDebugInlining: false, nameTableKind: None)
+!8 = !DIFile(filename: "/root/test/once_more/SVF/Test-Suite/src/ae_assert_tests/BASIC_ptr_call2-0.c", directory: "/root/test/once_more/SVF/Test-Suite", checksumkind: CSK_MD5, checksum: "d062e32c50bd991f94a65334c8d20b07")
 !9 = !{!0}
 !10 = !{i32 7, !"Dwarf Version", i32 5}
 !11 = !{i32 2, !"Debug Info Version", i32 3}
@@ -74,7 +70,7 @@ attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protect
 !14 = !{i32 7, !"PIE Level", i32 2}
 !15 = !{i32 7, !"uwtable", i32 2}
 !16 = !{i32 7, !"frame-pointer", i32 2}
-!17 = !{!"clang version 16.0.0"}
+!17 = !{!"Ubuntu clang version 20.1.3 (++20250415115034+9420327ad768-1~exp1~20250415235124.105)"}
 !18 = distinct !DISubprogram(name: "main", scope: !2, file: !2, line: 11, type: !19, scopeLine: 11, spFlags: DISPFlagDefinition, unit: !7, retainedNodes: !22)
 !19 = !DISubroutineType(types: !20)
 !20 = !{!21}

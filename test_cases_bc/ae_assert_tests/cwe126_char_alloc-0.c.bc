@@ -1,7 +1,7 @@
-; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/ae_assert_tests/cwe126_char_alloc-0.c.bc'
-source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/cwe126_char_alloc-0.c"
-target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
-target triple = "x86_64-unknown-linux-gnu"
+; ModuleID = '/root/test/once_more/SVF/Test-Suite/test_cases_bc/ae_assert_tests/cwe126_char_alloc-0.c.bc'
+source_filename = "/root/test/once_more/SVF/Test-Suite/src/ae_assert_tests/cwe126_char_alloc-0.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
 
 ; Function Attrs: noinline nounwind optnone uwtable
 define dso_local i32 @main() #0 !dbg !13 {
@@ -9,15 +9,15 @@ entry:
   %data = alloca ptr, align 8
   %dataGoodBuffer = alloca ptr, align 8
   %dest = alloca [2 x i8], align 1
-  call void @llvm.dbg.declare(metadata ptr %data, metadata !19, metadata !DIExpression()), !dbg !20
-  call void @llvm.dbg.declare(metadata ptr %dataGoodBuffer, metadata !21, metadata !DIExpression()), !dbg !22
+    #dbg_declare(ptr %data, !19, !DIExpression(), !20)
+    #dbg_declare(ptr %dataGoodBuffer, !21, !DIExpression(), !22)
   %0 = alloca i8, i64 2, align 16, !dbg !23
   store ptr %0, ptr %dataGoodBuffer, align 8, !dbg !22
   %1 = load ptr, ptr %dataGoodBuffer, align 8, !dbg !24
   call void @llvm.memset.p0.i64(ptr align 1 %1, i8 65, i64 2, i1 false), !dbg !25
   %2 = load ptr, ptr %dataGoodBuffer, align 8, !dbg !26
   store ptr %2, ptr %data, align 8, !dbg !27
-  call void @llvm.dbg.declare(metadata ptr %dest, metadata !28, metadata !DIExpression()), !dbg !32
+    #dbg_declare(ptr %dest, !28, !DIExpression(), !32)
   %arraydecay = getelementptr inbounds [2 x i8], ptr %dest, i64 0, i64 0, !dbg !33
   %3 = load ptr, ptr %data, align 8, !dbg !34
   call void @llvm.memcpy.p0.p0.i64(ptr align 1 %arraydecay, ptr align 1 %3, i64 2, i1 false), !dbg !33
@@ -30,29 +30,25 @@ entry:
   ret i32 0, !dbg !38
 }
 
-; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
-declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
-
 ; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: write)
-declare void @llvm.memset.p0.i64(ptr nocapture writeonly, i8, i64, i1 immarg) #2
+declare void @llvm.memset.p0.i64(ptr nocapture writeonly, i8, i64, i1 immarg) #1
 
 ; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: readwrite)
-declare void @llvm.memcpy.p0.p0.i64(ptr noalias nocapture writeonly, ptr noalias nocapture readonly, i64, i1 immarg) #3
+declare void @llvm.memcpy.p0.p0.i64(ptr noalias nocapture writeonly, ptr noalias nocapture readonly, i64, i1 immarg) #2
 
-declare void @svf_assert(i1 noundef zeroext) #4
+declare void @svf_assert(i1 noundef zeroext) #3
 
-attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #2 = { nocallback nofree nounwind willreturn memory(argmem: write) }
-attributes #3 = { nocallback nofree nounwind willreturn memory(argmem: readwrite) }
-attributes #4 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { nocallback nofree nounwind willreturn memory(argmem: write) }
+attributes #2 = { nocallback nofree nounwind willreturn memory(argmem: readwrite) }
+attributes #3 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 
 !llvm.dbg.cu = !{!0}
 !llvm.module.flags = !{!5, !6, !7, !8, !9, !10, !11}
 !llvm.ident = !{!12}
 
-!0 = distinct !DICompileUnit(language: DW_LANG_C11, file: !1, producer: "clang version 16.0.0", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, retainedTypes: !2, splitDebugInlining: false, nameTableKind: None)
-!1 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/cwe126_char_alloc-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "351da6695ae80efab07e8f2abdc79525")
+!0 = distinct !DICompileUnit(language: DW_LANG_C11, file: !1, producer: "Ubuntu clang version 20.1.3 (++20250415115034+9420327ad768-1~exp1~20250415235124.105)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, retainedTypes: !2, splitDebugInlining: false, nameTableKind: None)
+!1 = !DIFile(filename: "/root/test/once_more/SVF/Test-Suite/src/ae_assert_tests/cwe126_char_alloc-0.c", directory: "/root/test/once_more/SVF/Test-Suite", checksumkind: CSK_MD5, checksum: "351da6695ae80efab07e8f2abdc79525")
 !2 = !{!3}
 !3 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !4, size: 64)
 !4 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
@@ -63,9 +59,9 @@ attributes #4 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protect
 !9 = !{i32 7, !"PIE Level", i32 2}
 !10 = !{i32 7, !"uwtable", i32 2}
 !11 = !{i32 7, !"frame-pointer", i32 2}
-!12 = !{!"clang version 16.0.0"}
+!12 = !{!"Ubuntu clang version 20.1.3 (++20250415115034+9420327ad768-1~exp1~20250415235124.105)"}
 !13 = distinct !DISubprogram(name: "main", scope: !14, file: !14, line: 13, type: !15, scopeLine: 13, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !18)
-!14 = !DIFile(filename: "src/ae_assert_tests/cwe126_char_alloc-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "351da6695ae80efab07e8f2abdc79525")
+!14 = !DIFile(filename: "src/ae_assert_tests/cwe126_char_alloc-0.c", directory: "/root/test/once_more/SVF/Test-Suite", checksumkind: CSK_MD5, checksum: "351da6695ae80efab07e8f2abdc79525")
 !15 = !DISubroutineType(types: !16)
 !16 = !{!17}
 !17 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)

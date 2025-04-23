@@ -1,7 +1,7 @@
-; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/ae_assert_tests/INTERVAL_test_8-0.c.bc'
-source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/INTERVAL_test_8-0.c"
-target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
-target triple = "x86_64-unknown-linux-gnu"
+; ModuleID = '/root/test/once_more/SVF/Test-Suite/test_cases_bc/ae_assert_tests/INTERVAL_test_8-0.c.bc'
+source_filename = "/root/test/once_more/SVF/Test-Suite/src/ae_assert_tests/INTERVAL_test_8-0.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
 
 @.str = private unnamed_addr constant [2 x i8] c"a\00", align 1, !dbg !0
 
@@ -11,8 +11,8 @@ entry:
   %retval = alloca i32, align 4
   %a = alloca i32, align 4
   store i32 0, ptr %retval, align 4
-  call void @llvm.dbg.declare(metadata ptr %a, metadata !23, metadata !DIExpression()), !dbg !24
-  %call = call i32 @rand() #4, !dbg !25
+    #dbg_declare(ptr %a, !23, !DIExpression(), !24)
+  %call = call i32 @rand() #3, !dbg !25
   store i32 %call, ptr %a, align 4, !dbg !24
   br label %while.cond, !dbg !26
 
@@ -37,21 +37,17 @@ while.end:                                        ; preds = %while.cond
   ret i32 %4, !dbg !39
 }
 
-; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
-declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
-
 ; Function Attrs: nounwind
-declare i32 @rand() #2
+declare i32 @rand() #1
 
-declare void @svf_print(i32 noundef, ptr noundef) #3
+declare void @svf_print(i32 noundef, ptr noundef) #2
 
-declare void @svf_assert(i1 noundef zeroext) #3
+declare void @svf_assert(i1 noundef zeroext) #2
 
-attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #2 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #3 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #4 = { nounwind }
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #3 = { nounwind }
 
 !llvm.dbg.cu = !{!7}
 !llvm.module.flags = !{!10, !11, !12, !13, !14, !15, !16}
@@ -59,13 +55,13 @@ attributes #4 = { nounwind }
 
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
 !1 = distinct !DIGlobalVariable(scope: null, file: !2, line: 11, type: !3, isLocal: true, isDefinition: true)
-!2 = !DIFile(filename: "src/ae_assert_tests/INTERVAL_test_8-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "4aab0612f11ebfc058dcdbc8142acd46")
+!2 = !DIFile(filename: "src/ae_assert_tests/INTERVAL_test_8-0.c", directory: "/root/test/once_more/SVF/Test-Suite", checksumkind: CSK_MD5, checksum: "4aab0612f11ebfc058dcdbc8142acd46")
 !3 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 16, elements: !5)
 !4 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
 !5 = !{!6}
 !6 = !DISubrange(count: 2)
-!7 = distinct !DICompileUnit(language: DW_LANG_C11, file: !8, producer: "clang version 16.0.0", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !9, splitDebugInlining: false, nameTableKind: None)
-!8 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/INTERVAL_test_8-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "4aab0612f11ebfc058dcdbc8142acd46")
+!7 = distinct !DICompileUnit(language: DW_LANG_C11, file: !8, producer: "Ubuntu clang version 20.1.3 (++20250415115034+9420327ad768-1~exp1~20250415235124.105)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !9, splitDebugInlining: false, nameTableKind: None)
+!8 = !DIFile(filename: "/root/test/once_more/SVF/Test-Suite/src/ae_assert_tests/INTERVAL_test_8-0.c", directory: "/root/test/once_more/SVF/Test-Suite", checksumkind: CSK_MD5, checksum: "4aab0612f11ebfc058dcdbc8142acd46")
 !9 = !{!0}
 !10 = !{i32 7, !"Dwarf Version", i32 5}
 !11 = !{i32 2, !"Debug Info Version", i32 3}
@@ -74,7 +70,7 @@ attributes #4 = { nounwind }
 !14 = !{i32 7, !"PIE Level", i32 2}
 !15 = !{i32 7, !"uwtable", i32 2}
 !16 = !{i32 7, !"frame-pointer", i32 2}
-!17 = !{!"clang version 16.0.0"}
+!17 = !{!"Ubuntu clang version 20.1.3 (++20250415115034+9420327ad768-1~exp1~20250415235124.105)"}
 !18 = distinct !DISubprogram(name: "main", scope: !2, file: !2, line: 6, type: !19, scopeLine: 6, spFlags: DISPFlagDefinition, unit: !7, retainedNodes: !22)
 !19 = !DISubroutineType(types: !20)
 !20 = !{!21}
