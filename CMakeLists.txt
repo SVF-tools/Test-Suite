@@ -328,7 +328,7 @@ foreach(filename ${ae_overflow_files})
   )
   add_test(
           NAME ae_recursion_tests/${filename}-widen-only
-          COMMAND ae -overflow -recur-handle=widen-only -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ae -overflow -handle-recur=widen-only -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
@@ -350,7 +350,7 @@ file(GLOB ae_recursion_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRE
 foreach(filename ${ae_recursion_files})
   add_test(
           NAME ae_recursion_tests/${filename}-widen-narrow
-          COMMAND ae -overflow -recur-handle=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ae -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
