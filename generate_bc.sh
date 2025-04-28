@@ -19,6 +19,7 @@ test_dirs="
   ae_overflow_tests
   ae_assert_tests
   ae_nullptr_deref_tests
+  ae_recursion_tests
 "
 
 
@@ -102,6 +103,9 @@ for td in $test_dirs; do
     then
         $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
     elif test $td == "ae_overflow_tests"
+    then
+        $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
+    elif test $td == "ae_recursion_tests"
     then
         $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
     else
