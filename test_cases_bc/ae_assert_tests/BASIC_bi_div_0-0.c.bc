@@ -72,7 +72,7 @@ attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protect
 !6 = !DISubrange(count: 2)
 !7 = !DIGlobalVariableExpression(var: !8, expr: !DIExpression())
 !8 = distinct !DIGlobalVariable(scope: null, file: !2, line: 11, type: !3, isLocal: true, isDefinition: true)
-!9 = distinct !DICompileUnit(language: DW_LANG_C11, file: !10, producer: "clang version 16.0.0", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !11, splitDebugInlining: false, nameTableKind: None)
+!9 = distinct !DICompileUnit(language: DW_LANG_C11, file: !10, producer: "clang version 16.0.4 (https://github.com/bjjwwang/LLVM-compile a0f79b14ca0360151ea799a9ad1d5932235bbee1)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !11, splitDebugInlining: false, nameTableKind: None)
 !10 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/BASIC_bi_div_0-0.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "12648ff6157c37feda6c3ed320560cee")
 !11 = !{!0, !7}
 !12 = !{i32 7, !"Dwarf Version", i32 5}
@@ -82,7 +82,7 @@ attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protect
 !16 = !{i32 7, !"PIE Level", i32 2}
 !17 = !{i32 7, !"uwtable", i32 2}
 !18 = !{i32 7, !"frame-pointer", i32 2}
-!19 = !{!"clang version 16.0.0"}
+!19 = !{!"clang version 16.0.4 (https://github.com/bjjwwang/LLVM-compile a0f79b14ca0360151ea799a9ad1d5932235bbee1)"}
 !20 = distinct !DISubprogram(name: "main", scope: !2, file: !2, line: 5, type: !21, scopeLine: 5, spFlags: DISPFlagDefinition, unit: !9, retainedNodes: !24)
 !21 = !DISubroutineType(types: !22)
 !22 = !{!23}
