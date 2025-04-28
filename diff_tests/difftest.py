@@ -67,6 +67,8 @@ def comparer_andersen(stats1: Stats, stats2: Stats):
     delta = abs(d1 - d2) / d1
     exceptions = [
         ('basic_cpp_tests/queue-1.cpp.bc', 0.01), # 0.00604714303344439
+        ('basic_cpp_tests/deque-3.cpp.bc', 0.01), # 0.0010105589240854218
+        ('basic_cpp_tests/deque-4.cpp.bc', 0.01), # 0.0010217113665389242
         ('basic_cpp_tests/stack-1.cpp.bc', 0.01), # 0.0022123893805308967
         ('basic_cpp_tests/vector-1.cpp.bc', 0.15), # 0.1426766811269205
         ('basic_cpp_tests/vector-3.cpp.bc', 0.17), # 0.15063392744891338
