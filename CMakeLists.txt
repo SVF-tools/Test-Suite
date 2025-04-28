@@ -327,8 +327,8 @@ foreach(filename ${ae_overflow_files})
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   add_test(
-          NAME ae_recursion_tests/${filename}-widen-top
-          COMMAND ae -overflow -recur-mode=widen-top -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          NAME ae_recursion_tests/${filename}-widen-only
+          COMMAND ae -overflow -recur-mode=widen-only -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
