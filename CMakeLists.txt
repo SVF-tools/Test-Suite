@@ -333,16 +333,16 @@ foreach(filename ${ae_overflow_files})
   )
 endforeach()
 
-## loops over ae_nullptr_deref_files and run "ae -null-ptr-deref $bc_file"
-#file(GLOB ae_nullptr_deref_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_nullptr_deref_tests/*.bc")
-#
-#foreach(filename ${ae_nullptr_deref_files})
-#  add_test(
-#          NAME ae_nullptr_deref_tests/${filename}
-#          COMMAND ae -null-ptr-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
-#          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-#  )
-#endforeach()
+# loops over ae_nullptr_deref_files and run "ae -null-ptr-deref $bc_file"
+file(GLOB ae_nullptr_deref_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_nullptr_deref_tests/*.bc")
+
+foreach(filename ${ae_nullptr_deref_files})
+  add_test(
+          NAME ae_nullptr_deref_tests/${filename}
+          COMMAND ae -null-ptr-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
 
 # loops over ae_recursion_files and run "ae -overflow $bc_file" under 3 recursion modes
 file(GLOB ae_recursion_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_recursion_tests/*.bc")
