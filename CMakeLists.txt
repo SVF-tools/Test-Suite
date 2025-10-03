@@ -141,8 +141,6 @@ foreach(folder ${diff_tests_anderson_folders})
     )
 
     # read and write ander
-    # change file extension to .pre.bc
-    string(REGEX REPLACE "[.]bc$" ".bc" readFile ${CMAKE_CURRENT_SOURCE_DIR}/${filename})
     add_test(
       NAME diff_tests-wr-ander/ander-read-write/${filename}
       COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/difftest.py
