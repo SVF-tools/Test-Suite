@@ -144,7 +144,7 @@ foreach(folder ${diff_tests_anderson_folders})
     add_test(
       NAME diff_tests-wr-ander/ander-read-write/${filename}
       COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/difftest.py
-        "wpa -ander -alias-check=false -dump-icfg -print-pts -write-ander=ir_annotator"
+        "svf-ex -ander -alias-check=false -dump-icfg -print-pts -write-ander=ir_annotator"
         "wpa -ander -alias-check=false -dump-icfg -print-pts -read-ander=ir_annotator"
         ${CMAKE_CURRENT_SOURCE_DIR}/${filename} ${readFile}
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
