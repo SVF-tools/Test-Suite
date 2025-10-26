@@ -12,6 +12,60 @@ foreach(filename ${type_infer_files})
   )
 endforeach()
 
+
+# graphdb-wpa tests (write + read)
+# graphdb-wpa tests (ctest -R graphdb-wpa_tests -VV)
+list(APPEND graphdb_folders
+  basic_c_tests
+  basic_cpp_tests
+  fs_tests
+  vfs_tests
+)
+
+list(APPEND graphdb_write_commands
+  "graphdb-wpa -ander -write2db"
+  "graphdb-wpa -ander -write2db"
+  "graphdb-wpa -fspta -write2db"
+  "graphdb-wpa -vfspta -write2db"
+)
+
+list(APPEND graphdb_read_commands
+  "graphdb-wpa -ander -read-from-db"
+  "graphdb-wpa -ander -read-from-db"
+  "graphdb-wpa -fspta -read-from-db"
+  "graphdb-wpa -vfspta -read-from-db"
+)
+
+list(LENGTH graphdb_folders graphdb_len1)
+math(EXPR graphdb_len2 "${graphdb_len1} - 1")
+
+# loops over each command in commands list
+foreach(i RANGE ${graphdb_len2})
+  # gets the command and folder of index i
+  list(GET graphdb_folders ${i} folder)
+  list(GET graphdb_write_commands ${i} write_cmd)
+  list(GET graphdb_read_commands ${i} read_cmd)
+  # creates a list of each file in folder
+  file(GLOB files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/${folder}/*.bc*")
+
+  # loops over each file creating a test
+  foreach(filename ${files})
+    if (${filename} MATCHES ".pre.bc" OR ${filename} MATCHES ".pre.svf.bc" OR ${filename} MATCHES ".svf.bc")
+      continue()
+    endif()
+
+    # Combine commands: use bash -c to execute write && read
+  add_test(
+    NAME graphdb-wpa_tests/${filename}
+    COMMAND bash -c
+          "${CMAKE_BINARY_DIR}/bin/${write_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}' && ${CMAKE_BINARY_DIR}/bin/${read_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}'"
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+
+  endforeach()
+endforeach()
+
+
 # wpa tests (ctest -R wpa_tests -VV)
 # folder and commands list act in parallel. e.g. for index 0 command "wpa -ander -stat=false" will be run on basic_c_tests folder.
 list(
@@ -140,18 +194,6 @@ foreach(folder ${diff_tests_anderson_folders})
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     )
 
-    # read and write ander
-    # change file extension to .pre.bc
-    string(REGEX REPLACE "[.]bc$" ".pre.svf.bc" readFile ${CMAKE_CURRENT_SOURCE_DIR}/${filename})
-    add_test(
-      NAME diff_tests-wr-ander/ander-read-write/${filename}
-      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/difftest.py
-        "svf-ex -ander -alias-check=false -dump-icfg -print-pts -write-ander=ir_annotator"
-        "svf-ex -ander -alias-check=false -dump-icfg -print-pts -read-ander=ir_annotator"
-        ${CMAKE_CURRENT_SOURCE_DIR}/${filename} ${readFile}
-      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-    )
-
   endforeach()
 endforeach()
 
@@ -177,6 +219,25 @@ foreach(file ${diff_tests_cruxbc})
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}-build/bin
     )
   endif()
+endforeach()
+
+# graphdb-saber tests (write + read)
+# Usage: ctest -R graphdb-saber_tests -VV
+# This test suite runs graphdb-saber on the same mem_leak cases as saber,
+# executing both write2db and read-from-db phases. A test passes only if both succeed.
+set(graphdb_saber_write_cmd "graphdb-saber -leak -valid-tests -stat=false -write2db")
+set(graphdb_saber_read_cmd  "graphdb-saber -leak -valid-tests -stat=false -read-from-db")
+file(GLOB mem_leak_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/mem_leak/*.bc*")
+string(REPLACE " " ";" commandtemp ${cmd})
+set(command ${commandtemp})
+# loops over each file creating a test
+foreach(filename ${mem_leak_files})
+  add_test(
+    NAME graphdb-saber_tests/${filename}
+    COMMAND bash -c
+      "${CMAKE_BINARY_DIR}/bin/${graphdb_saber_write_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}' && ${CMAKE_BINARY_DIR}/bin/${graphdb_saber_read_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}'"
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
 endforeach()
 
 # saber mem_leak tests  (ctest -R mem_leak -VV)
