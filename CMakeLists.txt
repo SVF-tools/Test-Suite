@@ -55,13 +55,16 @@ foreach(i RANGE ${graphdb_len2})
     endif()
 
     # Combine commands: use bash -c to execute write && read
-  add_test(
-    NAME graphdb-wpa_tests/${filename}
-    COMMAND bash -c
-          "${CMAKE_BINARY_DIR}/bin/${write_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}' && ${CMAKE_BINARY_DIR}/bin/${read_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}'"
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-  )
-
+    if (TARGET graphdb-wpa)
+      add_test(
+        NAME graphdb-wpa_tests/${filename}
+        COMMAND bash -c
+              "${CMAKE_BINARY_DIR}/bin/${write_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}' && ${CMAKE_BINARY_DIR}/bin/${read_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}'"
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+      )
+    else()
+      message(WARNING "Skipping graphdb-wpa because binary not found")
+  endif()
   endforeach()
 endforeach()
 
@@ -221,7 +224,7 @@ foreach(file ${diff_tests_cruxbc})
   endif()
 endforeach()
 
-# graphdb-saber tests (write + read)
+# graphdb-saber mem_leak tests (write + read)
 # Usage: ctest -R graphdb-saber_tests -VV
 # This test suite runs graphdb-saber on the same mem_leak cases as saber,
 # executing both write2db and read-from-db phases. A test passes only if both succeed.
@@ -232,12 +235,16 @@ string(REPLACE " " ";" commandtemp ${cmd})
 set(command ${commandtemp})
 # loops over each file creating a test
 foreach(filename ${mem_leak_files})
-  add_test(
-    NAME graphdb-saber_tests/${filename}
-    COMMAND bash -c
-      "${CMAKE_BINARY_DIR}/bin/${graphdb_saber_write_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}' && ${CMAKE_BINARY_DIR}/bin/${graphdb_saber_read_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}'"
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-  )
+  if (TARGET graphdb-saber)
+      add_test(
+        NAME graphdb-saber_tests/${filename}
+        COMMAND bash -c
+          "${CMAKE_BINARY_DIR}/bin/${graphdb_saber_write_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}' && ${CMAKE_BINARY_DIR}/bin/${graphdb_saber_read_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}'"
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+      )
+  else()
+    message(WARNING "Skipping graphdb-saber because binary not found")
+  endif()
 endforeach()
 
 # saber mem_leak tests  (ctest -R mem_leak -VV)
