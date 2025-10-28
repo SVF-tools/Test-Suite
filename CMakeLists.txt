@@ -261,6 +261,29 @@ foreach(filename ${mem_leak_files})
   )
 endforeach()
 
+# graphdb-saber double_free test (write + read)
+# Usage: ctest -R graphdb-saber_double_free_test -VV
+# This test suite runs graphdb-saber on the same mem_leak cases as saber,
+# executing both write2db and read-from-db phases. A test passes only if both succeed.
+set(graphdb_saber_double_free_write_cmd "graphdb-saber -dfree -valid-tests -stat=false  -write2db")
+set(graphdb_saber_double_free_read_cmd  "graphdb-saber -dfree -valid-tests -stat=false -read-from-db")
+file(GLOB doublefree_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/double_free/*.bc*")
+string(REPLACE " " ";" commandtemp ${cmd})
+set(command ${commandtemp})
+# loops over each file creating a test
+foreach(filename ${doublefree_files})
+  if (TARGET graphdb-saber)
+      add_test(
+        NAME graphdb-saber_double_free_test/${filename}
+        COMMAND bash -c
+          "${CMAKE_BINARY_DIR}/bin/${graphdb_saber_double_free_write_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}' && ${CMAKE_BINARY_DIR}/bin/${graphdb_saber_double_free_read_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}'"
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+      )
+  else()
+    message(WARNING "Skipping graphdb-saber because binary not found")
+  endif()
+endforeach()
+
 # saber double_free tests (ctest -R double_free -VV)
 set(cmd "saber -dfree -valid-tests -stat=false")
 file(GLOB doublefree_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/double_free/*.bc*")
