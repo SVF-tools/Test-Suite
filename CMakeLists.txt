@@ -194,7 +194,19 @@ foreach(folder ${diff_tests_anderson_folders})
         ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     )
-
+    
+    # read and write ander
+    # change file extension to .pre.bc
+    string(REGEX REPLACE "[.]bc$" ".pre.svf.bc" readFile ${CMAKE_CURRENT_SOURCE_DIR}/${filename})
+    add_test(
+      NAME diff_tests-wr-ander/ander-read-write/${filename}
+      COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/difftest.py
+        "svf-ex -ander -alias-check=false -dump-icfg -print-pts -write-ander=ir_annotator"
+        "svf-ex -ander -alias-check=false -dump-icfg -print-pts -read-ander=ir_annotator"
+        ${CMAKE_CURRENT_SOURCE_DIR}/${filename} ${readFile}
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+    )
+    
   endforeach()
 endforeach()
 
