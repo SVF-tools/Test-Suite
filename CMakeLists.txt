@@ -62,8 +62,6 @@ foreach(i RANGE ${graphdb_len2})
               "${CMAKE_BINARY_DIR}/bin/${write_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}' && ${CMAKE_BINARY_DIR}/bin/${read_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}'"
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
       )
-    else()
-      message(WARNING "Skipping graphdb-wpa because binary not found")
   endif()
   endforeach()
 endforeach()
@@ -242,8 +240,6 @@ foreach(filename ${mem_leak_files})
           "${CMAKE_BINARY_DIR}/bin/${graphdb_saber_write_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}' && ${CMAKE_BINARY_DIR}/bin/${graphdb_saber_read_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}'"
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
       )
-  else()
-    message(WARNING "Skipping graphdb-saber because binary not found")
   endif()
 endforeach()
 
