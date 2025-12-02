@@ -12,6 +12,26 @@ foreach(filename ${type_infer_files})
   )
 endforeach()
 
+# graphdb-wpa object type inference tests (write + read)
+# Usage: ctest -R graphdb-objtype_tests -VV
+set(graphdb_objtype_write_cmd "graphdb-wpa -type -stat=false -write2db")
+set(graphdb_objtype_read_cmd  "graphdb-wpa -type -stat=false -read-from-db")
+file(GLOB type_infer_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/objtype_tests/*.bc*")
+string(REPLACE " " ";" commandtemp ${cmd})
+set(command ${commandtemp})
+foreach(filename ${type_infer_files})
+  if (TARGET graphdb-wpa)
+    add_test(
+      NAME graphdb-objtype_tests/${filename}
+      COMMAND bash -c
+        "${CMAKE_BINARY_DIR}/bin/${graphdb_objtype_write_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}' \
+         && ${CMAKE_BINARY_DIR}/bin/${graphdb_objtype_read_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}'"
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+    )
+  else()
+    message(WARNING "Skipping graphdb-objtype_tests because graphdb-wpa binary not found")
+  endif()
+endforeach()
 
 # graphdb-wpa tests (write + read)
 # graphdb-wpa tests (ctest -R graphdb-wpa_tests -VV)
@@ -154,6 +174,57 @@ foreach(i RANGE ${dvf_len2})
     )
   endforeach()
 endforeach()
+# graphdb dvf and mta tests (write + read)
+# Usage: ctest -R graphdb-dvf_tests -VV
+list(APPEND graphdb_dvf_folders
+  fs_tests
+  cs_tests
+  mta
+)
+list(APPEND graphdb_dvf_binaries
+  "graphdb-dvf"   # for fs_tests
+  "graphdb-dvf"   # for cs_tests
+  "graphdb-mta"   # for mta
+)
+list(APPEND graphdb_dvf_args
+  "-dfs -print-pts=false"   # for fs_tests
+  "-cxt -print-pts=false"   # for cs_tests
+  ""                        # for mta
+)
+list(LENGTH graphdb_dvf_folders dvf_len1)
+math(EXPR dvf_len2 "${dvf_len1} - 1")
+
+foreach(i RANGE ${dvf_len2})
+  list(GET graphdb_dvf_folders  ${i} folder)
+  list(GET graphdb_dvf_binaries ${i} binary)
+  list(GET graphdb_dvf_args     ${i} args)
+
+  file(GLOB files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+       "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/${folder}/*.bc*")
+
+  foreach(filename ${files})
+    if (${filename} MATCHES ".pre.bc" OR
+        ${filename} MATCHES ".pre.svf.bc" OR
+        ${filename} MATCHES ".svf.bc")
+      continue()
+    endif()
+
+    if (TARGET ${binary})
+      set(write_cmd "${binary} ${args} -write2db")
+      set(read_cmd  "${binary} ${args} -read-from-db")
+
+      add_test(
+        NAME graphdb-dvf_tests/${folder}/${filename}
+        COMMAND bash -c
+          "${CMAKE_BINARY_DIR}/bin/${write_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}' \
+           && ${CMAKE_BINARY_DIR}/bin/${read_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}'"
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+      )
+    else()
+      message(WARNING "Skipping graphdb-dvf_tests for ${folder} because target '${binary}' not found")
+    endif()
+  endforeach()
+endforeach()
 
 # differential_tests fspta-vfspta  (ctest -R diff_tests-fs -VV)
 file(GLOB files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/fs_tests/*.bc*")
@@ -267,6 +338,29 @@ foreach(filename ${mem_leak_files})
       COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
+endforeach()
+
+# graphdb-saber double_free test (write + read)
+# Usage: ctest -R graphdb-saber_double_free_test -VV
+# This test suite runs graphdb-saber on the same mem_leak cases as saber,
+# executing both write2db and read-from-db phases. A test passes only if both succeed.
+set(graphdb_saber_double_free_write_cmd "graphdb-saber -dfree -valid-tests -stat=false  -write2db")
+set(graphdb_saber_double_free_read_cmd  "graphdb-saber -dfree -valid-tests -stat=false -read-from-db")
+file(GLOB doublefree_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/double_free/*.bc*")
+string(REPLACE " " ";" commandtemp ${cmd})
+set(command ${commandtemp})
+# loops over each file creating a test
+foreach(filename ${doublefree_files})
+  if (TARGET graphdb-saber)
+      add_test(
+        NAME graphdb-saber_double_free_test/${filename}
+        COMMAND bash -c
+          "${CMAKE_BINARY_DIR}/bin/${graphdb_saber_double_free_write_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}' && ${CMAKE_BINARY_DIR}/bin/${graphdb_saber_double_free_read_cmd} '${CMAKE_CURRENT_SOURCE_DIR}/${filename}'"
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+      )
+  else()
+    message(WARNING "Skipping graphdb-saber because binary not found")
+  endif()
 endforeach()
 
 # saber double_free tests (ctest -R double_free -VV)
