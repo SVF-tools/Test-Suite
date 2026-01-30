@@ -20,6 +20,7 @@ test_dirs="
   ae_assert_tests
   ae_nullptr_deref_tests
   ae_recursion_tests
+  ae_wto_assert
 "
 
 
@@ -84,7 +85,7 @@ for td in $test_dirs; do
     ########
     compiler=""
     if [ "$ext" = "c" ]; then
-        compiler="clang"
+        compiler="/data1/wjw/SVF-projects/baseline/SVF/llvm-18.1.0.obj/bin/clang"
     else
         compiler="clang++"
     fi
@@ -108,11 +109,14 @@ for td in $test_dirs; do
     elif test $td == "ae_recursion_tests"
     then
         $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
+    elif test $td == "ae_wto_assert"
+    then
+        $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
     else
         $compiler -Wno-everything -S -emit-llvm -fno-discard-value-names -I"$root" "$c_f" -o "$bc_f"
     fi
     #llvm-as "$bc_f" -o "$bc_f"
-    opt -S -p=mem2reg "$bc_f" -o "$bc_f"
+    /data1/wjw/SVF-projects/baseline/SVF/llvm-18.1.0.obj/bin/opt -S -p=mem2reg "$bc_f" -o "$bc_f"
   done
 done
 
