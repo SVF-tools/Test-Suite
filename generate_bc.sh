@@ -85,7 +85,7 @@ for td in $test_dirs; do
     ########
     compiler=""
     if [ "$ext" = "c" ]; then
-        compiler="/data1/wjw/SVF-projects/baseline/SVF/llvm-18.1.0.obj/bin/clang"
+        compiler="clang"
     else
         compiler="clang++"
     fi
@@ -116,7 +116,7 @@ for td in $test_dirs; do
         $compiler -Wno-everything -S -emit-llvm -fno-discard-value-names -I"$root" "$c_f" -o "$bc_f"
     fi
     #llvm-as "$bc_f" -o "$bc_f"
-    /data1/wjw/SVF-projects/baseline/SVF/llvm-18.1.0.obj/bin/opt -S -p=mem2reg "$bc_f" -o "$bc_f"
+    opt -S -p=mem2reg "$bc_f" -o "$bc_f"
   done
 done
 
