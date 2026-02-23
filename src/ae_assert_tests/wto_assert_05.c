@@ -7,7 +7,13 @@
  * Expected: All assertions should PASS after proper WTO analysis
  */
 
-#include "svf_assert.h"
+ #include <stdlib.h>
+ #include "stdbool.h"
+ #include "math.h"
+ extern void svf_assert(bool);
+ extern void svf_assert_eq(int, int);
+ 
+ extern void svf_print(int, char*);
 
 int main() {
     int n = rand();
