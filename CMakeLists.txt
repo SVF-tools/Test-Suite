@@ -481,8 +481,13 @@ file(GLOB ae_assert_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_
 
 foreach(filename ${ae_assert_files})
   add_test(
-          NAME ae_assert_tests/${filename}
+          NAME ae-dense_assert_tests/${filename}
           COMMAND ae ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+  add_test(
+          NAME ae-sparse_assert_tests/${filename}
+          COMMAND ae -sparse ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
@@ -492,13 +497,23 @@ file(GLOB ae_overflow_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURREN
 
 foreach(filename ${ae_overflow_files})
   add_test(
-          NAME ae_overflow_tests/${filename}
+          NAME ae-dense_overflow_tests/${filename}
           COMMAND ae -overflow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   add_test(
-          NAME ae_recursion_tests/${filename}-widen-narrow
+          NAME ae-dense_recursion_tests/${filename}-widen-narrow
           COMMAND ae -overflow -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+  add_test(
+          NAME ae-sparse_overflow_tests/${filename}
+          COMMAND ae -sparse -overflow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+  add_test(
+          NAME ae-sparse_recursion_tests/${filename}-widen-narrow
+          COMMAND ae -sparse -overflow -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
@@ -508,8 +523,13 @@ file(GLOB ae_nullptr_deref_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_C
 
 foreach(filename ${ae_nullptr_deref_files})
   add_test(
-          NAME ae_nullptr_deref_tests/${filename}
+          NAME ae-dense_nullptr_deref_tests/${filename}
           COMMAND ae -null-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+  add_test(
+          NAME ae-sparse_nullptr_deref_tests/${filename}
+          COMMAND ae -sparse -null-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
@@ -519,12 +539,16 @@ file(GLOB ae_recursion_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRE
 
 foreach(filename ${ae_recursion_files})
   add_test(
-          NAME ae_recursion_tests/${filename}-widen-narrow
+          NAME ae-dense_recursion_tests/${filename}-widen-narrow
           COMMAND ae -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
+  add_test(
+          NAME ae-sparse_recursion_tests/${filename}-widen-narrow
+          COMMAND ae -sparse -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
 endforeach()
-
 
 ## symbolic abstraction tests  (ctest -R symabs -VV)
 set(cmd "ae  -symabs")
