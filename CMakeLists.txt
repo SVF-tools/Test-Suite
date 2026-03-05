@@ -476,55 +476,126 @@ foreach(file ${diff_tests_cruxbc_big})
   )
 endforeach()
 
-# loops over ae_assert_files and run "ae $bc_file"
-file(GLOB ae_assert_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_assert_tests/*.bc")
+# =============================================================================
+# AE tests using ae_pass (dense+sparse) and ae_dense_pass (dense only)
+# =============================================================================
+# ae_pass/       — tests that pass in both dense and sparse modes
+# ae_dense_pass/ — tests that pass in dense only (sparse precision loss expected)
 
-foreach(filename ${ae_assert_files})
+# --- ae_assert tests ---
+# ae_pass: dense + sparse
+file(GLOB ae_assert_pass_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/ae_pass/ae_assert_tests/*.bc")
+foreach(filename ${ae_assert_pass_files})
   add_test(
-          NAME ae_assert_tests/${filename}
+          NAME ae-dense_assert_tests/${filename}
+          COMMAND ae ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+  add_test(
+          NAME ae-sparse_assert_tests/${filename}
+          COMMAND ae -sparse ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+# ae_dense_pass: dense only
+file(GLOB ae_assert_dense_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/ae_dense_pass/ae_assert_tests/*.bc")
+foreach(filename ${ae_assert_dense_files})
+  add_test(
+          NAME ae-dense_assert_tests/${filename}
           COMMAND ae ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
 
-# loops over ae_overflow_files and run "ae -overflow $bc_file"
-file(GLOB ae_overflow_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_overflow_tests/*.bc")
-
-foreach(filename ${ae_overflow_files})
+# --- ae_overflow tests ---
+# ae_pass: dense + sparse
+file(GLOB ae_overflow_pass_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/ae_pass/ae_overflow_tests/*.bc")
+foreach(filename ${ae_overflow_pass_files})
   add_test(
-          NAME ae_overflow_tests/${filename}
+          NAME ae-dense_overflow_tests/${filename}
           COMMAND ae -overflow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   add_test(
-          NAME ae_recursion_tests/${filename}-widen-narrow
+          NAME ae-dense_overflow_tests/${filename}-widen-narrow
+          COMMAND ae -overflow -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+  add_test(
+          NAME ae-sparse_overflow_tests/${filename}
+          COMMAND ae -sparse -overflow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+  add_test(
+          NAME ae-sparse_overflow_tests/${filename}-widen-narrow
+          COMMAND ae -sparse -overflow -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+# ae_dense_pass: dense only
+file(GLOB ae_overflow_dense_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/ae_dense_pass/ae_overflow_tests/*.bc")
+foreach(filename ${ae_overflow_dense_files})
+  add_test(
+          NAME ae-dense_overflow_tests/${filename}
+          COMMAND ae -overflow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+  add_test(
+          NAME ae-dense_overflow_tests/${filename}-widen-narrow
           COMMAND ae -overflow -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
 
-# loops over ae_nullptr_deref_files and run "ae -null-deref $bc_file"
-file(GLOB ae_nullptr_deref_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_nullptr_deref_tests/*.bc")
-
-foreach(filename ${ae_nullptr_deref_files})
+# --- ae_nullptr_deref tests ---
+# ae_pass: dense + sparse
+file(GLOB ae_nullptr_pass_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/ae_pass/ae_nullptr_deref_tests/*.bc")
+foreach(filename ${ae_nullptr_pass_files})
   add_test(
-          NAME ae_nullptr_deref_tests/${filename}
+          NAME ae-dense_nullptr_deref_tests/${filename}
+          COMMAND ae -null-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+  add_test(
+          NAME ae-sparse_nullptr_deref_tests/${filename}
+          COMMAND ae -sparse -null-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+# ae_dense_pass: dense only
+file(GLOB ae_nullptr_dense_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/ae_dense_pass/ae_nullptr_deref_tests/*.bc")
+foreach(filename ${ae_nullptr_dense_files})
+  add_test(
+          NAME ae-dense_nullptr_deref_tests/${filename}
           COMMAND ae -null-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
 
-# loops over ae_recursion_files and run "ae -overflow $bc_file" under 3 recursion modes
-file(GLOB ae_recursion_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_recursion_tests/*.bc")
-
-foreach(filename ${ae_recursion_files})
+# --- ae_recursion tests ---
+# ae_pass: dense + sparse (currently empty — all recursion tests fail in sparse)
+file(GLOB ae_recursion_pass_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/ae_pass/ae_recursion_tests/*.bc")
+foreach(filename ${ae_recursion_pass_files})
   add_test(
-          NAME ae_recursion_tests/${filename}-widen-narrow
+          NAME ae-dense_recursion_tests/${filename}-widen-narrow
+          COMMAND ae -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+  add_test(
+          NAME ae-sparse_recursion_tests/${filename}-widen-narrow
+          COMMAND ae -sparse -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+# ae_dense_pass: dense only
+file(GLOB ae_recursion_dense_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/ae_dense_pass/ae_recursion_tests/*.bc")
+foreach(filename ${ae_recursion_dense_files})
+  add_test(
+          NAME ae-dense_recursion_tests/${filename}-widen-narrow
           COMMAND ae -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
-
 
 ## symbolic abstraction tests  (ctest -R symabs -VV)
 set(cmd "ae  -symabs")
