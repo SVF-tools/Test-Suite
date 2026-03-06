@@ -1,88 +1,85 @@
 #!/bin/sh
-# Generate bitcode for the .c/.cpp tests in $test_dirs.
+# Generate bitcode for the .c/.cpp tests.
+# Each entry in all_dirs is "src_subpath:bc_subpath".
+# - Non-AE tests: src under src/<dir>, bc under test_cases_bc/<dir>
+# - AE tests: src under src/ae_pass/<dir> or src/ae_dense_pass/<dir>,
+#             bc under ae_pass/<dir> or ae_dense_pass/<dir>
 
 sysOS=$(uname -s)
 
-test_dirs="
-  basic_c_tests
-  basic_cpp_tests
-  complex_tests
-  cpp_types
-  cs_tests
-  fs_tests
-  mem_leak
-  double_free
-  mta
-  non_annotated_tests
-  path_tests
-  objtype_tests
-  ae_overflow_tests
-  ae_assert_tests
-  ae_nullptr_deref_tests
-  ae_recursion_tests
-  ae_wto_assert
+all_dirs="
+  basic_c_tests:test_cases_bc/basic_c_tests
+  basic_cpp_tests:test_cases_bc/basic_cpp_tests
+  complex_tests:test_cases_bc/complex_tests
+  cpp_types:test_cases_bc/cpp_types
+  cs_tests:test_cases_bc/cs_tests
+  fs_tests:test_cases_bc/fs_tests
+  mem_leak:test_cases_bc/mem_leak
+  double_free:test_cases_bc/double_free
+  mta:test_cases_bc/mta
+  non_annotated_tests:test_cases_bc/non_annotated_tests
+  path_tests:test_cases_bc/path_tests
+  objtype_tests:test_cases_bc/objtype_tests
+  ae_pass/ae_assert_tests:ae_pass/ae_assert_tests
+  ae_pass/ae_nullptr_deref_tests:ae_pass/ae_nullptr_deref_tests
+  ae_pass/ae_overflow_tests:ae_pass/ae_overflow_tests
+  ae_pass/ae_recursion_tests:ae_pass/ae_recursion_tests
+  ae_dense_pass/ae_assert_tests:ae_dense_pass/ae_assert_tests
+  ae_dense_pass/ae_nullptr_deref_tests:ae_dense_pass/ae_nullptr_deref_tests
+  ae_dense_pass/ae_overflow_tests:ae_dense_pass/ae_overflow_tests
+  ae_dense_pass/ae_recursion_tests:ae_dense_pass/ae_recursion_tests
 "
 
-
 root=$(cd "$(dirname "$0")"; pwd)
-bc_path="$root/test_cases_bc"
 
 if [[ $sysOS == "Linux" ]];then
 
 ########
-# Remove previous bc folder and create a new one.
+# Remove previous bc folders and create new ones.
 ########
+git rm -rf "$root/test_cases_bc"
+git rm -rf "$root/ae_pass" 2>/dev/null || true
+git rm -rf "$root/ae_dense_pass" 2>/dev/null || true
+mkdir -p "$root/test_cases_bc"
 
-git rm -rf "$bc_path"
-mkdir -p "$bc_path"
+########
+# Loops through each entry in all_dirs.
+########
+for entry in $all_dirs; do
+  src_sub="${entry%%:*}"
+  bc_sub="${entry##*:}"
 
-########
-# Loops through each folder in test_dirs.
-########
-for td in $test_dirs; do
-  ########
-  # Creates a directory for each listed folder.
-  ########
-  bc_td="$bc_path/$td"
+  full_td="$root/src/$src_sub"
+  bc_td="$root/$bc_sub"
+
+  # Skip if source dir doesn't exist
+  [ -d "$full_td" ] || continue
+
   mkdir -p "$bc_td"
 
-  ########
-  # Full path to the test dir.
-  ########
-  full_td="$root/src/$td"
+  # Determine if this is an AE test directory
+  is_ae=false
+  case "$src_sub" in
+    ae_pass/*|ae_dense_pass/*) is_ae=true ;;
+  esac
 
-  ########
-  # Loops through each file within the folder.
-  ########
+  # Extract the leaf directory name for mem_leak check
+  leaf="${src_sub##*/}"
+
   for c_f in "$full_td/"*; do
-    ########
-    # Obtains the text after the '.'.
-    ########
     ext=${c_f##*.}
 
-    ########
-    # We only look for .c/.cpp files. Check $ext = $f in case the filename is c/cpp.
-    ########
     if [ \( "$ext" != "cpp" -a "$ext" != "c" \) -o "$ext" = "$f" ]
     then
         continue
     fi
 
-    ########
-    # The output .bc file name.
-    ########
-    bc_f="$bc_td/`basename "$c_f"`.bc"
+    bc_f="$bc_td/$(basename "$c_f").bc"
 
-    ########
-    # If the .bc is newer than the .c/.cpp, then no need to compile.
-    ########
     if [ "$bc_f" -nt "$c_f" ]; then
         continue
     fi
 
-    ########
-    # Set up the compiler to clang if the file extension is c else clang++.
-    ########
     compiler=""
     if [ "$ext" = "c" ]; then
         compiler="clang"
@@ -93,25 +90,10 @@ for td in $test_dirs; do
     echo "$0: Compiling '$c_f'"
     echo "$0:        to '$bc_f'"
 
-    ########
-    # created a .ll, let's make it .bc, as the filename suggests.
-    ########
-    if test $td == "mem_leak"
-    then
+    if [ "$is_ae" = true ]; then
+        $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
+    elif test "$leaf" == "mem_leak"; then
         $compiler -Wno-everything -S -emit-llvm -fno-discard-value-names -g -I"$root" "$c_f" -o "$bc_f"
-    # td = "ae_assert_tests" or "ae_overflow_tests"
-    elif test $td == "ae_assert_tests"
-    then
-        $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
-    elif test $td == "ae_overflow_tests"
-    then
-        $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
-    elif test $td == "ae_recursion_tests"
-    then
-        $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
-    elif test $td == "ae_wto_assert"
-    then
-        $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
     else
         $compiler -Wno-everything -S -emit-llvm -fno-discard-value-names -I"$root" "$c_f" -o "$bc_f"
     fi
