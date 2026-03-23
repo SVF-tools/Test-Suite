@@ -1,11 +1,9 @@
 #include "stdbool.h"
 extern void svf_assert(bool);
-extern void set_value(int, int, int);
-#include <assert.h>
 
 void foo(int* i) {
     int a = *i % 2;
-    switch (a) 
+    switch (a)
     {
         case 0:
             break;
@@ -19,8 +17,7 @@ void foo(int* i) {
 }
 
 int main() {
-    int i;
-    set_value(i, 1, 1);
+    int i = 1;
     if (i >= 0) {
         foo(&i);
         svf_assert(i % 2 == 0);
