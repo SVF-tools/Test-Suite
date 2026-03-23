@@ -485,6 +485,11 @@ foreach(filename ${ae_assert_files})
           COMMAND ae ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
+  add_test(
+          NAME semi_sparse_ae_assert_tests/${filename}
+          COMMAND ae -semi-sparse ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
 endforeach()
 
 # loops over ae_overflow_files and run "ae -overflow $bc_file"
@@ -501,6 +506,16 @@ foreach(filename ${ae_overflow_files})
           COMMAND ae -overflow -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
+  add_test(
+          NAME semi_sparse_ae_overflow_tests/${filename}
+          COMMAND ae -semi-sparse -overflow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+  add_test(
+          NAME semi_sparse_ae_recursion_tests/${filename}-widen-narrow
+          COMMAND ae -semi-sparse -overflow -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
 endforeach()
 
 # loops over ae_nullptr_deref_files and run "ae -null-deref $bc_file"
@@ -512,6 +527,11 @@ foreach(filename ${ae_nullptr_deref_files})
           COMMAND ae -null-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
+  add_test(
+          NAME semi_sparse_ae_nullptr_deref_tests/${filename}
+          COMMAND ae -semi-sparse -null-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
 endforeach()
 
 # loops over ae_recursion_files and run "ae -overflow $bc_file" under 3 recursion modes
@@ -521,6 +541,11 @@ foreach(filename ${ae_recursion_files})
   add_test(
           NAME ae_recursion_tests/${filename}-widen-narrow
           COMMAND ae -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+  add_test(
+          NAME semi_sparse_ae_recursion_tests/${filename}-widen-narrow
+          COMMAND ae -semi-sparse -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
