@@ -487,7 +487,7 @@ foreach(filename ${ae_assert_files})
   )
   add_test(
           NAME semi_sparse_ae_assert_tests/${filename}
-          COMMAND ae -semi-sparse ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ae -ae-sparsity=semi-sparse ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
@@ -508,12 +508,12 @@ foreach(filename ${ae_overflow_files})
   )
   add_test(
           NAME semi_sparse_ae_overflow_tests/${filename}
-          COMMAND ae -semi-sparse -overflow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ae -ae-sparsity=semi-sparse -overflow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   add_test(
           NAME semi_sparse_ae_recursion_tests/${filename}-widen-narrow
-          COMMAND ae -semi-sparse -overflow -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ae -ae-sparsity=semi-sparse -overflow -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
@@ -529,7 +529,7 @@ foreach(filename ${ae_nullptr_deref_files})
   )
   add_test(
           NAME semi_sparse_ae_nullptr_deref_tests/${filename}
-          COMMAND ae -semi-sparse -null-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ae -ae-sparsity=semi-sparse -null-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
@@ -545,7 +545,7 @@ foreach(filename ${ae_recursion_files})
   )
   add_test(
           NAME semi_sparse_ae_recursion_tests/${filename}-widen-narrow
-          COMMAND ae -semi-sparse -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ae -ae-sparsity=semi-sparse -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
