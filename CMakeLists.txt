@@ -479,13 +479,14 @@ endforeach()
 # ae_assert tests (ctest -R ae_assert_test -VV) + semi-sparse (ctest -R ae_semi_sparse -VV)
 file(GLOB ae_assert_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_assert_tests/*.bc")
 foreach(filename ${ae_assert_files})
+  get_filename_component(basename ${filename} NAME)
   add_test(
           NAME ae_assert_tests/${filename}
           COMMAND ae ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   add_test(
-          NAME ae_semi_sparse/assert/${filename}
+          NAME ae_semi_sparse/assert/${basename}
           COMMAND ae -ae-sparsity=semi-sparse ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
@@ -494,6 +495,7 @@ endforeach()
 # ae_overflow tests (ctest -R ae_overflow_test -VV) + semi-sparse (ctest -R ae_semi_sparse -VV)
 file(GLOB ae_overflow_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_overflow_tests/*.bc")
 foreach(filename ${ae_overflow_files})
+  get_filename_component(basename ${filename} NAME)
   add_test(
           NAME ae_overflow_tests/${filename}
           COMMAND ae -overflow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
@@ -505,12 +507,12 @@ foreach(filename ${ae_overflow_files})
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   add_test(
-          NAME ae_semi_sparse/overflow/${filename}
+          NAME ae_semi_sparse/overflow/${basename}
           COMMAND ae -ae-sparsity=semi-sparse -overflow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   add_test(
-          NAME ae_semi_sparse/recursion/${filename}-widen-narrow
+          NAME ae_semi_sparse/recursion_from_overflow/${basename}-widen-narrow
           COMMAND ae -ae-sparsity=semi-sparse -overflow -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
@@ -519,13 +521,14 @@ endforeach()
 # ae_nullptr_deref tests (ctest -R ae_nullptr_deref_tests -VV) + semi-sparse (ctest -R ae_semi_sparse -VV)
 file(GLOB ae_nullptr_deref_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_nullptr_deref_tests/*.bc")
 foreach(filename ${ae_nullptr_deref_files})
+  get_filename_component(basename ${filename} NAME)
   add_test(
           NAME ae_nullptr_deref_tests/${filename}
           COMMAND ae -null-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   add_test(
-          NAME ae_semi_sparse/nullptr_deref/${filename}
+          NAME ae_semi_sparse/nullptr_deref/${basename}
           COMMAND ae -ae-sparsity=semi-sparse -null-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
@@ -534,13 +537,14 @@ endforeach()
 # ae_recursion tests (ctest -R ae_recursion_tests -VV) + semi-sparse (ctest -R ae_semi_sparse -VV)
 file(GLOB ae_recursion_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_recursion_tests/*.bc")
 foreach(filename ${ae_recursion_files})
+  get_filename_component(basename ${filename} NAME)
   add_test(
           NAME ae_recursion_tests/${filename}-widen-narrow
           COMMAND ae -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   add_test(
-          NAME ae_semi_sparse/recursion/${filename}-widen-narrow
+          NAME ae_semi_sparse/recursion/${basename}-widen-narrow
           COMMAND ae -ae-sparsity=semi-sparse -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
