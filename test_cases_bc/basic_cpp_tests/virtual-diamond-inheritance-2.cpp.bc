@@ -78,7 +78,7 @@ $_ZTV1A = comdat any
 @global_obj_l2 = dso_local global i32 0, align 4
 @global_ptr_l2 = dso_local global ptr @global_obj_l2, align 8
 @_ZTV1D = linkonce_odr dso_local unnamed_addr constant { [11 x ptr], [9 x ptr] } { [11 x ptr] [ptr null, ptr null, ptr null, ptr null, ptr @_ZTI1D, ptr @_ZN1A2f1EPi, ptr @_ZN1A2f2EPi, ptr @_ZN1B2g1EPi, ptr @_ZN1B2g2EPi, ptr @_ZN1D2l1EPi, ptr @_ZN1D2l2EPi], [9 x ptr] [ptr inttoptr (i64 -8 to ptr), ptr inttoptr (i64 -8 to ptr), ptr inttoptr (i64 -8 to ptr), ptr inttoptr (i64 -8 to ptr), ptr @_ZTI1D, ptr null, ptr null, ptr @_ZN1C2h1EPi, ptr @_ZN1C2h2EPi] }, comdat, align 8
-@_ZTT1D = linkonce_odr unnamed_addr constant [7 x ptr] [ptr getelementptr inbounds ({ [11 x ptr], [9 x ptr] }, ptr @_ZTV1D, i32 0, inrange i32 0, i32 5), ptr getelementptr inbounds ({ [9 x ptr] }, ptr @_ZTC1D0_1B, i32 0, inrange i32 0, i32 5), ptr getelementptr inbounds ({ [9 x ptr] }, ptr @_ZTC1D0_1B, i32 0, inrange i32 0, i32 5), ptr getelementptr inbounds ({ [9 x ptr], [6 x ptr] }, ptr @_ZTC1D8_1C, i32 0, inrange i32 0, i32 5), ptr getelementptr inbounds ({ [9 x ptr], [6 x ptr] }, ptr @_ZTC1D8_1C, i32 0, inrange i32 1, i32 4), ptr getelementptr inbounds ({ [11 x ptr], [9 x ptr] }, ptr @_ZTV1D, i32 0, inrange i32 0, i32 5), ptr getelementptr inbounds ({ [11 x ptr], [9 x ptr] }, ptr @_ZTV1D, i32 0, inrange i32 1, i32 5)], comdat, align 8
+@_ZTT1D = linkonce_odr unnamed_addr constant [7 x ptr] [ptr getelementptr inbounds ({ [11 x ptr], [9 x ptr] }, ptr @_ZTV1D, i32 0, i32 0, i32 5), ptr getelementptr inbounds ({ [9 x ptr] }, ptr @_ZTC1D0_1B, i32 0, i32 0, i32 5), ptr getelementptr inbounds ({ [9 x ptr] }, ptr @_ZTC1D0_1B, i32 0, i32 0, i32 5), ptr getelementptr inbounds ({ [9 x ptr], [6 x ptr] }, ptr @_ZTC1D8_1C, i32 0, i32 0, i32 5), ptr getelementptr inbounds ({ [9 x ptr], [6 x ptr] }, ptr @_ZTC1D8_1C, i32 0, i32 1, i32 4), ptr getelementptr inbounds ({ [11 x ptr], [9 x ptr] }, ptr @_ZTV1D, i32 0, i32 0, i32 5), ptr getelementptr inbounds ({ [11 x ptr], [9 x ptr] }, ptr @_ZTV1D, i32 0, i32 1, i32 5)], comdat, align 8
 @_ZTC1D0_1B = linkonce_odr dso_local unnamed_addr constant { [9 x ptr] } { [9 x ptr] [ptr null, ptr null, ptr null, ptr null, ptr @_ZTI1B, ptr @_ZN1A2f1EPi, ptr @_ZN1A2f2EPi, ptr @_ZN1B2g1EPi, ptr @_ZN1B2g2EPi] }, comdat, align 8
 @_ZTVN10__cxxabiv121__vmi_class_type_infoE = external global ptr
 @_ZTS1B = linkonce_odr dso_local constant [3 x i8] c"1B\00", comdat, align 1
@@ -343,10 +343,10 @@ entry:
   call void @_ZN1BC2Ev(ptr noundef nonnull align 8 dereferenceable(8) %this1, ptr noundef getelementptr inbounds ([7 x ptr], ptr @_ZTT1D, i64 0, i64 1)) #5
   %0 = getelementptr inbounds i8, ptr %this1, i64 8
   call void @_ZN1CC2Ev(ptr noundef nonnull align 8 dereferenceable(8) %0, ptr noundef getelementptr inbounds ([7 x ptr], ptr @_ZTT1D, i64 0, i64 3)) #5
-  store ptr getelementptr inbounds ({ [11 x ptr], [9 x ptr] }, ptr @_ZTV1D, i32 0, inrange i32 0, i32 5), ptr %this1, align 8
-  store ptr getelementptr inbounds ({ [11 x ptr], [9 x ptr] }, ptr @_ZTV1D, i32 0, inrange i32 0, i32 5), ptr %this1, align 8
+  store ptr getelementptr inbounds ({ [11 x ptr], [9 x ptr] }, ptr @_ZTV1D, i32 0, i32 0, i32 5), ptr %this1, align 8
+  store ptr getelementptr inbounds ({ [11 x ptr], [9 x ptr] }, ptr @_ZTV1D, i32 0, i32 0, i32 5), ptr %this1, align 8
   %add.ptr = getelementptr inbounds i8, ptr %this1, i64 8
-  store ptr getelementptr inbounds ({ [11 x ptr], [9 x ptr] }, ptr @_ZTV1D, i32 0, inrange i32 1, i32 5), ptr %add.ptr, align 8
+  store ptr getelementptr inbounds ({ [11 x ptr], [9 x ptr] }, ptr @_ZTV1D, i32 0, i32 1, i32 5), ptr %add.ptr, align 8
   ret void
 }
 
@@ -356,7 +356,7 @@ entry:
   %this.addr = alloca ptr, align 8
   store ptr %this, ptr %this.addr, align 8
   %this1 = load ptr, ptr %this.addr, align 8
-  store ptr getelementptr inbounds ({ [4 x ptr] }, ptr @_ZTV1A, i32 0, inrange i32 0, i32 2), ptr %this1, align 8
+  store ptr getelementptr inbounds ({ [4 x ptr] }, ptr @_ZTV1A, i32 0, i32 0, i32 2), ptr %this1, align 8
   ret void
 }
 

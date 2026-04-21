@@ -41,7 +41,7 @@ $_ZTV1A = comdat any
 @global_float_obj = dso_local global float 0.000000e+00, align 4
 @global_float_ptr = dso_local global ptr @global_float_obj, align 8
 @_ZTV1B = linkonce_odr dso_local unnamed_addr constant { [7 x ptr] } { [7 x ptr] [ptr null, ptr null, ptr null, ptr null, ptr @_ZTI1B, ptr @_ZN1B1fEPi, ptr @_ZN1B1gEPf] }, comdat, align 8
-@_ZTT1B = linkonce_odr unnamed_addr constant [2 x ptr] [ptr getelementptr inbounds ({ [7 x ptr] }, ptr @_ZTV1B, i32 0, inrange i32 0, i32 5), ptr getelementptr inbounds ({ [7 x ptr] }, ptr @_ZTV1B, i32 0, inrange i32 0, i32 5)], comdat, align 8
+@_ZTT1B = linkonce_odr unnamed_addr constant [2 x ptr] [ptr getelementptr inbounds ({ [7 x ptr] }, ptr @_ZTV1B, i32 0, i32 0, i32 5), ptr getelementptr inbounds ({ [7 x ptr] }, ptr @_ZTV1B, i32 0, i32 0, i32 5)], comdat, align 8
 @_ZTVN10__cxxabiv121__vmi_class_type_infoE = external global ptr
 @_ZTS1B = linkonce_odr dso_local constant [3 x i8] c"1B\00", comdat, align 1
 @_ZTVN10__cxxabiv117__class_type_infoE = external global ptr
@@ -237,8 +237,8 @@ entry:
   store ptr %this, ptr %this.addr, align 8
   %this1 = load ptr, ptr %this.addr, align 8
   call void @_ZN1AC2Ev(ptr noundef nonnull align 8 dereferenceable(8) %this1) #8
-  store ptr getelementptr inbounds ({ [7 x ptr] }, ptr @_ZTV1B, i32 0, inrange i32 0, i32 5), ptr %this1, align 8
-  store ptr getelementptr inbounds ({ [7 x ptr] }, ptr @_ZTV1B, i32 0, inrange i32 0, i32 5), ptr %this1, align 8
+  store ptr getelementptr inbounds ({ [7 x ptr] }, ptr @_ZTV1B, i32 0, i32 0, i32 5), ptr %this1, align 8
+  store ptr getelementptr inbounds ({ [7 x ptr] }, ptr @_ZTV1B, i32 0, i32 0, i32 5), ptr %this1, align 8
   ret void
 }
 
@@ -248,7 +248,7 @@ entry:
   %this.addr = alloca ptr, align 8
   store ptr %this, ptr %this.addr, align 8
   %this1 = load ptr, ptr %this.addr, align 8
-  store ptr getelementptr inbounds ({ [4 x ptr] }, ptr @_ZTV1A, i32 0, inrange i32 0, i32 2), ptr %this1, align 8
+  store ptr getelementptr inbounds ({ [4 x ptr] }, ptr @_ZTV1A, i32 0, i32 0, i32 2), ptr %this1, align 8
   ret void
 }
 
