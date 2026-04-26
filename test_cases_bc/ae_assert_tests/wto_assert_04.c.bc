@@ -1,6 +1,6 @@
 ; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/ae_assert_tests/wto_assert_04.c.bc'
 source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/wto_assert_04.c"
-target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-unknown-linux-gnu"
 
 ; Function Attrs: noinline nounwind optnone uwtable
@@ -11,10 +11,10 @@ entry:
   %result = alloca i32, align 4
   %b = alloca i32, align 4
   store i32 0, ptr %retval, align 4
-  call void @llvm.dbg.declare(metadata ptr %a, metadata !16, metadata !DIExpression()), !dbg !17
-  %call = call i32 @rand() #4, !dbg !18
+    #dbg_declare(ptr %a, !16, !DIExpression(), !17)
+  %call = call i32 @rand() #3, !dbg !18
   store i32 %call, ptr %a, align 4, !dbg !17
-  call void @llvm.dbg.declare(metadata ptr %result, metadata !19, metadata !DIExpression()), !dbg !20
+    #dbg_declare(ptr %result, !19, !DIExpression(), !20)
   store i32 0, ptr %result, align 4, !dbg !20
   %0 = load i32, ptr %a, align 4, !dbg !21
   %cmp = icmp sgt i32 %0, 0, !dbg !23
@@ -23,57 +23,57 @@ entry:
 land.lhs.true:                                    ; preds = %entry
   %1 = load i32, ptr %a, align 4, !dbg !25
   %cmp1 = icmp slt i32 %1, 2, !dbg !26
-  br i1 %cmp1, label %if.then, label %if.else, !dbg !27
+  br i1 %cmp1, label %if.then, label %if.else, !dbg !24
 
 if.then:                                          ; preds = %land.lhs.true
-  store i32 100, ptr %result, align 4, !dbg !28
-  %2 = load i32, ptr %a, align 4, !dbg !30
-  %cmp2 = icmp eq i32 %2, 1, !dbg !31
-  call void @svf_assert(i1 noundef zeroext %cmp2), !dbg !32
-  br label %if.end17, !dbg !33
+  store i32 100, ptr %result, align 4, !dbg !27
+  %2 = load i32, ptr %a, align 4, !dbg !29
+  %cmp2 = icmp eq i32 %2, 1, !dbg !30
+  call void @svf_assert(i1 noundef zeroext %cmp2), !dbg !31
+  br label %if.end17, !dbg !32
 
 if.else:                                          ; preds = %land.lhs.true, %entry
-  %3 = load i32, ptr %a, align 4, !dbg !34
-  %cmp3 = icmp sgt i32 %3, 4, !dbg !36
-  br i1 %cmp3, label %land.lhs.true4, label %if.else8, !dbg !37
+  %3 = load i32, ptr %a, align 4, !dbg !33
+  %cmp3 = icmp sgt i32 %3, 4, !dbg !35
+  br i1 %cmp3, label %land.lhs.true4, label %if.else8, !dbg !36
 
 land.lhs.true4:                                   ; preds = %if.else
-  %4 = load i32, ptr %a, align 4, !dbg !38
-  %cmp5 = icmp slt i32 %4, 6, !dbg !39
-  br i1 %cmp5, label %if.then6, label %if.else8, !dbg !40
+  %4 = load i32, ptr %a, align 4, !dbg !37
+  %cmp5 = icmp slt i32 %4, 6, !dbg !38
+  br i1 %cmp5, label %if.then6, label %if.else8, !dbg !36
 
 if.then6:                                         ; preds = %land.lhs.true4
-  store i32 200, ptr %result, align 4, !dbg !41
-  %5 = load i32, ptr %a, align 4, !dbg !43
-  %cmp7 = icmp eq i32 %5, 5, !dbg !44
-  call void @svf_assert(i1 noundef zeroext %cmp7), !dbg !45
-  br label %if.end16, !dbg !46
+  store i32 200, ptr %result, align 4, !dbg !39
+  %5 = load i32, ptr %a, align 4, !dbg !41
+  %cmp7 = icmp eq i32 %5, 5, !dbg !42
+  call void @svf_assert(i1 noundef zeroext %cmp7), !dbg !43
+  br label %if.end16, !dbg !44
 
 if.else8:                                         ; preds = %land.lhs.true4, %if.else
-  %6 = load i32, ptr %a, align 4, !dbg !47
-  %cmp9 = icmp sgt i32 %6, 9, !dbg !49
-  br i1 %cmp9, label %land.lhs.true10, label %if.else14, !dbg !50
+  %6 = load i32, ptr %a, align 4, !dbg !45
+  %cmp9 = icmp sgt i32 %6, 9, !dbg !47
+  br i1 %cmp9, label %land.lhs.true10, label %if.else14, !dbg !48
 
 land.lhs.true10:                                  ; preds = %if.else8
-  %7 = load i32, ptr %a, align 4, !dbg !51
-  %cmp11 = icmp slt i32 %7, 11, !dbg !52
-  br i1 %cmp11, label %if.then12, label %if.else14, !dbg !53
+  %7 = load i32, ptr %a, align 4, !dbg !49
+  %cmp11 = icmp slt i32 %7, 11, !dbg !50
+  br i1 %cmp11, label %if.then12, label %if.else14, !dbg !48
 
 if.then12:                                        ; preds = %land.lhs.true10
-  store i32 300, ptr %result, align 4, !dbg !54
-  %8 = load i32, ptr %a, align 4, !dbg !56
-  %cmp13 = icmp eq i32 %8, 10, !dbg !57
-  call void @svf_assert(i1 noundef zeroext %cmp13), !dbg !58
-  br label %if.end, !dbg !59
+  store i32 300, ptr %result, align 4, !dbg !51
+  %8 = load i32, ptr %a, align 4, !dbg !53
+  %cmp13 = icmp eq i32 %8, 10, !dbg !54
+  call void @svf_assert(i1 noundef zeroext %cmp13), !dbg !55
+  br label %if.end, !dbg !56
 
 if.else14:                                        ; preds = %land.lhs.true10, %if.else8
-  call void @llvm.dbg.declare(metadata ptr %b, metadata !60, metadata !DIExpression()), !dbg !62
-  %call15 = call i32 @rand() #4, !dbg !63
-  store i32 %call15, ptr %b, align 4, !dbg !62
-  %9 = load i32, ptr %a, align 4, !dbg !64
-  %10 = load i32, ptr %b, align 4, !dbg !65
-  call void @svf_assert_eq(i32 noundef %9, i32 noundef %10), !dbg !66
-  store i32 -1, ptr %result, align 4, !dbg !67
+    #dbg_declare(ptr %b, !57, !DIExpression(), !59)
+  %call15 = call i32 @rand() #3, !dbg !60
+  store i32 %call15, ptr %b, align 4, !dbg !59
+  %9 = load i32, ptr %a, align 4, !dbg !61
+  %10 = load i32, ptr %b, align 4, !dbg !62
+  call void @svf_assert_eq(i32 noundef %9, i32 noundef %10), !dbg !63
+  store i32 -1, ptr %result, align 4, !dbg !64
   br label %if.end
 
 if.end:                                           ; preds = %if.else14, %if.then12
@@ -83,30 +83,26 @@ if.end16:                                         ; preds = %if.end, %if.then6
   br label %if.end17
 
 if.end17:                                         ; preds = %if.end16, %if.then
-  ret i32 0, !dbg !68
+  ret i32 0, !dbg !65
 }
 
-; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
-declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
-
 ; Function Attrs: nounwind
-declare i32 @rand() #2
+declare i32 @rand() #1
 
-declare void @svf_assert(i1 noundef zeroext) #3
+declare void @svf_assert(i1 noundef zeroext) #2
 
-declare void @svf_assert_eq(i32 noundef, i32 noundef) #3
+declare void @svf_assert_eq(i32 noundef, i32 noundef) #2
 
-attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #2 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #3 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
-attributes #4 = { nounwind }
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #3 = { nounwind }
 
 !llvm.dbg.cu = !{!0}
 !llvm.module.flags = !{!2, !3, !4, !5, !6, !7, !8}
 !llvm.ident = !{!9}
 
-!0 = distinct !DICompileUnit(language: DW_LANG_C11, file: !1, producer: "clang version 16.0.4 (https://github.com/bjjwwang/LLVM-compile a0f79b14ca0360151ea799a9ad1d5932235bbee1)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, splitDebugInlining: false, nameTableKind: None)
+!0 = distinct !DICompileUnit(language: DW_LANG_C11, file: !1, producer: "clang version 21.1.0 (https://github.com/bjjwwang/LLVM-compile 4f7056e8ada487923d1c8f9bc38df6472008eda3)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, splitDebugInlining: false, nameTableKind: None)
 !1 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/wto_assert_04.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "e6be97ee892b802e9a9b212edf9e47de")
 !2 = !{i32 7, !"Dwarf Version", i32 5}
 !3 = !{i32 2, !"Debug Info Version", i32 3}
@@ -115,7 +111,7 @@ attributes #4 = { nounwind }
 !6 = !{i32 7, !"PIE Level", i32 2}
 !7 = !{i32 7, !"uwtable", i32 2}
 !8 = !{i32 7, !"frame-pointer", i32 2}
-!9 = !{!"clang version 16.0.4 (https://github.com/bjjwwang/LLVM-compile a0f79b14ca0360151ea799a9ad1d5932235bbee1)"}
+!9 = !{!"clang version 21.1.0 (https://github.com/bjjwwang/LLVM-compile 4f7056e8ada487923d1c8f9bc38df6472008eda3)"}
 !10 = distinct !DISubprogram(name: "main", scope: !11, file: !11, line: 19, type: !12, scopeLine: 19, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !15)
 !11 = !DIFile(filename: "src/ae_assert_tests/wto_assert_04.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "e6be97ee892b802e9a9b212edf9e47de")
 !12 = !DISubroutineType(types: !13)
@@ -133,45 +129,42 @@ attributes #4 = { nounwind }
 !24 = !DILocation(line: 23, column: 15, scope: !22)
 !25 = !DILocation(line: 23, column: 18, scope: !22)
 !26 = !DILocation(line: 23, column: 20, scope: !22)
-!27 = !DILocation(line: 23, column: 9, scope: !10)
-!28 = !DILocation(line: 25, column: 16, scope: !29)
-!29 = distinct !DILexicalBlock(scope: !22, file: !11, line: 23, column: 25)
-!30 = !DILocation(line: 26, column: 20, scope: !29)
-!31 = !DILocation(line: 26, column: 22, scope: !29)
-!32 = !DILocation(line: 26, column: 9, scope: !29)
-!33 = !DILocation(line: 27, column: 5, scope: !29)
-!34 = !DILocation(line: 28, column: 14, scope: !35)
-!35 = distinct !DILexicalBlock(scope: !22, file: !11, line: 28, column: 14)
-!36 = !DILocation(line: 28, column: 16, scope: !35)
-!37 = !DILocation(line: 28, column: 20, scope: !35)
-!38 = !DILocation(line: 28, column: 23, scope: !35)
-!39 = !DILocation(line: 28, column: 25, scope: !35)
-!40 = !DILocation(line: 28, column: 14, scope: !22)
-!41 = !DILocation(line: 30, column: 16, scope: !42)
-!42 = distinct !DILexicalBlock(scope: !35, file: !11, line: 28, column: 30)
-!43 = !DILocation(line: 31, column: 20, scope: !42)
-!44 = !DILocation(line: 31, column: 22, scope: !42)
-!45 = !DILocation(line: 31, column: 9, scope: !42)
-!46 = !DILocation(line: 32, column: 5, scope: !42)
-!47 = !DILocation(line: 33, column: 14, scope: !48)
-!48 = distinct !DILexicalBlock(scope: !35, file: !11, line: 33, column: 14)
-!49 = !DILocation(line: 33, column: 16, scope: !48)
-!50 = !DILocation(line: 33, column: 20, scope: !48)
-!51 = !DILocation(line: 33, column: 23, scope: !48)
-!52 = !DILocation(line: 33, column: 25, scope: !48)
-!53 = !DILocation(line: 33, column: 14, scope: !35)
-!54 = !DILocation(line: 35, column: 16, scope: !55)
-!55 = distinct !DILexicalBlock(scope: !48, file: !11, line: 33, column: 31)
-!56 = !DILocation(line: 36, column: 20, scope: !55)
-!57 = !DILocation(line: 36, column: 22, scope: !55)
-!58 = !DILocation(line: 36, column: 9, scope: !55)
-!59 = !DILocation(line: 37, column: 5, scope: !55)
-!60 = !DILocalVariable(name: "b", scope: !61, file: !11, line: 40, type: !14)
-!61 = distinct !DILexicalBlock(scope: !48, file: !11, line: 38, column: 10)
-!62 = !DILocation(line: 40, column: 13, scope: !61)
-!63 = !DILocation(line: 40, column: 17, scope: !61)
-!64 = !DILocation(line: 42, column: 23, scope: !61)
-!65 = !DILocation(line: 42, column: 26, scope: !61)
-!66 = !DILocation(line: 42, column: 9, scope: !61)
-!67 = !DILocation(line: 43, column: 16, scope: !61)
-!68 = !DILocation(line: 49, column: 5, scope: !10)
+!27 = !DILocation(line: 25, column: 16, scope: !28)
+!28 = distinct !DILexicalBlock(scope: !22, file: !11, line: 23, column: 25)
+!29 = !DILocation(line: 26, column: 20, scope: !28)
+!30 = !DILocation(line: 26, column: 22, scope: !28)
+!31 = !DILocation(line: 26, column: 9, scope: !28)
+!32 = !DILocation(line: 27, column: 5, scope: !28)
+!33 = !DILocation(line: 28, column: 14, scope: !34)
+!34 = distinct !DILexicalBlock(scope: !22, file: !11, line: 28, column: 14)
+!35 = !DILocation(line: 28, column: 16, scope: !34)
+!36 = !DILocation(line: 28, column: 20, scope: !34)
+!37 = !DILocation(line: 28, column: 23, scope: !34)
+!38 = !DILocation(line: 28, column: 25, scope: !34)
+!39 = !DILocation(line: 30, column: 16, scope: !40)
+!40 = distinct !DILexicalBlock(scope: !34, file: !11, line: 28, column: 30)
+!41 = !DILocation(line: 31, column: 20, scope: !40)
+!42 = !DILocation(line: 31, column: 22, scope: !40)
+!43 = !DILocation(line: 31, column: 9, scope: !40)
+!44 = !DILocation(line: 32, column: 5, scope: !40)
+!45 = !DILocation(line: 33, column: 14, scope: !46)
+!46 = distinct !DILexicalBlock(scope: !34, file: !11, line: 33, column: 14)
+!47 = !DILocation(line: 33, column: 16, scope: !46)
+!48 = !DILocation(line: 33, column: 20, scope: !46)
+!49 = !DILocation(line: 33, column: 23, scope: !46)
+!50 = !DILocation(line: 33, column: 25, scope: !46)
+!51 = !DILocation(line: 35, column: 16, scope: !52)
+!52 = distinct !DILexicalBlock(scope: !46, file: !11, line: 33, column: 31)
+!53 = !DILocation(line: 36, column: 20, scope: !52)
+!54 = !DILocation(line: 36, column: 22, scope: !52)
+!55 = !DILocation(line: 36, column: 9, scope: !52)
+!56 = !DILocation(line: 37, column: 5, scope: !52)
+!57 = !DILocalVariable(name: "b", scope: !58, file: !11, line: 40, type: !14)
+!58 = distinct !DILexicalBlock(scope: !46, file: !11, line: 38, column: 10)
+!59 = !DILocation(line: 40, column: 13, scope: !58)
+!60 = !DILocation(line: 40, column: 17, scope: !58)
+!61 = !DILocation(line: 42, column: 23, scope: !58)
+!62 = !DILocation(line: 42, column: 26, scope: !58)
+!63 = !DILocation(line: 42, column: 9, scope: !58)
+!64 = !DILocation(line: 43, column: 16, scope: !58)
+!65 = !DILocation(line: 49, column: 5, scope: !10)
