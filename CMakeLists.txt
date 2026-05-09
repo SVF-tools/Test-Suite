@@ -476,6 +476,22 @@ foreach(file ${diff_tests_cruxbc_big})
   )
 endforeach()
 
+# Full-sparse mode (-ae-sparsity=sparse) reuses the same bc files but
+# trips on a curated set of cases with known precision regressions vs
+# dense/semi-sparse.  The skip list lives in a sidecar so adding /
+# removing entries is one line, with no churn here.  Format: one bc
+# basename per line; '#' comments and blanks ignored.
+# (ctest -R ae_full_sparse -VV)
+file(READ ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_full_sparse_skip.txt _ae_skip_raw)
+string(REGEX REPLACE "[\r\n]+" ";" _ae_skip_lines "${_ae_skip_raw}")
+set(AE_FULL_SPARSE_SKIPS "")
+foreach(_line ${_ae_skip_lines})
+  string(STRIP "${_line}" _line)
+  if(NOT "${_line}" STREQUAL "" AND NOT "${_line}" MATCHES "^#")
+    list(APPEND AE_FULL_SPARSE_SKIPS "${_line}")
+  endif()
+endforeach()
+
 # ae_assert tests (ctest -R ae_assert_test -VV) + semi-sparse (ctest -R ae_semi_sparse -VV)
 file(GLOB ae_assert_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_assert_tests/*.bc")
 foreach(filename ${ae_assert_files})
@@ -490,6 +506,13 @@ foreach(filename ${ae_assert_files})
           COMMAND ae -ae-sparsity=semi-sparse ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
+  if(NOT "${basename}" IN_LIST AE_FULL_SPARSE_SKIPS)
+    add_test(
+            NAME ae_full_sparse/assert/${basename}
+            COMMAND ae -ae-sparsity=sparse ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+    )
+  endif()
 endforeach()
 
 # ae_overflow tests (ctest -R ae_overflow_test -VV) + semi-sparse (ctest -R ae_semi_sparse -VV)
@@ -516,6 +539,18 @@ foreach(filename ${ae_overflow_files})
           COMMAND ae -ae-sparsity=semi-sparse -overflow -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
+  if(NOT "${basename}" IN_LIST AE_FULL_SPARSE_SKIPS)
+    add_test(
+            NAME ae_full_sparse/overflow/${basename}
+            COMMAND ae -ae-sparsity=sparse -overflow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+    )
+    add_test(
+            NAME ae_full_sparse/recursion_from_overflow/${basename}-widen-narrow
+            COMMAND ae -ae-sparsity=sparse -overflow -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+    )
+  endif()
 endforeach()
 
 # ae_nullptr_deref tests (ctest -R ae_nullptr_deref_tests -VV) + semi-sparse (ctest -R ae_semi_sparse -VV)
@@ -532,6 +567,13 @@ foreach(filename ${ae_nullptr_deref_files})
           COMMAND ae -ae-sparsity=semi-sparse -null-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
+  if(NOT "${basename}" IN_LIST AE_FULL_SPARSE_SKIPS)
+    add_test(
+            NAME ae_full_sparse/nullptr_deref/${basename}
+            COMMAND ae -ae-sparsity=sparse -null-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+    )
+  endif()
 endforeach()
 
 # ae_recursion tests (ctest -R ae_recursion_tests -VV) + semi-sparse (ctest -R ae_semi_sparse -VV)
@@ -548,6 +590,13 @@ foreach(filename ${ae_recursion_files})
           COMMAND ae -ae-sparsity=semi-sparse -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
+  if(NOT "${basename}" IN_LIST AE_FULL_SPARSE_SKIPS)
+    add_test(
+            NAME ae_full_sparse/recursion/${basename}-widen-narrow
+            COMMAND ae -ae-sparsity=sparse -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+    )
+  endif()
 endforeach()
 
 
