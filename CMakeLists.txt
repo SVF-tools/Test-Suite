@@ -476,7 +476,7 @@ foreach(file ${diff_tests_cruxbc_big})
   )
 endforeach()
 
-# ae_assert tests (ctest -R ae_assert_test -VV) + semi-sparse (ctest -R ae_semi_sparse -VV)
+# ae_assert tests (ctest -R ae_assert_test -VV) + semi/full-sparse
 file(GLOB ae_assert_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_assert_tests/*.bc")
 foreach(filename ${ae_assert_files})
   get_filename_component(basename ${filename} NAME)
@@ -490,9 +490,14 @@ foreach(filename ${ae_assert_files})
           COMMAND ae -ae-sparsity=semi-sparse ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
+  add_test(
+          NAME ae_full_sparse/assert/${basename}
+          COMMAND ae -ae-sparsity=sparse ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
 endforeach()
 
-# ae_overflow tests (ctest -R ae_overflow_test -VV) + semi-sparse (ctest -R ae_semi_sparse -VV)
+# ae_overflow tests (ctest -R ae_overflow_test -VV) + semi/full-sparse
 file(GLOB ae_overflow_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_overflow_tests/*.bc")
 foreach(filename ${ae_overflow_files})
   get_filename_component(basename ${filename} NAME)
@@ -516,9 +521,19 @@ foreach(filename ${ae_overflow_files})
           COMMAND ae -ae-sparsity=semi-sparse -overflow -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
+  add_test(
+          NAME ae_full_sparse/overflow/${basename}
+          COMMAND ae -ae-sparsity=sparse -overflow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+  add_test(
+          NAME ae_full_sparse/recursion_from_overflow/${basename}-widen-narrow
+          COMMAND ae -ae-sparsity=sparse -overflow -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
 endforeach()
 
-# ae_nullptr_deref tests (ctest -R ae_nullptr_deref_tests -VV) + semi-sparse (ctest -R ae_semi_sparse -VV)
+# ae_nullptr_deref tests (ctest -R ae_nullptr_deref_tests -VV) + semi/full-sparse
 file(GLOB ae_nullptr_deref_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_nullptr_deref_tests/*.bc")
 foreach(filename ${ae_nullptr_deref_files})
   get_filename_component(basename ${filename} NAME)
@@ -532,9 +547,14 @@ foreach(filename ${ae_nullptr_deref_files})
           COMMAND ae -ae-sparsity=semi-sparse -null-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
+  add_test(
+          NAME ae_full_sparse/nullptr_deref/${basename}
+          COMMAND ae -ae-sparsity=sparse -null-deref ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
 endforeach()
 
-# ae_recursion tests (ctest -R ae_recursion_tests -VV) + semi-sparse (ctest -R ae_semi_sparse -VV)
+# ae_recursion tests (ctest -R ae_recursion_tests -VV) + semi/full-sparse
 file(GLOB ae_recursion_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_recursion_tests/*.bc")
 foreach(filename ${ae_recursion_files})
   get_filename_component(basename ${filename} NAME)
@@ -546,6 +566,11 @@ foreach(filename ${ae_recursion_files})
   add_test(
           NAME ae_semi_sparse/recursion/${basename}-widen-narrow
           COMMAND ae -ae-sparsity=semi-sparse -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+  add_test(
+          NAME ae_full_sparse/recursion/${basename}-widen-narrow
+          COMMAND ae -ae-sparsity=sparse -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
@@ -570,4 +595,3 @@ add_test(
         COMMAND ${command}
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
 )
-
