@@ -1,0 +1,538 @@
+; ModuleID = 'test_cases_bc/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE129_fgets_01_no-main.c.bc'
+source_filename = "src/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE129_fgets_01_no-main.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+@stdin = external global ptr, align 8
+@.str = private unnamed_addr constant [16 x i8] c"fgets() failed.\00", align 1, !dbg !0
+@.str.1 = private unnamed_addr constant [32 x i8] c"ERROR: Array index is negative.\00", align 1, !dbg !7
+@.str.2 = private unnamed_addr constant [18 x i8] c"Calling good()...\00", align 1, !dbg !12
+@.str.3 = private unnamed_addr constant [16 x i8] c"Finished good()\00", align 1, !dbg !17
+@.str.4 = private unnamed_addr constant [17 x i8] c"Calling bad()...\00", align 1, !dbg !19
+@.str.5 = private unnamed_addr constant [15 x i8] c"Finished bad()\00", align 1, !dbg !24
+@.str.6 = private unnamed_addr constant [36 x i8] c"ERROR: Array index is out-of-bounds\00", align 1, !dbg !29
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @CWE121_Stack_Based_Buffer_Overflow__CWE129_fgets_01_bad() #0 !dbg !47 {
+entry:
+  %data = alloca i32, align 4
+  %inputBuffer = alloca [14 x i8], align 1
+  %i = alloca i32, align 4
+  %buffer = alloca [10 x i32], align 16
+    #dbg_declare(ptr %data, !51, !DIExpression(), !53)
+  store i32 -1, ptr %data, align 4, !dbg !54
+    #dbg_declare(ptr %inputBuffer, !55, !DIExpression(), !60)
+  call void @llvm.memset.p0.i64(ptr align 1 %inputBuffer, i8 0, i64 14, i1 false), !dbg !60
+  %arraydecay = getelementptr inbounds [14 x i8], ptr %inputBuffer, i64 0, i64 0, !dbg !61
+  %0 = load ptr, ptr @stdin, align 8, !dbg !63
+  %call = call ptr @fgets(ptr noundef %arraydecay, i32 noundef 14, ptr noundef %0), !dbg !64
+  %cmp = icmp ne ptr %call, null, !dbg !65
+  br i1 %cmp, label %if.then, label %if.else, !dbg !65
+
+if.then:                                          ; preds = %entry
+  %arraydecay1 = getelementptr inbounds [14 x i8], ptr %inputBuffer, i64 0, i64 0, !dbg !66
+  %call2 = call i32 @atoi(ptr noundef %arraydecay1) #5, !dbg !68
+  store i32 %call2, ptr %data, align 4, !dbg !69
+  br label %if.end, !dbg !70
+
+if.else:                                          ; preds = %entry
+  call void @printLine(ptr noundef @.str), !dbg !71
+  br label %if.end
+
+if.end:                                           ; preds = %if.else, %if.then
+    #dbg_declare(ptr %i, !73, !DIExpression(), !75)
+    #dbg_declare(ptr %buffer, !76, !DIExpression(), !80)
+  call void @llvm.memset.p0.i64(ptr align 16 %buffer, i8 0, i64 40, i1 false), !dbg !80
+  %1 = load i32, ptr %data, align 4, !dbg !81
+  %cmp3 = icmp sge i32 %1, 0, !dbg !83
+  br i1 %cmp3, label %if.then4, label %if.else11, !dbg !83
+
+if.then4:                                         ; preds = %if.end
+  %2 = load i32, ptr %data, align 4, !dbg !84
+  %idxprom = sext i32 %2 to i64, !dbg !86
+  %arrayidx = getelementptr inbounds [10 x i32], ptr %buffer, i64 0, i64 %idxprom, !dbg !86
+  store i32 1, ptr %arrayidx, align 4, !dbg !87
+  %arraydecay5 = getelementptr inbounds [10 x i32], ptr %buffer, i64 0, i64 0, !dbg !88
+  %3 = load i32, ptr %data, align 4, !dbg !89
+  %conv = sext i32 %3 to i64, !dbg !89
+  %mul = mul i64 %conv, 4, !dbg !90
+  %sub = sub i64 %mul, 1, !dbg !91
+  %call6 = call i32 (ptr, i64, ...) @UNSAFE_BUFACCESS(ptr noundef %arraydecay5, i64 noundef %sub), !dbg !92
+  store i32 0, ptr %i, align 4, !dbg !93
+  br label %for.cond, !dbg !95
+
+for.cond:                                         ; preds = %for.inc, %if.then4
+  %4 = load i32, ptr %i, align 4, !dbg !96
+  %cmp7 = icmp slt i32 %4, 10, !dbg !98
+  br i1 %cmp7, label %for.body, label %for.end, !dbg !99
+
+for.body:                                         ; preds = %for.cond
+  %5 = load i32, ptr %i, align 4, !dbg !100
+  %idxprom9 = sext i32 %5 to i64, !dbg !102
+  %arrayidx10 = getelementptr inbounds [10 x i32], ptr %buffer, i64 0, i64 %idxprom9, !dbg !102
+  %6 = load i32, ptr %arrayidx10, align 4, !dbg !102
+  call void @printIntLine(i32 noundef %6), !dbg !103
+  br label %for.inc, !dbg !104
+
+for.inc:                                          ; preds = %for.body
+  %7 = load i32, ptr %i, align 4, !dbg !105
+  %inc = add nsw i32 %7, 1, !dbg !105
+  store i32 %inc, ptr %i, align 4, !dbg !105
+  br label %for.cond, !dbg !106, !llvm.loop !107
+
+for.end:                                          ; preds = %for.cond
+  br label %if.end12, !dbg !110
+
+if.else11:                                        ; preds = %if.end
+  call void @printLine(ptr noundef @.str.1), !dbg !111
+  br label %if.end12
+
+if.end12:                                         ; preds = %if.else11, %for.end
+  ret void, !dbg !113
+}
+
+; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: write)
+declare void @llvm.memset.p0.i64(ptr writeonly captures(none), i8, i64, i1 immarg) #1
+
+declare ptr @fgets(ptr noundef, i32 noundef, ptr noundef) #2
+
+; Function Attrs: nounwind willreturn memory(read)
+declare i32 @atoi(ptr noundef) #3
+
+declare void @printLine(ptr noundef) #2
+
+declare i32 @UNSAFE_BUFACCESS(...) #2
+
+declare void @printIntLine(i32 noundef) #2
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @CWE121_Stack_Based_Buffer_Overflow__CWE129_fgets_01_good() #0 !dbg !114 {
+entry:
+  call void @goodG2B(), !dbg !115
+  call void @goodB2G(), !dbg !116
+  ret void, !dbg !117
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @no_main_CWE121_Stack_Based_Buffer_Overflow__CWE129_fgets_01(i32 noundef %argc, ptr noundef %argv) #0 !dbg !118 {
+entry:
+  %argc.addr = alloca i32, align 4
+  %argv.addr = alloca ptr, align 8
+  store i32 %argc, ptr %argc.addr, align 4
+    #dbg_declare(ptr %argc.addr, !123, !DIExpression(), !124)
+  store ptr %argv, ptr %argv.addr, align 8
+    #dbg_declare(ptr %argv.addr, !125, !DIExpression(), !126)
+  %call = call i64 @time(ptr noundef null) #6, !dbg !127
+  %conv = trunc i64 %call to i32, !dbg !128
+  call void @srand(i32 noundef %conv) #6, !dbg !129
+  call void @printLine(ptr noundef @.str.2), !dbg !130
+  call void @CWE121_Stack_Based_Buffer_Overflow__CWE129_fgets_01_good(), !dbg !131
+  call void @printLine(ptr noundef @.str.3), !dbg !132
+  call void @printLine(ptr noundef @.str.4), !dbg !133
+  call void @CWE121_Stack_Based_Buffer_Overflow__CWE129_fgets_01_bad(), !dbg !134
+  call void @printLine(ptr noundef @.str.5), !dbg !135
+  ret i32 0, !dbg !136
+}
+
+; Function Attrs: nounwind
+declare void @srand(i32 noundef) #4
+
+; Function Attrs: nounwind
+declare i64 @time(ptr noundef) #4
+
+; Function Attrs: noinline nounwind optnone uwtable
+define internal void @goodG2B() #0 !dbg !137 {
+entry:
+  %data = alloca i32, align 4
+  %i = alloca i32, align 4
+  %buffer = alloca [10 x i32], align 16
+    #dbg_declare(ptr %data, !138, !DIExpression(), !139)
+  store i32 -1, ptr %data, align 4, !dbg !140
+  store i32 7, ptr %data, align 4, !dbg !141
+    #dbg_declare(ptr %i, !142, !DIExpression(), !144)
+    #dbg_declare(ptr %buffer, !145, !DIExpression(), !146)
+  call void @llvm.memset.p0.i64(ptr align 16 %buffer, i8 0, i64 40, i1 false), !dbg !146
+  %0 = load i32, ptr %data, align 4, !dbg !147
+  %cmp = icmp sge i32 %0, 0, !dbg !149
+  br i1 %cmp, label %if.then, label %if.else, !dbg !149
+
+if.then:                                          ; preds = %entry
+  %1 = load i32, ptr %data, align 4, !dbg !150
+  %idxprom = sext i32 %1 to i64, !dbg !152
+  %arrayidx = getelementptr inbounds [10 x i32], ptr %buffer, i64 0, i64 %idxprom, !dbg !152
+  store i32 1, ptr %arrayidx, align 4, !dbg !153
+  %arraydecay = getelementptr inbounds [10 x i32], ptr %buffer, i64 0, i64 0, !dbg !154
+  %2 = load i32, ptr %data, align 4, !dbg !155
+  %conv = sext i32 %2 to i64, !dbg !155
+  %mul = mul i64 %conv, 4, !dbg !156
+  %sub = sub i64 %mul, 1, !dbg !157
+  %call = call i32 (ptr, i64, ...) @SAFE_BUFACCESS(ptr noundef %arraydecay, i64 noundef %sub), !dbg !158
+  store i32 0, ptr %i, align 4, !dbg !159
+  br label %for.cond, !dbg !161
+
+for.cond:                                         ; preds = %for.inc, %if.then
+  %3 = load i32, ptr %i, align 4, !dbg !162
+  %cmp1 = icmp slt i32 %3, 10, !dbg !164
+  br i1 %cmp1, label %for.body, label %for.end, !dbg !165
+
+for.body:                                         ; preds = %for.cond
+  %4 = load i32, ptr %i, align 4, !dbg !166
+  %idxprom3 = sext i32 %4 to i64, !dbg !168
+  %arrayidx4 = getelementptr inbounds [10 x i32], ptr %buffer, i64 0, i64 %idxprom3, !dbg !168
+  %5 = load i32, ptr %arrayidx4, align 4, !dbg !168
+  call void @printIntLine(i32 noundef %5), !dbg !169
+  br label %for.inc, !dbg !170
+
+for.inc:                                          ; preds = %for.body
+  %6 = load i32, ptr %i, align 4, !dbg !171
+  %inc = add nsw i32 %6, 1, !dbg !171
+  store i32 %inc, ptr %i, align 4, !dbg !171
+  br label %for.cond, !dbg !172, !llvm.loop !173
+
+for.end:                                          ; preds = %for.cond
+  br label %if.end, !dbg !175
+
+if.else:                                          ; preds = %entry
+  call void @printLine(ptr noundef @.str.1), !dbg !176
+  br label %if.end
+
+if.end:                                           ; preds = %if.else, %for.end
+  ret void, !dbg !178
+}
+
+declare i32 @SAFE_BUFACCESS(...) #2
+
+; Function Attrs: noinline nounwind optnone uwtable
+define internal void @goodB2G() #0 !dbg !179 {
+entry:
+  %data = alloca i32, align 4
+  %inputBuffer = alloca [14 x i8], align 1
+  %i = alloca i32, align 4
+  %buffer = alloca [10 x i32], align 16
+    #dbg_declare(ptr %data, !180, !DIExpression(), !181)
+  store i32 -1, ptr %data, align 4, !dbg !182
+    #dbg_declare(ptr %inputBuffer, !183, !DIExpression(), !185)
+  call void @llvm.memset.p0.i64(ptr align 1 %inputBuffer, i8 0, i64 14, i1 false), !dbg !185
+  %arraydecay = getelementptr inbounds [14 x i8], ptr %inputBuffer, i64 0, i64 0, !dbg !186
+  %0 = load ptr, ptr @stdin, align 8, !dbg !188
+  %call = call ptr @fgets(ptr noundef %arraydecay, i32 noundef 14, ptr noundef %0), !dbg !189
+  %cmp = icmp ne ptr %call, null, !dbg !190
+  br i1 %cmp, label %if.then, label %if.else, !dbg !190
+
+if.then:                                          ; preds = %entry
+  %arraydecay1 = getelementptr inbounds [14 x i8], ptr %inputBuffer, i64 0, i64 0, !dbg !191
+  %call2 = call i32 @atoi(ptr noundef %arraydecay1) #5, !dbg !193
+  store i32 %call2, ptr %data, align 4, !dbg !194
+  br label %if.end, !dbg !195
+
+if.else:                                          ; preds = %entry
+  call void @printLine(ptr noundef @.str), !dbg !196
+  br label %if.end
+
+if.end:                                           ; preds = %if.else, %if.then
+    #dbg_declare(ptr %i, !198, !DIExpression(), !200)
+    #dbg_declare(ptr %buffer, !201, !DIExpression(), !202)
+  call void @llvm.memset.p0.i64(ptr align 16 %buffer, i8 0, i64 40, i1 false), !dbg !202
+  %1 = load i32, ptr %data, align 4, !dbg !203
+  %cmp3 = icmp sge i32 %1, 0, !dbg !205
+  br i1 %cmp3, label %land.lhs.true, label %if.else12, !dbg !206
+
+land.lhs.true:                                    ; preds = %if.end
+  %2 = load i32, ptr %data, align 4, !dbg !207
+  %cmp4 = icmp slt i32 %2, 10, !dbg !208
+  br i1 %cmp4, label %if.then5, label %if.else12, !dbg !206
+
+if.then5:                                         ; preds = %land.lhs.true
+  %3 = load i32, ptr %data, align 4, !dbg !209
+  %idxprom = sext i32 %3 to i64, !dbg !211
+  %arrayidx = getelementptr inbounds [10 x i32], ptr %buffer, i64 0, i64 %idxprom, !dbg !211
+  store i32 1, ptr %arrayidx, align 4, !dbg !212
+  %arraydecay6 = getelementptr inbounds [10 x i32], ptr %buffer, i64 0, i64 0, !dbg !213
+  %4 = load i32, ptr %data, align 4, !dbg !214
+  %conv = sext i32 %4 to i64, !dbg !214
+  %mul = mul i64 %conv, 4, !dbg !215
+  %sub = sub i64 %mul, 1, !dbg !216
+  %call7 = call i32 (ptr, i64, ...) @SAFE_BUFACCESS(ptr noundef %arraydecay6, i64 noundef %sub), !dbg !217
+  store i32 0, ptr %i, align 4, !dbg !218
+  br label %for.cond, !dbg !220
+
+for.cond:                                         ; preds = %for.inc, %if.then5
+  %5 = load i32, ptr %i, align 4, !dbg !221
+  %cmp8 = icmp slt i32 %5, 10, !dbg !223
+  br i1 %cmp8, label %for.body, label %for.end, !dbg !224
+
+for.body:                                         ; preds = %for.cond
+  %6 = load i32, ptr %i, align 4, !dbg !225
+  %idxprom10 = sext i32 %6 to i64, !dbg !227
+  %arrayidx11 = getelementptr inbounds [10 x i32], ptr %buffer, i64 0, i64 %idxprom10, !dbg !227
+  %7 = load i32, ptr %arrayidx11, align 4, !dbg !227
+  call void @printIntLine(i32 noundef %7), !dbg !228
+  br label %for.inc, !dbg !229
+
+for.inc:                                          ; preds = %for.body
+  %8 = load i32, ptr %i, align 4, !dbg !230
+  %inc = add nsw i32 %8, 1, !dbg !230
+  store i32 %inc, ptr %i, align 4, !dbg !230
+  br label %for.cond, !dbg !231, !llvm.loop !232
+
+for.end:                                          ; preds = %for.cond
+  br label %if.end13, !dbg !234
+
+if.else12:                                        ; preds = %land.lhs.true, %if.end
+  call void @printLine(ptr noundef @.str.6), !dbg !235
+  br label %if.end13
+
+if.end13:                                         ; preds = %if.else12, %for.end
+  ret void, !dbg !237
+}
+
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { nocallback nofree nounwind willreturn memory(argmem: write) }
+attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #3 = { nounwind willreturn memory(read) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #4 = { nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #5 = { nounwind willreturn memory(read) }
+attributes #6 = { nounwind }
+
+!llvm.dbg.cu = !{!34}
+!llvm.module.flags = !{!39, !40, !41, !42, !43, !44, !45}
+!llvm.ident = !{!46}
+
+!0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
+!1 = distinct !DIGlobalVariable(scope: null, file: !2, line: 39, type: !3, isLocal: true, isDefinition: true)
+!2 = !DIFile(filename: "src/ae_overflow_tests/CWE121_Stack_Based_Buffer_Overflow__CWE129_fgets_01_no-main.c", directory: "/mnt/scratch/PAG/Wjw/vibe/SVF/0506-master-compatible-clean/Test-Suite", checksumkind: CSK_MD5, checksum: "45ca468129465dc166c2ae3e31a5feb5")
+!3 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 128, elements: !5)
+!4 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
+!5 = !{!6}
+!6 = !DISubrange(count: 16)
+!7 = !DIGlobalVariableExpression(var: !8, expr: !DIExpression())
+!8 = distinct !DIGlobalVariable(scope: null, file: !2, line: 59, type: !9, isLocal: true, isDefinition: true)
+!9 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 256, elements: !10)
+!10 = !{!11}
+!11 = !DISubrange(count: 32)
+!12 = !DIGlobalVariableExpression(var: !13, expr: !DIExpression())
+!13 = distinct !DIGlobalVariable(scope: null, file: !2, line: 159, type: !14, isLocal: true, isDefinition: true)
+!14 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 144, elements: !15)
+!15 = !{!16}
+!16 = !DISubrange(count: 18)
+!17 = !DIGlobalVariableExpression(var: !18, expr: !DIExpression())
+!18 = distinct !DIGlobalVariable(scope: null, file: !2, line: 161, type: !3, isLocal: true, isDefinition: true)
+!19 = !DIGlobalVariableExpression(var: !20, expr: !DIExpression())
+!20 = distinct !DIGlobalVariable(scope: null, file: !2, line: 164, type: !21, isLocal: true, isDefinition: true)
+!21 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 136, elements: !22)
+!22 = !{!23}
+!23 = !DISubrange(count: 17)
+!24 = !DIGlobalVariableExpression(var: !25, expr: !DIExpression())
+!25 = distinct !DIGlobalVariable(scope: null, file: !2, line: 166, type: !26, isLocal: true, isDefinition: true)
+!26 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 120, elements: !27)
+!27 = !{!28}
+!28 = !DISubrange(count: 15)
+!29 = !DIGlobalVariableExpression(var: !30, expr: !DIExpression())
+!30 = distinct !DIGlobalVariable(scope: null, file: !2, line: 134, type: !31, isLocal: true, isDefinition: true)
+!31 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 288, elements: !32)
+!32 = !{!33}
+!33 = !DISubrange(count: 36)
+!34 = distinct !DICompileUnit(language: DW_LANG_C11, file: !2, producer: "clang version 21.1.0 (https://github.com/bjjwwang/LLVM-compile 4f7056e8ada487923d1c8f9bc38df6472008eda3)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, retainedTypes: !35, globals: !38, splitDebugInlining: false, nameTableKind: None)
+!35 = !{!36, !37}
+!36 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: null, size: 64)
+!37 = !DIBasicType(name: "unsigned int", size: 32, encoding: DW_ATE_unsigned)
+!38 = !{!0, !7, !12, !17, !19, !24, !29}
+!39 = !{i32 7, !"Dwarf Version", i32 5}
+!40 = !{i32 2, !"Debug Info Version", i32 3}
+!41 = !{i32 1, !"wchar_size", i32 4}
+!42 = !{i32 8, !"PIC Level", i32 2}
+!43 = !{i32 7, !"PIE Level", i32 2}
+!44 = !{i32 7, !"uwtable", i32 2}
+!45 = !{i32 7, !"frame-pointer", i32 2}
+!46 = !{!"clang version 21.1.0 (https://github.com/bjjwwang/LLVM-compile 4f7056e8ada487923d1c8f9bc38df6472008eda3)"}
+!47 = distinct !DISubprogram(name: "CWE121_Stack_Based_Buffer_Overflow__CWE129_fgets_01_bad", scope: !2, file: !2, line: 24, type: !48, scopeLine: 25, spFlags: DISPFlagDefinition, unit: !34, retainedNodes: !50)
+!48 = !DISubroutineType(types: !49)
+!49 = !{null}
+!50 = !{}
+!51 = !DILocalVariable(name: "data", scope: !47, file: !2, line: 26, type: !52)
+!52 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+!53 = !DILocation(line: 26, column: 9, scope: !47)
+!54 = !DILocation(line: 28, column: 10, scope: !47)
+!55 = !DILocalVariable(name: "inputBuffer", scope: !56, file: !2, line: 30, type: !57)
+!56 = distinct !DILexicalBlock(scope: !47, file: !2, line: 29, column: 5)
+!57 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 112, elements: !58)
+!58 = !{!59}
+!59 = !DISubrange(count: 14)
+!60 = !DILocation(line: 30, column: 14, scope: !56)
+!61 = !DILocation(line: 32, column: 19, scope: !62)
+!62 = distinct !DILexicalBlock(scope: !56, file: !2, line: 32, column: 13)
+!63 = !DILocation(line: 32, column: 49, scope: !62)
+!64 = !DILocation(line: 32, column: 13, scope: !62)
+!65 = !DILocation(line: 32, column: 56, scope: !62)
+!66 = !DILocation(line: 35, column: 25, scope: !67)
+!67 = distinct !DILexicalBlock(scope: !62, file: !2, line: 33, column: 9)
+!68 = !DILocation(line: 35, column: 20, scope: !67)
+!69 = !DILocation(line: 35, column: 18, scope: !67)
+!70 = !DILocation(line: 36, column: 9, scope: !67)
+!71 = !DILocation(line: 39, column: 13, scope: !72)
+!72 = distinct !DILexicalBlock(scope: !62, file: !2, line: 38, column: 9)
+!73 = !DILocalVariable(name: "i", scope: !74, file: !2, line: 43, type: !52)
+!74 = distinct !DILexicalBlock(scope: !47, file: !2, line: 42, column: 5)
+!75 = !DILocation(line: 43, column: 13, scope: !74)
+!76 = !DILocalVariable(name: "buffer", scope: !74, file: !2, line: 44, type: !77)
+!77 = !DICompositeType(tag: DW_TAG_array_type, baseType: !52, size: 320, elements: !78)
+!78 = !{!79}
+!79 = !DISubrange(count: 10)
+!80 = !DILocation(line: 44, column: 13, scope: !74)
+!81 = !DILocation(line: 47, column: 13, scope: !82)
+!82 = distinct !DILexicalBlock(scope: !74, file: !2, line: 47, column: 13)
+!83 = !DILocation(line: 47, column: 18, scope: !82)
+!84 = !DILocation(line: 49, column: 20, scope: !85)
+!85 = distinct !DILexicalBlock(scope: !82, file: !2, line: 48, column: 9)
+!86 = !DILocation(line: 49, column: 13, scope: !85)
+!87 = !DILocation(line: 49, column: 26, scope: !85)
+!88 = !DILocation(line: 50, column: 30, scope: !85)
+!89 = !DILocation(line: 50, column: 38, scope: !85)
+!90 = !DILocation(line: 50, column: 43, scope: !85)
+!91 = !DILocation(line: 50, column: 57, scope: !85)
+!92 = !DILocation(line: 50, column: 13, scope: !85)
+!93 = !DILocation(line: 52, column: 19, scope: !94)
+!94 = distinct !DILexicalBlock(scope: !85, file: !2, line: 52, column: 13)
+!95 = !DILocation(line: 52, column: 17, scope: !94)
+!96 = !DILocation(line: 52, column: 24, scope: !97)
+!97 = distinct !DILexicalBlock(scope: !94, file: !2, line: 52, column: 13)
+!98 = !DILocation(line: 52, column: 26, scope: !97)
+!99 = !DILocation(line: 52, column: 13, scope: !94)
+!100 = !DILocation(line: 54, column: 37, scope: !101)
+!101 = distinct !DILexicalBlock(scope: !97, file: !2, line: 53, column: 13)
+!102 = !DILocation(line: 54, column: 30, scope: !101)
+!103 = !DILocation(line: 54, column: 17, scope: !101)
+!104 = !DILocation(line: 55, column: 13, scope: !101)
+!105 = !DILocation(line: 52, column: 33, scope: !97)
+!106 = !DILocation(line: 52, column: 13, scope: !97)
+!107 = distinct !{!107, !99, !108, !109}
+!108 = !DILocation(line: 55, column: 13, scope: !94)
+!109 = !{!"llvm.loop.mustprogress"}
+!110 = !DILocation(line: 56, column: 9, scope: !85)
+!111 = !DILocation(line: 59, column: 13, scope: !112)
+!112 = distinct !DILexicalBlock(scope: !82, file: !2, line: 58, column: 9)
+!113 = !DILocation(line: 62, column: 1, scope: !47)
+!114 = distinct !DISubprogram(name: "CWE121_Stack_Based_Buffer_Overflow__CWE129_fgets_01_good", scope: !2, file: !2, line: 139, type: !48, scopeLine: 140, spFlags: DISPFlagDefinition, unit: !34)
+!115 = !DILocation(line: 141, column: 5, scope: !114)
+!116 = !DILocation(line: 142, column: 5, scope: !114)
+!117 = !DILocation(line: 143, column: 1, scope: !114)
+!118 = distinct !DISubprogram(name: "no_main_CWE121_Stack_Based_Buffer_Overflow__CWE129_fgets_01", scope: !2, file: !2, line: 154, type: !119, scopeLine: 155, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !34, retainedNodes: !50)
+!119 = !DISubroutineType(types: !120)
+!120 = !{!52, !52, !121}
+!121 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !122, size: 64)
+!122 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !4, size: 64)
+!123 = !DILocalVariable(name: "argc", arg: 1, scope: !118, file: !2, line: 154, type: !52)
+!124 = !DILocation(line: 154, column: 69, scope: !118)
+!125 = !DILocalVariable(name: "argv", arg: 2, scope: !118, file: !2, line: 154, type: !121)
+!126 = !DILocation(line: 154, column: 82, scope: !118)
+!127 = !DILocation(line: 157, column: 22, scope: !118)
+!128 = !DILocation(line: 157, column: 12, scope: !118)
+!129 = !DILocation(line: 157, column: 5, scope: !118)
+!130 = !DILocation(line: 159, column: 5, scope: !118)
+!131 = !DILocation(line: 160, column: 5, scope: !118)
+!132 = !DILocation(line: 161, column: 5, scope: !118)
+!133 = !DILocation(line: 164, column: 5, scope: !118)
+!134 = !DILocation(line: 165, column: 5, scope: !118)
+!135 = !DILocation(line: 166, column: 5, scope: !118)
+!136 = !DILocation(line: 168, column: 5, scope: !118)
+!137 = distinct !DISubprogram(name: "goodG2B", scope: !2, file: !2, line: 69, type: !48, scopeLine: 70, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !34, retainedNodes: !50)
+!138 = !DILocalVariable(name: "data", scope: !137, file: !2, line: 71, type: !52)
+!139 = !DILocation(line: 71, column: 9, scope: !137)
+!140 = !DILocation(line: 73, column: 10, scope: !137)
+!141 = !DILocation(line: 76, column: 10, scope: !137)
+!142 = !DILocalVariable(name: "i", scope: !143, file: !2, line: 78, type: !52)
+!143 = distinct !DILexicalBlock(scope: !137, file: !2, line: 77, column: 5)
+!144 = !DILocation(line: 78, column: 13, scope: !143)
+!145 = !DILocalVariable(name: "buffer", scope: !143, file: !2, line: 79, type: !77)
+!146 = !DILocation(line: 79, column: 13, scope: !143)
+!147 = !DILocation(line: 82, column: 13, scope: !148)
+!148 = distinct !DILexicalBlock(scope: !143, file: !2, line: 82, column: 13)
+!149 = !DILocation(line: 82, column: 18, scope: !148)
+!150 = !DILocation(line: 84, column: 20, scope: !151)
+!151 = distinct !DILexicalBlock(scope: !148, file: !2, line: 83, column: 9)
+!152 = !DILocation(line: 84, column: 13, scope: !151)
+!153 = !DILocation(line: 84, column: 26, scope: !151)
+!154 = !DILocation(line: 85, column: 28, scope: !151)
+!155 = !DILocation(line: 85, column: 36, scope: !151)
+!156 = !DILocation(line: 85, column: 41, scope: !151)
+!157 = !DILocation(line: 85, column: 55, scope: !151)
+!158 = !DILocation(line: 85, column: 13, scope: !151)
+!159 = !DILocation(line: 87, column: 19, scope: !160)
+!160 = distinct !DILexicalBlock(scope: !151, file: !2, line: 87, column: 13)
+!161 = !DILocation(line: 87, column: 17, scope: !160)
+!162 = !DILocation(line: 87, column: 24, scope: !163)
+!163 = distinct !DILexicalBlock(scope: !160, file: !2, line: 87, column: 13)
+!164 = !DILocation(line: 87, column: 26, scope: !163)
+!165 = !DILocation(line: 87, column: 13, scope: !160)
+!166 = !DILocation(line: 89, column: 37, scope: !167)
+!167 = distinct !DILexicalBlock(scope: !163, file: !2, line: 88, column: 13)
+!168 = !DILocation(line: 89, column: 30, scope: !167)
+!169 = !DILocation(line: 89, column: 17, scope: !167)
+!170 = !DILocation(line: 90, column: 13, scope: !167)
+!171 = !DILocation(line: 87, column: 33, scope: !163)
+!172 = !DILocation(line: 87, column: 13, scope: !163)
+!173 = distinct !{!173, !165, !174, !109}
+!174 = !DILocation(line: 90, column: 13, scope: !160)
+!175 = !DILocation(line: 91, column: 9, scope: !151)
+!176 = !DILocation(line: 94, column: 13, scope: !177)
+!177 = distinct !DILexicalBlock(scope: !148, file: !2, line: 93, column: 9)
+!178 = !DILocation(line: 97, column: 1, scope: !137)
+!179 = distinct !DISubprogram(name: "goodB2G", scope: !2, file: !2, line: 100, type: !48, scopeLine: 101, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !34, retainedNodes: !50)
+!180 = !DILocalVariable(name: "data", scope: !179, file: !2, line: 102, type: !52)
+!181 = !DILocation(line: 102, column: 9, scope: !179)
+!182 = !DILocation(line: 104, column: 10, scope: !179)
+!183 = !DILocalVariable(name: "inputBuffer", scope: !184, file: !2, line: 106, type: !57)
+!184 = distinct !DILexicalBlock(scope: !179, file: !2, line: 105, column: 5)
+!185 = !DILocation(line: 106, column: 14, scope: !184)
+!186 = !DILocation(line: 108, column: 19, scope: !187)
+!187 = distinct !DILexicalBlock(scope: !184, file: !2, line: 108, column: 13)
+!188 = !DILocation(line: 108, column: 49, scope: !187)
+!189 = !DILocation(line: 108, column: 13, scope: !187)
+!190 = !DILocation(line: 108, column: 56, scope: !187)
+!191 = !DILocation(line: 111, column: 25, scope: !192)
+!192 = distinct !DILexicalBlock(scope: !187, file: !2, line: 109, column: 9)
+!193 = !DILocation(line: 111, column: 20, scope: !192)
+!194 = !DILocation(line: 111, column: 18, scope: !192)
+!195 = !DILocation(line: 112, column: 9, scope: !192)
+!196 = !DILocation(line: 115, column: 13, scope: !197)
+!197 = distinct !DILexicalBlock(scope: !187, file: !2, line: 114, column: 9)
+!198 = !DILocalVariable(name: "i", scope: !199, file: !2, line: 119, type: !52)
+!199 = distinct !DILexicalBlock(scope: !179, file: !2, line: 118, column: 5)
+!200 = !DILocation(line: 119, column: 13, scope: !199)
+!201 = !DILocalVariable(name: "buffer", scope: !199, file: !2, line: 120, type: !77)
+!202 = !DILocation(line: 120, column: 13, scope: !199)
+!203 = !DILocation(line: 122, column: 13, scope: !204)
+!204 = distinct !DILexicalBlock(scope: !199, file: !2, line: 122, column: 13)
+!205 = !DILocation(line: 122, column: 18, scope: !204)
+!206 = !DILocation(line: 122, column: 23, scope: !204)
+!207 = !DILocation(line: 122, column: 26, scope: !204)
+!208 = !DILocation(line: 122, column: 31, scope: !204)
+!209 = !DILocation(line: 124, column: 20, scope: !210)
+!210 = distinct !DILexicalBlock(scope: !204, file: !2, line: 123, column: 9)
+!211 = !DILocation(line: 124, column: 13, scope: !210)
+!212 = !DILocation(line: 124, column: 26, scope: !210)
+!213 = !DILocation(line: 125, column: 28, scope: !210)
+!214 = !DILocation(line: 125, column: 36, scope: !210)
+!215 = !DILocation(line: 125, column: 41, scope: !210)
+!216 = !DILocation(line: 125, column: 55, scope: !210)
+!217 = !DILocation(line: 125, column: 13, scope: !210)
+!218 = !DILocation(line: 127, column: 19, scope: !219)
+!219 = distinct !DILexicalBlock(scope: !210, file: !2, line: 127, column: 13)
+!220 = !DILocation(line: 127, column: 17, scope: !219)
+!221 = !DILocation(line: 127, column: 24, scope: !222)
+!222 = distinct !DILexicalBlock(scope: !219, file: !2, line: 127, column: 13)
+!223 = !DILocation(line: 127, column: 26, scope: !222)
+!224 = !DILocation(line: 127, column: 13, scope: !219)
+!225 = !DILocation(line: 129, column: 37, scope: !226)
+!226 = distinct !DILexicalBlock(scope: !222, file: !2, line: 128, column: 13)
+!227 = !DILocation(line: 129, column: 30, scope: !226)
+!228 = !DILocation(line: 129, column: 17, scope: !226)
+!229 = !DILocation(line: 130, column: 13, scope: !226)
+!230 = !DILocation(line: 127, column: 33, scope: !222)
+!231 = !DILocation(line: 127, column: 13, scope: !222)
+!232 = distinct !{!232, !224, !233, !109}
+!233 = !DILocation(line: 130, column: 13, scope: !219)
+!234 = !DILocation(line: 131, column: 9, scope: !210)
+!235 = !DILocation(line: 134, column: 13, scope: !236)
+!236 = distinct !DILexicalBlock(scope: !204, file: !2, line: 133, column: 9)
+!237 = !DILocation(line: 137, column: 1, scope: !179)
