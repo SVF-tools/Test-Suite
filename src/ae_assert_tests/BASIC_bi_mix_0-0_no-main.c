@@ -1,0 +1,14 @@
+#include "stdbool.h"
+extern void svf_assert(bool);
+extern void set_value(int, int, int);
+int no_main_BASIC_bi_mix_0_0() {
+    int a, b;
+    a = 1;
+    a += 2 ;
+    b = a;
+    b -= 1;
+    svf_assert( a == 3 && b == 2);
+
+
+    return 0;
+}

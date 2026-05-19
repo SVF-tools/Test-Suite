@@ -480,19 +480,23 @@ endforeach()
 file(GLOB ae_assert_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_assert_tests/*.bc")
 foreach(filename ${ae_assert_files})
   get_filename_component(basename ${filename} NAME)
+  set(ae_entry_args)
+  if ("${basename}" MATCHES "no-main")
+    set(ae_entry_args -ae-fun-entry=multiple)
+  endif()
   add_test(
           NAME ae_assert_tests/${filename}
-          COMMAND ae ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ae ${ae_entry_args} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   add_test(
           NAME ae_semi_sparse/assert/${basename}
-          COMMAND ae -ae-sparsity=semi-sparse ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ae -ae-sparsity=semi-sparse ${ae_entry_args} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   add_test(
           NAME ae_full_sparse/assert/${basename}
-          COMMAND ae -ae-sparsity=sparse ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ae -ae-sparsity=sparse ${ae_entry_args} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
