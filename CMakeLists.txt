@@ -482,7 +482,7 @@ foreach(filename ${ae_assert_files})
   get_filename_component(basename ${filename} NAME)
   set(ae_entry_args)
   if ("${basename}" MATCHES "no-main")
-    set(ae_entry_args -ae-fun-entry=multiple)
+    set(ae_entry_args -ae-fun-entry=no-main)
   endif()
   add_test(
           NAME ae_assert_tests/${filename}
@@ -507,7 +507,7 @@ foreach(filename ${ae_overflow_files})
   get_filename_component(basename ${filename} NAME)
   set(ae_entry_args)
   if ("${basename}" MATCHES "no-main")
-    set(ae_entry_args -ae-fun-entry=multiple)
+    set(ae_entry_args -ae-fun-entry=no-main)
   endif()
   add_test(
           NAME ae_overflow_tests/${filename}
@@ -547,7 +547,7 @@ foreach(filename ${ae_nullptr_deref_files})
   get_filename_component(basename ${filename} NAME)
   set(ae_entry_args)
   if ("${basename}" MATCHES "no-main")
-    set(ae_entry_args -ae-fun-entry=multiple)
+    set(ae_entry_args -ae-fun-entry=no-main)
   endif()
   add_test(
           NAME ae_nullptr_deref_tests/${filename}
@@ -572,7 +572,7 @@ foreach(filename ${ae_recursion_files})
   get_filename_component(basename ${filename} NAME)
   set(ae_entry_args)
   if ("${basename}" MATCHES "no-main")
-    set(ae_entry_args -ae-fun-entry=multiple)
+    set(ae_entry_args -ae-fun-entry=no-main)
   endif()
   add_test(
           NAME ae_recursion_tests/${filename}-widen-narrow
