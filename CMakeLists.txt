@@ -478,6 +478,7 @@ endforeach()
 
 # ae_assert tests (ctest -R ae_assert_test -VV) + semi/full-sparse
 file(GLOB ae_assert_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_assert_tests/*.bc")
+list(FILTER ae_assert_files EXCLUDE REGEX "no-main")
 foreach(filename ${ae_assert_files})
   get_filename_component(basename ${filename} NAME)
   set(ae_entry_args)
@@ -503,6 +504,7 @@ endforeach()
 
 # ae_overflow tests (ctest -R ae_overflow_test -VV) + semi/full-sparse
 file(GLOB ae_overflow_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_overflow_tests/*.bc")
+list(FILTER ae_overflow_files EXCLUDE REGEX "no-main")
 foreach(filename ${ae_overflow_files})
   get_filename_component(basename ${filename} NAME)
   set(ae_entry_args)
@@ -543,6 +545,7 @@ endforeach()
 
 # ae_nullptr_deref tests (ctest -R ae_nullptr_deref_tests -VV) + semi/full-sparse
 file(GLOB ae_nullptr_deref_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_nullptr_deref_tests/*.bc")
+list(FILTER ae_nullptr_deref_files EXCLUDE REGEX "no-main")
 foreach(filename ${ae_nullptr_deref_files})
   get_filename_component(basename ${filename} NAME)
   set(ae_entry_args)
@@ -568,6 +571,7 @@ endforeach()
 
 # ae_recursion tests (ctest -R ae_recursion_tests -VV) + semi/full-sparse
 file(GLOB ae_recursion_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_recursion_tests/*.bc")
+list(FILTER ae_recursion_files EXCLUDE REGEX "no-main")
 foreach(filename ${ae_recursion_files})
   get_filename_component(basename ${filename} NAME)
   set(ae_entry_args)
@@ -587,6 +591,35 @@ foreach(filename ${ae_recursion_files})
   add_test(
           NAME ae_full_sparse/recursion/${basename}-widen-narrow
           COMMAND ae -ae-sparsity=sparse -overflow ${ae_entry_args} -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+
+# ae no-main tests (ctest -R ae_no_main -VV)
+set(ae_no_main_dirs
+  ae_assert_tests
+  ae_overflow_tests
+  ae_nullptr_deref_tests
+  ae_recursion_tests
+)
+set(ae_no_main_files)
+foreach(ae_no_main_dir ${ae_no_main_dirs})
+  file(GLOB ae_no_main_dir_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/${ae_no_main_dir}/*no-main*.bc")
+  list(APPEND ae_no_main_files ${ae_no_main_dir_files})
+endforeach()
+foreach(filename ${ae_no_main_files})
+  get_filename_component(basename ${filename} NAME)
+  set(ae_no_main_args)
+  if ("${filename}" MATCHES "ae_overflow_tests")
+    set(ae_no_main_args -overflow -field-limit=1024)
+  elseif ("${filename}" MATCHES "ae_nullptr_deref_tests")
+    set(ae_no_main_args -null-deref)
+  elseif ("${filename}" MATCHES "ae_recursion_tests")
+    set(ae_no_main_args -overflow -handle-recur=widen-narrow -field-limit=1024 -widen-delay=10)
+  endif()
+  add_test(
+          NAME ae_no_main/${basename}
+          COMMAND ae -ae-fun-entry=no-main ${ae_no_main_args} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 endforeach()
