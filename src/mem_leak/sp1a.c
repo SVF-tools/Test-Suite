@@ -15,7 +15,7 @@ int ResourceLeak_TC01(int *p) {
 	if (p == NULL)
 		return -1;
 
-	strcat(p, str);
+	strcat_s(p, 10, str);
 	printf(" %s \n", p);
 	return 0;
 }

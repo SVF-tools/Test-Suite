@@ -22,7 +22,7 @@ int ResourceLeak_TC03 (int arg1)
 		if( p1 == NULL) {
 				return 1;
 		}
-		strcat(p1,str);
+		strcat_s(p1, 10, str);
 		pointer(&p2,p1);
 
 		printf(" %s \n", p1);
