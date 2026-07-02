@@ -192,7 +192,7 @@ foreach(filename ${sliced_mta_files})
 endforeach()
 
 # mta statistic tests (ctest -R mta_stat_tests -VV)
-set(mta_stat_cmd "mta -flow-sensitive=false -stat=true")
+set(mta_stat_cmd "mta -mt-flow-sensitive=false -stat=true")
 set(mta_stat_files
   test_cases_bc/sliced_mta/smoke1_basic.c.bc
   test_cases_bc/sliced_mta/smoke7_indirect_fork_join.c.bc
