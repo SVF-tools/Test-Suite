@@ -176,7 +176,7 @@ foreach(i RANGE ${dvf_len2})
 endforeach()
 
 # sliced mta tests (ctest -R sliced_mta_tests -VV)
-set(sliced_mta_cmd "mta -enable-slicing=true")
+set(sliced_mta_cmd "mta -enable-slicing=true -stat=true")
 file(GLOB sliced_mta_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/sliced_mta/*.bc*")
 string(REPLACE " " ";" commandtemp ${sliced_mta_cmd})
 set(command ${commandtemp})
@@ -186,6 +186,22 @@ foreach(filename ${sliced_mta_files})
   endif()
   add_test(
     NAME sliced_mta_tests/${filename}
+    COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+
+# mta statistic tests (ctest -R mta_stat_tests -VV)
+set(mta_stat_cmd "mta -flow-sensitive=false -stat=true")
+set(mta_stat_files
+  test_cases_bc/sliced_mta/smoke1_basic.c.bc
+  test_cases_bc/sliced_mta/smoke7_indirect_fork_join.c.bc
+)
+string(REPLACE " " ";" commandtemp ${mta_stat_cmd})
+set(command ${commandtemp})
+foreach(filename ${mta_stat_files})
+  add_test(
+    NAME mta_stat_tests/${filename}
     COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
