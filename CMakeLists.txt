@@ -174,6 +174,23 @@ foreach(i RANGE ${dvf_len2})
     )
   endforeach()
 endforeach()
+
+# sliced mta tests (ctest -R sliced_mta_tests -VV)
+set(sliced_mta_cmd "mta -enable-slicing=true")
+file(GLOB sliced_mta_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/sliced_mta/*.bc*")
+string(REPLACE " " ";" commandtemp ${sliced_mta_cmd})
+set(command ${commandtemp})
+foreach(filename ${sliced_mta_files})
+  if (${filename} MATCHES ".pre.bc" OR ${filename} MATCHES ".pre.svf.bc" OR ${filename} MATCHES ".svf.bc")
+    continue()
+  endif()
+  add_test(
+    NAME sliced_mta_tests/${filename}
+    COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+
 # graphdb dvf and mta tests (write + read)
 # Usage: ctest -R graphdb-dvf_tests -VV
 list(APPEND graphdb_dvf_folders
