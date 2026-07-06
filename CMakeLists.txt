@@ -207,6 +207,100 @@ foreach(filename ${mta_stat_files})
   )
 endforeach()
 
+# whole-program (no-slicing) FSAM baseline (ctest -R mta_whole_tests -VV)
+# Runs the SlicedMTA pipeline with slicing off, exercising runWholeProgramDetection
+# (the A/B reference the sliced run is compared against).
+set(mta_whole_cmd "mta -enable-slicing=false -stat=true")
+file(GLOB mta_whole_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/sliced_mta/*.bc*")
+string(REPLACE " " ";" commandtemp ${mta_whole_cmd})
+set(command ${commandtemp})
+foreach(filename ${mta_whole_files})
+  if (${filename} MATCHES ".pre.bc" OR ${filename} MATCHES ".pre.svf.bc" OR ${filename} MATCHES ".svf.bc")
+    continue()
+  endif()
+  add_test(
+    NAME mta_whole_tests/${filename}
+    COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+
+# single unified slice, one slice for ILA + FSPTA (ctest -R mta_single_slice_tests -VV)
+# Exercises the SingleSlicer (-slicing-single) single-pass baseline branch.
+set(mta_single_cmd "mta -enable-slicing=true -slicing-single=true -stat=true")
+file(GLOB mta_single_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/sliced_mta/*.bc*")
+string(REPLACE " " ";" commandtemp ${mta_single_cmd})
+set(command ${commandtemp})
+foreach(filename ${mta_single_files})
+  if (${filename} MATCHES ".pre.bc" OR ${filename} MATCHES ".pre.svf.bc" OR ${filename} MATCHES ".svf.bc")
+    continue()
+  endif()
+  add_test(
+    NAME mta_single_slice_tests/${filename}
+    COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+
+# main FSMPTA value flow rebuilt from the sliced ILA (ctest -R mta_main_ila_tests -VV)
+# Exercises the -main-ila-sliced (fresh SVFG from the sliced ILA) branch.
+set(mta_main_ila_cmd "mta -enable-slicing=true -main-ila-sliced=true -stat=true")
+set(mta_main_ila_files
+  test_cases_bc/sliced_mta/smoke1_basic.c.bc
+  test_cases_bc/sliced_mta/smoke3_rich_races.c.bc
+)
+string(REPLACE " " ";" commandtemp ${mta_main_ila_cmd})
+set(command ${commandtemp})
+foreach(filename ${mta_main_ila_files})
+  add_test(
+    NAME mta_main_ila_tests/${filename}
+    COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+
+# observe mode: dump FSAM points-to + ILA instead of detecting races
+# (ctest -R mta_observe_tests -VV). Both slicing on/off variants are run so the
+# sliced and whole-program observers (and the ILA dumper) are all exercised.
+set(mta_observe_sliced_cmd "mta -observe=true -enable-slicing=true")
+set(mta_observe_whole_cmd  "mta -observe=true -enable-slicing=false")
+set(mta_observe_files
+  test_cases_bc/sliced_mta/smoke1_basic.c.bc
+  test_cases_bc/sliced_mta/smoke3_rich_races.c.bc
+  test_cases_bc/sliced_mta/smoke6_lock_paths.c.bc
+)
+foreach(filename ${mta_observe_files})
+  string(REPLACE " " ";" cmd_sliced ${mta_observe_sliced_cmd})
+  add_test(
+    NAME mta_observe_tests/sliced/${filename}
+    COMMAND ${cmd_sliced} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+  string(REPLACE " " ";" cmd_whole ${mta_observe_whole_cmd})
+  add_test(
+    NAME mta_observe_tests/whole/${filename}
+    COMMAND ${cmd_whole} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+
+# saber with the full SVFG on top of the pointer-only one (ctest -R saber_full_svfg_tests -VV)
+# Exercises SVFGBuilder::buildFullSVFG / SVFGOPT (plain saber uses the pointer-only SVFG).
+set(saber_full_cmd "saber -leak -saber-full-svfg=true -valid-tests -stat=false")
+file(GLOB saber_full_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/mem_leak/*.bc*")
+string(REPLACE " " ";" commandtemp ${saber_full_cmd})
+set(command ${commandtemp})
+foreach(filename ${saber_full_files})
+  if (${filename} MATCHES ".pre.bc" OR ${filename} MATCHES ".pre.svf.bc" OR ${filename} MATCHES ".svf.bc")
+    continue()
+  endif()
+  add_test(
+    NAME saber_full_svfg_tests/${filename}
+    COMMAND ${command} ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endforeach()
+
 # graphdb dvf and mta tests (write + read)
 # Usage: ctest -R graphdb-dvf_tests -VV
 list(APPEND graphdb_dvf_folders
