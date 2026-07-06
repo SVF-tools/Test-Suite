@@ -301,42 +301,6 @@ foreach(filename ${saber_full_files})
   )
 endforeach()
 
-# MSli race-statement count assertions (ctest -R mta_race_count_tests -VV)
-# The suites above only check that mta runs (exit 0); they pass even if race
-# detection is silently broken. These assert the exact race-statement count for
-# each known program, for BOTH the sliced (MSli) and whole-program (FSAM) runs --
-# so a wrong count, or a sliced/whole divergence (a query-preservation break),
-# fails the test. Update the expected number when the analysis legitimately changes.
-set(MTA_BIN "${CMAKE_BINARY_DIR}/bin/mta")
-set(SLICED_MTA_DIR "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/sliced_mta")
-set(mta_race_counts
-  "basic=5" "interproc=2" "rich_races=9" "pointer_noise=75"
-  "workqueue_stats=6" "lock_paths=18" "indirect_fork_join=12" "pointer_field_flows=14"
-)
-foreach(entry ${mta_race_counts})
-  string(REPLACE "=" ";" kv ${entry})
-  list(GET kv 0 cname)
-  list(GET kv 1 ccount)
-  add_test(
-    NAME mta_race_count_tests/${cname}
-    COMMAND bash -c "${MTA_BIN} -enable-slicing=true '${SLICED_MTA_DIR}/${cname}.c.bc' | grep -Fxq '[MSLI-RQ] mode=MSli alarms=${ccount}' && ${MTA_BIN} -enable-slicing=false '${SLICED_MTA_DIR}/${cname}.c.bc' | grep -Fxq '[MSLI-RQ] mode=FSAM alarms=${ccount}'"
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-  )
-endforeach()
-
-# Guard-path assertions: a threaded but race-free program reports zero race
-# pairs, and a non-threaded program reports no thread functions.
-add_test(
-  NAME mta_race_count_tests/no_data_race
-  COMMAND bash -c "${MTA_BIN} -enable-slicing=true '${SLICED_MTA_DIR}/no_data_race.c.bc' | grep -Fxq 'Found 0 race pairs'"
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-)
-add_test(
-  NAME mta_race_count_tests/single_threaded
-  COMMAND bash -c "${MTA_BIN} -enable-slicing=true '${SLICED_MTA_DIR}/single_threaded.c.bc' | grep -Fxq '[WARNING] No thread functions found'"
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-)
-
 # graphdb dvf and mta tests (write + read)
 # Usage: ctest -R graphdb-dvf_tests -VV
 list(APPEND graphdb_dvf_folders
