@@ -194,8 +194,8 @@ endforeach()
 # mta statistic tests (ctest -R mta_stat_tests -VV)
 set(mta_stat_cmd "mta -mt-flow-sensitive=false -stat=true")
 set(mta_stat_files
-  test_cases_bc/sliced_mta/smoke1_basic.c.bc
-  test_cases_bc/sliced_mta/smoke7_indirect_fork_join.c.bc
+  test_cases_bc/sliced_mta/basic.c.bc
+  test_cases_bc/sliced_mta/indirect_fork_join.c.bc
 )
 string(REPLACE " " ";" commandtemp ${mta_stat_cmd})
 set(command ${commandtemp})
@@ -246,8 +246,8 @@ endforeach()
 # Exercises the -main-ila-sliced (fresh SVFG from the sliced ILA) branch.
 set(mta_main_ila_cmd "mta -enable-slicing=true -main-ila-sliced=true -stat=true")
 set(mta_main_ila_files
-  test_cases_bc/sliced_mta/smoke1_basic.c.bc
-  test_cases_bc/sliced_mta/smoke3_rich_races.c.bc
+  test_cases_bc/sliced_mta/basic.c.bc
+  test_cases_bc/sliced_mta/rich_races.c.bc
 )
 string(REPLACE " " ";" commandtemp ${mta_main_ila_cmd})
 set(command ${commandtemp})
@@ -265,9 +265,9 @@ endforeach()
 set(mta_observe_sliced_cmd "mta -observe=true -enable-slicing=true")
 set(mta_observe_whole_cmd  "mta -observe=true -enable-slicing=false")
 set(mta_observe_files
-  test_cases_bc/sliced_mta/smoke1_basic.c.bc
-  test_cases_bc/sliced_mta/smoke3_rich_races.c.bc
-  test_cases_bc/sliced_mta/smoke6_lock_paths.c.bc
+  test_cases_bc/sliced_mta/basic.c.bc
+  test_cases_bc/sliced_mta/rich_races.c.bc
+  test_cases_bc/sliced_mta/lock_paths.c.bc
 )
 foreach(filename ${mta_observe_files})
   string(REPLACE " " ";" cmd_sliced ${mta_observe_sliced_cmd})

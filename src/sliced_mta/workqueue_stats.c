@@ -1,4 +1,4 @@
-// smoke5_workqueue_stats.c -- a small request-processing workload.
+// workqueue_stats.c -- a small request-processing workload.
 //
 // Worker threads run a local request pipeline and then update shared statistics
 // without locks. Most request parsing, routing, checksum, and serialization code

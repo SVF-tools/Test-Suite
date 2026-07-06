@@ -1,4 +1,4 @@
-// smoke2_interproc.c -- a second smoke test exercising interprocedural slicing.
+// interproc.c -- a second test exercising interprocedural slicing.
 //
 // A pool of worker threads reaches a shared write through a chain of helper
 // calls, and main writes the same object concurrently. A separate, larger body

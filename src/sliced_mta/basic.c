@@ -1,4 +1,4 @@
-// smoke1_basic.c -- a minimal smoke test for the MSli artifact.
+// basic.c -- a minimal test for the MSli artifact.
 //
 // Two worker threads share a counter and a flag; main also touches them. Most of
 // the program is independent local arithmetic (compute_*) that never touches the

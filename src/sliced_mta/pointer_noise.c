@@ -1,4 +1,4 @@
-// smoke4_pointer_noise.c -- pthread races with unrelated pointer-heavy code.
+// pointer_noise.c -- pthread races with unrelated pointer-heavy code.
 #include <pthread.h>
 
 typedef struct Node {

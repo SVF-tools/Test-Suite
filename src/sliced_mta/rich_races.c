@@ -1,4 +1,4 @@
-// smoke3_rich_races.c -- a denser smoke test for preservation checks.
+// rich_races.c -- a denser test for preservation checks.
 //
 // This case has several independently reachable race statements: direct shared
 // writes, pointer-indirect writes, interprocedural writes, and array element
