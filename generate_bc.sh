@@ -13,6 +13,7 @@ test_dirs="
   mem_leak
   double_free
   mta
+  sliced_mta
   non_annotated_tests
   path_tests
   objtype_tests
