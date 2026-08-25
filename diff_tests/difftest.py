@@ -225,8 +225,13 @@ def main(argv: List[str]):
         usage()
         sys.exit(1)
 
-    cmd1 = f'./{cmd1} {path1}'
-    cmd2 = f'./{cmd2} {path2}'
+    import sys
+    if sys.platform == 'win32':
+        cmd1 = f'.\\{cmd1} {path1}'
+        cmd2 = f'.\\{cmd2} {path2}'
+    else:
+        cmd1 = f'./{cmd1} {path1}'
+        cmd2 = f'./{cmd2} {path2}'
 
     stats1 = exec_collect(cmd1)
     stats2 = exec_collect(cmd2)
