@@ -27,7 +27,7 @@ test_dirs="
 root=$(cd "$(dirname "$0")"; pwd)
 bc_path="$root/test_cases_bc"
 
-if [[ $sysOS == "Linux" ]];then
+if [[ $sysOS == "Linux" || $sysOS == "Darwin" || $sysOS =~ "MINGW" || $sysOS =~ "MSYS" ]];then
 
 ########
 # Remove previous bc folder and create a new one.
