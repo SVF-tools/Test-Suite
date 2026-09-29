@@ -63,31 +63,3 @@ jobs:
           git add .
           git commit -am "update bc files" || true
           git push
-
-  mac_build:
-    needs: linux_build
-    runs-on: macos-latest
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: stash-changes
-        run: |
-          git stash --all
-          echo $(pwd)
-
-      - name: generate-bcs
-        run: |
-          echo $(pwd)
-          git status
-          bash ./generate_bc.sh
-
-      - name: commit-and-push
-        run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@users.noreply.github.com'
-          git status
-          git pull
-          git add .
-          git commit -am "update bc files" || true
-          git push
