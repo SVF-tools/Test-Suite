@@ -27,7 +27,7 @@ test_dirs="
 root=$(cd "$(dirname "$0")"; pwd)
 bc_path="$root/test_cases_bc"
 
-if [[ $sysOS == "Linux" ]];then
+if [[ $sysOS == "Linux" || $sysOS == "Darwin" || $sysOS =~ "MINGW" || $sysOS =~ "MSYS" ]];then
 
 ########
 # Remove previous bc folder and create a new one.
@@ -94,26 +94,36 @@ for td in $test_dirs; do
     echo "$0:        to '$bc_f'"
 
     ########
+    # Check if this test requires the MSVC ABI target
+    ########
+    target_arg=""
+    case "$(basename "$c_f")" in
+        msvc_*)
+            target_arg="-target x86_64-pc-windows-msvc"
+            ;;
+    esac
+
+    ########
     # created a .ll, let's make it .bc, as the filename suggests.
     ########
     if test $td == "mem_leak"
     then
-        $compiler -Wno-everything -S -emit-llvm -fno-discard-value-names -g -I"$root" "$c_f" -o "$bc_f"
+        $compiler $target_arg -Wno-everything -S -emit-llvm -fno-discard-value-names -g -I"$root" "$c_f" -o "$bc_f"
     # td = "ae_assert_tests" or "ae_overflow_tests"
     elif test $td == "ae_assert_tests"
     then
-        $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
+        $compiler $target_arg -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
     elif test $td == "ae_overflow_tests"
     then
-        $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
+        $compiler $target_arg -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
     elif test $td == "ae_recursion_tests"
     then
-        $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
+        $compiler $target_arg -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
     elif test $td == "ae_wto_assert"
     then
-        $compiler -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
+        $compiler $target_arg -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
     else
-        $compiler -Wno-everything -S -emit-llvm -fno-discard-value-names -I"$root" "$c_f" -o "$bc_f"
+        $compiler $target_arg -Wno-everything -S -emit-llvm -fno-discard-value-names -I"$root" "$c_f" -o "$bc_f"
     fi
     #llvm-as "$bc_f" -o "$bc_f"
     opt -S -p=mem2reg "$bc_f" -o "$bc_f"
