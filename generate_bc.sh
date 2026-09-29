@@ -30,10 +30,19 @@ bc_path="$root/test_cases_bc"
 if [[ $sysOS == "Linux" || $sysOS == "Darwin" || $sysOS =~ "MINGW" || $sysOS =~ "MSYS" ]];then
 
 ########
-# Remove previous bc folder and create a new one.
+# Remove previous bc files and create a new directory layout, while
+# preserving the committed Windows-only bitcode file.
 ########
+preserved_bc="$bc_path/mem_leak/leak_win_heap.c.bc"
+if [ -d "$bc_path" ]; then
+  git ls-files -z "$bc_path" | while IFS= read -r -d '' tracked_bc; do
+    if [ "$root/$tracked_bc" != "$preserved_bc" ]; then
+      git rm -f -- "$tracked_bc"
+    fi
+  done
 
-git rm -rf "$bc_path"
+  find "$bc_path" -type f ! -path "$preserved_bc" -delete
+fi
 mkdir -p "$bc_path"
 
 ########
@@ -57,7 +66,6 @@ for td in $test_dirs; do
   for c_f in "$full_td/"*; do
     ########
     # Obtains the text after the '.'.
-    ########
     ext=${c_f##*.}
 
     ########
@@ -68,10 +76,18 @@ for td in $test_dirs; do
         continue
     fi
 
+    filename=$(basename "$c_f")
+
+    # This test requires Windows SDK headers. Preserve its committed bitcode.
+    if [ "$td" = "mem_leak" ] && [ "$filename" = "leak_win_heap.c" ]; then
+        echo "$0: Skipping '$c_f' (preserving '$preserved_bc')"
+        continue
+    fi
+
     ########
     # The output .bc file name.
     ########
-    bc_f="$bc_td/`basename "$c_f"`.bc"
+    bc_f="$bc_td/$filename.bc"
 
     ########
     # If the .bc is newer than the .c/.cpp, then no need to compile.
@@ -97,7 +113,7 @@ for td in $test_dirs; do
     # Check if this test requires the MSVC ABI target
     ########
     target_arg=""
-    case "$(basename "$c_f")" in
+    case "$filename" in
         msvc_*)
             target_arg="-target x86_64-pc-windows-msvc"
             ;;
