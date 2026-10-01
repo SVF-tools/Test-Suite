@@ -21,6 +21,8 @@ test_dirs="
   ae_nullptr_deref_tests
   ae_recursion_tests
   ae_wto_assert
+  blk_tests
+  blk_extapi_tests
 "
 
 
@@ -119,5 +121,11 @@ for td in $test_dirs; do
     opt -S -p=mem2reg "$bc_f" -o "$bc_f"
   done
 done
+
+########
+# blk_extapi_tests run wpa with their own extapi, compiled like SVF's extapi.bc.
+########
+mkdir -p "$bc_path/blk_extapi_tests/extapi"
+clang -w -S -c -fPIC -std=gnu11 -emit-llvm "$root/src/blk_extapi_tests/extapi/scanf_like_extapi.c" -o "$bc_path/blk_extapi_tests/extapi/scanf_like_extapi.bc"
 
 fi
