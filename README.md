@@ -25,6 +25,8 @@ The following gives the Test-Suite's folders and the corresponding SVF's options
 | mta                   |                                                             | multithreaded test cases                                                          |
 | mem_leak              | saber -leak -valid-tests -mempar=inter-disjoint -stat=false | memory leak test cases   
 | double_free           | saber -dfree -valid-tests -stat=false                       | double free test cases                                                            |
+| blk_tests             | wpa -ander -blk                                             | scanf outputs under the black-hole pointer model (-blk)                           |
+| blk_extapi_tests      | wpa -ander -blk -extapi=(test-only extapi in extapi/)       | annotation-driven scanf handling, using a test-only extapi                        |
 
 ## Scripts
 Travis CI is used to build all the test cases, It uses `./generate_bc.sh` to do so and then pushes the compiled test cases into master branch.

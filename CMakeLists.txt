@@ -99,6 +99,8 @@ list(
   basic_cpp_tests
   fs_tests
   vfs_tests
+  blk_tests
+  blk_extapi_tests
 )
 
 list(
@@ -108,6 +110,8 @@ list(
   "wpa -ander"
   "wpa -fspta"
   "wpa -vfspta"
+  "wpa -ander -blk"
+  "wpa -ander -blk -extapi=${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/blk_extapi_tests/extapi/scanf_like_extapi.bc"
 )
 
 list(LENGTH wpa_folders wpa_len1)
