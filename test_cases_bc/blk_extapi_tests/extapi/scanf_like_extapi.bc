@@ -1,0 +1,37 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/src/blk_extapi_tests/extapi/scanf_like_extapi.c'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/blk_extapi_tests/extapi/scanf_like_extapi.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+@.str = private unnamed_addr constant [16 x i8] c"STORE_TOP:Arg2+\00", section "llvm.metadata"
+@.str.1 = private unnamed_addr constant [88 x i8] c"/home/runner/work/Test-Suite/Test-Suite/src/blk_extapi_tests/extapi/scanf_like_extapi.c\00", section "llvm.metadata"
+@.str.2 = private unnamed_addr constant [17 x i8] c"SCANF:FormatArg1\00", section "llvm.metadata"
+@.str.3 = private unnamed_addr constant [16 x i8] c"STORE_TOP:Arg1+\00", section "llvm.metadata"
+@llvm.global.annotations = appending global [3 x { ptr, ptr, ptr, i32, ptr }] [{ ptr, ptr, ptr, i32, ptr } { ptr @read_record, ptr @.str, ptr @.str.1, i32 9, ptr null }, { ptr, ptr, ptr, i32, ptr } { ptr @read_record, ptr @.str.2, ptr @.str.1, i32 9, ptr null }, { ptr, ptr, ptr, i32, ptr } { ptr @fill_unknown, ptr @.str.3, ptr @.str.1, i32 16, ptr null }], section "llvm.metadata"
+
+; Function Attrs: noinline nounwind optnone uwtable
+define i32 @read_record(ptr noundef %0, ptr noundef %1, ...) #0 {
+  %3 = alloca ptr, align 8
+  %4 = alloca ptr, align 8
+  store ptr %0, ptr %3, align 8
+  store ptr %1, ptr %4, align 8
+  ret i32 0
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define i32 @fill_unknown(ptr noundef %0, ...) #0 {
+  %2 = alloca ptr, align 8
+  store ptr %0, ptr %2, align 8
+  ret i32 0
+}
+
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+
+!llvm.module.flags = !{!0, !1, !2, !3}
+!llvm.ident = !{!4}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{i32 8, !"PIC Level", i32 2}
+!2 = !{i32 7, !"uwtable", i32 2}
+!3 = !{i32 7, !"frame-pointer", i32 2}
+!4 = !{!"clang version 21.1.0 (https://github.com/bjjwwang/LLVM-compile 4f7056e8ada487923d1c8f9bc38df6472008eda3)"}
