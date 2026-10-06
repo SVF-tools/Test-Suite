@@ -49,7 +49,7 @@ jobs:
            cd crux-bitcode
            rm pkgs.txt
            echo -e "bc\nhtop\ncurl\nbzip2\nunrar\ntmux\nbash" >> pkgs.txt
-           sed -i 's|http://ftpmirror.gnu.org|https://ftp.gnu.org|g' ports/core/bash/Pkgfile
+           sed -i 's|http://ftpmirror.gnu.org/gnu/|https://mirrors.kernel.org/gnu/|g' ports/core/bash/Pkgfile
            sed -i 's|https://ftp.gnu.org/gnu/|https://mirrors.kernel.org/gnu/|g' ports/core/bc/Pkgfile
            bash ./build-bitcode.sh
            unzip -j -o \*.zip -d $GITHUB_WORKSPACE/test_cases_bc/crux-bc/
