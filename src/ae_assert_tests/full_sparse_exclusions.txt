@@ -1,0 +1,19 @@
+# BASIC_array_int_0-0.c, lines 10-13:
+#   int a[10] = {..., 9};  // line 10
+#   *(a + 9) = 10;         // line 12
+#   svf_assert(a[9] == 10);  // line 13
+# Dense/Semi: line 12 strongly overwrites a[9], so line 13 reads 10.
+# FullSparse: definitions from lines 10 and 12 are joined, yielding [9, 10].
+# Needed: versioned reaching definitions with overwrite/kill semantics, so the
+# newer feasible definition of the same object replaces older ones before JOIN.
+assert/BASIC_array_int_0-0.c.bc
+
+# INTERVAL_test_19-0.c, lines 11 and 20-23:
+#   int i = 1;             // line 20
+#   foo(&i);               // line 22; case 1 writes *i = *i + 1 at line 11
+#   svf_assert(i % 2 == 0);  // line 23
+# Dense/Semi: the feasible case updates i to 2 before returning to line 23.
+# FullSparse: caller value 1 and callee value 2 are joined at return as [1, 2].
+# Needed: versioned reaching definitions with overwrite/kill semantics, so the
+# newer feasible definition of the same object replaces older ones before JOIN.
+assert/INTERVAL_test_19-0.c.bc

@@ -1,0 +1,11 @@
+# ExtAPI_strcat_03.c, lines 6 and 10-11:
+#   char buffer[10] = "Hi";                       // line 6
+#   strcat(buffer, input);                        // line 10
+#   UNSAFE_BUFACCESS(buffer, strlen(buffer));     // line 11
+# Dense/Semi: line 10 updates the ordered state before strlen runs at line 11.
+# FullSparse: the old '\0' at buffer[2] joins the strcat writes, so strlen can
+# stop early and the expected possible overflow is missed.
+# Needed: versioned reaching definitions with overwrite/kill semantics, so the
+# newer feasible definition of the same object replaces older ones before JOIN.
+overflow/ExtAPI_strcat_03.c.bc
+recursion_from_overflow/ExtAPI_strcat_03.c.bc-widen-narrow
