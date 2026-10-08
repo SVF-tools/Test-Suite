@@ -680,7 +680,6 @@ endfunction()
 
 disable_ae_full_sparse_tests(src/ae_assert_tests/full_sparse_exclusions.txt)
 disable_ae_full_sparse_tests(src/ae_overflow_tests/full_sparse_exclusions.txt)
-disable_ae_full_sparse_tests(src/ae_nullptr_deref_tests/full_sparse_exclusions.txt)
 
 # ae no-main tests (ctest -R ae_no_main -VV)
 set(ae_no_main_dirs

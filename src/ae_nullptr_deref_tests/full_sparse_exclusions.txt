@@ -1,9 +1,0 @@
-# dangleptr_safe_branch.c, lines 15-20 and 26:
-#   myPtr = malloc(...); free(myPtr);  // lines 15-16: dangling target
-#   if (a > 0) myPtr = &a;             // lines 18-20; a is 5
-#   SAFE_LOAD(myPtr);                  // line 26
-# Dense/Semi: the true branch strongly overwrites myPtr, so line 26 sees only &a.
-# FullSparse: the dangling target and &a are joined at line 26.
-# Needed: versioned reaching definitions with overwrite/kill semantics, so the
-# newer feasible definition of the same object replaces older ones before JOIN.
-nullptr_deref/dangleptr_safe_branch.c.bc
