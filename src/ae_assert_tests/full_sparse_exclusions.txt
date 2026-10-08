@@ -1,0 +1,12 @@
+# BASIC_array_int_0-0.c, lines 10-13:
+#   int a[10] = {..., 9};  // line 10
+#   *(a + 9) = 10;         // line 12
+#   svf_assert(a[9] == 10);  // line 13
+# Dense/Semi: line 12 performs a strong update of the concrete sub-object a[9],
+# so the old value 9 is killed and line 13 reads only 10.
+# FullSparse: an array target is currently treated as a summary object, so line
+# 12 performs a weak update: JOIN(9, 10) = [9, 10].
+# Needed: distinguish a constant-index sub-object such as a[9] from an unknown
+# array summary. The former can use a strong update; the latter must remain a
+# weak update.
+assert/BASIC_array_int_0-0.c.bc

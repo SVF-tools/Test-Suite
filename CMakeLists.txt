@@ -668,6 +668,19 @@ foreach(filename ${ae_recursion_files})
   )
 endforeach()
 
+function(disable_ae_full_sparse_tests exclusion_file)
+  file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/${exclusion_file}"
+       excluded_tests REGEX "^[^#].+")
+  list(TRANSFORM excluded_tests PREPEND "ae_full_sparse/")
+  set_tests_properties(${excluded_tests} PROPERTIES
+    DISABLED TRUE
+    LABELS ae_full_sparse_known_limitation
+  )
+endfunction()
+
+disable_ae_full_sparse_tests(src/ae_assert_tests/full_sparse_exclusions.txt)
+disable_ae_full_sparse_tests(src/ae_overflow_tests/full_sparse_exclusions.txt)
+
 # ae no-main tests (ctest -R ae_no_main -VV)
 set(ae_no_main_dirs
   ae_assert_tests

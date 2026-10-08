@@ -1,0 +1,13 @@
+# ExtAPI_strcat_03.c, lines 6 and 10-11:
+#   char buffer[10] = "Hi";                       // line 6
+#   strcat(buffer, input);                        // line 10
+#   UNSAFE_BUFACCESS(buffer, strlen(buffer));     // line 11
+# Dense/Semi: strcat strongly updates each resolved destination sub-object, so
+# the old '\0' at buffer[2] is killed before strlen runs at line 11.
+# FullSparse: the modeled writes currently use weak-update semantics for the
+# destination array, so the old '\0' is JOINed with the character written by
+# strcat. strlen can therefore stop early and miss the possible overflow.
+# Needed: use strong updates for destination sub-objects that ExtAPI modeling
+# resolves precisely; retain weak updates for unknown offsets or summary objects.
+overflow/ExtAPI_strcat_03.c.bc
+recursion_from_overflow/ExtAPI_strcat_03.c.bc-widen-narrow
