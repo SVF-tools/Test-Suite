@@ -1,0 +1,12 @@
+# dangleptr_safe_branch.c, lines 15-20 and 26:
+#   myPtr = malloc(sizeof(int)); free(myPtr); // lines 15-16
+#   UNSAFE_LOAD(myPtr);                       // line 17: genuinely unsafe
+#   if (a > 0) myPtr = &a;                    // lines 18-20; a = 5
+#   SAFE_LOAD(myPtr);                         // line 26
+# Dense/Semi: the feasible branch overwrites myPtr with &a; line 26 is safe.
+# FullSparse: the freed address may remain in the incoming JOIN with &a,
+# causing a false positive at line 26. The diagnostic at line 17 is correct.
+# Needed: exclude superseded Obj values before the incoming JOIN across these
+# boundaries; retain alternative feasible definitions conservatively. This is
+# a source-merge limitation, not a weak update performed by the pointer store.
+nullptr_deref/dangleptr_safe_branch.c.bc

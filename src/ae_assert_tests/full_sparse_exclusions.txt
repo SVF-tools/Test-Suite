@@ -1,12 +1,14 @@
-# BASIC_array_int_0-0.c, lines 10-13:
-#   int a[10] = {..., 9};  // line 10
-#   *(a + 9) = 10;         // line 12
-#   svf_assert(a[9] == 10);  // line 13
-# Dense/Semi: line 12 performs a strong update of the concrete sub-object a[9],
-# so the old value 9 is killed and line 13 reads only 10.
-# FullSparse: an array target is currently treated as a summary object, so line
-# 12 performs a weak update: JOIN(9, 10) = [9, 10].
-# Needed: distinguish a constant-index sub-object such as a[9] from an unknown
-# array summary. The former can use a strong update; the latter must remain a
-# weak update.
-assert/BASIC_array_int_0-0.c.bc
+# INTERVAL_test_19-0.c, lines 11 and 20-23:
+#   int i = 1;                 // line 20
+#   if (i >= 0) {
+#     foo(&i);                 // line 22; line 11 writes i = i + 1
+#     svf_assert(i % 2 == 0);   // line 23
+#   }
+# Dense/Semi: line 23 observes i = 2 after the callee's store.
+# FullSparse: older caller values may still JOIN with the callee's updated
+# value, so line 23 cannot prove the assertion. A local strong update alone
+# does not remove older sources propagated across call/branch boundaries.
+# Needed: exclude superseded Obj values before the incoming JOIN across these
+# boundaries; retain alternative feasible definitions conservatively. This is
+# a source-merge limitation, not a weak update performed by the callee's store.
+assert/INTERVAL_test_19-0.c.bc
