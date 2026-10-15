@@ -1,5 +1,5 @@
 #!/bin/sh
-# Generate bitcode for the .c/.cpp tests in $test_dirs.
+# Generate bitcode for the .c/.cpp/.ll tests in $test_dirs.
 
 sysOS=$(uname -s)
 
@@ -69,6 +69,13 @@ for td in $test_dirs; do
     ########
     # Obtains the text after the '.'.
     ext=${c_f##*.}
+
+    # Preserve hand-written IR tests: compiling C or running optimizations can
+    # erase the aggregate/vector instructions these regressions exercise.
+    if [ "$ext" = "ll" ]; then
+      cp "$c_f" "$bc_td/$(basename "$c_f").bc" || exit 1
+      continue
+    fi
 
     ########
     # We only look for .c/.cpp files. Check $ext = $f in case the filename is c/cpp.
