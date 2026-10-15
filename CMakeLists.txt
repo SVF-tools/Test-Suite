@@ -580,40 +580,61 @@ file(GLOB ae_overflow_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURREN
 list(FILTER ae_overflow_files EXCLUDE REGEX "no-main")
 foreach(filename ${ae_overflow_files})
   get_filename_component(basename ${filename} NAME)
+  set(ae_overflow_command ae)
+  if ("${basename}" MATCHES "^AllocationSize_")
+    string(REGEX REPLACE "\\.bc$" "" source_basename "${basename}")
+    set(ae_overflow_command
+      ${PYTHON_RUNNER} ${CMAKE_CURRENT_SOURCE_DIR}/ae_tests/check_allocation_bounds.py
+      ${CMAKE_CURRENT_SOURCE_DIR}/src/ae_overflow_tests/${source_basename}
+      $<TARGET_FILE:ae>
+    )
+  endif()
   set(ae_entry_args)
   if ("${basename}" MATCHES "no-main")
     set(ae_entry_args -ae-fun-entry=no-main)
   endif()
   add_test(
           NAME ae_overflow_tests/${filename}
-          COMMAND ae -overflow ${ae_entry_args} -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ${ae_overflow_command} -overflow ${ae_entry_args} -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   add_test(
           NAME ae_recursion_tests/${filename}-widen-narrow
-          COMMAND ae -overflow ${ae_entry_args} -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ${ae_overflow_command} -overflow ${ae_entry_args} -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   add_test(
           NAME ae_semi_sparse/overflow/${basename}
-          COMMAND ae -ae-sparsity=semi-sparse -overflow ${ae_entry_args} -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ${ae_overflow_command} -ae-sparsity=semi-sparse -overflow ${ae_entry_args} -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   add_test(
           NAME ae_semi_sparse/recursion_from_overflow/${basename}-widen-narrow
-          COMMAND ae -ae-sparsity=semi-sparse -overflow ${ae_entry_args} -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ${ae_overflow_command} -ae-sparsity=semi-sparse -overflow ${ae_entry_args} -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   add_test(
           NAME ae_full_sparse/overflow/${basename}
-          COMMAND ae -ae-sparsity=sparse -overflow ${ae_entry_args} -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ${ae_overflow_command} -ae-sparsity=sparse -overflow ${ae_entry_args} -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
   add_test(
           NAME ae_full_sparse/recursion_from_overflow/${basename}-widen-narrow
-          COMMAND ae -ae-sparsity=sparse -overflow ${ae_entry_args} -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+          COMMAND ${ae_overflow_command} -ae-sparsity=sparse -overflow ${ae_entry_args} -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
+  if ("${basename}" MATCHES "^AllocationSize_")
+    # Only the exact documented historical result is skipped by the checker.
+    set_tests_properties(
+      ae_overflow_tests/${filename}
+      ae_recursion_tests/${filename}-widen-narrow
+      ae_semi_sparse/overflow/${basename}
+      ae_semi_sparse/recursion_from_overflow/${basename}-widen-narrow
+      ae_full_sparse/overflow/${basename}
+      ae_full_sparse/recursion_from_overflow/${basename}-widen-narrow
+      PROPERTIES SKIP_RETURN_CODE 77
+    )
+  endif()
 endforeach()
 
 # ae_nullptr_deref tests (ctest -R ae_nullptr_deref_tests -VV) + semi/full-sparse
