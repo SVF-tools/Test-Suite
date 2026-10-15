@@ -29,15 +29,6 @@ The following gives the Test-Suite's folders and the corresponding SVF's options
 | blk_extapi_tests      | wpa -ander -blk -extapi=(test-only extapi in extapi/)       | annotation-driven scanf handling, using a test-only extapi                        |
 
 ## Scripts
-
-Hand-written LLVM IR tests live under `src/` with a `.ll` extension. The
-generation script copies them unchanged to `test_cases_bc/<group>/<name>.ll.bc`
-(textual IR, like the generated C/C++ tests). This preserves instructions such
-as `insertvalue`, `extractvalue`, `insertelement`, `extractelement`, and
-`shufflevector` independently of frontend optimization and platform ABI choices.
-Commit both the source and its matching `.ll.bc` copy. Existing test groups
-discover these files without additional CMake registration.
-
 Travis CI is used to build all the test cases, It uses `./generate_bc.sh` to do so and then pushes the compiled test cases into master branch.
 
 All tests are specified in `CMakeLists.txt` file. The `CMakeLists.txt` file uses foreach loops to specify tests in bulk. To add new tests append a command and specified folder into the respective commands list and folders list in `CMakeLists.txt`
