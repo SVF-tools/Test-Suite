@@ -1,0 +1,158 @@
+; ModuleID = 'test_cases_bc/ae_assert_tests/PROP_branch_merge_both.c.bc'
+source_filename = "src/ae_assert_tests/PROP_branch_merge_both.c"
+target datalayout = "e-m:o-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-n32:64-S128-Fn32"
+target triple = "arm64-apple-macosx26.0.0"
+
+@.str = private unnamed_addr constant [9 x i8] c"merged-x\00", align 1, !dbg !0
+
+; Function Attrs: noinline nounwind optnone ssp uwtable(sync)
+define i32 @main(i32 noundef %argc, ptr noundef %argv) #0 !dbg !17 {
+entry:
+  %retval = alloca i32, align 4
+  %argc.addr = alloca i32, align 4
+  %argv.addr = alloca ptr, align 8
+  %expected = alloca i32, align 4
+  %x = alloca i32, align 4
+  store i32 0, ptr %retval, align 4
+  store i32 %argc, ptr %argc.addr, align 4
+    #dbg_declare(ptr %argc.addr, !24, !DIExpression(), !25)
+  store ptr %argv, ptr %argv.addr, align 8
+    #dbg_declare(ptr %argv.addr, !26, !DIExpression(), !27)
+    #dbg_declare(ptr %expected, !28, !DIExpression(), !29)
+  %0 = load i32, ptr %argc.addr, align 4, !dbg !30
+  %cmp = icmp sgt i32 %0, 1, !dbg !31
+  %1 = zext i1 %cmp to i64, !dbg !30
+  %cond = select i1 %cmp, i32 2, i32 3, !dbg !30
+  store i32 %cond, ptr %expected, align 4, !dbg !29
+    #dbg_declare(ptr %x, !32, !DIExpression(), !33)
+  store i32 1, ptr %x, align 4, !dbg !33
+  %2 = load i32, ptr %argc.addr, align 4, !dbg !34
+  %cmp1 = icmp sgt i32 %2, 1, !dbg !35
+  %conv = zext i1 %cmp1 to i32, !dbg !35
+  call void @update(ptr noundef %x, i32 noundef %conv), !dbg !36
+  %3 = load i32, ptr %x, align 4, !dbg !37
+  call void @svf_print(i32 noundef %3, ptr noundef @.str), !dbg !38
+  %4 = load i32, ptr %x, align 4, !dbg !39
+  %cmp2 = icmp sge i32 %4, 2, !dbg !40
+  br i1 %cmp2, label %land.rhs, label %land.end, !dbg !41
+
+land.rhs:                                         ; preds = %entry
+  %5 = load i32, ptr %x, align 4, !dbg !42
+  %cmp4 = icmp sle i32 %5, 3, !dbg !43
+  br label %land.end
+
+land.end:                                         ; preds = %land.rhs, %entry
+  %6 = phi i1 [ false, %entry ], [ %cmp4, %land.rhs ], !dbg !44
+  call void @svf_assert(i1 noundef zeroext %6), !dbg !45
+  %7 = load i32, ptr %x, align 4, !dbg !46
+  %8 = load i32, ptr %expected, align 4, !dbg !47
+  call void @svf_assert_eq(i32 noundef %7, i32 noundef %8), !dbg !48
+  ret i32 0, !dbg !49
+}
+
+; Function Attrs: noinline nounwind optnone ssp uwtable(sync)
+define internal void @update(ptr noundef %x, i32 noundef %condition) #0 !dbg !50 {
+entry:
+  %x.addr = alloca ptr, align 8
+  %condition.addr = alloca i32, align 4
+  store ptr %x, ptr %x.addr, align 8
+    #dbg_declare(ptr %x.addr, !54, !DIExpression(), !55)
+  store i32 %condition, ptr %condition.addr, align 4
+    #dbg_declare(ptr %condition.addr, !56, !DIExpression(), !57)
+  %0 = load i32, ptr %condition.addr, align 4, !dbg !58
+  %tobool = icmp ne i32 %0, 0, !dbg !58
+  br i1 %tobool, label %if.then, label %if.else, !dbg !58
+
+if.then:                                          ; preds = %entry
+  %1 = load ptr, ptr %x.addr, align 8, !dbg !60
+  store i32 2, ptr %1, align 4, !dbg !61
+  br label %if.end, !dbg !62
+
+if.else:                                          ; preds = %entry
+  %2 = load ptr, ptr %x.addr, align 8, !dbg !63
+  store i32 3, ptr %2, align 4, !dbg !64
+  br label %if.end
+
+if.end:                                           ; preds = %if.else, %if.then
+  ret void, !dbg !65
+}
+
+declare void @svf_print(i32 noundef, ptr noundef) #1
+
+declare void @svf_assert(i1 noundef zeroext) #1
+
+declare void @svf_assert_eq(i32 noundef, i32 noundef) #1
+
+attributes #0 = { noinline nounwind optnone ssp uwtable(sync) "frame-pointer"="non-leaf" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="apple-m1" "target-features"="+aes,+altnzcv,+ccdp,+ccidx,+ccpp,+complxnum,+crc,+dit,+dotprod,+flagm,+fp-armv8,+fp16fml,+fptoint,+fullfp16,+jsconv,+lse,+neon,+pauth,+perfmon,+predres,+ras,+rcpc,+rdm,+sb,+sha2,+sha3,+specrestrict,+ssbs,+v8.1a,+v8.2a,+v8.3a,+v8.4a,+v8a" }
+attributes #1 = { "frame-pointer"="non-leaf" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="apple-m1" "target-features"="+aes,+altnzcv,+ccdp,+ccidx,+ccpp,+complxnum,+crc,+dit,+dotprod,+flagm,+fp-armv8,+fp16fml,+fptoint,+fullfp16,+jsconv,+lse,+neon,+pauth,+perfmon,+predres,+ras,+rcpc,+rdm,+sb,+sha2,+sha3,+specrestrict,+ssbs,+v8.1a,+v8.2a,+v8.3a,+v8.4a,+v8a" }
+
+!llvm.module.flags = !{!7, !8, !9, !10, !11, !12, !13}
+!llvm.dbg.cu = !{!14}
+!llvm.ident = !{!16}
+
+!0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
+!1 = distinct !DIGlobalVariable(scope: null, file: !2, line: 21, type: !3, isLocal: true, isDefinition: true)
+!2 = !DIFile(filename: "src/ae_assert_tests/PROP_branch_merge_both.c", directory: ".", checksumkind: CSK_MD5, checksum: "2674106388c2d4883ff878636b93defd")
+!3 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 72, elements: !5)
+!4 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
+!5 = !{!6}
+!6 = !DISubrange(count: 9)
+!7 = !{i32 2, !"SDK Version", [2 x i32] [i32 26, i32 5]}
+!8 = !{i32 7, !"Dwarf Version", i32 5}
+!9 = !{i32 2, !"Debug Info Version", i32 3}
+!10 = !{i32 1, !"wchar_size", i32 4}
+!11 = !{i32 8, !"PIC Level", i32 2}
+!12 = !{i32 7, !"uwtable", i32 1}
+!13 = !{i32 7, !"frame-pointer", i32 1}
+!14 = distinct !DICompileUnit(language: DW_LANG_C11, file: !2, producer: "Homebrew clang version 21.1.8", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !15, splitDebugInlining: false, nameTableKind: Apple, sysroot: "/Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk", sdk: "MacOSX26.sdk")
+!15 = !{!0}
+!16 = !{!"Homebrew clang version 21.1.8"}
+!17 = distinct !DISubprogram(name: "main", scope: !2, file: !2, line: 15, type: !18, scopeLine: 16, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !14, retainedNodes: !23)
+!18 = !DISubroutineType(types: !19)
+!19 = !{!20, !20, !21}
+!20 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+!21 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !22, size: 64)
+!22 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !4, size: 64)
+!23 = !{}
+!24 = !DILocalVariable(name: "argc", arg: 1, scope: !17, file: !2, line: 15, type: !20)
+!25 = !DILocation(line: 15, column: 14, scope: !17)
+!26 = !DILocalVariable(name: "argv", arg: 2, scope: !17, file: !2, line: 15, type: !21)
+!27 = !DILocation(line: 15, column: 27, scope: !17)
+!28 = !DILocalVariable(name: "expected", scope: !17, file: !2, line: 17, type: !20)
+!29 = !DILocation(line: 17, column: 9, scope: !17)
+!30 = !DILocation(line: 17, column: 20, scope: !17)
+!31 = !DILocation(line: 17, column: 25, scope: !17)
+!32 = !DILocalVariable(name: "x", scope: !17, file: !2, line: 18, type: !20)
+!33 = !DILocation(line: 18, column: 9, scope: !17)
+!34 = !DILocation(line: 19, column: 16, scope: !17)
+!35 = !DILocation(line: 19, column: 21, scope: !17)
+!36 = !DILocation(line: 19, column: 5, scope: !17)
+!37 = !DILocation(line: 21, column: 15, scope: !17)
+!38 = !DILocation(line: 21, column: 5, scope: !17)
+!39 = !DILocation(line: 22, column: 16, scope: !17)
+!40 = !DILocation(line: 22, column: 18, scope: !17)
+!41 = !DILocation(line: 22, column: 23, scope: !17)
+!42 = !DILocation(line: 22, column: 26, scope: !17)
+!43 = !DILocation(line: 22, column: 28, scope: !17)
+!44 = !DILocation(line: 0, scope: !17)
+!45 = !DILocation(line: 22, column: 5, scope: !17)
+!46 = !DILocation(line: 23, column: 19, scope: !17)
+!47 = !DILocation(line: 23, column: 22, scope: !17)
+!48 = !DILocation(line: 23, column: 5, scope: !17)
+!49 = !DILocation(line: 24, column: 5, scope: !17)
+!50 = distinct !DISubprogram(name: "update", scope: !2, file: !2, line: 7, type: !51, scopeLine: 8, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !14, retainedNodes: !23)
+!51 = !DISubroutineType(types: !52)
+!52 = !{null, !53, !20}
+!53 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !20, size: 64)
+!54 = !DILocalVariable(name: "x", arg: 1, scope: !50, file: !2, line: 7, type: !53)
+!55 = !DILocation(line: 7, column: 25, scope: !50)
+!56 = !DILocalVariable(name: "condition", arg: 2, scope: !50, file: !2, line: 7, type: !20)
+!57 = !DILocation(line: 7, column: 32, scope: !50)
+!58 = !DILocation(line: 9, column: 9, scope: !59)
+!59 = distinct !DILexicalBlock(scope: !50, file: !2, line: 9, column: 9)
+!60 = !DILocation(line: 10, column: 10, scope: !59)
+!61 = !DILocation(line: 10, column: 12, scope: !59)
+!62 = !DILocation(line: 10, column: 9, scope: !59)
+!63 = !DILocation(line: 12, column: 10, scope: !59)
+!64 = !DILocation(line: 12, column: 12, scope: !59)
+!65 = !DILocation(line: 13, column: 1, scope: !50)

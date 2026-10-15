@@ -1,0 +1,133 @@
+; ModuleID = 'test_cases_bc/ae_assert_tests/PROP_array_dynamic_read.c.bc'
+source_filename = "src/ae_assert_tests/PROP_array_dynamic_read.c"
+target datalayout = "e-m:o-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-n32:64-S128-Fn32"
+target triple = "arm64-apple-macosx26.0.0"
+
+@__const.main.a = private unnamed_addr constant [2 x [2 x i32]] [[2 x i32] [i32 1, i32 2], [2 x i32] [i32 3, i32 4]], align 4
+@.str = private unnamed_addr constant [20 x i8] c"dynamic-array-value\00", align 1, !dbg !0
+
+; Function Attrs: noinline nounwind optnone ssp uwtable(sync)
+define i32 @main(i32 noundef %argc, ptr noundef %argv) #0 !dbg !17 {
+entry:
+  %retval = alloca i32, align 4
+  %argc.addr = alloca i32, align 4
+  %argv.addr = alloca ptr, align 8
+  %a = alloca [2 x [2 x i32]], align 4
+  %index = alloca i32, align 4
+  %value = alloca i32, align 4
+  store i32 0, ptr %retval, align 4
+  store i32 %argc, ptr %argc.addr, align 4
+    #dbg_declare(ptr %argc.addr, !24, !DIExpression(), !25)
+  store ptr %argv, ptr %argv.addr, align 8
+    #dbg_declare(ptr %argv.addr, !26, !DIExpression(), !27)
+    #dbg_declare(ptr %a, !28, !DIExpression(), !32)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 4 %a, ptr align 4 @__const.main.a, i64 16, i1 false), !dbg !32
+  %arrayidx = getelementptr inbounds [2 x [2 x i32]], ptr %a, i64 0, i64 1, !dbg !33
+  %arrayidx1 = getelementptr inbounds [2 x i32], ptr %arrayidx, i64 0, i64 1, !dbg !33
+  store i32 8, ptr %arrayidx1, align 4, !dbg !34
+    #dbg_declare(ptr %index, !35, !DIExpression(), !36)
+  %0 = load i32, ptr %argc.addr, align 4, !dbg !37
+  %cmp = icmp sgt i32 %0, 1, !dbg !38
+  %1 = zext i1 %cmp to i64, !dbg !37
+  %cond = select i1 %cmp, i32 1, i32 0, !dbg !37
+  store i32 %cond, ptr %index, align 4, !dbg !36
+    #dbg_declare(ptr %value, !39, !DIExpression(), !40)
+  %arrayidx2 = getelementptr inbounds [2 x [2 x i32]], ptr %a, i64 0, i64 1, !dbg !41
+  %2 = load i32, ptr %index, align 4, !dbg !42
+  %idxprom = sext i32 %2 to i64, !dbg !41
+  %arrayidx3 = getelementptr inbounds [2 x i32], ptr %arrayidx2, i64 0, i64 %idxprom, !dbg !41
+  %3 = load i32, ptr %arrayidx3, align 4, !dbg !41
+  store i32 %3, ptr %value, align 4, !dbg !40
+  %4 = load i32, ptr %value, align 4, !dbg !43
+  call void @svf_print(i32 noundef %4, ptr noundef @.str), !dbg !44
+  %5 = load i32, ptr %value, align 4, !dbg !45
+  %cmp4 = icmp sge i32 %5, 3, !dbg !46
+  br i1 %cmp4, label %land.rhs, label %land.end, !dbg !47
+
+land.rhs:                                         ; preds = %entry
+  %6 = load i32, ptr %value, align 4, !dbg !48
+  %cmp5 = icmp sle i32 %6, 8, !dbg !49
+  br label %land.end
+
+land.end:                                         ; preds = %land.rhs, %entry
+  %7 = phi i1 [ false, %entry ], [ %cmp5, %land.rhs ], !dbg !50
+  call void @svf_assert(i1 noundef zeroext %7), !dbg !51
+  %arrayidx6 = getelementptr inbounds [2 x [2 x i32]], ptr %a, i64 0, i64 0, !dbg !52
+  %arrayidx7 = getelementptr inbounds [2 x i32], ptr %arrayidx6, i64 0, i64 0, !dbg !52
+  %8 = load i32, ptr %arrayidx7, align 4, !dbg !52
+  %cmp8 = icmp eq i32 %8, 1, !dbg !53
+  call void @svf_assert(i1 noundef zeroext %cmp8), !dbg !54
+  ret i32 0, !dbg !55
+}
+
+; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: readwrite)
+declare void @llvm.memcpy.p0.p0.i64(ptr noalias writeonly captures(none), ptr noalias readonly captures(none), i64, i1 immarg) #1
+
+declare void @svf_print(i32 noundef, ptr noundef) #2
+
+declare void @svf_assert(i1 noundef zeroext) #2
+
+attributes #0 = { noinline nounwind optnone ssp uwtable(sync) "frame-pointer"="non-leaf" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="apple-m1" "target-features"="+aes,+altnzcv,+ccdp,+ccidx,+ccpp,+complxnum,+crc,+dit,+dotprod,+flagm,+fp-armv8,+fp16fml,+fptoint,+fullfp16,+jsconv,+lse,+neon,+pauth,+perfmon,+predres,+ras,+rcpc,+rdm,+sb,+sha2,+sha3,+specrestrict,+ssbs,+v8.1a,+v8.2a,+v8.3a,+v8.4a,+v8a" }
+attributes #1 = { nocallback nofree nounwind willreturn memory(argmem: readwrite) }
+attributes #2 = { "frame-pointer"="non-leaf" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="apple-m1" "target-features"="+aes,+altnzcv,+ccdp,+ccidx,+ccpp,+complxnum,+crc,+dit,+dotprod,+flagm,+fp-armv8,+fp16fml,+fptoint,+fullfp16,+jsconv,+lse,+neon,+pauth,+perfmon,+predres,+ras,+rcpc,+rdm,+sb,+sha2,+sha3,+specrestrict,+ssbs,+v8.1a,+v8.2a,+v8.3a,+v8.4a,+v8a" }
+
+!llvm.module.flags = !{!7, !8, !9, !10, !11, !12, !13}
+!llvm.dbg.cu = !{!14}
+!llvm.ident = !{!16}
+
+!0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
+!1 = distinct !DIGlobalVariable(scope: null, file: !2, line: 13, type: !3, isLocal: true, isDefinition: true)
+!2 = !DIFile(filename: "src/ae_assert_tests/PROP_array_dynamic_read.c", directory: ".", checksumkind: CSK_MD5, checksum: "1b109d804187fa2602553820556f09bc")
+!3 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 160, elements: !5)
+!4 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
+!5 = !{!6}
+!6 = !DISubrange(count: 20)
+!7 = !{i32 2, !"SDK Version", [2 x i32] [i32 26, i32 5]}
+!8 = !{i32 7, !"Dwarf Version", i32 5}
+!9 = !{i32 2, !"Debug Info Version", i32 3}
+!10 = !{i32 1, !"wchar_size", i32 4}
+!11 = !{i32 8, !"PIC Level", i32 2}
+!12 = !{i32 7, !"uwtable", i32 1}
+!13 = !{i32 7, !"frame-pointer", i32 1}
+!14 = distinct !DICompileUnit(language: DW_LANG_C11, file: !2, producer: "Homebrew clang version 21.1.8", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !15, splitDebugInlining: false, nameTableKind: Apple, sysroot: "/Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk", sdk: "MacOSX26.sdk")
+!15 = !{!0}
+!16 = !{!"Homebrew clang version 21.1.8"}
+!17 = distinct !DISubprogram(name: "main", scope: !2, file: !2, line: 6, type: !18, scopeLine: 7, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !14, retainedNodes: !23)
+!18 = !DISubroutineType(types: !19)
+!19 = !{!20, !20, !21}
+!20 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+!21 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !22, size: 64)
+!22 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !4, size: 64)
+!23 = !{}
+!24 = !DILocalVariable(name: "argc", arg: 1, scope: !17, file: !2, line: 6, type: !20)
+!25 = !DILocation(line: 6, column: 14, scope: !17)
+!26 = !DILocalVariable(name: "argv", arg: 2, scope: !17, file: !2, line: 6, type: !21)
+!27 = !DILocation(line: 6, column: 27, scope: !17)
+!28 = !DILocalVariable(name: "a", scope: !17, file: !2, line: 8, type: !29)
+!29 = !DICompositeType(tag: DW_TAG_array_type, baseType: !20, size: 128, elements: !30)
+!30 = !{!31, !31}
+!31 = !DISubrange(count: 2)
+!32 = !DILocation(line: 8, column: 9, scope: !17)
+!33 = !DILocation(line: 9, column: 5, scope: !17)
+!34 = !DILocation(line: 9, column: 13, scope: !17)
+!35 = !DILocalVariable(name: "index", scope: !17, file: !2, line: 10, type: !20)
+!36 = !DILocation(line: 10, column: 9, scope: !17)
+!37 = !DILocation(line: 10, column: 17, scope: !17)
+!38 = !DILocation(line: 10, column: 22, scope: !17)
+!39 = !DILocalVariable(name: "value", scope: !17, file: !2, line: 11, type: !20)
+!40 = !DILocation(line: 11, column: 9, scope: !17)
+!41 = !DILocation(line: 11, column: 17, scope: !17)
+!42 = !DILocation(line: 11, column: 22, scope: !17)
+!43 = !DILocation(line: 13, column: 15, scope: !17)
+!44 = !DILocation(line: 13, column: 5, scope: !17)
+!45 = !DILocation(line: 14, column: 16, scope: !17)
+!46 = !DILocation(line: 14, column: 22, scope: !17)
+!47 = !DILocation(line: 14, column: 27, scope: !17)
+!48 = !DILocation(line: 14, column: 30, scope: !17)
+!49 = !DILocation(line: 14, column: 36, scope: !17)
+!50 = !DILocation(line: 0, scope: !17)
+!51 = !DILocation(line: 14, column: 5, scope: !17)
+!52 = !DILocation(line: 15, column: 16, scope: !17)
+!53 = !DILocation(line: 15, column: 24, scope: !17)
+!54 = !DILocation(line: 15, column: 5, scope: !17)
+!55 = !DILocation(line: 16, column: 5, scope: !17)

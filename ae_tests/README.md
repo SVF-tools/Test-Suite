@@ -1,4 +1,6 @@
-# Allocation-size diagnostic tests
+# AE regression tests
+
+## Allocation-size diagnostics
 
 The `AllocationSize_*.c` cases in `src/ae_overflow_tests` follow the existing
 small C tests and use `SAFE_BUFACCESS` / `UNSAFE_BUFACCESS` checkpoints. The
@@ -47,3 +49,30 @@ These integration cases do not force every internal abstract state. Empty
 size vectors, bottom/negative size factors, and machine-integer multiplication
 overflow need dedicated helper-level tests rather than C cases with undefined
 or platform-dependent allocation behavior.
+
+## Branch refinement, cycles, and field arrays
+
+The 16 `PROP_*.c` cases in `src/ae_assert_tests` and
+`src/ae_recursion_tests` use the existing `svf_assert` and `svf_assert_eq`
+interfaces. Their matching LLVM IR fixtures are registered by the existing
+CTest globs; no new checker, exclusions, or skip rules are added.
+
+Coverage includes repeated branch-constrained uses, stores invalidating old
+constraints, two-branch joins, a unique feasible callee predecessor, switch
+default intervals, scalar/array loops, bounded recursive returns, recursive
+stack summaries, sibling fields, dynamic array reads, arrays of structs,
+one-byte memset, multi-target stores, and heap-summary weak updates.
+
+```sh
+ctest -R PROP_ --output-on-failure
+```
+
+These cases run in Dense, SemiSparse, and FullSparse. Recursive cases reuse
+the existing `-handle-recur=widen-narrow` configuration. Local validation with
+SVF PR #1898 at `00812d94` passes all 48 configurations with no skips.
+
+This propagation coverage accompanies SVF PR #1898, including shared
+strong/weak store semantics. The allocation-size diagnostics above separately
+accompany SVF PR #1929. Validation of one group is not a claim that both SVF
+changes are present in the other group's tested revision; the complete test
+update is intended for SVF with both changes applied.
