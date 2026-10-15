@@ -1,0 +1,177 @@
+; ModuleID = 'test_cases_bc/ae_assert_tests/PROP_store_multiple_targets.c.bc'
+source_filename = "src/ae_assert_tests/PROP_store_multiple_targets.c"
+target datalayout = "e-m:o-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-n32:64-S128-Fn32"
+target triple = "arm64-apple-macosx26.0.0"
+
+@.str = private unnamed_addr constant [7 x i8] c"weak-x\00", align 1, !dbg !0
+@.str.1 = private unnamed_addr constant [7 x i8] c"weak-y\00", align 1, !dbg !7
+
+; Function Attrs: noinline nounwind optnone ssp uwtable(sync)
+define i32 @main(i32 noundef %argc, ptr noundef %argv) #0 !dbg !19 {
+entry:
+  %retval = alloca i32, align 4
+  %argc.addr = alloca i32, align 4
+  %argv.addr = alloca ptr, align 8
+  %expected_x = alloca i32, align 4
+  %expected_y = alloca i32, align 4
+  %x = alloca i32, align 4
+  %y = alloca i32, align 4
+  %pointer = alloca ptr, align 8
+  store i32 0, ptr %retval, align 4
+  store i32 %argc, ptr %argc.addr, align 4
+    #dbg_declare(ptr %argc.addr, !26, !DIExpression(), !27)
+  store ptr %argv, ptr %argv.addr, align 8
+    #dbg_declare(ptr %argv.addr, !28, !DIExpression(), !29)
+    #dbg_declare(ptr %expected_x, !30, !DIExpression(), !31)
+  %0 = load i32, ptr %argc.addr, align 4, !dbg !32
+  %cmp = icmp sgt i32 %0, 1, !dbg !33
+  %1 = zext i1 %cmp to i64, !dbg !32
+  %cond = select i1 %cmp, i32 1, i32 2, !dbg !32
+  store i32 %cond, ptr %expected_x, align 4, !dbg !31
+    #dbg_declare(ptr %expected_y, !34, !DIExpression(), !35)
+  %2 = load i32, ptr %argc.addr, align 4, !dbg !36
+  %cmp1 = icmp sgt i32 %2, 1, !dbg !37
+  %3 = zext i1 %cmp1 to i64, !dbg !36
+  %cond2 = select i1 %cmp1, i32 2, i32 3, !dbg !36
+  store i32 %cond2, ptr %expected_y, align 4, !dbg !35
+    #dbg_declare(ptr %x, !38, !DIExpression(), !39)
+  store i32 1, ptr %x, align 4, !dbg !39
+    #dbg_declare(ptr %y, !40, !DIExpression(), !41)
+  store i32 3, ptr %y, align 4, !dbg !41
+    #dbg_declare(ptr %pointer, !42, !DIExpression(), !44)
+  %4 = load i32, ptr %argc.addr, align 4, !dbg !45
+  %cmp3 = icmp sgt i32 %4, 1, !dbg !46
+  br i1 %cmp3, label %cond.true, label %cond.false, !dbg !45
+
+cond.true:                                        ; preds = %entry
+  br label %cond.end, !dbg !45
+
+cond.false:                                       ; preds = %entry
+  br label %cond.end, !dbg !45
+
+cond.end:                                         ; preds = %cond.false, %cond.true
+  %cond4 = phi ptr [ %x, %cond.true ], [ %y, %cond.false ], !dbg !45
+  store ptr %cond4, ptr %pointer, align 8, !dbg !44
+  %5 = load ptr, ptr %pointer, align 8, !dbg !47
+  store i32 2, ptr %5, align 4, !dbg !48
+  %6 = load i32, ptr %x, align 4, !dbg !49
+  call void @svf_print(i32 noundef %6, ptr noundef @.str), !dbg !50
+  %7 = load i32, ptr %y, align 4, !dbg !51
+  call void @svf_print(i32 noundef %7, ptr noundef @.str.1), !dbg !52
+  %8 = load i32, ptr %x, align 4, !dbg !53
+  %cmp5 = icmp sge i32 %8, 1, !dbg !54
+  br i1 %cmp5, label %land.lhs.true, label %land.end, !dbg !55
+
+land.lhs.true:                                    ; preds = %cond.end
+  %9 = load i32, ptr %x, align 4, !dbg !56
+  %cmp6 = icmp sle i32 %9, 2, !dbg !57
+  br i1 %cmp6, label %land.lhs.true7, label %land.end, !dbg !58
+
+land.lhs.true7:                                   ; preds = %land.lhs.true
+  %10 = load i32, ptr %y, align 4, !dbg !59
+  %cmp8 = icmp sge i32 %10, 2, !dbg !60
+  br i1 %cmp8, label %land.rhs, label %land.end, !dbg !61
+
+land.rhs:                                         ; preds = %land.lhs.true7
+  %11 = load i32, ptr %y, align 4, !dbg !62
+  %cmp9 = icmp sle i32 %11, 3, !dbg !63
+  br label %land.end
+
+land.end:                                         ; preds = %land.rhs, %land.lhs.true7, %land.lhs.true, %cond.end
+  %12 = phi i1 [ false, %land.lhs.true7 ], [ false, %land.lhs.true ], [ false, %cond.end ], [ %cmp9, %land.rhs ], !dbg !64
+  call void @svf_assert(i1 noundef zeroext %12), !dbg !65
+  %13 = load i32, ptr %x, align 4, !dbg !66
+  %14 = load i32, ptr %expected_x, align 4, !dbg !67
+  call void @svf_assert_eq(i32 noundef %13, i32 noundef %14), !dbg !68
+  %15 = load i32, ptr %y, align 4, !dbg !69
+  %16 = load i32, ptr %expected_y, align 4, !dbg !70
+  call void @svf_assert_eq(i32 noundef %15, i32 noundef %16), !dbg !71
+  ret i32 0, !dbg !72
+}
+
+declare void @svf_print(i32 noundef, ptr noundef) #1
+
+declare void @svf_assert(i1 noundef zeroext) #1
+
+declare void @svf_assert_eq(i32 noundef, i32 noundef) #1
+
+attributes #0 = { noinline nounwind optnone ssp uwtable(sync) "frame-pointer"="non-leaf" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="apple-m1" "target-features"="+aes,+altnzcv,+ccdp,+ccidx,+ccpp,+complxnum,+crc,+dit,+dotprod,+flagm,+fp-armv8,+fp16fml,+fptoint,+fullfp16,+jsconv,+lse,+neon,+pauth,+perfmon,+predres,+ras,+rcpc,+rdm,+sb,+sha2,+sha3,+specrestrict,+ssbs,+v8.1a,+v8.2a,+v8.3a,+v8.4a,+v8a" }
+attributes #1 = { "frame-pointer"="non-leaf" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="apple-m1" "target-features"="+aes,+altnzcv,+ccdp,+ccidx,+ccpp,+complxnum,+crc,+dit,+dotprod,+flagm,+fp-armv8,+fp16fml,+fptoint,+fullfp16,+jsconv,+lse,+neon,+pauth,+perfmon,+predres,+ras,+rcpc,+rdm,+sb,+sha2,+sha3,+specrestrict,+ssbs,+v8.1a,+v8.2a,+v8.3a,+v8.4a,+v8a" }
+
+!llvm.module.flags = !{!9, !10, !11, !12, !13, !14, !15}
+!llvm.dbg.cu = !{!16}
+!llvm.ident = !{!18}
+
+!0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
+!1 = distinct !DIGlobalVariable(scope: null, file: !2, line: 15, type: !3, isLocal: true, isDefinition: true)
+!2 = !DIFile(filename: "src/ae_assert_tests/PROP_store_multiple_targets.c", directory: ".", checksumkind: CSK_MD5, checksum: "0da84e88b9b1d4855b264090edfd6a40")
+!3 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 56, elements: !5)
+!4 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
+!5 = !{!6}
+!6 = !DISubrange(count: 7)
+!7 = !DIGlobalVariableExpression(var: !8, expr: !DIExpression())
+!8 = distinct !DIGlobalVariable(scope: null, file: !2, line: 16, type: !3, isLocal: true, isDefinition: true)
+!9 = !{i32 2, !"SDK Version", [2 x i32] [i32 26, i32 5]}
+!10 = !{i32 7, !"Dwarf Version", i32 5}
+!11 = !{i32 2, !"Debug Info Version", i32 3}
+!12 = !{i32 1, !"wchar_size", i32 4}
+!13 = !{i32 8, !"PIC Level", i32 2}
+!14 = !{i32 7, !"uwtable", i32 1}
+!15 = !{i32 7, !"frame-pointer", i32 1}
+!16 = distinct !DICompileUnit(language: DW_LANG_C11, file: !2, producer: "Homebrew clang version 21.1.8", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !17, splitDebugInlining: false, nameTableKind: Apple, sysroot: "/Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk", sdk: "MacOSX26.sdk")
+!17 = !{!0, !7}
+!18 = !{!"Homebrew clang version 21.1.8"}
+!19 = distinct !DISubprogram(name: "main", scope: !2, file: !2, line: 7, type: !20, scopeLine: 8, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !16, retainedNodes: !25)
+!20 = !DISubroutineType(types: !21)
+!21 = !{!22, !22, !23}
+!22 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+!23 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !24, size: 64)
+!24 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !4, size: 64)
+!25 = !{}
+!26 = !DILocalVariable(name: "argc", arg: 1, scope: !19, file: !2, line: 7, type: !22)
+!27 = !DILocation(line: 7, column: 14, scope: !19)
+!28 = !DILocalVariable(name: "argv", arg: 2, scope: !19, file: !2, line: 7, type: !23)
+!29 = !DILocation(line: 7, column: 27, scope: !19)
+!30 = !DILocalVariable(name: "expected_x", scope: !19, file: !2, line: 9, type: !22)
+!31 = !DILocation(line: 9, column: 9, scope: !19)
+!32 = !DILocation(line: 9, column: 22, scope: !19)
+!33 = !DILocation(line: 9, column: 27, scope: !19)
+!34 = !DILocalVariable(name: "expected_y", scope: !19, file: !2, line: 10, type: !22)
+!35 = !DILocation(line: 10, column: 9, scope: !19)
+!36 = !DILocation(line: 10, column: 22, scope: !19)
+!37 = !DILocation(line: 10, column: 27, scope: !19)
+!38 = !DILocalVariable(name: "x", scope: !19, file: !2, line: 11, type: !22)
+!39 = !DILocation(line: 11, column: 9, scope: !19)
+!40 = !DILocalVariable(name: "y", scope: !19, file: !2, line: 11, type: !22)
+!41 = !DILocation(line: 11, column: 16, scope: !19)
+!42 = !DILocalVariable(name: "pointer", scope: !19, file: !2, line: 12, type: !43)
+!43 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !22, size: 64)
+!44 = !DILocation(line: 12, column: 10, scope: !19)
+!45 = !DILocation(line: 12, column: 20, scope: !19)
+!46 = !DILocation(line: 12, column: 25, scope: !19)
+!47 = !DILocation(line: 13, column: 6, scope: !19)
+!48 = !DILocation(line: 13, column: 14, scope: !19)
+!49 = !DILocation(line: 15, column: 15, scope: !19)
+!50 = !DILocation(line: 15, column: 5, scope: !19)
+!51 = !DILocation(line: 16, column: 15, scope: !19)
+!52 = !DILocation(line: 16, column: 5, scope: !19)
+!53 = !DILocation(line: 17, column: 16, scope: !19)
+!54 = !DILocation(line: 17, column: 18, scope: !19)
+!55 = !DILocation(line: 17, column: 23, scope: !19)
+!56 = !DILocation(line: 17, column: 26, scope: !19)
+!57 = !DILocation(line: 17, column: 28, scope: !19)
+!58 = !DILocation(line: 17, column: 33, scope: !19)
+!59 = !DILocation(line: 17, column: 36, scope: !19)
+!60 = !DILocation(line: 17, column: 38, scope: !19)
+!61 = !DILocation(line: 17, column: 43, scope: !19)
+!62 = !DILocation(line: 17, column: 46, scope: !19)
+!63 = !DILocation(line: 17, column: 48, scope: !19)
+!64 = !DILocation(line: 0, scope: !19)
+!65 = !DILocation(line: 17, column: 5, scope: !19)
+!66 = !DILocation(line: 18, column: 19, scope: !19)
+!67 = !DILocation(line: 18, column: 22, scope: !19)
+!68 = !DILocation(line: 18, column: 5, scope: !19)
+!69 = !DILocation(line: 19, column: 19, scope: !19)
+!70 = !DILocation(line: 19, column: 22, scope: !19)
+!71 = !DILocation(line: 19, column: 5, scope: !19)
+!72 = !DILocation(line: 20, column: 5, scope: !19)

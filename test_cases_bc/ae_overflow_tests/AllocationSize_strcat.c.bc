@@ -1,0 +1,130 @@
+; ModuleID = 'test_cases_bc/ae_overflow_tests/AllocationSize_strcat.c.bc'
+source_filename = "src/ae_overflow_tests/AllocationSize_strcat.c"
+target datalayout = "e-m:o-i64:64-i128:128-n32:64-S128"
+target triple = "arm64-apple-macosx16.0.0"
+
+@.str = private unnamed_addr constant [3 x i8] c"hi\00", align 1, !dbg !0
+@.str.1 = private unnamed_addr constant [12 x i8] c"hello world\00", align 1, !dbg !7
+
+; Function Attrs: noinline nounwind optnone ssp uwtable(sync)
+define i32 @main(i32 noundef %argc, ptr noundef %argv) #0 !dbg !21 {
+entry:
+  %retval = alloca i32, align 4
+  %argc.addr = alloca i32, align 4
+  %argv.addr = alloca ptr, align 8
+  %n = alloca i64, align 8
+  %buffer = alloca ptr, align 8
+  store i32 0, ptr %retval, align 4
+  store i32 %argc, ptr %argc.addr, align 4
+  call void @llvm.dbg.declare(metadata ptr %argc.addr, metadata !28, metadata !DIExpression()), !dbg !29
+  store ptr %argv, ptr %argv.addr, align 8
+  call void @llvm.dbg.declare(metadata ptr %argv.addr, metadata !30, metadata !DIExpression()), !dbg !31
+  call void @llvm.dbg.declare(metadata ptr %n, metadata !32, metadata !DIExpression()), !dbg !38
+  %0 = load i32, ptr %argc.addr, align 4, !dbg !39
+  %cmp = icmp sgt i32 %0, 1, !dbg !40
+  %1 = zext i1 %cmp to i64, !dbg !39
+  %cond = select i1 %cmp, i32 4, i32 10, !dbg !39
+  %conv = sext i32 %cond to i64, !dbg !39
+  store i64 %conv, ptr %n, align 8, !dbg !38
+  call void @llvm.dbg.declare(metadata ptr %buffer, metadata !41, metadata !DIExpression()), !dbg !42
+  %2 = load i64, ptr %n, align 8, !dbg !43
+  %call = call ptr @malloc(i64 noundef %2) #5, !dbg !44
+  store ptr %call, ptr %buffer, align 8, !dbg !42
+  %3 = load ptr, ptr %buffer, align 8, !dbg !45
+  %4 = load ptr, ptr %buffer, align 8, !dbg !45
+  %5 = call i64 @llvm.objectsize.i64.p0(ptr %4, i1 false, i1 true, i1 false), !dbg !45
+  %call1 = call ptr @__strcpy_chk(ptr noundef %3, ptr noundef @.str, i64 noundef %5) #6, !dbg !45
+  %6 = load ptr, ptr %buffer, align 8, !dbg !46
+  %7 = load ptr, ptr %buffer, align 8, !dbg !46
+  %8 = call i64 @llvm.objectsize.i64.p0(ptr %7, i1 false, i1 true, i1 false), !dbg !46
+  %call2 = call ptr @__strcat_chk(ptr noundef %6, ptr noundef @.str.1, i64 noundef %8) #6, !dbg !46
+  %9 = load ptr, ptr %buffer, align 8, !dbg !47
+  call void @UNSAFE_BUFACCESS(ptr noundef %9, i32 noundef 13), !dbg !48
+  %10 = load ptr, ptr %buffer, align 8, !dbg !49
+  call void @free(ptr noundef %10), !dbg !50
+  ret i32 0, !dbg !51
+}
+
+; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
+
+; Function Attrs: allocsize(0)
+declare ptr @malloc(i64 noundef) #2
+
+; Function Attrs: nounwind
+declare ptr @__strcpy_chk(ptr noundef, ptr noundef, i64 noundef) #3
+
+; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare i64 @llvm.objectsize.i64.p0(ptr, i1 immarg, i1 immarg, i1 immarg) #1
+
+; Function Attrs: nounwind
+declare ptr @__strcat_chk(ptr noundef, ptr noundef, i64 noundef) #3
+
+declare void @UNSAFE_BUFACCESS(ptr noundef, i32 noundef) #4
+
+declare void @free(ptr noundef) #4
+
+attributes #0 = { noinline nounwind optnone ssp uwtable(sync) "frame-pointer"="non-leaf" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="apple-m1" "target-features"="+aes,+complxnum,+crc,+dotprod,+fp-armv8,+fp16fml,+fullfp16,+jsconv,+lse,+neon,+pauth,+ras,+rcpc,+rdm,+sha2,+sha3,+v8.1a,+v8.2a,+v8.3a,+v8.4a,+v8.5a,+v8a,+zcm,+zcz" }
+attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
+attributes #2 = { allocsize(0) "frame-pointer"="non-leaf" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="apple-m1" "target-features"="+aes,+complxnum,+crc,+dotprod,+fp-armv8,+fp16fml,+fullfp16,+jsconv,+lse,+neon,+pauth,+ras,+rcpc,+rdm,+sha2,+sha3,+v8.1a,+v8.2a,+v8.3a,+v8.4a,+v8.5a,+v8a,+zcm,+zcz" }
+attributes #3 = { nounwind "frame-pointer"="non-leaf" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="apple-m1" "target-features"="+aes,+complxnum,+crc,+dotprod,+fp-armv8,+fp16fml,+fullfp16,+jsconv,+lse,+neon,+pauth,+ras,+rcpc,+rdm,+sha2,+sha3,+v8.1a,+v8.2a,+v8.3a,+v8.4a,+v8.5a,+v8a,+zcm,+zcz" }
+attributes #4 = { "frame-pointer"="non-leaf" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="apple-m1" "target-features"="+aes,+complxnum,+crc,+dotprod,+fp-armv8,+fp16fml,+fullfp16,+jsconv,+lse,+neon,+pauth,+ras,+rcpc,+rdm,+sha2,+sha3,+v8.1a,+v8.2a,+v8.3a,+v8.4a,+v8.5a,+v8a,+zcm,+zcz" }
+attributes #5 = { allocsize(0) }
+attributes #6 = { nounwind }
+
+!llvm.dbg.cu = !{!12}
+!llvm.module.flags = !{!14, !15, !16, !17, !18, !19}
+!llvm.ident = !{!20}
+
+!0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
+!1 = distinct !DIGlobalVariable(scope: null, file: !2, line: 11, type: !3, isLocal: true, isDefinition: true)
+!2 = !DIFile(filename: "src/ae_overflow_tests/AllocationSize_strcat.c", directory: "/Volumes/MicronX10/SVF/qiuyi/Test-Suite-review")
+!3 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 24, elements: !5)
+!4 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
+!5 = !{!6}
+!6 = !DISubrange(count: 3)
+!7 = !DIGlobalVariableExpression(var: !8, expr: !DIExpression())
+!8 = distinct !DIGlobalVariable(scope: null, file: !2, line: 12, type: !9, isLocal: true, isDefinition: true)
+!9 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 96, elements: !10)
+!10 = !{!11}
+!11 = !DISubrange(count: 12)
+!12 = distinct !DICompileUnit(language: DW_LANG_C11, file: !2, producer: "Homebrew clang version 18.1.8", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !13, splitDebugInlining: false, nameTableKind: Apple, sysroot: "/Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk", sdk: "MacOSX26.sdk")
+!13 = !{!0, !7}
+!14 = !{i32 7, !"Dwarf Version", i32 4}
+!15 = !{i32 2, !"Debug Info Version", i32 3}
+!16 = !{i32 1, !"wchar_size", i32 4}
+!17 = !{i32 8, !"PIC Level", i32 2}
+!18 = !{i32 7, !"uwtable", i32 1}
+!19 = !{i32 7, !"frame-pointer", i32 1}
+!20 = !{!"Homebrew clang version 18.1.8"}
+!21 = distinct !DISubprogram(name: "main", scope: !2, file: !2, line: 8, type: !22, scopeLine: 8, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !12, retainedNodes: !27)
+!22 = !DISubroutineType(types: !23)
+!23 = !{!24, !24, !25}
+!24 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+!25 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !26, size: 64)
+!26 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !4, size: 64)
+!27 = !{}
+!28 = !DILocalVariable(name: "argc", arg: 1, scope: !21, file: !2, line: 8, type: !24)
+!29 = !DILocation(line: 8, column: 14, scope: !21)
+!30 = !DILocalVariable(name: "argv", arg: 2, scope: !21, file: !2, line: 8, type: !25)
+!31 = !DILocation(line: 8, column: 27, scope: !21)
+!32 = !DILocalVariable(name: "n", scope: !21, file: !2, line: 9, type: !33)
+!33 = !DIDerivedType(tag: DW_TAG_typedef, name: "size_t", file: !34, line: 50, baseType: !35)
+!34 = !DIFile(filename: "/Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk/usr/include/sys/_types/_size_t.h", directory: "")
+!35 = !DIDerivedType(tag: DW_TAG_typedef, name: "__darwin_size_t", file: !36, line: 87, baseType: !37)
+!36 = !DIFile(filename: "/Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk/usr/include/arm/_types.h", directory: "")
+!37 = !DIBasicType(name: "unsigned long", size: 64, encoding: DW_ATE_unsigned)
+!38 = !DILocation(line: 9, column: 12, scope: !21)
+!39 = !DILocation(line: 9, column: 16, scope: !21)
+!40 = !DILocation(line: 9, column: 21, scope: !21)
+!41 = !DILocalVariable(name: "buffer", scope: !21, file: !2, line: 10, type: !26)
+!42 = !DILocation(line: 10, column: 11, scope: !21)
+!43 = !DILocation(line: 10, column: 27, scope: !21)
+!44 = !DILocation(line: 10, column: 20, scope: !21)
+!45 = !DILocation(line: 11, column: 5, scope: !21)
+!46 = !DILocation(line: 12, column: 5, scope: !21)
+!47 = !DILocation(line: 13, column: 22, scope: !21)
+!48 = !DILocation(line: 13, column: 5, scope: !21)
+!49 = !DILocation(line: 14, column: 10, scope: !21)
+!50 = !DILocation(line: 14, column: 5, scope: !21)
+!51 = !DILocation(line: 15, column: 5, scope: !21)
