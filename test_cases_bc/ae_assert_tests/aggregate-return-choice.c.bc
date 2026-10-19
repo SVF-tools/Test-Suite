@@ -1,0 +1,152 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/ae_assert_tests/aggregate-return-choice.c.bc'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/aggregate-return-choice.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+%struct.pair = type { ptr, ptr }
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main() #0 !dbg !10 {
+entry:
+  %retval = alloca i32, align 4
+  %x = alloca i32, align 4
+  %y = alloca i32, align 4
+  %result = alloca %struct.pair, align 8
+  store i32 0, ptr %retval, align 4
+    #dbg_declare(ptr %x, !16, !DIExpression(), !17)
+  store i32 7, ptr %x, align 4, !dbg !17
+    #dbg_declare(ptr %y, !18, !DIExpression(), !19)
+  store i32 9, ptr %y, align 4, !dbg !19
+    #dbg_declare(ptr %result, !20, !DIExpression(), !26)
+  %call = call swiftcc { ptr, ptr } @choose(i32 noundef 1, ptr noundef %x, ptr noundef %y), !dbg !27
+  %0 = getelementptr inbounds nuw { ptr, ptr }, ptr %result, i32 0, i32 0, !dbg !27
+  %1 = extractvalue { ptr, ptr } %call, 0, !dbg !27
+  store ptr %1, ptr %0, align 8, !dbg !27
+  %2 = getelementptr inbounds nuw { ptr, ptr }, ptr %result, i32 0, i32 1, !dbg !27
+  %3 = extractvalue { ptr, ptr } %call, 1, !dbg !27
+  store ptr %3, ptr %2, align 8, !dbg !27
+  %first = getelementptr inbounds nuw %struct.pair, ptr %result, i32 0, i32 0, !dbg !28
+  %4 = load ptr, ptr %first, align 8, !dbg !28
+  %5 = load i32, ptr %4, align 4, !dbg !29
+  %cmp = icmp eq i32 %5, 7, !dbg !30
+  call void @svf_assert(i1 noundef zeroext %cmp), !dbg !31
+  %second = getelementptr inbounds nuw %struct.pair, ptr %result, i32 0, i32 1, !dbg !32
+  %6 = load ptr, ptr %second, align 8, !dbg !32
+  %7 = load i32, ptr %6, align 4, !dbg !33
+  %cmp1 = icmp eq i32 %7, 9, !dbg !34
+  call void @svf_assert(i1 noundef zeroext %cmp1), !dbg !35
+  ret i32 0, !dbg !36
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define internal swiftcc { ptr, ptr } @choose(i32 noundef %condition, ptr noundef %p, ptr noundef %q) #0 !dbg !37 {
+entry:
+  %retval = alloca %struct.pair, align 8
+  %condition.addr = alloca i32, align 4
+  %p.addr = alloca ptr, align 8
+  %q.addr = alloca ptr, align 8
+  store i32 %condition, ptr %condition.addr, align 4
+    #dbg_declare(ptr %condition.addr, !40, !DIExpression(), !41)
+  store ptr %p, ptr %p.addr, align 8
+    #dbg_declare(ptr %p.addr, !42, !DIExpression(), !43)
+  store ptr %q, ptr %q.addr, align 8
+    #dbg_declare(ptr %q.addr, !44, !DIExpression(), !45)
+  %0 = load i32, ptr %condition.addr, align 4, !dbg !46
+  %cmp = icmp ne i32 %0, 0, !dbg !48
+  br i1 %cmp, label %if.then, label %if.end, !dbg !48
+
+if.then:                                          ; preds = %entry
+  %first = getelementptr inbounds nuw %struct.pair, ptr %retval, i32 0, i32 0, !dbg !49
+  %1 = load ptr, ptr %p.addr, align 8, !dbg !50
+  store ptr %1, ptr %first, align 8, !dbg !49
+  %second = getelementptr inbounds nuw %struct.pair, ptr %retval, i32 0, i32 1, !dbg !49
+  %2 = load ptr, ptr %q.addr, align 8, !dbg !51
+  store ptr %2, ptr %second, align 8, !dbg !49
+  br label %return, !dbg !52
+
+if.end:                                           ; preds = %entry
+  %first1 = getelementptr inbounds nuw %struct.pair, ptr %retval, i32 0, i32 0, !dbg !53
+  %3 = load ptr, ptr %q.addr, align 8, !dbg !54
+  store ptr %3, ptr %first1, align 8, !dbg !53
+  %second2 = getelementptr inbounds nuw %struct.pair, ptr %retval, i32 0, i32 1, !dbg !53
+  %4 = load ptr, ptr %p.addr, align 8, !dbg !55
+  store ptr %4, ptr %second2, align 8, !dbg !53
+  br label %return, !dbg !56
+
+return:                                           ; preds = %if.end, %if.then
+  %5 = getelementptr inbounds nuw { ptr, ptr }, ptr %retval, i32 0, i32 0, !dbg !57
+  %6 = load ptr, ptr %5, align 8, !dbg !57
+  %7 = getelementptr inbounds nuw { ptr, ptr }, ptr %retval, i32 0, i32 1, !dbg !57
+  %8 = load ptr, ptr %7, align 8, !dbg !57
+  %9 = insertvalue { ptr, ptr } poison, ptr %6, 0, !dbg !57
+  %10 = insertvalue { ptr, ptr } %9, ptr %8, 1, !dbg !57
+  ret { ptr, ptr } %10, !dbg !57
+}
+
+declare void @svf_assert(i1 noundef zeroext) #1
+
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+
+!llvm.dbg.cu = !{!0}
+!llvm.module.flags = !{!2, !3, !4, !5, !6, !7, !8}
+!llvm.ident = !{!9}
+
+!0 = distinct !DICompileUnit(language: DW_LANG_C11, file: !1, producer: "clang version 21.1.0 (https://github.com/bjjwwang/LLVM-compile 4f7056e8ada487923d1c8f9bc38df6472008eda3)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, splitDebugInlining: false, nameTableKind: None)
+!1 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/aggregate-return-choice.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "d5bb49c76508d52a1e5e9877bbdba835")
+!2 = !{i32 7, !"Dwarf Version", i32 5}
+!3 = !{i32 2, !"Debug Info Version", i32 3}
+!4 = !{i32 1, !"wchar_size", i32 4}
+!5 = !{i32 8, !"PIC Level", i32 2}
+!6 = !{i32 7, !"PIE Level", i32 2}
+!7 = !{i32 7, !"uwtable", i32 2}
+!8 = !{i32 7, !"frame-pointer", i32 2}
+!9 = !{!"clang version 21.1.0 (https://github.com/bjjwwang/LLVM-compile 4f7056e8ada487923d1c8f9bc38df6472008eda3)"}
+!10 = distinct !DISubprogram(name: "main", scope: !11, file: !11, line: 17, type: !12, scopeLine: 18, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !15)
+!11 = !DIFile(filename: "src/ae_assert_tests/aggregate-return-choice.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "d5bb49c76508d52a1e5e9877bbdba835")
+!12 = !DISubroutineType(types: !13)
+!13 = !{!14}
+!14 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+!15 = !{}
+!16 = !DILocalVariable(name: "x", scope: !10, file: !11, line: 19, type: !14)
+!17 = !DILocation(line: 19, column: 9, scope: !10)
+!18 = !DILocalVariable(name: "y", scope: !10, file: !11, line: 19, type: !14)
+!19 = !DILocation(line: 19, column: 16, scope: !10)
+!20 = !DILocalVariable(name: "result", scope: !10, file: !11, line: 20, type: !21)
+!21 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "pair", file: !11, line: 5, size: 128, elements: !22)
+!22 = !{!23, !25}
+!23 = !DIDerivedType(tag: DW_TAG_member, name: "first", scope: !21, file: !11, line: 5, baseType: !24, size: 64)
+!24 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !14, size: 64)
+!25 = !DIDerivedType(tag: DW_TAG_member, name: "second", scope: !21, file: !11, line: 5, baseType: !24, size: 64, offset: 64)
+!26 = !DILocation(line: 20, column: 17, scope: !10)
+!27 = !DILocation(line: 20, column: 26, scope: !10)
+!28 = !DILocation(line: 21, column: 24, scope: !10)
+!29 = !DILocation(line: 21, column: 16, scope: !10)
+!30 = !DILocation(line: 21, column: 30, scope: !10)
+!31 = !DILocation(line: 21, column: 5, scope: !10)
+!32 = !DILocation(line: 22, column: 24, scope: !10)
+!33 = !DILocation(line: 22, column: 16, scope: !10)
+!34 = !DILocation(line: 22, column: 31, scope: !10)
+!35 = !DILocation(line: 22, column: 5, scope: !10)
+!36 = !DILocation(line: 23, column: 5, scope: !10)
+!37 = distinct !DISubprogram(name: "choose", scope: !11, file: !11, line: 10, type: !38, scopeLine: 11, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !15)
+!38 = !DISubroutineType(cc: DW_CC_LLVM_Swift, types: !39)
+!39 = !{!21, !14, !24, !24}
+!40 = !DILocalVariable(name: "condition", arg: 1, scope: !37, file: !11, line: 10, type: !14)
+!41 = !DILocation(line: 10, column: 31, scope: !37)
+!42 = !DILocalVariable(name: "p", arg: 2, scope: !37, file: !11, line: 10, type: !24)
+!43 = !DILocation(line: 10, column: 47, scope: !37)
+!44 = !DILocalVariable(name: "q", arg: 3, scope: !37, file: !11, line: 10, type: !24)
+!45 = !DILocation(line: 10, column: 55, scope: !37)
+!46 = !DILocation(line: 12, column: 9, scope: !47)
+!47 = distinct !DILexicalBlock(scope: !37, file: !11, line: 12, column: 9)
+!48 = !DILocation(line: 12, column: 19, scope: !47)
+!49 = !DILocation(line: 13, column: 29, scope: !47)
+!50 = !DILocation(line: 13, column: 30, scope: !47)
+!51 = !DILocation(line: 13, column: 33, scope: !47)
+!52 = !DILocation(line: 13, column: 9, scope: !47)
+!53 = !DILocation(line: 14, column: 25, scope: !37)
+!54 = !DILocation(line: 14, column: 26, scope: !37)
+!55 = !DILocation(line: 14, column: 29, scope: !37)
+!56 = !DILocation(line: 14, column: 5, scope: !37)
+!57 = !DILocation(line: 15, column: 1, scope: !37)
