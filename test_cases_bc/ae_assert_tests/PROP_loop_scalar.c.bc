@@ -1,0 +1,88 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/ae_assert_tests/PROP_loop_scalar.c.bc'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/PROP_loop_scalar.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+@.str = private unnamed_addr constant [12 x i8] c"loop-exit-i\00", align 1, !dbg !0
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main() #0 !dbg !18 {
+entry:
+  %retval = alloca i32, align 4
+  %i = alloca i32, align 4
+  store i32 0, ptr %retval, align 4
+    #dbg_declare(ptr %i, !23, !DIExpression(), !24)
+  store i32 0, ptr %i, align 4, !dbg !24
+  br label %while.cond, !dbg !25
+
+while.cond:                                       ; preds = %while.body, %entry
+  %0 = load i32, ptr %i, align 4, !dbg !26
+  %cmp = icmp slt i32 %0, 4, !dbg !27
+  br i1 %cmp, label %while.body, label %while.end, !dbg !25
+
+while.body:                                       ; preds = %while.cond
+  %1 = load i32, ptr %i, align 4, !dbg !28
+  %add = add nsw i32 %1, 1, !dbg !29
+  store i32 %add, ptr %i, align 4, !dbg !30
+  br label %while.cond, !dbg !25, !llvm.loop !31
+
+while.end:                                        ; preds = %while.cond
+  %2 = load i32, ptr %i, align 4, !dbg !34
+  call void @svf_print(i32 noundef %2, ptr noundef @.str), !dbg !35
+  %3 = load i32, ptr %i, align 4, !dbg !36
+  %cmp1 = icmp eq i32 %3, 4, !dbg !37
+  call void @svf_assert(i1 noundef zeroext %cmp1), !dbg !38
+  ret i32 0, !dbg !39
+}
+
+declare void @svf_print(i32 noundef, ptr noundef) #1
+
+declare void @svf_assert(i1 noundef zeroext) #1
+
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+
+!llvm.dbg.cu = !{!7}
+!llvm.module.flags = !{!10, !11, !12, !13, !14, !15, !16}
+!llvm.ident = !{!17}
+
+!0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
+!1 = distinct !DIGlobalVariable(scope: null, file: !2, line: 12, type: !3, isLocal: true, isDefinition: true)
+!2 = !DIFile(filename: "src/ae_assert_tests/PROP_loop_scalar.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "629dd4d7d757ee1fddc685ab2b82b5a0")
+!3 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 96, elements: !5)
+!4 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
+!5 = !{!6}
+!6 = !DISubrange(count: 12)
+!7 = distinct !DICompileUnit(language: DW_LANG_C11, file: !8, producer: "clang version 21.1.0 (https://github.com/bjjwwang/LLVM-compile 4f7056e8ada487923d1c8f9bc38df6472008eda3)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !9, splitDebugInlining: false, nameTableKind: None)
+!8 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/PROP_loop_scalar.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "629dd4d7d757ee1fddc685ab2b82b5a0")
+!9 = !{!0}
+!10 = !{i32 7, !"Dwarf Version", i32 5}
+!11 = !{i32 2, !"Debug Info Version", i32 3}
+!12 = !{i32 1, !"wchar_size", i32 4}
+!13 = !{i32 8, !"PIC Level", i32 2}
+!14 = !{i32 7, !"PIE Level", i32 2}
+!15 = !{i32 7, !"uwtable", i32 2}
+!16 = !{i32 7, !"frame-pointer", i32 2}
+!17 = !{!"clang version 21.1.0 (https://github.com/bjjwwang/LLVM-compile 4f7056e8ada487923d1c8f9bc38df6472008eda3)"}
+!18 = distinct !DISubprogram(name: "main", scope: !2, file: !2, line: 6, type: !19, scopeLine: 7, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !7, retainedNodes: !22)
+!19 = !DISubroutineType(types: !20)
+!20 = !{!21}
+!21 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+!22 = !{}
+!23 = !DILocalVariable(name: "i", scope: !18, file: !2, line: 8, type: !21)
+!24 = !DILocation(line: 8, column: 9, scope: !18)
+!25 = !DILocation(line: 9, column: 5, scope: !18)
+!26 = !DILocation(line: 9, column: 12, scope: !18)
+!27 = !DILocation(line: 9, column: 14, scope: !18)
+!28 = !DILocation(line: 10, column: 13, scope: !18)
+!29 = !DILocation(line: 10, column: 15, scope: !18)
+!30 = !DILocation(line: 10, column: 11, scope: !18)
+!31 = distinct !{!31, !25, !32, !33}
+!32 = !DILocation(line: 10, column: 17, scope: !18)
+!33 = !{!"llvm.loop.mustprogress"}
+!34 = !DILocation(line: 12, column: 15, scope: !18)
+!35 = !DILocation(line: 12, column: 5, scope: !18)
+!36 = !DILocation(line: 13, column: 16, scope: !18)
+!37 = !DILocation(line: 13, column: 18, scope: !18)
+!38 = !DILocation(line: 13, column: 5, scope: !18)
+!39 = !DILocation(line: 14, column: 5, scope: !18)
