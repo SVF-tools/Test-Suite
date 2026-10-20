@@ -43,9 +43,3 @@ add_test(
 
 For differential testing of two options a C++ script `diff_tests.cpp` is used. This script will run each option, compare the results and output. If the output is 0 then the test passed.
 
-
-
-Allocation-size diagnostic regressions live alongside the existing AE overflow
-cases. They check both the buffer-access checkpoints and the reported allocation
-intervals in all six overflow configurations. See [ae_tests/README.md](ae_tests/README.md)
-for the cases, expected-output comments, known issue, and CTest command.
