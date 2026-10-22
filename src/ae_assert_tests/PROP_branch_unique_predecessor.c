@@ -12,8 +12,7 @@ int main(void)
 {
     int x = 1;
     update(&x, 1);
-    // Only then is feasible, but conservative merging may retain input x=1.
-    svf_assert(x >= 1);
-    svf_assert(x <= 2);
+    // The callee's merge has only its then predecessor; do not restore x=1.
+    svf_assert(x == 2);
     return 0;
 }

@@ -643,12 +643,8 @@ foreach(filename ${ae_nullptr_deref_files})
 endforeach()
 
 # FullSparse: INTERVAL_test_16 cannot retrieve set_value's model-produced definition.
-# PROP_array_memset cannot recover a bounded value for the written element.
-# dangleptr_safe_branch conservatively rejoins an older freed target after overwrite.
 set_tests_properties(
   ae_full_sparse/assert/INTERVAL_test_16-0.c.bc
-  ae_full_sparse/assert/PROP_array_memset.c.bc
-  ae_full_sparse/nullptr_deref/dangleptr_safe_branch.c.bc
   PROPERTIES DISABLED TRUE
 )
 
