@@ -43,3 +43,20 @@ add_test(
 
 For differential testing of two options a C++ script `diff_tests.cpp` is used. This script will run each option, compare the results and output. If the output is 0 then the test passed.
 
+
+## Andersen SCC endpoint regressions
+
+`src/andersen_scc_tests/` contains textual LLVM IR regressions for
+[SVF issue #1944](https://github.com/SVF-tools/SVF/issues/1944). They check that
+Load and Store constraints still propagate when SCC merging rewrites an endpoint
+to a non-pointer object representative. Textual IR preserves the constraint graph
+shape across compiler versions. Each case uses `MAYALIAS` to require the expected
+target and runs with both mutable and persistent points-to storage.
+
+```sh
+ctest --test-dir Release-build -R '^wpa_tests/andersen_scc/' --output-on-failure
+```
+
+The tests explicitly enable `-ff-eq-base=true` to exercise the Store reproducer.
+CTest checks both successful and failed alias-validator output, including builds
+with assertions disabled.

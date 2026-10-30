@@ -717,3 +717,23 @@ add_test(
         COMMAND ${command}
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
 )
+
+# Preserve Load/Store constraints when their endpoints become non-pointer SCC
+# representatives (SVF issue #1944). Keep textual IR to preserve the graph shape.
+foreach(case load store)
+  foreach(backing mutable persistent)
+    set(test_name "wpa_tests/andersen_scc/${case}-${backing}")
+    add_test(
+      NAME ${test_name}
+      COMMAND wpa -ander -ptd=${backing} -node-alloc-strat=dense
+              -ff-eq-base=true
+              ${CMAKE_CURRENT_SOURCE_DIR}/src/andersen_scc_tests/${case}-object-representative.ll
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+    )
+    # Check the validator output even when assertions are disabled.
+    set_tests_properties(${test_name} PROPERTIES
+      PASS_REGULAR_EXPRESSION "SUCCESS :.*MAYALIAS"
+      FAIL_REGULAR_EXPRESSION "FAILURE :"
+    )
+  endforeach()
+endforeach()
