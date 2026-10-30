@@ -1,23 +1,15 @@
-; Regression: Store source merged with the written object into a Copy SCC.
-;
-; %value = *@box and *%mixed = %value create opposite Copy edges between
-; %value and the @box object, so Andersen merges them into one SCC. After
-; %mixed also points to @other, the Store source is rewritten to the merged
-; representative. processStore() must not reject the retargeted edge by the
-; representative's PAG type.
-;
-; Expected: %p = *@other sees @target, because the Store must write the box
-; object into @other. The Store must still contribute its target after SCC merging.
-; Reproduce the Andersen miss with -ff-eq-base=true; with the default object
-; layout this particular shape does not reach the failing path.
+; Store source rewritten to a non-pointer object representative after Copy SCC
+; merging. The inherited Store must still propagate @target to @other, so the
+; final Load and @target must alias under the default analysis configuration.
 
 @target = global i8 0
-@box = global [1 x ptr] [ptr @target]
+@box = global [1 x ptr] zeroinitializer
 @other = global ptr null
 @holder = global ptr @other
 
 define i32 @main(i32 %argc, ptr %argv) {
 entry:
+  store ptr @target, ptr @box
   %choose = icmp eq i32 %argc, 0
   %q = load ptr, ptr @holder
   %mixed = select i1 %choose, ptr @box, ptr %q
