@@ -1,10 +1,10 @@
-Start testing: Oct 28 01:09 UTC
+Start testing: Nov 03 00:00 UTC
 ----------------------------------------------------------
 1585/2860 Testing: diff-perf-cruxbc-small/test_cases_bc/crux-bc/dc.bc
 1585/2860 Test: diff-perf-cruxbc-small/test_cases_bc/crux-bc/dc.bc
 Command: "/home/runner/work/SVF/SVF/Release-build/bin/wpa" "-vfspta" "-dump-vfg" "/home/runner/work/SVF/SVF/Test-Suite/test_cases_bc/crux-bc/dc.bc"
 Directory: /home/runner/work/SVF/SVF/Release-build/bin
-"diff-perf-cruxbc-small/test_cases_bc/crux-bc/dc.bc" start time: Oct 28 01:09 UTC
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/dc.bc" start time: Nov 03 00:00 UTC
 Output:
 ----------------------------------------------------------
 
@@ -40,9 +40,9 @@ TotalSVFStmts       8872
 VarArrayObj         9
 VarStructObj        57
 ----------------Time and memory stats--------------------
-LLVMIRTime          0.01389
-SVFIRTime           0.038461
-SymbolTableTime     0.004278
+LLVMIRTime          0.022582
+SVFIRTime           0.057659
+SymbolTableTime     0.00584
 #######################################################
 
 *********PTACallGraph Stats (Andersen analysis)***************
@@ -69,11 +69,11 @@ AvgTopLvlPtsSize    2.56893
 CollapseTime        0
 CopyGepTime         0
 LoadStoreTime       0
-MemoryUsageVmrss    11740
-MemoryUsageVmsize   11184
+MemoryUsageVmrss    11676
+MemoryUsageVmsize   11180
 SCCDetectTime       0
 SCCMergeTime        0
-TotalTime           0.032163
+TotalTime           0.046035
 UpdateCGTime        0
 ----------------Numbers stats----------------------------
 AddrProcessed       918
@@ -145,11 +145,11 @@ PreemptiveIntersections  140
 ################ (program : dc.bc)###############
 ----------------Time and memory stats--------------------
 AverageRegSize      1.63111
-GenMUCHITime        0.003303
-GenRegionTime       0.010927
-InsertPHITime       0.000725
-SSARenameTime       0.001904
-TotalMSSATime       0.017125
+GenMUCHITime        0.003943
+GenRegionTime       0.013906
+InsertPHITime       0.000846
+SSARenameTime       0.002396
+TotalMSSATime       0.02143
 ----------------Numbers stats----------------------------
 BBHasMSSAPhi        247
 CSChiNode           1020
@@ -172,13 +172,13 @@ StoreHasChi         528
 *********SVFG Statistics***************
 ################ (program : dc.bc)###############
 ----------------Time and memory stats--------------------
-ATNodeTime          0.003343
+ATNodeTime          0.004219
 AvgWeight           1.56102
 ConnDirEdgeTime     0
-ConnIndEdgeTime     0.006564
+ConnIndEdgeTime     0.008154
 OptTime             0
 TLNodeTime          0
-TotalTime           0.00991
+TotalTime           0.012378
 ----------------Numbers stats----------------------------
 ActualIn            1879
 ActualOut           1020
@@ -242,20 +242,20 @@ DirectPropaTime     0
 GepTime             0
 IndirectPropaTime   0
 LoadTime            0
-MemoryUsageVmrss    3820
-MemoryUsageVmsize   84228
+MemoryUsageVmrss    3816
+MemoryUsageVmsize   84220
 PhiTime             0
-PrelabelingTime     0.000616
+PrelabelingTime     0.000581
 ProcessTime         0
 PropagationTime     0
 SCCTime             0
-SolveTime           0.019726
+SolveTime           0.029477
 StoreTime           0
 Strong/WeakUpdTime  0
-TotalTime           0.071412
+TotalTime           0.106893
 UpdateCGTime        0
 VersionPropTime     0
-meldLabelingTime    0.010443
+meldLabelingTime    0.017035
 ----------------Numbers stats----------------------------
 CopysNum            46
 DummyFieldPtrs      31
@@ -312,10 +312,10 @@ LookupIntersections      0
 PreemptiveIntersections  0
 #######################################################
 <end of output>
-Test time =   0.31 sec
+Test time =   0.44 sec
 ----------------------------------------------------------
 Test Passed.
-"diff-perf-cruxbc-small/test_cases_bc/crux-bc/dc.bc" end time: Oct 28 01:09 UTC
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/dc.bc" end time: Nov 03 00:00 UTC
 "diff-perf-cruxbc-small/test_cases_bc/crux-bc/dc.bc" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -323,7 +323,7 @@ Test Passed.
 1586/2860 Test: diff-perf-cruxbc-small/test_cases_bc/crux-bc/bc.bc
 Command: "/home/runner/work/SVF/SVF/Release-build/bin/wpa" "-vfspta" "-dump-vfg" "/home/runner/work/SVF/SVF/Test-Suite/test_cases_bc/crux-bc/bc.bc"
 Directory: /home/runner/work/SVF/SVF/Release-build/bin
-"diff-perf-cruxbc-small/test_cases_bc/crux-bc/bc.bc" start time: Oct 28 01:09 UTC
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/bc.bc" start time: Nov 03 00:00 UTC
 Output:
 ----------------------------------------------------------
 
@@ -359,9 +359,9 @@ TotalSVFStmts       14445
 VarArrayObj         15
 VarStructObj        16
 ----------------Time and memory stats--------------------
-LLVMIRTime          0.021553
-SVFIRTime           0.074523
-SymbolTableTime     0.007007
+LLVMIRTime          0.031838
+SVFIRTime           0.098451
+SymbolTableTime     0.01028
 #######################################################
 
 *********PTACallGraph Stats (Andersen analysis)***************
@@ -388,11 +388,11 @@ AvgTopLvlPtsSize    7.89245
 CollapseTime        0
 CopyGepTime         0
 LoadStoreTime       0
-MemoryUsageVmrss    18156
-MemoryUsageVmsize   17640
+MemoryUsageVmrss    18032
+MemoryUsageVmsize   17636
 SCCDetectTime       0
 SCCMergeTime        0
-TotalTime           0.073953
+TotalTime           0.09244
 UpdateCGTime        0
 ----------------Numbers stats----------------------------
 AddrProcessed       1351
@@ -464,11 +464,11 @@ PreemptiveIntersections  478
 ################ (program : bc.bc)###############
 ----------------Time and memory stats--------------------
 AverageRegSize      2.27739
-GenMUCHITime        0.005844
-GenRegionTime       0.02247
-InsertPHITime       0.001165
-SSARenameTime       0.003059
-TotalMSSATime       0.032877
+GenMUCHITime        0.006883
+GenRegionTime       0.028599
+InsertPHITime       0.001258
+SSARenameTime       0.003661
+TotalMSSATime       0.040824
 ----------------Numbers stats----------------------------
 BBHasMSSAPhi        387
 CSChiNode           1625
@@ -491,13 +491,13 @@ StoreHasChi         739
 *********SVFG Statistics***************
 ################ (program : bc.bc)###############
 ----------------Time and memory stats--------------------
-ATNodeTime          0.005083
+ATNodeTime          0.006778
 AvgWeight           3.31592
 ConnDirEdgeTime     0
-ConnIndEdgeTime     0.01282
+ConnIndEdgeTime     0.016302
 OptTime             0
 TLNodeTime          0
-TotalTime           0.017916
+TotalTime           0.023086
 ----------------Numbers stats----------------------------
 ActualIn            3329
 ActualOut           1625
@@ -564,17 +564,17 @@ LoadTime            0
 MemoryUsageVmrss    4816
 MemoryUsageVmsize   83960
 PhiTime             0
-PrelabelingTime     0.000818
+PrelabelingTime     0.000802
 ProcessTime         0
 PropagationTime     0
 SCCTime             0
-SolveTime           0.040599
+SolveTime           0.052055
 StoreTime           0
 Strong/WeakUpdTime  0
-TotalTime           0.151957
+TotalTime           0.235185
 UpdateCGTime        0
 VersionPropTime     0
-meldLabelingTime    0.02577
+meldLabelingTime    0.039501
 ----------------Numbers stats----------------------------
 CopysNum            29
 DummyFieldPtrs      41
@@ -631,10 +631,10 @@ LookupIntersections      0
 PreemptiveIntersections  0
 #######################################################
 <end of output>
-Test time =   0.63 sec
+Test time =   0.87 sec
 ----------------------------------------------------------
 Test Passed.
-"diff-perf-cruxbc-small/test_cases_bc/crux-bc/bc.bc" end time: Oct 28 01:09 UTC
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/bc.bc" end time: Nov 03 00:00 UTC
 "diff-perf-cruxbc-small/test_cases_bc/crux-bc/bc.bc" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -642,7 +642,7 @@ Test Passed.
 1587/2860 Test: diff-perf-cruxbc-small/test_cases_bc/crux-bc/libbz2.so.bc
 Command: "/home/runner/work/SVF/SVF/Release-build/bin/wpa" "-vfspta" "-dump-vfg" "/home/runner/work/SVF/SVF/Test-Suite/test_cases_bc/crux-bc/libbz2.so.bc"
 Directory: /home/runner/work/SVF/SVF/Release-build/bin
-"diff-perf-cruxbc-small/test_cases_bc/crux-bc/libbz2.so.bc" start time: Oct 28 01:09 UTC
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/libbz2.so.bc" start time: Nov 03 00:00 UTC
 Output:
 ----------------------------------------------------------
 
@@ -678,9 +678,9 @@ TotalSVFStmts       23875
 VarArrayObj         29
 VarStructObj        4
 ----------------Time and memory stats--------------------
-LLVMIRTime          0.02513
-SVFIRTime           0.132996
-SymbolTableTime     0.006814
+LLVMIRTime          0.039657
+SVFIRTime           0.168187
+SymbolTableTime     0.009865
 #######################################################
 
 *********PTACallGraph Stats (Andersen analysis)***************
@@ -707,11 +707,11 @@ AvgTopLvlPtsSize    7.20256
 CollapseTime        0
 CopyGepTime         0
 LoadStoreTime       0
-MemoryUsageVmrss    28000
-MemoryUsageVmsize   27380
+MemoryUsageVmrss    27940
+MemoryUsageVmsize   27372
 SCCDetectTime       0
 SCCMergeTime        0
-TotalTime           0.097555
+TotalTime           0.129245
 UpdateCGTime        0
 ----------------Numbers stats----------------------------
 AddrProcessed       867
@@ -783,11 +783,11 @@ PreemptiveIntersections  248
 ################ (program : libbz2.so.bc)###############
 ----------------Time and memory stats--------------------
 AverageRegSize      1.33146
-GenMUCHITime        0.004055
-GenRegionTime       0.010738
-InsertPHITime       0.000371
-SSARenameTime       0.003048
-TotalMSSATime       0.018357
+GenMUCHITime        0.004913
+GenRegionTime       0.012959
+InsertPHITime       0.000378
+SSARenameTime       0.003546
+TotalMSSATime       0.021981
 ----------------Numbers stats----------------------------
 BBHasMSSAPhi        156
 CSChiNode           64
@@ -810,13 +810,13 @@ StoreHasChi         290
 *********SVFG Statistics***************
 ################ (program : libbz2.so.bc)###############
 ----------------Time and memory stats--------------------
-ATNodeTime          0.000966
+ATNodeTime          0.001135
 AvgWeight           2.37444
 ConnDirEdgeTime     0
-ConnIndEdgeTime     0.003059
+ConnIndEdgeTime     0.003558
 OptTime             0
 TLNodeTime          0
-TotalTime           0.004031
+TotalTime           0.004698
 ----------------Numbers stats----------------------------
 ActualIn            223
 ActualOut           64
@@ -880,20 +880,20 @@ DirectPropaTime     0
 GepTime             0
 IndirectPropaTime   0
 LoadTime            0
-MemoryUsageVmrss    4948
-MemoryUsageVmsize   85168
+MemoryUsageVmrss    4896
+MemoryUsageVmsize   85180
 PhiTime             0
-PrelabelingTime     0.000415
+PrelabelingTime     0.00038
 ProcessTime         0
 PropagationTime     0
 SCCTime             0
-SolveTime           0.027857
+SolveTime           0.039815
 StoreTime           0
 Strong/WeakUpdTime  0
-TotalTime           0.259174
+TotalTime           0.466747
 UpdateCGTime        0
 VersionPropTime     0
-meldLabelingTime    0.006473
+meldLabelingTime    0.010171
 ----------------Numbers stats----------------------------
 CopysNum            4
 DummyFieldPtrs      4
@@ -950,18 +950,18 @@ LookupIntersections      0
 PreemptiveIntersections  0
 #######################################################
 <end of output>
-Test time =   0.91 sec
+Test time =   1.39 sec
 ----------------------------------------------------------
 Test Passed.
-"diff-perf-cruxbc-small/test_cases_bc/crux-bc/libbz2.so.bc" end time: Oct 28 01:09 UTC
-"diff-perf-cruxbc-small/test_cases_bc/crux-bc/libbz2.so.bc" time elapsed: 00:00:00
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/libbz2.so.bc" end time: Nov 03 00:00 UTC
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/libbz2.so.bc" time elapsed: 00:00:01
 ----------------------------------------------------------
 
 1588/2860 Testing: diff-perf-cruxbc-small/test_cases_bc/crux-bc/bunzip2.bc
 1588/2860 Test: diff-perf-cruxbc-small/test_cases_bc/crux-bc/bunzip2.bc
 Command: "/home/runner/work/SVF/SVF/Release-build/bin/wpa" "-vfspta" "-dump-vfg" "/home/runner/work/SVF/SVF/Test-Suite/test_cases_bc/crux-bc/bunzip2.bc"
 Directory: /home/runner/work/SVF/SVF/Release-build/bin
-"diff-perf-cruxbc-small/test_cases_bc/crux-bc/bunzip2.bc" start time: Oct 28 01:09 UTC
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/bunzip2.bc" start time: Nov 03 00:00 UTC
 Output:
 ----------------------------------------------------------
 
@@ -997,9 +997,9 @@ TotalSVFStmts       26939
 VarArrayObj         43
 VarStructObj        16
 ----------------Time and memory stats--------------------
-LLVMIRTime          0.030085
-SVFIRTime           0.138451
-SymbolTableTime     0.008787
+LLVMIRTime          0.044971
+SVFIRTime           0.192611
+SymbolTableTime     0.01319
 #######################################################
 
 *********PTACallGraph Stats (Andersen analysis)***************
@@ -1026,11 +1026,11 @@ AvgTopLvlPtsSize    11.405
 CollapseTime        0
 CopyGepTime         0
 LoadStoreTime       0
-MemoryUsageVmrss    33024
+MemoryUsageVmrss    32892
 MemoryUsageVmsize   32468
 SCCDetectTime       0
 SCCMergeTime        0
-TotalTime           0.141785
+TotalTime           0.190244
 UpdateCGTime        0
 ----------------Numbers stats----------------------------
 AddrProcessed       1272
@@ -1102,11 +1102,11 @@ PreemptiveIntersections  334
 ################ (program : bunzip2.bc)###############
 ----------------Time and memory stats--------------------
 AverageRegSize      1.67333
-GenMUCHITime        0.006529
-GenRegionTime       0.021645
-InsertPHITime       0.000696
-SSARenameTime       0.004057
-TotalMSSATime       0.033179
+GenMUCHITime        0.007883
+GenRegionTime       0.021494
+InsertPHITime       0.00073
+SSARenameTime       0.004694
+TotalMSSATime       0.035138
 ----------------Numbers stats----------------------------
 BBHasMSSAPhi        232
 CSChiNode           264
@@ -1129,13 +1129,13 @@ StoreHasChi         411
 *********SVFG Statistics***************
 ################ (program : bunzip2.bc)###############
 ----------------Time and memory stats--------------------
-ATNodeTime          0.002029
+ATNodeTime          0.002748
 AvgWeight           3.12656
 ConnDirEdgeTime     0
-ConnIndEdgeTime     0.005754
+ConnIndEdgeTime     0.007597
 OptTime             0
 TLNodeTime          0
-TotalTime           0.007789
+TotalTime           0.010351
 ----------------Numbers stats----------------------------
 ActualIn            711
 ActualOut           264
@@ -1199,20 +1199,20 @@ DirectPropaTime     0
 GepTime             0
 IndirectPropaTime   0
 LoadTime            0
-MemoryUsageVmrss    5848
-MemoryUsageVmsize   85400
+MemoryUsageVmrss    5688
+MemoryUsageVmsize   85288
 PhiTime             0
-PrelabelingTime     0.000669
+PrelabelingTime     0.000568
 ProcessTime         0
 PropagationTime     0
 SCCTime             0
-SolveTime           0.049236
+SolveTime           0.065953
 StoreTime           0
 Strong/WeakUpdTime  0
-TotalTime           0.33823
+TotalTime           0.559356
 UpdateCGTime        0
 VersionPropTime     0
-meldLabelingTime    0.013094
+meldLabelingTime    0.019301
 ----------------Numbers stats----------------------------
 CopysNum            13
 DummyFieldPtrs      22
@@ -1233,10 +1233,10 @@ ProcessedAddr       2544
 ProcessedCopy       40
 ProcessedFRet       0
 ProcessedGep        20774
-ProcessedLoad       29330
+ProcessedLoad       29454
 ProcessedMSSANode   5174
 ProcessedPhi        63
-ProcessedStore      2895
+ProcessedStore      2901
 SolveIterations     2
 StoresNum           430
 StrongUpdates       288
@@ -1252,10 +1252,10 @@ TotalVersions       14395
 ****Persistent Points-To Cache Statistics: flow-sensitive analysis bitvector****
 ################ (program : bunzip2.bc)###############
 UniquePointsToSets       1056
-TotalUnions              179128
-PropertyUnions           150626
+TotalUnions              179817
+PropertyUnions           151313
 UniqueUnions             128
-LookupUnions             28172
+LookupUnions             28174
 PreemptiveUnions         202
 TotalComplements         0
 PropertyComplements      0
@@ -1269,10 +1269,10 @@ LookupIntersections      0
 PreemptiveIntersections  0
 #######################################################
 <end of output>
-Test time =   1.25 sec
+Test time =   1.70 sec
 ----------------------------------------------------------
 Test Passed.
-"diff-perf-cruxbc-small/test_cases_bc/crux-bc/bunzip2.bc" end time: Oct 28 01:09 UTC
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/bunzip2.bc" end time: Nov 03 00:00 UTC
 "diff-perf-cruxbc-small/test_cases_bc/crux-bc/bunzip2.bc" time elapsed: 00:00:01
 ----------------------------------------------------------
 
@@ -1280,7 +1280,7 @@ Test Passed.
 1589/2860 Test: diff-perf-cruxbc-small/test_cases_bc/crux-bc/htop.bc
 Command: "/home/runner/work/SVF/SVF/Release-build/bin/wpa" "-vfspta" "-dump-vfg" "/home/runner/work/SVF/SVF/Test-Suite/test_cases_bc/crux-bc/htop.bc"
 Directory: /home/runner/work/SVF/SVF/Release-build/bin
-"diff-perf-cruxbc-small/test_cases_bc/crux-bc/htop.bc" start time: Oct 28 01:09 UTC
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/htop.bc" start time: Nov 03 00:00 UTC
 Output:
 ----------------------------------------------------------
 vcall gep idx not constantint
@@ -1317,9 +1317,9 @@ TotalSVFStmts       35661
 VarArrayObj         97
 VarStructObj        51
 ----------------Time and memory stats--------------------
-LLVMIRTime          0.039783
-SVFIRTime           0.193029
-SymbolTableTime     0.015352
+LLVMIRTime          0.064385
+SVFIRTime           0.267354
+SymbolTableTime     0.023602
 #######################################################
 
 *********PTACallGraph Stats (Andersen analysis)***************
@@ -1346,11 +1346,11 @@ AvgTopLvlPtsSize    47.2614
 CollapseTime        0
 CopyGepTime         0
 LoadStoreTime       0
-MemoryUsageVmrss    84540
-MemoryUsageVmsize   83988
+MemoryUsageVmrss    84468
+MemoryUsageVmsize   84040
 SCCDetectTime       0
 SCCMergeTime        0
-TotalTime           0.619943
+TotalTime           0.935178
 UpdateCGTime        0
 ----------------Numbers stats----------------------------
 AddrProcessed       4601
@@ -1412,9 +1412,9 @@ UniqueComplements        436
 LookupComplements        4884
 PreemptiveComplements    436
 TotalIntersections       54131
-PropertyIntersections    52718
-UniqueIntersections      11
-LookupIntersections      521
+PropertyIntersections    52721
+UniqueIntersections      12
+LookupIntersections      517
 PreemptiveIntersections  881
 #######################################################
 
@@ -1422,11 +1422,11 @@ PreemptiveIntersections  881
 ################ (program : htop.bc)###############
 ----------------Time and memory stats--------------------
 AverageRegSize      3.88992
-GenMUCHITime        0.018221
-GenRegionTime       0.164108
-InsertPHITime       0.001851
-SSARenameTime       0.005462
-TotalMSSATime       0.190671
+GenMUCHITime        0.020395
+GenRegionTime       0.266562
+InsertPHITime       0.002126
+SSARenameTime       0.006546
+TotalMSSATime       0.29694
 ----------------Numbers stats----------------------------
 BBHasMSSAPhi        464
 CSChiNode           1865
@@ -1449,13 +1449,13 @@ StoreHasChi         1511
 *********SVFG Statistics***************
 ################ (program : htop.bc)###############
 ----------------Time and memory stats--------------------
-ATNodeTime          0.011547
+ATNodeTime          0.015864
 AvgWeight           13.9455
 ConnDirEdgeTime     0
-ConnIndEdgeTime     0.032836
+ConnIndEdgeTime     0.045571
 OptTime             0
 TLNodeTime          0
-TotalTime           0.044391
+TotalTime           0.061443
 ----------------Numbers stats----------------------------
 ActualIn            3084
 ActualOut           1865
@@ -1519,20 +1519,20 @@ DirectPropaTime     0
 GepTime             0
 IndirectPropaTime   0
 LoadTime            0
-MemoryUsageVmrss    33316
-MemoryUsageVmsize   100704
+MemoryUsageVmrss    33088
+MemoryUsageVmsize   100388
 PhiTime             0
-PrelabelingTime     0.002649
+PrelabelingTime     0.005102
 ProcessTime         0
 PropagationTime     0
 SCCTime             0
-SolveTime           0.411537
+SolveTime           0.625837
 StoreTime           0
 Strong/WeakUpdTime  0
-TotalTime           1.01823
+TotalTime           1.69856
 UpdateCGTime        0
 VersionPropTime     0
-meldLabelingTime    0.195352
+meldLabelingTime    0.343353
 ----------------Numbers stats----------------------------
 CopysNum            36
 DummyFieldPtrs      149
@@ -1589,18 +1589,18 @@ LookupIntersections      0
 PreemptiveIntersections  0
 #######################################################
 <end of output>
-Test time =   2.96 sec
+Test time =   4.57 sec
 ----------------------------------------------------------
 Test Passed.
-"diff-perf-cruxbc-small/test_cases_bc/crux-bc/htop.bc" end time: Oct 28 01:09 UTC
-"diff-perf-cruxbc-small/test_cases_bc/crux-bc/htop.bc" time elapsed: 00:00:02
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/htop.bc" end time: Nov 03 00:00 UTC
+"diff-perf-cruxbc-small/test_cases_bc/crux-bc/htop.bc" time elapsed: 00:00:04
 ----------------------------------------------------------
 
 1590/2860 Testing: diff-perf-cruxbc-big/test_cases_bc/crux-bc/libcurl.so.bc
 1590/2860 Test: diff-perf-cruxbc-big/test_cases_bc/crux-bc/libcurl.so.bc
 Command: "/home/runner/work/SVF/SVF/Release-build/bin/wpa" "-ander" "/home/runner/work/SVF/SVF/Test-Suite/test_cases_bc/crux-bc/libcurl.so.bc"
 Directory: /home/runner/work/SVF/SVF/Release-build/bin
-"diff-perf-cruxbc-big/test_cases_bc/crux-bc/libcurl.so.bc" start time: Oct 28 01:09 UTC
+"diff-perf-cruxbc-big/test_cases_bc/crux-bc/libcurl.so.bc" start time: Nov 03 00:00 UTC
 Output:
 ----------------------------------------------------------
 
@@ -1636,9 +1636,9 @@ TotalSVFStmts       152910
 VarArrayObj         222
 VarStructObj        199
 ----------------Time and memory stats--------------------
-LLVMIRTime          0.135544
-SVFIRTime           1.1799
-SymbolTableTime     0.059176
+LLVMIRTime          0.190853
+SVFIRTime           1.47846
+SymbolTableTime     0.086805
 #######################################################
 
 *********PTACallGraph Stats (Andersen analysis)***************
@@ -1665,11 +1665,11 @@ AvgTopLvlPtsSize    85.5148
 CollapseTime        0
 CopyGepTime         0
 LoadStoreTime       0
-MemoryUsageVmrss    472200
-MemoryUsageVmsize   471448
+MemoryUsageVmrss    472112
+MemoryUsageVmsize   471388
 SCCDetectTime       0
 SCCMergeTime        0
-TotalTime           6.6949
+TotalTime           7.56392
 UpdateCGTime        0
 ----------------Numbers stats----------------------------
 AddrProcessed       12172
@@ -1720,35 +1720,35 @@ TotalPointers       155065
 ****Persistent Points-To Cache Statistics: Andersen's analysis bitvector****
 ################ (program : libcurl.so.bc)###############
 UniquePointsToSets       16467
-TotalUnions              253815
+TotalUnions              253816
 PropertyUnions           81240
 UniqueUnions             5120
 LookupUnions             158625
-PreemptiveUnions         8830
+PreemptiveUnions         8831
 TotalComplements         1244765
 PropertyComplements      1087213
 UniqueComplements        4440
 LookupComplements        148677
 PreemptiveComplements    4435
-TotalIntersections       380937
-PropertyIntersections    371074
-UniqueIntersections      59
-LookupIntersections      894
-PreemptiveIntersections  8910
+TotalIntersections       380938
+PropertyIntersections    371063
+UniqueIntersections      61
+LookupIntersections      903
+PreemptiveIntersections  8911
 #######################################################
 <end of output>
-Test time =  10.14 sec
+Test time =  11.01 sec
 ----------------------------------------------------------
 Test Passed.
-"diff-perf-cruxbc-big/test_cases_bc/crux-bc/libcurl.so.bc" end time: Oct 28 01:09 UTC
-"diff-perf-cruxbc-big/test_cases_bc/crux-bc/libcurl.so.bc" time elapsed: 00:00:10
+"diff-perf-cruxbc-big/test_cases_bc/crux-bc/libcurl.so.bc" end time: Nov 03 00:00 UTC
+"diff-perf-cruxbc-big/test_cases_bc/crux-bc/libcurl.so.bc" time elapsed: 00:00:11
 ----------------------------------------------------------
 
 1591/2860 Testing: diff-perf-cruxbc-big/test_cases_bc/crux-bc/bash.bc
 1591/2860 Test: diff-perf-cruxbc-big/test_cases_bc/crux-bc/bash.bc
 Command: "/home/runner/work/SVF/SVF/Release-build/bin/wpa" "-ander" "/home/runner/work/SVF/SVF/Test-Suite/test_cases_bc/crux-bc/bash.bc"
 Directory: /home/runner/work/SVF/SVF/Release-build/bin
-"diff-perf-cruxbc-big/test_cases_bc/crux-bc/bash.bc" start time: Oct 28 01:09 UTC
+"diff-perf-cruxbc-big/test_cases_bc/crux-bc/bash.bc" start time: Nov 03 00:00 UTC
 Output:
 ----------------------------------------------------------
 
@@ -1784,9 +1784,9 @@ TotalSVFStmts       209739
 VarArrayObj         163
 VarStructObj        463
 ----------------Time and memory stats--------------------
-LLVMIRTime          0.286691
-SVFIRTime           1.83796
-SymbolTableTime     0.144569
+LLVMIRTime          0.406534
+SVFIRTime           2.16504
+SymbolTableTime     0.163404
 #######################################################
 
 *********PTACallGraph Stats (Andersen analysis)***************
@@ -1813,11 +1813,11 @@ AvgTopLvlPtsSize    203.576
 CollapseTime        0
 CopyGepTime         0
 LoadStoreTime       0
-MemoryUsageVmrss    972732
-MemoryUsageVmsize   971912
+MemoryUsageVmrss    972708
+MemoryUsageVmsize   971896
 SCCDetectTime       0
 SCCMergeTime        0
-TotalTime           12.0405
+TotalTime           14.5079
 UpdateCGTime        0
 ----------------Numbers stats----------------------------
 AddrProcessed       17604
@@ -1885,11 +1885,11 @@ LookupIntersections      8
 PreemptiveIntersections  931
 #######################################################
 <end of output>
-Test time =  18.15 sec
+Test time =  20.34 sec
 ----------------------------------------------------------
 Test Passed.
-"diff-perf-cruxbc-big/test_cases_bc/crux-bc/bash.bc" end time: Oct 28 01:09 UTC
-"diff-perf-cruxbc-big/test_cases_bc/crux-bc/bash.bc" time elapsed: 00:00:18
+"diff-perf-cruxbc-big/test_cases_bc/crux-bc/bash.bc" end time: Nov 03 00:01 UTC
+"diff-perf-cruxbc-big/test_cases_bc/crux-bc/bash.bc" time elapsed: 00:00:20
 ----------------------------------------------------------
 
-End testing: Oct 28 01:09 UTC
+End testing: Nov 03 00:01 UTC
