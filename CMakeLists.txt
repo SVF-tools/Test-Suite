@@ -698,22 +698,57 @@ foreach(filename ${ae_no_main_files})
 endforeach()
 
 
-## symbolic abstraction tests  (ctest -R symabs -VV)
-set(cmd "ae  -symabs")
-string(REPLACE " " ";" commandtemp ${cmd})
-set(command ${commandtemp})
-add_test(
-        NAME symabs
-        COMMAND ${command}
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-)
+# Domain self-tests use the implementation supplied by the parent SVF build.
+if(TARGET AbstractDomainCore)
+  set(ae_domain_checks
+    initialization-contract
+    initialization-storage-contract
+    product-initialization-contract
+    guarded-product-differential
+    semantic-regression-contract
+  )
+  foreach(check IN LISTS ae_domain_checks)
+    add_executable(ae-${check} src/ae_domain_tests/${check}.cpp)
+    target_link_libraries(ae-${check} PRIVATE AbstractDomainCore)
+    add_test(NAME aetest/${check} COMMAND ae-${check})
+  endforeach()
+  add_test(NAME aetest/initialization-invalid
+    COMMAND ${CMAKE_COMMAND}
+      -DEXECUTABLE=$<TARGET_FILE:ae-initialization-contract>
+      -P ${CMAKE_CURRENT_SOURCE_DIR}/src/ae_domain_tests/initialization-invalid.cmake)
+  get_target_property(ae_domain_sources AbstractDomainCore SOURCES)
+  if("${ae_domain_sources}" MATCHES "OctagonDomain.cpp")
+    foreach(check IN ITEMS NativeDomainCheck OctagonObjectCheck)
+      add_executable(ae-${check} src/ae_domain_tests/${check}.cpp)
+      target_link_libraries(ae-${check} PRIVATE AbstractDomainCore)
+      add_test(NAME symabs/${check} COMMAND ae-${check})
+    endforeach()
+  endif()
+else()
+  ## symbolic abstraction tests  (ctest -R symabs -VV)
+  set(cmd "ae  -symabs")
+  string(REPLACE " " ";" commandtemp ${cmd})
+  set(command ${commandtemp})
+  add_test(
+          NAME symabs
+          COMMAND ${command}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
 
-## symbolic abstraction tests  (ctest -R aetest -VV)
-set(cmd "ae  -aetest")
-string(REPLACE " " ";" commandtemp ${cmd})
-set(command ${commandtemp})
-add_test(
-        NAME aetest
-        COMMAND ${command}
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-)
+  ## symbolic abstraction tests  (ctest -R aetest -VV)
+  set(cmd "ae  -aetest")
+  string(REPLACE " " ";" commandtemp ${cmd})
+  set(command ${commandtemp})
+  add_test(
+          NAME aetest
+          COMMAND ${command}
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  )
+endif()
+
+get_property(suite_tests DIRECTORY PROPERTY TESTS)
+foreach(test_name IN LISTS suite_tests)
+  if(test_name MATCHES "^diff_tests-wr-ander/")
+    set_tests_properties("${test_name}" PROPERTIES RUN_SERIAL TRUE)
+  endif()
+endforeach()
