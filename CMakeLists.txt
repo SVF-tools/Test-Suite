@@ -698,6 +698,44 @@ foreach(filename ${ae_no_main_files})
 endforeach()
 
 
+# AE-only named entry tests. Cases live outside the default AE globs because
+# they intentionally start at a function other than main.
+foreach(mode dense semi-sparse sparse)
+  foreach(case plain globals recursive global_values siblings)
+    set(input "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_entry_tests/${case}.c.bc")
+    if(NOT EXISTS "${input}")
+      continue()
+    endif()
+    set(entry foo)
+    set(expect overflow)
+    if(case STREQUAL "recursive")
+      set(entry b)
+    elseif(case STREQUAL "global_values")
+      set(expect assert)
+    elseif(case STREQUAL "siblings")
+      set(expect siblings)
+    endif()
+    add_test(NAME ae_entry/${case}/${mode}
+      COMMAND ${CMAKE_COMMAND} -DAE=$<TARGET_FILE:ae> -DBC=${input}
+        -DENTRY=${entry} -DMODE=${mode} -DEXPECT=${expect}
+        -P ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/check_ae_entry.cmake
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+  endforeach()
+endforeach()
+foreach(case unknown declaration conflict variants)
+  set(source declaration)
+  if(case STREQUAL "variants")
+    set(source variants)
+  endif()
+  set(input "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_entry_tests/${source}.c.bc")
+  if(EXISTS "${input}")
+    add_test(NAME ae_entry/error/${case}
+      COMMAND ${CMAKE_COMMAND} -DAE=$<TARGET_FILE:ae> -DBC=${input} -DCASE=${case}
+        -P ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/check_ae_entry.cmake
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+  endif()
+endforeach()
+
 ## symbolic abstraction tests  (ctest -R symabs -VV)
 set(cmd "ae  -symabs")
 string(REPLACE " " ";" commandtemp ${cmd})
