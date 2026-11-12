@@ -20,6 +20,7 @@ test_dirs="
   ae_assert_tests
   ae_nullptr_deref_tests
   ae_recursion_tests
+  ae_entry_tests
   ae_wto_assert
   blk_tests
   blk_extapi_tests
