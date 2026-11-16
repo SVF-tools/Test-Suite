@@ -631,7 +631,9 @@ endforeach()
 
 # strcpy from a pointer that may point to a 3- or a 15-character string into
 # char[8]. The 15-character source overflows dst, so the alarm must be
-# reported at the strcpy; without the fix AE reports no overflow at all.
+# reported at the strcpy. Without the fix, AE takes the source length from
+# whichever object it visits last in an unordered address set, so it misses
+# the overflow on some platforms (Linux/libstdc++) but not others.
 foreach(sparsity dense semi-sparse sparse)
   add_test(
     NAME ae_overflow_tests/strcpy_joined_source_length/${sparsity}
@@ -640,6 +642,19 @@ foreach(sparsity dense semi-sparse sparse)
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
   set_tests_properties(ae_overflow_tests/strcpy_joined_source_length/${sparsity} PROPERTIES
     PASS_REGULAR_EXPRESSION "accessing at : \\(CallICFGNode: \\{ \"ln\": 12, \"cl\": 5,")
+endforeach()
+
+# strcat of "A" onto "" in char[2] is safe: the last byte written is d[1].
+# Without the fix, AE counts the source twice and reports access size [3, 3],
+# which excludes the true access, on every platform.
+foreach(sparsity dense semi-sparse sparse)
+  add_test(
+    NAME ae_overflow_tests/strcat_appended_source_once/${sparsity}
+    COMMAND ae -overflow -ae-sparsity=${sparsity} -field-limit=1024
+      ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_overflow_tests/strcat_appended_source_once.c.bc
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+  set_tests_properties(ae_overflow_tests/strcat_appended_source_once/${sparsity} PROPERTIES
+    FAIL_REGULAR_EXPRESSION "Buffer Overflow \\(")
 endforeach()
 
 # ae_nullptr_deref tests (ctest -R ae_nullptr_deref_tests -VV) + semi/full-sparse
