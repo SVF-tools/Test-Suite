@@ -629,6 +629,19 @@ foreach(filename ${ae_overflow_files})
   endif()
 endforeach()
 
+# strcpy from a pointer that may point to a 3- or a 15-character string into
+# char[8]. The 15-character source overflows dst, so the alarm must be
+# reported at the strcpy; without the fix AE reports no overflow at all.
+foreach(sparsity dense semi-sparse sparse)
+  add_test(
+    NAME ae_overflow_tests/strcpy_joined_source_length/${sparsity}
+    COMMAND ae -overflow -ae-sparsity=${sparsity} -field-limit=1024
+      ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_overflow_tests/strcpy_joined_source_length.c.bc
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+  set_tests_properties(ae_overflow_tests/strcpy_joined_source_length/${sparsity} PROPERTIES
+    PASS_REGULAR_EXPRESSION "accessing at : \\(CallICFGNode: \\{ \"ln\": 12, \"cl\": 5,")
+endforeach()
+
 # ae_nullptr_deref tests (ctest -R ae_nullptr_deref_tests -VV) + semi/full-sparse
 file(GLOB ae_nullptr_deref_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_nullptr_deref_tests/*.bc")
 list(FILTER ae_nullptr_deref_files EXCLUDE REGEX "no-main")
