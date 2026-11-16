@@ -738,7 +738,7 @@ foreach(mode dense semi-sparse sparse)
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
   endforeach()
 endforeach()
-foreach(case unknown declaration conflict ambiguity no_debug no_debug_ambiguity boundary last_colon strip_once nonnumeric_prefix)
+foreach(case unknown declaration declaration_qualified conflict ambiguity no_debug no_debug_ambiguity boundary last_colon strip_once nonnumeric_prefix)
   set(source declaration)
   if(case MATCHES "^(ambiguity|boundary|last_colon)$")
     set(source static)
@@ -751,6 +751,22 @@ foreach(case unknown declaration conflict ambiguity no_debug no_debug_ambiguity 
   if(EXISTS "${input}")
     add_test(NAME ae_entry/error/${case}
       COMMAND ${CMAKE_COMMAND} -DAE=$<TARGET_FILE:ae> -DBC=${input} -DCASE=${case}
+        -P ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/check_ae_entry.cmake
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+  endif()
+endforeach()
+
+foreach(case modules modules_linked)
+  set(input "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_entry_tests/modules/a.c.bc")
+  set(input2 "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_entry_tests/modules/m.c.bc")
+  if(case STREQUAL "modules_linked")
+    set(input "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_entry_tests/modules/linked.bc")
+    set(input2 "")
+  endif()
+  if(EXISTS "${input}")
+    add_test(NAME ae_entry/error/${case}
+      COMMAND ${CMAKE_COMMAND} -DAE=$<TARGET_FILE:ae> -DBC=${input}
+        -DBC2=${input2} -DCASE=${case}
         -P ${CMAKE_CURRENT_SOURCE_DIR}/diff_tests/check_ae_entry.cmake
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
   endif()

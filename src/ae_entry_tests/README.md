@@ -22,3 +22,10 @@ It also generates `static_no_debug.c.bc` without `-g`. No linking is needed.
 The suffix fixture checks removing exactly one trailing numeric suffix and
 preserving nonnumeric suffixes. Qualifier errors check path component boundaries
 and splitting on the last colon. All previous non-entry tests remain unchanged.
+
+`modules/a.c` defines `foo`; `modules/m.c` declares and calls it. The generation
+script compiles both with debug info from their source directory and also
+produces `modules/linked.bc` with `llvm-link -S`. Both the two-input and linked
+tests request `m.c:foo` and require the missing-file-definition diagnostic to
+list `foo (a.c:1)`, without a declaration-only diagnostic or a `-g` hint.
+The qualified declaration-only case also rejects a spurious `-g` hint.

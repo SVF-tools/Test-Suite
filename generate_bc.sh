@@ -157,6 +157,19 @@ for td in $test_dirs; do
 done
 
 ########
+# Entry diagnostics must agree for separate modules and llvm-link output.
+########
+mkdir -p "$bc_path/ae_entry_tests/modules"
+(
+  cd "$root/src/ae_entry_tests/modules" || exit 1
+  for source in a.c m.c; do
+    clang -g -S -emit-llvm -fno-discard-value-names "$source" -o "$bc_path/ae_entry_tests/modules/$source.bc" || exit 1
+    opt -S -p=mem2reg "$bc_path/ae_entry_tests/modules/$source.bc" -o "$bc_path/ae_entry_tests/modules/$source.bc" || exit 1
+  done
+  llvm-link -S "$bc_path/ae_entry_tests/modules/a.c.bc" "$bc_path/ae_entry_tests/modules/m.c.bc" -o "$bc_path/ae_entry_tests/modules/linked.bc"
+) || exit 1
+
+########
 # blk_extapi_tests run wpa with their own extapi, compiled like SVF's extapi.bc.
 ########
 mkdir -p "$bc_path/blk_extapi_tests/extapi"
