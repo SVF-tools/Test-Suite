@@ -138,6 +138,13 @@ for td in $test_dirs; do
     elif test $td == "ae_recursion_tests"
     then
         $compiler $target_arg -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
+    elif test $td == "ae_entry_tests"
+    then
+        $compiler $target_arg -Wno-everything -S -emit-llvm -fno-discard-value-names -g -I"$root" "$c_f" -o "$bc_f"
+        if [ "$filename" = "static.c" ]; then
+            $compiler -Wno-everything -S -emit-llvm -fno-discard-value-names "$c_f" -o "$bc_td/static_no_debug.c.bc"
+            opt -S -p=mem2reg "$bc_td/static_no_debug.c.bc" -o "$bc_td/static_no_debug.c.bc"
+        fi
     elif test $td == "ae_wto_assert"
     then
         $compiler $target_arg -Wno-everything -S -c -Xclang -DINCLUDEMAIN -Wno-implicit-function-declaration -fno-discard-value-names -g -emit-llvm -I"$root" "$c_f" -o "$bc_f"
