@@ -614,9 +614,22 @@ foreach(filename ${ae_overflow_files})
           COMMAND ae -ae-sparsity=sparse -overflow ${ae_entry_args} -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
-  if (basename STREQUAL "special_target_gep.c.bc")
-    # Require the unbounded allocation size and real 4-byte GEP offset;
-    # the buggy [0, 0] bounds must not pass just because AE exits successfully.
+  if (basename STREQUAL "special_target_gep.c.bc" OR
+      basename STREQUAL "strcpy_joined_source_length.c.bc" OR
+      basename STREQUAL "strcat_appended_source_once.c.bc")
+    if (basename STREQUAL "special_target_gep.c.bc")
+      # Require the unbounded allocation size and real 4-byte GEP offset.
+      set(ae_overflow_check_property PASS_REGULAR_EXPRESSION)
+      set(ae_overflow_check_pattern "allocate size : \\[0, \\+oo\\], access size : \\[4, 4\\]")
+    elseif (basename STREQUAL "strcpy_joined_source_length.c.bc")
+      # The longer possible source must produce an alarm at the strcpy.
+      set(ae_overflow_check_property PASS_REGULAR_EXPRESSION)
+      set(ae_overflow_check_pattern "accessing at : \\(CallICFGNode: \\{ \"ln\": 12, \"cl\": 5,")
+    else()
+      # Appending "A" to "" in char[2] is safe and must not report overflow.
+      set(ae_overflow_check_property FAIL_REGULAR_EXPRESSION)
+      set(ae_overflow_check_pattern "Buffer Overflow \\(")
+    endif()
     set_tests_properties(
       ae_overflow_tests/${filename}
       ae_recursion_tests/${filename}-widen-narrow
@@ -624,8 +637,7 @@ foreach(filename ${ae_overflow_files})
       ae_semi_sparse/recursion_from_overflow/${basename}-widen-narrow
       ae_full_sparse/overflow/${basename}
       ae_full_sparse/recursion_from_overflow/${basename}-widen-narrow
-      PROPERTIES
-        PASS_REGULAR_EXPRESSION "allocate size : \\[0, \\+oo\\], access size : \\[4, 4\\]")
+      PROPERTIES ${ae_overflow_check_property} "${ae_overflow_check_pattern}")
   endif()
 endforeach()
 
