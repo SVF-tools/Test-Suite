@@ -614,9 +614,22 @@ foreach(filename ${ae_overflow_files})
           COMMAND ae -ae-sparsity=sparse -overflow ${ae_entry_args} -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
-  if (basename STREQUAL "special_target_gep.c.bc")
-    # Require the unbounded allocation size and real 4-byte GEP offset;
-    # the buggy [0, 0] bounds must not pass just because AE exits successfully.
+  if (basename STREQUAL "special_target_gep.c.bc" OR
+      basename STREQUAL "strcpy_joined_source_length.c.bc" OR
+      basename STREQUAL "strcat_appended_source_once.c.bc")
+    if (basename STREQUAL "special_target_gep.c.bc")
+      # Require the unbounded allocation size and real 4-byte GEP offset.
+      set(ae_overflow_check_property PASS_REGULAR_EXPRESSION)
+      set(ae_overflow_check_pattern "allocate size : \\[0, \\+oo\\], access size : \\[4, 4\\]")
+    elseif (basename STREQUAL "strcpy_joined_source_length.c.bc")
+      # The longer possible source must produce an alarm at the strcpy.
+      set(ae_overflow_check_property PASS_REGULAR_EXPRESSION)
+      set(ae_overflow_check_pattern "accessing at : \\(CallICFGNode: \\{ \"ln\": 12, \"cl\": 5,")
+    else()
+      # Appending "A" to "" in char[2] is safe and must not report overflow.
+      set(ae_overflow_check_property FAIL_REGULAR_EXPRESSION)
+      set(ae_overflow_check_pattern "Buffer Overflow \\(")
+    endif()
     set_tests_properties(
       ae_overflow_tests/${filename}
       ae_recursion_tests/${filename}-widen-narrow
@@ -624,37 +637,8 @@ foreach(filename ${ae_overflow_files})
       ae_semi_sparse/recursion_from_overflow/${basename}-widen-narrow
       ae_full_sparse/overflow/${basename}
       ae_full_sparse/recursion_from_overflow/${basename}-widen-narrow
-      PROPERTIES
-        PASS_REGULAR_EXPRESSION "allocate size : \\[0, \\+oo\\], access size : \\[4, 4\\]")
+      PROPERTIES ${ae_overflow_check_property} "${ae_overflow_check_pattern}")
   endif()
-endforeach()
-
-# strcpy from a pointer that may point to a 3- or a 15-character string into
-# char[8]. The 15-character source overflows dst, so the alarm must be
-# reported at the strcpy. Without the fix, AE takes the source length from
-# whichever object it visits last in an unordered address set, so it misses
-# the overflow on some platforms (Linux/libstdc++) but not others.
-foreach(sparsity dense semi-sparse sparse)
-  add_test(
-    NAME ae_overflow_tests/strcpy_joined_source_length/${sparsity}
-    COMMAND ae -overflow -ae-sparsity=${sparsity} -field-limit=1024
-      ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_overflow_tests/strcpy_joined_source_length.c.bc
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-  set_tests_properties(ae_overflow_tests/strcpy_joined_source_length/${sparsity} PROPERTIES
-    PASS_REGULAR_EXPRESSION "accessing at : \\(CallICFGNode: \\{ \"ln\": 12, \"cl\": 5,")
-endforeach()
-
-# strcat of "A" onto "" in char[2] is safe: the last byte written is d[1].
-# Without the fix, AE counts the source twice and reports access size [3, 3],
-# which excludes the true access, on every platform.
-foreach(sparsity dense semi-sparse sparse)
-  add_test(
-    NAME ae_overflow_tests/strcat_appended_source_once/${sparsity}
-    COMMAND ae -overflow -ae-sparsity=${sparsity} -field-limit=1024
-      ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_overflow_tests/strcat_appended_source_once.c.bc
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-  set_tests_properties(ae_overflow_tests/strcat_appended_source_once/${sparsity} PROPERTIES
-    FAIL_REGULAR_EXPRESSION "Buffer Overflow \\(")
 endforeach()
 
 # ae_nullptr_deref tests (ctest -R ae_nullptr_deref_tests -VV) + semi/full-sparse
