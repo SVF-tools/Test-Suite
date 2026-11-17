@@ -549,6 +549,19 @@ foreach(file ${diff_tests_cruxbc_big})
   )
 endforeach()
 
+# GEP through a pointer whose target has no known allocation size. The alarm
+# must report an unbounded allocation size and the real 4-byte access offset;
+# without the fix it reports [0, 0] for both, which excludes the true values.
+foreach(sparsity dense semi-sparse sparse)
+  add_test(
+    NAME ae_overflow_tests/special_target_gep/${sparsity}
+    COMMAND ae -overflow -ae-sparsity=${sparsity}
+      ${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_overflow_tests/special_target_gep.c.bc
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+  set_tests_properties(ae_overflow_tests/special_target_gep/${sparsity} PROPERTIES
+    PASS_REGULAR_EXPRESSION "allocate size : \\[0, \\+oo\\], access size : \\[4, 4\\]")
+endforeach()
+
 # ae_assert tests (ctest -R ae_assert_test -VV) + semi/full-sparse
 file(GLOB ae_assert_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/test_cases_bc/ae_assert_tests/*.bc")
 list(FILTER ae_assert_files EXCLUDE REGEX "no-main")
