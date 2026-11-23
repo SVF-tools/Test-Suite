@@ -1,0 +1,98 @@
+; ModuleID = '/home/runner/work/Test-Suite/Test-Suite/test_cases_bc/ae_assert_tests/cmp-ptr-undef.c.bc'
+source_filename = "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/cmp-ptr-undef.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+@object = dso_local global i32 0, align 4, !dbg !0
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main(i32 noundef %argc, ptr noundef %argv) #0 !dbg !15 {
+entry:
+  %retval = alloca i32, align 4
+  %argc.addr = alloca i32, align 4
+  %argv.addr = alloca ptr, align 8
+  %r = alloca i32, align 4
+  %expected = alloca i32, align 4
+  store i32 0, ptr %retval, align 4
+  store i32 %argc, ptr %argc.addr, align 4
+    #dbg_declare(ptr %argc.addr, !22, !DIExpression(), !23)
+  store ptr %argv, ptr %argv.addr, align 8
+    #dbg_declare(ptr %argv.addr, !24, !DIExpression(), !25)
+    #dbg_declare(ptr %r, !26, !DIExpression(), !27)
+  %call = call i32 @compare_uninit(), !dbg !28
+  store i32 %call, ptr %r, align 4, !dbg !27
+    #dbg_declare(ptr %expected, !29, !DIExpression(), !30)
+  %0 = load i32, ptr %argc.addr, align 4, !dbg !31
+  %cmp = icmp eq i32 %0, 1, !dbg !32
+  %1 = zext i1 %cmp to i64, !dbg !33
+  %cond = select i1 %cmp, i32 1, i32 0, !dbg !33
+  store i32 %cond, ptr %expected, align 4, !dbg !30
+  %2 = load i32, ptr %r, align 4, !dbg !34
+  %3 = load i32, ptr %expected, align 4, !dbg !35
+  call void @svf_assert_eq(i32 noundef %2, i32 noundef %3), !dbg !36
+  ret i32 0, !dbg !37
+}
+
+; Function Attrs: minsize noinline nounwind uwtable
+define internal i32 @compare_uninit() #1 !dbg !38 {
+entry:
+  %cmp = icmp ne ptr undef, @object, !dbg !41
+  %0 = zext i1 %cmp to i64, !dbg !42
+  %cond = select i1 %cmp, i32 1, i32 0, !dbg !42
+  ret i32 %cond, !dbg !43
+}
+
+declare void @svf_assert_eq(i32 noundef, i32 noundef) #2
+
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { minsize noinline nounwind uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+
+!llvm.dbg.cu = !{!2}
+!llvm.module.flags = !{!7, !8, !9, !10, !11, !12, !13}
+!llvm.ident = !{!14}
+
+!0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
+!1 = distinct !DIGlobalVariable(name: "object", scope: !2, file: !5, line: 7, type: !6, isLocal: false, isDefinition: true)
+!2 = distinct !DICompileUnit(language: DW_LANG_C11, file: !3, producer: "clang version 21.1.0 (https://github.com/bjjwwang/LLVM-compile 4f7056e8ada487923d1c8f9bc38df6472008eda3)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !4, splitDebugInlining: false, nameTableKind: None)
+!3 = !DIFile(filename: "/home/runner/work/Test-Suite/Test-Suite/src/ae_assert_tests/cmp-ptr-undef.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "b448866101e3a103299d15f5651f371f")
+!4 = !{!0}
+!5 = !DIFile(filename: "src/ae_assert_tests/cmp-ptr-undef.c", directory: "/home/runner/work/Test-Suite/Test-Suite", checksumkind: CSK_MD5, checksum: "b448866101e3a103299d15f5651f371f")
+!6 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+!7 = !{i32 7, !"Dwarf Version", i32 5}
+!8 = !{i32 2, !"Debug Info Version", i32 3}
+!9 = !{i32 1, !"wchar_size", i32 4}
+!10 = !{i32 8, !"PIC Level", i32 2}
+!11 = !{i32 7, !"PIE Level", i32 2}
+!12 = !{i32 7, !"uwtable", i32 2}
+!13 = !{i32 7, !"frame-pointer", i32 2}
+!14 = !{!"clang version 21.1.0 (https://github.com/bjjwwang/LLVM-compile 4f7056e8ada487923d1c8f9bc38df6472008eda3)"}
+!15 = distinct !DISubprogram(name: "main", scope: !5, file: !5, line: 16, type: !16, scopeLine: 17, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !21)
+!16 = !DISubroutineType(types: !17)
+!17 = !{!6, !6, !18}
+!18 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !19, size: 64)
+!19 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !20, size: 64)
+!20 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
+!21 = !{}
+!22 = !DILocalVariable(name: "argc", arg: 1, scope: !15, file: !5, line: 16, type: !6)
+!23 = !DILocation(line: 16, column: 14, scope: !15)
+!24 = !DILocalVariable(name: "argv", arg: 2, scope: !15, file: !5, line: 16, type: !18)
+!25 = !DILocation(line: 16, column: 27, scope: !15)
+!26 = !DILocalVariable(name: "r", scope: !15, file: !5, line: 18, type: !6)
+!27 = !DILocation(line: 18, column: 9, scope: !15)
+!28 = !DILocation(line: 18, column: 13, scope: !15)
+!29 = !DILocalVariable(name: "expected", scope: !15, file: !5, line: 20, type: !6)
+!30 = !DILocation(line: 20, column: 9, scope: !15)
+!31 = !DILocation(line: 20, column: 21, scope: !15)
+!32 = !DILocation(line: 20, column: 26, scope: !15)
+!33 = !DILocation(line: 20, column: 20, scope: !15)
+!34 = !DILocation(line: 21, column: 19, scope: !15)
+!35 = !DILocation(line: 21, column: 22, scope: !15)
+!36 = !DILocation(line: 21, column: 5, scope: !15)
+!37 = !DILocation(line: 22, column: 5, scope: !15)
+!38 = distinct !DISubprogram(name: "compare_uninit", scope: !5, file: !5, line: 10, type: !39, scopeLine: 11, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !21)
+!39 = !DISubroutineType(types: !40)
+!40 = !{!6}
+!41 = !DILocation(line: 13, column: 15, scope: !38)
+!42 = !DILocation(line: 13, column: 12, scope: !38)
+!43 = !DILocation(line: 13, column: 5, scope: !38)
