@@ -1,5 +1,5 @@
 #!/bin/sh
-# Generate bitcode for the .c/.cpp tests in $test_dirs.
+# Generate bitcode for the .c/.cpp/.ll tests in $test_dirs.
 
 sysOS=$(uname -s)
 
@@ -71,7 +71,13 @@ for td in $test_dirs; do
     ext=${c_f##*.}
 
     ########
-    # We only look for .c/.cpp files. Check $ext = $f in case the filename is c/cpp.
+    # Assemble hand-written IR without running optimization passes.
+    if [ "$ext" = "ll" ]; then
+        llvm-as "$c_f" -o "$bc_td/$(basename "$c_f").bc"
+        continue
+    fi
+
+    # Check $ext = $f in case the filename is c/cpp.
     ########
     if [ \( "$ext" != "cpp" -a "$ext" != "c" \) -o "$ext" = "$f" ]
     then
@@ -122,6 +128,13 @@ for td in $test_dirs; do
     esac
 
     ########
+    # Promote the uninitialized local to an explicit undef operand.
+    if [ "$td/$filename" = "ae_assert_tests/cmp-int-undef.c" ]; then
+        clang -g -S -emit-llvm -O0 -Xclang -disable-O0-optnone -fno-discard-value-names "$c_f" -o "$bc_f"
+        opt -passes=mem2reg,lower-switch "$bc_f" -o "$bc_f"
+        continue
+    fi
+
     # created a .ll, let's make it .bc, as the filename suggests.
     ########
     if test $td == "mem_leak"
