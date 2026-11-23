@@ -557,6 +557,8 @@ foreach(filename ${ae_assert_files})
   set(ae_entry_args)
   if ("${basename}" MATCHES "no-main")
     set(ae_entry_args -ae-fun-entry=no-main)
+  elseif ("${basename}" MATCHES "_ae-entry")
+    set(ae_entry_args -ae-entry=entry)
   endif()
   add_test(
           NAME ae_assert_tests/${filename}
