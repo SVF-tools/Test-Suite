@@ -1,9 +1,8 @@
+#include "NativeDomainCheck.h"
 #include "AE/Core/ConvexPolyhedraDomain.h"
 #include "AE/Core/OctagonDomain.h"
-#include <functional>
 #include <iostream>
 #include <stdexcept>
-#include <string>
 using namespace SVF;
 
 void check(bool valid, const char* message)
@@ -430,8 +429,10 @@ void checkGenerators()
     });
 }
 
-int main()
+int main(int argc, char** argv)
 {
+    if (argc > 1)
+        return checkInvalidNarrowing(argv[1]);
     if (checkBasicRelations() != 0)
         ++failed;
     checkCommonOperations("box", [] { return makeNumericalDomain(DomainKind::Box, false); });
@@ -441,20 +442,22 @@ int main()
                 OctagonStorageKind::ComponentDense
             })
     {
-        const Factory make = [storage]
+        OctagonConfig config;
+        config.storage = storage;
+        const Factory make = [config]
         {
-            OctagonConfig config;
-            config.storage = storage;
             return std::make_unique<OctagonDomain>(OctagonDomain::top(config));
         };
         const std::string name = std::string("octagon/") + octagonStorageKindName(storage);
         checkCommonOperations(name, make);
         checkRelationalOperations(name, make);
+        checkOctagonRegressions(name, config);
     }
     const Factory polyhedra = [] { return makeNumericalDomain(DomainKind::ConvexPolyhedra, false); };
     checkCommonOperations("polyhedra", polyhedra);
     checkRelationalOperations("polyhedra", polyhedra);
     checkGenerators();
+    checkPolyhedraRegressions();
     std::cout << "additional scenarios: " << passed << " passed, " << failed << " failed\n";
     return failed ? 1 : 0;
 }

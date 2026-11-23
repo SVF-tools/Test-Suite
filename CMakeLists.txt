@@ -723,6 +723,14 @@ if(TARGET AbstractDomainCore)
       target_link_libraries(ae-${check} PRIVATE AbstractDomainCore)
       add_test(NAME symabs/${check} COMMAND ae-${check})
     endforeach()
+    target_sources(ae-NativeDomainCheck PRIVATE src/ae_domain_tests/RelationalRegressionCheck.cpp)
+    foreach(case IN ITEMS bottom-top bottom-proper proper-top bounded-unbounded)
+      add_test(NAME symabs/invalid-narrowing/${case}
+        COMMAND ${CMAKE_COMMAND}
+          -DEXECUTABLE=$<TARGET_FILE:ae-NativeDomainCheck>
+          -DCASE=${case}
+          -P ${CMAKE_CURRENT_SOURCE_DIR}/src/ae_domain_tests/narrowing-invalid.cmake)
+    endforeach()
   endif()
 else()
   ## symbolic abstraction tests  (ctest -R symabs -VV)
