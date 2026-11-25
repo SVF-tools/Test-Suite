@@ -6,6 +6,11 @@
 #include <functional>
 #include <string>
 
+namespace SVF
+{
+struct OctagonConfig;
+}
+
 extern const SVF::Variable x, y, z, realX, realY;
 
 void check(bool valid, const char* message);

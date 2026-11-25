@@ -1,5 +1,5 @@
 #include "NativeDomainCheck.h"
-#include "AE/Core/ConvexPolyhedraDomain.h"
+#include "AE/Core/PolyhedraDomain.h"
 #include "AE/Core/OctagonDomain.h"
 #include <iostream>
 #include <stdexcept>
@@ -16,10 +16,26 @@ int checkBasicRelations()
     {
         const Variable x(1), y(2);
         const LinearExpression ex(x), ey(y), one(Rational(1));
+        const LinearConstraintSet constraints
+        {
+            lessEqual(one, ex),
+            lessEqual(ex, LinearExpression(Rational(5))),
+            equal(ey, ex + one)
+        };
+        const auto checkBounds = [&](const NumericalDomain& state)
+        {
+            check(state.bound(ey - ex) == Interval::singleton(Rational(1)),
+                  "constraint construction preserves the difference");
+            check(state.bound(y) == Interval::closed(Rational(2), Rational(6)),
+                  "constraint construction preserves the projected bounds");
+        };
+        checkBounds(OctagonDomain::fromConstraints(constraints));
+        checkBounds(PolyhedraDomain::fromConstraints(constraints));
+
         const LinearConstraint relation(ex - ey - one, ConstraintKind::Equal);
         for (DomainKind kind :
                 {
-                    DomainKind::Octagon, DomainKind::ConvexPolyhedra
+                    DomainKind::Octagon, DomainKind::Polyhedra
                 })
         {
             auto state = makeNumericalDomain(kind, false);
@@ -391,7 +407,7 @@ void checkGenerators()
     run("polyhedra/triangle-generators", []
     {
         const std::vector<Variable> variables{realX, realY};
-        auto state = ConvexPolyhedraDomain::fromGenerators(variables,
+        auto state = PolyhedraDomain::fromGenerators(variables,
         {   {PolyhedraGeneratorKind::Point, {Rational(0), Rational(0)}},
             {PolyhedraGeneratorKind::Point, {Rational(3), Rational(0)}},
             {PolyhedraGeneratorKind::Point, {Rational(0), Rational(3)}}
@@ -399,26 +415,26 @@ void checkGenerators()
         check(state.entails(lessEqual(e(realX) + e(realY), c(3))) == CheckResult::True, "triangle diagonal facet");
         check(state.entails(greaterEqual(e(realX), c(0))) == CheckResult::True, "triangle x facet");
         check(state.entails(greaterEqual(e(realY), c(0))) == CheckResult::True, "triangle y facet");
-        auto restored = ConvexPolyhedraDomain::fromGenerators(variables, state.toGenerators(variables));
+        auto restored = PolyhedraDomain::fromGenerators(variables, state.toGenerators(variables));
         check(restored.isEquivalentTo(state) == CheckResult::True, "generator round trip");
     });
     run("polyhedra/open-segment-generators", []
     {
-        auto state = ConvexPolyhedraDomain::fromGenerators({realX},
+        auto state = PolyhedraDomain::fromGenerators({realX},
         {   {PolyhedraGeneratorKind::ClosurePoint, {Rational(0)}},
             {PolyhedraGeneratorKind::Point, {Rational(1)}},
             {PolyhedraGeneratorKind::ClosurePoint, {Rational(2)}}
         });
         check(state.bound(realX) == Interval(Bound::finite(Rational(0), true), Bound::finite(Rational(2), true)),
               "closure points do not include endpoints");
-        auto restored = ConvexPolyhedraDomain::fromGenerators({realX}, state.toGenerators({realX}));
+        auto restored = PolyhedraDomain::fromGenerators({realX}, state.toGenerators({realX}));
         check(restored.isEquivalentTo(state) == CheckResult::True, "open generator round trip");
         state.close();
         expectRange(state, realX, 0, 2);
     });
     run("polyhedra/ray-and-line-generators", []
     {
-        auto state = ConvexPolyhedraDomain::fromGenerators({realX, realY},
+        auto state = PolyhedraDomain::fromGenerators({realX, realY},
         {   {PolyhedraGeneratorKind::Point, {Rational(2), Rational(0)}},
             {PolyhedraGeneratorKind::Ray, {Rational(1), Rational(0)}},
             {PolyhedraGeneratorKind::Line, {Rational(0), Rational(1)}}
@@ -453,7 +469,7 @@ int main(int argc, char** argv)
         checkRelationalOperations(name, make);
         checkOctagonRegressions(name, config);
     }
-    const Factory polyhedra = [] { return makeNumericalDomain(DomainKind::ConvexPolyhedra, false); };
+    const Factory polyhedra = [] { return makeNumericalDomain(DomainKind::Polyhedra, false); };
     checkCommonOperations("polyhedra", polyhedra);
     checkRelationalOperations("polyhedra", polyhedra);
     checkGenerators();

@@ -1,5 +1,5 @@
 #include "NativeDomainCheck.h"
-#include "AE/Core/ConvexPolyhedraDomain.h"
+#include "AE/Core/PolyhedraDomain.h"
 #include "AE/Core/OctagonDomain.h"
 
 #include <algorithm>
@@ -178,7 +178,7 @@ void checkOctagonRegressions(const std::string& name, const OctagonConfig& confi
 // These cases match the named tests in IKOS core/test/unit/domain/numeric/apron/
 // polka_polyhedra.cpp and pkgrid_polyhedra_lin_congruences.cpp at
 // ac7f7c1738976cabc58c6a53413df6e458995c38. The two files share their fixtures.
-using Polyhedra = ConvexPolyhedraDomain;
+using Polyhedra = PolyhedraDomain;
 const Variable lowerBounded(23), extra(24);
 
 Interval range(int lower, int upper)
