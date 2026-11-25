@@ -614,6 +614,19 @@ foreach(filename ${ae_overflow_files})
           COMMAND ae -ae-sparsity=sparse -overflow ${ae_entry_args} -handle-recur=widen-narrow -field-limit=1024 ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
+  if (basename STREQUAL "special_target_gep.c.bc")
+    # Require the unbounded allocation size and real 4-byte GEP offset;
+    # the buggy [0, 0] bounds must not pass just because AE exits successfully.
+    set_tests_properties(
+      ae_overflow_tests/${filename}
+      ae_recursion_tests/${filename}-widen-narrow
+      ae_semi_sparse/overflow/${basename}
+      ae_semi_sparse/recursion_from_overflow/${basename}-widen-narrow
+      ae_full_sparse/overflow/${basename}
+      ae_full_sparse/recursion_from_overflow/${basename}-widen-narrow
+      PROPERTIES
+        PASS_REGULAR_EXPRESSION "allocate size : \\[0, \\+oo\\], access size : \\[4, 4\\]")
+  endif()
 endforeach()
 
 # ae_nullptr_deref tests (ctest -R ae_nullptr_deref_tests -VV) + semi/full-sparse
