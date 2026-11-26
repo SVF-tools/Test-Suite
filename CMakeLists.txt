@@ -710,6 +710,11 @@ foreach(filename ${ae_no_main_files})
   )
 endforeach()
 
+# svf_assert failures no longer abort ae, so fail every AE test on the failure messages.
+get_property(ae_tests DIRECTORY PROPERTY TESTS)
+list(FILTER ae_tests INCLUDE REGEX "^ae_")
+set_tests_properties(${ae_tests} PROPERTIES FAIL_REGULAR_EXPRESSION
+  "Assertion failure, this svf_assert cannot be verified;svf_assert_eq Fail")
 
 ## symbolic abstraction tests  (ctest -R symabs -VV)
 set(cmd "ae  -symabs")
